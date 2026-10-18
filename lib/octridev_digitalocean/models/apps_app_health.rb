@@ -5,141 +5,137 @@
 
 # apps_app_health domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAppHealthMetadata
-  FIELDS = {
-    components: "components",
-    functions_components: "functions_components",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    components: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppComponentHealth.from_hash(item) }
-    end,
-    functions_components: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppFunctionsComponentHealth.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AppHealth.
-# Typed representation of the `AppHealth` API schema.
-class AppHealth
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppHealthMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppHealthMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppHealthMetadata::DECODERS
-
-  # @return [Array_of_AppComponentHealth] Optional array value serialized in the `components` wire field.
-  attr_reader :components
-  # @return [Array_of_AppFunctionsComponentHealth] Optional array value serialized in the `functions_components` wire field.
-  attr_reader :functions_components
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppHealthMetadata
+    FIELDS = {
+      components: 'components',
+      functions_components: 'functions_components'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      components: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppComponentHealth.from_hash(item) }
+      end,
+      functions_components: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppFunctionsComponentHealth.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppHealth.
+  # Typed representation of the `AppHealth` API schema.
+  class AppHealth
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppHealthMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppHealthMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppHealthMetadata::DECODERS
+
+    # @return [Array_of_AppComponentHealth] Optional array value serialized in the `components` wire field.
+    attr_reader :components
+    # @return [Array_of_AppFunctionsComponentHealth] Optional array value serialized in the `functions_components` wire field.
+    attr_reader :functions_components
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppHealthCheckSpecMetadata
-  FIELDS = {
-    failure_threshold: "failure_threshold",
-    port: "port",
-    http_path: "http_path",
-    initial_delay_seconds: "initial_delay_seconds",
-    period_seconds: "period_seconds",
-    success_threshold: "success_threshold",
-    timeout_seconds: "timeout_seconds",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppHealthCheckSpec.
-# Typed representation of the `AppHealthCheckSpec` API schema.
-class AppHealthCheckSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppHealthCheckSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppHealthCheckSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppHealthCheckSpecMetadata::DECODERS
-
-  # @return [Integer] The number of failed health checks before considered unhealthy.
-  attr_reader :failure_threshold
-  # @return [Integer] The port on which the health check will be performed.
-  attr_reader :port
-  # @return [String] The route path used for the HTTP health check ping. If not set, the HTTP health check will be disabled and a TCP health check used instead.
-  attr_reader :http_path
-  # @return [Integer] The number of seconds to wait before beginning health checks.
-  attr_reader :initial_delay_seconds
-  # @return [Integer] The number of seconds to wait between health checks.
-  attr_reader :period_seconds
-  # @return [Integer] The number of successful health checks before considered healthy.
-  attr_reader :success_threshold
-  # @return [Integer] The number of seconds after which the check times out.
-  attr_reader :timeout_seconds
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppHealthCheckSpecMetadata
+    FIELDS = {
+      failure_threshold: 'failure_threshold',
+      port: 'port',
+      http_path: 'http_path',
+      initial_delay_seconds: 'initial_delay_seconds',
+      period_seconds: 'period_seconds',
+      success_threshold: 'success_threshold',
+      timeout_seconds: 'timeout_seconds'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppHealthCheckSpec.
+  # Typed representation of the `AppHealthCheckSpec` API schema.
+  class AppHealthCheckSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppHealthCheckSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppHealthCheckSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppHealthCheckSpecMetadata::DECODERS
+
+    # @return [Integer] The number of failed health checks before considered unhealthy.
+    attr_reader :failure_threshold
+    # @return [Integer] The port on which the health check will be performed.
+    attr_reader :port
+    # @return [String] The route path used for the HTTP health check ping. If not set, the HTTP health check will be disabled and a TCP health check used instead.
+    attr_reader :http_path
+    # @return [Integer] The number of seconds to wait before beginning health checks.
+    attr_reader :initial_delay_seconds
+    # @return [Integer] The number of seconds to wait between health checks.
+    attr_reader :period_seconds
+    # @return [Integer] The number of successful health checks before considered healthy.
+    attr_reader :success_threshold
+    # @return [Integer] The number of seconds after which the check times out.
+    attr_reader :timeout_seconds
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppHealthResponseMetadata
-  FIELDS = {
-    app_health: "app_health",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    app_health: lambda do |value|
-      ::OctridevDigitalocean::AppHealth.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppHealthResponse.
-# Typed representation of the `AppHealthResponse` API schema.
-class AppHealthResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppHealthResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppHealthResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppHealthResponseMetadata::DECODERS
-
-  # @return [AppHealth] Optional object value serialized in the `app_health` wire field.
-  attr_reader :app_health
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppHealthResponseMetadata
+    FIELDS = {
+      app_health: 'app_health'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      app_health: lambda do |value|
+        ::OctridevDigitalocean::AppHealth.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for AppHealthResponse.
+  # Typed representation of the `AppHealthResponse` API schema.
+  class AppHealthResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppHealthResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppHealthResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppHealthResponseMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [AppHealth] Optional object value serialized in the `app_health` wire field.
+    attr_reader :app_health
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

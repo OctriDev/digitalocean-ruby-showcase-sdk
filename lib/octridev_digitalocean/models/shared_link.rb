@@ -5,147 +5,139 @@
 
 # shared_link domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalLinkToFirstPageMetadata
-  FIELDS = {
-    first: "first",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for LinkToFirstPage.
-# Typed representation of the `LinkToFirstPage` API schema.
-class LinkToFirstPage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLinkToFirstPageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLinkToFirstPageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLinkToFirstPageMetadata::DECODERS
-
-  # @return [String] URI of the first page of the results.
-  attr_reader :first
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalLinkToFirstPageMetadata
+    FIELDS = {
+      first: 'first'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for LinkToFirstPage.
+  # Typed representation of the `LinkToFirstPage` API schema.
+  class LinkToFirstPage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLinkToFirstPageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLinkToFirstPageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLinkToFirstPageMetadata::DECODERS
+
+    # @return [String] URI of the first page of the results.
+    attr_reader :first
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalLinkToLastPageMetadata
-  FIELDS = {
-    last: "last",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for LinkToLastPage.
-# Typed representation of the `LinkToLastPage` API schema.
-class LinkToLastPage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLinkToLastPageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLinkToLastPageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLinkToLastPageMetadata::DECODERS
-
-  # @return [String] URI of the last page of the results.
-  attr_reader :last
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalLinkToLastPageMetadata
+    FIELDS = {
+      last: 'last'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for LinkToLastPage.
+  # Typed representation of the `LinkToLastPage` API schema.
+  class LinkToLastPage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLinkToLastPageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLinkToLastPageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLinkToLastPageMetadata::DECODERS
+
+    # @return [String] URI of the last page of the results.
+    attr_reader :last
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalLinkToNextPageMetadata
-  FIELDS = {
-    next_: "next",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for LinkToNextPage.
-# Typed representation of the `LinkToNextPage` API schema.
-class LinkToNextPage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLinkToNextPageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLinkToNextPageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLinkToNextPageMetadata::DECODERS
-
-  # @return [String] URI of the next page of the results.
-  attr_reader :next_
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalLinkToNextPageMetadata
+    FIELDS = {
+      next_: 'next'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for LinkToNextPage.
+  # Typed representation of the `LinkToNextPage` API schema.
+  class LinkToNextPage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLinkToNextPageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLinkToNextPageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLinkToNextPageMetadata::DECODERS
+
+    # @return [String] URI of the next page of the results.
+    attr_reader :next_
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalLinkToPrevPageMetadata
-  FIELDS = {
-    prev: "prev",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for LinkToPrevPage.
-# Typed representation of the `LinkToPrevPage` API schema.
-class LinkToPrevPage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLinkToPrevPageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLinkToPrevPageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLinkToPrevPageMetadata::DECODERS
-
-  # @return [String] URI of the previous page of the results.
-  attr_reader :prev
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalLinkToPrevPageMetadata
+    FIELDS = {
+      prev: 'prev'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for LinkToPrevPage.
+  # Typed representation of the `LinkToPrevPage` API schema.
+  class LinkToPrevPage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLinkToPrevPageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLinkToPrevPageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLinkToPrevPageMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] URI of the previous page of the results.
+    attr_reader :prev
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

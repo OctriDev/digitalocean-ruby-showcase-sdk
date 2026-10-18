@@ -12,12 +12,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalAddonsCreateC759e58aMetadata
         FIELDS = {
-          app_slug: "app_slug",
-          plan_slug: "plan_slug",
-          name: "name",
-          metadata: "metadata",
-          linked_droplet_id: "linked_droplet_id",
-          fleet_uuid: "fleet_uuid",
+          app_slug: 'app_slug',
+          plan_slug: 'plan_slug',
+          name: 'name',
+          metadata: 'metadata',
+          linked_droplet_id: 'linked_droplet_id',
+          fleet_uuid: 'fleet_uuid'
         }.freeze
         REQUIRED_FIELDS = %i[
           app_slug
@@ -28,7 +28,7 @@ module OctridevDigitalocean
         DECODERS = {
           metadata: lambda do |value|
             value&.map { |item| ::OctridevDigitalocean::AddonsResourceMetadata.from_hash(item) }
-          end,
+          end
         }.freeze
       end
 
@@ -69,13 +69,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalAddonsPatchMetadata
         FIELDS = {
-          name: "name",
+          name: 'name'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for AddonsPatch.
@@ -105,13 +104,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalAddonsPatchPlanMetadata
         FIELDS = {
-          plan_slug: "plan_slug",
+          plan_slug: 'plan_slug'
         }.freeze
         REQUIRED_FIELDS = %i[
           plan_slug
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for AddonsPatchPlan.
@@ -143,16 +141,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/add-ons/apps",
+          '/v2/add-ons/apps',
           config: config,
           return_type: ::OctridevDigitalocean::AddonsGetApp,
           decoder: :json,
           operation_id: 'addons_get_app',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -165,20 +162,19 @@ module OctridevDigitalocean
         app_slug:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/add-ons/apps/",
+            '/v2/add-ons/apps/',
             SdkClient.encode_path_segment(app_slug),
-            "/metadata"
+            '/metadata'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AddonsGetAppMetadata,
           decoder: :json,
           operation_id: 'addons_get_app_metadata',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -187,16 +183,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/add-ons/saas",
+          '/v2/add-ons/saas',
           config: config,
           return_type: ::OctridevDigitalocean::AddonsList,
           decoder: :json,
           operation_id: 'addons_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -224,10 +219,9 @@ module OctridevDigitalocean
         fleet_uuid: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/add-ons/saas",
+          '/v2/add-ons/saas',
           config: config,
           body: {
             'app_slug' => app_slug,
@@ -235,13 +229,13 @@ module OctridevDigitalocean
             'name' => name,
             'metadata' => metadata,
             'linked_droplet_id' => linked_droplet_id,
-            'fleet_uuid' => fleet_uuid,
+            'fleet_uuid' => fleet_uuid
           },
           return_type: ::OctridevDigitalocean::AddonsCreate,
           decoder: :json,
           operation_id: 'addons_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -253,11 +247,10 @@ module OctridevDigitalocean
         resource_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/add-ons/saas/",
+            '/v2/add-ons/saas/',
             SdkClient.encode_path_segment(resource_uuid)
           ].join,
           config: config,
@@ -265,7 +258,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'addons_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -277,20 +270,19 @@ module OctridevDigitalocean
         resource_uuid:,
         request_options: nil
       )
-
         Validation.validate_uuid('resource_uuid', resource_uuid)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/add-ons/saas/",
+            '/v2/add-ons/saas/',
             SdkClient.encode_path_segment(resource_uuid)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'addons_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -304,22 +296,21 @@ module OctridevDigitalocean
         name:,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/v2/add-ons/saas/",
+            '/v2/add-ons/saas/',
             SdkClient.encode_path_segment(resource_uuid)
           ].join,
           config: config,
           body: {
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::AddonsUpdate,
           decoder: :json,
           operation_id: 'addons_patch',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -334,23 +325,22 @@ module OctridevDigitalocean
         plan_slug:,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/v2/add-ons/saas/",
+            '/v2/add-ons/saas/',
             SdkClient.encode_path_segment(resource_uuid),
-            "/plan"
+            '/plan'
           ].join,
           config: config,
           body: {
-            'plan_slug' => plan_slug,
+            'plan_slug' => plan_slug
           },
           return_type: ::OctridevDigitalocean::AddonsUpdate,
           decoder: :json,
           operation_id: 'addons_patch_plan',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

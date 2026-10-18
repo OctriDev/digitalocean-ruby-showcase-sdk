@@ -5,318 +5,310 @@
 
 # apps_app_ingress domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAppIngressSpecMetadata
-  FIELDS = {
-    rules: "rules",
-    custom_error_page_url: "custom_error_page_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    rules: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppIngressSpecRule.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AppIngressSpec.
-# Specification for app ingress configurations.
-class AppIngressSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppIngressSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppIngressSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppIngressSpecMetadata::DECODERS
-
-  # @return [Array_of_AppIngressSpecRule] Rules for configuring HTTP ingress for component routes, CORS, rewrites, and redirects.
-  attr_reader :rules
-  # @return [String] Optional HTTPS URL of a custom error page to display when the app is unreachable. The page is shown in a full-viewport iframe. The target must allow framing: avoid `X-Frame-Options: DENY` and a restrictive `Content-Security-Policy` `frame-ancestors` that blocks the platform. If omitted, the default platform error page is used.
-  attr_reader :custom_error_page_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppIngressSpecMetadata
+    FIELDS = {
+      rules: 'rules',
+      custom_error_page_url: 'custom_error_page_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      rules: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppIngressSpecRule.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppIngressSpec.
+  # Specification for app ingress configurations.
+  class AppIngressSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppIngressSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppIngressSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppIngressSpecMetadata::DECODERS
+
+    # @return [Array_of_AppIngressSpecRule] Rules for configuring HTTP ingress for component routes, CORS, rewrites, and redirects.
+    attr_reader :rules
+    # @return [String] Optional HTTPS URL of a custom error page to display when the app is unreachable. The page is shown in a full-viewport iframe. The target must allow framing: avoid `X-Frame-Options: DENY` and a restrictive `Content-Security-Policy` `frame-ancestors` that blocks the platform. If omitted, the default platform error page is used.
+    attr_reader :custom_error_page_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppIngressSpecRuleMetadata
-  FIELDS = {
-    match: "match",
-    cors: "cors",
-    component: "component",
-    redirect: "redirect",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    match: lambda do |value|
-      ::OctridevDigitalocean::AppIngressSpecRuleMatch.from_hash(value)
-    end,
-    cors: lambda do |value|
-      ::OctridevDigitalocean::AppsCorsPolicy.from_hash(value)
-    end,
-    component: lambda do |value|
-      ::OctridevDigitalocean::AppIngressSpecRuleRoutingComponent.from_hash(value)
-    end,
-    redirect: lambda do |value|
-      ::OctridevDigitalocean::AppIngressSpecRuleRoutingRedirect.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppIngressSpecRule.
-# Typed representation of the `AppIngressSpecRule` API schema.
-class AppIngressSpecRule
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppIngressSpecRuleMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppIngressSpecRuleMetadata::DECODERS
-
-  # @return [AppIngressSpecRuleMatch] The match configuration for the rule.
-  attr_reader :match
-  # @return [AppsCorsPolicy] Optional object value serialized in the `cors` wire field.
-  attr_reader :cors
-  # @return [AppIngressSpecRuleRoutingComponent] The component to route to. Only one of `component` or `redirect` may be set.
-  attr_reader :component
-  # @return [AppIngressSpecRuleRoutingRedirect] The redirect configuration for the rule. Only one of `component` or `redirect` may be set.
-  attr_reader :redirect
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppIngressSpecRuleMetadata
+    FIELDS = {
+      match: 'match',
+      cors: 'cors',
+      component: 'component',
+      redirect: 'redirect'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      match: lambda do |value|
+        ::OctridevDigitalocean::AppIngressSpecRuleMatch.from_hash(value)
+      end,
+      cors: lambda do |value|
+        ::OctridevDigitalocean::AppsCorsPolicy.from_hash(value)
+      end,
+      component: lambda do |value|
+        ::OctridevDigitalocean::AppIngressSpecRuleRoutingComponent.from_hash(value)
+      end,
+      redirect: lambda do |value|
+        ::OctridevDigitalocean::AppIngressSpecRuleRoutingRedirect.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppIngressSpecRule.
+  # Typed representation of the `AppIngressSpecRule` API schema.
+  class AppIngressSpecRule
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppIngressSpecRuleMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppIngressSpecRuleMetadata::DECODERS
+
+    # @return [AppIngressSpecRuleMatch] The match configuration for the rule.
+    attr_reader :match
+    # @return [AppsCorsPolicy] Optional object value serialized in the `cors` wire field.
+    attr_reader :cors
+    # @return [AppIngressSpecRuleRoutingComponent] The component to route to. Only one of `component` or `redirect` may be set.
+    attr_reader :component
+    # @return [AppIngressSpecRuleRoutingRedirect] The redirect configuration for the rule. Only one of `component` or `redirect` may be set.
+    attr_reader :redirect
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppIngressSpecRuleMatchMetadata
-  FIELDS = {
-    path: "path",
-    authority: "authority",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    path: lambda do |value|
-      ::OctridevDigitalocean::AppIngressSpecRuleStringMatchPrefix.from_hash(value)
-    end,
-    authority: lambda do |value|
-      ::OctridevDigitalocean::AppIngressSpecRuleStringMatchExact.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppIngressSpecRuleMatch.
-# The match configuration for the rule.
-class AppIngressSpecRuleMatch
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppIngressSpecRuleMatchMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleMatchMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppIngressSpecRuleMatchMetadata::DECODERS
-
-  # @return [AppIngressSpecRuleStringMatchPrefix] The path to match on.
-  attr_reader :path
-  # @return [AppIngressSpecRuleStringMatchExact] The authority to match on.
-  attr_reader :authority
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppIngressSpecRuleMatchMetadata
+    FIELDS = {
+      path: 'path',
+      authority: 'authority'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      path: lambda do |value|
+        ::OctridevDigitalocean::AppIngressSpecRuleStringMatchPrefix.from_hash(value)
+      end,
+      authority: lambda do |value|
+        ::OctridevDigitalocean::AppIngressSpecRuleStringMatchExact.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppIngressSpecRuleMatch.
+  # The match configuration for the rule.
+  class AppIngressSpecRuleMatch
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppIngressSpecRuleMatchMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleMatchMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppIngressSpecRuleMatchMetadata::DECODERS
+
+    # @return [AppIngressSpecRuleStringMatchPrefix] The path to match on.
+    attr_reader :path
+    # @return [AppIngressSpecRuleStringMatchExact] The authority to match on.
+    attr_reader :authority
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppIngressSpecRuleRoutingComponentMetadata
-  FIELDS = {
-    name: "name",
-    preserve_path_prefix: "preserve_path_prefix",
-    rewrite: "rewrite",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppIngressSpecRuleRoutingComponent.
-# The component to route to. Only one of `component` or `redirect` may be set.
-class AppIngressSpecRuleRoutingComponent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppIngressSpecRuleRoutingComponentMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleRoutingComponentMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppIngressSpecRuleRoutingComponentMetadata::DECODERS
-
-  # @return [String] The name of the component to route to.
-  attr_reader :name
-  # @return [String] An optional flag to preserve the path that is forwarded to the backend service. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If this value is `true`, the path will remain `/api/list`. Note: this is not applicable for Functions Components and is mutually exclusive with `rewrite`.
-  attr_reader :preserve_path_prefix
-  # @return [String] An optional field that will rewrite the path of the component to be what is specified here. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If you specified the rewrite to be `/v1/`, requests to `/api/list` would be rewritten to `/v1/list`. Note: this is mutually exclusive with `preserve_path_prefix`.
-  attr_reader :rewrite
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppIngressSpecRuleRoutingComponentMetadata
+    FIELDS = {
+      name: 'name',
+      preserve_path_prefix: 'preserve_path_prefix',
+      rewrite: 'rewrite'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppIngressSpecRuleRoutingComponent.
+  # The component to route to. Only one of `component` or `redirect` may be set.
+  class AppIngressSpecRuleRoutingComponent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppIngressSpecRuleRoutingComponentMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleRoutingComponentMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppIngressSpecRuleRoutingComponentMetadata::DECODERS
+
+    # @return [String] The name of the component to route to.
+    attr_reader :name
+    # @return [String] An optional flag to preserve the path that is forwarded to the backend service. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If this value is `true`, the path will remain `/api/list`. Note: this is not applicable for Functions Components and is mutually exclusive with `rewrite`.
+    attr_reader :preserve_path_prefix
+    # @return [String] An optional field that will rewrite the path of the component to be what is specified here. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If you specified the rewrite to be `/v1/`, requests to `/api/list` would be rewritten to `/v1/list`. Note: this is mutually exclusive with `preserve_path_prefix`.
+    attr_reader :rewrite
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppIngressSpecRuleRoutingRedirectMetadata
-  FIELDS = {
-    uri: "uri",
-    authority: "authority",
-    port: "port",
-    scheme: "scheme",
-    redirect_code: "redirect_code",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppIngressSpecRuleRoutingRedirect.
-# The redirect configuration for the rule. Only one of `component` or `redirect` may be set.
-class AppIngressSpecRuleRoutingRedirect
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppIngressSpecRuleRoutingRedirectMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleRoutingRedirectMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppIngressSpecRuleRoutingRedirectMetadata::DECODERS
-
-  # @return [String] An optional URI path to redirect to. Note: if this is specified the whole URI of the original request will be overwritten to this value, irrespective of the original request URI being matched.
-  attr_reader :uri
-  # @return [String] The authority/host to redirect to. This can be a hostname or IP address. Note: use `port` to set the port.
-  attr_reader :authority
-  # @return [Integer] The port to redirect to.
-  attr_reader :port
-  # @return [String] The scheme to redirect to. Supported values are `http` or `https`. Default: `https`.
-  attr_reader :scheme
-  # @return [Integer] The redirect code to use. Defaults to `302`. Supported values are 300, 301, 302, 303, 304, 307, 308.
-  attr_reader :redirect_code
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppIngressSpecRuleRoutingRedirectMetadata
+    FIELDS = {
+      uri: 'uri',
+      authority: 'authority',
+      port: 'port',
+      scheme: 'scheme',
+      redirect_code: 'redirect_code'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppIngressSpecRuleRoutingRedirect.
+  # The redirect configuration for the rule. Only one of `component` or `redirect` may be set.
+  class AppIngressSpecRuleRoutingRedirect
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppIngressSpecRuleRoutingRedirectMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleRoutingRedirectMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppIngressSpecRuleRoutingRedirectMetadata::DECODERS
+
+    # @return [String] An optional URI path to redirect to. Note: if this is specified the whole URI of the original request will be overwritten to this value, irrespective of the original request URI being matched.
+    attr_reader :uri
+    # @return [String] The authority/host to redirect to. This can be a hostname or IP address. Note: use `port` to set the port.
+    attr_reader :authority
+    # @return [Integer] The port to redirect to.
+    attr_reader :port
+    # @return [String] The scheme to redirect to. Supported values are `http` or `https`. Default: `https`.
+    attr_reader :scheme
+    # @return [Integer] The redirect code to use. Defaults to `302`. Supported values are 300, 301, 302, 303, 304, 307, 308.
+    attr_reader :redirect_code
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppIngressSpecRuleStringMatchExactMetadata
-  FIELDS = {
-    exact: "exact",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    exact
-  ].freeze
-  DECODERS = {
-  }.freeze
-  NULLABLE_FIELDS = %i[
-    exact
-  ].freeze
-end
-
-# API model for AppIngressSpecRuleStringMatchExact.
-# The authority to match on.
-class AppIngressSpecRuleStringMatchExact
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppIngressSpecRuleStringMatchExactMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleStringMatchExactMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppIngressSpecRuleStringMatchExactMetadata::DECODERS
-
-  # @return [String] Exact string match. An empty string is a valid value and will be serialized explicitly rather than being omitted from the payload.
-  attr_reader :exact
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppIngressSpecRuleStringMatchExactMetadata
+    FIELDS = {
+      exact: 'exact'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      exact
+    ].freeze
+    DECODERS = {}.freeze
+    NULLABLE_FIELDS = %i[
+      exact
+    ].freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalAppIngressSpecRuleStringMatchExactMetadata::NULLABLE_FIELDS)
+  # API model for AppIngressSpecRuleStringMatchExact.
+  # The authority to match on.
+  class AppIngressSpecRuleStringMatchExact
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppIngressSpecRuleStringMatchExactMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleStringMatchExactMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppIngressSpecRuleStringMatchExactMetadata::DECODERS
+
+    # @return [String] Exact string match. An empty string is a valid value and will be serialized explicitly rather than being omitted from the payload.
+    attr_reader :exact
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalAppIngressSpecRuleStringMatchExactMetadata::NULLABLE_FIELDS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata
-  FIELDS = {
-    prefix: "prefix",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    prefix
-  ].freeze
-  DECODERS = {
-  }.freeze
-  NULLABLE_FIELDS = %i[
-    prefix
-  ].freeze
-end
-
-# API model for AppIngressSpecRuleStringMatchPrefix.
-# The path to match on.
-class AppIngressSpecRuleStringMatchPrefix
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata::DECODERS
-
-  # @return [String] Prefix-based match. For example, `/api` will match `/api`, `/api/`, and any nested paths such as `/api/v1/endpoint`.
-  attr_reader :prefix
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata
+    FIELDS = {
+      prefix: 'prefix'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      prefix
+    ].freeze
+    DECODERS = {}.freeze
+    NULLABLE_FIELDS = %i[
+      prefix
+    ].freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata::NULLABLE_FIELDS)
-  end
+  # API model for AppIngressSpecRuleStringMatchPrefix.
+  # The path to match on.
+  class AppIngressSpecRuleStringMatchPrefix
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] Prefix-based match. For example, `/api` will match `/api`, `/api/`, and any nested paths such as `/api/v1/endpoint`.
+    attr_reader :prefix
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalAppIngressSpecRuleStringMatchPrefixMetadata::NULLABLE_FIELDS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

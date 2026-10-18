@@ -5,671 +5,659 @@
 
 # apps_app domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAppMetadata
-  FIELDS = {
-    active_deployment: "active_deployment",
-    created_at: "created_at",
-    default_ingress: "default_ingress",
-    domains: "domains",
-    id: "id",
-    in_progress_deployment: "in_progress_deployment",
-    last_deployment_created_at: "last_deployment_created_at",
-    live_domain: "live_domain",
-    live_url: "live_url",
-    live_url_base: "live_url_base",
-    owner_uuid: "owner_uuid",
-    pending_deployment: "pending_deployment",
-    project_id: "project_id",
-    region: "region",
-    spec: "spec",
-    tier_slug: "tier_slug",
-    updated_at: "updated_at",
-    pinned_deployment: "pinned_deployment",
-    dedicated_ips: "dedicated_ips",
-    vpc: "vpc",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    spec
-  ].freeze
-  DECODERS = {
-    active_deployment: lambda do |value|
-      ::OctridevDigitalocean::AppsDeployment.from_hash(value)
-    end,
-    domains: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppsDomain.from_hash(item) }
-    end,
-    in_progress_deployment: lambda do |value|
-      ::OctridevDigitalocean::AppsDeployment.from_hash(value)
-    end,
-    pending_deployment: lambda do |value|
-      ::OctridevDigitalocean::AppsDeployment.from_hash(value)
-    end,
-    region: lambda do |value|
-      ::OctridevDigitalocean::AppsRegion.from_hash(value)
-    end,
-    spec: lambda do |value|
-      ::OctridevDigitalocean::AppSpec.from_hash(value)
-    end,
-    pinned_deployment: lambda do |value|
-      ::OctridevDigitalocean::AppsDeployment.from_hash(value)
-    end,
-    dedicated_ips: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppsDedicatedEgressIp.from_hash(item) }
-    end,
-    vpc: lambda do |value|
-      ::OctridevDigitalocean::AppsVpc.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for App.
-# An application's configuration and status.
-class App
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppMetadata::DECODERS
-
-  # @return [AppsDeployment] Optional object value serialized in the `active_deployment` wire field.
-  attr_reader :active_deployment
-  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-  attr_reader :created_at
-  # @return [String] Optional `string` value serialized in the `default_ingress` wire field.
-  attr_reader :default_ingress
-  # @return [Array_of_AppsDomain] Optional array value serialized in the `domains` wire field.
-  attr_reader :domains
-  # @return [String] Optional `string` value serialized in the `id` wire field.
-  attr_reader :id
-  # @return [AppsDeployment] Optional object value serialized in the `in_progress_deployment` wire field.
-  attr_reader :in_progress_deployment
-  # @return [String] Optional `date-time`-formatted value serialized in the `last_deployment_created_at` wire field.
-  attr_reader :last_deployment_created_at
-  # @return [String] Optional `string` value serialized in the `live_domain` wire field.
-  attr_reader :live_domain
-  # @return [String] Optional `string` value serialized in the `live_url` wire field.
-  attr_reader :live_url
-  # @return [String] Optional `string` value serialized in the `live_url_base` wire field.
-  attr_reader :live_url_base
-  # @return [String] Optional `string` value serialized in the `owner_uuid` wire field.
-  attr_reader :owner_uuid
-  # @return [AppsDeployment] The most recent pending deployment. For CreateApp and UpdateApp transactions this is guaranteed to reflect the associated deployment.
-  attr_reader :pending_deployment
-  # @return [String] Requires `project:read` scope.
-  attr_reader :project_id
-  # @return [AppsRegion] Optional object value serialized in the `region` wire field.
-  attr_reader :region
-  # @return [AppSpec] The desired configuration of an application.
-  attr_reader :spec
-  # @return [String] Optional `string` value serialized in the `tier_slug` wire field.
-  attr_reader :tier_slug
-  # @return [String] Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-  attr_reader :updated_at
-  # @return [AppsDeployment] The deployment that the app is pinned to.
-  attr_reader :pinned_deployment
-  # @return [Array_of_AppsDedicatedEgressIp] Optional array value serialized in the `dedicated_ips` wire field.
-  attr_reader :dedicated_ips
-  # @return [AppsVpc] Optional object value serialized in the `vpc` wire field.
-  attr_reader :vpc
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppMetadata
+    FIELDS = {
+      active_deployment: 'active_deployment',
+      created_at: 'created_at',
+      default_ingress: 'default_ingress',
+      domains: 'domains',
+      id: 'id',
+      in_progress_deployment: 'in_progress_deployment',
+      last_deployment_created_at: 'last_deployment_created_at',
+      live_domain: 'live_domain',
+      live_url: 'live_url',
+      live_url_base: 'live_url_base',
+      owner_uuid: 'owner_uuid',
+      pending_deployment: 'pending_deployment',
+      project_id: 'project_id',
+      region: 'region',
+      spec: 'spec',
+      tier_slug: 'tier_slug',
+      updated_at: 'updated_at',
+      pinned_deployment: 'pinned_deployment',
+      dedicated_ips: 'dedicated_ips',
+      vpc: 'vpc'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      spec
+    ].freeze
+    DECODERS = {
+      active_deployment: lambda do |value|
+        ::OctridevDigitalocean::AppsDeployment.from_hash(value)
+      end,
+      domains: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppsDomain.from_hash(item) }
+      end,
+      in_progress_deployment: lambda do |value|
+        ::OctridevDigitalocean::AppsDeployment.from_hash(value)
+      end,
+      pending_deployment: lambda do |value|
+        ::OctridevDigitalocean::AppsDeployment.from_hash(value)
+      end,
+      region: lambda do |value|
+        ::OctridevDigitalocean::AppsRegion.from_hash(value)
+      end,
+      spec: lambda do |value|
+        ::OctridevDigitalocean::AppSpec.from_hash(value)
+      end,
+      pinned_deployment: lambda do |value|
+        ::OctridevDigitalocean::AppsDeployment.from_hash(value)
+      end,
+      dedicated_ips: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppsDedicatedEgressIp.from_hash(item) }
+      end,
+      vpc: lambda do |value|
+        ::OctridevDigitalocean::AppsVpc.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for App.
+  # An application's configuration and status.
+  class App
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppMetadata::DECODERS
+
+    # @return [AppsDeployment] Optional object value serialized in the `active_deployment` wire field.
+    attr_reader :active_deployment
+    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    attr_reader :created_at
+    # @return [String] Optional `string` value serialized in the `default_ingress` wire field.
+    attr_reader :default_ingress
+    # @return [Array_of_AppsDomain] Optional array value serialized in the `domains` wire field.
+    attr_reader :domains
+    # @return [String] Optional `string` value serialized in the `id` wire field.
+    attr_reader :id
+    # @return [AppsDeployment] Optional object value serialized in the `in_progress_deployment` wire field.
+    attr_reader :in_progress_deployment
+    # @return [String] Optional `date-time`-formatted value serialized in the `last_deployment_created_at` wire field.
+    attr_reader :last_deployment_created_at
+    # @return [String] Optional `string` value serialized in the `live_domain` wire field.
+    attr_reader :live_domain
+    # @return [String] Optional `string` value serialized in the `live_url` wire field.
+    attr_reader :live_url
+    # @return [String] Optional `string` value serialized in the `live_url_base` wire field.
+    attr_reader :live_url_base
+    # @return [String] Optional `string` value serialized in the `owner_uuid` wire field.
+    attr_reader :owner_uuid
+    # @return [AppsDeployment] The most recent pending deployment. For CreateApp and UpdateApp transactions this is guaranteed to reflect the associated deployment.
+    attr_reader :pending_deployment
+    # @return [String] Requires `project:read` scope.
+    attr_reader :project_id
+    # @return [AppsRegion] Optional object value serialized in the `region` wire field.
+    attr_reader :region
+    # @return [AppSpec] The desired configuration of an application.
+    attr_reader :spec
+    # @return [String] Optional `string` value serialized in the `tier_slug` wire field.
+    attr_reader :tier_slug
+    # @return [String] Optional `date-time`-formatted value serialized in the `updated_at` wire field.
+    attr_reader :updated_at
+    # @return [AppsDeployment] The deployment that the app is pinned to.
+    attr_reader :pinned_deployment
+    # @return [Array_of_AppsDedicatedEgressIp] Optional array value serialized in the `dedicated_ips` wire field.
+    attr_reader :dedicated_ips
+    # @return [AppsVpc] Optional object value serialized in the `vpc` wire field.
+    attr_reader :vpc
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppDatabaseSpecMetadata
-  FIELDS = {
-    cluster_name: "cluster_name",
-    db_name: "db_name",
-    db_user: "db_user",
-    engine: "engine",
-    name: "name",
-    production: "production",
-    version: "version",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-    engine: lambda do |value|
-      ::OctridevDigitalocean::AppDatabaseSpecEngine.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AppDatabaseSpec.
-# Typed representation of the `AppDatabaseSpec` API schema.
-class AppDatabaseSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppDatabaseSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppDatabaseSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppDatabaseSpecMetadata::DECODERS
-
-  # @return [String] The name of the underlying DigitalOcean DBaaS cluster. This is required for production databases. For dev databases, if cluster_name is not set, a new cluster will be provisioned.
-  attr_reader :cluster_name
-  # @return [String] The name of the MySQL or PostgreSQL database to configure.
-  attr_reader :db_name
-  # @return [String] The name of the MySQL or PostgreSQL user to configure.
-  attr_reader :db_user
-  # @return [AppDatabaseSpecEngine] - MYSQL: MySQL - PG: PostgreSQL - REDIS: Caching - MONGODB: MongoDB - KAFKA: Kafka - OPENSEARCH: OpenSearch - VALKEY: ValKey
-  attr_reader :engine
-  # @return [String] The database's name. The name must be unique across all components within the same app and cannot use capital letters.
-  attr_reader :name
-  # @return [Boolean] Whether this is a production or dev database.
-  attr_reader :production
-  # @return [String] The version of the database engine
-  attr_reader :version
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppDatabaseSpecMetadata
+    FIELDS = {
+      cluster_name: 'cluster_name',
+      db_name: 'db_name',
+      db_user: 'db_user',
+      engine: 'engine',
+      name: 'name',
+      production: 'production',
+      version: 'version'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {
+      engine: lambda do |value|
+        ::OctridevDigitalocean::AppDatabaseSpecEngine.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppDatabaseSpec.
+  # Typed representation of the `AppDatabaseSpec` API schema.
+  class AppDatabaseSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppDatabaseSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppDatabaseSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppDatabaseSpecMetadata::DECODERS
+
+    # @return [String] The name of the underlying DigitalOcean DBaaS cluster. This is required for production databases. For dev databases, if cluster_name is not set, a new cluster will be provisioned.
+    attr_reader :cluster_name
+    # @return [String] The name of the MySQL or PostgreSQL database to configure.
+    attr_reader :db_name
+    # @return [String] The name of the MySQL or PostgreSQL user to configure.
+    attr_reader :db_user
+    # @return [AppDatabaseSpecEngine] - MYSQL: MySQL - PG: PostgreSQL - REDIS: Caching - MONGODB: MongoDB - KAFKA: Kafka - OPENSEARCH: OpenSearch - VALKEY: ValKey
+    attr_reader :engine
+    # @return [String] The database's name. The name must be unique across all components within the same app and cannot use capital letters.
+    attr_reader :name
+    # @return [Boolean] Whether this is a production or dev database.
+    attr_reader :production
+    # @return [String] The version of the database engine
+    attr_reader :version
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AppDatabaseSpecEngine SDK namespace.
-module AppDatabaseSpecEngine
-  UNSET = 'UNSET'
-  MYSQL = 'MYSQL'
-  PG = 'PG'
-  REDIS = 'REDIS'
-  MONGODB = 'MONGODB'
-  KAFKA = 'KAFKA'
-  OPENSEARCH = 'OPENSEARCH'
-  VALKEY = 'VALKEY'
-  VALUES = ['UNSET', 'MYSQL', 'PG', 'REDIS', 'MONGODB', 'KAFKA', 'OPENSEARCH', 'VALKEY'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppEventAutoscalingMetadata
-  FIELDS = {
-    phase: "phase",
-    components: "components",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    phase: lambda do |value|
-      ::OctridevDigitalocean::AppEventAutoscalingPhase.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AppEventAutoscaling.
-# Autoscaling event details. Only present for autoscaling events.
-class AppEventAutoscaling
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppEventAutoscalingMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppEventAutoscalingMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppEventAutoscalingMetadata::DECODERS
-
-  # @return [AppEventAutoscalingPhase] The current phase of the autoscaling event
-  attr_reader :phase
-  # @return [Hash] Map of component names to their scale changes
-  attr_reader :components
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AppDatabaseSpecEngine SDK namespace.
+  module AppDatabaseSpecEngine
+    UNSET = 'UNSET'
+    MYSQL = 'MYSQL'
+    PG = 'PG'
+    REDIS = 'REDIS'
+    MONGODB = 'MONGODB'
+    KAFKA = 'KAFKA'
+    OPENSEARCH = 'OPENSEARCH'
+    VALKEY = 'VALKEY'
+    VALUES = %w[UNSET MYSQL PG REDIS MONGODB KAFKA OPENSEARCH VALKEY].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppEventAutoscalingMetadata
+    FIELDS = {
+      phase: 'phase',
+      components: 'components'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      phase: lambda do |value|
+        ::OctridevDigitalocean::AppEventAutoscalingPhase.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AppEventAutoscaling.
+  # Autoscaling event details. Only present for autoscaling events.
+  class AppEventAutoscaling
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppEventAutoscalingMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppEventAutoscalingMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppEventAutoscalingMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAppEventMetadata
-  FIELDS = {
-    id: "id",
-    type: "type",
-    created_at: "created_at",
-    deployment_id: "deployment_id",
-    deployment: "deployment",
-    autoscaling: "autoscaling",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::AppEventType.from_value(value)
-    end,
-    deployment: lambda do |value|
-      ::OctridevDigitalocean::AppsDeployment.from_hash(value)
-    end,
-    autoscaling: lambda do |value|
-      ::OctridevDigitalocean::AppEventAutoscaling.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [AppEventAutoscalingPhase] The current phase of the autoscaling event
+    attr_reader :phase
+    # @return [Hash] Map of component names to their scale changes
+    attr_reader :components
 
-# API model for AppEvent.
-# Typed representation of the `AppEvent` API schema.
-class AppEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppEventMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Optional `string` value serialized in the `id` wire field.
-  attr_reader :id
-  # @return [AppEventType] The type of event
-  attr_reader :type
-  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-  attr_reader :created_at
-  # @return [String] For deployment events, this is the same as the deployment's ID. For autoscaling events, this is the deployment that was autoscaled.
-  attr_reader :deployment_id
-  # @return [AppsDeployment] Optional object value serialized in the `deployment` wire field.
-  attr_reader :deployment
-  # @return [AppEventAutoscaling] Autoscaling event details. Only present for autoscaling events.
-  attr_reader :autoscaling
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppEventMetadata
+    FIELDS = {
+      id: 'id',
+      type: 'type',
+      created_at: 'created_at',
+      deployment_id: 'deployment_id',
+      deployment: 'deployment',
+      autoscaling: 'autoscaling'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::AppEventType.from_value(value)
+      end,
+      deployment: lambda do |value|
+        ::OctridevDigitalocean::AppsDeployment.from_hash(value)
+      end,
+      autoscaling: lambda do |value|
+        ::OctridevDigitalocean::AppEventAutoscaling.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AppEvent.
+  # Typed representation of the `AppEvent` API schema.
+  class AppEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppEventMetadata::DECODERS
 
-# Defines the AppEventAutoscalingPhase SDK namespace.
-module AppEventAutoscalingPhase
-  UNKNOWN = 'UNKNOWN'
-  PENDING = 'PENDING'
-  IN_PROGRESS = 'IN_PROGRESS'
-  SUCCEEDED = 'SUCCEEDED'
-  FAILED = 'FAILED'
-  CANCELED = 'CANCELED'
-  VALUES = ['UNKNOWN', 'PENDING', 'IN_PROGRESS', 'SUCCEEDED', 'FAILED', 'CANCELED'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Optional `string` value serialized in the `id` wire field.
+    attr_reader :id
+    # @return [AppEventType] The type of event
+    attr_reader :type
+    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    attr_reader :created_at
+    # @return [String] For deployment events, this is the same as the deployment's ID. For autoscaling events, this is the deployment that was autoscaled.
+    attr_reader :deployment_id
+    # @return [AppsDeployment] Optional object value serialized in the `deployment` wire field.
+    attr_reader :deployment
+    # @return [AppEventAutoscaling] Autoscaling event details. Only present for autoscaling events.
+    attr_reader :autoscaling
 
-# Defines the AppEventType SDK namespace.
-module AppEventType
-  UNKNOWN = 'UNKNOWN'
-  DEPLOYMENT = 'DEPLOYMENT'
-  AUTOSCALING = 'AUTOSCALING'
-  VALUES = ['UNKNOWN', 'DEPLOYMENT', 'AUTOSCALING'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalAppEventsMetadata
-  FIELDS = {
-    events: "events",
-    links: "links",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    events: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppEvent.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for AppEvents.
-# Typed representation of the `AppEvents` API schema.
-class AppEvents
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppEventsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppEventsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppEventsMetadata::DECODERS
-
-  attr_reader :events
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AppEventAutoscalingPhase SDK namespace.
+  module AppEventAutoscalingPhase
+    UNKNOWN = 'UNKNOWN'
+    PENDING = 'PENDING'
+    IN_PROGRESS = 'IN_PROGRESS'
+    SUCCEEDED = 'SUCCEEDED'
+    FAILED = 'FAILED'
+    CANCELED = 'CANCELED'
+    VALUES = %w[UNKNOWN PENDING IN_PROGRESS SUCCEEDED FAILED CANCELED].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppInstanceMetadata
-  FIELDS = {
-    component_name: "component_name",
-    component_type: "component_type",
-    instance_name: "instance_name",
-    instance_alias: "instance_alias",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    component_type: lambda do |value|
-      ::OctridevDigitalocean::AppInstanceComponentType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AppInstance.
-# Typed representation of the `AppInstance` API schema.
-class AppInstance
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppInstanceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppInstanceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppInstanceMetadata::DECODERS
-
-  # @return [String] Name of the component, from the app spec.
-  attr_reader :component_name
-  # @return [AppInstanceComponentType] Supported compute component by DigitalOcean App Platform.
-  attr_reader :component_type
-  # @return [String] Name of the instance, which is a unique identifier for the instance.
-  attr_reader :instance_name
-  # @return [String] Readable identifier, an alias of the instance name, reference for mapping insights to instance names.
-  attr_reader :instance_alias
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AppEventType SDK namespace.
+  module AppEventType
+    UNKNOWN = 'UNKNOWN'
+    DEPLOYMENT = 'DEPLOYMENT'
+    AUTOSCALING = 'AUTOSCALING'
+    VALUES = %w[UNKNOWN DEPLOYMENT AUTOSCALING].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppEventsMetadata
+    FIELDS = {
+      events: 'events',
+      links: 'links'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      events: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppEvent.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AppEvents.
+  # Typed representation of the `AppEvents` API schema.
+  class AppEvents
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppEventsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppEventsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppEventsMetadata::DECODERS
 
-# Defines the AppInstanceComponentType SDK namespace.
-module AppInstanceComponentType
-  SERVICE = 'SERVICE'
-  WORKER = 'WORKER'
-  JOB = 'JOB'
-  VALUES = ['SERVICE', 'WORKER', 'JOB'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    attr_reader :events
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
 
-# Internal model hydration metadata.
-class SdkInternalAppInstancesMetadata
-  FIELDS = {
-    instances: "instances",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    instances: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppInstance.from_hash(item) }
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for AppInstances.
-# Typed representation of the `AppInstances` API schema.
-class AppInstances
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppInstancesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppInstancesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppInstancesMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [Array_of_AppInstance] Optional array value serialized in the `instances` wire field.
-  attr_reader :instances
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppInstanceMetadata
+    FIELDS = {
+      component_name: 'component_name',
+      component_type: 'component_type',
+      instance_name: 'instance_name',
+      instance_alias: 'instance_alias'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      component_type: lambda do |value|
+        ::OctridevDigitalocean::AppInstanceComponentType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AppInstance.
+  # Typed representation of the `AppInstance` API schema.
+  class AppInstance
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppInstanceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppInstanceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppInstanceMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAppMaintenanceSpecMetadata
-  FIELDS = {
-    enabled: "enabled",
-    archive: "archive",
-    offline_page_url: "offline_page_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] Name of the component, from the app spec.
+    attr_reader :component_name
+    # @return [AppInstanceComponentType] Supported compute component by DigitalOcean App Platform.
+    attr_reader :component_type
+    # @return [String] Name of the instance, which is a unique identifier for the instance.
+    attr_reader :instance_name
+    # @return [String] Readable identifier, an alias of the instance name, reference for mapping insights to instance names.
+    attr_reader :instance_alias
 
-# API model for AppMaintenanceSpec.
-# Specification to configure maintenance settings for the app, such as maintenance mode and archiving the app.
-class AppMaintenanceSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppMaintenanceSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppMaintenanceSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppMaintenanceSpecMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Boolean] Indicates whether maintenance mode should be enabled for the app.
-  attr_reader :enabled
-  # @return [Boolean] Indicates whether the app should be archived. Setting this to true implies that enabled is set to true.
-  attr_reader :archive
-  # @return [String] A custom offline page to display when maintenance mode is enabled or the app is archived.
-  attr_reader :offline_page_url
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AppInstanceComponentType SDK namespace.
+  module AppInstanceComponentType
+    SERVICE = 'SERVICE'
+    WORKER = 'WORKER'
+    JOB = 'JOB'
+    VALUES = %w[SERVICE WORKER JOB].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppResponseMetadata
-  FIELDS = {
-    app: "app",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    app: lambda do |value|
-      ::OctridevDigitalocean::App.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppResponse.
-# Typed representation of the `AppResponse` API schema.
-class AppResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppResponseMetadata::DECODERS
-
-  # @return [App] An application's configuration and status.
-  attr_reader :app
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppInstancesMetadata
+    FIELDS = {
+      instances: 'instances'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      instances: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppInstance.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppInstances.
+  # Typed representation of the `AppInstances` API schema.
+  class AppInstances
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppInstancesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppInstancesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppInstancesMetadata::DECODERS
+
+    # @return [Array_of_AppInstance] Optional array value serialized in the `instances` wire field.
+    attr_reader :instances
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppRollbackValidationConditionMetadata
-  FIELDS = {
-    code: "code",
-    message: "message",
-    components: "components",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    code: lambda do |value|
-      ::OctridevDigitalocean::AppRollbackValidationConditionCode.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AppRollbackValidationCondition.
-# Typed representation of the `AppRollbackValidationCondition` API schema.
-class AppRollbackValidationCondition
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppRollbackValidationConditionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppRollbackValidationConditionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppRollbackValidationConditionMetadata::DECODERS
-
-  # @return [AppRollbackValidationConditionCode] A code identifier that represents the failing condition. Failing conditions: - `incompatible_phase` - indicates that the deployment's phase is not suitable for rollback. - `incompatible_result` - indicates that the deployment's result is not suitable for rollback. - `exceeded_revision_limit` - indicates that the app has exceeded the rollback revision limits for its tier. - `app_pinned` - indicates that there is already a rollback in progress and the app is pinned. -…
-  attr_reader :code
-  # @return [String] A human-readable message describing the failing condition.
-  attr_reader :message
-  # @return [Array_of_String] Optional array value serialized in the `components` wire field.
-  attr_reader :components
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppMaintenanceSpecMetadata
+    FIELDS = {
+      enabled: 'enabled',
+      archive: 'archive',
+      offline_page_url: 'offline_page_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppMaintenanceSpec.
+  # Specification to configure maintenance settings for the app, such as maintenance mode and archiving the app.
+  class AppMaintenanceSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppMaintenanceSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppMaintenanceSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppMaintenanceSpecMetadata::DECODERS
+
+    # @return [Boolean] Indicates whether maintenance mode should be enabled for the app.
+    attr_reader :enabled
+    # @return [Boolean] Indicates whether the app should be archived. Setting this to true implies that enabled is set to true.
+    attr_reader :archive
+    # @return [String] A custom offline page to display when maintenance mode is enabled or the app is archived.
+    attr_reader :offline_page_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AppRollbackValidationConditionCode SDK namespace.
-module AppRollbackValidationConditionCode
-  INCOMPATIBLE_PHASE = 'incompatible_phase'
-  INCOMPATIBLE_RESULT = 'incompatible_result'
-  EXCEEDED_REVISION_LIMIT = 'exceeded_revision_limit'
-  APP_PINNED = 'app_pinned'
-  DATABASE_CONFIG_CONFLICT = 'database_config_conflict'
-  REGION_CONFLICT = 'region_conflict'
-  STATIC_SITE_REQUIRES_REBUILD = 'static_site_requires_rebuild'
-  IMAGE_SOURCE_MISSING_DIGEST = 'image_source_missing_digest'
-  VALUES = [
-    'incompatible_phase', 'incompatible_result', 'exceeded_revision_limit', 'app_pinned',
-    'database_config_conflict', 'region_conflict', 'static_site_requires_rebuild',
-    'image_source_missing_digest'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppRouteSpecMetadata
-  FIELDS = {
-    path: "path",
-    preserve_path_prefix: "preserve_path_prefix",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppRouteSpec.
-# Typed representation of the `AppRouteSpec` API schema.
-class AppRouteSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppRouteSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppRouteSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppRouteSpecMetadata::DECODERS
-
-  # @return [String] (Deprecated - Use Ingress Rules instead). An HTTP path prefix. Paths must start with / and must be unique across all components within an app.
-  attr_reader :path
-  # @return [Boolean] An optional flag to preserve the path that is forwarded to the backend service. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If this value is `true`, the path will remain `/api/list`.
-  attr_reader :preserve_path_prefix
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppResponseMetadata
+    FIELDS = {
+      app: 'app'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      app: lambda do |value|
+        ::OctridevDigitalocean::App.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppResponse.
+  # Typed representation of the `AppResponse` API schema.
+  class AppResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppResponseMetadata::DECODERS
+
+    # @return [App] An application's configuration and status.
+    attr_reader :app
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalAppRollbackValidationConditionMetadata
+    FIELDS = {
+      code: 'code',
+      message: 'message',
+      components: 'components'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      code: lambda do |value|
+        ::OctridevDigitalocean::AppRollbackValidationConditionCode.from_value(value)
+      end
+    }.freeze
   end
-end
 
-# Internal model hydration metadata.
-class SdkInternalAppStaticSiteSpecVariant1CorsMetadata
-  FIELDS = {
-    allow_origins: "allow_origins",
-    allow_methods: "allow_methods",
-    allow_headers: "allow_headers",
-    expose_headers: "expose_headers",
-    max_age: "max_age",
-    allow_credentials: "allow_credentials",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    allow_origins: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppsStringMatch.from_hash(item) }
-    end,
-  }.freeze
-end
+  # API model for AppRollbackValidationCondition.
+  # Typed representation of the `AppRollbackValidationCondition` API schema.
+  class AppRollbackValidationCondition
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppRollbackValidationConditionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppRollbackValidationConditionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppRollbackValidationConditionMetadata::DECODERS
+
+    # @return [AppRollbackValidationConditionCode] A code identifier that represents the failing condition. Failing conditions: - `incompatible_phase` - indicates that the deployment's phase is not suitable for rollback. - `incompatible_result` - indicates that the deployment's result is not suitable for rollback. - `exceeded_revision_limit` - indicates that the app has exceeded the rollback revision limits for its tier. - `app_pinned` - indicates that there is already a rollback in progress and the app is pinned. -…
+    attr_reader :code
+    # @return [String] A human-readable message describing the failing condition.
+    attr_reader :message
+    # @return [Array_of_String] Optional array value serialized in the `components` wire field.
+    attr_reader :components
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the AppRollbackValidationConditionCode SDK namespace.
+  module AppRollbackValidationConditionCode
+    INCOMPATIBLE_PHASE = 'incompatible_phase'
+    INCOMPATIBLE_RESULT = 'incompatible_result'
+    EXCEEDED_REVISION_LIMIT = 'exceeded_revision_limit'
+    APP_PINNED = 'app_pinned'
+    DATABASE_CONFIG_CONFLICT = 'database_config_conflict'
+    REGION_CONFLICT = 'region_conflict'
+    STATIC_SITE_REQUIRES_REBUILD = 'static_site_requires_rebuild'
+    IMAGE_SOURCE_MISSING_DIGEST = 'image_source_missing_digest'
+    VALUES = %w[
+      incompatible_phase incompatible_result exceeded_revision_limit app_pinned
+      database_config_conflict region_conflict static_site_requires_rebuild
+      image_source_missing_digest
+    ].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalAppRouteSpecMetadata
+    FIELDS = {
+      path: 'path',
+      preserve_path_prefix: 'preserve_path_prefix'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for AppRouteSpec.
+  # Typed representation of the `AppRouteSpec` API schema.
+  class AppRouteSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppRouteSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppRouteSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppRouteSpecMetadata::DECODERS
+
+    # @return [String] (Deprecated - Use Ingress Rules instead). An HTTP path prefix. Paths must start with / and must be unique across all components within an app.
+    attr_reader :path
+    # @return [Boolean] An optional flag to preserve the path that is forwarded to the backend service. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If this value is `true`, the path will remain `/api/list`.
+    attr_reader :preserve_path_prefix
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalAppStaticSiteSpecVariant1CorsMetadata
+    FIELDS = {
+      allow_origins: 'allow_origins',
+      allow_methods: 'allow_methods',
+      allow_headers: 'allow_headers',
+      expose_headers: 'expose_headers',
+      max_age: 'max_age',
+      allow_credentials: 'allow_credentials'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      allow_origins: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppsStringMatch.from_hash(item) }
+      end
+    }.freeze
+  end
 end

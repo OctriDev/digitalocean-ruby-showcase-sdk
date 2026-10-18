@@ -22,25 +22,24 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'POST',
-          "/v2/volumes/actions",
+          '/v2/volumes/actions',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           body: body,
           return_type: ::OctridevDigitalocean::VolumeActionResponse,
           decoder: :json,
           operation_id: 'volume_actions_post',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -56,7 +55,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('volume_id', volume_id)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -66,20 +64,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/volumes/",
+            '/v2/volumes/',
             SdkClient.encode_path_segment(volume_id),
-            "/actions"
+            '/actions'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::VolumeActions,
           decoder: :json,
           operation_id: 'volume_actions_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -98,7 +96,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('volume_id', volume_id)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -108,21 +105,21 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/v2/volumes/",
+            '/v2/volumes/',
             SdkClient.encode_path_segment(volume_id),
-            "/actions"
+            '/actions'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           body: body,
           return_type: ::OctridevDigitalocean::VolumeActionResponse,
           decoder: :json,
           operation_id: 'volume_actions_post_by_id',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -141,7 +138,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('volume_id', volume_id)
 
         Validation.validate_range('action_id', action_id, min: 1)
@@ -153,21 +149,21 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/volumes/",
+            '/v2/volumes/',
             SdkClient.encode_path_segment(volume_id),
-            "/actions/",
+            '/actions/',
             SdkClient.encode_path_segment(action_id)
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::VolumeActionResponse,
           decoder: :json,
           operation_id: 'volume_actions_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -5,124 +5,120 @@
 
 # apps_app_metrics domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAppMetricsBandwidthUsageMetadata
-  FIELDS = {
-    app_bandwidth_usage: "app_bandwidth_usage",
-    date: "date",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    app_bandwidth_usage: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppMetricsBandwidthUsageDetails.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AppMetricsBandwidthUsage.
-# Typed representation of the `AppMetricsBandwidthUsage` API schema.
-class AppMetricsBandwidthUsage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppMetricsBandwidthUsageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppMetricsBandwidthUsageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppMetricsBandwidthUsageMetadata::DECODERS
-
-  # @return [Array_of_AppMetricsBandwidthUsageDetails] A list of bandwidth usage details by app.
-  attr_reader :app_bandwidth_usage
-  # @return [String] The date for the metrics data.
-  attr_reader :date
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppMetricsBandwidthUsageMetadata
+    FIELDS = {
+      app_bandwidth_usage: 'app_bandwidth_usage',
+      date: 'date'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      app_bandwidth_usage: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppMetricsBandwidthUsageDetails.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppMetricsBandwidthUsage.
+  # Typed representation of the `AppMetricsBandwidthUsage` API schema.
+  class AppMetricsBandwidthUsage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppMetricsBandwidthUsageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppMetricsBandwidthUsageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppMetricsBandwidthUsageMetadata::DECODERS
+
+    # @return [Array_of_AppMetricsBandwidthUsageDetails] A list of bandwidth usage details by app.
+    attr_reader :app_bandwidth_usage
+    # @return [String] The date for the metrics data.
+    attr_reader :date
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppMetricsBandwidthUsageDetailsMetadata
-  FIELDS = {
-    app_id: "app_id",
-    bandwidth_bytes: "bandwidth_bytes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppMetricsBandwidthUsageDetails.
-# Bandwidth usage for an app.
-class AppMetricsBandwidthUsageDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppMetricsBandwidthUsageDetailsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppMetricsBandwidthUsageDetailsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppMetricsBandwidthUsageDetailsMetadata::DECODERS
-
-  # @return [String] The ID of the app.
-  attr_reader :app_id
-  # @return [String] The used bandwidth amount in bytes.
-  attr_reader :bandwidth_bytes
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppMetricsBandwidthUsageDetailsMetadata
+    FIELDS = {
+      app_id: 'app_id',
+      bandwidth_bytes: 'bandwidth_bytes'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppMetricsBandwidthUsageDetails.
+  # Bandwidth usage for an app.
+  class AppMetricsBandwidthUsageDetails
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppMetricsBandwidthUsageDetailsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppMetricsBandwidthUsageDetailsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppMetricsBandwidthUsageDetailsMetadata::DECODERS
+
+    # @return [String] The ID of the app.
+    attr_reader :app_id
+    # @return [String] The used bandwidth amount in bytes.
+    attr_reader :bandwidth_bytes
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppMetricsBandwidthUsageRequestMetadata
-  FIELDS = {
-    app_ids: "app_ids",
-    date: "date",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    app_ids
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppMetricsBandwidthUsageRequest.
-# Typed representation of the `AppMetricsBandwidthUsageRequest` API schema.
-class AppMetricsBandwidthUsageRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppMetricsBandwidthUsageRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppMetricsBandwidthUsageRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppMetricsBandwidthUsageRequestMetadata::DECODERS
-
-  # @return [Array_of_String] A list of app IDs to query bandwidth metrics for.
-  attr_reader :app_ids
-  # @return [String] Optional day to query. Only the date component of the timestamp will be considered. Default: yesterday.
-  attr_reader :date
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppMetricsBandwidthUsageRequestMetadata
+    FIELDS = {
+      app_ids: 'app_ids',
+      date: 'date'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      app_ids
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for AppMetricsBandwidthUsageRequest.
+  # Typed representation of the `AppMetricsBandwidthUsageRequest` API schema.
+  class AppMetricsBandwidthUsageRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppMetricsBandwidthUsageRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppMetricsBandwidthUsageRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppMetricsBandwidthUsageRequestMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [Array_of_String] A list of app IDs to query bandwidth metrics for.
+    attr_reader :app_ids
+    # @return [String] Optional day to query. Only the date component of the timestamp will be considered. Default: yesterday.
+    attr_reader :date
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

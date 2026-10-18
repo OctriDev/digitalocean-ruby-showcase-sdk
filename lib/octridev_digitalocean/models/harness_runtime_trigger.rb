@@ -5,315 +5,312 @@
 
 # harness_runtime_trigger domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalTriggerMetadata
-  FIELDS = {
-    trigger_id: "trigger_id",
-    kind: "kind",
-    name: "name",
-    status: "status",
-    session_mode: "session_mode",
-    agent_kind: "agent_kind",
-    prompt_template: "prompt_template",
-    output: "output",
-    session_template: "session_template",
-    bound_session_id: "bound_session_id",
-    webhook: "webhook",
-    cron: "cron",
-    created_at: "created_at",
-    updated_at: "updated_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    kind: lambda do |value|
-      ::OctridevDigitalocean::TriggerKind.from_value(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::TriggerStatus.from_value(value)
-    end,
-    session_mode: lambda do |value|
-      ::OctridevDigitalocean::TriggerSessionMode.from_value(value)
-    end,
-    agent_kind: lambda do |value|
-      ::OctridevDigitalocean::AgentKind.from_value(value)
-    end,
-    output: lambda do |value|
-      ::OctridevDigitalocean::TriggerOutputRead.from_hash(value)
-    end,
-    webhook: lambda do |value|
-      ::OctridevDigitalocean::WebhookConfig.from_hash(value)
-    end,
-    cron: lambda do |value|
-      ::OctridevDigitalocean::CronConfig.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Trigger.
-# A single automation bound to exactly one agent/session (agent == session in v1). The nested block present depends on `kind` (webhook xor cron) and `session_mode` (fresh => session_template; reuse => bound_session_id). `agent_kind` is read-only and derived; the webhook secret, the output email address / Slack webhook URL, and any env values inside session_template are write-only and never returned.
-class Trigger
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTriggerMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTriggerMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTriggerMetadata::DECODERS
-
-  # @return [String] Server-allocated UUID; opaque to clients.
-  attr_reader :trigger_id
-  # @return [TriggerKind] How the trigger fires - on an event (webhook) or on a schedule (cron). Immutable after create.
-  attr_reader :kind
-  # @return [String] Unique per team among non-deleted triggers. Same rules as session names; not UUID-form.
-  attr_reader :name
-  # @return [TriggerStatus] Trigger lifecycle state. Soft-deleted triggers are never returned (404).
-  attr_reader :status
-  # @return [TriggerSessionMode] fresh = a new session is created from the trigger's spec on every firing and destroyed after. reuse = the trigger binds an existing PAUSED session, resumed on each firing and paused after; multiple triggers may bind one session.
-  attr_reader :session_mode
-  # @return [AgentKind] AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE, OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400. AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter. AGENT_KIND_CREWAI is the CrewAI…
-  attr_reader :agent_kind
-  # @return [String] The prompt sent on each fire. Opaque to clients; payload-interpolation syntax is server-defined. For cron triggers it must not reference payload placeholders.
-  attr_reader :prompt_template
-  # @return [TriggerOutputRead] Output-delivery configuration as seen on reads. The email address and Slack webhook URL are write-only and never returned.
-  attr_reader :output
-  # @return [String] Present iff session_mode=fresh. The agents.yaml Agent manifest used to CREATE a session on each fire, returned with its env values REDACTED.
-  attr_reader :session_template
-  # @return [String] Present iff session_mode=reuse. UUID of the existing PAUSED session this trigger resumes; may be shared by multiple triggers.
-  attr_reader :bound_session_id
-  # @return [WebhookConfig] Present iff kind=webhook. The secret is never in this object (see create_trigger_response / rotate_secret_response).
-  attr_reader :webhook
-  # @return [CronConfig] Present iff kind=cron.
-  attr_reader :cron
-  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-  attr_reader :created_at
-  # @return [String] Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-  attr_reader :updated_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTriggerMetadata
+    FIELDS = {
+      trigger_id: 'trigger_id',
+      kind: 'kind',
+      name: 'name',
+      status: 'status',
+      session_mode: 'session_mode',
+      agent_kind: 'agent_kind',
+      prompt_template: 'prompt_template',
+      output: 'output',
+      session_template: 'session_template',
+      bound_session_id: 'bound_session_id',
+      webhook: 'webhook',
+      cron: 'cron',
+      created_at: 'created_at',
+      updated_at: 'updated_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      kind: lambda do |value|
+        ::OctridevDigitalocean::TriggerKind.from_value(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::TriggerStatus.from_value(value)
+      end,
+      session_mode: lambda do |value|
+        ::OctridevDigitalocean::TriggerSessionMode.from_value(value)
+      end,
+      agent_kind: lambda do |value|
+        ::OctridevDigitalocean::AgentKind.from_value(value)
+      end,
+      output: lambda do |value|
+        ::OctridevDigitalocean::TriggerOutputRead.from_hash(value)
+      end,
+      webhook: lambda do |value|
+        ::OctridevDigitalocean::WebhookConfig.from_hash(value)
+      end,
+      cron: lambda do |value|
+        ::OctridevDigitalocean::CronConfig.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Trigger.
+  # A single automation bound to exactly one agent/session (agent == session in v1). The nested block present depends on `kind` (webhook xor cron) and `session_mode` (fresh => session_template; reuse => bound_session_id). `agent_kind` is read-only and derived; the webhook secret, the output email address / Slack webhook URL, and any env values inside session_template are write-only and never returned.
+  class Trigger
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTriggerMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTriggerMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTriggerMetadata::DECODERS
+
+    # @return [String] Server-allocated UUID; opaque to clients.
+    attr_reader :trigger_id
+    # @return [TriggerKind] How the trigger fires - on an event (webhook) or on a schedule (cron). Immutable after create.
+    attr_reader :kind
+    # @return [String] Unique per team among non-deleted triggers. Same rules as session names; not UUID-form.
+    attr_reader :name
+    # @return [TriggerStatus] Trigger lifecycle state. Soft-deleted triggers are never returned (404).
+    attr_reader :status
+    # @return [TriggerSessionMode] fresh = a new session is created from the trigger's spec on every firing and destroyed after. reuse = the trigger binds an existing PAUSED session, resumed on each firing and paused after; multiple triggers may bind one session.
+    attr_reader :session_mode
+    # @return [AgentKind] AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE, OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400. AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter. AGENT_KIND_CREWAI is the CrewAI…
+    attr_reader :agent_kind
+    # @return [String] The prompt sent on each fire. Opaque to clients; payload-interpolation syntax is server-defined. For cron triggers it must not reference payload placeholders.
+    attr_reader :prompt_template
+    # @return [TriggerOutputRead] Output-delivery configuration as seen on reads. The email address and Slack webhook URL are write-only and never returned.
+    attr_reader :output
+    # @return [String] Present iff session_mode=fresh. The agents.yaml Agent manifest used to CREATE a session on each fire, returned with its env values REDACTED.
+    attr_reader :session_template
+    # @return [String] Present iff session_mode=reuse. UUID of the existing PAUSED session this trigger resumes; may be shared by multiple triggers.
+    attr_reader :bound_session_id
+    # @return [WebhookConfig] Present iff kind=webhook. The secret is never in this object (see create_trigger_response / rotate_secret_response).
+    attr_reader :webhook
+    # @return [CronConfig] Present iff kind=cron.
+    attr_reader :cron
+    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    attr_reader :created_at
+    # @return [String] Optional `date-time`-formatted value serialized in the `updated_at` wire field.
+    attr_reader :updated_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTriggerExecutionMetadata
-  FIELDS = {
-    execution_id: "execution_id",
-    trigger_id: "trigger_id",
-    status: "status",
-    session_id: "session_id",
-    run_id: "run_id",
-    failure_reason: "failure_reason",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    payload: "payload",
-    output_text: "output_text",
-    output_truncated: "output_truncated",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::TriggerExecutionStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for TriggerExecution.
-# One row per firing (webhook delivery or cron tick).
-class TriggerExecution
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTriggerExecutionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTriggerExecutionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTriggerExecutionMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `execution_id` wire field.
-  attr_reader :execution_id
-  # @return [String] Optional `string` value serialized in the `trigger_id` wire field.
-  attr_reader :trigger_id
-  # @return [TriggerExecutionStatus] Per-firing outcome.
-  attr_reader :status
-  # @return [String] The run's session. Populated once the session is created (fresh) or is known (reuse); empty before then.
-  attr_reader :session_id
-  # @return [String] Populated once SendInput acks; correlation/audit only. May be empty.
-  attr_reader :run_id
-  # @return [String] Client-safe reason when status=failed; absent otherwise. One of a fixed set of messages; do not parse it or match on substrings. Quote the execution_id when contacting support.
-  attr_reader :failure_reason
-  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-  attr_reader :created_at
-  # @return [String] Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-  attr_reader :updated_at
-  # @return [String] The raw webhook body or cron tick metadata. Returned by GetTriggerExecution only; omitted from list items. Cleared for terminal executions after the payload retention window (default 7 days from creation).
-  attr_reader :payload
-  # @return [String] The doctl-parity transcript rendered from the run's SPI events. Returned by GetTriggerExecution only; omitted from list items.
-  attr_reader :output_text
-  # @return [Boolean] True when output_text is incomplete. Returned by GetTriggerExecution only; omitted from list items.
-  attr_reader :output_truncated
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTriggerExecutionMetadata
+    FIELDS = {
+      execution_id: 'execution_id',
+      trigger_id: 'trigger_id',
+      status: 'status',
+      session_id: 'session_id',
+      run_id: 'run_id',
+      failure_reason: 'failure_reason',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      payload: 'payload',
+      output_text: 'output_text',
+      output_truncated: 'output_truncated'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::TriggerExecutionStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TriggerExecution.
+  # One row per firing (webhook delivery or cron tick).
+  class TriggerExecution
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTriggerExecutionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTriggerExecutionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTriggerExecutionMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `execution_id` wire field.
+    attr_reader :execution_id
+    # @return [String] Optional `string` value serialized in the `trigger_id` wire field.
+    attr_reader :trigger_id
+    # @return [TriggerExecutionStatus] Per-firing outcome.
+    attr_reader :status
+    # @return [String] The run's session. Populated once the session is created (fresh) or is known (reuse); empty before then.
+    attr_reader :session_id
+    # @return [String] Populated once SendInput acks; correlation/audit only. May be empty.
+    attr_reader :run_id
+    # @return [String] Client-safe reason when status=failed; absent otherwise. One of a fixed set of messages; do not parse it or match on substrings. Quote the execution_id when contacting support.
+    attr_reader :failure_reason
+    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    attr_reader :created_at
+    # @return [String] Optional `date-time`-formatted value serialized in the `updated_at` wire field.
+    attr_reader :updated_at
+    # @return [String] The raw webhook body or cron tick metadata. Returned by GetTriggerExecution only; omitted from list items. Cleared for terminal executions after the payload retention window (default 7 days from creation).
+    attr_reader :payload
+    # @return [String] The doctl-parity transcript rendered from the run's SPI events. Returned by GetTriggerExecution only; omitted from list items.
+    attr_reader :output_text
+    # @return [Boolean] True when output_text is incomplete. Returned by GetTriggerExecution only; omitted from list items.
+    attr_reader :output_truncated
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the TriggerExecutionStatus SDK namespace.
-module TriggerExecutionStatus
-  PENDING = 'pending'
-  RUNNING = 'running'
-  SUCCEEDED = 'succeeded'
-  FAILED = 'failed'
-  VALUES = ['pending', 'running', 'succeeded', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the TriggerKind SDK namespace.
-module TriggerKind
-  WEBHOOK = 'webhook'
-  CRON = 'cron'
-  VALUES = ['webhook', 'cron'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the TriggerOutputMode SDK namespace.
-module TriggerOutputMode
-  NONE = 'none'
-  EMAIL = 'email'
-  SLACK = 'slack'
-  VALUES = ['none', 'email', 'slack'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTriggerOutputReadMetadata
-  FIELDS = {
-    mode: "mode",
-    email_configured: "email_configured",
-    slack_configured: "slack_configured",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    mode: lambda do |value|
-      ::OctridevDigitalocean::TriggerOutputMode.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for TriggerOutputRead.
-# Output-delivery configuration as seen on reads. The email address and Slack webhook URL are write-only and never returned.
-class TriggerOutputRead
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTriggerOutputReadMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTriggerOutputReadMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTriggerOutputReadMetadata::DECODERS
-
-  # @return [TriggerOutputMode] none = nothing pushed; the result stays in run history for self-serve. email = the collected run output is emailed to a configured address. slack = the collected run output is posted to a Slack incoming webhook URL (channel fixed by the webhook at install time).
-  attr_reader :mode
-  # @return [Boolean] True when an email address is stored (mode=email).
-  attr_reader :email_configured
-  # @return [Boolean] True when a Slack incoming webhook URL is stored (mode=slack).
-  attr_reader :slack_configured
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the TriggerExecutionStatus SDK namespace.
+  module TriggerExecutionStatus
+    PENDING = 'pending'
+    RUNNING = 'running'
+    SUCCEEDED = 'succeeded'
+    FAILED = 'failed'
+    VALUES = %w[pending running succeeded failed].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the TriggerKind SDK namespace.
+  module TriggerKind
+    WEBHOOK = 'webhook'
+    CRON = 'cron'
+    VALUES = %w[webhook cron].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTriggerOutputWriteMetadata
-  FIELDS = {
-    mode: "mode",
-    email: "email",
-    slack: "slack",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    mode
-  ].freeze
-  DECODERS = {
-    mode: lambda do |value|
-      ::OctridevDigitalocean::TriggerOutputMode.from_value(value)
-    end,
-    slack: lambda do |value|
-      ::OctridevDigitalocean::SlackOutputWrite.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for TriggerOutputWrite.
-# Output-delivery configuration on create/update. Exactly one of email / slack is required for the matching mode and forbidden otherwise; destinations are stored encrypted and never returned.
-class TriggerOutputWrite
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTriggerOutputWriteMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTriggerOutputWriteMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTriggerOutputWriteMetadata::DECODERS
-
-  # @return [TriggerOutputMode] none = nothing pushed; the result stays in run history for self-serve. email = the collected run output is emailed to a configured address. slack = the collected run output is posted to a Slack incoming webhook URL (channel fixed by the webhook at install time).
-  attr_reader :mode
-  # @return [String] Destination address; required iff mode=email.
-  attr_reader :email
-  # @return [SlackOutputWrite] Slack destination on create/update. webhook_url is required when mode=slack; must be hooks.slack.com stored encrypted and never returned.
-  attr_reader :slack
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the TriggerOutputMode SDK namespace.
+  module TriggerOutputMode
+    NONE = 'none'
+    EMAIL = 'email'
+    SLACK = 'slack'
+    VALUES = %w[none email slack].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalTriggerOutputReadMetadata
+    FIELDS = {
+      mode: 'mode',
+      email_configured: 'email_configured',
+      slack_configured: 'slack_configured'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      mode: lambda do |value|
+        ::OctridevDigitalocean::TriggerOutputMode.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for TriggerOutputRead.
+  # Output-delivery configuration as seen on reads. The email address and Slack webhook URL are write-only and never returned.
+  class TriggerOutputRead
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTriggerOutputReadMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTriggerOutputReadMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTriggerOutputReadMetadata::DECODERS
 
-# Defines the TriggerSessionMode SDK namespace.
-module TriggerSessionMode
-  FRESH = 'fresh'
-  REUSE = 'reuse'
-  VALUES = ['fresh', 'reuse'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [TriggerOutputMode] none = nothing pushed; the result stays in run history for self-serve. email = the collected run output is emailed to a configured address. slack = the collected run output is posted to a Slack incoming webhook URL (channel fixed by the webhook at install time).
+    attr_reader :mode
+    # @return [Boolean] True when an email address is stored (mode=email).
+    attr_reader :email_configured
+    # @return [Boolean] True when a Slack incoming webhook URL is stored (mode=slack).
+    attr_reader :slack_configured
 
-# Defines the TriggerStatus SDK namespace.
-module TriggerStatus
-  ACTIVE = 'active'
-  PAUSED = 'paused'
-  VALUES = ['active', 'paused'].freeze
-  def self.from_value(value)
-    value
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalTriggerOutputWriteMetadata
+    FIELDS = {
+      mode: 'mode',
+      email: 'email',
+      slack: 'slack'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      mode
+    ].freeze
+    DECODERS = {
+      mode: lambda do |value|
+        ::OctridevDigitalocean::TriggerOutputMode.from_value(value)
+      end,
+      slack: lambda do |value|
+        ::OctridevDigitalocean::SlackOutputWrite.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for TriggerOutputWrite.
+  # Output-delivery configuration on create/update. Exactly one of email / slack is required for the matching mode and forbidden otherwise; destinations are stored encrypted and never returned.
+  class TriggerOutputWrite
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTriggerOutputWriteMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTriggerOutputWriteMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTriggerOutputWriteMetadata::DECODERS
+
+    # @return [TriggerOutputMode] none = nothing pushed; the result stays in run history for self-serve. email = the collected run output is emailed to a configured address. slack = the collected run output is posted to a Slack incoming webhook URL (channel fixed by the webhook at install time).
+    attr_reader :mode
+    # @return [String] Destination address; required iff mode=email.
+    attr_reader :email
+    # @return [SlackOutputWrite] Slack destination on create/update. webhook_url is required when mode=slack; must be hooks.slack.com stored encrypted and never returned.
+    attr_reader :slack
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the TriggerSessionMode SDK namespace.
+  module TriggerSessionMode
+    FRESH = 'fresh'
+    REUSE = 'reuse'
+    VALUES = %w[fresh reuse].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the TriggerStatus SDK namespace.
+  module TriggerStatus
+    ACTIVE = 'active'
+    PAUSED = 'paused'
+    VALUES = %w[active paused].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

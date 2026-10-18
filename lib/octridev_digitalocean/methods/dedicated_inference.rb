@@ -18,13 +18,12 @@ module OctridevDigitalocean
         dedicated_inference_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id)
           ].join,
           config: config,
@@ -32,7 +31,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'dedicated_inferences_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -51,25 +50,24 @@ module OctridevDigitalocean
         access_tokens: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         SdkClient.request(
           'PATCH',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id)
           ].join,
           config: config,
           body: {
             'spec' => spec,
-            'access_tokens' => access_tokens,
+            'access_tokens' => access_tokens
           },
           return_type: ::OctridevDigitalocean::DedicatedInferenceUpdateAccepted,
           decoder: :json,
           operation_id: 'dedicated_inferences_patch',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -82,20 +80,19 @@ module OctridevDigitalocean
         dedicated_inference_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'dedicated_inferences_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -112,25 +109,24 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/dedicated-inferences",
+          '/v2/dedicated-inferences',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'region' => QueryValue.new(region, style: 'form', explode: true),
+            'region' => QueryValue.new(region, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllDedicatedInferences,
           decoder: :json,
           operation_id: 'dedicated_inferences_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -146,20 +142,19 @@ module OctridevDigitalocean
         access_tokens: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/dedicated-inferences",
+          '/v2/dedicated-inferences',
           config: config,
           body: {
             'spec' => spec,
-            'access_tokens' => access_tokens,
+            'access_tokens' => access_tokens
           },
           return_type: ::OctridevDigitalocean::DedicatedInferenceProvisioning,
           decoder: :json,
           operation_id: 'dedicated_inferences_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -178,7 +173,6 @@ module OctridevDigitalocean
         slug: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -188,21 +182,21 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id),
-            "/accelerators"
+            '/accelerators'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'slug' => QueryValue.new(slug, style: 'form', explode: true),
+            'slug' => QueryValue.new(slug, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AcceleratorsList,
           decoder: :json,
           operation_id: 'dedicated_inferences_list_accelerators',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -218,7 +212,6 @@ module OctridevDigitalocean
         accelerator_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         Validation.validate_uuid('accelerator_id', accelerator_id)
@@ -226,9 +219,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id),
-            "/accelerators/",
+            '/accelerators/',
             SdkClient.encode_path_segment(accelerator_id)
           ].join,
           config: config,
@@ -236,7 +229,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'dedicated_inferences_get_accelerator',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -249,22 +242,21 @@ module OctridevDigitalocean
         dedicated_inference_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id),
-            "/ca"
+            '/ca'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::CaCertificate,
           decoder: :json,
           operation_id: 'dedicated_inferences_get_ca',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -281,7 +273,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -291,20 +282,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id),
-            "/tokens"
+            '/tokens'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::TokensList,
           decoder: :json,
           operation_id: 'dedicated_inferences_list_tokens',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -319,7 +310,6 @@ module OctridevDigitalocean
         name:,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         Validation.validate_length('name', name, max: 255)
@@ -328,19 +318,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id),
-            "/tokens"
+            '/tokens'
           ].join,
           config: config,
           body: {
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::TokenCreated,
           decoder: :json,
           operation_id: 'dedicated_inferences_create_tokens',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -356,7 +346,6 @@ module OctridevDigitalocean
         token_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('dedicated_inference_id', dedicated_inference_id)
 
         Validation.validate_uuid('token_id', token_id)
@@ -364,16 +353,16 @@ module OctridevDigitalocean
         SdkClient.request(
           'DELETE',
           [
-            "/v2/dedicated-inferences/",
+            '/v2/dedicated-inferences/',
             SdkClient.encode_path_segment(dedicated_inference_id),
-            "/tokens/",
+            '/tokens/',
             SdkClient.encode_path_segment(token_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'dedicated_inferences_delete_tokens',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -382,16 +371,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/dedicated-inferences/sizes",
+          '/v2/dedicated-inferences/sizes',
           config: config,
           return_type: ::OctridevDigitalocean::DedicatedInferenceSizesResponse,
           decoder: :json,
           operation_id: 'dedicated_inferences_list_sizes',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -400,16 +388,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/dedicated-inferences/gpu-model-config",
+          '/v2/dedicated-inferences/gpu-model-config',
           config: config,
           return_type: ::OctridevDigitalocean::DedicatedInferenceGpuModelConfigsResponse,
           decoder: :json,
           operation_id: 'dedicated_inferences_get_gpu_model_config',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

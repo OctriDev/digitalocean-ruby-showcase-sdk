@@ -30,27 +30,26 @@ module OctridevDigitalocean
         type: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/droplets",
+          '/v2/droplets',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'tag_name' => QueryValue.new(tag_name, style: 'form', explode: true),
             'name' => QueryValue.new(name, style: 'form', explode: true),
-            'type' => QueryValue.new(type, style: 'form', explode: true),
+            'type' => QueryValue.new(type, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllDroplets,
           decoder: :json,
           operation_id: 'droplets_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -62,17 +61,16 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/droplets",
+          '/v2/droplets',
           config: config,
           body: body,
           return_type: ::OctridevDigitalocean::DropletsCreateResponse,
           decoder: :json,
           operation_id: 'droplets_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -84,18 +82,17 @@ module OctridevDigitalocean
         tag_name:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
-          "/v2/droplets",
+          '/v2/droplets',
           config: config,
           query: {
-            'tag_name' => QueryValue.new(tag_name, style: 'form', explode: true),
+            'tag_name' => QueryValue.new(tag_name, style: 'form', explode: true)
           },
           decoder: :empty,
           operation_id: 'droplets_destroy_by_tag',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -107,13 +104,12 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id)
           ].join,
           config: config,
@@ -121,7 +117,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'droplets_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -133,20 +129,19 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'droplets_destroy',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -162,7 +157,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -172,20 +166,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/backups"
+            '/backups'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllDropletBackups,
           decoder: :json,
           operation_id: 'droplets_list_backups',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -197,22 +191,21 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/backups/policy"
+            '/backups/policy'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::DropletBackupPolicyResponse,
           decoder: :json,
           operation_id: 'droplets_get_backup_policy',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -226,24 +219,23 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/droplets/backups/policies",
+          '/v2/droplets/backups/policies',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllDropletBackupPolicies,
           decoder: :json,
           operation_id: 'droplets_list_backup_policies',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -252,16 +244,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/droplets/backups/supported_policies",
+          '/v2/droplets/backups/supported_policies',
           config: config,
           return_type: ::OctridevDigitalocean::DropletsSupportedBackupPolicies,
           decoder: :json,
           operation_id: 'droplets_list_supported_backup_policies',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -277,7 +268,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -287,20 +277,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/snapshots"
+            '/snapshots'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllDropletSnapshots,
           decoder: :json,
           operation_id: 'droplets_list_snapshots',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -316,7 +306,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -326,20 +315,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/kernels"
+            '/kernels'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllKernels,
           decoder: :json,
           operation_id: 'droplets_list_kernels',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -355,7 +344,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -365,20 +353,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/firewalls"
+            '/firewalls'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllFirewalls,
           decoder: :json,
           operation_id: 'droplets_list_firewalls',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -390,22 +378,21 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/neighbors"
+            '/neighbors'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::NeighborDroplets,
           decoder: :json,
           operation_id: 'droplets_list_neighbors',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -417,22 +404,21 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/destroy_with_associated_resources"
+            '/destroy_with_associated_resources'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AssociatedResourcesList,
           decoder: :json,
           operation_id: 'droplets_list_associated_resources',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -459,15 +445,14 @@ module OctridevDigitalocean
         volume_snapshots: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/destroy_with_associated_resources/selective"
+            '/destroy_with_associated_resources/selective'
           ].join,
           config: config,
           body: {
@@ -475,12 +460,12 @@ module OctridevDigitalocean
             'reserved_ips' => reserved_ips,
             'snapshots' => snapshots,
             'volumes' => volumes,
-            'volume_snapshots' => volume_snapshots,
+            'volume_snapshots' => volume_snapshots
           },
           decoder: :empty,
           operation_id: 'droplets_destroy_with_associated_resources_selective',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -495,24 +480,23 @@ module OctridevDigitalocean
         x_dangerous:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/destroy_with_associated_resources/dangerous"
+            '/destroy_with_associated_resources/dangerous'
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'droplets_destroy_with_associated_resources_dangerous',
           extra_headers: SdkClient.serialize_headers({
-            'X-Dangerous' => SdkClient.header_value(x_dangerous),
-          }),
+                                                       'X-Dangerous' => SdkClient.header_value(x_dangerous)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -524,22 +508,21 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/destroy_with_associated_resources/status"
+            '/destroy_with_associated_resources/status'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AssociatedResourceStatus,
           decoder: :json,
           operation_id: 'droplets_get_destroy_associated_resources_status',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -551,21 +534,20 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/destroy_with_associated_resources/retry"
+            '/destroy_with_associated_resources/retry'
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'droplets_destroy_retry_with_associated_resources',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

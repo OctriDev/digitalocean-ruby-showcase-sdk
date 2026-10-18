@@ -5,111 +5,105 @@
 
 # kubernetes_amd domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAmdGpuDeviceMetricsExporterPluginMetadata
-  FIELDS = {
-    enabled: "enabled",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AmdGpuDeviceMetricsExporterPlugin.
-# An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.
-class AmdGpuDeviceMetricsExporterPlugin
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAmdGpuDeviceMetricsExporterPluginMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAmdGpuDeviceMetricsExporterPluginMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAmdGpuDeviceMetricsExporterPluginMetadata::DECODERS
-
-  # @return [Boolean] Indicates whether the AMD Device Metrics Exporter is enabled.
-  attr_reader :enabled
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAmdGpuDeviceMetricsExporterPluginMetadata
+    FIELDS = {
+      enabled: 'enabled'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AmdGpuDeviceMetricsExporterPlugin.
+  # An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.
+  class AmdGpuDeviceMetricsExporterPlugin
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAmdGpuDeviceMetricsExporterPluginMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAmdGpuDeviceMetricsExporterPluginMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAmdGpuDeviceMetricsExporterPluginMetadata::DECODERS
+
+    # @return [Boolean] Indicates whether the AMD Device Metrics Exporter is enabled.
+    attr_reader :enabled
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAmdGpuDevicePluginMetadata
-  FIELDS = {
-    enabled: "enabled",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AmdGpuDevicePlugin.
-# An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.
-class AmdGpuDevicePlugin
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAmdGpuDevicePluginMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAmdGpuDevicePluginMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAmdGpuDevicePluginMetadata::DECODERS
-
-  # @return [Boolean] Indicates whether the AMD GPU Device Plugin is enabled.
-  attr_reader :enabled
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAmdGpuDevicePluginMetadata
+    FIELDS = {
+      enabled: 'enabled'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AmdGpuDevicePlugin.
+  # An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.
+  class AmdGpuDevicePlugin
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAmdGpuDevicePluginMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAmdGpuDevicePluginMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAmdGpuDevicePluginMetadata::DECODERS
+
+    # @return [Boolean] Indicates whether the AMD GPU Device Plugin is enabled.
+    attr_reader :enabled
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAmdGpuDraDriverMetadata
-  FIELDS = {
-    enabled: "enabled",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AmdGpuDraDriver.
-# An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
-class AmdGpuDraDriver
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAmdGpuDraDriverMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAmdGpuDraDriverMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAmdGpuDraDriverMetadata::DECODERS
-
-  # @return [Boolean] Indicates whether the AMD GPU DRA Driver is enabled.
-  attr_reader :enabled
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAmdGpuDraDriverMetadata
+    FIELDS = {
+      enabled: 'enabled'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for AmdGpuDraDriver.
+  # An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
+  class AmdGpuDraDriver
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAmdGpuDraDriverMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAmdGpuDraDriverMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAmdGpuDraDriverMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [Boolean] Indicates whether the AMD GPU DRA Driver is enabled.
+    attr_reader :enabled
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

@@ -31,14 +31,13 @@ module OctridevDigitalocean
         permission: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/spaces/keys",
+          '/v2/spaces/keys',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
@@ -47,13 +46,13 @@ module OctridevDigitalocean
             'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
             'name' => QueryValue.new(name, style: 'form', explode: true),
             'bucket' => QueryValue.new(bucket, style: 'form', explode: true),
-            'permission' => QueryValue.new(permission, style: 'form', explode: true),
+            'permission' => QueryValue.new(permission, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::KeyList,
           decoder: :json,
           operation_id: 'spaces_key_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -67,20 +66,19 @@ module OctridevDigitalocean
         grants: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/spaces/keys",
+          '/v2/spaces/keys',
           config: config,
           body: {
             'name' => name,
-            'grants' => grants,
+            'grants' => grants
           },
           return_type: ::OctridevDigitalocean::KeyCreate,
           decoder: :json,
           operation_id: 'spaces_key_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -92,11 +90,10 @@ module OctridevDigitalocean
         access_key:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/spaces/keys/",
+            '/v2/spaces/keys/',
             SdkClient.encode_path_segment(access_key)
           ].join,
           config: config,
@@ -104,7 +101,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'spaces_key_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -116,18 +113,17 @@ module OctridevDigitalocean
         access_key:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/spaces/keys/",
+            '/v2/spaces/keys/',
             SdkClient.encode_path_segment(access_key)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'spaces_key_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -143,23 +139,22 @@ module OctridevDigitalocean
         grants: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/spaces/keys/",
+            '/v2/spaces/keys/',
             SdkClient.encode_path_segment(access_key)
           ].join,
           config: config,
           body: {
             'name' => name,
-            'grants' => grants,
+            'grants' => grants
           },
           return_type: ::OctridevDigitalocean::KeyUpdate,
           decoder: :json,
           operation_id: 'spaces_key_update',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -175,23 +170,22 @@ module OctridevDigitalocean
         grants: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/v2/spaces/keys/",
+            '/v2/spaces/keys/',
             SdkClient.encode_path_segment(access_key)
           ].join,
           config: config,
           body: {
             'name' => name,
-            'grants' => grants,
+            'grants' => grants
           },
           return_type: ::OctridevDigitalocean::KeyUpdate,
           decoder: :json,
           operation_id: 'spaces_key_patch',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

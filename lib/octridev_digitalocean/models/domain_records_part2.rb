@@ -5,174 +5,172 @@
 
 # domain_records domain models (part 2)
 module OctridevDigitalocean
-# API model for DomainRecordSoa.
-# Typed representation of the `DomainRecordSoa` API schema.
-class DomainRecordSoa
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainRecordSoaMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainRecordSoaMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainRecordSoaMetadata::DECODERS
+  # API model for DomainRecordSoa.
+  # Typed representation of the `DomainRecordSoa` API schema.
+  class DomainRecordSoa
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainRecordSoaMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainRecordSoaMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainRecordSoaMetadata::DECODERS
 
-  # @return [Integer] A unique identifier for each domain record.
-  attr_reader :id
-  # @return [String] The type of the DNS record. For example: A, CNAME, TXT, ...
-  attr_reader :type
-  # @return [String] The host name, alias, or service being defined by the record.
-  attr_reader :name
-  # @return [String] Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
-  attr_reader :data
-  # @return [Integer] The priority for SRV and MX records.
-  attr_reader :priority
-  # @return [Integer] The port for SRV records.
-  attr_reader :port
-  # @return [Integer] This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
-  attr_reader :ttl
-  # @return [Integer] The weight for SRV records.
-  attr_reader :weight
-  # @return [Integer] An unsigned integer between 0-255 used for CAA records.
-  attr_reader :flags
-  # @return [String] The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
-  attr_reader :tag
+    # @return [Integer] A unique identifier for each domain record.
+    attr_reader :id
+    # @return [String] The type of the DNS record. For example: A, CNAME, TXT, ...
+    attr_reader :type
+    # @return [String] The host name, alias, or service being defined by the record.
+    attr_reader :name
+    # @return [String] Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
+    attr_reader :data
+    # @return [Integer] The priority for SRV and MX records.
+    attr_reader :priority
+    # @return [Integer] The port for SRV records.
+    attr_reader :port
+    # @return [Integer] This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
+    attr_reader :ttl
+    # @return [Integer] The weight for SRV records.
+    attr_reader :weight
+    # @return [Integer] An unsigned integer between 0-255 used for CAA records.
+    attr_reader :flags
+    # @return [String] The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+    attr_reader :tag
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDomainRecordSrvMetadata
+    FIELDS = {
+      id: 'id',
+      type: 'type',
+      name: 'name',
+      data: 'data',
+      priority: 'priority',
+      port: 'port',
+      ttl: 'ttl',
+      weight: 'weight',
+      flags: 'flags',
+      tag: 'tag'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DomainRecordSrv.
+  # Typed representation of the `DomainRecordSrv` API schema.
+  class DomainRecordSrv
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainRecordSrvMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainRecordSrvMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainRecordSrvMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDomainRecordSrvMetadata
-  FIELDS = {
-    id: "id",
-    type: "type",
-    name: "name",
-    data: "data",
-    priority: "priority",
-    port: "port",
-    ttl: "ttl",
-    weight: "weight",
-    flags: "flags",
-    tag: "tag",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [Integer] A unique identifier for each domain record.
+    attr_reader :id
+    # @return [String] The type of the DNS record. For example: A, CNAME, TXT, ...
+    attr_reader :type
+    # @return [String] The host name, alias, or service being defined by the record.
+    attr_reader :name
+    # @return [String] Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
+    attr_reader :data
+    # @return [Integer] The priority for SRV and MX records.
+    attr_reader :priority
+    # @return [Integer] The port for SRV records.
+    attr_reader :port
+    # @return [Integer] This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
+    attr_reader :ttl
+    # @return [Integer] The weight for SRV records.
+    attr_reader :weight
+    # @return [Integer] An unsigned integer between 0-255 used for CAA records.
+    attr_reader :flags
+    # @return [String] The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+    attr_reader :tag
 
-# API model for DomainRecordSrv.
-# Typed representation of the `DomainRecordSrv` API schema.
-class DomainRecordSrv
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainRecordSrvMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainRecordSrvMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainRecordSrvMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Integer] A unique identifier for each domain record.
-  attr_reader :id
-  # @return [String] The type of the DNS record. For example: A, CNAME, TXT, ...
-  attr_reader :type
-  # @return [String] The host name, alias, or service being defined by the record.
-  attr_reader :name
-  # @return [String] Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
-  attr_reader :data
-  # @return [Integer] The priority for SRV and MX records.
-  attr_reader :priority
-  # @return [Integer] The port for SRV records.
-  attr_reader :port
-  # @return [Integer] This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
-  attr_reader :ttl
-  # @return [Integer] The weight for SRV records.
-  attr_reader :weight
-  # @return [Integer] An unsigned integer between 0-255 used for CAA records.
-  attr_reader :flags
-  # @return [String] The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
-  attr_reader :tag
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDomainRecordTxtMetadata
+    FIELDS = {
+      id: 'id',
+      type: 'type',
+      name: 'name',
+      data: 'data',
+      priority: 'priority',
+      port: 'port',
+      ttl: 'ttl',
+      weight: 'weight',
+      flags: 'flags',
+      tag: 'tag'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for DomainRecordTxt.
+  # Typed representation of the `DomainRecordTxt` API schema.
+  class DomainRecordTxt
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDomainRecordTxtMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDomainRecordTxtMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDomainRecordTxtMetadata::DECODERS
+
+    # @return [Integer] A unique identifier for each domain record.
+    attr_reader :id
+    # @return [String] The type of the DNS record. For example: A, CNAME, TXT, ...
+    attr_reader :type
+    # @return [String] The host name, alias, or service being defined by the record.
+    attr_reader :name
+    # @return [String] Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
+    attr_reader :data
+    # @return [Integer] The priority for SRV and MX records.
+    attr_reader :priority
+    # @return [Integer] The port for SRV records.
+    attr_reader :port
+    # @return [Integer] This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
+    attr_reader :ttl
+    # @return [Integer] The weight for SRV records.
+    attr_reader :weight
+    # @return [Integer] An unsigned integer between 0-255 used for CAA records.
+    attr_reader :flags
+    # @return [String] The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+    attr_reader :tag
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDomainRecordTxtMetadata
-  FIELDS = {
-    id: "id",
-    type: "type",
-    name: "name",
-    data: "data",
-    priority: "priority",
-    port: "port",
-    ttl: "ttl",
-    weight: "weight",
-    flags: "flags",
-    tag: "tag",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DomainRecordTxt.
-# Typed representation of the `DomainRecordTxt` API schema.
-class DomainRecordTxt
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDomainRecordTxtMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDomainRecordTxtMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDomainRecordTxtMetadata::DECODERS
-
-  # @return [Integer] A unique identifier for each domain record.
-  attr_reader :id
-  # @return [String] The type of the DNS record. For example: A, CNAME, TXT, ...
-  attr_reader :type
-  # @return [String] The host name, alias, or service being defined by the record.
-  attr_reader :name
-  # @return [String] Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
-  attr_reader :data
-  # @return [Integer] The priority for SRV and MX records.
-  attr_reader :priority
-  # @return [Integer] The port for SRV records.
-  attr_reader :port
-  # @return [Integer] This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
-  attr_reader :ttl
-  # @return [Integer] The weight for SRV records.
-  attr_reader :weight
-  # @return [Integer] An unsigned integer between 0-255 used for CAA records.
-  attr_reader :flags
-  # @return [String] The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
-  attr_reader :tag
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
 end

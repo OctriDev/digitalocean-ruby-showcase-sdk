@@ -5,160 +5,155 @@
 
 # 1_click_applications domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalOneClicksMetadata
-  FIELDS = {
-    slug: "slug",
-    type: "type",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    slug
-    type
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for OneClicks.
-# Typed representation of the `OneClicks` API schema.
-class OneClicks
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOneClicksMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOneClicksMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOneClicksMetadata::DECODERS
-
-  # @return [String] The slug identifier for the 1-Click application.
-  attr_reader :slug
-  # @return [String] The type of the 1-Click application.
-  attr_reader :type
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalOneClicksMetadata
+    FIELDS = {
+      slug: 'slug',
+      type: 'type'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      slug
+      type
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for OneClicks.
+  # Typed representation of the `OneClicks` API schema.
+  class OneClicks
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOneClicksMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOneClicksMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOneClicksMetadata::DECODERS
+
+    # @return [String] The slug identifier for the 1-Click application.
+    attr_reader :slug
+    # @return [String] The type of the 1-Click application.
+    attr_reader :type
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalOneClicksAllMetadata
-  FIELDS = {
-    v1_clicks: "1_clicks",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    v1_clicks: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::OneClicks.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for OneClicksAll.
-# Typed representation of the `OneClicksAll` API schema.
-class OneClicksAll
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOneClicksAllMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOneClicksAllMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOneClicksAllMetadata::DECODERS
-
-  # @return [Array_of_OneClicks] Optional array value serialized in the `1_clicks` wire field.
-  attr_reader :v1_clicks
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalOneClicksAllMetadata
+    FIELDS = {
+      v1_clicks: '1_clicks'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      v1_clicks: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::OneClicks.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for OneClicksAll.
+  # Typed representation of the `OneClicksAll` API schema.
+  class OneClicksAll
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOneClicksAllMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOneClicksAllMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOneClicksAllMetadata::DECODERS
+
+    # @return [Array_of_OneClicks] Optional array value serialized in the `1_clicks` wire field.
+    attr_reader :v1_clicks
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalOneClicksCreateMetadata
-  FIELDS = {
-    addon_slugs: "addon_slugs",
-    cluster_uuid: "cluster_uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    addon_slugs
-    cluster_uuid
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for OneClicksCreate.
-# Typed representation of the `OneClicksCreate` API schema.
-class OneClicksCreate
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOneClicksCreateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOneClicksCreateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOneClicksCreateMetadata::DECODERS
-
-  # @return [Array_of_String] An array of 1-Click Application slugs to be installed to the Kubernetes cluster.
-  attr_reader :addon_slugs
-  # @return [String] A unique ID for the Kubernetes cluster to which the 1-Click Applications will be installed.
-  attr_reader :cluster_uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalOneClicksCreateMetadata
+    FIELDS = {
+      addon_slugs: 'addon_slugs',
+      cluster_uuid: 'cluster_uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      addon_slugs
+      cluster_uuid
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for OneClicksCreate.
+  # Typed representation of the `OneClicksCreate` API schema.
+  class OneClicksCreate
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOneClicksCreateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOneClicksCreateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOneClicksCreateMetadata::DECODERS
+
+    # @return [Array_of_String] An array of 1-Click Application slugs to be installed to the Kubernetes cluster.
+    attr_reader :addon_slugs
+    # @return [String] A unique ID for the Kubernetes cluster to which the 1-Click Applications will be installed.
+    attr_reader :cluster_uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalOneClicksCreateResponseMetadata
-  FIELDS = {
-    message: "message",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for OneClicksCreateResponse.
-# Typed representation of the `OneClicksCreateResponse` API schema.
-class OneClicksCreateResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOneClicksCreateResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOneClicksCreateResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOneClicksCreateResponseMetadata::DECODERS
-
-  # @return [String] A message about the result of the request.
-  attr_reader :message
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalOneClicksCreateResponseMetadata
+    FIELDS = {
+      message: 'message'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for OneClicksCreateResponse.
+  # Typed representation of the `OneClicksCreateResponse` API schema.
+  class OneClicksCreateResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOneClicksCreateResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOneClicksCreateResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOneClicksCreateResponseMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] A message about the result of the request.
+    attr_reader :message
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

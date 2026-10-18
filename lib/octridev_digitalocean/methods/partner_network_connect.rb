@@ -19,24 +19,23 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/partner_network_connect/attachments",
+          '/v2/partner_network_connect/attachments',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllPartnerAttachments,
           decoder: :json,
           operation_id: 'partner_attachments_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -70,14 +69,13 @@ module OctridevDigitalocean
         redundancy_zone: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_pattern('name', name, '^[a-zA-Z0-9\\-\\.]+$')
 
         Validation.validate_items('vpc_ids', vpc_ids, min: 1)
 
         SdkClient.request(
           'POST',
-          "/v2/partner_network_connect/attachments",
+          '/v2/partner_network_connect/attachments',
           config: config,
           body: {
             'name' => name,
@@ -87,13 +85,13 @@ module OctridevDigitalocean
             'vpc_ids' => vpc_ids,
             'parent_uuid' => parent_uuid,
             'bgp' => bgp,
-            'redundancy_zone' => redundancy_zone,
+            'redundancy_zone' => redundancy_zone
           },
           return_type: ::OctridevDigitalocean::SinglePartnerAttachment,
           decoder: :json,
           operation_id: 'partner_attachments_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -105,11 +103,10 @@ module OctridevDigitalocean
         pa_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/partner_network_connect/attachments/",
+            '/v2/partner_network_connect/attachments/',
             SdkClient.encode_path_segment(pa_id)
           ].join,
           config: config,
@@ -117,7 +114,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'partner_attachments_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -132,11 +129,10 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/v2/partner_network_connect/attachments/",
+            '/v2/partner_network_connect/attachments/',
             SdkClient.encode_path_segment(pa_id)
           ].join,
           config: config,
@@ -145,7 +141,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'partner_attachments_patch',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -157,11 +153,10 @@ module OctridevDigitalocean
         pa_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/partner_network_connect/attachments/",
+            '/v2/partner_network_connect/attachments/',
             SdkClient.encode_path_segment(pa_id)
           ].join,
           config: config,
@@ -169,7 +164,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'partner_attachments_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -181,20 +176,19 @@ module OctridevDigitalocean
         pa_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/partner_network_connect/attachments/",
+            '/v2/partner_network_connect/attachments/',
             SdkClient.encode_path_segment(pa_id),
-            "/bgp_auth_key"
+            '/bgp_auth_key'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::SinglePartnerAttachmentBgpAuthKey,
           decoder: :json,
           operation_id: 'partner_attachments_get_bgp_auth_key',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -210,7 +204,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
@@ -218,20 +211,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/partner_network_connect/attachments/",
+            '/v2/partner_network_connect/attachments/',
             SdkClient.encode_path_segment(pa_id),
-            "/remote_routes"
+            '/remote_routes'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllPartnerAttachmentRemoteRoutes,
           decoder: :json,
           operation_id: 'partner_attachments_list_remote_routes',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -243,20 +236,19 @@ module OctridevDigitalocean
         pa_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/partner_network_connect/attachments/",
+            '/v2/partner_network_connect/attachments/',
             SdkClient.encode_path_segment(pa_id),
-            "/service_key"
+            '/service_key'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::SinglePartnerAttachmentServiceKey,
           decoder: :json,
           operation_id: 'partner_attachments_get_service_key',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -268,19 +260,18 @@ module OctridevDigitalocean
         pa_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/partner_network_connect/attachments/",
+            '/v2/partner_network_connect/attachments/',
             SdkClient.encode_path_segment(pa_id),
-            "/service_key"
+            '/service_key'
           ].join,
           config: config,
           decoder: :json,
           operation_id: 'partner_attachments_create_service_key',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

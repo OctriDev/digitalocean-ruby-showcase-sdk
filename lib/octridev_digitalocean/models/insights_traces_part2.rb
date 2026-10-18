@@ -5,119 +5,118 @@
 
 # insights_traces domain models (part 2)
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalTracesTraceResponseMetadata
-  FIELDS = {
-    trace_id: "traceId",
-    spans: "spans",
-    truncated: "truncated",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    spans: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::TracesSpanRecord.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for TracesTraceResponse.
-# A single trace and all of its spans.
-class TracesTraceResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTracesTraceResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTracesTraceResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTracesTraceResponseMetadata::DECODERS
-
-  # @return [String] The trace identifier.
-  attr_reader :trace_id
-  # @return [Array_of_TracesSpanRecord] Every span in the trace, ordered by start time.
-  attr_reader :spans
-  # @return [Boolean] True when the trace has more spans than were returned in this response. Omitted when false.
-  attr_reader :truncated
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTracesTraceResponseMetadata
+    FIELDS = {
+      trace_id: 'traceId',
+      spans: 'spans',
+      truncated: 'truncated'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      spans: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::TracesSpanRecord.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TracesTraceResponse.
+  # A single trace and all of its spans.
+  class TracesTraceResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTracesTraceResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTracesTraceResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTracesTraceResponseMetadata::DECODERS
+
+    # @return [String] The trace identifier.
+    attr_reader :trace_id
+    # @return [Array_of_TracesSpanRecord] Every span in the trace, ordered by start time.
+    attr_reader :spans
+    # @return [Boolean] True when the trace has more spans than were returned in this response. Omitted when false.
+    attr_reader :truncated
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTracesTraceSummaryMetadata
-  FIELDS = {
-    trace_id: "traceId",
-    started: "started",
-    service_name: "serviceName",
-    duration_ns: "durationNs",
-    span_count: "spanCount",
-    error_count: "errorCount",
-    status: "status",
-    span_names: "spanNames",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    trace_id
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::TracesTraceSummaryStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for TracesTraceSummary.
-# A single trace returned by a traces search. One row per trace, aggregated from its spans. Every field except `traceId` is omitted when it holds its zero value (for example, `errorCount` is absent when no spans errored).
-class TracesTraceSummary
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTracesTraceSummaryMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTracesTraceSummaryMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTracesTraceSummaryMetadata::DECODERS
-
-  # @return [String] The trace identifier.
-  attr_reader :trace_id
-  # @return [String] The start time of the earliest span in the trace, in RFC 3339 format.
-  attr_reader :started
-  # @return [String] The service that emitted the root span. Omitted when the root span has no service.name resource attribute.
-  attr_reader :service_name
-  # @return [Integer] Wall-clock duration of the trace in nanoseconds.
-  attr_reader :duration_ns
-  # @return [Integer] The number of spans in the trace.
-  attr_reader :span_count
-  # @return [Integer] The number of spans in the trace with an `Error` status code. Omitted when zero.
-  attr_reader :error_count
-  # @return [TracesTraceSummaryStatus] The rolled-up status of the trace. `Error` if any span has an `Error` status code, otherwise `Ok`.
-  attr_reader :status
-  # @return [Array_of_String] The distinct span names present in the trace.
-  attr_reader :span_names
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalTracesTraceSummaryMetadata
+    FIELDS = {
+      trace_id: 'traceId',
+      started: 'started',
+      service_name: 'serviceName',
+      duration_ns: 'durationNs',
+      span_count: 'spanCount',
+      error_count: 'errorCount',
+      status: 'status',
+      span_names: 'spanNames'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      trace_id
+    ].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::TracesTraceSummaryStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for TracesTraceSummary.
+  # A single trace returned by a traces search. One row per trace, aggregated from its spans. Every field except `traceId` is omitted when it holds its zero value (for example, `errorCount` is absent when no spans errored).
+  class TracesTraceSummary
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTracesTraceSummaryMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTracesTraceSummaryMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTracesTraceSummaryMetadata::DECODERS
+
+    # @return [String] The trace identifier.
+    attr_reader :trace_id
+    # @return [String] The start time of the earliest span in the trace, in RFC 3339 format.
+    attr_reader :started
+    # @return [String] The service that emitted the root span. Omitted when the root span has no service.name resource attribute.
+    attr_reader :service_name
+    # @return [Integer] Wall-clock duration of the trace in nanoseconds.
+    attr_reader :duration_ns
+    # @return [Integer] The number of spans in the trace.
+    attr_reader :span_count
+    # @return [Integer] The number of spans in the trace with an `Error` status code. Omitted when zero.
+    attr_reader :error_count
+    # @return [TracesTraceSummaryStatus] The rolled-up status of the trace. `Error` if any span has an `Error` status code, otherwise `Ok`.
+    attr_reader :status
+    # @return [Array_of_String] The distinct span names present in the trace.
+    attr_reader :span_names
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the TracesTraceSummaryStatus SDK namespace.
+  module TracesTraceSummaryStatus
+    OK = 'Ok'
+    ERROR = 'Error'
+    VALUES = %w[Ok Error].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the TracesTraceSummaryStatus SDK namespace.
-module TracesTraceSummaryStatus
-  OK = 'Ok'
-  ERROR = 'Error'
-  VALUES = ['Ok', 'Error'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end
