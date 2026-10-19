@@ -5,677 +5,680 @@
 
 # shared_chat domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata
-    FIELDS = {
-      content: 'content',
-      refusal: 'refusal'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      content
-      refusal
-    ].freeze
-    DECODERS = {
-      content: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
-      end,
-      refusal: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
-      end
-    }.freeze
-    NULLABLE_FIELDS = %i[
-      content
-      refusal
-    ].freeze
+# Internal model hydration metadata.
+class SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata
+  FIELDS = {
+    content: "content",
+    refusal: "refusal",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    content
+    refusal
+  ].freeze
+  DECODERS = {
+    content: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
+    end,
+    refusal: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
+    end,
+  }.freeze
+  NULLABLE_FIELDS = %i[
+    content
+    refusal
+  ].freeze
+end
+
+# API model for ChatCompletionChunkChoicesItemLogprobs.
+# Log probability information for the choice.
+class ChatCompletionChunkChoicesItemLogprobs
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata::DECODERS
+
+  # @return [Array_of_ChatCompletionTokenLogprob] A list of message content tokens with log probability information.
+  attr_reader :content
+  # @return [Array_of_ChatCompletionTokenLogprob] A list of message refusal tokens with log probability information.
+  attr_reader :refusal
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ChatCompletionChunkChoicesItemLogprobs.
-  # Log probability information for the choice.
-  class ChatCompletionChunkChoicesItemLogprobs
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata::DECODERS
-
-    # @return [Array_of_ChatCompletionTokenLogprob] A list of message content tokens with log probability information.
-    attr_reader :content
-    # @return [Array_of_ChatCompletionTokenLogprob] A list of message refusal tokens with log probability information.
-    attr_reader :refusal
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata::NULLABLE_FIELDS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionChunkChoicesItemLogprobsMetadata::NULLABLE_FIELDS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionChunkChoicesItemMetadata
-    FIELDS = {
-      delta: 'delta',
-      logprobs: 'logprobs',
-      finish_reason: 'finish_reason',
-      index: 'index'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      delta
-      finish_reason
-      index
-    ].freeze
-    DECODERS = {
-      delta: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionStreamResponseDelta.from_hash(value)
-      end,
-      logprobs: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionChunkChoicesItemLogprobs.from_hash(value)
-      end,
-      finish_reason: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionChunkChoicesItemFinishReason.from_value(value)
-      end
-    }.freeze
-    NULLABLE_FIELDS = %i[
-      finish_reason
-    ].freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalChatCompletionChunkChoicesItemMetadata
+  FIELDS = {
+    delta: "delta",
+    logprobs: "logprobs",
+    finish_reason: "finish_reason",
+    index: "index",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    delta
+    finish_reason
+    index
+  ].freeze
+  DECODERS = {
+    delta: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionStreamResponseDelta.from_hash(value)
+    end,
+    logprobs: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionChunkChoicesItemLogprobs.from_hash(value)
+    end,
+    finish_reason: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionChunkChoicesItemFinishReason.from_value(value)
+    end,
+  }.freeze
+  NULLABLE_FIELDS = %i[
+    finish_reason
+  ].freeze
+end
+
+# API model for ChatCompletionChunkChoicesItem.
+# Required object value serialized in the `choices[]` wire field.
+class ChatCompletionChunkChoicesItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionChunkChoicesItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionChunkChoicesItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionChunkChoicesItemMetadata::DECODERS
+
+  # @return [ChatCompletionStreamResponseDelta] A chat completion delta generated by streamed model responses.
+  attr_reader :delta
+  # @return [ChatCompletionChunkChoicesItemLogprobs] Log probability information for the choice.
+  attr_reader :logprobs
+  # @return [ChatCompletionChunkChoicesItemFinishReason] The reason the model stopped generating tokens. stop if the model hit a natural stop point or a provided stop sequence, length if the maximum number of tokens specified in the request was reached, tool_calls if the model called a tool.
+  attr_reader :finish_reason
+  # @return [Integer] The index of the choice in the list of choices.
+  attr_reader :index
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ChatCompletionChunkChoicesItem.
-  # Required object value serialized in the `choices[]` wire field.
-  class ChatCompletionChunkChoicesItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionChunkChoicesItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionChunkChoicesItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionChunkChoicesItemMetadata::DECODERS
-
-    # @return [ChatCompletionStreamResponseDelta] A chat completion delta generated by streamed model responses.
-    attr_reader :delta
-    # @return [ChatCompletionChunkChoicesItemLogprobs] Log probability information for the choice.
-    attr_reader :logprobs
-    # @return [ChatCompletionChunkChoicesItemFinishReason] The reason the model stopped generating tokens. stop if the model hit a natural stop point or a provided stop sequence, length if the maximum number of tokens specified in the request was reached, tool_calls if the model called a tool.
-    attr_reader :finish_reason
-    # @return [Integer] The index of the choice in the list of choices.
-    attr_reader :index
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionChunkChoicesItemMetadata::NULLABLE_FIELDS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionChunkChoicesItemMetadata::NULLABLE_FIELDS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionChunkMetadata
-    FIELDS = {
-      id: 'id',
-      choices: 'choices',
-      created: 'created',
-      model: 'model',
-      object: 'object',
-      usage: 'usage'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      choices
-      created
-      model
-      object
-    ].freeze
-    DECODERS = {
-      choices: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ChatCompletionChunkChoicesItem.from_hash(item) }
-      end,
-      object: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionChunkObject.from_value(value)
-      end,
-      usage: lambda do |value|
-        ::OctridevDigitalocean::CompletionUsage.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalChatCompletionChunkMetadata
+  FIELDS = {
+    id: "id",
+    choices: "choices",
+    created: "created",
+    model: "model",
+    object: "object",
+    usage: "usage",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    choices
+    created
+    model
+    object
+  ].freeze
+  DECODERS = {
+    choices: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ChatCompletionChunkChoicesItem.from_hash(item) }
+    end,
+    object: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionChunkObject.from_value(value)
+    end,
+    usage: lambda do |value|
+      ::OctridevDigitalocean::CompletionUsage.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ChatCompletionChunk.
+# Represents a streamed chunk of a chat completion response returned by the model, based on the provided input.
+class ChatCompletionChunk
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionChunkMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionChunkMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionChunkMetadata::DECODERS
+
+  # @return [String] A unique identifier for the chat completion. Each chunk has the same ID.
+  attr_reader :id
+  # @return [Array_of_ChatCompletionChunkChoicesItem] A list of chat completion choices. Can contain more than one element if n is greater than 1. Can also be empty for the last chunk if you set stream_options include_usage to true.
+  attr_reader :choices
+  # @return [Integer] The Unix timestamp (in seconds) of when the chat completion was created. Each chunk has the same timestamp.
+  attr_reader :created
+  # @return [String] The model to generate the completion.
+  attr_reader :model
+  # @return [ChatCompletionChunkObject] The object type, which is always chat.completion.chunk.
+  attr_reader :object
+  # @return [CompletionUsage] An optional field that will only be present when you set stream_options include_usage to true in your request. When present, it contains a null value except for the last chunk which contains the token usage statistics for the entire request.
+  attr_reader :usage
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ChatCompletionChunk.
-  # Represents a streamed chunk of a chat completion response returned by the model, based on the provided input.
-  class ChatCompletionChunk
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionChunkMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionChunkMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionChunkMetadata::DECODERS
-
-    # @return [String] A unique identifier for the chat completion. Each chunk has the same ID.
-    attr_reader :id
-    # @return [Array_of_ChatCompletionChunkChoicesItem] A list of chat completion choices. Can contain more than one element if n is greater than 1. Can also be empty for the last chunk if you set stream_options include_usage to true.
-    attr_reader :choices
-    # @return [Integer] The Unix timestamp (in seconds) of when the chat completion was created. Each chunk has the same timestamp.
-    attr_reader :created
-    # @return [String] The model to generate the completion.
-    attr_reader :model
-    # @return [ChatCompletionChunkObject] The object type, which is always chat.completion.chunk.
-    attr_reader :object
-    # @return [CompletionUsage] An optional field that will only be present when you set stream_options include_usage to true in your request. When present, it contains a null value except for the last chunk which contains the token usage statistics for the entire request.
-    attr_reader :usage
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ChatCompletionChunkChoicesItemFinishReason SDK namespace.
-  module ChatCompletionChunkChoicesItemFinishReason
-    STOP = 'stop'
-    LENGTH = 'length'
-    TOOL_CALLS = 'tool_calls'
-    CONTENT_FILTER = 'content_filter'
-    VALUES = %w[stop length tool_calls content_filter].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ChatCompletionChunkChoicesItemFinishReason SDK namespace.
+module ChatCompletionChunkChoicesItemFinishReason
+  STOP = 'stop'
+  LENGTH = 'length'
+  TOOL_CALLS = 'tool_calls'
+  CONTENT_FILTER = 'content_filter'
+  VALUES = ['stop', 'length', 'tool_calls', 'content_filter'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the ChatCompletionChunkObject SDK namespace.
+module ChatCompletionChunkObject
+  CHAT_COMPLETION_CHUNK = 'chat.completion.chunk'
+  VALUES = ['chat.completion.chunk'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalChatCompletionRequestStreamOptionsMetadata
+  FIELDS = {
+    include_usage: "include_usage",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ChatCompletionRequestStreamOptions.
+# Options for streaming response. Only set this when you set stream to true.
+class ChatCompletionRequestStreamOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionRequestStreamOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionRequestStreamOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionRequestStreamOptionsMetadata::DECODERS
+
+  # @return [Boolean] If set, an additional chunk will be streamed before the data [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array.
+  attr_reader :include_usage
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ChatCompletionChunkObject SDK namespace.
-  module ChatCompletionChunkObject
-    CHAT_COMPLETION_CHUNK = 'chat.completion.chunk'
-    VALUES = ['chat.completion.chunk'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionRequestStreamOptionsMetadata
-    FIELDS = {
-      include_usage: 'include_usage'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalChatCompletionRequestMetadata
+  FIELDS = {
+    messages: "messages",
+    model: "model",
+    max_tokens: "max_tokens",
+    max_completion_tokens: "max_completion_tokens",
+    frequency_penalty: "frequency_penalty",
+    presence_penalty: "presence_penalty",
+    top_logprobs: "top_logprobs",
+    tools: "tools",
+    tool_choice: "tool_choice",
+    stream: "stream",
+    stop: "stop",
+    logit_bias: "logit_bias",
+    logprobs: "logprobs",
+    count: "n",
+    stream_options: "stream_options",
+    reasoning_effort: "reasoning_effort",
+    seed: "seed",
+    metadata: "metadata",
+    temperature: "temperature",
+    top_p: "top_p",
+    user: "user",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    messages
+    model
+  ].freeze
+  DECODERS = {
+    messages: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ChatMessage.from_hash(item) }
+    end,
+    tools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ChatCompletionTool.from_hash(item) }
+    end,
+    tool_choice: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionRequestToolChoice.from_hash(value)
+    end,
+    stream_options: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionRequestStreamOptions.from_hash(value)
+    end,
+    reasoning_effort: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionRequestReasoningEffort.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ChatCompletionRequest.
+# Typed representation of the `ChatCompletionRequest` API schema.
+class ChatCompletionRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionRequestMetadata::DECODERS
+
+  # @return [Array_of_ChatMessage] A list of messages comprising the conversation so far.
+  attr_reader :messages
+  # @return [String] Model ID used to generate the response.
+  attr_reader :model
+  # @return [Integer] The maximum number of tokens that can be generated in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length.
+  attr_reader :max_tokens
+  # @return [Integer] The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run.
+  attr_reader :max_completion_tokens
+  # @return [Float] Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+  attr_reader :frequency_penalty
+  # @return [Float] Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+  attr_reader :presence_penalty
+  # @return [Integer] An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+  attr_reader :top_logprobs
+  # @return [Array_of_ChatCompletionTool] A list of tools the model may call. Currently, only functions are supported as a tool.
+  attr_reader :tools
+  # @return [ChatCompletionRequestToolChoice] Controls which (if any) tool is called by the model. none means the model will not call any tool and instead generates a message. auto means the model can pick between generating a message or calling one or more tools. required means the model must call one or more tools. Specifying a particular tool via {"type": "function", "function": {"name": "my_function"}} forces the model to call that tool. none is the default when no tools are present. auto is the default if tools are…
+  attr_reader :tool_choice
+  # @return [Boolean] If set to true, the model response data will be streamed to the client as it is generated using server-sent events.
+  attr_reader :stream
+  # @return [Object] Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
+  attr_reader :stop
+  # @return [Hash] Modify the likelihood of specified tokens appearing in the completion. Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive…
+  attr_reader :logit_bias
+  # @return [Boolean] Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+  attr_reader :logprobs
+  # @return [Integer] How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+  attr_reader :count
+  # @return [ChatCompletionRequestStreamOptions] Options for streaming response. Only set this when you set stream to true.
+  attr_reader :stream_options
+  # @return [ChatCompletionRequestReasoningEffort] Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+  attr_reader :reasoning_effort
+  # @return [Integer] If specified, the system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed.
+  attr_reader :seed
+  # @return [Hash] Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+  attr_reader :metadata
+  # @return [Float] What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or top_p but not both.
+  attr_reader :temperature
+  # @return [Float] An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
+  attr_reader :top_p
+  # @return [String] A unique identifier representing your end-user, which can help DigitalOcean to monitor and detect abuse.
+  attr_reader :user
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ChatCompletionRequestStreamOptions.
-  # Options for streaming response. Only set this when you set stream to true.
-  class ChatCompletionRequestStreamOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionRequestStreamOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionRequestStreamOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionRequestStreamOptionsMetadata::DECODERS
-
-    # @return [Boolean] If set, an additional chunk will be streamed before the data [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array.
-    attr_reader :include_usage
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionRequestMetadata
-    FIELDS = {
-      messages: 'messages',
-      model: 'model',
-      max_tokens: 'max_tokens',
-      max_completion_tokens: 'max_completion_tokens',
-      frequency_penalty: 'frequency_penalty',
-      presence_penalty: 'presence_penalty',
-      top_logprobs: 'top_logprobs',
-      tools: 'tools',
-      tool_choice: 'tool_choice',
-      stream: 'stream',
-      stop: 'stop',
-      logit_bias: 'logit_bias',
-      logprobs: 'logprobs',
-      count: 'n',
-      stream_options: 'stream_options',
-      reasoning_effort: 'reasoning_effort',
-      seed: 'seed',
-      metadata: 'metadata',
-      temperature: 'temperature',
-      top_p: 'top_p',
-      user: 'user'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      messages
-      model
-    ].freeze
-    DECODERS = {
-      messages: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ChatMessage.from_hash(item) }
-      end,
-      tools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ChatCompletionTool.from_hash(item) }
-      end,
-      tool_choice: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionRequestToolChoice.from_hash(value)
-      end,
-      stream_options: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionRequestStreamOptions.from_hash(value)
-      end,
-      reasoning_effort: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionRequestReasoningEffort.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ChatCompletionRequestReasoningEffort SDK namespace.
+module ChatCompletionRequestReasoningEffort
+  NONE = 'none'
+  MINIMAL = 'minimal'
+  LOW = 'low'
+  MEDIUM = 'medium'
+  HIGH = 'high'
+  XHIGH = 'xhigh'
+  VALUES = ['none', 'minimal', 'low', 'medium', 'high', 'xhigh'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalChatCompletionRequestToolChoiceVariant1FunctionMetadata
+  FIELDS = {
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ChatCompletionRequestToolChoiceVariant1Function.
+# Required object value serialized in the `function` wire field.
+class ChatCompletionRequestToolChoiceVariant1Function
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionRequestToolChoiceVariant1FunctionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionRequestToolChoiceVariant1FunctionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionRequestToolChoiceVariant1FunctionMetadata::DECODERS
+
+  # @return [String] The name of the function to call.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ChatCompletionRequest.
-  # Typed representation of the `ChatCompletionRequest` API schema.
-  class ChatCompletionRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionRequestMetadata::DECODERS
-
-    # @return [Array_of_ChatMessage] A list of messages comprising the conversation so far.
-    attr_reader :messages
-    # @return [String] Model ID used to generate the response.
-    attr_reader :model
-    # @return [Integer] The maximum number of tokens that can be generated in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length.
-    attr_reader :max_tokens
-    # @return [Integer] The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run.
-    attr_reader :max_completion_tokens
-    # @return [Float] Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
-    attr_reader :frequency_penalty
-    # @return [Float] Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
-    attr_reader :presence_penalty
-    # @return [Integer] An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-    attr_reader :top_logprobs
-    # @return [Array_of_ChatCompletionTool] A list of tools the model may call. Currently, only functions are supported as a tool.
-    attr_reader :tools
-    # @return [ChatCompletionRequestToolChoice] Controls which (if any) tool is called by the model. none means the model will not call any tool and instead generates a message. auto means the model can pick between generating a message or calling one or more tools. required means the model must call one or more tools. Specifying a particular tool via {"type": "function", "function": {"name": "my_function"}} forces the model to call that tool. none is the default when no tools are present. auto is the default if tools are…
-    attr_reader :tool_choice
-    # @return [Boolean] If set to true, the model response data will be streamed to the client as it is generated using server-sent events.
-    attr_reader :stream
-    # @return [Object] Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
-    attr_reader :stop
-    # @return [Hash] Modify the likelihood of specified tokens appearing in the completion. Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive…
-    attr_reader :logit_bias
-    # @return [Boolean] Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-    attr_reader :logprobs
-    # @return [Integer] How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-    attr_reader :count
-    # @return [ChatCompletionRequestStreamOptions] Options for streaming response. Only set this when you set stream to true.
-    attr_reader :stream_options
-    # @return [ChatCompletionRequestReasoningEffort] Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-    attr_reader :reasoning_effort
-    # @return [Integer] If specified, the system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed.
-    attr_reader :seed
-    # @return [Hash] Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
-    attr_reader :metadata
-    # @return [Float] What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or top_p but not both.
-    attr_reader :temperature
-    # @return [Float] An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
-    attr_reader :top_p
-    # @return [String] A unique identifier representing your end-user, which can help DigitalOcean to monitor and detect abuse.
-    attr_reader :user
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ChatCompletionRequestReasoningEffort SDK namespace.
-  module ChatCompletionRequestReasoningEffort
-    NONE = 'none'
-    MINIMAL = 'minimal'
-    LOW = 'low'
-    MEDIUM = 'medium'
-    HIGH = 'high'
-    XHIGH = 'xhigh'
-    VALUES = %w[none minimal low medium high xhigh].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalChatCompletionRequestToolChoiceVariant1Metadata
+  FIELDS = {
+    type: "type",
+    function: "function",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    function
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionRequestToolChoiceVariant1Type.from_value(value)
+    end,
+    function: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionRequestToolChoiceVariant1Function.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ChatCompletionRequestToolChoiceVariant1.
+class ChatCompletionRequestToolChoiceVariant1
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionRequestToolChoiceVariant1Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionRequestToolChoiceVariant1Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionRequestToolChoiceVariant1Metadata::DECODERS
+
+  # @return [ChatCompletionRequestToolChoiceVariant1Type] Required enumerated value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [ChatCompletionRequestToolChoiceVariant1Function] Required object value serialized in the `function` wire field.
+  attr_reader :function
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionRequestToolChoiceVariant1FunctionMetadata
-    FIELDS = {
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ChatCompletionRequestToolChoiceVariant1Function.
-  # Required object value serialized in the `function` wire field.
-  class ChatCompletionRequestToolChoiceVariant1Function
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionRequestToolChoiceVariant1FunctionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionRequestToolChoiceVariant1FunctionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionRequestToolChoiceVariant1FunctionMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The name of the function to call.
-    attr_reader :name
+# Defines the ChatCompletionRequestToolChoice SDK namespace.
+module ChatCompletionRequestToolChoice
+  def self.from_hash(hash)
+    return ChatCompletionRequestToolChoiceVariant0.from_value(hash) if hash.is_a?(::String)
+    return ChatCompletionRequestToolChoiceVariant1.from_hash(hash)
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Defines the ChatCompletionRequestToolChoiceVariant0 SDK namespace.
+module ChatCompletionRequestToolChoiceVariant0
+  NONE = 'none'
+  AUTO = 'auto'
+  REQUIRED = 'required'
+  VALUES = ['none', 'auto', 'required'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Defines the ChatCompletionRequestToolChoiceVariant1Type SDK namespace.
+module ChatCompletionRequestToolChoiceVariant1Type
+  FUNCTION = 'function'
+  VALUES = ['function'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# Internal model hydration metadata.
+class SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemFunctionMetadata
+  FIELDS = {
+    name: "name",
+    arguments: "arguments",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    arguments
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ChatCompletionResponseChoicesItemMessageToolCallsItemFunction.
+# Required object value serialized in the `function` wire field.
+class ChatCompletionResponseChoicesItemMessageToolCallsItemFunction
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemFunctionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemFunctionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemFunctionMetadata::DECODERS
+
+  # @return [String] The name of the function to call.
+  attr_reader :name
+  # @return [String] The arguments to call the function with.
+  attr_reader :arguments
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionRequestToolChoiceVariant1Metadata
-    FIELDS = {
-      type: 'type',
-      function: 'function'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      function
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionRequestToolChoiceVariant1Type.from_value(value)
-      end,
-      function: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionRequestToolChoiceVariant1Function.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ChatCompletionRequestToolChoiceVariant1.
-  class ChatCompletionRequestToolChoiceVariant1
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionRequestToolChoiceVariant1Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionRequestToolChoiceVariant1Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionRequestToolChoiceVariant1Metadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ChatCompletionRequestToolChoiceVariant1Type] Required enumerated value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [ChatCompletionRequestToolChoiceVariant1Function] Required object value serialized in the `function` wire field.
-    attr_reader :function
+# Internal model hydration metadata.
+class SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemMetadata
+  FIELDS = {
+    id: "id",
+    type: "type",
+    function: "function",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    type
+    function
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessageToolCallsItemType.from_value(value)
+    end,
+    function: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessageToolCallsItemFunction.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ChatCompletionResponseChoicesItemMessageToolCallsItem.
+# Required object value serialized in the `tool_calls[]` wire field.
+class ChatCompletionResponseChoicesItemMessageToolCallsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The ID of the tool call.
+  attr_reader :id
+  # @return [ChatCompletionResponseChoicesItemMessageToolCallsItemType] The type of the tool.
+  attr_reader :type
+  # @return [ChatCompletionResponseChoicesItemMessageToolCallsItemFunction] Required object value serialized in the `function` wire field.
+  attr_reader :function
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ChatCompletionRequestToolChoice SDK namespace.
-  module ChatCompletionRequestToolChoice
-    def self.from_hash(hash)
-      return ChatCompletionRequestToolChoiceVariant0.from_value(hash) if hash.is_a?(::String)
-
-      ChatCompletionRequestToolChoiceVariant1.from_hash(hash)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ChatCompletionRequestToolChoiceVariant0 SDK namespace.
-  module ChatCompletionRequestToolChoiceVariant0
-    NONE = 'none'
-    AUTO = 'auto'
-    REQUIRED = 'required'
-    VALUES = %w[none auto required].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalChatCompletionResponseChoicesItemMessageMetadata
+  FIELDS = {
+    content: "content",
+    refusal: "refusal",
+    tool_calls: "tool_calls",
+    reasoning_content: "reasoning_content",
+    role: "role",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    content
+    refusal
+    reasoning_content
+    role
+  ].freeze
+  DECODERS = {
+    tool_calls: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessageToolCallsItem.from_hash(item) }
+    end,
+    role: lambda do |value|
+      ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessageRole.from_value(value)
+    end,
+  }.freeze
+  NULLABLE_FIELDS = %i[
+    content
+    refusal
+    reasoning_content
+  ].freeze
+end
+
+# API model for ChatCompletionResponseChoicesItemMessage.
+# A chat completion message generated by the model.
+class ChatCompletionResponseChoicesItemMessage
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionResponseChoicesItemMessageMetadata::DECODERS
+
+  # @return [String] The contents of the message.
+  attr_reader :content
+  # @return [String] The refusal message generated by the model.
+  attr_reader :refusal
+  # @return [Array_of_ChatCompletionResponseChoicesItemMessageToolCallsItem] The tool calls generated by the model, such as function calls.
+  attr_reader :tool_calls
+  # @return [String] The reasoning content generated by the model.
+  attr_reader :reasoning_content
+  # @return [ChatCompletionResponseChoicesItemMessageRole] The role of the author of this message.
+  attr_reader :role
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ChatCompletionRequestToolChoiceVariant1Type SDK namespace.
-  module ChatCompletionRequestToolChoiceVariant1Type
-    FUNCTION = 'function'
-    VALUES = ['function'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionResponseChoicesItemMessageMetadata::NULLABLE_FIELDS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemFunctionMetadata
-    FIELDS = {
-      name: 'name',
-      arguments: 'arguments'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      arguments
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata
+  FIELDS = {
+    content: "content",
+    refusal: "refusal",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    content
+    refusal
+  ].freeze
+  DECODERS = {
+    content: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
+    end,
+    refusal: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
+    end,
+  }.freeze
+  NULLABLE_FIELDS = %i[
+    content
+    refusal
+  ].freeze
+end
+
+# API model for ChatCompletionResponseChoicesItemLogprobs.
+# Log probability information for the choice.
+class ChatCompletionResponseChoicesItemLogprobs
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::DECODERS
+
+  # @return [Array_of_ChatCompletionTokenLogprob] A list of message content tokens with log probability information.
+  attr_reader :content
+  # @return [Array_of_ChatCompletionTokenLogprob] A list of message refusal tokens with log probability information.
+  attr_reader :refusal
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ChatCompletionResponseChoicesItemMessageToolCallsItemFunction.
-  # Required object value serialized in the `function` wire field.
-  class ChatCompletionResponseChoicesItemMessageToolCallsItemFunction
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemFunctionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemFunctionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemFunctionMetadata::DECODERS
-
-    # @return [String] The name of the function to call.
-    attr_reader :name
-    # @return [String] The arguments to call the function with.
-    attr_reader :arguments
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::NULLABLE_FIELDS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemMetadata
-    FIELDS = {
-      id: 'id',
-      type: 'type',
-      function: 'function'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      type
-      function
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessageToolCallsItemType.from_value(value)
-      end,
-      function: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessageToolCallsItemFunction.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for ChatCompletionResponseChoicesItemMessageToolCallsItem.
-  # Required object value serialized in the `tool_calls[]` wire field.
-  class ChatCompletionResponseChoicesItemMessageToolCallsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionResponseChoicesItemMessageToolCallsItemMetadata::DECODERS
-
-    # @return [String] The ID of the tool call.
-    attr_reader :id
-    # @return [ChatCompletionResponseChoicesItemMessageToolCallsItemType] The type of the tool.
-    attr_reader :type
-    # @return [ChatCompletionResponseChoicesItemMessageToolCallsItemFunction] Required object value serialized in the `function` wire field.
-    attr_reader :function
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionResponseChoicesItemMessageMetadata
-    FIELDS = {
-      content: 'content',
-      refusal: 'refusal',
-      tool_calls: 'tool_calls',
-      reasoning_content: 'reasoning_content',
-      role: 'role'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      content
-      refusal
-      reasoning_content
-      role
-    ].freeze
-    DECODERS = {
-      tool_calls: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessageToolCallsItem.from_hash(item) }
-      end,
-      role: lambda do |value|
-        ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessageRole.from_value(value)
-      end
-    }.freeze
-    NULLABLE_FIELDS = %i[
-      content
-      refusal
-      reasoning_content
-    ].freeze
-  end
-
-  # API model for ChatCompletionResponseChoicesItemMessage.
-  # A chat completion message generated by the model.
-  class ChatCompletionResponseChoicesItemMessage
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemMessageMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionResponseChoicesItemMessageMetadata::DECODERS
-
-    # @return [String] The contents of the message.
-    attr_reader :content
-    # @return [String] The refusal message generated by the model.
-    attr_reader :refusal
-    # @return [Array_of_ChatCompletionResponseChoicesItemMessageToolCallsItem] The tool calls generated by the model, such as function calls.
-    attr_reader :tool_calls
-    # @return [String] The reasoning content generated by the model.
-    attr_reader :reasoning_content
-    # @return [ChatCompletionResponseChoicesItemMessageRole] The role of the author of this message.
-    attr_reader :role
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionResponseChoicesItemMessageMetadata::NULLABLE_FIELDS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata
-    FIELDS = {
-      content: 'content',
-      refusal: 'refusal'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      content
-      refusal
-    ].freeze
-    DECODERS = {
-      content: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
-      end,
-      refusal: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
-      end
-    }.freeze
-    NULLABLE_FIELDS = %i[
-      content
-      refusal
-    ].freeze
-  end
-
-  # API model for ChatCompletionResponseChoicesItemLogprobs.
-  # Log probability information for the choice.
-  class ChatCompletionResponseChoicesItemLogprobs
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::DECODERS
-
-    # @return [Array_of_ChatCompletionTokenLogprob] A list of message content tokens with log probability information.
-    attr_reader :content
-    # @return [Array_of_ChatCompletionTokenLogprob] A list of message refusal tokens with log probability information.
-    attr_reader :refusal
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::NULLABLE_FIELDS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

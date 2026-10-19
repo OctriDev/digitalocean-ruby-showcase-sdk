@@ -5,120 +5,123 @@
 
 # apps_apps_list domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAppsListAlertsResponseMetadata
-    FIELDS = {
-      alerts: 'alerts'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      alerts: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppAlert.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAppsListAlertsResponseMetadata
+  FIELDS = {
+    alerts: "alerts",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    alerts: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppAlert.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AppsListAlertsResponse.
+# Typed representation of the `AppsListAlertsResponse` API schema.
+class AppsListAlertsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsListAlertsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsListAlertsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsListAlertsResponseMetadata::DECODERS
+
+  # @return [Array_of_AppAlert] Optional array value serialized in the `alerts` wire field.
+  attr_reader :alerts
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsListAlertsResponse.
-  # Typed representation of the `AppsListAlertsResponse` API schema.
-  class AppsListAlertsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsListAlertsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsListAlertsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsListAlertsResponseMetadata::DECODERS
-
-    # @return [Array_of_AppAlert] Optional array value serialized in the `alerts` wire field.
-    attr_reader :alerts
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppsListInstanceSizesResponseMetadata
-    FIELDS = {
-      discount_percent: 'discount_percent',
-      instance_sizes: 'instance_sizes'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      instance_sizes: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppsInstanceSize.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppsListInstanceSizesResponseMetadata
+  FIELDS = {
+    discount_percent: "discount_percent",
+    instance_sizes: "instance_sizes",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    instance_sizes: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppsInstanceSize.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AppsListInstanceSizesResponse.
+# Typed representation of the `AppsListInstanceSizesResponse` API schema.
+class AppsListInstanceSizesResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsListInstanceSizesResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsListInstanceSizesResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsListInstanceSizesResponseMetadata::DECODERS
+
+  # @return [Float] Optional `float`-formatted value serialized in the `discount_percent` wire field.
+  attr_reader :discount_percent
+  # @return [Array_of_AppsInstanceSize] Optional array value serialized in the `instance_sizes` wire field.
+  attr_reader :instance_sizes
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsListInstanceSizesResponse.
-  # Typed representation of the `AppsListInstanceSizesResponse` API schema.
-  class AppsListInstanceSizesResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsListInstanceSizesResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsListInstanceSizesResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsListInstanceSizesResponseMetadata::DECODERS
-
-    # @return [Float] Optional `float`-formatted value serialized in the `discount_percent` wire field.
-    attr_reader :discount_percent
-    # @return [Array_of_AppsInstanceSize] Optional array value serialized in the `instance_sizes` wire field.
-    attr_reader :instance_sizes
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppsListRegionsResponseMetadata
-    FIELDS = {
-      regions: 'regions'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      regions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppsRegion.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppsListRegionsResponseMetadata
+  FIELDS = {
+    regions: "regions",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    regions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppsRegion.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AppsListRegionsResponse.
+# Typed representation of the `AppsListRegionsResponse` API schema.
+class AppsListRegionsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsListRegionsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsListRegionsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsListRegionsResponseMetadata::DECODERS
+
+  # @return [Array_of_AppsRegion] Optional array value serialized in the `regions` wire field.
+  attr_reader :regions
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsListRegionsResponse.
-  # Typed representation of the `AppsListRegionsResponse` API schema.
-  class AppsListRegionsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsListRegionsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsListRegionsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsListRegionsResponseMetadata::DECODERS
-
-    # @return [Array_of_AppsRegion] Optional array value serialized in the `regions` wire field.
-    attr_reader :regions
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

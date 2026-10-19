@@ -5,209 +5,215 @@
 
 # domains domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAllDomainsResponseMetadata
-    FIELDS = {
-      domains: 'domains',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      domains
-      meta
-    ].freeze
-    DECODERS = {
-      domains: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Domain.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAllDomainsResponseMetadata
+  FIELDS = {
+    domains: "domains",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    domains
+    meta
+  ].freeze
+  DECODERS = {
+    domains: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Domain.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AllDomainsResponse.
+# Typed representation of the `AllDomainsResponse` API schema.
+class AllDomainsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAllDomainsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAllDomainsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAllDomainsResponseMetadata::DECODERS
+
+  # @return [Array_of_Domain] Array of volumes.
+  attr_reader :domains
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AllDomainsResponse.
-  # Typed representation of the `AllDomainsResponse` API schema.
-  class AllDomainsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAllDomainsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAllDomainsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAllDomainsResponseMetadata::DECODERS
-
-    # @return [Array_of_Domain] Array of volumes.
-    attr_reader :domains
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateDomainResponseMetadata
-    FIELDS = {
-      domain: 'domain'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      domain: lambda do |value|
-        ::OctridevDigitalocean::Domain.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateDomainResponseMetadata
+  FIELDS = {
+    domain: "domain",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    domain: lambda do |value|
+      ::OctridevDigitalocean::Domain.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for CreateDomainResponse.
+# Typed representation of the `CreateDomainResponse` API schema.
+class CreateDomainResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateDomainResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateDomainResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateDomainResponseMetadata::DECODERS
+
+  # @return [Domain] Optional object value serialized in the `domain` wire field.
+  attr_reader :domain
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateDomainResponse.
-  # Typed representation of the `CreateDomainResponse` API schema.
-  class CreateDomainResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateDomainResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateDomainResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateDomainResponseMetadata::DECODERS
-
-    # @return [Domain] Optional object value serialized in the `domain` wire field.
-    attr_reader :domain
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDomainMetadata
-    FIELDS = {
-      name: 'name',
-      ttl: 'ttl',
-      zone_file: 'zone_file'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDomainMetadata
+  FIELDS = {
+    name: "name",
+    ttl: "ttl",
+    zone_file: "zone_file",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for Domain.
+# Typed representation of the `Domain` API schema.
+class Domain
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDomainMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDomainMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDomainMetadata::DECODERS
+
+  # @return [String] The name of the domain itself. This should follow the standard domain format of domain.TLD. For instance, `example.com` is a valid domain name.
+  attr_reader :name
+  # @return [Integer] This value is the time to live for the records on this domain, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
+  attr_reader :ttl
+  # @return [String] This attribute contains the complete contents of the zone file for the selected domain. Individual domain record resources should be used to get more granular control over records. However, this attribute can also be used to get information about the SOA record, which is created automatically and is not accessible as an individual record resource.
+  attr_reader :zone_file
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Domain.
-  # Typed representation of the `Domain` API schema.
-  class Domain
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDomainMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDomainMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDomainMetadata::DECODERS
-
-    # @return [String] The name of the domain itself. This should follow the standard domain format of domain.TLD. For instance, `example.com` is a valid domain name.
-    attr_reader :name
-    # @return [Integer] This value is the time to live for the records on this domain, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
-    attr_reader :ttl
-    # @return [String] This attribute contains the complete contents of the zone file for the selected domain. Individual domain record resources should be used to get more granular control over records. However, this attribute can also be used to get information about the SOA record, which is created automatically and is not accessible as an individual record resource.
-    attr_reader :zone_file
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDomainRequestMetadata
-    FIELDS = {
-      name: 'name',
-      ip_address: 'ip_address'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDomainRequestMetadata
+  FIELDS = {
+    name: "name",
+    ip_address: "ip_address",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DomainRequest.
+# Typed representation of the `DomainRequest` API schema.
+class DomainRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDomainRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDomainRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDomainRequestMetadata::DECODERS
+
+  # @return [String] The name of the domain itself. This should follow the standard domain format of domain.TLD. For instance, `example.com` is a valid domain name.
+  attr_reader :name
+  # @return [String] This optional attribute may contain an IP address. When provided, an A record will be automatically created pointing to the apex domain.
+  attr_reader :ip_address
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DomainRequest.
-  # Typed representation of the `DomainRequest` API schema.
-  class DomainRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDomainRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDomainRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDomainRequestMetadata::DECODERS
-
-    # @return [String] The name of the domain itself. This should follow the standard domain format of domain.TLD. For instance, `example.com` is a valid domain name.
-    attr_reader :name
-    # @return [String] This optional attribute may contain an IP address. When provided, an A record will be automatically created pointing to the apex domain.
-    attr_reader :ip_address
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExistingDomainMetadata
-    FIELDS = {
-      domain: 'domain'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      domain: lambda do |value|
-        ::OctridevDigitalocean::Domain.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalExistingDomainMetadata
+  FIELDS = {
+    domain: "domain",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    domain: lambda do |value|
+      ::OctridevDigitalocean::Domain.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ExistingDomain.
+# Typed representation of the `ExistingDomain` API schema.
+class ExistingDomain
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExistingDomainMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExistingDomainMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExistingDomainMetadata::DECODERS
+
+  # @return [Domain] Optional object value serialized in the `domain` wire field.
+  attr_reader :domain
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ExistingDomain.
-  # Typed representation of the `ExistingDomain` API schema.
-  class ExistingDomain
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExistingDomainMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExistingDomainMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExistingDomainMetadata::DECODERS
-
-    # @return [Domain] Optional object value serialized in the `domain` wire field.
-    attr_reader :domain
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -5,261 +5,267 @@
 
 # database domain models (part 2)
 module OctridevDigitalocean
-  # API model for DatabaseRegionOptions.
-  # Typed representation of the `DatabaseRegionOptions` API schema.
-  class DatabaseRegionOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseRegionOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseRegionOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseRegionOptionsMetadata::DECODERS
+# API model for DatabaseRegionOptions.
+# Typed representation of the `DatabaseRegionOptions` API schema.
+class DatabaseRegionOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseRegionOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseRegionOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseRegionOptionsMetadata::DECODERS
 
-    # @return [Array_of_String] An array of strings containing the names of available regions
-    attr_reader :regions
+  # @return [Array_of_String] An array of strings containing the names of available regions
+  attr_reader :regions
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseReplicaConnectionMetadata
-    FIELDS = {
-      uri: 'uri',
-      database: 'database',
-      host: 'host',
-      port: 'port',
-      user: 'user',
-      password: 'password',
-      ssl: 'ssl'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DatabaseReplicaConnection.
-  # Optional API value serialized in the `connection` wire field.
-  class DatabaseReplicaConnection
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseReplicaConnectionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseReplicaConnectionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseReplicaConnectionMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
-    attr_reader :uri
-    # @return [String] The name of the default database.
-    attr_reader :database
-    # @return [String] The FQDN pointing to the database cluster's current primary node.
-    attr_reader :host
-    # @return [Integer] The port on which the database cluster is listening.
-    attr_reader :port
-    # @return [String] The default user for the database. Requires `database:view_credentials` scope.
-    attr_reader :user
-    # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
-    attr_reader :password
-    # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
-    attr_reader :ssl
+# Internal model hydration metadata.
+class SdkInternalDatabaseReplicaConnectionMetadata
+  FIELDS = {
+    uri: "uri",
+    database: "database",
+    host: "host",
+    port: "port",
+    user: "user",
+    password: "password",
+    ssl: "ssl",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DatabaseReplicaConnection.
+# Optional API value serialized in the `connection` wire field.
+class DatabaseReplicaConnection
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseReplicaConnectionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseReplicaConnectionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseReplicaConnectionMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+  attr_reader :uri
+  # @return [String] The name of the default database.
+  attr_reader :database
+  # @return [String] The FQDN pointing to the database cluster's current primary node.
+  attr_reader :host
+  # @return [Integer] The port on which the database cluster is listening.
+  attr_reader :port
+  # @return [String] The default user for the database. Requires `database:view_credentials` scope.
+  attr_reader :user
+  # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
+  attr_reader :password
+  # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
+  attr_reader :ssl
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseReplicaPrivateConnectionMetadata
-    FIELDS = {
-      uri: 'uri',
-      database: 'database',
-      host: 'host',
-      port: 'port',
-      user: 'user',
-      password: 'password',
-      ssl: 'ssl'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DatabaseReplicaPrivateConnection.
-  # Optional API value serialized in the `private_connection` wire field.
-  class DatabaseReplicaPrivateConnection
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseReplicaPrivateConnectionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseReplicaPrivateConnectionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseReplicaPrivateConnectionMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
-    attr_reader :uri
-    # @return [String] The name of the default database.
-    attr_reader :database
-    # @return [String] The FQDN pointing to the database cluster's current primary node.
-    attr_reader :host
-    # @return [Integer] The port on which the database cluster is listening.
-    attr_reader :port
-    # @return [String] The default user for the database. Requires `database:view_credentials` scope.
-    attr_reader :user
-    # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
-    attr_reader :password
-    # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
-    attr_reader :ssl
+# Internal model hydration metadata.
+class SdkInternalDatabaseReplicaPrivateConnectionMetadata
+  FIELDS = {
+    uri: "uri",
+    database: "database",
+    host: "host",
+    port: "port",
+    user: "user",
+    password: "password",
+    ssl: "ssl",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DatabaseReplicaPrivateConnection.
+# Optional API value serialized in the `private_connection` wire field.
+class DatabaseReplicaPrivateConnection
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseReplicaPrivateConnectionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseReplicaPrivateConnectionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseReplicaPrivateConnectionMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+  attr_reader :uri
+  # @return [String] The name of the default database.
+  attr_reader :database
+  # @return [String] The FQDN pointing to the database cluster's current primary node.
+  attr_reader :host
+  # @return [Integer] The port on which the database cluster is listening.
+  attr_reader :port
+  # @return [String] The default user for the database. Requires `database:view_credentials` scope.
+  attr_reader :user
+  # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
+  attr_reader :password
+  # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
+  attr_reader :ssl
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseReplicaMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      region: 'region',
-      size: 'size',
-      status: 'status',
-      tags: 'tags',
-      created_at: 'created_at',
-      private_network_uuid: 'private_network_uuid',
-      connection: 'connection',
-      private_connection: 'private_connection',
-      storage_size_mib: 'storage_size_mib',
-      do_settings: 'do_settings'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::DatabaseReplicaStatus.from_value(value)
-      end,
-      connection: lambda do |value|
-        ::OctridevDigitalocean::DatabaseReplicaConnection.from_hash(value)
-      end,
-      private_connection: lambda do |value|
-        ::OctridevDigitalocean::DatabaseReplicaPrivateConnection.from_hash(value)
-      end,
-      do_settings: lambda do |value|
-        ::OctridevDigitalocean::DoSettings.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DatabaseReplica.
-  # Typed representation of the `DatabaseReplica` API schema.
-  class DatabaseReplica
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseReplicaMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseReplicaMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseReplicaMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] A unique ID that can be used to identify and reference a database replica.
-    attr_reader :id
-    # @return [String] The name to give the read-only replicating
-    attr_reader :name
-    # @return [String] A slug identifier for the region where the read-only replica will be located. If excluded, the replica will be placed in the same region as the cluster.
-    attr_reader :region
-    # @return [String] A slug identifier representing the size of the node for the read-only replica. The size of the replica must be at least as large as the node size for the database cluster from which it is replicating.
-    attr_reader :size
-    # @return [DatabaseReplicaStatus] A string representing the current status of the database cluster.
-    attr_reader :status
-    # @return [Array_of_String] A flat array of tag names as strings to apply to the read-only replica after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
-    attr_reader :tags
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the database cluster was created.
-    attr_reader :created_at
-    # @return [String] A string specifying the UUID of the VPC to which the read-only replica will be assigned. If excluded, the replica will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
-    attr_reader :private_network_uuid
-    # @return [DatabaseReplicaConnection] Optional API value serialized in the `connection` wire field.
-    attr_reader :connection
-    # @return [DatabaseReplicaPrivateConnection] Optional API value serialized in the `private_connection` wire field.
-    attr_reader :private_connection
-    # @return [Integer] Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.
-    attr_reader :storage_size_mib
-    # @return [DoSettings] DigitalOcean-specific settings for the read-only replica, including custom service CNAMEs.
-    attr_reader :do_settings
+# Internal model hydration metadata.
+class SdkInternalDatabaseReplicaMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    region: "region",
+    size: "size",
+    status: "status",
+    tags: "tags",
+    created_at: "created_at",
+    private_network_uuid: "private_network_uuid",
+    connection: "connection",
+    private_connection: "private_connection",
+    storage_size_mib: "storage_size_mib",
+    do_settings: "do_settings",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::DatabaseReplicaStatus.from_value(value)
+    end,
+    connection: lambda do |value|
+      ::OctridevDigitalocean::DatabaseReplicaConnection.from_hash(value)
+    end,
+    private_connection: lambda do |value|
+      ::OctridevDigitalocean::DatabaseReplicaPrivateConnection.from_hash(value)
+    end,
+    do_settings: lambda do |value|
+      ::OctridevDigitalocean::DoSettings.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DatabaseReplica.
+# Typed representation of the `DatabaseReplica` API schema.
+class DatabaseReplica
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseReplicaMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseReplicaMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseReplicaMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] A unique ID that can be used to identify and reference a database replica.
+  attr_reader :id
+  # @return [String] The name to give the read-only replicating
+  attr_reader :name
+  # @return [String] A slug identifier for the region where the read-only replica will be located. If excluded, the replica will be placed in the same region as the cluster.
+  attr_reader :region
+  # @return [String] A slug identifier representing the size of the node for the read-only replica. The size of the replica must be at least as large as the node size for the database cluster from which it is replicating.
+  attr_reader :size
+  # @return [DatabaseReplicaStatus] A string representing the current status of the database cluster.
+  attr_reader :status
+  # @return [Array_of_String] A flat array of tag names as strings to apply to the read-only replica after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+  attr_reader :tags
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the database cluster was created.
+  attr_reader :created_at
+  # @return [String] A string specifying the UUID of the VPC to which the read-only replica will be assigned. If excluded, the replica will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+  attr_reader :private_network_uuid
+  # @return [DatabaseReplicaConnection] Optional API value serialized in the `connection` wire field.
+  attr_reader :connection
+  # @return [DatabaseReplicaPrivateConnection] Optional API value serialized in the `private_connection` wire field.
+  attr_reader :private_connection
+  # @return [Integer] Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.
+  attr_reader :storage_size_mib
+  # @return [DoSettings] DigitalOcean-specific settings for the read-only replica, including custom service CNAMEs.
+  attr_reader :do_settings
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the DatabaseReplicaStatus SDK namespace.
-  module DatabaseReplicaStatus
-    CREATING = 'creating'
-    ONLINE = 'online'
-    RESIZING = 'resizing'
-    MIGRATING = 'migrating'
-    FORKING = 'forking'
-    VALUES = %w[creating online resizing migrating forking].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseVersionOptionsMetadata
-    FIELDS = {
-      versions: 'versions'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the DatabaseReplicaStatus SDK namespace.
+module DatabaseReplicaStatus
+  CREATING = 'creating'
+  ONLINE = 'online'
+  RESIZING = 'resizing'
+  MIGRATING = 'migrating'
+  FORKING = 'forking'
+  VALUES = ['creating', 'online', 'resizing', 'migrating', 'forking'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseVersionOptionsMetadata
+  FIELDS = {
+    versions: "versions",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DatabaseVersionOptions.
+# Typed representation of the `DatabaseVersionOptions` API schema.
+class DatabaseVersionOptions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseVersionOptionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseVersionOptionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseVersionOptionsMetadata::DECODERS
+
+  # @return [Array_of_String] An array of strings containing the names of available regions
+  attr_reader :versions
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseVersionOptions.
-  # Typed representation of the `DatabaseVersionOptions` API schema.
-  class DatabaseVersionOptions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseVersionOptionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseVersionOptionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseVersionOptionsMetadata::DECODERS
-
-    # @return [Array_of_String] An array of strings containing the names of available regions
-    attr_reader :versions
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

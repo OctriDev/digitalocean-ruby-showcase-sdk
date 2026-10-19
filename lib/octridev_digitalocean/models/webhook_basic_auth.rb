@@ -5,39 +5,40 @@
 
 # webhook_basic_auth domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalWebhookBasicAuthMetadata
-    FIELDS = {
-      username: 'username'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      username
-    ].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalWebhookBasicAuthMetadata
+  FIELDS = {
+    username: "username",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    username
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for WebhookBasicAuth.
+# HTTP basic authentication credentials for a webhook create or update request. `password` is write-only: send the full value to set or rotate. Omit `password` on update to keep the existing password.
+class WebhookBasicAuth
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookBasicAuthMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookBasicAuthMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookBasicAuthMetadata::DECODERS
+
+  # @return [String] Basic auth username.
+  attr_reader :username
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookBasicAuth.
-  # HTTP basic authentication credentials for a webhook create or update request. `password` is write-only: send the full value to set or rotate. Omit `password` on update to keep the existing password.
-  class WebhookBasicAuth
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookBasicAuthMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookBasicAuthMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookBasicAuthMetadata::DECODERS
-
-    # @return [String] Basic auth username.
-    attr_reader :username
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

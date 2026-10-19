@@ -5,59 +5,60 @@
 
 # apps_apps_dedicated domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAppsDedicatedEgressIpMetadata
-    FIELDS = {
-      ip: 'ip',
-      id: 'id',
-      status: 'status'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::AppsDedicatedEgressIpStatus.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAppsDedicatedEgressIpMetadata
+  FIELDS = {
+    ip: "ip",
+    id: "id",
+    status: "status",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::AppsDedicatedEgressIpStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for AppsDedicatedEgressIp.
+# Typed representation of the `AppsDedicatedEgressIp` API schema.
+class AppsDedicatedEgressIp
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsDedicatedEgressIpMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsDedicatedEgressIpMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsDedicatedEgressIpMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `ip` wire field.
+  attr_reader :ip
+  # @return [String] Optional `string` value serialized in the `id` wire field.
+  attr_reader :id
+  # @return [AppsDedicatedEgressIpStatus] Optional enumerated value serialized in the `status` wire field.
+  attr_reader :status
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsDedicatedEgressIp.
-  # Typed representation of the `AppsDedicatedEgressIp` API schema.
-  class AppsDedicatedEgressIp
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsDedicatedEgressIpMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsDedicatedEgressIpMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsDedicatedEgressIpMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `ip` wire field.
-    attr_reader :ip
-    # @return [String] Optional `string` value serialized in the `id` wire field.
-    attr_reader :id
-    # @return [AppsDedicatedEgressIpStatus] Optional enumerated value serialized in the `status` wire field.
-    attr_reader :status
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the AppsDedicatedEgressIpStatus SDK namespace.
-  module AppsDedicatedEgressIpStatus
-    UNKNOWN = 'UNKNOWN'
-    ASSIGNING = 'ASSIGNING'
-    ASSIGNED = 'ASSIGNED'
-    REMOVED = 'REMOVED'
-    VALUES = %w[UNKNOWN ASSIGNING ASSIGNED REMOVED].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Defines the AppsDedicatedEgressIpStatus SDK namespace.
+module AppsDedicatedEgressIpStatus
+  UNKNOWN = 'UNKNOWN'
+  ASSIGNING = 'ASSIGNING'
+  ASSIGNED = 'ASSIGNED'
+  REMOVED = 'REMOVED'
+  VALUES = ['UNKNOWN', 'ASSIGNING', 'ASSIGNED', 'REMOVED'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

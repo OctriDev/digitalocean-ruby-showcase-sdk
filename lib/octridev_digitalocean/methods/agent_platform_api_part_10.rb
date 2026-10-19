@@ -21,22 +21,23 @@ module OctridevDigitalocean
         run_uuid2: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/v2/gen-ai/simulation_runs/',
+            "/v2/gen-ai/simulation_runs/",
             SdkClient.encode_path_segment(run_uuid),
-            '/cancel'
+            "/cancel"
           ].join,
           config: config,
           body: {
-            'run_uuid' => run_uuid2
+            'run_uuid' => run_uuid2,
           },
           return_type: ::OctridevDigitalocean::ApiCancelSimulationRunOutput,
           decoder: :json,
           operation_id: 'genai_patch_cancel_simulation_run',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -85,12 +86,13 @@ module OctridevDigitalocean
         sort_direction: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/simulation_runs/',
+            "/v2/gen-ai/simulation_runs/",
             SdkClient.encode_path_segment(run_uuid),
-            '/episodes'
+            "/episodes"
           ].join,
           config: config,
           query: {
@@ -101,13 +103,13 @@ module OctridevDigitalocean
             'verdicts' => QueryValue.new(verdicts, style: 'form', explode: true),
             'search' => QueryValue.new(search, style: 'form', explode: true),
             'sort_by' => QueryValue.new(sort_by, style: 'form', explode: true),
-            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true)
+            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ApiListSimulationEpisodesOutput,
           decoder: :json,
           operation_id: 'genai_list_simulation_episodes',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -121,12 +123,13 @@ module OctridevDigitalocean
         episode_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/simulation_runs/',
+            "/v2/gen-ai/simulation_runs/",
             SdkClient.encode_path_segment(run_uuid),
-            '/episodes/',
+            "/episodes/",
             SdkClient.encode_path_segment(episode_uuid)
           ].join,
           config: config,
@@ -134,7 +137,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'genai_get_simulation_episode',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -148,21 +151,22 @@ module OctridevDigitalocean
         episode_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/simulation_runs/',
+            "/v2/gen-ai/simulation_runs/",
             SdkClient.encode_path_segment(run_uuid),
-            '/episodes/',
+            "/episodes/",
             SdkClient.encode_path_segment(episode_uuid),
-            '/trajectory'
+            "/trajectory"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiGetSimulationEpisodeTrajectoryOutput,
           decoder: :json,
           operation_id: 'genai_get_simulation_episode_trajectory',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -176,21 +180,22 @@ module OctridevDigitalocean
         episode_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/simulation_runs/',
+            "/v2/gen-ai/simulation_runs/",
             SdkClient.encode_path_segment(run_uuid),
-            '/episodes/',
+            "/episodes/",
             SdkClient.encode_path_segment(episode_uuid),
-            '/trajectory_url'
+            "/trajectory_url"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiGetSimulationEpisodeTrajectoryURLOutput,
           decoder: :json,
           operation_id: 'genai_get_simulation_episode_trajectory_url',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -199,15 +204,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/gen-ai/workspaces',
+          "/v2/gen-ai/workspaces",
           config: config,
           return_type: ::OctridevDigitalocean::ApiListWorkspacesOutput,
           decoder: :json,
           operation_id: 'genai_list_workspaces',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -224,20 +230,21 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/gen-ai/workspaces',
+          "/v2/gen-ai/workspaces",
           config: config,
           body: {
             'agent_uuids' => agent_uuids,
             'description' => description,
-            'name' => name
+            'name' => name,
           },
           return_type: ::OctridevDigitalocean::ApiCreateWorkspaceOutput,
           decoder: :json,
           operation_id: 'genai_create_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -249,10 +256,11 @@ module OctridevDigitalocean
         workspace_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/workspaces/',
+            "/v2/gen-ai/workspaces/",
             SdkClient.encode_path_segment(workspace_uuid)
           ].join,
           config: config,
@@ -260,7 +268,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'genai_get_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -278,23 +286,24 @@ module OctridevDigitalocean
         workspace_uuid2: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/gen-ai/workspaces/',
+            "/v2/gen-ai/workspaces/",
             SdkClient.encode_path_segment(workspace_uuid)
           ].join,
           config: config,
           body: {
             'description' => description,
             'name' => name,
-            'workspace_uuid' => workspace_uuid2
+            'workspace_uuid' => workspace_uuid2,
           },
           return_type: ::OctridevDigitalocean::ApiUpdateWorkspaceOutput,
           decoder: :json,
           operation_id: 'genai_update_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -306,10 +315,11 @@ module OctridevDigitalocean
         workspace_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/v2/gen-ai/workspaces/',
+            "/v2/gen-ai/workspaces/",
             SdkClient.encode_path_segment(workspace_uuid)
           ].join,
           config: config,
@@ -317,7 +327,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'genai_delete_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -335,24 +345,25 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/workspaces/',
+            "/v2/gen-ai/workspaces/",
             SdkClient.encode_path_segment(workspace_uuid),
-            '/agents'
+            "/agents"
           ].join,
           config: config,
           query: {
             'only_deployed' => QueryValue.new(only_deployed, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ApiListAgentsByWorkspaceOutput,
           decoder: :json,
           operation_id: 'genai_list_agents_by_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -368,23 +379,24 @@ module OctridevDigitalocean
         workspace_uuid2: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/gen-ai/workspaces/',
+            "/v2/gen-ai/workspaces/",
             SdkClient.encode_path_segment(workspace_uuid),
-            '/agents'
+            "/agents"
           ].join,
           config: config,
           body: {
             'agent_uuids' => agent_uuids,
-            'workspace_uuid' => workspace_uuid2
+            'workspace_uuid' => workspace_uuid2,
           },
           return_type: ::OctridevDigitalocean::ApiMoveAgentsToWorkspaceOutput,
           decoder: :json,
           operation_id: 'genai_update_agents_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -396,19 +408,20 @@ module OctridevDigitalocean
         workspace_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/workspaces/',
+            "/v2/gen-ai/workspaces/",
             SdkClient.encode_path_segment(workspace_uuid),
-            '/evaluation_test_cases'
+            "/evaluation_test_cases"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiListEvaluationTestCasesByWorkspaceOutput,
           decoder: :json,
           operation_id: 'genai_list_evaluation_test_cases_by_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

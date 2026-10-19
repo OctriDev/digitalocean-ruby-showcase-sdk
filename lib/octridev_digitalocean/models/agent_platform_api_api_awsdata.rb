@@ -5,89 +5,93 @@
 
 # agent_platform_api_api_awsdata domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiAWSDataSourceMetadata
-    FIELDS = {
-      bucket_name: 'bucket_name',
-      item_path: 'item_path',
-      key_id: 'key_id',
-      region: 'region',
-      secret_key: 'secret_key'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalApiAWSDataSourceMetadata
+  FIELDS = {
+    bucket_name: "bucket_name",
+    item_path: "item_path",
+    key_id: "key_id",
+    region: "region",
+    secret_key: "secret_key",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiAWSDataSource.
+# AWS S3 Data Source
+class ApiAWSDataSource
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiAWSDataSourceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiAWSDataSourceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiAWSDataSourceMetadata::DECODERS
+
+  # @return [String] Spaces bucket name
+  attr_reader :bucket_name
+  # @return [String] Optional `string` value serialized in the `item_path` wire field.
+  attr_reader :item_path
+  # @return [String] The AWS Key ID
+  attr_reader :key_id
+  # @return [String] Region of bucket
+  attr_reader :region
+  # @return [String] The AWS Secret Key
+  attr_reader :secret_key
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiAWSDataSource.
-  # AWS S3 Data Source
-  class ApiAWSDataSource
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiAWSDataSourceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiAWSDataSourceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiAWSDataSourceMetadata::DECODERS
-
-    # @return [String] Spaces bucket name
-    attr_reader :bucket_name
-    # @return [String] Optional `string` value serialized in the `item_path` wire field.
-    attr_reader :item_path
-    # @return [String] The AWS Key ID
-    attr_reader :key_id
-    # @return [String] Region of bucket
-    attr_reader :region
-    # @return [String] The AWS Secret Key
-    attr_reader :secret_key
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiAWSDataSourceDisplayMetadata
-    FIELDS = {
-      bucket_name: 'bucket_name',
-      item_path: 'item_path',
-      region: 'region'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiAWSDataSourceDisplayMetadata
+  FIELDS = {
+    bucket_name: "bucket_name",
+    item_path: "item_path",
+    region: "region",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiAWSDataSourceDisplay.
+# AWS S3 Data Source for Display
+class ApiAWSDataSourceDisplay
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiAWSDataSourceDisplayMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiAWSDataSourceDisplayMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiAWSDataSourceDisplayMetadata::DECODERS
+
+  # @return [String] Spaces bucket name
+  attr_reader :bucket_name
+  # @return [String] Optional `string` value serialized in the `item_path` wire field.
+  attr_reader :item_path
+  # @return [String] Region of bucket
+  attr_reader :region
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiAWSDataSourceDisplay.
-  # AWS S3 Data Source for Display
-  class ApiAWSDataSourceDisplay
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiAWSDataSourceDisplayMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiAWSDataSourceDisplayMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiAWSDataSourceDisplayMetadata::DECODERS
-
-    # @return [String] Spaces bucket name
-    attr_reader :bucket_name
-    # @return [String] Optional `string` value serialized in the `item_path` wire field.
-    attr_reader :item_path
-    # @return [String] Region of bucket
-    attr_reader :region
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

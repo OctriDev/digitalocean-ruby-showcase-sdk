@@ -5,99 +5,101 @@
 
 # serverless_inference_video domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalVideoGenerationMetadata
-    FIELDS = {
-      id: 'id',
-      object: 'object',
-      created_at: 'created_at',
-      model: 'model',
-      status: 'status',
-      output: 'output',
-      error: 'error',
-      x_request_id: 'x_request_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      status
-    ].freeze
-    DECODERS = {
-      output: lambda do |value|
-        ::OctridevDigitalocean::VideoGenerationOutput.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalVideoGenerationMetadata
+  FIELDS = {
+    id: "id",
+    object: "object",
+    created_at: "created_at",
+    model: "model",
+    status: "status",
+    output: "output",
+    error: "error",
+    x_request_id: "x_request_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    status
+  ].freeze
+  DECODERS = {
+    output: lambda do |value|
+      ::OctridevDigitalocean::VideoGenerationOutput.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for VideoGeneration.
+# Status of an asynchronous video generation job.
+class VideoGeneration
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVideoGenerationMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVideoGenerationMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVideoGenerationMetadata::DECODERS
+
+  # @return [String] The video generation job identifier.
+  attr_reader :id
+  # @return [String] Object type returned by the API.
+  attr_reader :object
+  # @return [Integer] Unix timestamp (in seconds) of when the job was created.
+  attr_reader :created_at
+  # @return [String] The model used for generation.
+  attr_reader :model
+  # @return [String] Job status. Poll until the value is a terminal state such as `completed` or `failed`.
+  attr_reader :status
+  # @return [VideoGenerationOutput] Download location for a completed video when a presigned URL is available.
+  attr_reader :output
+  # @return [Hash] Error details when status is `failed`.
+  attr_reader :error
+  # @return [String] Request correlation identifier when provided by the API.
+  attr_reader :x_request_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VideoGeneration.
-  # Status of an asynchronous video generation job.
-  class VideoGeneration
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVideoGenerationMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVideoGenerationMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVideoGenerationMetadata::DECODERS
-
-    # @return [String] The video generation job identifier.
-    attr_reader :id
-    # @return [String] Object type returned by the API.
-    attr_reader :object
-    # @return [Integer] Unix timestamp (in seconds) of when the job was created.
-    attr_reader :created_at
-    # @return [String] The model used for generation.
-    attr_reader :model
-    # @return [String] Job status. Poll until the value is a terminal state such as `completed` or `failed`.
-    attr_reader :status
-    # @return [VideoGenerationOutput] Download location for a completed video when a presigned URL is available.
-    attr_reader :output
-    # @return [Hash] Error details when status is `failed`.
-    attr_reader :error
-    # @return [String] Request correlation identifier when provided by the API.
-    attr_reader :x_request_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVideoGenerationOutputMetadata
-    FIELDS = {
-      url: 'url'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalVideoGenerationOutputMetadata
+  FIELDS = {
+    url: "url",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for VideoGenerationOutput.
+# Download location for a completed video when a presigned URL is available.
+class VideoGenerationOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVideoGenerationOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVideoGenerationOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVideoGenerationOutputMetadata::DECODERS
+
+  # @return [String] Presigned URL for the generated MP4.
+  attr_reader :url
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VideoGenerationOutput.
-  # Download location for a completed video when a presigned URL is available.
-  class VideoGenerationOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVideoGenerationOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVideoGenerationOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVideoGenerationOutputMetadata::DECODERS
-
-    # @return [String] Presigned URL for the generated MP4.
-    attr_reader :url
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

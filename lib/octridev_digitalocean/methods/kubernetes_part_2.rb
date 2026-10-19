@@ -27,25 +27,26 @@ module OctridevDigitalocean
         volume_snapshots: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/destroy_with_associated_resources/selective'
+            "/destroy_with_associated_resources/selective"
           ].join,
           config: config,
           body: {
             'load_balancers' => load_balancers,
             'volumes' => volumes,
-            'volume_snapshots' => volume_snapshots
+            'volume_snapshots' => volume_snapshots,
           },
           decoder: :empty,
           operation_id: 'kubernetes_destroy_associated_resources_selective',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -58,20 +59,21 @@ module OctridevDigitalocean
         cluster_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/destroy_with_associated_resources/dangerous'
+            "/destroy_with_associated_resources/dangerous"
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'kubernetes_destroy_associated_resources_dangerous',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -93,6 +95,7 @@ module OctridevDigitalocean
         type: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.if_given(expiry_seconds) do
@@ -102,19 +105,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/kubeconfig'
+            "/kubeconfig"
           ].join,
           config: config,
           query: {
             'expiry_seconds' => QueryValue.new(expiry_seconds, style: 'form', explode: true),
-            'type' => QueryValue.new(type, style: 'form', explode: true)
+            'type' => QueryValue.new(type, style: 'form', explode: true),
           },
           decoder: :bytes,
           operation_id: 'kubernetes_get_kubeconfig',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -131,6 +134,7 @@ module OctridevDigitalocean
         expiry_seconds: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.if_given(expiry_seconds) do
@@ -140,19 +144,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/credentials'
+            "/credentials"
           ].join,
           config: config,
           query: {
-            'expiry_seconds' => QueryValue.new(expiry_seconds, style: 'form', explode: true)
+            'expiry_seconds' => QueryValue.new(expiry_seconds, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::Credentials,
           decoder: :json,
           operation_id: 'kubernetes_get_credentials',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -165,21 +169,22 @@ module OctridevDigitalocean
         cluster_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/upgrades'
+            "/upgrades"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AvailableUpgrades,
           decoder: :json,
           operation_id: 'kubernetes_get_available_upgrades',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -195,23 +200,24 @@ module OctridevDigitalocean
         version: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/upgrade'
+            "/upgrade"
           ].join,
           config: config,
           body: {
-            'version' => version
+            'version' => version,
           },
           decoder: :empty,
           operation_id: 'kubernetes_upgrade_cluster',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -224,21 +230,22 @@ module OctridevDigitalocean
         cluster_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/node_pools'
+            "/node_pools"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AllNodePools,
           decoder: :json,
           operation_id: 'kubernetes_list_node_pools',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -252,14 +259,15 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/node_pools'
+            "/node_pools"
           ].join,
           config: config,
           body: body,
@@ -267,7 +275,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'kubernetes_add_node_pool',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -283,6 +291,7 @@ module OctridevDigitalocean
         node_pool_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.validate_uuid('node_pool_id', node_pool_id)
@@ -290,9 +299,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/node_pools/',
+            "/node_pools/",
             SdkClient.encode_path_segment(node_pool_id)
           ].join,
           config: config,
@@ -300,7 +309,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'kubernetes_get_node_pool',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -346,6 +355,7 @@ module OctridevDigitalocean
         max_nodes: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.validate_uuid('node_pool_id', node_pool_id)
@@ -353,9 +363,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'PUT',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/node_pools/',
+            "/node_pools/",
             SdkClient.encode_path_segment(node_pool_id)
           ].join,
           config: config,
@@ -367,13 +377,13 @@ module OctridevDigitalocean
             'taints' => taints,
             'auto_scale' => auto_scale,
             'min_nodes' => min_nodes,
-            'max_nodes' => max_nodes
+            'max_nodes' => max_nodes,
           },
           return_type: ::OctridevDigitalocean::NodePoolUpdate,
           decoder: :json,
           operation_id: 'kubernetes_update_node_pool',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -389,6 +399,7 @@ module OctridevDigitalocean
         node_pool_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.validate_uuid('node_pool_id', node_pool_id)
@@ -396,16 +407,16 @@ module OctridevDigitalocean
         SdkClient.request(
           'DELETE',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/node_pools/',
+            "/node_pools/",
             SdkClient.encode_path_segment(node_pool_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'kubernetes_delete_node_pool',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -434,6 +445,7 @@ module OctridevDigitalocean
         replace: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.validate_uuid('node_pool_id', node_pool_id)
@@ -447,22 +459,22 @@ module OctridevDigitalocean
         SdkClient.request(
           'DELETE',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/node_pools/',
+            "/node_pools/",
             SdkClient.encode_path_segment(node_pool_id),
-            '/nodes/',
+            "/nodes/",
             SdkClient.encode_path_segment(node_id)
           ].join,
           config: config,
           query: {
             'skip_drain' => QueryValue.new(skip_drain, style: 'form', explode: true),
-            'replace' => QueryValue.new(replace, style: 'form', explode: true)
+            'replace' => QueryValue.new(replace, style: 'form', explode: true),
           },
           decoder: :empty,
           operation_id: 'kubernetes_delete_node',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -483,6 +495,7 @@ module OctridevDigitalocean
         nodes: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.validate_uuid('node_pool_id', node_pool_id)
@@ -490,20 +503,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/node_pools/',
+            "/node_pools/",
             SdkClient.encode_path_segment(node_pool_id),
-            '/recycle'
+            "/recycle"
           ].join,
           config: config,
           body: {
-            'nodes' => nodes
+            'nodes' => nodes,
           },
           decoder: :empty,
           operation_id: 'kubernetes_recycle_node_pool',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -516,21 +529,22 @@ module OctridevDigitalocean
         cluster_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/user'
+            "/user"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::User2,
           decoder: :json,
           operation_id: 'kubernetes_get_cluster_user',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -539,15 +553,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/kubernetes/options',
+          "/v2/kubernetes/options",
           config: config,
           return_type: ::OctridevDigitalocean::KubernetesOptions,
           decoder: :json,
           operation_id: 'kubernetes_list_options',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

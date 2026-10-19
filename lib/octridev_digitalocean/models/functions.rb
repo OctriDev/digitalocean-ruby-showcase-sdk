@@ -5,655 +5,674 @@
 
 # functions domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAccessKeyMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      expires_at: 'expires_at',
-      created_at: 'created_at',
-      updated_at: 'updated_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalAccessKeyMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    expires_at: "expires_at",
+    created_at: "created_at",
+    updated_at: "updated_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AccessKey.
+# Typed representation of the `AccessKey` API schema.
+class AccessKey
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAccessKeyMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAccessKeyMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAccessKeyMetadata::DECODERS
+
+  # @return [String] The access key's unique identifier with prefix 'dof_v1_'.
+  attr_reader :id
+  # @return [String] The access key's name.
+  attr_reader :name
+  # @return [String] When the key expires (null for non-expiring keys).
+  attr_reader :expires_at
+  # @return [String] The date and time the key was created.
+  attr_reader :created_at
+  # @return [String] The date and time the key was last updated.
+  attr_reader :updated_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AccessKey.
-  # Typed representation of the `AccessKey` API schema.
-  class AccessKey
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAccessKeyMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAccessKeyMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAccessKeyMetadata::DECODERS
-
-    # @return [String] The access key's unique identifier with prefix 'dof_v1_'.
-    attr_reader :id
-    # @return [String] The access key's name.
-    attr_reader :name
-    # @return [String] When the key expires (null for non-expiring keys).
-    attr_reader :expires_at
-    # @return [String] The date and time the key was created.
-    attr_reader :created_at
-    # @return [String] The date and time the key was last updated.
-    attr_reader :updated_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAccessKeyCreateMetadata
-    FIELDS = {
-      access_key: 'access_key'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      access_key: lambda do |value|
-        ::OctridevDigitalocean::AccessKeyCreateResponse.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAccessKeyCreateMetadata
+  FIELDS = {
+    access_key: "access_key",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    access_key: lambda do |value|
+      ::OctridevDigitalocean::AccessKeyCreateResponse.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AccessKeyCreate.
+# Typed representation of the `AccessKeyCreate` API schema.
+class AccessKeyCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAccessKeyCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAccessKeyCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAccessKeyCreateMetadata::DECODERS
+
+  # @return [AccessKeyCreateResponse] Optional API value serialized in the `access_key` wire field.
+  attr_reader :access_key
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AccessKeyCreate.
-  # Typed representation of the `AccessKeyCreate` API schema.
-  class AccessKeyCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAccessKeyCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAccessKeyCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAccessKeyCreateMetadata::DECODERS
-
-    # @return [AccessKeyCreateResponse] Optional API value serialized in the `access_key` wire field.
-    attr_reader :access_key
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAccessKeyCreateRequestMetadata
-    FIELDS = {
-      name: 'name',
-      expires_in: 'expires_in'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAccessKeyCreateRequestMetadata
+  FIELDS = {
+    name: "name",
+    expires_in: "expires_in",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AccessKeyCreateRequest.
+# Typed representation of the `AccessKeyCreateRequest` API schema.
+class AccessKeyCreateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAccessKeyCreateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAccessKeyCreateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAccessKeyCreateRequestMetadata::DECODERS
+
+  # @return [String] The access key's name.
+  attr_reader :name
+  # @return [String] The duration after which the access key expires, specified as a human-readable duration string in the format `<int>h` (hours) or `<int>d` (days). Minimum value is `1h`. If omitted, the key will never expire.
+  attr_reader :expires_in
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AccessKeyCreateRequest.
-  # Typed representation of the `AccessKeyCreateRequest` API schema.
-  class AccessKeyCreateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAccessKeyCreateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAccessKeyCreateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAccessKeyCreateRequestMetadata::DECODERS
-
-    # @return [String] The access key's name.
-    attr_reader :name
-    # @return [String] The duration after which the access key expires, specified as a human-readable duration string in the format `<int>h` (hours) or `<int>d` (days). Minimum value is `1h`. If omitted, the key will never expire.
-    attr_reader :expires_in
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAccessKeyCreateResponseMetadata
-    FIELDS = {
-      secret: 'secret',
-      id: 'id',
-      name: 'name',
-      expires_at: 'expires_at',
-      created_at: 'created_at',
-      updated_at: 'updated_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAccessKeyCreateResponseMetadata
+  FIELDS = {
+    secret: "secret",
+    id: "id",
+    name: "name",
+    expires_at: "expires_at",
+    created_at: "created_at",
+    updated_at: "updated_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AccessKeyCreateResponse.
+# Typed representation of the `AccessKeyCreateResponse` API schema.
+class AccessKeyCreateResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAccessKeyCreateResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAccessKeyCreateResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAccessKeyCreateResponseMetadata::DECODERS
+
+  # @return [String] The secret key used to authenticate. This is only returned once upon creation. Make sure to copy and securely store it.
+  attr_reader :secret
+  # @return [String] The access key's unique identifier with prefix 'dof_v1_'.
+  attr_reader :id
+  # @return [String] The access key's name.
+  attr_reader :name
+  # @return [String] When the key expires (null for non-expiring keys).
+  attr_reader :expires_at
+  # @return [String] The date and time the key was created.
+  attr_reader :created_at
+  # @return [String] The date and time the key was last updated.
+  attr_reader :updated_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AccessKeyCreateResponse.
-  # Typed representation of the `AccessKeyCreateResponse` API schema.
-  class AccessKeyCreateResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAccessKeyCreateResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAccessKeyCreateResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAccessKeyCreateResponseMetadata::DECODERS
-
-    # @return [String] The secret key used to authenticate. This is only returned once upon creation. Make sure to copy and securely store it.
-    attr_reader :secret
-    # @return [String] The access key's unique identifier with prefix 'dof_v1_'.
-    attr_reader :id
-    # @return [String] The access key's name.
-    attr_reader :name
-    # @return [String] When the key expires (null for non-expiring keys).
-    attr_reader :expires_at
-    # @return [String] The date and time the key was created.
-    attr_reader :created_at
-    # @return [String] The date and time the key was last updated.
-    attr_reader :updated_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAccessKeyListMetadata
-    FIELDS = {
-      access_keys: 'access_keys',
-      count: 'count'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      access_keys: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AccessKey.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAccessKeyListMetadata
+  FIELDS = {
+    access_keys: "access_keys",
+    count: "count",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    access_keys: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AccessKey.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AccessKeyList.
+# Typed representation of the `AccessKeyList` API schema.
+class AccessKeyList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAccessKeyListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAccessKeyListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAccessKeyListMetadata::DECODERS
+
+  # @return [Array_of_AccessKey] Optional array value serialized in the `access_keys` wire field.
+  attr_reader :access_keys
+  # @return [Integer] Total number of access keys
+  attr_reader :count
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AccessKeyList.
-  # Typed representation of the `AccessKeyList` API schema.
-  class AccessKeyList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAccessKeyListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAccessKeyListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAccessKeyListMetadata::DECODERS
-
-    # @return [Array_of_AccessKey] Optional array value serialized in the `access_keys` wire field.
-    attr_reader :access_keys
-    # @return [Integer] Total number of access keys
-    attr_reader :count
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAccessKeyUpdateMetadata
-    FIELDS = {
-      access_key: 'access_key'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      access_key: lambda do |value|
-        ::OctridevDigitalocean::AccessKey.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAccessKeyUpdateMetadata
+  FIELDS = {
+    access_key: "access_key",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    access_key: lambda do |value|
+      ::OctridevDigitalocean::AccessKey.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AccessKeyUpdate.
+# Typed representation of the `AccessKeyUpdate` API schema.
+class AccessKeyUpdate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAccessKeyUpdateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAccessKeyUpdateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAccessKeyUpdateMetadata::DECODERS
+
+  # @return [AccessKey] Optional object value serialized in the `access_key` wire field.
+  attr_reader :access_key
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AccessKeyUpdate.
-  # Typed representation of the `AccessKeyUpdate` API schema.
-  class AccessKeyUpdate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAccessKeyUpdateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAccessKeyUpdateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAccessKeyUpdateMetadata::DECODERS
-
-    # @return [AccessKey] Optional object value serialized in the `access_key` wire field.
-    attr_reader :access_key
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateNamespaceMetadata
-    FIELDS = {
-      region: 'region',
-      label: 'label'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      region
-      label
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateNamespaceMetadata
+  FIELDS = {
+    region: "region",
+    label: "label",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    region
+    label
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateNamespace.
+# Typed representation of the `CreateNamespace` API schema.
+class CreateNamespace
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateNamespaceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateNamespaceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateNamespaceMetadata::DECODERS
+
+  # @return [String] The datacenter region in which to create the namespace.
+  attr_reader :region
+  # @return [String] The namespace's unique name.
+  attr_reader :label
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateNamespace.
-  # Typed representation of the `CreateNamespace` API schema.
-  class CreateNamespace
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateNamespaceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateNamespaceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateNamespaceMetadata::DECODERS
-
-    # @return [String] The datacenter region in which to create the namespace.
-    attr_reader :region
-    # @return [String] The namespace's unique name.
-    attr_reader :label
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateTriggerMetadata
-    FIELDS = {
-      name: 'name',
-      function: 'function',
-      type: 'type',
-      is_enabled: 'is_enabled',
-      scheduled_details: 'scheduled_details'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      function
-      type
-      is_enabled
-      scheduled_details
-    ].freeze
-    DECODERS = {
-      scheduled_details: lambda do |value|
-        ::OctridevDigitalocean::ScheduledDetails.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateTriggerMetadata
+  FIELDS = {
+    name: "name",
+    function: "function",
+    type: "type",
+    is_enabled: "is_enabled",
+    scheduled_details: "scheduled_details",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    function
+    type
+    is_enabled
+    scheduled_details
+  ].freeze
+  DECODERS = {
+    scheduled_details: lambda do |value|
+      ::OctridevDigitalocean::ScheduledDetails.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for CreateTrigger.
+# Typed representation of the `CreateTrigger` API schema.
+class CreateTrigger
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateTriggerMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateTriggerMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateTriggerMetadata::DECODERS
+
+  # @return [String] The trigger's unique name within the namespace.
+  attr_reader :name
+  # @return [String] Name of function(action) that exists in the given namespace.
+  attr_reader :function
+  # @return [String] One of different type of triggers. Currently only SCHEDULED is supported.
+  attr_reader :type
+  # @return [Boolean] Indicates weather the trigger is paused or unpaused.
+  attr_reader :is_enabled
+  # @return [ScheduledDetails] Trigger details for SCHEDULED type, where body is optional.
+  attr_reader :scheduled_details
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateTrigger.
-  # Typed representation of the `CreateTrigger` API schema.
-  class CreateTrigger
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateTriggerMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateTriggerMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateTriggerMetadata::DECODERS
-
-    # @return [String] The trigger's unique name within the namespace.
-    attr_reader :name
-    # @return [String] Name of function(action) that exists in the given namespace.
-    attr_reader :function
-    # @return [String] One of different type of triggers. Currently only SCHEDULED is supported.
-    attr_reader :type
-    # @return [Boolean] Indicates weather the trigger is paused or unpaused.
-    attr_reader :is_enabled
-    # @return [ScheduledDetails] Trigger details for SCHEDULED type, where body is optional.
-    attr_reader :scheduled_details
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListNamespacesMetadata
-    FIELDS = {
-      namespaces: 'namespaces'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      namespaces: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::NamespaceInfo.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListNamespacesMetadata
+  FIELDS = {
+    namespaces: "namespaces",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    namespaces: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::NamespaceInfo.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListNamespaces.
+# Typed representation of the `ListNamespaces` API schema.
+class ListNamespaces
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListNamespacesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListNamespacesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListNamespacesMetadata::DECODERS
+
+  attr_reader :namespaces
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListNamespaces.
-  # Typed representation of the `ListNamespaces` API schema.
-  class ListNamespaces
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListNamespacesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListNamespacesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListNamespacesMetadata::DECODERS
-
-    attr_reader :namespaces
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListTriggersMetadata
-    FIELDS = {
-      triggers: 'triggers'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      triggers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::TriggerInfo.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListTriggersMetadata
+  FIELDS = {
+    triggers: "triggers",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    triggers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::TriggerInfo.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListTriggers.
+# Typed representation of the `ListTriggers` API schema.
+class ListTriggers
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListTriggersMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListTriggersMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListTriggersMetadata::DECODERS
+
+  attr_reader :triggers
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListTriggers.
-  # Typed representation of the `ListTriggers` API schema.
-  class ListTriggers
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListTriggersMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListTriggersMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListTriggersMetadata::DECODERS
-
-    attr_reader :triggers
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalNamespaceCreatedMetadata
-    FIELDS = {
-      namespace: 'namespace'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      namespace: lambda do |value|
-        ::OctridevDigitalocean::NamespaceInfo.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalNamespaceCreatedMetadata
+  FIELDS = {
+    namespace: "namespace",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    namespace: lambda do |value|
+      ::OctridevDigitalocean::NamespaceInfo.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for NamespaceCreated.
+# Typed representation of the `NamespaceCreated` API schema.
+class NamespaceCreated
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalNamespaceCreatedMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalNamespaceCreatedMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalNamespaceCreatedMetadata::DECODERS
+
+  # @return [NamespaceInfo] Optional object value serialized in the `namespace` wire field.
+  attr_reader :namespace
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for NamespaceCreated.
-  # Typed representation of the `NamespaceCreated` API schema.
-  class NamespaceCreated
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalNamespaceCreatedMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalNamespaceCreatedMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalNamespaceCreatedMetadata::DECODERS
-
-    # @return [NamespaceInfo] Optional object value serialized in the `namespace` wire field.
-    attr_reader :namespace
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalNamespaceInfoMetadata
-    FIELDS = {
-      api_host: 'api_host',
-      namespace: 'namespace',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      label: 'label',
-      region: 'region',
-      uuid: 'uuid',
-      key: 'key'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalNamespaceInfoMetadata
+  FIELDS = {
+    api_host: "api_host",
+    namespace: "namespace",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    label: "label",
+    region: "region",
+    uuid: "uuid",
+    key: "key",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for NamespaceInfo.
+# Typed representation of the `NamespaceInfo` API schema.
+class NamespaceInfo
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalNamespaceInfoMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalNamespaceInfoMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalNamespaceInfoMetadata::DECODERS
+
+  # @return [String] The namespace's API hostname. Each function in a namespace is provided an endpoint at the namespace's hostname.
+  attr_reader :api_host
+  # @return [String] A unique string format of UUID with a prefix fn-.
+  attr_reader :namespace
+  # @return [String] UTC time string.
+  attr_reader :created_at
+  # @return [String] UTC time string.
+  attr_reader :updated_at
+  # @return [String] The namespace's unique name.
+  attr_reader :label
+  # @return [String] The namespace's datacenter region.
+  attr_reader :region
+  # @return [String] The namespace's Universally Unique Identifier.
+  attr_reader :uuid
+  # @return [String] A random alpha numeric string. This key is used in conjunction with the namespace's UUID to authenticate a user to use the namespace via `doctl`, DigitalOcean's official CLI.
+  attr_reader :key
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for NamespaceInfo.
-  # Typed representation of the `NamespaceInfo` API schema.
-  class NamespaceInfo
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalNamespaceInfoMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalNamespaceInfoMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalNamespaceInfoMetadata::DECODERS
-
-    # @return [String] The namespace's API hostname. Each function in a namespace is provided an endpoint at the namespace's hostname.
-    attr_reader :api_host
-    # @return [String] A unique string format of UUID with a prefix fn-.
-    attr_reader :namespace
-    # @return [String] UTC time string.
-    attr_reader :created_at
-    # @return [String] UTC time string.
-    attr_reader :updated_at
-    # @return [String] The namespace's unique name.
-    attr_reader :label
-    # @return [String] The namespace's datacenter region.
-    attr_reader :region
-    # @return [String] The namespace's Universally Unique Identifier.
-    attr_reader :uuid
-    # @return [String] A random alpha numeric string. This key is used in conjunction with the namespace's UUID to authenticate a user to use the namespace via `doctl`, DigitalOcean's official CLI.
-    attr_reader :key
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalScheduledDetailsBodyMetadata
-    FIELDS = {
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalScheduledDetailsBodyMetadata
+  FIELDS = {
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ScheduledDetailsBody.
+# Optional data to be sent to function while triggering the function.
+class ScheduledDetailsBody
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalScheduledDetailsBodyMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalScheduledDetailsBodyMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalScheduledDetailsBodyMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `name` wire field.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ScheduledDetailsBody.
-  # Optional data to be sent to function while triggering the function.
-  class ScheduledDetailsBody
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalScheduledDetailsBodyMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalScheduledDetailsBodyMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalScheduledDetailsBodyMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `name` wire field.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalScheduledDetailsMetadata
-    FIELDS = {
-      cron: 'cron',
-      body: 'body'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      cron
-    ].freeze
-    DECODERS = {
-      body: lambda do |value|
-        ::OctridevDigitalocean::ScheduledDetailsBody.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalScheduledDetailsMetadata
+  FIELDS = {
+    cron: "cron",
+    body: "body",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    cron
+  ].freeze
+  DECODERS = {
+    body: lambda do |value|
+      ::OctridevDigitalocean::ScheduledDetailsBody.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ScheduledDetails.
+# Trigger details for SCHEDULED type, where body is optional.
+class ScheduledDetails
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalScheduledDetailsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalScheduledDetailsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalScheduledDetailsMetadata::DECODERS
+
+  # @return [String] valid cron expression string which is required for SCHEDULED type triggers.
+  attr_reader :cron
+  # @return [ScheduledDetailsBody] Optional data to be sent to function while triggering the function.
+  attr_reader :body
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ScheduledDetails.
-  # Trigger details for SCHEDULED type, where body is optional.
-  class ScheduledDetails
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalScheduledDetailsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalScheduledDetailsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalScheduledDetailsMetadata::DECODERS
-
-    # @return [String] valid cron expression string which is required for SCHEDULED type triggers.
-    attr_reader :cron
-    # @return [ScheduledDetailsBody] Optional data to be sent to function while triggering the function.
-    attr_reader :body
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTriggerInfoScheduledRunsMetadata
-    FIELDS = {
-      last_run_at: 'last_run_at',
-      next_run_at: 'next_run_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTriggerInfoScheduledRunsMetadata
+  FIELDS = {
+    last_run_at: "last_run_at",
+    next_run_at: "next_run_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for TriggerInfoScheduledRuns.
+# Optional object value serialized in the `scheduled_runs` wire field.
+class TriggerInfoScheduledRuns
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTriggerInfoScheduledRunsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTriggerInfoScheduledRunsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTriggerInfoScheduledRunsMetadata::DECODERS
+
+  # @return [String] Indicates last run time. null value indicates trigger not run yet.
+  attr_reader :last_run_at
+  # @return [String] Indicates next run time. null value indicates trigger will not run.
+  attr_reader :next_run_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TriggerInfoScheduledRuns.
-  # Optional object value serialized in the `scheduled_runs` wire field.
-  class TriggerInfoScheduledRuns
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTriggerInfoScheduledRunsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTriggerInfoScheduledRunsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTriggerInfoScheduledRunsMetadata::DECODERS
-
-    # @return [String] Indicates last run time. null value indicates trigger not run yet.
-    attr_reader :last_run_at
-    # @return [String] Indicates next run time. null value indicates trigger will not run.
-    attr_reader :next_run_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTriggerInfoMetadata
-    FIELDS = {
-      namespace: 'namespace',
-      name: 'name',
-      function: 'function',
-      type: 'type',
-      is_enabled: 'is_enabled',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      scheduled_details: 'scheduled_details',
-      scheduled_runs: 'scheduled_runs'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      scheduled_details: lambda do |value|
-        ::OctridevDigitalocean::ScheduledDetails.from_hash(value)
-      end,
-      scheduled_runs: lambda do |value|
-        ::OctridevDigitalocean::TriggerInfoScheduledRuns.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTriggerInfoMetadata
+  FIELDS = {
+    namespace: "namespace",
+    name: "name",
+    function: "function",
+    type: "type",
+    is_enabled: "is_enabled",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    scheduled_details: "scheduled_details",
+    scheduled_runs: "scheduled_runs",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    scheduled_details: lambda do |value|
+      ::OctridevDigitalocean::ScheduledDetails.from_hash(value)
+    end,
+    scheduled_runs: lambda do |value|
+      ::OctridevDigitalocean::TriggerInfoScheduledRuns.from_hash(value)
+    end,
+  }.freeze
+end
 end

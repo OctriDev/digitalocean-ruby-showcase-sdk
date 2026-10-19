@@ -5,654 +5,672 @@
 
 # agent_platform_api_api_get domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiGetAgentOutputMetadata
-    FIELDS = {
-      agent: 'agent'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      agent: lambda do |value|
-        ::OctridevDigitalocean::ApiAgent.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalApiGetAgentOutputMetadata
+  FIELDS = {
+    agent: "agent",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    agent: lambda do |value|
+      ::OctridevDigitalocean::ApiAgent.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetAgentOutput.
+# One Agent
+class ApiGetAgentOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetAgentOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetAgentOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetAgentOutputMetadata::DECODERS
+
+  # @return [ApiAgent] An Agent
+  attr_reader :agent
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetAgentOutput.
-  # One Agent
-  class ApiGetAgentOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetAgentOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetAgentOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetAgentOutputMetadata::DECODERS
-
-    # @return [ApiAgent] An Agent
-    attr_reader :agent
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetAgentUsageOutputMetadata
-    FIELDS = {
-      log_insights_usage: 'log_insights_usage',
-      usage: 'usage'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      log_insights_usage: lambda do |value|
-        ::OctridevDigitalocean::ApiResourceUsage.from_hash(value)
-      end,
-      usage: lambda do |value|
-        ::OctridevDigitalocean::ApiResourceUsage.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetAgentUsageOutputMetadata
+  FIELDS = {
+    log_insights_usage: "log_insights_usage",
+    usage: "usage",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    log_insights_usage: lambda do |value|
+      ::OctridevDigitalocean::ApiResourceUsage.from_hash(value)
+    end,
+    usage: lambda do |value|
+      ::OctridevDigitalocean::ApiResourceUsage.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetAgentUsageOutput.
+# Agent usage
+class ApiGetAgentUsageOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetAgentUsageOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetAgentUsageOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetAgentUsageOutputMetadata::DECODERS
+
+  # @return [ApiResourceUsage] Resource Usage Description
+  attr_reader :log_insights_usage
+  # @return [ApiResourceUsage] Resource Usage Description
+  attr_reader :usage
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetAgentUsageOutput.
-  # Agent usage
-  class ApiGetAgentUsageOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetAgentUsageOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetAgentUsageOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetAgentUsageOutputMetadata::DECODERS
-
-    # @return [ApiResourceUsage] Resource Usage Description
-    attr_reader :log_insights_usage
-    # @return [ApiResourceUsage] Resource Usage Description
-    attr_reader :usage
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetAnthropicAPIKeyOutputMetadata
-    FIELDS = {
-      api_key_info: 'api_key_info'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      api_key_info: lambda do |value|
-        ::OctridevDigitalocean::ApiAnthropicAPIKeyInfo.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetAnthropicAPIKeyOutputMetadata
+  FIELDS = {
+    api_key_info: "api_key_info",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    api_key_info: lambda do |value|
+      ::OctridevDigitalocean::ApiAnthropicAPIKeyInfo.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetAnthropicAPIKeyOutput.
+# Typed representation of the `ApiGetAnthropicAPIKeyOutput` API schema.
+class ApiGetAnthropicAPIKeyOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetAnthropicAPIKeyOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetAnthropicAPIKeyOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetAnthropicAPIKeyOutputMetadata::DECODERS
+
+  # @return [ApiAnthropicAPIKeyInfo] Anthropic API Key Info
+  attr_reader :api_key_info
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetAnthropicAPIKeyOutput.
-  # Typed representation of the `ApiGetAnthropicAPIKeyOutput` API schema.
-  class ApiGetAnthropicAPIKeyOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetAnthropicAPIKeyOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetAnthropicAPIKeyOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetAnthropicAPIKeyOutputMetadata::DECODERS
-
-    # @return [ApiAnthropicAPIKeyInfo] Anthropic API Key Info
-    attr_reader :api_key_info
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetChildrenOutputMetadata
-    FIELDS = {
-      children: 'children'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      children: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetChildrenOutputMetadata
+  FIELDS = {
+    children: "children",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    children: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ApiGetChildrenOutput.
+# Child list for an agent
+class ApiGetChildrenOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetChildrenOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetChildrenOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetChildrenOutputMetadata::DECODERS
+
+  # @return [Array_of_ApiAgent] Child agents
+  attr_reader :children
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetChildrenOutput.
-  # Child list for an agent
-  class ApiGetChildrenOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetChildrenOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetChildrenOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetChildrenOutputMetadata::DECODERS
-
-    # @return [Array_of_ApiAgent] Child agents
-    attr_reader :children
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetCustomModelOutputPublicMetadata
-    FIELDS = {
-      model: 'model'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      model: lambda do |value|
-        ::OctridevDigitalocean::ApiCustomModel.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetCustomModelOutputPublicMetadata
+  FIELDS = {
+    model: "model",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    model: lambda do |value|
+      ::OctridevDigitalocean::ApiCustomModel.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetCustomModelOutputPublic.
+# Response containing a single custom model (public)
+class ApiGetCustomModelOutputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetCustomModelOutputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetCustomModelOutputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetCustomModelOutputPublicMetadata::DECODERS
+
+  # @return [ApiCustomModel] Custom model - user-imported model from HuggingFace, Spaces, etc.
+  attr_reader :model
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetCustomModelOutputPublic.
-  # Response containing a single custom model (public)
-  class ApiGetCustomModelOutputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetCustomModelOutputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetCustomModelOutputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetCustomModelOutputPublicMetadata::DECODERS
-
-    # @return [ApiCustomModel] Custom model - user-imported model from HuggingFace, Spaces, etc.
-    attr_reader :model
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetEvaluationDatasetDownloadURLOutputMetadata
-    FIELDS = {
-      download_url: 'download_url',
-      expires_at: 'expires_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetEvaluationDatasetDownloadURLOutputMetadata
+  FIELDS = {
+    download_url: "download_url",
+    expires_at: "expires_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiGetEvaluationDatasetDownloadURLOutput.
+# Response containing a presigned download URL for an evaluation dataset.
+class ApiGetEvaluationDatasetDownloadURLOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetEvaluationDatasetDownloadURLOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetEvaluationDatasetDownloadURLOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetEvaluationDatasetDownloadURLOutputMetadata::DECODERS
+
+  # @return [String] The presigned URL to download the dataset file.
+  attr_reader :download_url
+  # @return [String] The time the URL expires at.
+  attr_reader :expires_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetEvaluationDatasetDownloadURLOutput.
-  # Response containing a presigned download URL for an evaluation dataset.
-  class ApiGetEvaluationDatasetDownloadURLOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetEvaluationDatasetDownloadURLOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetEvaluationDatasetDownloadURLOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetEvaluationDatasetDownloadURLOutputMetadata::DECODERS
-
-    # @return [String] The presigned URL to download the dataset file.
-    attr_reader :download_url
-    # @return [String] The time the URL expires at.
-    attr_reader :expires_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetEvaluationRunOutputMetadata
-    FIELDS = {
-      evaluation_run: 'evaluation_run'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      evaluation_run: lambda do |value|
-        ::OctridevDigitalocean::ApiEvaluationRun.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetEvaluationRunOutputMetadata
+  FIELDS = {
+    evaluation_run: "evaluation_run",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    evaluation_run: lambda do |value|
+      ::OctridevDigitalocean::ApiEvaluationRun.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetEvaluationRunOutput.
+# Typed representation of the `ApiGetEvaluationRunOutput` API schema.
+class ApiGetEvaluationRunOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetEvaluationRunOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetEvaluationRunOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetEvaluationRunOutputMetadata::DECODERS
+
+  # @return [ApiEvaluationRun] Optional object value serialized in the `evaluation_run` wire field.
+  attr_reader :evaluation_run
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetEvaluationRunOutput.
-  # Typed representation of the `ApiGetEvaluationRunOutput` API schema.
-  class ApiGetEvaluationRunOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetEvaluationRunOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetEvaluationRunOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetEvaluationRunOutputMetadata::DECODERS
-
-    # @return [ApiEvaluationRun] Optional object value serialized in the `evaluation_run` wire field.
-    attr_reader :evaluation_run
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetEvaluationRunPromptResultsOutputMetadata
-    FIELDS = {
-      prompt: 'prompt'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      prompt: lambda do |value|
-        ::OctridevDigitalocean::ApiPrompt.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetEvaluationRunPromptResultsOutputMetadata
+  FIELDS = {
+    prompt: "prompt",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    prompt: lambda do |value|
+      ::OctridevDigitalocean::ApiPrompt.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetEvaluationRunPromptResultsOutput.
+# Typed representation of the `ApiGetEvaluationRunPromptResultsOutput` API schema.
+class ApiGetEvaluationRunPromptResultsOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetEvaluationRunPromptResultsOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetEvaluationRunPromptResultsOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetEvaluationRunPromptResultsOutputMetadata::DECODERS
+
+  # @return [ApiPrompt] Optional object value serialized in the `prompt` wire field.
+  attr_reader :prompt
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetEvaluationRunPromptResultsOutput.
-  # Typed representation of the `ApiGetEvaluationRunPromptResultsOutput` API schema.
-  class ApiGetEvaluationRunPromptResultsOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetEvaluationRunPromptResultsOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetEvaluationRunPromptResultsOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetEvaluationRunPromptResultsOutputMetadata::DECODERS
-
-    # @return [ApiPrompt] Optional object value serialized in the `prompt` wire field.
-    attr_reader :prompt
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetEvaluationRunResultsOutputMetadata
-    FIELDS = {
-      evaluation_run: 'evaluation_run',
-      links: 'links',
-      meta: 'meta',
-      prompts: 'prompts'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      evaluation_run: lambda do |value|
-        ::OctridevDigitalocean::ApiEvaluationRun.from_hash(value)
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::ApiLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::ApiMeta.from_hash(value)
-      end,
-      prompts: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiPrompt.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetEvaluationRunResultsOutputMetadata
+  FIELDS = {
+    evaluation_run: "evaluation_run",
+    links: "links",
+    meta: "meta",
+    prompts: "prompts",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    evaluation_run: lambda do |value|
+      ::OctridevDigitalocean::ApiEvaluationRun.from_hash(value)
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::ApiLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::ApiMeta.from_hash(value)
+    end,
+    prompts: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiPrompt.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ApiGetEvaluationRunResultsOutput.
+# Gets the full results of an evaluation run with all prompts.
+class ApiGetEvaluationRunResultsOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetEvaluationRunResultsOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetEvaluationRunResultsOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetEvaluationRunResultsOutputMetadata::DECODERS
+
+  # @return [ApiEvaluationRun] Optional object value serialized in the `evaluation_run` wire field.
+  attr_reader :evaluation_run
+  # @return [ApiLinks] Links to other pages
+  attr_reader :links
+  # @return [ApiMeta] Meta information about the data set
+  attr_reader :meta
+  # @return [Array_of_ApiPrompt] The prompt level results.
+  attr_reader :prompts
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetEvaluationRunResultsOutput.
-  # Gets the full results of an evaluation run with all prompts.
-  class ApiGetEvaluationRunResultsOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetEvaluationRunResultsOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetEvaluationRunResultsOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetEvaluationRunResultsOutputMetadata::DECODERS
-
-    # @return [ApiEvaluationRun] Optional object value serialized in the `evaluation_run` wire field.
-    attr_reader :evaluation_run
-    # @return [ApiLinks] Links to other pages
-    attr_reader :links
-    # @return [ApiMeta] Meta information about the data set
-    attr_reader :meta
-    # @return [Array_of_ApiPrompt] The prompt level results.
-    attr_reader :prompts
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetEvaluationTestCaseOutputMetadata
-    FIELDS = {
-      evaluation_test_case: 'evaluation_test_case'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      evaluation_test_case: lambda do |value|
-        ::OctridevDigitalocean::ApiEvaluationTestCase.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetEvaluationTestCaseOutputMetadata
+  FIELDS = {
+    evaluation_test_case: "evaluation_test_case",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    evaluation_test_case: lambda do |value|
+      ::OctridevDigitalocean::ApiEvaluationTestCase.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetEvaluationTestCaseOutput.
+# Typed representation of the `ApiGetEvaluationTestCaseOutput` API schema.
+class ApiGetEvaluationTestCaseOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetEvaluationTestCaseOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetEvaluationTestCaseOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetEvaluationTestCaseOutputMetadata::DECODERS
+
+  # @return [ApiEvaluationTestCase] Optional object value serialized in the `evaluation_test_case` wire field.
+  attr_reader :evaluation_test_case
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetEvaluationTestCaseOutput.
-  # Typed representation of the `ApiGetEvaluationTestCaseOutput` API schema.
-  class ApiGetEvaluationTestCaseOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetEvaluationTestCaseOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetEvaluationTestCaseOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetEvaluationTestCaseOutputMetadata::DECODERS
-
-    # @return [ApiEvaluationTestCase] Optional object value serialized in the `evaluation_test_case` wire field.
-    attr_reader :evaluation_test_case
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetIndexingJobDetailsSignedURLOutputMetadata
-    FIELDS = {
-      signed_url: 'signed_url'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetIndexingJobDetailsSignedURLOutputMetadata
+  FIELDS = {
+    signed_url: "signed_url",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiGetIndexingJobDetailsSignedURLOutput.
+# Typed representation of the `ApiGetIndexingJobDetailsSignedURLOutput` API schema.
+class ApiGetIndexingJobDetailsSignedURLOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetIndexingJobDetailsSignedURLOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetIndexingJobDetailsSignedURLOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetIndexingJobDetailsSignedURLOutputMetadata::DECODERS
+
+  # @return [String] The signed url for downloading the indexing job details
+  attr_reader :signed_url
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetIndexingJobDetailsSignedURLOutput.
-  # Typed representation of the `ApiGetIndexingJobDetailsSignedURLOutput` API schema.
-  class ApiGetIndexingJobDetailsSignedURLOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetIndexingJobDetailsSignedURLOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetIndexingJobDetailsSignedURLOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetIndexingJobDetailsSignedURLOutputMetadata::DECODERS
-
-    # @return [String] The signed url for downloading the indexing job details
-    attr_reader :signed_url
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetKnowledgeBaseIndexingJobOutputMetadata
-    FIELDS = {
-      job: 'job'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      job: lambda do |value|
-        ::OctridevDigitalocean::ApiIndexingJob.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetKnowledgeBaseIndexingJobOutputMetadata
+  FIELDS = {
+    job: "job",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    job: lambda do |value|
+      ::OctridevDigitalocean::ApiIndexingJob.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetKnowledgeBaseIndexingJobOutput.
+# GetKnowledgeBaseIndexingJobOutput description
+class ApiGetKnowledgeBaseIndexingJobOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetKnowledgeBaseIndexingJobOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetKnowledgeBaseIndexingJobOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetKnowledgeBaseIndexingJobOutputMetadata::DECODERS
+
+  # @return [ApiIndexingJob] IndexingJob description
+  attr_reader :job
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetKnowledgeBaseIndexingJobOutput.
-  # GetKnowledgeBaseIndexingJobOutput description
-  class ApiGetKnowledgeBaseIndexingJobOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetKnowledgeBaseIndexingJobOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetKnowledgeBaseIndexingJobOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetKnowledgeBaseIndexingJobOutputMetadata::DECODERS
-
-    # @return [ApiIndexingJob] IndexingJob description
-    attr_reader :job
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetKnowledgeBaseOutputMetadata
-    FIELDS = {
-      database_status: 'database_status',
-      knowledge_base: 'knowledge_base'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      database_status: lambda do |value|
-        ::OctridevDigitalocean::DbaasClusterStatus.from_value(value)
-      end,
-      knowledge_base: lambda do |value|
-        ::OctridevDigitalocean::ApiKnowledgeBase.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetKnowledgeBaseOutputMetadata
+  FIELDS = {
+    database_status: "database_status",
+    knowledge_base: "knowledge_base",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    database_status: lambda do |value|
+      ::OctridevDigitalocean::DbaasClusterStatus.from_value(value)
+    end,
+    knowledge_base: lambda do |value|
+      ::OctridevDigitalocean::ApiKnowledgeBase.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetKnowledgeBaseOutput.
+# The knowledge base
+class ApiGetKnowledgeBaseOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetKnowledgeBaseOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetKnowledgeBaseOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetKnowledgeBaseOutputMetadata::DECODERS
+
+  # @return [DbaasClusterStatus] Optional enumerated value serialized in the `database_status` wire field.
+  attr_reader :database_status
+  # @return [ApiKnowledgeBase] Knowledgebase Description
+  attr_reader :knowledge_base
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetKnowledgeBaseOutput.
-  # The knowledge base
-  class ApiGetKnowledgeBaseOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetKnowledgeBaseOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetKnowledgeBaseOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetKnowledgeBaseOutputMetadata::DECODERS
-
-    # @return [DbaasClusterStatus] Optional enumerated value serialized in the `database_status` wire field.
-    attr_reader :database_status
-    # @return [ApiKnowledgeBase] Knowledgebase Description
-    attr_reader :knowledge_base
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetModelCatalogCardOutputMetadata
-    FIELDS = {
-      data: 'data'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        ::OctridevDigitalocean::ApiModelCatalogCard.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetModelCatalogCardOutputMetadata
+  FIELDS = {
+    data: "data",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      ::OctridevDigitalocean::ApiModelCatalogCard.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetModelCatalogCardOutput.
+# Typed representation of the `ApiGetModelCatalogCardOutput` API schema.
+class ApiGetModelCatalogCardOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetModelCatalogCardOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetModelCatalogCardOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetModelCatalogCardOutputMetadata::DECODERS
+
+  # @return [ApiModelCatalogCard] Detail view for GetModelCatalogCard
+  attr_reader :data
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetModelCatalogCardOutput.
-  # Typed representation of the `ApiGetModelCatalogCardOutput` API schema.
-  class ApiGetModelCatalogCardOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetModelCatalogCardOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetModelCatalogCardOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetModelCatalogCardOutputMetadata::DECODERS
-
-    # @return [ApiModelCatalogCard] Detail view for GetModelCatalogCard
-    attr_reader :data
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetModelEvaluationPresetOutputMetadata
-    FIELDS = {
-      preset: 'preset'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      preset: lambda do |value|
-        ::OctridevDigitalocean::ApiModelEvaluationPreset.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetModelEvaluationPresetOutputMetadata
+  FIELDS = {
+    preset: "preset",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    preset: lambda do |value|
+      ::OctridevDigitalocean::ApiModelEvaluationPreset.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetModelEvaluationPresetOutput.
+# Typed representation of the `ApiGetModelEvaluationPresetOutput` API schema.
+class ApiGetModelEvaluationPresetOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetModelEvaluationPresetOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetModelEvaluationPresetOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetModelEvaluationPresetOutputMetadata::DECODERS
+
+  # @return [ApiModelEvaluationPreset] Model Evaluation Preset - a saved, reusable configuration for model evaluation runs. Each section (dataset, judge, metrics, candidate, system prompt) is independent and may be empty; sections the preset omits must be supplied inline on the run that references it. Use `saved_sections` to tell "section saved with empty value" apart from "section not saved at all" — each section's scalar fields are left empty when the section was not saved.
+  attr_reader :preset
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetModelEvaluationPresetOutput.
-  # Typed representation of the `ApiGetModelEvaluationPresetOutput` API schema.
-  class ApiGetModelEvaluationPresetOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetModelEvaluationPresetOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetModelEvaluationPresetOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetModelEvaluationPresetOutputMetadata::DECODERS
-
-    # @return [ApiModelEvaluationPreset] Model Evaluation Preset - a saved, reusable configuration for model evaluation runs. Each section (dataset, judge, metrics, candidate, system prompt) is independent and may be empty; sections the preset omits must be supplied inline on the run that references it. Use `saved_sections` to tell "section saved with empty value" apart from "section not saved at all" — each section's scalar fields are left empty when the section was not saved.
-    attr_reader :preset
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiGetModelEvaluationRunOutputMetadata
-    FIELDS = {
-      links: 'links',
-      meta: 'meta',
-      results: 'results',
-      run: 'run'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      links: lambda do |value|
-        ::OctridevDigitalocean::ApiLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::ApiMeta.from_hash(value)
-      end,
-      results: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiModelEvaluationResult.from_hash(item) }
-      end,
-      run: lambda do |value|
-        ::OctridevDigitalocean::ApiModelEvaluationRunDetail.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiGetModelEvaluationRunOutputMetadata
+  FIELDS = {
+    links: "links",
+    meta: "meta",
+    results: "results",
+    run: "run",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    links: lambda do |value|
+      ::OctridevDigitalocean::ApiLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::ApiMeta.from_hash(value)
+    end,
+    results: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiModelEvaluationResult.from_hash(item) }
+    end,
+    run: lambda do |value|
+      ::OctridevDigitalocean::ApiModelEvaluationRunDetail.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiGetModelEvaluationRunOutput.
+# Typed representation of the `ApiGetModelEvaluationRunOutput` API schema.
+class ApiGetModelEvaluationRunOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiGetModelEvaluationRunOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiGetModelEvaluationRunOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiGetModelEvaluationRunOutputMetadata::DECODERS
+
+  # @return [ApiLinks] Links to other pages
+  attr_reader :links
+  # @return [ApiMeta] Meta information about the data set
+  attr_reader :meta
+  # @return [Array_of_ApiModelEvaluationResult] Paginated per-prompt evaluation results.
+  attr_reader :results
+  # @return [ApiModelEvaluationRunDetail] Model Evaluation Run Detail - full view returned when fetching a specific run.
+  attr_reader :run
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiGetModelEvaluationRunOutput.
-  # Typed representation of the `ApiGetModelEvaluationRunOutput` API schema.
-  class ApiGetModelEvaluationRunOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiGetModelEvaluationRunOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiGetModelEvaluationRunOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiGetModelEvaluationRunOutputMetadata::DECODERS
-
-    # @return [ApiLinks] Links to other pages
-    attr_reader :links
-    # @return [ApiMeta] Meta information about the data set
-    attr_reader :meta
-    # @return [Array_of_ApiModelEvaluationResult] Paginated per-prompt evaluation results.
-    attr_reader :results
-    # @return [ApiModelEvaluationRunDetail] Model Evaluation Run Detail - full view returned when fetching a specific run.
-    attr_reader :run
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -5,168 +5,171 @@
 
 # vpc_peerings domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalActiveVpcPeeringMetadata
-    FIELDS = {
-      vpc_peering: 'vpc_peering'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      vpc_peering: lambda do |value|
-        ::OctridevDigitalocean::VpcPeering.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalActiveVpcPeeringMetadata
+  FIELDS = {
+    vpc_peering: "vpc_peering",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    vpc_peering: lambda do |value|
+      ::OctridevDigitalocean::VpcPeering.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ActiveVpcPeering.
+# Typed representation of the `ActiveVpcPeering` API schema.
+class ActiveVpcPeering
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalActiveVpcPeeringMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalActiveVpcPeeringMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalActiveVpcPeeringMetadata::DECODERS
+
+  # @return [VpcPeering] Optional object value serialized in the `vpc_peering` wire field.
+  attr_reader :vpc_peering
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ActiveVpcPeering.
-  # Typed representation of the `ActiveVpcPeering` API schema.
-  class ActiveVpcPeering
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalActiveVpcPeeringMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalActiveVpcPeeringMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalActiveVpcPeeringMetadata::DECODERS
-
-    # @return [VpcPeering] Optional object value serialized in the `vpc_peering` wire field.
-    attr_reader :vpc_peering
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAllVpcPeeringsMetadata
-    FIELDS = {
-      vpc_peerings: 'vpc_peerings',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      vpc_peerings: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::VpcPeering.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAllVpcPeeringsMetadata
+  FIELDS = {
+    vpc_peerings: "vpc_peerings",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    vpc_peerings: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::VpcPeering.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AllVpcPeerings.
+# Typed representation of the `AllVpcPeerings` API schema.
+class AllVpcPeerings
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAllVpcPeeringsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAllVpcPeeringsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAllVpcPeeringsMetadata::DECODERS
+
+  attr_reader :vpc_peerings
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AllVpcPeerings.
-  # Typed representation of the `AllVpcPeerings` API schema.
-  class AllVpcPeerings
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAllVpcPeeringsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAllVpcPeeringsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAllVpcPeeringsMetadata::DECODERS
-
-    attr_reader :vpc_peerings
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDeletingVpcPeeringMetadata
-    FIELDS = {
-      vpc_peering: 'vpc_peering'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      vpc_peering: lambda do |value|
-        ::OctridevDigitalocean::VpcPeering.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDeletingVpcPeeringMetadata
+  FIELDS = {
+    vpc_peering: "vpc_peering",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    vpc_peering: lambda do |value|
+      ::OctridevDigitalocean::VpcPeering.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DeletingVpcPeering.
+# Typed representation of the `DeletingVpcPeering` API schema.
+class DeletingVpcPeering
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDeletingVpcPeeringMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDeletingVpcPeeringMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDeletingVpcPeeringMetadata::DECODERS
+
+  # @return [VpcPeering] Optional object value serialized in the `vpc_peering` wire field.
+  attr_reader :vpc_peering
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DeletingVpcPeering.
-  # Typed representation of the `DeletingVpcPeering` API schema.
-  class DeletingVpcPeering
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDeletingVpcPeeringMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDeletingVpcPeeringMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDeletingVpcPeeringMetadata::DECODERS
-
-    # @return [VpcPeering] Optional object value serialized in the `vpc_peering` wire field.
-    attr_reader :vpc_peering
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalProvisioningVpcPeeringMetadata
-    FIELDS = {
-      vpc_peering: 'vpc_peering'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      vpc_peering: lambda do |value|
-        ::OctridevDigitalocean::VpcPeering.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalProvisioningVpcPeeringMetadata
+  FIELDS = {
+    vpc_peering: "vpc_peering",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    vpc_peering: lambda do |value|
+      ::OctridevDigitalocean::VpcPeering.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ProvisioningVpcPeering.
+# Typed representation of the `ProvisioningVpcPeering` API schema.
+class ProvisioningVpcPeering
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalProvisioningVpcPeeringMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalProvisioningVpcPeeringMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalProvisioningVpcPeeringMetadata::DECODERS
+
+  # @return [VpcPeering] Optional object value serialized in the `vpc_peering` wire field.
+  attr_reader :vpc_peering
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ProvisioningVpcPeering.
-  # Typed representation of the `ProvisioningVpcPeering` API schema.
-  class ProvisioningVpcPeering
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalProvisioningVpcPeeringMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalProvisioningVpcPeeringMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalProvisioningVpcPeeringMetadata::DECODERS
-
-    # @return [VpcPeering] Optional object value serialized in the `vpc_peering` wire field.
-    attr_reader :vpc_peering
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

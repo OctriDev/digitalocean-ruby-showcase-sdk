@@ -5,691 +5,691 @@
 
 # load_balancer domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalLoadBalancerCreateVariant0Metadata
-    FIELDS = {
-      droplet_ids: 'droplet_ids',
-      ip: 'ip',
-      region: 'region',
-      id: 'id',
-      name: 'name',
-      project_id: 'project_id',
-      ipv6: 'ipv6',
-      size_unit: 'size_unit',
-      size: 'size',
-      algorithm: 'algorithm',
-      status: 'status',
-      created_at: 'created_at',
-      forwarding_rules: 'forwarding_rules',
-      health_check: 'health_check',
-      sticky_sessions: 'sticky_sessions',
-      redirect_http_to_https: 'redirect_http_to_https',
-      enable_proxy_protocol: 'enable_proxy_protocol',
-      enable_backend_keepalive: 'enable_backend_keepalive',
-      http_idle_timeout_seconds: 'http_idle_timeout_seconds',
-      vpc_uuid: 'vpc_uuid',
-      subnet_uuid: 'subnet_uuid',
-      disable_lets_encrypt_dns_records: 'disable_lets_encrypt_dns_records',
-      firewall: 'firewall',
-      network: 'network',
-      network_stack: 'network_stack',
-      type: 'type',
-      domains: 'domains',
-      glb_settings: 'glb_settings',
-      target_load_balancer_ids: 'target_load_balancer_ids',
-      tls_cipher_policy: 'tls_cipher_policy'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      droplet_ids
-      region
-      forwarding_rules
-    ].freeze
-    DECODERS = {
-      region: lambda do |value|
-        ::OctridevDigitalocean::RegionSlug.from_value(value)
-      end,
-      size: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseSize.from_value(value)
-      end,
-      algorithm: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseAlgorithm.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseStatus.from_value(value)
-      end,
-      forwarding_rules: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ForwardingRule.from_hash(item) }
-      end,
-      health_check: lambda do |value|
-        ::OctridevDigitalocean::HealthCheck.from_hash(value)
-      end,
-      sticky_sessions: lambda do |value|
-        ::OctridevDigitalocean::StickySessions.from_hash(value)
-      end,
-      firewall: lambda do |value|
-        ::OctridevDigitalocean::LbFirewall.from_hash(value)
-      end,
-      network: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseNetwork.from_value(value)
-      end,
-      network_stack: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseNetworkStack.from_value(value)
-      end,
-      type: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseType.from_value(value)
-      end,
-      domains: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Domains.from_hash(item) }
-      end,
-      glb_settings: lambda do |value|
-        ::OctridevDigitalocean::GlbSettings.from_hash(value)
-      end,
-      tls_cipher_policy: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseTlsCipherPolicy.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalLoadBalancerCreateVariant0Metadata
+  FIELDS = {
+    droplet_ids: "droplet_ids",
+    ip: "ip",
+    region: "region",
+    id: "id",
+    name: "name",
+    project_id: "project_id",
+    ipv6: "ipv6",
+    size_unit: "size_unit",
+    size: "size",
+    algorithm: "algorithm",
+    status: "status",
+    created_at: "created_at",
+    forwarding_rules: "forwarding_rules",
+    health_check: "health_check",
+    sticky_sessions: "sticky_sessions",
+    redirect_http_to_https: "redirect_http_to_https",
+    enable_proxy_protocol: "enable_proxy_protocol",
+    enable_backend_keepalive: "enable_backend_keepalive",
+    http_idle_timeout_seconds: "http_idle_timeout_seconds",
+    vpc_uuid: "vpc_uuid",
+    subnet_uuid: "subnet_uuid",
+    disable_lets_encrypt_dns_records: "disable_lets_encrypt_dns_records",
+    firewall: "firewall",
+    network: "network",
+    network_stack: "network_stack",
+    type: "type",
+    domains: "domains",
+    glb_settings: "glb_settings",
+    target_load_balancer_ids: "target_load_balancer_ids",
+    tls_cipher_policy: "tls_cipher_policy",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    droplet_ids
+    region
+    forwarding_rules
+  ].freeze
+  DECODERS = {
+    region: lambda do |value|
+      ::OctridevDigitalocean::RegionSlug.from_value(value)
+    end,
+    size: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseSize.from_value(value)
+    end,
+    algorithm: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseAlgorithm.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseStatus.from_value(value)
+    end,
+    forwarding_rules: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ForwardingRule.from_hash(item) }
+    end,
+    health_check: lambda do |value|
+      ::OctridevDigitalocean::HealthCheck.from_hash(value)
+    end,
+    sticky_sessions: lambda do |value|
+      ::OctridevDigitalocean::StickySessions.from_hash(value)
+    end,
+    firewall: lambda do |value|
+      ::OctridevDigitalocean::LbFirewall.from_hash(value)
+    end,
+    network: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseNetwork.from_value(value)
+    end,
+    network_stack: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseNetworkStack.from_value(value)
+    end,
+    type: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseType.from_value(value)
+    end,
+    domains: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Domains.from_hash(item) }
+    end,
+    glb_settings: lambda do |value|
+      ::OctridevDigitalocean::GlbSettings.from_hash(value)
+    end,
+    tls_cipher_policy: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseTlsCipherPolicy.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for LoadBalancerCreateVariant0.
+class LoadBalancerCreateVariant0
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLoadBalancerCreateVariant0Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLoadBalancerCreateVariant0Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLoadBalancerCreateVariant0Metadata::DECODERS
+
+  # @return [Array_of_Integer] An array containing the IDs of the Droplets assigned to the load balancer.
+  attr_reader :droplet_ids
+  # @return [String] An optional IP address to assign to the load balancer from one of your Bring Your Own IP (BYOIP) prefixes. The address must be an unassigned BYOIP address on your account in the same region as the load balancer. If omitted, DigitalOcean assigns a public IP address automatically. This field is only applied when creating the load balancer, cannot be changed afterward, and is not supported for `GLOBAL` or `INTERNAL` load balancers.
+  attr_reader :ip
+  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+  attr_reader :region
+  # @return [String] A unique ID that can be used to identify and reference a load balancer.
+  attr_reader :id
+  # @return [String] A human-readable name for a load balancer instance.
+  attr_reader :name
+  # @return [String] The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
+  attr_reader :project_id
+  # @return [String] An attribute containing the public-facing IPv6 address of the load balancer.
+  attr_reader :ipv6
+  # @return [Integer] How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
+  attr_reader :size_unit
+  # @return [LoadBalancerBaseSize] This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
+  attr_reader :size
+  # @return [LoadBalancerBaseAlgorithm] This field has been deprecated. You can no longer specify an algorithm for load balancers.
+  attr_reader :algorithm
+  # @return [LoadBalancerBaseStatus] A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
+  attr_reader :status
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
+  attr_reader :created_at
+  # @return [Array_of_ForwardingRule] An array of objects specifying the forwarding rules for a load balancer.
+  attr_reader :forwarding_rules
+  # @return [HealthCheck] An object specifying health check settings for the load balancer.
+  attr_reader :health_check
+  # @return [StickySessions] An object specifying sticky sessions settings for the load balancer.
+  attr_reader :sticky_sessions
+  # @return [Boolean] A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
+  attr_reader :redirect_http_to_https
+  # @return [Boolean] A boolean value indicating whether PROXY Protocol is in use.
+  attr_reader :enable_proxy_protocol
+  # @return [Boolean] A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
+  attr_reader :enable_backend_keepalive
+  # @return [Integer] An integer value which configures the idle timeout for HTTP requests to the target droplets.
+  attr_reader :http_idle_timeout_seconds
+  # @return [String] A string specifying the UUID of the VPC to which the load balancer is assigned.
+  attr_reader :vpc_uuid
+  # @return [String] A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
+  attr_reader :subnet_uuid
+  # @return [Boolean] A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
+  attr_reader :disable_lets_encrypt_dns_records
+  # @return [LbFirewall] An object specifying allow and deny rules to control traffic to the load balancer.
+  attr_reader :firewall
+  # @return [LoadBalancerBaseNetwork] A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
+  attr_reader :network
+  # @return [LoadBalancerBaseNetworkStack] A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
+  attr_reader :network_stack
+  # @return [LoadBalancerBaseType] A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
+  attr_reader :type
+  # @return [Array_of_Domains] An array of objects specifying the domain configurations for a Global load balancer.
+  attr_reader :domains
+  # @return [GlbSettings] An object specifying forwarding configurations for a Global load balancer.
+  attr_reader :glb_settings
+  # @return [Array_of_String] An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
+  attr_reader :target_load_balancer_ids
+  # @return [LoadBalancerBaseTlsCipherPolicy] A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+  attr_reader :tls_cipher_policy
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for LoadBalancerCreateVariant0.
-  class LoadBalancerCreateVariant0
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLoadBalancerCreateVariant0Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLoadBalancerCreateVariant0Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLoadBalancerCreateVariant0Metadata::DECODERS
-
-    # @return [Array_of_Integer] An array containing the IDs of the Droplets assigned to the load balancer.
-    attr_reader :droplet_ids
-    # @return [String] An optional IP address to assign to the load balancer from one of your Bring Your Own IP (BYOIP) prefixes. The address must be an unassigned BYOIP address on your account in the same region as the load balancer. If omitted, DigitalOcean assigns a public IP address automatically. This field is only applied when creating the load balancer, cannot be changed afterward, and is not supported for `GLOBAL` or `INTERNAL` load balancers.
-    attr_reader :ip
-    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-    attr_reader :region
-    # @return [String] A unique ID that can be used to identify and reference a load balancer.
-    attr_reader :id
-    # @return [String] A human-readable name for a load balancer instance.
-    attr_reader :name
-    # @return [String] The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
-    attr_reader :project_id
-    # @return [String] An attribute containing the public-facing IPv6 address of the load balancer.
-    attr_reader :ipv6
-    # @return [Integer] How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
-    attr_reader :size_unit
-    # @return [LoadBalancerBaseSize] This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
-    attr_reader :size
-    # @return [LoadBalancerBaseAlgorithm] This field has been deprecated. You can no longer specify an algorithm for load balancers.
-    attr_reader :algorithm
-    # @return [LoadBalancerBaseStatus] A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
-    attr_reader :status
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
-    attr_reader :created_at
-    # @return [Array_of_ForwardingRule] An array of objects specifying the forwarding rules for a load balancer.
-    attr_reader :forwarding_rules
-    # @return [HealthCheck] An object specifying health check settings for the load balancer.
-    attr_reader :health_check
-    # @return [StickySessions] An object specifying sticky sessions settings for the load balancer.
-    attr_reader :sticky_sessions
-    # @return [Boolean] A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
-    attr_reader :redirect_http_to_https
-    # @return [Boolean] A boolean value indicating whether PROXY Protocol is in use.
-    attr_reader :enable_proxy_protocol
-    # @return [Boolean] A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
-    attr_reader :enable_backend_keepalive
-    # @return [Integer] An integer value which configures the idle timeout for HTTP requests to the target droplets.
-    attr_reader :http_idle_timeout_seconds
-    # @return [String] A string specifying the UUID of the VPC to which the load balancer is assigned.
-    attr_reader :vpc_uuid
-    # @return [String] A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
-    attr_reader :subnet_uuid
-    # @return [Boolean] A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
-    attr_reader :disable_lets_encrypt_dns_records
-    # @return [LbFirewall] An object specifying allow and deny rules to control traffic to the load balancer.
-    attr_reader :firewall
-    # @return [LoadBalancerBaseNetwork] A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
-    attr_reader :network
-    # @return [LoadBalancerBaseNetworkStack] A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
-    attr_reader :network_stack
-    # @return [LoadBalancerBaseType] A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
-    attr_reader :type
-    # @return [Array_of_Domains] An array of objects specifying the domain configurations for a Global load balancer.
-    attr_reader :domains
-    # @return [GlbSettings] An object specifying forwarding configurations for a Global load balancer.
-    attr_reader :glb_settings
-    # @return [Array_of_String] An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
-    attr_reader :target_load_balancer_ids
-    # @return [LoadBalancerBaseTlsCipherPolicy] A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
-    attr_reader :tls_cipher_policy
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalLoadBalancerCreateVariant1Metadata
-    FIELDS = {
-      tag: 'tag',
-      ip: 'ip',
-      region: 'region',
-      id: 'id',
-      name: 'name',
-      project_id: 'project_id',
-      ipv6: 'ipv6',
-      size_unit: 'size_unit',
-      size: 'size',
-      algorithm: 'algorithm',
-      status: 'status',
-      created_at: 'created_at',
-      forwarding_rules: 'forwarding_rules',
-      health_check: 'health_check',
-      sticky_sessions: 'sticky_sessions',
-      redirect_http_to_https: 'redirect_http_to_https',
-      enable_proxy_protocol: 'enable_proxy_protocol',
-      enable_backend_keepalive: 'enable_backend_keepalive',
-      http_idle_timeout_seconds: 'http_idle_timeout_seconds',
-      vpc_uuid: 'vpc_uuid',
-      subnet_uuid: 'subnet_uuid',
-      disable_lets_encrypt_dns_records: 'disable_lets_encrypt_dns_records',
-      firewall: 'firewall',
-      network: 'network',
-      network_stack: 'network_stack',
-      type: 'type',
-      domains: 'domains',
-      glb_settings: 'glb_settings',
-      target_load_balancer_ids: 'target_load_balancer_ids',
-      tls_cipher_policy: 'tls_cipher_policy'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      tag
-      region
-      forwarding_rules
-    ].freeze
-    DECODERS = {
-      region: lambda do |value|
-        ::OctridevDigitalocean::RegionSlug.from_value(value)
-      end,
-      size: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseSize.from_value(value)
-      end,
-      algorithm: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseAlgorithm.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseStatus.from_value(value)
-      end,
-      forwarding_rules: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ForwardingRule.from_hash(item) }
-      end,
-      health_check: lambda do |value|
-        ::OctridevDigitalocean::HealthCheck.from_hash(value)
-      end,
-      sticky_sessions: lambda do |value|
-        ::OctridevDigitalocean::StickySessions.from_hash(value)
-      end,
-      firewall: lambda do |value|
-        ::OctridevDigitalocean::LbFirewall.from_hash(value)
-      end,
-      network: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseNetwork.from_value(value)
-      end,
-      network_stack: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseNetworkStack.from_value(value)
-      end,
-      type: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseType.from_value(value)
-      end,
-      domains: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Domains.from_hash(item) }
-      end,
-      glb_settings: lambda do |value|
-        ::OctridevDigitalocean::GlbSettings.from_hash(value)
-      end,
-      tls_cipher_policy: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseTlsCipherPolicy.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalLoadBalancerCreateVariant1Metadata
+  FIELDS = {
+    tag: "tag",
+    ip: "ip",
+    region: "region",
+    id: "id",
+    name: "name",
+    project_id: "project_id",
+    ipv6: "ipv6",
+    size_unit: "size_unit",
+    size: "size",
+    algorithm: "algorithm",
+    status: "status",
+    created_at: "created_at",
+    forwarding_rules: "forwarding_rules",
+    health_check: "health_check",
+    sticky_sessions: "sticky_sessions",
+    redirect_http_to_https: "redirect_http_to_https",
+    enable_proxy_protocol: "enable_proxy_protocol",
+    enable_backend_keepalive: "enable_backend_keepalive",
+    http_idle_timeout_seconds: "http_idle_timeout_seconds",
+    vpc_uuid: "vpc_uuid",
+    subnet_uuid: "subnet_uuid",
+    disable_lets_encrypt_dns_records: "disable_lets_encrypt_dns_records",
+    firewall: "firewall",
+    network: "network",
+    network_stack: "network_stack",
+    type: "type",
+    domains: "domains",
+    glb_settings: "glb_settings",
+    target_load_balancer_ids: "target_load_balancer_ids",
+    tls_cipher_policy: "tls_cipher_policy",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    tag
+    region
+    forwarding_rules
+  ].freeze
+  DECODERS = {
+    region: lambda do |value|
+      ::OctridevDigitalocean::RegionSlug.from_value(value)
+    end,
+    size: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseSize.from_value(value)
+    end,
+    algorithm: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseAlgorithm.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseStatus.from_value(value)
+    end,
+    forwarding_rules: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ForwardingRule.from_hash(item) }
+    end,
+    health_check: lambda do |value|
+      ::OctridevDigitalocean::HealthCheck.from_hash(value)
+    end,
+    sticky_sessions: lambda do |value|
+      ::OctridevDigitalocean::StickySessions.from_hash(value)
+    end,
+    firewall: lambda do |value|
+      ::OctridevDigitalocean::LbFirewall.from_hash(value)
+    end,
+    network: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseNetwork.from_value(value)
+    end,
+    network_stack: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseNetworkStack.from_value(value)
+    end,
+    type: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseType.from_value(value)
+    end,
+    domains: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Domains.from_hash(item) }
+    end,
+    glb_settings: lambda do |value|
+      ::OctridevDigitalocean::GlbSettings.from_hash(value)
+    end,
+    tls_cipher_policy: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseTlsCipherPolicy.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for LoadBalancerCreateVariant1.
+class LoadBalancerCreateVariant1
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLoadBalancerCreateVariant1Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLoadBalancerCreateVariant1Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLoadBalancerCreateVariant1Metadata::DECODERS
+
+  # @return [String] The name of a Droplet tag corresponding to Droplets assigned to the load balancer.
+  attr_reader :tag
+  # @return [String] An optional IP address to assign to the load balancer from one of your Bring Your Own IP (BYOIP) prefixes. The address must be an unassigned BYOIP address on your account in the same region as the load balancer. If omitted, DigitalOcean assigns a public IP address automatically. This field is only applied when creating the load balancer, cannot be changed afterward, and is not supported for `GLOBAL` or `INTERNAL` load balancers.
+  attr_reader :ip
+  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+  attr_reader :region
+  # @return [String] A unique ID that can be used to identify and reference a load balancer.
+  attr_reader :id
+  # @return [String] A human-readable name for a load balancer instance.
+  attr_reader :name
+  # @return [String] The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
+  attr_reader :project_id
+  # @return [String] An attribute containing the public-facing IPv6 address of the load balancer.
+  attr_reader :ipv6
+  # @return [Integer] How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
+  attr_reader :size_unit
+  # @return [LoadBalancerBaseSize] This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
+  attr_reader :size
+  # @return [LoadBalancerBaseAlgorithm] This field has been deprecated. You can no longer specify an algorithm for load balancers.
+  attr_reader :algorithm
+  # @return [LoadBalancerBaseStatus] A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
+  attr_reader :status
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
+  attr_reader :created_at
+  # @return [Array_of_ForwardingRule] An array of objects specifying the forwarding rules for a load balancer.
+  attr_reader :forwarding_rules
+  # @return [HealthCheck] An object specifying health check settings for the load balancer.
+  attr_reader :health_check
+  # @return [StickySessions] An object specifying sticky sessions settings for the load balancer.
+  attr_reader :sticky_sessions
+  # @return [Boolean] A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
+  attr_reader :redirect_http_to_https
+  # @return [Boolean] A boolean value indicating whether PROXY Protocol is in use.
+  attr_reader :enable_proxy_protocol
+  # @return [Boolean] A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
+  attr_reader :enable_backend_keepalive
+  # @return [Integer] An integer value which configures the idle timeout for HTTP requests to the target droplets.
+  attr_reader :http_idle_timeout_seconds
+  # @return [String] A string specifying the UUID of the VPC to which the load balancer is assigned.
+  attr_reader :vpc_uuid
+  # @return [String] A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
+  attr_reader :subnet_uuid
+  # @return [Boolean] A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
+  attr_reader :disable_lets_encrypt_dns_records
+  # @return [LbFirewall] An object specifying allow and deny rules to control traffic to the load balancer.
+  attr_reader :firewall
+  # @return [LoadBalancerBaseNetwork] A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
+  attr_reader :network
+  # @return [LoadBalancerBaseNetworkStack] A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
+  attr_reader :network_stack
+  # @return [LoadBalancerBaseType] A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
+  attr_reader :type
+  # @return [Array_of_Domains] An array of objects specifying the domain configurations for a Global load balancer.
+  attr_reader :domains
+  # @return [GlbSettings] An object specifying forwarding configurations for a Global load balancer.
+  attr_reader :glb_settings
+  # @return [Array_of_String] An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
+  attr_reader :target_load_balancer_ids
+  # @return [LoadBalancerBaseTlsCipherPolicy] A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+  attr_reader :tls_cipher_policy
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for LoadBalancerCreateVariant1.
-  class LoadBalancerCreateVariant1
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLoadBalancerCreateVariant1Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLoadBalancerCreateVariant1Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLoadBalancerCreateVariant1Metadata::DECODERS
-
-    # @return [String] The name of a Droplet tag corresponding to Droplets assigned to the load balancer.
-    attr_reader :tag
-    # @return [String] An optional IP address to assign to the load balancer from one of your Bring Your Own IP (BYOIP) prefixes. The address must be an unassigned BYOIP address on your account in the same region as the load balancer. If omitted, DigitalOcean assigns a public IP address automatically. This field is only applied when creating the load balancer, cannot be changed afterward, and is not supported for `GLOBAL` or `INTERNAL` load balancers.
-    attr_reader :ip
-    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-    attr_reader :region
-    # @return [String] A unique ID that can be used to identify and reference a load balancer.
-    attr_reader :id
-    # @return [String] A human-readable name for a load balancer instance.
-    attr_reader :name
-    # @return [String] The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
-    attr_reader :project_id
-    # @return [String] An attribute containing the public-facing IPv6 address of the load balancer.
-    attr_reader :ipv6
-    # @return [Integer] How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
-    attr_reader :size_unit
-    # @return [LoadBalancerBaseSize] This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
-    attr_reader :size
-    # @return [LoadBalancerBaseAlgorithm] This field has been deprecated. You can no longer specify an algorithm for load balancers.
-    attr_reader :algorithm
-    # @return [LoadBalancerBaseStatus] A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
-    attr_reader :status
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
-    attr_reader :created_at
-    # @return [Array_of_ForwardingRule] An array of objects specifying the forwarding rules for a load balancer.
-    attr_reader :forwarding_rules
-    # @return [HealthCheck] An object specifying health check settings for the load balancer.
-    attr_reader :health_check
-    # @return [StickySessions] An object specifying sticky sessions settings for the load balancer.
-    attr_reader :sticky_sessions
-    # @return [Boolean] A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
-    attr_reader :redirect_http_to_https
-    # @return [Boolean] A boolean value indicating whether PROXY Protocol is in use.
-    attr_reader :enable_proxy_protocol
-    # @return [Boolean] A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
-    attr_reader :enable_backend_keepalive
-    # @return [Integer] An integer value which configures the idle timeout for HTTP requests to the target droplets.
-    attr_reader :http_idle_timeout_seconds
-    # @return [String] A string specifying the UUID of the VPC to which the load balancer is assigned.
-    attr_reader :vpc_uuid
-    # @return [String] A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
-    attr_reader :subnet_uuid
-    # @return [Boolean] A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
-    attr_reader :disable_lets_encrypt_dns_records
-    # @return [LbFirewall] An object specifying allow and deny rules to control traffic to the load balancer.
-    attr_reader :firewall
-    # @return [LoadBalancerBaseNetwork] A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
-    attr_reader :network
-    # @return [LoadBalancerBaseNetworkStack] A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
-    attr_reader :network_stack
-    # @return [LoadBalancerBaseType] A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
-    attr_reader :type
-    # @return [Array_of_Domains] An array of objects specifying the domain configurations for a Global load balancer.
-    attr_reader :domains
-    # @return [GlbSettings] An object specifying forwarding configurations for a Global load balancer.
-    attr_reader :glb_settings
-    # @return [Array_of_String] An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
-    attr_reader :target_load_balancer_ids
-    # @return [LoadBalancerBaseTlsCipherPolicy] A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
-    attr_reader :tls_cipher_policy
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the LoadBalancerCreate SDK namespace.
-  module LoadBalancerCreate
-    def self.from_hash(hash)
-      shape_mapping = {
-        'droplet_ids' => LoadBalancerCreateVariant0,
-        'tag' => LoadBalancerCreateVariant1
-      }
-      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-      decoded = type&.from_hash(hash)
-      decoded unless type.nil?
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the LoadBalancerCreate SDK namespace.
+module LoadBalancerCreate
+  def self.from_hash(hash)
+    shape_mapping = {
+      "droplet_ids" => LoadBalancerCreateVariant0,
+      "tag" => LoadBalancerCreateVariant1,
+    }
+    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+    decoded = type&.from_hash(hash)
+    return decoded unless type.nil?
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalLoadBalancerUpdateVariant0Metadata
+  FIELDS = {
+    droplet_ids: "droplet_ids",
+    region: "region",
+    id: "id",
+    name: "name",
+    project_id: "project_id",
+    ipv6: "ipv6",
+    size_unit: "size_unit",
+    size: "size",
+    algorithm: "algorithm",
+    status: "status",
+    created_at: "created_at",
+    forwarding_rules: "forwarding_rules",
+    health_check: "health_check",
+    sticky_sessions: "sticky_sessions",
+    redirect_http_to_https: "redirect_http_to_https",
+    enable_proxy_protocol: "enable_proxy_protocol",
+    enable_backend_keepalive: "enable_backend_keepalive",
+    http_idle_timeout_seconds: "http_idle_timeout_seconds",
+    vpc_uuid: "vpc_uuid",
+    subnet_uuid: "subnet_uuid",
+    disable_lets_encrypt_dns_records: "disable_lets_encrypt_dns_records",
+    firewall: "firewall",
+    network: "network",
+    network_stack: "network_stack",
+    type: "type",
+    domains: "domains",
+    glb_settings: "glb_settings",
+    target_load_balancer_ids: "target_load_balancer_ids",
+    tls_cipher_policy: "tls_cipher_policy",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    droplet_ids
+    region
+    forwarding_rules
+  ].freeze
+  DECODERS = {
+    region: lambda do |value|
+      ::OctridevDigitalocean::RegionSlug.from_value(value)
+    end,
+    size: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseSize.from_value(value)
+    end,
+    algorithm: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseAlgorithm.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseStatus.from_value(value)
+    end,
+    forwarding_rules: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ForwardingRule.from_hash(item) }
+    end,
+    health_check: lambda do |value|
+      ::OctridevDigitalocean::HealthCheck.from_hash(value)
+    end,
+    sticky_sessions: lambda do |value|
+      ::OctridevDigitalocean::StickySessions.from_hash(value)
+    end,
+    firewall: lambda do |value|
+      ::OctridevDigitalocean::LbFirewall.from_hash(value)
+    end,
+    network: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseNetwork.from_value(value)
+    end,
+    network_stack: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseNetworkStack.from_value(value)
+    end,
+    type: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseType.from_value(value)
+    end,
+    domains: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Domains.from_hash(item) }
+    end,
+    glb_settings: lambda do |value|
+      ::OctridevDigitalocean::GlbSettings.from_hash(value)
+    end,
+    tls_cipher_policy: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseTlsCipherPolicy.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for LoadBalancerUpdateVariant0.
+class LoadBalancerUpdateVariant0
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLoadBalancerUpdateVariant0Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLoadBalancerUpdateVariant0Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLoadBalancerUpdateVariant0Metadata::DECODERS
+
+  # @return [Array_of_Integer] An array containing the IDs of the Droplets assigned to the load balancer.
+  attr_reader :droplet_ids
+  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+  attr_reader :region
+  # @return [String] A unique ID that can be used to identify and reference a load balancer.
+  attr_reader :id
+  # @return [String] A human-readable name for a load balancer instance.
+  attr_reader :name
+  # @return [String] The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
+  attr_reader :project_id
+  # @return [String] An attribute containing the public-facing IPv6 address of the load balancer.
+  attr_reader :ipv6
+  # @return [Integer] How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
+  attr_reader :size_unit
+  # @return [LoadBalancerBaseSize] This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
+  attr_reader :size
+  # @return [LoadBalancerBaseAlgorithm] This field has been deprecated. You can no longer specify an algorithm for load balancers.
+  attr_reader :algorithm
+  # @return [LoadBalancerBaseStatus] A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
+  attr_reader :status
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
+  attr_reader :created_at
+  # @return [Array_of_ForwardingRule] An array of objects specifying the forwarding rules for a load balancer.
+  attr_reader :forwarding_rules
+  # @return [HealthCheck] An object specifying health check settings for the load balancer.
+  attr_reader :health_check
+  # @return [StickySessions] An object specifying sticky sessions settings for the load balancer.
+  attr_reader :sticky_sessions
+  # @return [Boolean] A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
+  attr_reader :redirect_http_to_https
+  # @return [Boolean] A boolean value indicating whether PROXY Protocol is in use.
+  attr_reader :enable_proxy_protocol
+  # @return [Boolean] A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
+  attr_reader :enable_backend_keepalive
+  # @return [Integer] An integer value which configures the idle timeout for HTTP requests to the target droplets.
+  attr_reader :http_idle_timeout_seconds
+  # @return [String] A string specifying the UUID of the VPC to which the load balancer is assigned.
+  attr_reader :vpc_uuid
+  # @return [String] A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
+  attr_reader :subnet_uuid
+  # @return [Boolean] A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
+  attr_reader :disable_lets_encrypt_dns_records
+  # @return [LbFirewall] An object specifying allow and deny rules to control traffic to the load balancer.
+  attr_reader :firewall
+  # @return [LoadBalancerBaseNetwork] A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
+  attr_reader :network
+  # @return [LoadBalancerBaseNetworkStack] A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
+  attr_reader :network_stack
+  # @return [LoadBalancerBaseType] A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
+  attr_reader :type
+  # @return [Array_of_Domains] An array of objects specifying the domain configurations for a Global load balancer.
+  attr_reader :domains
+  # @return [GlbSettings] An object specifying forwarding configurations for a Global load balancer.
+  attr_reader :glb_settings
+  # @return [Array_of_String] An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
+  attr_reader :target_load_balancer_ids
+  # @return [LoadBalancerBaseTlsCipherPolicy] A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+  attr_reader :tls_cipher_policy
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalLoadBalancerUpdateVariant0Metadata
-    FIELDS = {
-      droplet_ids: 'droplet_ids',
-      region: 'region',
-      id: 'id',
-      name: 'name',
-      project_id: 'project_id',
-      ipv6: 'ipv6',
-      size_unit: 'size_unit',
-      size: 'size',
-      algorithm: 'algorithm',
-      status: 'status',
-      created_at: 'created_at',
-      forwarding_rules: 'forwarding_rules',
-      health_check: 'health_check',
-      sticky_sessions: 'sticky_sessions',
-      redirect_http_to_https: 'redirect_http_to_https',
-      enable_proxy_protocol: 'enable_proxy_protocol',
-      enable_backend_keepalive: 'enable_backend_keepalive',
-      http_idle_timeout_seconds: 'http_idle_timeout_seconds',
-      vpc_uuid: 'vpc_uuid',
-      subnet_uuid: 'subnet_uuid',
-      disable_lets_encrypt_dns_records: 'disable_lets_encrypt_dns_records',
-      firewall: 'firewall',
-      network: 'network',
-      network_stack: 'network_stack',
-      type: 'type',
-      domains: 'domains',
-      glb_settings: 'glb_settings',
-      target_load_balancer_ids: 'target_load_balancer_ids',
-      tls_cipher_policy: 'tls_cipher_policy'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      droplet_ids
-      region
-      forwarding_rules
-    ].freeze
-    DECODERS = {
-      region: lambda do |value|
-        ::OctridevDigitalocean::RegionSlug.from_value(value)
-      end,
-      size: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseSize.from_value(value)
-      end,
-      algorithm: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseAlgorithm.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseStatus.from_value(value)
-      end,
-      forwarding_rules: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ForwardingRule.from_hash(item) }
-      end,
-      health_check: lambda do |value|
-        ::OctridevDigitalocean::HealthCheck.from_hash(value)
-      end,
-      sticky_sessions: lambda do |value|
-        ::OctridevDigitalocean::StickySessions.from_hash(value)
-      end,
-      firewall: lambda do |value|
-        ::OctridevDigitalocean::LbFirewall.from_hash(value)
-      end,
-      network: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseNetwork.from_value(value)
-      end,
-      network_stack: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseNetworkStack.from_value(value)
-      end,
-      type: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseType.from_value(value)
-      end,
-      domains: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Domains.from_hash(item) }
-      end,
-      glb_settings: lambda do |value|
-        ::OctridevDigitalocean::GlbSettings.from_hash(value)
-      end,
-      tls_cipher_policy: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseTlsCipherPolicy.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for LoadBalancerUpdateVariant0.
-  class LoadBalancerUpdateVariant0
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLoadBalancerUpdateVariant0Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLoadBalancerUpdateVariant0Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLoadBalancerUpdateVariant0Metadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_Integer] An array containing the IDs of the Droplets assigned to the load balancer.
-    attr_reader :droplet_ids
-    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-    attr_reader :region
-    # @return [String] A unique ID that can be used to identify and reference a load balancer.
-    attr_reader :id
-    # @return [String] A human-readable name for a load balancer instance.
-    attr_reader :name
-    # @return [String] The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
-    attr_reader :project_id
-    # @return [String] An attribute containing the public-facing IPv6 address of the load balancer.
-    attr_reader :ipv6
-    # @return [Integer] How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
-    attr_reader :size_unit
-    # @return [LoadBalancerBaseSize] This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
-    attr_reader :size
-    # @return [LoadBalancerBaseAlgorithm] This field has been deprecated. You can no longer specify an algorithm for load balancers.
-    attr_reader :algorithm
-    # @return [LoadBalancerBaseStatus] A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
-    attr_reader :status
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
-    attr_reader :created_at
-    # @return [Array_of_ForwardingRule] An array of objects specifying the forwarding rules for a load balancer.
-    attr_reader :forwarding_rules
-    # @return [HealthCheck] An object specifying health check settings for the load balancer.
-    attr_reader :health_check
-    # @return [StickySessions] An object specifying sticky sessions settings for the load balancer.
-    attr_reader :sticky_sessions
-    # @return [Boolean] A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
-    attr_reader :redirect_http_to_https
-    # @return [Boolean] A boolean value indicating whether PROXY Protocol is in use.
-    attr_reader :enable_proxy_protocol
-    # @return [Boolean] A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
-    attr_reader :enable_backend_keepalive
-    # @return [Integer] An integer value which configures the idle timeout for HTTP requests to the target droplets.
-    attr_reader :http_idle_timeout_seconds
-    # @return [String] A string specifying the UUID of the VPC to which the load balancer is assigned.
-    attr_reader :vpc_uuid
-    # @return [String] A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
-    attr_reader :subnet_uuid
-    # @return [Boolean] A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
-    attr_reader :disable_lets_encrypt_dns_records
-    # @return [LbFirewall] An object specifying allow and deny rules to control traffic to the load balancer.
-    attr_reader :firewall
-    # @return [LoadBalancerBaseNetwork] A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
-    attr_reader :network
-    # @return [LoadBalancerBaseNetworkStack] A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
-    attr_reader :network_stack
-    # @return [LoadBalancerBaseType] A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
-    attr_reader :type
-    # @return [Array_of_Domains] An array of objects specifying the domain configurations for a Global load balancer.
-    attr_reader :domains
-    # @return [GlbSettings] An object specifying forwarding configurations for a Global load balancer.
-    attr_reader :glb_settings
-    # @return [Array_of_String] An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
-    attr_reader :target_load_balancer_ids
-    # @return [LoadBalancerBaseTlsCipherPolicy] A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
-    attr_reader :tls_cipher_policy
+# Internal model hydration metadata.
+class SdkInternalLoadBalancerUpdateVariant1Metadata
+  FIELDS = {
+    tag: "tag",
+    region: "region",
+    id: "id",
+    name: "name",
+    project_id: "project_id",
+    ipv6: "ipv6",
+    size_unit: "size_unit",
+    size: "size",
+    algorithm: "algorithm",
+    status: "status",
+    created_at: "created_at",
+    forwarding_rules: "forwarding_rules",
+    health_check: "health_check",
+    sticky_sessions: "sticky_sessions",
+    redirect_http_to_https: "redirect_http_to_https",
+    enable_proxy_protocol: "enable_proxy_protocol",
+    enable_backend_keepalive: "enable_backend_keepalive",
+    http_idle_timeout_seconds: "http_idle_timeout_seconds",
+    vpc_uuid: "vpc_uuid",
+    subnet_uuid: "subnet_uuid",
+    disable_lets_encrypt_dns_records: "disable_lets_encrypt_dns_records",
+    firewall: "firewall",
+    network: "network",
+    network_stack: "network_stack",
+    type: "type",
+    domains: "domains",
+    glb_settings: "glb_settings",
+    target_load_balancer_ids: "target_load_balancer_ids",
+    tls_cipher_policy: "tls_cipher_policy",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    tag
+    region
+    forwarding_rules
+  ].freeze
+  DECODERS = {
+    region: lambda do |value|
+      ::OctridevDigitalocean::RegionSlug.from_value(value)
+    end,
+    size: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseSize.from_value(value)
+    end,
+    algorithm: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseAlgorithm.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseStatus.from_value(value)
+    end,
+    forwarding_rules: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ForwardingRule.from_hash(item) }
+    end,
+    health_check: lambda do |value|
+      ::OctridevDigitalocean::HealthCheck.from_hash(value)
+    end,
+    sticky_sessions: lambda do |value|
+      ::OctridevDigitalocean::StickySessions.from_hash(value)
+    end,
+    firewall: lambda do |value|
+      ::OctridevDigitalocean::LbFirewall.from_hash(value)
+    end,
+    network: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseNetwork.from_value(value)
+    end,
+    network_stack: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseNetworkStack.from_value(value)
+    end,
+    type: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseType.from_value(value)
+    end,
+    domains: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Domains.from_hash(item) }
+    end,
+    glb_settings: lambda do |value|
+      ::OctridevDigitalocean::GlbSettings.from_hash(value)
+    end,
+    tls_cipher_policy: lambda do |value|
+      ::OctridevDigitalocean::LoadBalancerBaseTlsCipherPolicy.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for LoadBalancerUpdateVariant1.
+class LoadBalancerUpdateVariant1
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLoadBalancerUpdateVariant1Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLoadBalancerUpdateVariant1Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLoadBalancerUpdateVariant1Metadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The name of a Droplet tag corresponding to Droplets assigned to the load balancer.
+  attr_reader :tag
+  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+  attr_reader :region
+  # @return [String] A unique ID that can be used to identify and reference a load balancer.
+  attr_reader :id
+  # @return [String] A human-readable name for a load balancer instance.
+  attr_reader :name
+  # @return [String] The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
+  attr_reader :project_id
+  # @return [String] An attribute containing the public-facing IPv6 address of the load balancer.
+  attr_reader :ipv6
+  # @return [Integer] How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
+  attr_reader :size_unit
+  # @return [LoadBalancerBaseSize] This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
+  attr_reader :size
+  # @return [LoadBalancerBaseAlgorithm] This field has been deprecated. You can no longer specify an algorithm for load balancers.
+  attr_reader :algorithm
+  # @return [LoadBalancerBaseStatus] A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
+  attr_reader :status
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
+  attr_reader :created_at
+  # @return [Array_of_ForwardingRule] An array of objects specifying the forwarding rules for a load balancer.
+  attr_reader :forwarding_rules
+  # @return [HealthCheck] An object specifying health check settings for the load balancer.
+  attr_reader :health_check
+  # @return [StickySessions] An object specifying sticky sessions settings for the load balancer.
+  attr_reader :sticky_sessions
+  # @return [Boolean] A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
+  attr_reader :redirect_http_to_https
+  # @return [Boolean] A boolean value indicating whether PROXY Protocol is in use.
+  attr_reader :enable_proxy_protocol
+  # @return [Boolean] A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
+  attr_reader :enable_backend_keepalive
+  # @return [Integer] An integer value which configures the idle timeout for HTTP requests to the target droplets.
+  attr_reader :http_idle_timeout_seconds
+  # @return [String] A string specifying the UUID of the VPC to which the load balancer is assigned.
+  attr_reader :vpc_uuid
+  # @return [String] A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
+  attr_reader :subnet_uuid
+  # @return [Boolean] A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
+  attr_reader :disable_lets_encrypt_dns_records
+  # @return [LbFirewall] An object specifying allow and deny rules to control traffic to the load balancer.
+  attr_reader :firewall
+  # @return [LoadBalancerBaseNetwork] A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
+  attr_reader :network
+  # @return [LoadBalancerBaseNetworkStack] A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
+  attr_reader :network_stack
+  # @return [LoadBalancerBaseType] A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
+  attr_reader :type
+  # @return [Array_of_Domains] An array of objects specifying the domain configurations for a Global load balancer.
+  attr_reader :domains
+  # @return [GlbSettings] An object specifying forwarding configurations for a Global load balancer.
+  attr_reader :glb_settings
+  # @return [Array_of_String] An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
+  attr_reader :target_load_balancer_ids
+  # @return [LoadBalancerBaseTlsCipherPolicy] A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+  attr_reader :tls_cipher_policy
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalLoadBalancerUpdateVariant1Metadata
-    FIELDS = {
-      tag: 'tag',
-      region: 'region',
-      id: 'id',
-      name: 'name',
-      project_id: 'project_id',
-      ipv6: 'ipv6',
-      size_unit: 'size_unit',
-      size: 'size',
-      algorithm: 'algorithm',
-      status: 'status',
-      created_at: 'created_at',
-      forwarding_rules: 'forwarding_rules',
-      health_check: 'health_check',
-      sticky_sessions: 'sticky_sessions',
-      redirect_http_to_https: 'redirect_http_to_https',
-      enable_proxy_protocol: 'enable_proxy_protocol',
-      enable_backend_keepalive: 'enable_backend_keepalive',
-      http_idle_timeout_seconds: 'http_idle_timeout_seconds',
-      vpc_uuid: 'vpc_uuid',
-      subnet_uuid: 'subnet_uuid',
-      disable_lets_encrypt_dns_records: 'disable_lets_encrypt_dns_records',
-      firewall: 'firewall',
-      network: 'network',
-      network_stack: 'network_stack',
-      type: 'type',
-      domains: 'domains',
-      glb_settings: 'glb_settings',
-      target_load_balancer_ids: 'target_load_balancer_ids',
-      tls_cipher_policy: 'tls_cipher_policy'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      tag
-      region
-      forwarding_rules
-    ].freeze
-    DECODERS = {
-      region: lambda do |value|
-        ::OctridevDigitalocean::RegionSlug.from_value(value)
-      end,
-      size: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseSize.from_value(value)
-      end,
-      algorithm: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseAlgorithm.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseStatus.from_value(value)
-      end,
-      forwarding_rules: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ForwardingRule.from_hash(item) }
-      end,
-      health_check: lambda do |value|
-        ::OctridevDigitalocean::HealthCheck.from_hash(value)
-      end,
-      sticky_sessions: lambda do |value|
-        ::OctridevDigitalocean::StickySessions.from_hash(value)
-      end,
-      firewall: lambda do |value|
-        ::OctridevDigitalocean::LbFirewall.from_hash(value)
-      end,
-      network: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseNetwork.from_value(value)
-      end,
-      network_stack: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseNetworkStack.from_value(value)
-      end,
-      type: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseType.from_value(value)
-      end,
-      domains: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Domains.from_hash(item) }
-      end,
-      glb_settings: lambda do |value|
-        ::OctridevDigitalocean::GlbSettings.from_hash(value)
-      end,
-      tls_cipher_policy: lambda do |value|
-        ::OctridevDigitalocean::LoadBalancerBaseTlsCipherPolicy.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for LoadBalancerUpdateVariant1.
-  class LoadBalancerUpdateVariant1
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLoadBalancerUpdateVariant1Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLoadBalancerUpdateVariant1Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLoadBalancerUpdateVariant1Metadata::DECODERS
-
-    # @return [String] The name of a Droplet tag corresponding to Droplets assigned to the load balancer.
-    attr_reader :tag
-    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-    attr_reader :region
-    # @return [String] A unique ID that can be used to identify and reference a load balancer.
-    attr_reader :id
-    # @return [String] A human-readable name for a load balancer instance.
-    attr_reader :name
-    # @return [String] The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
-    attr_reader :project_id
-    # @return [String] An attribute containing the public-facing IPv6 address of the load balancer.
-    attr_reader :ipv6
-    # @return [Integer] How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
-    attr_reader :size_unit
-    # @return [LoadBalancerBaseSize] This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
-    attr_reader :size
-    # @return [LoadBalancerBaseAlgorithm] This field has been deprecated. You can no longer specify an algorithm for load balancers.
-    attr_reader :algorithm
-    # @return [LoadBalancerBaseStatus] A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
-    attr_reader :status
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
-    attr_reader :created_at
-    # @return [Array_of_ForwardingRule] An array of objects specifying the forwarding rules for a load balancer.
-    attr_reader :forwarding_rules
-    # @return [HealthCheck] An object specifying health check settings for the load balancer.
-    attr_reader :health_check
-    # @return [StickySessions] An object specifying sticky sessions settings for the load balancer.
-    attr_reader :sticky_sessions
-    # @return [Boolean] A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
-    attr_reader :redirect_http_to_https
-    # @return [Boolean] A boolean value indicating whether PROXY Protocol is in use.
-    attr_reader :enable_proxy_protocol
-    # @return [Boolean] A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
-    attr_reader :enable_backend_keepalive
-    # @return [Integer] An integer value which configures the idle timeout for HTTP requests to the target droplets.
-    attr_reader :http_idle_timeout_seconds
-    # @return [String] A string specifying the UUID of the VPC to which the load balancer is assigned.
-    attr_reader :vpc_uuid
-    # @return [String] A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
-    attr_reader :subnet_uuid
-    # @return [Boolean] A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
-    attr_reader :disable_lets_encrypt_dns_records
-    # @return [LbFirewall] An object specifying allow and deny rules to control traffic to the load balancer.
-    attr_reader :firewall
-    # @return [LoadBalancerBaseNetwork] A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
-    attr_reader :network
-    # @return [LoadBalancerBaseNetworkStack] A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
-    attr_reader :network_stack
-    # @return [LoadBalancerBaseType] A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
-    attr_reader :type
-    # @return [Array_of_Domains] An array of objects specifying the domain configurations for a Global load balancer.
-    attr_reader :domains
-    # @return [GlbSettings] An object specifying forwarding configurations for a Global load balancer.
-    attr_reader :glb_settings
-    # @return [Array_of_String] An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
-    attr_reader :target_load_balancer_ids
-    # @return [LoadBalancerBaseTlsCipherPolicy] A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
-    attr_reader :tls_cipher_policy
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the LoadBalancerUpdate SDK namespace.
-  module LoadBalancerUpdate
-    def self.from_hash(hash)
-      shape_mapping = {
-        'droplet_ids' => LoadBalancerUpdateVariant0,
-        'tag' => LoadBalancerUpdateVariant1
-      }
-      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-      decoded = type&.from_hash(hash)
-      decoded unless type.nil?
-    end
+# Defines the LoadBalancerUpdate SDK namespace.
+module LoadBalancerUpdate
+  def self.from_hash(hash)
+    shape_mapping = {
+      "droplet_ids" => LoadBalancerUpdateVariant0,
+      "tag" => LoadBalancerUpdateVariant1,
+    }
+    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+    decoded = type&.from_hash(hash)
+    return decoded unless type.nil?
   end
+end
 end

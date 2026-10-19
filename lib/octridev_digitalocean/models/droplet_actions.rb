@@ -5,553 +5,555 @@
 
 # droplet_actions domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAllDropletActionsMetadata
-    FIELDS = {
-      actions: 'actions',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      actions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAllDropletActionsMetadata
+  FIELDS = {
+    actions: "actions",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    actions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AllDropletActions.
+# Typed representation of the `AllDropletActions` API schema.
+class AllDropletActions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAllDropletActionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAllDropletActionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAllDropletActionsMetadata::DECODERS
+
+  attr_reader :actions
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AllDropletActions.
-  # Typed representation of the `AllDropletActions` API schema.
-  class AllDropletActions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAllDropletActionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAllDropletActionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAllDropletActionsMetadata::DECODERS
-
-    attr_reader :actions
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionMetadata
-    FIELDS = {
-      type: 'type'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletActionMetadata
+  FIELDS = {
+    type: "type",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for DropletAction.
+# Specifies the action that will be taken on the Droplet.
+class DropletAction
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionMetadata::DECODERS
+
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletAction.
-  # Specifies the action that will be taken on the Droplet.
-  class DropletAction
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionMetadata::DECODERS
-
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the DropletActionType SDK namespace.
-  module DropletActionType
-    ENABLE_BACKUPS = 'enable_backups'
-    DISABLE_BACKUPS = 'disable_backups'
-    REBOOT = 'reboot'
-    POWER_CYCLE = 'power_cycle'
-    SHUTDOWN = 'shutdown'
-    POWER_OFF = 'power_off'
-    POWER_ON = 'power_on'
-    RESTORE = 'restore'
-    PASSWORD_RESET = 'password_reset'
-    RESIZE = 'resize'
-    REBUILD = 'rebuild'
-    RENAME = 'rename'
-    CHANGE_KERNEL = 'change_kernel'
-    ENABLE_IPV6 = 'enable_ipv6'
-    SNAPSHOT = 'snapshot'
-    VALUES = %w[
-      enable_backups disable_backups reboot power_cycle shutdown power_off
-      power_on restore password_reset resize rebuild rename change_kernel
-      enable_ipv6 snapshot
-    ].freeze
-    def self.from_value(value)
-      return value if VALUES.include?(value)
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-      raise SdkValidationError.new('DropletActionType', 'enum', "Unknown DropletActionType: #{value}")
-    end
+# Defines the DropletActionType SDK namespace.
+module DropletActionType
+  ENABLE_BACKUPS = 'enable_backups'
+  DISABLE_BACKUPS = 'disable_backups'
+  REBOOT = 'reboot'
+  POWER_CYCLE = 'power_cycle'
+  SHUTDOWN = 'shutdown'
+  POWER_OFF = 'power_off'
+  POWER_ON = 'power_on'
+  RESTORE = 'restore'
+  PASSWORD_RESET = 'password_reset'
+  RESIZE = 'resize'
+  REBUILD = 'rebuild'
+  RENAME = 'rename'
+  CHANGE_KERNEL = 'change_kernel'
+  ENABLE_IPV6 = 'enable_ipv6'
+  SNAPSHOT = 'snapshot'
+  VALUES = [
+    'enable_backups', 'disable_backups', 'reboot', 'power_cycle', 'shutdown', 'power_off',
+    'power_on', 'restore', 'password_reset', 'resize', 'rebuild', 'rename', 'change_kernel',
+    'enable_ipv6', 'snapshot'
+  ].freeze
+  def self.from_value(value)
+    return value if VALUES.include?(value)
+
+    raise SdkValidationError.new('DropletActionType', 'enum', "Unknown DropletActionType: #{value}")
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletActionChangeBackupPolicyMetadata
+  FIELDS = {
+    type: "type",
+    backup_policy: "backup_policy",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    backup_policy
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+    backup_policy: lambda do |value|
+      ::OctridevDigitalocean::DropletBackupPolicy.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DropletActionChangeBackupPolicy.
+# Typed representation of the `DropletActionChangeBackupPolicy` API schema.
+class DropletActionChangeBackupPolicy
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionChangeBackupPolicyMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionChangeBackupPolicyMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionChangeBackupPolicyMetadata::DECODERS
+
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+  # @return [DropletBackupPolicy] An object specifying the backup policy for the Droplet.
+  attr_reader :backup_policy
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionChangeBackupPolicyMetadata
-    FIELDS = {
-      type: 'type',
-      backup_policy: 'backup_policy'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      backup_policy
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end,
-      backup_policy: lambda do |value|
-        ::OctridevDigitalocean::DropletBackupPolicy.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionChangeBackupPolicy.
-  # Typed representation of the `DropletActionChangeBackupPolicy` API schema.
-  class DropletActionChangeBackupPolicy
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionChangeBackupPolicyMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionChangeBackupPolicyMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionChangeBackupPolicyMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-    # @return [DropletBackupPolicy] An object specifying the backup policy for the Droplet.
-    attr_reader :backup_policy
+# Internal model hydration metadata.
+class SdkInternalDropletActionChangeKernelMetadata
+  FIELDS = {
+    type: "type",
+    kernel: "kernel",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionChangeKernel.
+# Typed representation of the `DropletActionChangeKernel` API schema.
+class DropletActionChangeKernel
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionChangeKernelMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionChangeKernelMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionChangeKernelMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+  # @return [Integer] A unique number used to identify and reference a specific kernel.
+  attr_reader :kernel
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionChangeKernelMetadata
-    FIELDS = {
-      type: 'type',
-      kernel: 'kernel'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionChangeKernel.
-  # Typed representation of the `DropletActionChangeKernel` API schema.
-  class DropletActionChangeKernel
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionChangeKernelMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionChangeKernelMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionChangeKernelMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-    # @return [Integer] A unique number used to identify and reference a specific kernel.
-    attr_reader :kernel
+# Internal model hydration metadata.
+class SdkInternalDropletActionEnableBackupsRequestMetadata
+  FIELDS = {
+    type: "type",
+    backup_policy: "backup_policy",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+    backup_policy: lambda do |value|
+      ::OctridevDigitalocean::DropletBackupPolicyRequest.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionEnableBackupsRequest.
+# Typed representation of the `DropletActionEnableBackupsRequest` API schema.
+class DropletActionEnableBackupsRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionEnableBackupsRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionEnableBackupsRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionEnableBackupsRequestMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+  # @return [DropletBackupPolicyRequest] An object specifying the backup policy for the Droplet. If omitted, the backup plan will default to daily.
+  attr_reader :backup_policy
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionEnableBackupsRequestMetadata
-    FIELDS = {
-      type: 'type',
-      backup_policy: 'backup_policy'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end,
-      backup_policy: lambda do |value|
-        ::OctridevDigitalocean::DropletBackupPolicyRequest.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionEnableBackupsRequest.
-  # Typed representation of the `DropletActionEnableBackupsRequest` API schema.
-  class DropletActionEnableBackupsRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionEnableBackupsRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionEnableBackupsRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionEnableBackupsRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-    # @return [DropletBackupPolicyRequest] An object specifying the backup policy for the Droplet. If omitted, the backup plan will default to daily.
-    attr_reader :backup_policy
+# Internal model hydration metadata.
+class SdkInternalDropletActionRebuildMetadata
+  FIELDS = {
+    type: "type",
+    image: "image",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionRebuild.
+# Typed representation of the `DropletActionRebuild` API schema.
+class DropletActionRebuild
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionRebuildMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionRebuildMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionRebuildMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+  # @return [Object] The image ID of a public or private image or the slug identifier for a public image. The Droplet will be rebuilt using this image as its base.
+  attr_reader :image
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionRebuildMetadata
-    FIELDS = {
-      type: 'type',
-      image: 'image'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionRebuild.
-  # Typed representation of the `DropletActionRebuild` API schema.
-  class DropletActionRebuild
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionRebuildMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionRebuildMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionRebuildMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-    # @return [Object] The image ID of a public or private image or the slug identifier for a public image. The Droplet will be rebuilt using this image as its base.
-    attr_reader :image
+# Internal model hydration metadata.
+class SdkInternalDropletActionRenameMetadata
+  FIELDS = {
+    type: "type",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionRename.
+# Typed representation of the `DropletActionRename` API schema.
+class DropletActionRename
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionRenameMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionRenameMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionRenameMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+  # @return [String] The new name for the Droplet.
+  attr_reader :name
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionRenameMetadata
-    FIELDS = {
-      type: 'type',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionRename.
-  # Typed representation of the `DropletActionRename` API schema.
-  class DropletActionRename
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionRenameMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionRenameMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionRenameMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-    # @return [String] The new name for the Droplet.
-    attr_reader :name
+# Internal model hydration metadata.
+class SdkInternalDropletActionResizeMetadata
+  FIELDS = {
+    type: "type",
+    disk: "disk",
+    size: "size",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionResize.
+# Typed representation of the `DropletActionResize` API schema.
+class DropletActionResize
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionResizeMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionResizeMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionResizeMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+  # @return [Boolean] When `true`, the Droplet's disk will be resized in addition to its RAM and CPU. This is a permanent change and cannot be reversed as a Droplet's disk size cannot be decreased.
+  attr_reader :disk
+  # @return [String] The slug identifier for the size to which you wish to resize the Droplet.
+  attr_reader :size
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionResizeMetadata
-    FIELDS = {
-      type: 'type',
-      disk: 'disk',
-      size: 'size'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionResize.
-  # Typed representation of the `DropletActionResize` API schema.
-  class DropletActionResize
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionResizeMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionResizeMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionResizeMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-    # @return [Boolean] When `true`, the Droplet's disk will be resized in addition to its RAM and CPU. This is a permanent change and cannot be reversed as a Droplet's disk size cannot be decreased.
-    attr_reader :disk
-    # @return [String] The slug identifier for the size to which you wish to resize the Droplet.
-    attr_reader :size
+# Internal model hydration metadata.
+class SdkInternalDropletActionResponseMetadata
+  FIELDS = {
+    action: "action",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    action: lambda do |value|
+      ::OctridevDigitalocean::Action.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionResponse.
+# Typed representation of the `DropletActionResponse` API schema.
+class DropletActionResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Action] Optional object value serialized in the `action` wire field.
+  attr_reader :action
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionResponseMetadata
-    FIELDS = {
-      action: 'action'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      action: lambda do |value|
-        ::OctridevDigitalocean::Action.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionResponse.
-  # Typed representation of the `DropletActionResponse` API schema.
-  class DropletActionResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Action] Optional object value serialized in the `action` wire field.
-    attr_reader :action
+# Internal model hydration metadata.
+class SdkInternalDropletActionRestoreMetadata
+  FIELDS = {
+    type: "type",
+    image: "image",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionRestore.
+# Typed representation of the `DropletActionRestore` API schema.
+class DropletActionRestore
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionRestoreMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionRestoreMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionRestoreMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+  # @return [Integer] The ID of a backup of the current Droplet instance to restore from.
+  attr_reader :image
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionRestoreMetadata
-    FIELDS = {
-      type: 'type',
-      image: 'image'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionRestore.
-  # Typed representation of the `DropletActionRestore` API schema.
-  class DropletActionRestore
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionRestoreMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionRestoreMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionRestoreMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-    # @return [Integer] The ID of a backup of the current Droplet instance to restore from.
-    attr_reader :image
+# Internal model hydration metadata.
+class SdkInternalDropletActionSnapshotMetadata
+  FIELDS = {
+    type: "type",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletActionType.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionSnapshot.
+# Typed representation of the `DropletActionSnapshot` API schema.
+class DropletActionSnapshot
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionSnapshotMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionSnapshotMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionSnapshotMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [DropletActionType] The type of action to initiate for the Droplet.
+  attr_reader :type
+  # @return [String] The name to give the new snapshot of the Droplet.
+  attr_reader :name
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionSnapshotMetadata
-    FIELDS = {
-      type: 'type',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletActionType.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionSnapshot.
-  # Typed representation of the `DropletActionSnapshot` API schema.
-  class DropletActionSnapshot
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionSnapshotMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionSnapshotMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionSnapshotMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DropletActionType] The type of action to initiate for the Droplet.
-    attr_reader :type
-    # @return [String] The name to give the new snapshot of the Droplet.
-    attr_reader :name
+# Internal model hydration metadata.
+class SdkInternalDropletActionsResponseMetadata
+  FIELDS = {
+    actions: "actions",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    actions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletActionsResponse.
+# Typed representation of the `DropletActionsResponse` API schema.
+class DropletActionsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletActionsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletActionsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletActionsResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_Action] Optional array value serialized in the `actions` wire field.
+  attr_reader :actions
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletActionsResponseMetadata
-    FIELDS = {
-      actions: 'actions'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      actions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletActionsResponse.
-  # Typed representation of the `DropletActionsResponse` API schema.
-  class DropletActionsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletActionsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletActionsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletActionsResponseMetadata::DECODERS
-
-    # @return [Array_of_Action] Optional array value serialized in the `actions` wire field.
-    attr_reader :actions
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

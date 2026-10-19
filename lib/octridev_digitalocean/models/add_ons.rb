@@ -5,661 +5,667 @@
 
 # add_ons domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAddonsAppInfoMetadata
-    FIELDS = {
-      app_slug: 'app_slug',
-      tos: 'tos',
-      eula: 'eula',
-      plans: 'plans'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      app_slug
-      tos
-      eula
-      plans
-    ].freeze
-    DECODERS = {
-      plans: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AddonsPlan.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAddonsAppInfoMetadata
+  FIELDS = {
+    app_slug: "app_slug",
+    tos: "tos",
+    eula: "eula",
+    plans: "plans",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    app_slug
+    tos
+    eula
+    plans
+  ].freeze
+  DECODERS = {
+    plans: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AddonsPlan.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AddonsAppInfo.
+# Typed representation of the `AddonsAppInfo` API schema.
+class AddonsAppInfo
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsAppInfoMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsAppInfoMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsAppInfoMetadata::DECODERS
+
+  # @return [String] The slug identifier for the application associated with the resource.
+  attr_reader :app_slug
+  # @return [String] The Terms of Service URL for the resource.
+  attr_reader :tos
+  # @return [String] The End User License Agreement URL for the resource.
+  attr_reader :eula
+  # @return [Array_of_AddonsPlan] A list of plans available for the resource.
+  attr_reader :plans
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AddonsAppInfo.
-  # Typed representation of the `AddonsAppInfo` API schema.
-  class AddonsAppInfo
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsAppInfoMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsAppInfoMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsAppInfoMetadata::DECODERS
-
-    # @return [String] The slug identifier for the application associated with the resource.
-    attr_reader :app_slug
-    # @return [String] The Terms of Service URL for the resource.
-    attr_reader :tos
-    # @return [String] The End User License Agreement URL for the resource.
-    attr_reader :eula
-    # @return [Array_of_AddonsPlan] A list of plans available for the resource.
-    attr_reader :plans
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsAppMetadataMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      display_name: 'display_name',
-      description: 'description',
-      type: 'type',
-      options: 'options'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      name
-      display_name
-      description
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::AddonsAppMetadataType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAddonsAppMetadataMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    display_name: "display_name",
+    description: "description",
+    type: "type",
+    options: "options",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    name
+    display_name
+    description
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::AddonsAppMetadataType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for AddonsAppMetadata.
+# Typed representation of the `AddonsAppMetadata` API schema.
+class AddonsAppMetadata
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsAppMetadataMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsAppMetadataMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsAppMetadataMetadata::DECODERS
+
+  # @return [Integer] Unique identifier for the addon metadata item.
+  attr_reader :id
+  # @return [String] The name of the metadata item.
+  attr_reader :name
+  # @return [String] The display name of the metadata item.
+  attr_reader :display_name
+  # @return [String] A brief description of the metadata item.
+  attr_reader :description
+  # @return [AddonsAppMetadataType] The data type of the metadata value.
+  attr_reader :type
+  # @return [Array_of_String] Optional array value serialized in the `options` wire field.
+  attr_reader :options
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AddonsAppMetadata.
-  # Typed representation of the `AddonsAppMetadata` API schema.
-  class AddonsAppMetadata
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsAppMetadataMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsAppMetadataMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsAppMetadataMetadata::DECODERS
-
-    # @return [Integer] Unique identifier for the addon metadata item.
-    attr_reader :id
-    # @return [String] The name of the metadata item.
-    attr_reader :name
-    # @return [String] The display name of the metadata item.
-    attr_reader :display_name
-    # @return [String] A brief description of the metadata item.
-    attr_reader :description
-    # @return [AddonsAppMetadataType] The data type of the metadata value.
-    attr_reader :type
-    # @return [Array_of_String] Optional array value serialized in the `options` wire field.
-    attr_reader :options
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the AddonsAppMetadataType SDK namespace.
-  module AddonsAppMetadataType
-    STRING = 'string'
-    BOOLEAN = 'boolean'
-    VALUES = %w[string boolean].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the AddonsAppMetadataType SDK namespace.
+module AddonsAppMetadataType
+  STRING = 'string'
+  BOOLEAN = 'boolean'
+  VALUES = ['string', 'boolean'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAddonsCreateMetadata
+  FIELDS = {
+    resource: "resource",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    resource: lambda do |value|
+      ::OctridevDigitalocean::AddonsResource.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AddonsCreate.
+# Typed representation of the `AddonsCreate` API schema.
+class AddonsCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsCreateMetadata::DECODERS
+
+  # @return [AddonsResource] Optional object value serialized in the `resource` wire field.
+  attr_reader :resource
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsCreateMetadata
-    FIELDS = {
-      resource: 'resource'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      resource: lambda do |value|
-        ::OctridevDigitalocean::AddonsResource.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AddonsCreate.
-  # Typed representation of the `AddonsCreate` API schema.
-  class AddonsCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsCreateMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [AddonsResource] Optional object value serialized in the `resource` wire field.
-    attr_reader :resource
+# Internal model hydration metadata.
+class SdkInternalAddonsDimensionVolumeWithPriceMetadata
+  FIELDS = {
+    id: "id",
+    low_volume: "low_volume",
+    max_volume: "max_volume",
+    price_per_unit: "price_per_unit",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    low_volume
+    max_volume
+    price_per_unit
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for AddonsDimensionVolumeWithPrice.
+# Typed representation of the `AddonsDimensionVolumeWithPrice` API schema.
+class AddonsDimensionVolumeWithPrice
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsDimensionVolumeWithPriceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsDimensionVolumeWithPriceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsDimensionVolumeWithPriceMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Integer] Unique identifier for the addon.
+  attr_reader :id
+  # @return [Integer] The minimum volume for the volume pricing tier.
+  attr_reader :low_volume
+  # @return [Integer] The maximum volume for the volume pricing tier.
+  attr_reader :max_volume
+  # @return [String] The price per unit for the volume tier in US dollars.
+  attr_reader :price_per_unit
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsDimensionVolumeWithPriceMetadata
-    FIELDS = {
-      id: 'id',
-      low_volume: 'low_volume',
-      max_volume: 'max_volume',
-      price_per_unit: 'price_per_unit'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      low_volume
-      max_volume
-      price_per_unit
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AddonsDimensionVolumeWithPrice.
-  # Typed representation of the `AddonsDimensionVolumeWithPrice` API schema.
-  class AddonsDimensionVolumeWithPrice
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsDimensionVolumeWithPriceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsDimensionVolumeWithPriceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsDimensionVolumeWithPriceMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] Unique identifier for the addon.
-    attr_reader :id
-    # @return [Integer] The minimum volume for the volume pricing tier.
-    attr_reader :low_volume
-    # @return [Integer] The maximum volume for the volume pricing tier.
-    attr_reader :max_volume
-    # @return [String] The price per unit for the volume tier in US dollars.
-    attr_reader :price_per_unit
+# Internal model hydration metadata.
+class SdkInternalAddonsDimensionWithPriceMetadata
+  FIELDS = {
+    id: "id",
+    sku: "sku",
+    slug: "slug",
+    display_name: "display_name",
+    feature_name: "feature_name",
+    volumes: "volumes",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    sku
+    slug
+    display_name
+    feature_name
+    volumes
+  ].freeze
+  DECODERS = {
+    volumes: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AddonsDimensionVolumeWithPrice.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for AddonsDimensionWithPrice.
+# Typed representation of the `AddonsDimensionWithPrice` API schema.
+class AddonsDimensionWithPrice
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsDimensionWithPriceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsDimensionWithPriceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsDimensionWithPriceMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Integer] Unique identifier for the dimension.
+  attr_reader :id
+  # @return [String] Unique string identifier for the dimension, tied to a price.
+  attr_reader :sku
+  # @return [String] Slug identifier for the dimension.
+  attr_reader :slug
+  # @return [String] Display name for the dimension.
+  attr_reader :display_name
+  # @return [String] Name of the feature associated with the dimension.
+  attr_reader :feature_name
+  # @return [Array_of_AddonsDimensionVolumeWithPrice] A list of volumes associated with the dimension, each with its own price.
+  attr_reader :volumes
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsDimensionWithPriceMetadata
-    FIELDS = {
-      id: 'id',
-      sku: 'sku',
-      slug: 'slug',
-      display_name: 'display_name',
-      feature_name: 'feature_name',
-      volumes: 'volumes'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      sku
-      slug
-      display_name
-      feature_name
-      volumes
-    ].freeze
-    DECODERS = {
-      volumes: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AddonsDimensionVolumeWithPrice.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AddonsDimensionWithPrice.
-  # Typed representation of the `AddonsDimensionWithPrice` API schema.
-  class AddonsDimensionWithPrice
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsDimensionWithPriceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsDimensionWithPriceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsDimensionWithPriceMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] Unique identifier for the dimension.
-    attr_reader :id
-    # @return [String] Unique string identifier for the dimension, tied to a price.
-    attr_reader :sku
-    # @return [String] Slug identifier for the dimension.
-    attr_reader :slug
-    # @return [String] Display name for the dimension.
-    attr_reader :display_name
-    # @return [String] Name of the feature associated with the dimension.
-    attr_reader :feature_name
-    # @return [Array_of_AddonsDimensionVolumeWithPrice] A list of volumes associated with the dimension, each with its own price.
-    attr_reader :volumes
+# Internal model hydration metadata.
+class SdkInternalAddonsFeatureMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    type: "type",
+    unit: "unit",
+    value: "value",
+    created_at: "created_at",
+    updated_at: "updated_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    name
+    type
+    value
+    created_at
+    updated_at
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::AddonsFeatureType.from_value(value)
+    end,
+    unit: lambda do |value|
+      ::OctridevDigitalocean::AddonsFeatureUnit.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for AddonsFeature.
+# Typed representation of the `AddonsFeature` API schema.
+class AddonsFeature
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsFeatureMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsFeatureMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsFeatureMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Integer] Unique identifier for the app feature.
+  attr_reader :id
+  # @return [String] Name of the feature.
+  attr_reader :name
+  # @return [AddonsFeatureType] Feature type, indicating the kind of data it holds.
+  attr_reader :type
+  # @return [AddonsFeatureUnit] Unit of measurement for the feature, if applicable. Units apply to allowance features.
+  attr_reader :unit
+  # @return [Object] Value of the feature, which can vary based on the type.
+  attr_reader :value
+  # @return [String] Timestamp when the feature was created.
+  attr_reader :created_at
+  # @return [String] Timestamp when the feature was last updated.
+  attr_reader :updated_at
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsFeatureMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      type: 'type',
-      unit: 'unit',
-      value: 'value',
-      created_at: 'created_at',
-      updated_at: 'updated_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      name
-      type
-      value
-      created_at
-      updated_at
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::AddonsFeatureType.from_value(value)
-      end,
-      unit: lambda do |value|
-        ::OctridevDigitalocean::AddonsFeatureUnit.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AddonsFeature.
-  # Typed representation of the `AddonsFeature` API schema.
-  class AddonsFeature
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsFeatureMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsFeatureMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsFeatureMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] Unique identifier for the app feature.
-    attr_reader :id
-    # @return [String] Name of the feature.
-    attr_reader :name
-    # @return [AddonsFeatureType] Feature type, indicating the kind of data it holds.
-    attr_reader :type
-    # @return [AddonsFeatureUnit] Unit of measurement for the feature, if applicable. Units apply to allowance features.
-    attr_reader :unit
-    # @return [Object] Value of the feature, which can vary based on the type.
-    attr_reader :value
-    # @return [String] Timestamp when the feature was created.
-    attr_reader :created_at
-    # @return [String] Timestamp when the feature was last updated.
-    attr_reader :updated_at
+# Defines the AddonsFeatureType SDK namespace.
+module AddonsFeatureType
+  UNKNOWN = 'unknown'
+  STRING = 'string'
+  BOOLEAN = 'boolean'
+  ALLOWANCE = 'allowance'
+  VALUES = ['unknown', 'string', 'boolean', 'allowance'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Defines the AddonsFeatureUnit SDK namespace.
+module AddonsFeatureUnit
+  UNIT_UNKNOWN = 'unit_unknown'
+  GB = 'GB'
+  GIB = 'GIB'
+  COUNT = 'count'
+  BYTE = 'byte'
+  BYTE_SECOND = 'byte_second'
+  VALUES = ['unit_unknown', 'GB', 'GIB', 'count', 'byte', 'byte_second'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Internal model hydration metadata.
+class SdkInternalAddonsGetMetadata
+  FIELDS = {
+    resource: "resource",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    resource: lambda do |value|
+      ::OctridevDigitalocean::AddonsResource.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# API model for AddonsGet.
+# Typed representation of the `AddonsGet` API schema.
+class AddonsGet
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsGetMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsGetMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsGetMetadata::DECODERS
+
+  # @return [AddonsResource] Optional object value serialized in the `resource` wire field.
+  attr_reader :resource
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the AddonsFeatureType SDK namespace.
-  module AddonsFeatureType
-    UNKNOWN = 'unknown'
-    STRING = 'string'
-    BOOLEAN = 'boolean'
-    ALLOWANCE = 'allowance'
-    VALUES = %w[unknown string boolean allowance].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the AddonsFeatureUnit SDK namespace.
-  module AddonsFeatureUnit
-    UNIT_UNKNOWN = 'unit_unknown'
-    GB = 'GB'
-    GIB = 'GIB'
-    COUNT = 'count'
-    BYTE = 'byte'
-    BYTE_SECOND = 'byte_second'
-    VALUES = %w[unit_unknown GB GIB count byte byte_second].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAddonsGetAppMetadata
+  FIELDS = {
+    apps: "apps",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    apps: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AddonsAppInfo.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AddonsGetApp.
+# Typed representation of the `AddonsGetApp` API schema.
+class AddonsGetApp
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsGetAppMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsGetAppMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsGetAppMetadata::DECODERS
+
+  # @return [Array_of_AddonsAppInfo] Optional array value serialized in the `apps` wire field.
+  attr_reader :apps
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsGetMetadata
-    FIELDS = {
-      resource: 'resource'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      resource: lambda do |value|
-        ::OctridevDigitalocean::AddonsResource.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AddonsGet.
-  # Typed representation of the `AddonsGet` API schema.
-  class AddonsGet
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsGetMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsGetMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsGetMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [AddonsResource] Optional object value serialized in the `resource` wire field.
-    attr_reader :resource
+# Internal model hydration metadata.
+class SdkInternalAddonsGetAppMetadataMetadata
+  FIELDS = {
+    metadata: "metadata",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    metadata: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AddonsAppMetadata.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for AddonsGetAppMetadata.
+# Typed representation of the `AddonsGetAppMetadata` API schema.
+class AddonsGetAppMetadata
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsGetAppMetadataMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsGetAppMetadataMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsGetAppMetadataMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_AddonsAppMetadata] Optional array value serialized in the `metadata` wire field.
+  attr_reader :metadata
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsGetAppMetadata
-    FIELDS = {
-      apps: 'apps'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      apps: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AddonsAppInfo.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AddonsGetApp.
-  # Typed representation of the `AddonsGetApp` API schema.
-  class AddonsGetApp
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsGetAppMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsGetAppMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsGetAppMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_AddonsAppInfo] Optional array value serialized in the `apps` wire field.
-    attr_reader :apps
+# Internal model hydration metadata.
+class SdkInternalAddonsListMetadata
+  FIELDS = {
+    resources: "resources",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    resources: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AddonsResource.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for AddonsList.
+# Typed representation of the `AddonsList` API schema.
+class AddonsList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsListMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_AddonsResource] Optional array value serialized in the `resources` wire field.
+  attr_reader :resources
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsGetAppMetadataMetadata
-    FIELDS = {
-      metadata: 'metadata'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      metadata: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AddonsAppMetadata.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AddonsGetAppMetadata.
-  # Typed representation of the `AddonsGetAppMetadata` API schema.
-  class AddonsGetAppMetadata
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsGetAppMetadataMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsGetAppMetadataMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsGetAppMetadataMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_AddonsAppMetadata] Optional array value serialized in the `metadata` wire field.
-    attr_reader :metadata
+# Internal model hydration metadata.
+class SdkInternalAddonsPlanMetadata
+  FIELDS = {
+    id: "id",
+    app_id: "app_id",
+    display_name: "display_name",
+    description: "description",
+    slug: "slug",
+    price_per_month: "price_per_month",
+    active: "active",
+    state: "state",
+    features: "features",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    available: "available",
+    uuid: "uuid",
+    by_default: "by_default",
+    dimensions: "dimensions",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    app_id
+    display_name
+    slug
+    price_per_month
+    active
+    state
+    created_at
+    updated_at
+    available
+    uuid
+    by_default
+  ].freeze
+  DECODERS = {
+    state: lambda do |value|
+      ::OctridevDigitalocean::AddonsPlanState.from_value(value)
+    end,
+    features: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AddonsFeature.from_hash(item) }
+    end,
+    dimensions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AddonsDimensionWithPrice.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for AddonsPlan.
+# Typed representation of the `AddonsPlan` API schema.
+class AddonsPlan
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAddonsPlanMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAddonsPlanMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAddonsPlanMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Integer] ID of a given plan.
+  attr_reader :id
+  # @return [Integer] ID of the app associated with this plan.
+  attr_reader :app_id
+  # @return [String] Display name for a given plan.
+  attr_reader :display_name
+  # @return [String] Description of an app plan.
+  attr_reader :description
+  # @return [String] Slug identifier for the plan.
+  attr_reader :slug
+  # @return [Integer] Price of a month's usage of the plan in US dollars.
+  attr_reader :price_per_month
+  # @return [Boolean] Indicates if the plan is currently active.
+  attr_reader :active
+  # @return [AddonsPlanState] Current state of the plan.
+  attr_reader :state
+  # @return [Array_of_AddonsFeature] List of features included in the plan.
+  attr_reader :features
+  # @return [String] Timestamp when the plan was created.
+  attr_reader :created_at
+  # @return [String] Timestamp when the plan was last updated.
+  attr_reader :updated_at
+  # @return [Boolean] Indicates if the plan is available for selection.
+  attr_reader :available
+  # @return [String] Unique identifier for the plan.
+  attr_reader :uuid
+  # @return [Boolean] Indicates if this plan is the default option for the app.
+  attr_reader :by_default
+  # @return [Array_of_AddonsDimensionWithPrice] List of dimensions associated with the plan, each with its own pricing.
+  attr_reader :dimensions
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsListMetadata
-    FIELDS = {
-      resources: 'resources'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      resources: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AddonsResource.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AddonsList.
-  # Typed representation of the `AddonsList` API schema.
-  class AddonsList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsListMetadata::DECODERS
-
-    # @return [Array_of_AddonsResource] Optional array value serialized in the `resources` wire field.
-    attr_reader :resources
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Internal model hydration metadata.
-  class SdkInternalAddonsPlanMetadata
-    FIELDS = {
-      id: 'id',
-      app_id: 'app_id',
-      display_name: 'display_name',
-      description: 'description',
-      slug: 'slug',
-      price_per_month: 'price_per_month',
-      active: 'active',
-      state: 'state',
-      features: 'features',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      available: 'available',
-      uuid: 'uuid',
-      by_default: 'by_default',
-      dimensions: 'dimensions'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      app_id
-      display_name
-      slug
-      price_per_month
-      active
-      state
-      created_at
-      updated_at
-      available
-      uuid
-      by_default
-    ].freeze
-    DECODERS = {
-      state: lambda do |value|
-        ::OctridevDigitalocean::AddonsPlanState.from_value(value)
-      end,
-      features: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AddonsFeature.from_hash(item) }
-      end,
-      dimensions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AddonsDimensionWithPrice.from_hash(item) }
-      end
-    }.freeze
+# Defines the AddonsPlanState SDK namespace.
+module AddonsPlanState
+  UNKNOWN = 'unknown'
+  DRAFT = 'draft'
+  IN_REVIEW = 'in_review'
+  APPROVED = 'approved'
+  SUSPENDED = 'suspended'
+  ARCHIVED = 'archived'
+  VALUES = ['unknown', 'draft', 'in_review', 'approved', 'suspended', 'archived'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # API model for AddonsPlan.
-  # Typed representation of the `AddonsPlan` API schema.
-  class AddonsPlan
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAddonsPlanMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAddonsPlanMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAddonsPlanMetadata::DECODERS
-
-    # @return [Integer] ID of a given plan.
-    attr_reader :id
-    # @return [Integer] ID of the app associated with this plan.
-    attr_reader :app_id
-    # @return [String] Display name for a given plan.
-    attr_reader :display_name
-    # @return [String] Description of an app plan.
-    attr_reader :description
-    # @return [String] Slug identifier for the plan.
-    attr_reader :slug
-    # @return [Integer] Price of a month's usage of the plan in US dollars.
-    attr_reader :price_per_month
-    # @return [Boolean] Indicates if the plan is currently active.
-    attr_reader :active
-    # @return [AddonsPlanState] Current state of the plan.
-    attr_reader :state
-    # @return [Array_of_AddonsFeature] List of features included in the plan.
-    attr_reader :features
-    # @return [String] Timestamp when the plan was created.
-    attr_reader :created_at
-    # @return [String] Timestamp when the plan was last updated.
-    attr_reader :updated_at
-    # @return [Boolean] Indicates if the plan is available for selection.
-    attr_reader :available
-    # @return [String] Unique identifier for the plan.
-    attr_reader :uuid
-    # @return [Boolean] Indicates if this plan is the default option for the app.
-    attr_reader :by_default
-    # @return [Array_of_AddonsDimensionWithPrice] List of dimensions associated with the plan, each with its own pricing.
-    attr_reader :dimensions
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the AddonsPlanState SDK namespace.
-  module AddonsPlanState
-    UNKNOWN = 'unknown'
-    DRAFT = 'draft'
-    IN_REVIEW = 'in_review'
-    APPROVED = 'approved'
-    SUSPENDED = 'suspended'
-    ARCHIVED = 'archived'
-    VALUES = %w[unknown draft in_review approved suspended archived].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalAddonsResourceMetadata
-    FIELDS = {
-      uuid: 'uuid',
-      name: 'name',
-      state: 'state',
-      app_name: 'app_name',
-      app_slug: 'app_slug',
-      plan_name: 'plan_name',
-      plan_slug: 'plan_slug',
-      plan_price_per_month: 'plan_price_per_month',
-      has_config: 'has_config',
-      metadata: 'metadata',
-      sso_url: 'sso_url',
-      message: 'message'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      uuid
-      name
-      state
-      app_slug
-      plan_slug
-      has_config
-    ].freeze
-    DECODERS = {
-      state: lambda do |value|
-        ::OctridevDigitalocean::AddonsResourceState.from_value(value)
-      end,
-      metadata: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AddonsResourceMetadata.from_hash(item) }
-      end
-    }.freeze
-  end
+# Internal model hydration metadata.
+class SdkInternalAddonsResourceMetadata
+  FIELDS = {
+    uuid: "uuid",
+    name: "name",
+    state: "state",
+    app_name: "app_name",
+    app_slug: "app_slug",
+    plan_name: "plan_name",
+    plan_slug: "plan_slug",
+    plan_price_per_month: "plan_price_per_month",
+    has_config: "has_config",
+    metadata: "metadata",
+    sso_url: "sso_url",
+    message: "message",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    uuid
+    name
+    state
+    app_slug
+    plan_slug
+    has_config
+  ].freeze
+  DECODERS = {
+    state: lambda do |value|
+      ::OctridevDigitalocean::AddonsResourceState.from_value(value)
+    end,
+    metadata: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AddonsResourceMetadata.from_hash(item) }
+    end,
+  }.freeze
+end
 end

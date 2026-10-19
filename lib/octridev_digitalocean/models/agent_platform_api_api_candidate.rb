@@ -5,104 +5,108 @@
 
 # agent_platform_api_api_candidate domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiCandidateAgentConfigMetadata
-    FIELDS = {
-      agent_deployment_uuid: 'agent_deployment_uuid',
-      agent_uuid: 'agent_uuid',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalApiCandidateAgentConfigMetadata
+  FIELDS = {
+    agent_deployment_uuid: "agent_deployment_uuid",
+    agent_uuid: "agent_uuid",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiCandidateAgentConfig.
+# Configuration of the candidate agent under test for a simulation run.
+class ApiCandidateAgentConfig
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiCandidateAgentConfigMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiCandidateAgentConfigMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiCandidateAgentConfigMetadata::DECODERS
+
+  # @return [String] Optional agent deployment to run. Defaults to the agent's current deployment when unset.
+  attr_reader :agent_deployment_uuid
+  # @return [String] UUID of the agent to exercise as the candidate.
+  attr_reader :agent_uuid
+  # @return [String] Display name of the candidate agent. Persisted with the run.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiCandidateAgentConfig.
-  # Configuration of the candidate agent under test for a simulation run.
-  class ApiCandidateAgentConfig
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiCandidateAgentConfigMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiCandidateAgentConfigMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiCandidateAgentConfigMetadata::DECODERS
-
-    # @return [String] Optional agent deployment to run. Defaults to the agent's current deployment when unset.
-    attr_reader :agent_deployment_uuid
-    # @return [String] UUID of the agent to exercise as the candidate.
-    attr_reader :agent_uuid
-    # @return [String] Display name of the candidate agent. Persisted with the run.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiCandidateInferenceConfigMetadata
-    FIELDS = {
-      max_tokens: 'max_tokens',
-      reasoning_effort: 'reasoning_effort',
-      stop_token: 'stop_token',
-      system_prompt: 'system_prompt',
-      temperature: 'temperature'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiCandidateInferenceConfigMetadata
+  FIELDS = {
+    max_tokens: "max_tokens",
+    reasoning_effort: "reasoning_effort",
+    stop_token: "stop_token",
+    system_prompt: "system_prompt",
+    temperature: "temperature",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiCandidateInferenceConfig.
+# Inference configuration for the candidate model during evaluation.
+class ApiCandidateInferenceConfig
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiCandidateInferenceConfigMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiCandidateInferenceConfigMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiCandidateInferenceConfigMetadata::DECODERS
+
+  # @return [Integer] Optional `int64`-formatted value serialized in the `max_tokens` wire field.
+  attr_reader :max_tokens
+  # @return [String] Reasoning effort for reasoning-capable models (e.g. "low", "medium", "high"). Validated against the candidate model's supported values; a model that advertises none rejects this field.
+  attr_reader :reasoning_effort
+  # @return [String] Optional `string` value serialized in the `stop_token` wire field.
+  attr_reader :stop_token
+  # @return [String] Optional `string` value serialized in the `system_prompt` wire field.
+  attr_reader :system_prompt
+  # @return [Float] Optional `float`-formatted value serialized in the `temperature` wire field.
+  attr_reader :temperature
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiCandidateInferenceConfig.
-  # Inference configuration for the candidate model during evaluation.
-  class ApiCandidateInferenceConfig
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiCandidateInferenceConfigMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiCandidateInferenceConfigMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiCandidateInferenceConfigMetadata::DECODERS
-
-    # @return [Integer] Optional `int64`-formatted value serialized in the `max_tokens` wire field.
-    attr_reader :max_tokens
-    # @return [String] Reasoning effort for reasoning-capable models (e.g. "low", "medium", "high"). Validated against the candidate model's supported values; a model that advertises none rejects this field.
-    attr_reader :reasoning_effort
-    # @return [String] Optional `string` value serialized in the `stop_token` wire field.
-    attr_reader :stop_token
-    # @return [String] Optional `string` value serialized in the `system_prompt` wire field.
-    attr_reader :system_prompt
-    # @return [Float] Optional `float`-formatted value serialized in the `temperature` wire field.
-    attr_reader :temperature
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ApiCandidateModelSource SDK namespace.
-  module ApiCandidateModelSource
-    CANDIDATE_MODEL_SOURCE_SERVERLESS = 'CANDIDATE_MODEL_SOURCE_SERVERLESS'
-    CANDIDATE_MODEL_SOURCE_DEDICATED = 'CANDIDATE_MODEL_SOURCE_DEDICATED'
-    CANDIDATE_MODEL_SOURCE_ROUTER = 'CANDIDATE_MODEL_SOURCE_ROUTER'
-    CANDIDATE_MODEL_SOURCE_AGENT = 'CANDIDATE_MODEL_SOURCE_AGENT'
-    VALUES = %w[
-      CANDIDATE_MODEL_SOURCE_SERVERLESS CANDIDATE_MODEL_SOURCE_DEDICATED
-      CANDIDATE_MODEL_SOURCE_ROUTER CANDIDATE_MODEL_SOURCE_AGENT
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Defines the ApiCandidateModelSource SDK namespace.
+module ApiCandidateModelSource
+  CANDIDATE_MODEL_SOURCE_SERVERLESS = 'CANDIDATE_MODEL_SOURCE_SERVERLESS'
+  CANDIDATE_MODEL_SOURCE_DEDICATED = 'CANDIDATE_MODEL_SOURCE_DEDICATED'
+  CANDIDATE_MODEL_SOURCE_ROUTER = 'CANDIDATE_MODEL_SOURCE_ROUTER'
+  CANDIDATE_MODEL_SOURCE_AGENT = 'CANDIDATE_MODEL_SOURCE_AGENT'
+  VALUES = [
+    'CANDIDATE_MODEL_SOURCE_SERVERLESS', 'CANDIDATE_MODEL_SOURCE_DEDICATED',
+    'CANDIDATE_MODEL_SOURCE_ROUTER', 'CANDIDATE_MODEL_SOURCE_AGENT'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

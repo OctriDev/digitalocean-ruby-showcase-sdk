@@ -5,654 +5,671 @@
 
 # agent_platform_api_api domain models (part 2)
 module OctridevDigitalocean
-  # Defines the ApiGuardrailType SDK namespace.
-  module ApiGuardrailType
-    GUARDRAIL_TYPE_UNKNOWN = 'GUARDRAIL_TYPE_UNKNOWN'
-    GUARDRAIL_TYPE_JAILBREAK = 'GUARDRAIL_TYPE_JAILBREAK'
-    GUARDRAIL_TYPE_SENSITIVE_DATA = 'GUARDRAIL_TYPE_SENSITIVE_DATA'
-    GUARDRAIL_TYPE_CONTENT_MODERATION = 'GUARDRAIL_TYPE_CONTENT_MODERATION'
-    VALUES = %w[
-      GUARDRAIL_TYPE_UNKNOWN GUARDRAIL_TYPE_JAILBREAK GUARDRAIL_TYPE_SENSITIVE_DATA
-      GUARDRAIL_TYPE_CONTENT_MODERATION
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the ApiGuardrailType SDK namespace.
+module ApiGuardrailType
+  GUARDRAIL_TYPE_UNKNOWN = 'GUARDRAIL_TYPE_UNKNOWN'
+  GUARDRAIL_TYPE_JAILBREAK = 'GUARDRAIL_TYPE_JAILBREAK'
+  GUARDRAIL_TYPE_SENSITIVE_DATA = 'GUARDRAIL_TYPE_SENSITIVE_DATA'
+  GUARDRAIL_TYPE_CONTENT_MODERATION = 'GUARDRAIL_TYPE_CONTENT_MODERATION'
+  VALUES = [
+    'GUARDRAIL_TYPE_UNKNOWN', 'GUARDRAIL_TYPE_JAILBREAK', 'GUARDRAIL_TYPE_SENSITIVE_DATA',
+    'GUARDRAIL_TYPE_CONTENT_MODERATION'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiIndexingJobMetadata
+  FIELDS = {
+    completed_datasources: "completed_datasources",
+    created_at: "created_at",
+    data_source_jobs: "data_source_jobs",
+    data_source_uuids: "data_source_uuids",
+    finished_at: "finished_at",
+    is_report_available: "is_report_available",
+    knowledge_base_uuid: "knowledge_base_uuid",
+    phase: "phase",
+    started_at: "started_at",
+    status: "status",
+    tokens: "tokens",
+    total_datasources: "total_datasources",
+    total_tokens: "total_tokens",
+    updated_at: "updated_at",
+    uuid: "uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data_source_jobs: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiIndexedDataSource.from_hash(item) }
+    end,
+    phase: lambda do |value|
+      ::OctridevDigitalocean::ApiBatchJobPhase.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::ApiIndexJobStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiIndexingJob.
+# IndexingJob description
+class ApiIndexingJob
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiIndexingJobMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiIndexingJobMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiIndexingJobMetadata::DECODERS
+
+  # @return [Integer] Number of datasources indexed completed
+  attr_reader :completed_datasources
+  # @return [String] Creation date / time
+  attr_reader :created_at
+  # @return [Array_of_ApiIndexedDataSource] Details on Data Sources included in the Indexing Job
+  attr_reader :data_source_jobs
+  # @return [Array_of_String] Optional array value serialized in the `data_source_uuids` wire field.
+  attr_reader :data_source_uuids
+  # @return [String] Optional `date-time`-formatted value serialized in the `finished_at` wire field.
+  attr_reader :finished_at
+  # @return [Boolean] Boolean value to determine if the indexing job details are available
+  attr_reader :is_report_available
+  # @return [String] Knowledge base id
+  attr_reader :knowledge_base_uuid
+  # @return [ApiBatchJobPhase] Optional enumerated value serialized in the `phase` wire field.
+  attr_reader :phase
+  # @return [String] Optional `date-time`-formatted value serialized in the `started_at` wire field.
+  attr_reader :started_at
+  # @return [ApiIndexJobStatus] Optional enumerated value serialized in the `status` wire field.
+  attr_reader :status
+  # @return [Integer] Number of tokens [This field is deprecated]
+  attr_reader :tokens
+  # @return [Integer] Number of datasources being indexed
+  attr_reader :total_datasources
+  # @return [String] Total Tokens Consumed By the Indexing Job
+  attr_reader :total_tokens
+  # @return [String] Last modified
+  attr_reader :updated_at
+  # @return [String] Unique id
+  attr_reader :uuid
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiIndexingJobMetadata
-    FIELDS = {
-      completed_datasources: 'completed_datasources',
-      created_at: 'created_at',
-      data_source_jobs: 'data_source_jobs',
-      data_source_uuids: 'data_source_uuids',
-      finished_at: 'finished_at',
-      is_report_available: 'is_report_available',
-      knowledge_base_uuid: 'knowledge_base_uuid',
-      phase: 'phase',
-      started_at: 'started_at',
-      status: 'status',
-      tokens: 'tokens',
-      total_datasources: 'total_datasources',
-      total_tokens: 'total_tokens',
-      updated_at: 'updated_at',
-      uuid: 'uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data_source_jobs: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiIndexedDataSource.from_hash(item) }
-      end,
-      phase: lambda do |value|
-        ::OctridevDigitalocean::ApiBatchJobPhase.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::ApiIndexJobStatus.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiIndexingJob.
-  # IndexingJob description
-  class ApiIndexingJob
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiIndexingJobMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiIndexingJobMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiIndexingJobMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] Number of datasources indexed completed
-    attr_reader :completed_datasources
-    # @return [String] Creation date / time
-    attr_reader :created_at
-    # @return [Array_of_ApiIndexedDataSource] Details on Data Sources included in the Indexing Job
-    attr_reader :data_source_jobs
-    # @return [Array_of_String] Optional array value serialized in the `data_source_uuids` wire field.
-    attr_reader :data_source_uuids
-    # @return [String] Optional `date-time`-formatted value serialized in the `finished_at` wire field.
-    attr_reader :finished_at
-    # @return [Boolean] Boolean value to determine if the indexing job details are available
-    attr_reader :is_report_available
-    # @return [String] Knowledge base id
-    attr_reader :knowledge_base_uuid
-    # @return [ApiBatchJobPhase] Optional enumerated value serialized in the `phase` wire field.
-    attr_reader :phase
-    # @return [String] Optional `date-time`-formatted value serialized in the `started_at` wire field.
-    attr_reader :started_at
-    # @return [ApiIndexJobStatus] Optional enumerated value serialized in the `status` wire field.
-    attr_reader :status
-    # @return [Integer] Number of tokens [This field is deprecated]
-    attr_reader :tokens
-    # @return [Integer] Number of datasources being indexed
-    attr_reader :total_datasources
-    # @return [String] Total Tokens Consumed By the Indexing Job
-    attr_reader :total_tokens
-    # @return [String] Last modified
-    attr_reader :updated_at
-    # @return [String] Unique id
-    attr_reader :uuid
+# Defines the ApiIndexJobStatus SDK namespace.
+module ApiIndexJobStatus
+  INDEX_JOB_STATUS_UNKNOWN = 'INDEX_JOB_STATUS_UNKNOWN'
+  INDEX_JOB_STATUS_PARTIAL = 'INDEX_JOB_STATUS_PARTIAL'
+  INDEX_JOB_STATUS_IN_PROGRESS = 'INDEX_JOB_STATUS_IN_PROGRESS'
+  INDEX_JOB_STATUS_COMPLETED = 'INDEX_JOB_STATUS_COMPLETED'
+  INDEX_JOB_STATUS_FAILED = 'INDEX_JOB_STATUS_FAILED'
+  INDEX_JOB_STATUS_NO_CHANGES = 'INDEX_JOB_STATUS_NO_CHANGES'
+  INDEX_JOB_STATUS_PENDING = 'INDEX_JOB_STATUS_PENDING'
+  INDEX_JOB_STATUS_CANCELLED = 'INDEX_JOB_STATUS_CANCELLED'
+  VALUES = [
+    'INDEX_JOB_STATUS_UNKNOWN', 'INDEX_JOB_STATUS_PARTIAL', 'INDEX_JOB_STATUS_IN_PROGRESS',
+    'INDEX_JOB_STATUS_COMPLETED', 'INDEX_JOB_STATUS_FAILED', 'INDEX_JOB_STATUS_NO_CHANGES',
+    'INDEX_JOB_STATUS_PENDING', 'INDEX_JOB_STATUS_CANCELLED'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalApiKBDataSourceMetadata
+  FIELDS = {
+    aws_data_source: "aws_data_source",
+    bucket_name: "bucket_name",
+    bucket_region: "bucket_region",
+    chunking_algorithm: "chunking_algorithm",
+    chunking_options: "chunking_options",
+    dropbox_data_source: "dropbox_data_source",
+    file_upload_data_source: "file_upload_data_source",
+    google_drive_data_source: "google_drive_data_source",
+    item_path: "item_path",
+    spaces_data_source: "spaces_data_source",
+    web_crawler_data_source: "web_crawler_data_source",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    aws_data_source: lambda do |value|
+      ::OctridevDigitalocean::ApiAWSDataSource.from_hash(value)
+    end,
+    chunking_algorithm: lambda do |value|
+      ::OctridevDigitalocean::ApiChunkingAlgorithm.from_value(value)
+    end,
+    chunking_options: lambda do |value|
+      ::OctridevDigitalocean::ApiChunkingOptions.from_hash(value)
+    end,
+    dropbox_data_source: lambda do |value|
+      ::OctridevDigitalocean::ApiDropboxDataSource.from_hash(value)
+    end,
+    file_upload_data_source: lambda do |value|
+      ::OctridevDigitalocean::ApiFileUploadDataSource.from_hash(value)
+    end,
+    google_drive_data_source: lambda do |value|
+      ::OctridevDigitalocean::ApiGoogleDriveDataSource.from_hash(value)
+    end,
+    spaces_data_source: lambda do |value|
+      ::OctridevDigitalocean::ApiSpacesDataSource.from_hash(value)
+    end,
+    web_crawler_data_source: lambda do |value|
+      ::OctridevDigitalocean::ApiWebCrawlerDataSource.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for ApiKBDataSource.
+# Typed representation of the `ApiKBDataSource` API schema.
+class ApiKBDataSource
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiKBDataSourceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiKBDataSourceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiKBDataSourceMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [ApiAWSDataSource] AWS S3 Data Source
+  attr_reader :aws_data_source
+  # @return [String] Deprecated, moved to data_source_details
+  attr_reader :bucket_name
+  # @return [String] Deprecated, moved to data_source_details
+  attr_reader :bucket_region
+  # @return [ApiChunkingAlgorithm] Optional enumerated value serialized in the `chunking_algorithm` wire field.
+  attr_reader :chunking_algorithm
+  # @return [ApiChunkingOptions] Optional object value serialized in the `chunking_options` wire field.
+  attr_reader :chunking_options
+  # @return [ApiDropboxDataSource] Dropbox Data Source
+  attr_reader :dropbox_data_source
+  # @return [ApiFileUploadDataSource] File to upload as data source for knowledge base.
+  attr_reader :file_upload_data_source
+  # @return [ApiGoogleDriveDataSource] Google Drive Data Source
+  attr_reader :google_drive_data_source
+  # @return [String] Optional `string` value serialized in the `item_path` wire field.
+  attr_reader :item_path
+  # @return [ApiSpacesDataSource] Spaces Bucket Data Source
+  attr_reader :spaces_data_source
+  # @return [ApiWebCrawlerDataSource] WebCrawlerDataSource
+  attr_reader :web_crawler_data_source
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ApiIndexJobStatus SDK namespace.
-  module ApiIndexJobStatus
-    INDEX_JOB_STATUS_UNKNOWN = 'INDEX_JOB_STATUS_UNKNOWN'
-    INDEX_JOB_STATUS_PARTIAL = 'INDEX_JOB_STATUS_PARTIAL'
-    INDEX_JOB_STATUS_IN_PROGRESS = 'INDEX_JOB_STATUS_IN_PROGRESS'
-    INDEX_JOB_STATUS_COMPLETED = 'INDEX_JOB_STATUS_COMPLETED'
-    INDEX_JOB_STATUS_FAILED = 'INDEX_JOB_STATUS_FAILED'
-    INDEX_JOB_STATUS_NO_CHANGES = 'INDEX_JOB_STATUS_NO_CHANGES'
-    INDEX_JOB_STATUS_PENDING = 'INDEX_JOB_STATUS_PENDING'
-    INDEX_JOB_STATUS_CANCELLED = 'INDEX_JOB_STATUS_CANCELLED'
-    VALUES = %w[
-      INDEX_JOB_STATUS_UNKNOWN INDEX_JOB_STATUS_PARTIAL INDEX_JOB_STATUS_IN_PROGRESS
-      INDEX_JOB_STATUS_COMPLETED INDEX_JOB_STATUS_FAILED INDEX_JOB_STATUS_NO_CHANGES
-      INDEX_JOB_STATUS_PENDING INDEX_JOB_STATUS_CANCELLED
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiKBDataSourceMetadata
-    FIELDS = {
-      aws_data_source: 'aws_data_source',
-      bucket_name: 'bucket_name',
-      bucket_region: 'bucket_region',
-      chunking_algorithm: 'chunking_algorithm',
-      chunking_options: 'chunking_options',
-      dropbox_data_source: 'dropbox_data_source',
-      file_upload_data_source: 'file_upload_data_source',
-      google_drive_data_source: 'google_drive_data_source',
-      item_path: 'item_path',
-      spaces_data_source: 'spaces_data_source',
-      web_crawler_data_source: 'web_crawler_data_source'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      aws_data_source: lambda do |value|
-        ::OctridevDigitalocean::ApiAWSDataSource.from_hash(value)
-      end,
-      chunking_algorithm: lambda do |value|
-        ::OctridevDigitalocean::ApiChunkingAlgorithm.from_value(value)
-      end,
-      chunking_options: lambda do |value|
-        ::OctridevDigitalocean::ApiChunkingOptions.from_hash(value)
-      end,
-      dropbox_data_source: lambda do |value|
-        ::OctridevDigitalocean::ApiDropboxDataSource.from_hash(value)
-      end,
-      file_upload_data_source: lambda do |value|
-        ::OctridevDigitalocean::ApiFileUploadDataSource.from_hash(value)
-      end,
-      google_drive_data_source: lambda do |value|
-        ::OctridevDigitalocean::ApiGoogleDriveDataSource.from_hash(value)
-      end,
-      spaces_data_source: lambda do |value|
-        ::OctridevDigitalocean::ApiSpacesDataSource.from_hash(value)
-      end,
-      web_crawler_data_source: lambda do |value|
-        ::OctridevDigitalocean::ApiWebCrawlerDataSource.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiLatencyMetricsMetadata
+  FIELDS = {
+    avg_e2e_latency_ms: "avg_e2e_latency_ms",
+    max_e2e_latency_ms: "max_e2e_latency_ms",
+    min_e2e_latency_ms: "min_e2e_latency_ms",
+    p50_latency_ms: "p50_latency_ms",
+    p90_latency_ms: "p90_latency_ms",
+    p95_latency_ms: "p95_latency_ms",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiLatencyMetrics.
+# Latency metrics for candidate model invocations (in milliseconds).
+class ApiLatencyMetrics
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiLatencyMetricsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiLatencyMetricsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiLatencyMetricsMetadata::DECODERS
+
+  # @return [Float] Average end-to-end latency across all invocations.
+  attr_reader :avg_e2e_latency_ms
+  # @return [Float] Maximum end-to-end latency observed.
+  attr_reader :max_e2e_latency_ms
+  # @return [Float] Minimum end-to-end latency observed.
+  attr_reader :min_e2e_latency_ms
+  # @return [Float] P50 (median) latency.
+  attr_reader :p50_latency_ms
+  # @return [Float] P90 latency.
+  attr_reader :p90_latency_ms
+  # @return [Float] P95 latency.
+  attr_reader :p95_latency_ms
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiKBDataSource.
-  # Typed representation of the `ApiKBDataSource` API schema.
-  class ApiKBDataSource
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiKBDataSourceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiKBDataSourceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiKBDataSourceMetadata::DECODERS
-
-    # @return [ApiAWSDataSource] AWS S3 Data Source
-    attr_reader :aws_data_source
-    # @return [String] Deprecated, moved to data_source_details
-    attr_reader :bucket_name
-    # @return [String] Deprecated, moved to data_source_details
-    attr_reader :bucket_region
-    # @return [ApiChunkingAlgorithm] Optional enumerated value serialized in the `chunking_algorithm` wire field.
-    attr_reader :chunking_algorithm
-    # @return [ApiChunkingOptions] Optional object value serialized in the `chunking_options` wire field.
-    attr_reader :chunking_options
-    # @return [ApiDropboxDataSource] Dropbox Data Source
-    attr_reader :dropbox_data_source
-    # @return [ApiFileUploadDataSource] File to upload as data source for knowledge base.
-    attr_reader :file_upload_data_source
-    # @return [ApiGoogleDriveDataSource] Google Drive Data Source
-    attr_reader :google_drive_data_source
-    # @return [String] Optional `string` value serialized in the `item_path` wire field.
-    attr_reader :item_path
-    # @return [ApiSpacesDataSource] Spaces Bucket Data Source
-    attr_reader :spaces_data_source
-    # @return [ApiWebCrawlerDataSource] WebCrawlerDataSource
-    attr_reader :web_crawler_data_source
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiLatencyMetricsMetadata
-    FIELDS = {
-      avg_e2e_latency_ms: 'avg_e2e_latency_ms',
-      max_e2e_latency_ms: 'max_e2e_latency_ms',
-      min_e2e_latency_ms: 'min_e2e_latency_ms',
-      p50_latency_ms: 'p50_latency_ms',
-      p90_latency_ms: 'p90_latency_ms',
-      p95_latency_ms: 'p95_latency_ms'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiLinksMetadata
+  FIELDS = {
+    pages: "pages",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    pages: lambda do |value|
+      ::OctridevDigitalocean::ApiPages.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiLinks.
+# Links to other pages
+class ApiLinks
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiLinksMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiLinksMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiLinksMetadata::DECODERS
+
+  # @return [ApiPages] Information about how to reach other pages
+  attr_reader :pages
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiLatencyMetrics.
-  # Latency metrics for candidate model invocations (in milliseconds).
-  class ApiLatencyMetrics
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiLatencyMetricsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiLatencyMetricsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiLatencyMetricsMetadata::DECODERS
-
-    # @return [Float] Average end-to-end latency across all invocations.
-    attr_reader :avg_e2e_latency_ms
-    # @return [Float] Maximum end-to-end latency observed.
-    attr_reader :max_e2e_latency_ms
-    # @return [Float] Minimum end-to-end latency observed.
-    attr_reader :min_e2e_latency_ms
-    # @return [Float] P50 (median) latency.
-    attr_reader :p50_latency_ms
-    # @return [Float] P90 latency.
-    attr_reader :p90_latency_ms
-    # @return [Float] P95 latency.
-    attr_reader :p95_latency_ms
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiLinksMetadata
-    FIELDS = {
-      pages: 'pages'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      pages: lambda do |value|
-        ::OctridevDigitalocean::ApiPages.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiLLMSpanMetadata
+  FIELDS = {
+    common: "common",
+    model: "model",
+    num_input_tokens: "num_input_tokens",
+    num_output_tokens: "num_output_tokens",
+    temperature: "temperature",
+    time_to_first_token_ns: "time_to_first_token_ns",
+    tools: "tools",
+    total_tokens: "total_tokens",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    common: lambda do |value|
+      ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiLLMSpan.
+# LLM span
+class ApiLLMSpan
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiLLMSpanMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiLLMSpanMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiLLMSpanMetadata::DECODERS
+
+  # @return [ApiSpanCommon] Common optional fields shared by all span types
+  attr_reader :common
+  # @return [String] Optional `string` value serialized in the `model` wire field.
+  attr_reader :model
+  # @return [Integer] Optional `int32`-formatted value serialized in the `num_input_tokens` wire field.
+  attr_reader :num_input_tokens
+  # @return [Integer] Optional `int32`-formatted value serialized in the `num_output_tokens` wire field.
+  attr_reader :num_output_tokens
+  # @return [Float] Optional `float`-formatted value serialized in the `temperature` wire field.
+  attr_reader :temperature
+  # @return [String] Optional `int64`-formatted value serialized in the `time_to_first_token_ns` wire field.
+  attr_reader :time_to_first_token_ns
+  # @return [Array_of_Hash] Tool definitions passed to the model
+  attr_reader :tools
+  # @return [Integer] Optional `int32`-formatted value serialized in the `total_tokens` wire field.
+  attr_reader :total_tokens
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiLinks.
-  # Links to other pages
-  class ApiLinks
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiLinksMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiLinksMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiLinksMetadata::DECODERS
-
-    # @return [ApiPages] Information about how to reach other pages
-    attr_reader :pages
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiLLMSpanMetadata
-    FIELDS = {
-      common: 'common',
-      model: 'model',
-      num_input_tokens: 'num_input_tokens',
-      num_output_tokens: 'num_output_tokens',
-      temperature: 'temperature',
-      time_to_first_token_ns: 'time_to_first_token_ns',
-      tools: 'tools',
-      total_tokens: 'total_tokens'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      common: lambda do |value|
-        ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiMcpServerMetadata
+  FIELDS = {
+    allowed_tools: "allowed_tools",
+    authorization: "authorization",
+    headers: "headers",
+    server_label: "server_label",
+    server_url: "server_url",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiMcpServer.
+# McpServer defines a remote MCP server configuration for an agent.
+class ApiMcpServer
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiMcpServerMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiMcpServerMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiMcpServerMetadata::DECODERS
+
+  # @return [Array_of_String] Optional list of allowed tool names to expose from this server
+  attr_reader :allowed_tools
+  # @return [String] Optional authorization header value for the MCP server
+  attr_reader :authorization
+  # @return [Hash] Optional additional headers to send to the MCP server
+  attr_reader :headers
+  # @return [String] A label identifying this MCP server
+  attr_reader :server_label
+  # @return [String] The URL of the MCP server
+  attr_reader :server_url
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiLLMSpan.
-  # LLM span
-  class ApiLLMSpan
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiLLMSpanMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiLLMSpanMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiLLMSpanMetadata::DECODERS
-
-    # @return [ApiSpanCommon] Common optional fields shared by all span types
-    attr_reader :common
-    # @return [String] Optional `string` value serialized in the `model` wire field.
-    attr_reader :model
-    # @return [Integer] Optional `int32`-formatted value serialized in the `num_input_tokens` wire field.
-    attr_reader :num_input_tokens
-    # @return [Integer] Optional `int32`-formatted value serialized in the `num_output_tokens` wire field.
-    attr_reader :num_output_tokens
-    # @return [Float] Optional `float`-formatted value serialized in the `temperature` wire field.
-    attr_reader :temperature
-    # @return [String] Optional `int64`-formatted value serialized in the `time_to_first_token_ns` wire field.
-    attr_reader :time_to_first_token_ns
-    # @return [Array_of_Hash] Tool definitions passed to the model
-    attr_reader :tools
-    # @return [Integer] Optional `int32`-formatted value serialized in the `total_tokens` wire field.
-    attr_reader :total_tokens
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiMcpServerMetadata
-    FIELDS = {
-      allowed_tools: 'allowed_tools',
-      authorization: 'authorization',
-      headers: 'headers',
-      server_label: 'server_label',
-      server_url: 'server_url'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiMetaMetadata
+  FIELDS = {
+    page: "page",
+    pages: "pages",
+    total: "total",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiMeta.
+# Meta information about the data set
+class ApiMeta
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiMetaMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiMetaMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiMetaMetadata::DECODERS
+
+  # @return [Integer] The current page
+  attr_reader :page
+  # @return [Integer] Total number of pages
+  attr_reader :pages
+  # @return [Integer] Total amount of items over all pages
+  attr_reader :total
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiMcpServer.
-  # McpServer defines a remote MCP server configuration for an agent.
-  class ApiMcpServer
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiMcpServerMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiMcpServerMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiMcpServerMetadata::DECODERS
-
-    # @return [Array_of_String] Optional list of allowed tool names to expose from this server
-    attr_reader :allowed_tools
-    # @return [String] Optional authorization header value for the MCP server
-    attr_reader :authorization
-    # @return [Hash] Optional additional headers to send to the MCP server
-    attr_reader :headers
-    # @return [String] A label identifying this MCP server
-    attr_reader :server_label
-    # @return [String] The URL of the MCP server
-    attr_reader :server_url
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiMetaMetadata
-    FIELDS = {
-      page: 'page',
-      pages: 'pages',
-      total: 'total'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiMetricResultSummaryMetadata
+  FIELDS = {
+    avg_at_k_percent: "avg_at_k_percent",
+    cons_at_k_percent: "cons_at_k_percent",
+    description: "description",
+    fail_count: "fail_count",
+    fail_percent: "fail_percent",
+    metric_name: "metric_name",
+    metric_uuid: "metric_uuid",
+    pass_at_k_percent: "pass_at_k_percent",
+    pass_count: "pass_count",
+    pass_percent: "pass_percent",
+    skip_percent: "skip_percent",
+    skipped_count: "skipped_count",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiMetricResultSummary.
+# Per-metric aggregated pass/fail statistics across all prompts.
+class ApiMetricResultSummary
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiMetricResultSummaryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiMetricResultSummaryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiMetricResultSummaryMetadata::DECODERS
+
+  # @return [Float] Row-level (not attempt-level) aggregation across epochs for this metric, mirroring EpochResultSummary but scoped to one metric. Only set when the run's epochs > 1; pass_percent/pass_count/etc. above stay attempt-level (over row x epoch pairs) so they don't desynchronize from the counts sitting next to them.
+  attr_reader :avg_at_k_percent
+  # @return [Float] Optional `double`-formatted value serialized in the `cons_at_k_percent` wire field.
+  attr_reader :cons_at_k_percent
+  # @return [String] Optional `string` value serialized in the `description` wire field.
+  attr_reader :description
+  # @return [Integer] Rows where the metric failed to score or completed below the threshold.
+  attr_reader :fail_count
+  # @return [Float] Optional `double`-formatted value serialized in the `fail_percent` wire field.
+  attr_reader :fail_percent
+  # @return [String] Optional `string` value serialized in the `metric_name` wire field.
+  attr_reader :metric_name
+  # @return [String] Optional `string` value serialized in the `metric_uuid` wire field.
+  attr_reader :metric_uuid
+  # @return [Float] Optional `double`-formatted value serialized in the `pass_at_k_percent` wire field.
+  attr_reader :pass_at_k_percent
+  # @return [Integer] Rows where the metric completed and passed the configured threshold.
+  attr_reader :pass_count
+  # @return [Float] Optional `double`-formatted value serialized in the `pass_percent` wire field.
+  attr_reader :pass_percent
+  # @return [Float] Percentage of rows that were skipped for this metric, computed as skipped_count divided by the total rows the metric saw (pass_count + fail_count + skipped_count).
+  attr_reader :skip_percent
+  # @return [Integer] Rows where the metric was not evaluated for this prompt.
+  attr_reader :skipped_count
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiMeta.
-  # Meta information about the data set
-  class ApiMeta
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiMetaMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiMetaMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiMetaMetadata::DECODERS
-
-    # @return [Integer] The current page
-    attr_reader :page
-    # @return [Integer] Total number of pages
-    attr_reader :pages
-    # @return [Integer] Total amount of items over all pages
-    attr_reader :total
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiMetricResultSummaryMetadata
-    FIELDS = {
-      avg_at_k_percent: 'avg_at_k_percent',
-      cons_at_k_percent: 'cons_at_k_percent',
-      description: 'description',
-      fail_count: 'fail_count',
-      fail_percent: 'fail_percent',
-      metric_name: 'metric_name',
-      metric_uuid: 'metric_uuid',
-      pass_at_k_percent: 'pass_at_k_percent',
-      pass_count: 'pass_count',
-      pass_percent: 'pass_percent',
-      skip_percent: 'skip_percent',
-      skipped_count: 'skipped_count'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiPagesMetadata
+  FIELDS = {
+    first: "first",
+    last: "last",
+    next_: "next",
+    previous: "previous",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiPages.
+# Information about how to reach other pages
+class ApiPages
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiPagesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiPagesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiPagesMetadata::DECODERS
+
+  # @return [String] First page
+  attr_reader :first
+  # @return [String] Last page
+  attr_reader :last
+  # @return [String] Next page
+  attr_reader :next_
+  # @return [String] Previous page
+  attr_reader :previous
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiMetricResultSummary.
-  # Per-metric aggregated pass/fail statistics across all prompts.
-  class ApiMetricResultSummary
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiMetricResultSummaryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiMetricResultSummaryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiMetricResultSummaryMetadata::DECODERS
-
-    # @return [Float] Row-level (not attempt-level) aggregation across epochs for this metric, mirroring EpochResultSummary but scoped to one metric. Only set when the run's epochs > 1; pass_percent/pass_count/etc. above stay attempt-level (over row x epoch pairs) so they don't desynchronize from the counts sitting next to them.
-    attr_reader :avg_at_k_percent
-    # @return [Float] Optional `double`-formatted value serialized in the `cons_at_k_percent` wire field.
-    attr_reader :cons_at_k_percent
-    # @return [String] Optional `string` value serialized in the `description` wire field.
-    attr_reader :description
-    # @return [Integer] Rows where the metric failed to score or completed below the threshold.
-    attr_reader :fail_count
-    # @return [Float] Optional `double`-formatted value serialized in the `fail_percent` wire field.
-    attr_reader :fail_percent
-    # @return [String] Optional `string` value serialized in the `metric_name` wire field.
-    attr_reader :metric_name
-    # @return [String] Optional `string` value serialized in the `metric_uuid` wire field.
-    attr_reader :metric_uuid
-    # @return [Float] Optional `double`-formatted value serialized in the `pass_at_k_percent` wire field.
-    attr_reader :pass_at_k_percent
-    # @return [Integer] Rows where the metric completed and passed the configured threshold.
-    attr_reader :pass_count
-    # @return [Float] Optional `double`-formatted value serialized in the `pass_percent` wire field.
-    attr_reader :pass_percent
-    # @return [Float] Percentage of rows that were skipped for this metric, computed as skipped_count divided by the total rows the metric saw (pass_count + fail_count + skipped_count).
-    attr_reader :skip_percent
-    # @return [Integer] Rows where the metric was not evaluated for this prompt.
-    attr_reader :skipped_count
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiPagesMetadata
-    FIELDS = {
-      first: 'first',
-      last: 'last',
-      next_: 'next',
-      previous: 'previous'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiPerformanceMetricsMetadata
+  FIELDS = {
+    candidate_latency: "candidate_latency",
+    token_usage: "token_usage",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    candidate_latency: lambda do |value|
+      ::OctridevDigitalocean::ApiLatencyMetrics.from_hash(value)
+    end,
+    token_usage: lambda do |value|
+      ::OctridevDigitalocean::ApiTokenUsage.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiPerformanceMetrics.
+# All performance metrics are for the candidate model unless noted otherwise.
+class ApiPerformanceMetrics
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiPerformanceMetricsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiPerformanceMetricsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiPerformanceMetricsMetadata::DECODERS
+
+  # @return [ApiLatencyMetrics] Latency metrics for candidate model invocations (in milliseconds).
+  attr_reader :candidate_latency
+  # @return [ApiTokenUsage] Optional object value serialized in the `token_usage` wire field.
+  attr_reader :token_usage
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiPages.
-  # Information about how to reach other pages
-  class ApiPages
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiPagesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiPagesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiPagesMetadata::DECODERS
-
-    # @return [String] First page
-    attr_reader :first
-    # @return [String] Last page
-    attr_reader :last
-    # @return [String] Next page
-    attr_reader :next_
-    # @return [String] Previous page
-    attr_reader :previous
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiPerformanceMetricsMetadata
-    FIELDS = {
-      candidate_latency: 'candidate_latency',
-      token_usage: 'token_usage'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      candidate_latency: lambda do |value|
-        ::OctridevDigitalocean::ApiLatencyMetrics.from_hash(value)
-      end,
-      token_usage: lambda do |value|
-        ::OctridevDigitalocean::ApiTokenUsage.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ApiPresetSaveSection SDK namespace.
+module ApiPresetSaveSection
+  PRESET_SAVE_SECTION_UNSPECIFIED = 'PRESET_SAVE_SECTION_UNSPECIFIED'
+  PRESET_SAVE_SECTION_CANDIDATE = 'PRESET_SAVE_SECTION_CANDIDATE'
+  PRESET_SAVE_SECTION_METRICS = 'PRESET_SAVE_SECTION_METRICS'
+  PRESET_SAVE_SECTION_JUDGE = 'PRESET_SAVE_SECTION_JUDGE'
+  PRESET_SAVE_SECTION_DATASET = 'PRESET_SAVE_SECTION_DATASET'
+  PRESET_SAVE_SECTION_SYSTEM_PROMPT = 'PRESET_SAVE_SECTION_SYSTEM_PROMPT'
+  VALUES = [
+    'PRESET_SAVE_SECTION_UNSPECIFIED', 'PRESET_SAVE_SECTION_CANDIDATE',
+    'PRESET_SAVE_SECTION_METRICS', 'PRESET_SAVE_SECTION_JUDGE', 'PRESET_SAVE_SECTION_DATASET',
+    'PRESET_SAVE_SECTION_SYSTEM_PROMPT'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiPresignedUrlFileMetadata
+  FIELDS = {
+    file_name: "file_name",
+    file_size: "file_size",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiPresignedUrlFile.
+# A single file’s metadata in the request.
+class ApiPresignedUrlFile
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiPresignedUrlFileMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiPresignedUrlFileMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiPresignedUrlFileMetadata::DECODERS
+
+  # @return [String] Local filename
+  attr_reader :file_name
+  # @return [String] The size of the file in bytes.
+  attr_reader :file_size
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiPerformanceMetrics.
-  # All performance metrics are for the candidate model unless noted otherwise.
-  class ApiPerformanceMetrics
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiPerformanceMetricsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiPerformanceMetricsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiPerformanceMetricsMetadata::DECODERS
-
-    # @return [ApiLatencyMetrics] Latency metrics for candidate model invocations (in milliseconds).
-    attr_reader :candidate_latency
-    # @return [ApiTokenUsage] Optional object value serialized in the `token_usage` wire field.
-    attr_reader :token_usage
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ApiPresetSaveSection SDK namespace.
-  module ApiPresetSaveSection
-    PRESET_SAVE_SECTION_UNSPECIFIED = 'PRESET_SAVE_SECTION_UNSPECIFIED'
-    PRESET_SAVE_SECTION_CANDIDATE = 'PRESET_SAVE_SECTION_CANDIDATE'
-    PRESET_SAVE_SECTION_METRICS = 'PRESET_SAVE_SECTION_METRICS'
-    PRESET_SAVE_SECTION_JUDGE = 'PRESET_SAVE_SECTION_JUDGE'
-    PRESET_SAVE_SECTION_DATASET = 'PRESET_SAVE_SECTION_DATASET'
-    PRESET_SAVE_SECTION_SYSTEM_PROMPT = 'PRESET_SAVE_SECTION_SYSTEM_PROMPT'
-    VALUES = %w[
-      PRESET_SAVE_SECTION_UNSPECIFIED PRESET_SAVE_SECTION_CANDIDATE
-      PRESET_SAVE_SECTION_METRICS PRESET_SAVE_SECTION_JUDGE PRESET_SAVE_SECTION_DATASET
-      PRESET_SAVE_SECTION_SYSTEM_PROMPT
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # Internal model hydration metadata.
-  class SdkInternalApiPresignedUrlFileMetadata
-    FIELDS = {
-      file_name: 'file_name',
-      file_size: 'file_size'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for ApiPresignedUrlFile.
-  # A single file’s metadata in the request.
-  class ApiPresignedUrlFile
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiPresignedUrlFileMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiPresignedUrlFileMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiPresignedUrlFileMetadata::DECODERS
-
-    # @return [String] Local filename
-    attr_reader :file_name
-    # @return [String] The size of the file in bytes.
-    attr_reader :file_size
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

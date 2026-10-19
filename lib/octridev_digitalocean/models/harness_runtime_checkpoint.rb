@@ -5,89 +5,90 @@
 
 # harness_runtime_checkpoint domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalCheckpointMetadata
-    FIELDS = {
-      checkpoint_id: 'checkpoint_id',
-      session_id: 'session_id',
-      status: 'status',
-      kind: 'kind',
-      label: 'label',
-      event_id: 'event_id',
-      size_bytes: 'size_bytes',
-      created_at: 'created_at',
-      error_message: 'error_message'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::CheckpointStatus.from_value(value)
-      end,
-      kind: lambda do |value|
-        ::OctridevDigitalocean::CheckpointKind.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalCheckpointMetadata
+  FIELDS = {
+    checkpoint_id: "checkpoint_id",
+    session_id: "session_id",
+    status: "status",
+    kind: "kind",
+    label: "label",
+    event_id: "event_id",
+    size_bytes: "size_bytes",
+    created_at: "created_at",
+    error_message: "error_message",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::CheckpointStatus.from_value(value)
+    end,
+    kind: lambda do |value|
+      ::OctridevDigitalocean::CheckpointKind.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for Checkpoint.
+# Checkpoint is a durable capture of a session's live sandbox machine state bound to the event-log cursor at the cut. READY checkpoints seed forks (ForkSession) and rollback. Internal fields (team_id, the substrate checkpoint id, event_seq) are never serialized.
+class Checkpoint
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCheckpointMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCheckpointMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCheckpointMetadata::DECODERS
+
+  # @return [String] Public checkpoint id, stable for the checkpoint's lifetime (e.g. cp_9f2c1a4b).
+  attr_reader :checkpoint_id
+  # @return [String] Owning session.
+  attr_reader :session_id
+  # @return [CheckpointStatus] Capture lifecycle: PENDING -> READY | FAILED. Only READY checkpoints are forkable/restorable. CreateCheckpoint blocks until terminal, so PENDING is only ever observable via list/get while a capture is in flight.
+  attr_reader :status
+  # @return [CheckpointKind] How the checkpoint came to exist: explicit - requested via CreateCheckpoint; implicit - minted automatically by the platform (on run completion, or when ForkSession is called without from_checkpoint_id).
+  attr_reader :kind
+  # @return [String] Optional user-supplied label from CreateCheckpoint; empty when omitted.
+  attr_reader :label
+  # @return [String] Event-log cursor (ULID) of the last event included in the cut; forks resume event replay from here.
+  attr_reader :event_id
+  # @return [Integer] Size of the captured machine state. 0 until the checkpoint reaches READY.
+  attr_reader :size_bytes
+  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+  attr_reader :created_at
+  # @return [String] Client-safe failure detail; set only when status is FAILED.
+  attr_reader :error_message
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Checkpoint.
-  # Checkpoint is a durable capture of a session's live sandbox machine state bound to the event-log cursor at the cut. READY checkpoints seed forks (ForkSession) and rollback. Internal fields (team_id, the substrate checkpoint id, event_seq) are never serialized.
-  class Checkpoint
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCheckpointMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCheckpointMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCheckpointMetadata::DECODERS
-
-    # @return [String] Public checkpoint id, stable for the checkpoint's lifetime (e.g. cp_9f2c1a4b).
-    attr_reader :checkpoint_id
-    # @return [String] Owning session.
-    attr_reader :session_id
-    # @return [CheckpointStatus] Capture lifecycle: PENDING -> READY | FAILED. Only READY checkpoints are forkable/restorable. CreateCheckpoint blocks until terminal, so PENDING is only ever observable via list/get while a capture is in flight.
-    attr_reader :status
-    # @return [CheckpointKind] How the checkpoint came to exist: explicit - requested via CreateCheckpoint; implicit - minted automatically by the platform (on run completion, or when ForkSession is called without from_checkpoint_id).
-    attr_reader :kind
-    # @return [String] Optional user-supplied label from CreateCheckpoint; empty when omitted.
-    attr_reader :label
-    # @return [String] Event-log cursor (ULID) of the last event included in the cut; forks resume event replay from here.
-    attr_reader :event_id
-    # @return [Integer] Size of the captured machine state. 0 until the checkpoint reaches READY.
-    attr_reader :size_bytes
-    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-    attr_reader :created_at
-    # @return [String] Client-safe failure detail; set only when status is FAILED.
-    attr_reader :error_message
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the CheckpointKind SDK namespace.
-  module CheckpointKind
-    EXPLICIT = 'explicit'
-    IMPLICIT = 'implicit'
-    VALUES = %w[explicit implicit].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the CheckpointStatus SDK namespace.
-  module CheckpointStatus
-    PENDING = 'PENDING'
-    READY = 'READY'
-    FAILED = 'FAILED'
-    VALUES = %w[PENDING READY FAILED].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the CheckpointKind SDK namespace.
+module CheckpointKind
+  EXPLICIT = 'explicit'
+  IMPLICIT = 'implicit'
+  VALUES = ['explicit', 'implicit'].freeze
+  def self.from_value(value)
+    value
   end
+end
+
+# Defines the CheckpointStatus SDK namespace.
+module CheckpointStatus
+  PENDING = 'PENDING'
+  READY = 'READY'
+  FAILED = 'FAILED'
+  VALUES = ['PENDING', 'READY', 'FAILED'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

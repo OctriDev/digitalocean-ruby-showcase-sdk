@@ -12,11 +12,11 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalUptimeCreateCheckMetadata
         FIELDS = {
-          name: 'name',
-          type: 'type',
-          target: 'target',
-          regions: 'regions',
-          enabled: 'enabled'
+          name: "name",
+          type: "type",
+          target: "target",
+          regions: "regions",
+          enabled: "enabled",
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -31,7 +31,7 @@ module OctridevDigitalocean
           end,
           regions: lambda do |value|
             value&.map { |item| ::OctridevDigitalocean::Methods::Uptime::UptimeCreateCheckRegionsItem.from_value(item) }
-          end
+          end,
         }.freeze
       end
 
@@ -70,12 +70,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalUptimeCreateAlertMetadata
         FIELDS = {
-          name: 'name',
-          type: 'type',
-          threshold: 'threshold',
-          comparison: 'comparison',
-          notifications: 'notifications',
-          period: 'period'
+          name: "name",
+          type: "type",
+          threshold: "threshold",
+          comparison: "comparison",
+          notifications: "notifications",
+          period: "period",
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -95,7 +95,7 @@ module OctridevDigitalocean
           end,
           period: lambda do |value|
             ::OctridevDigitalocean::Methods::Uptime::UptimeCreateAlertPeriod.from_value(value)
-          end
+          end,
         }.freeze
       end
 
@@ -136,12 +136,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalUptimeUpdateAlertMetadata
         FIELDS = {
-          name: 'name',
-          type: 'type',
-          threshold: 'threshold',
-          comparison: 'comparison',
-          notifications: 'notifications',
-          period: 'period'
+          name: "name",
+          type: "type",
+          threshold: "threshold",
+          comparison: "comparison",
+          notifications: "notifications",
+          period: "period",
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -161,7 +161,7 @@ module OctridevDigitalocean
           end,
           period: lambda do |value|
             ::OctridevDigitalocean::Methods::Uptime::UptimeUpdateAlertPeriod.from_value(value)
-          end
+          end,
         }.freeze
       end
 
@@ -208,7 +208,7 @@ module OctridevDigitalocean
         V_15_M = '15m'
         V_30_M = '30m'
         V_1_H = '1h'
-        VALUES = %w[2m 3m 5m 10m 15m 30m 1h].freeze
+        VALUES = ['2m', '3m', '5m', '10m', '15m', '30m', '1h'].freeze
         def self.from_value(value)
           value
         end
@@ -220,7 +220,7 @@ module OctridevDigitalocean
         DOWN = 'down'
         DOWN_GLOBAL = 'down_global'
         SSL_EXPIRY = 'ssl_expiry'
-        VALUES = %w[latency down down_global ssl_expiry].freeze
+        VALUES = ['latency', 'down', 'down_global', 'ssl_expiry'].freeze
         def self.from_value(value)
           value
         end
@@ -231,7 +231,7 @@ module OctridevDigitalocean
         PING = 'ping'
         HTTP = 'http'
         HTTPS = 'https'
-        VALUES = %w[ping http https].freeze
+        VALUES = ['ping', 'http', 'https'].freeze
         def self.from_value(value)
           value
         end
@@ -243,7 +243,7 @@ module OctridevDigitalocean
         DOWN = 'down'
         DOWN_GLOBAL = 'down_global'
         SSL_EXPIRY = 'ssl_expiry'
-        VALUES = %w[latency down down_global ssl_expiry].freeze
+        VALUES = ['latency', 'down', 'down_global', 'ssl_expiry'].freeze
         def self.from_value(value)
           value
         end
@@ -253,7 +253,7 @@ module OctridevDigitalocean
       module UptimeCreateAlertComparison
         GREATER_THAN = 'greater_than'
         LESS_THAN = 'less_than'
-        VALUES = %w[greater_than less_than].freeze
+        VALUES = ['greater_than', 'less_than'].freeze
         def self.from_value(value)
           value
         end
@@ -263,7 +263,7 @@ module OctridevDigitalocean
       module UptimeUpdateAlertComparison
         GREATER_THAN = 'greater_than'
         LESS_THAN = 'less_than'
-        VALUES = %w[greater_than less_than].freeze
+        VALUES = ['greater_than', 'less_than'].freeze
         def self.from_value(value)
           value
         end
@@ -275,7 +275,7 @@ module OctridevDigitalocean
         US_WEST = 'us_west'
         EU_WEST = 'eu_west'
         SE_ASIA = 'se_asia'
-        VALUES = %w[us_east us_west eu_west se_asia].freeze
+        VALUES = ['us_east', 'us_west', 'eu_west', 'se_asia'].freeze
         def self.from_value(value)
           value
         end
@@ -290,7 +290,7 @@ module OctridevDigitalocean
         V_15_M = '15m'
         V_30_M = '30m'
         V_1_H = '1h'
-        VALUES = %w[2m 3m 5m 10m 15m 30m 1h].freeze
+        VALUES = ['2m', '3m', '5m', '10m', '15m', '30m', '1h'].freeze
         def self.from_value(value)
           value
         end
@@ -306,23 +306,24 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          '/v2/uptime/checks',
+          "/v2/uptime/checks",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::AllChecks,
           decoder: :json,
           operation_id: 'uptime_list_checks',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -344,22 +345,23 @@ module OctridevDigitalocean
         enabled:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/uptime/checks',
+          "/v2/uptime/checks",
           config: config,
           body: {
             'name' => name,
             'type' => type,
             'target' => target,
             'regions' => regions,
-            'enabled' => enabled
+            'enabled' => enabled,
           },
           return_type: ::OctridevDigitalocean::ExistingCheck,
           decoder: :json,
           operation_id: 'uptime_create_check',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -371,12 +373,13 @@ module OctridevDigitalocean
         check_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('check_id', check_id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/uptime/checks/',
+            "/v2/uptime/checks/",
             SdkClient.encode_path_segment(check_id)
           ].join,
           config: config,
@@ -384,7 +387,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'uptime_get_check',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -397,12 +400,13 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
+
         Validation.validate_uuid('check_id', check_id)
 
         SdkClient.request(
           'PUT',
           [
-            '/v2/uptime/checks/',
+            "/v2/uptime/checks/",
             SdkClient.encode_path_segment(check_id)
           ].join,
           config: config,
@@ -411,7 +415,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'uptime_update_check',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -423,19 +427,20 @@ module OctridevDigitalocean
         check_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('check_id', check_id)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/uptime/checks/',
+            "/v2/uptime/checks/",
             SdkClient.encode_path_segment(check_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'uptime_delete_check',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -447,21 +452,22 @@ module OctridevDigitalocean
         check_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('check_id', check_id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/uptime/checks/',
+            "/v2/uptime/checks/",
             SdkClient.encode_path_segment(check_id),
-            '/state'
+            "/state"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ExistingCheckState,
           decoder: :json,
           operation_id: 'uptime_get_check_state',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -477,6 +483,7 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('check_id', check_id)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -486,20 +493,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/uptime/checks/',
+            "/v2/uptime/checks/",
             SdkClient.encode_path_segment(check_id),
-            '/alerts'
+            "/alerts"
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::AllAlerts,
           decoder: :json,
           operation_id: 'uptime_list_alerts',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -527,14 +534,15 @@ module OctridevDigitalocean
         comparison: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('check_id', check_id)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/uptime/checks/',
+            "/v2/uptime/checks/",
             SdkClient.encode_path_segment(check_id),
-            '/alerts'
+            "/alerts"
           ].join,
           config: config,
           body: {
@@ -543,13 +551,13 @@ module OctridevDigitalocean
             'notifications' => notifications,
             'period' => period,
             'threshold' => threshold,
-            'comparison' => comparison
+            'comparison' => comparison,
           },
           return_type: ::OctridevDigitalocean::ExistingAlert,
           decoder: :json,
           operation_id: 'uptime_create_alert',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

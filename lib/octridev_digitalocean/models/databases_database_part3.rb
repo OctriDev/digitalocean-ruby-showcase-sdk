@@ -5,645 +5,663 @@
 
 # databases_database domain models (part 3)
 module OctridevDigitalocean
-  # Defines the DatabaseConfigConfig SDK namespace.
-  module DatabaseConfigConfig
-    def self.from_hash(hash)
-      lossy = nil
-      [MysqlAdvancedConfig, PostgresAdvancedConfig, RedisAdvancedConfig, ValkeyAdvancedConfig, MongoAdvancedConfig, KafkaAdvancedConfig, OpensearchAdvancedConfig].each do |type|
-        decoded = type.from_hash(hash)
-        return decoded if SdkModel.keeps_every_key?(hash, decoded)
+# Defines the DatabaseConfigConfig SDK namespace.
+module DatabaseConfigConfig
+  def self.from_hash(hash)
+    lossy = nil
+    [MysqlAdvancedConfig, PostgresAdvancedConfig, RedisAdvancedConfig, ValkeyAdvancedConfig, MongoAdvancedConfig, KafkaAdvancedConfig, OpensearchAdvancedConfig].each do |type|
+      decoded = type.from_hash(hash)
+      return decoded if SdkModel.keeps_every_key?(hash, decoded)
 
-        lossy ||= decoded
-      rescue ::StandardError
-        next
-      end
-      lossy unless lossy.nil?
+      lossy ||= decoded
+    rescue ::StandardError
+      next
     end
+    return lossy unless lossy.nil?
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseConfigResponseMetadata
+  FIELDS = {
+    config: "config",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    config
+  ].freeze
+  DECODERS = {
+    config: lambda do |value|
+      ::OctridevDigitalocean::DatabaseConfigResponseConfig.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DatabaseConfigResponse.
+# Typed representation of the `DatabaseConfigResponse` API schema.
+class DatabaseConfigResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseConfigResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseConfigResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseConfigResponseMetadata::DECODERS
+
+  # @return [DatabaseConfigResponseConfig] Required API value serialized in the `config` wire field.
+  attr_reader :config
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseConfigResponseMetadata
-    FIELDS = {
-      config: 'config'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      config
-    ].freeze
-    DECODERS = {
-      config: lambda do |value|
-        ::OctridevDigitalocean::DatabaseConfigResponseConfig.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DatabaseConfigResponse.
-  # Typed representation of the `DatabaseConfigResponse` API schema.
-  class DatabaseConfigResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseConfigResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseConfigResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseConfigResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [DatabaseConfigResponseConfig] Required API value serialized in the `config` wire field.
-    attr_reader :config
+# Defines the DatabaseConfigResponseConfig SDK namespace.
+module DatabaseConfigResponseConfig
+  def self.from_hash(hash)
+    lossy = nil
+    [MysqlAdvancedConfig, PostgresAdvancedConfig, RedisAdvancedConfig, ValkeyAdvancedConfig, KafkaAdvancedConfig, OpensearchAdvancedConfig, MongoAdvancedConfig].each do |type|
+      decoded = type.from_hash(hash)
+      return decoded if SdkModel.keeps_every_key?(hash, decoded)
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
+      lossy ||= decoded
+    rescue ::StandardError
+      next
     end
+    return lossy unless lossy.nil?
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Internal model hydration metadata.
+class SdkInternalDatabaseConnectionMetadata
+  FIELDS = {
+    uri: "uri",
+    database: "database",
+    host: "host",
+    port: "port",
+    user: "user",
+    password: "password",
+    ssl: "ssl",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# API model for DatabaseConnection.
+# Typed representation of the `DatabaseConnection` API schema.
+class DatabaseConnection
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseConnectionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseConnectionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseConnectionMetadata::DECODERS
+
+  # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+  attr_reader :uri
+  # @return [String] The name of the default database.
+  attr_reader :database
+  # @return [String] The FQDN pointing to the database cluster's current primary node.
+  attr_reader :host
+  # @return [Integer] The port on which the database cluster is listening.
+  attr_reader :port
+  # @return [String] The default user for the database. Requires `database:view_credentials` scope.
+  attr_reader :user
+  # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
+  attr_reader :password
+  # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
+  attr_reader :ssl
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the DatabaseConfigResponseConfig SDK namespace.
-  module DatabaseConfigResponseConfig
-    def self.from_hash(hash)
-      lossy = nil
-      [MysqlAdvancedConfig, PostgresAdvancedConfig, RedisAdvancedConfig, ValkeyAdvancedConfig, KafkaAdvancedConfig, OpensearchAdvancedConfig, MongoAdvancedConfig].each do |type|
-        decoded = type.from_hash(hash)
-        return decoded if SdkModel.keeps_every_key?(hash, decoded)
-
-        lossy ||= decoded
-      rescue ::StandardError
-        next
-      end
-      lossy unless lossy.nil?
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseConnectionMetadata
-    FIELDS = {
-      uri: 'uri',
-      database: 'database',
-      host: 'host',
-      port: 'port',
-      user: 'user',
-      password: 'password',
-      ssl: 'ssl'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseConnectionRequestMetadata
+  FIELDS = {
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DatabaseConnectionRequest.
+# Typed representation of the `DatabaseConnectionRequest` API schema.
+class DatabaseConnectionRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseConnectionRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseConnectionRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseConnectionRequestMetadata::DECODERS
+
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseConnection.
-  # Typed representation of the `DatabaseConnection` API schema.
-  class DatabaseConnection
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseConnectionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseConnectionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseConnectionMetadata::DECODERS
-
-    # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
-    attr_reader :uri
-    # @return [String] The name of the default database.
-    attr_reader :database
-    # @return [String] The FQDN pointing to the database cluster's current primary node.
-    attr_reader :host
-    # @return [Integer] The port on which the database cluster is listening.
-    attr_reader :port
-    # @return [String] The default user for the database. Requires `database:view_credentials` scope.
-    attr_reader :user
-    # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
-    attr_reader :password
-    # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
-    attr_reader :ssl
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseConnectionRequestMetadata
-    FIELDS = {}.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseLayoutOptionMetadata
+  FIELDS = {
+    num_nodes: "num_nodes",
+    sizes: "sizes",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DatabaseLayoutOption.
+# Typed representation of the `DatabaseLayoutOption` API schema.
+class DatabaseLayoutOption
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseLayoutOptionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseLayoutOptionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseLayoutOptionMetadata::DECODERS
+
+  # @return [Integer] Optional `integer` value serialized in the `num_nodes` wire field.
+  attr_reader :num_nodes
+  # @return [Array_of_String] An array of objects containing the slugs available with various node counts
+  attr_reader :sizes
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseConnectionRequest.
-  # Typed representation of the `DatabaseConnectionRequest` API schema.
-  class DatabaseConnectionRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseConnectionRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseConnectionRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseConnectionRequestMetadata::DECODERS
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseLayoutOptionMetadata
-    FIELDS = {
-      num_nodes: 'num_nodes',
-      sizes: 'sizes'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseMaintenanceWindowMetadata
+  FIELDS = {
+    day: "day",
+    hour: "hour",
+    pending: "pending",
+    description: "description",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    day
+    hour
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DatabaseMaintenanceWindow.
+# Typed representation of the `DatabaseMaintenanceWindow` API schema.
+class DatabaseMaintenanceWindow
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseMaintenanceWindowMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseMaintenanceWindowMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseMaintenanceWindowMetadata::DECODERS
+
+  # @return [String] The day of the week on which to apply maintenance updates.
+  attr_reader :day
+  # @return [String] The hour in UTC at which maintenance updates will be applied in 24 hour format.
+  attr_reader :hour
+  # @return [Boolean] A boolean value indicating whether any maintenance is scheduled to be performed in the next window.
+  attr_reader :pending
+  # @return [Array_of_String] A list of strings, each containing information about a pending maintenance update.
+  attr_reader :description
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseLayoutOption.
-  # Typed representation of the `DatabaseLayoutOption` API schema.
-  class DatabaseLayoutOption
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseLayoutOptionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseLayoutOptionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseLayoutOptionMetadata::DECODERS
-
-    # @return [Integer] Optional `integer` value serialized in the `num_nodes` wire field.
-    attr_reader :num_nodes
-    # @return [Array_of_String] An array of objects containing the slugs available with various node counts
-    attr_reader :sizes
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseMaintenanceWindowMetadata
-    FIELDS = {
-      day: 'day',
-      hour: 'hour',
-      pending: 'pending',
-      description: 'description'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      day
-      hour
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseMaintenanceWindowRequestMetadata
+  FIELDS = {
+    day: "day",
+    hour: "hour",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    day
+    hour
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DatabaseMaintenanceWindowRequest.
+# Typed representation of the `DatabaseMaintenanceWindowRequest` API schema.
+class DatabaseMaintenanceWindowRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseMaintenanceWindowRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseMaintenanceWindowRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseMaintenanceWindowRequestMetadata::DECODERS
+
+  # @return [String] The day of the week on which to apply maintenance updates.
+  attr_reader :day
+  # @return [String] The hour in UTC at which maintenance updates will be applied in 24 hour format.
+  attr_reader :hour
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseMaintenanceWindow.
-  # Typed representation of the `DatabaseMaintenanceWindow` API schema.
-  class DatabaseMaintenanceWindow
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseMaintenanceWindowMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseMaintenanceWindowMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseMaintenanceWindowMetadata::DECODERS
-
-    # @return [String] The day of the week on which to apply maintenance updates.
-    attr_reader :day
-    # @return [String] The hour in UTC at which maintenance updates will be applied in 24 hour format.
-    attr_reader :hour
-    # @return [Boolean] A boolean value indicating whether any maintenance is scheduled to be performed in the next window.
-    attr_reader :pending
-    # @return [Array_of_String] A list of strings, each containing information about a pending maintenance update.
-    attr_reader :description
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseMaintenanceWindowRequestMetadata
-    FIELDS = {
-      day: 'day',
-      hour: 'hour'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      day
-      hour
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseMetricsAuthMetadata
+  FIELDS = {
+    credentials: "credentials",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    credentials: lambda do |value|
+      ::OctridevDigitalocean::DatabaseMetricsCredentials.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DatabaseMetricsAuth.
+# Typed representation of the `DatabaseMetricsAuth` API schema.
+class DatabaseMetricsAuth
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseMetricsAuthMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseMetricsAuthMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseMetricsAuthMetadata::DECODERS
+
+  # @return [DatabaseMetricsCredentials] Optional object value serialized in the `credentials` wire field.
+  attr_reader :credentials
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseMaintenanceWindowRequest.
-  # Typed representation of the `DatabaseMaintenanceWindowRequest` API schema.
-  class DatabaseMaintenanceWindowRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseMaintenanceWindowRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseMaintenanceWindowRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseMaintenanceWindowRequestMetadata::DECODERS
-
-    # @return [String] The day of the week on which to apply maintenance updates.
-    attr_reader :day
-    # @return [String] The hour in UTC at which maintenance updates will be applied in 24 hour format.
-    attr_reader :hour
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseMetricsAuthMetadata
-    FIELDS = {
-      credentials: 'credentials'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      credentials: lambda do |value|
-        ::OctridevDigitalocean::DatabaseMetricsCredentials.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseMetricsCredentialsMetadata
+  FIELDS = {
+    credentials: "credentials",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    credentials: lambda do |value|
+      ::OctridevDigitalocean::DatabasesBasicAuthCredentials.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DatabaseMetricsCredentials.
+# Typed representation of the `DatabaseMetricsCredentials` API schema.
+class DatabaseMetricsCredentials
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseMetricsCredentialsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseMetricsCredentialsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseMetricsCredentialsMetadata::DECODERS
+
+  # @return [DatabasesBasicAuthCredentials] Optional object value serialized in the `credentials` wire field.
+  attr_reader :credentials
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseMetricsAuth.
-  # Typed representation of the `DatabaseMetricsAuth` API schema.
-  class DatabaseMetricsAuth
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseMetricsAuthMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseMetricsAuthMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseMetricsAuthMetadata::DECODERS
-
-    # @return [DatabaseMetricsCredentials] Optional object value serialized in the `credentials` wire field.
-    attr_reader :credentials
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseMetricsCredentialsMetadata
-    FIELDS = {
-      credentials: 'credentials'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      credentials: lambda do |value|
-        ::OctridevDigitalocean::DatabasesBasicAuthCredentials.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseReplicaReadConnectionMetadata
+  FIELDS = {
+    uri: "uri",
+    database: "database",
+    host: "host",
+    port: "port",
+    user: "user",
+    password: "password",
+    ssl: "ssl",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DatabaseReplicaReadConnection.
+# Optional API value serialized in the `connection` wire field.
+class DatabaseReplicaReadConnection
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseReplicaReadConnectionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseReplicaReadConnectionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseReplicaReadConnectionMetadata::DECODERS
+
+  # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+  attr_reader :uri
+  # @return [String] The name of the default database.
+  attr_reader :database
+  # @return [String] The FQDN pointing to the database cluster's current primary node.
+  attr_reader :host
+  # @return [Integer] The port on which the database cluster is listening.
+  attr_reader :port
+  # @return [String] The default user for the database. Requires `database:view_credentials` scope.
+  attr_reader :user
+  # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
+  attr_reader :password
+  # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
+  attr_reader :ssl
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseMetricsCredentials.
-  # Typed representation of the `DatabaseMetricsCredentials` API schema.
-  class DatabaseMetricsCredentials
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseMetricsCredentialsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseMetricsCredentialsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseMetricsCredentialsMetadata::DECODERS
-
-    # @return [DatabasesBasicAuthCredentials] Optional object value serialized in the `credentials` wire field.
-    attr_reader :credentials
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseReplicaReadConnectionMetadata
-    FIELDS = {
-      uri: 'uri',
-      database: 'database',
-      host: 'host',
-      port: 'port',
-      user: 'user',
-      password: 'password',
-      ssl: 'ssl'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseReplicaReadPrivateConnectionMetadata
+  FIELDS = {
+    uri: "uri",
+    database: "database",
+    host: "host",
+    port: "port",
+    user: "user",
+    password: "password",
+    ssl: "ssl",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for DatabaseReplicaReadPrivateConnection.
+# Optional API value serialized in the `private_connection` wire field.
+class DatabaseReplicaReadPrivateConnection
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseReplicaReadPrivateConnectionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseReplicaReadPrivateConnectionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseReplicaReadPrivateConnectionMetadata::DECODERS
+
+  # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+  attr_reader :uri
+  # @return [String] The name of the default database.
+  attr_reader :database
+  # @return [String] The FQDN pointing to the database cluster's current primary node.
+  attr_reader :host
+  # @return [Integer] The port on which the database cluster is listening.
+  attr_reader :port
+  # @return [String] The default user for the database. Requires `database:view_credentials` scope.
+  attr_reader :user
+  # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
+  attr_reader :password
+  # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
+  attr_reader :ssl
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseReplicaReadConnection.
-  # Optional API value serialized in the `connection` wire field.
-  class DatabaseReplicaReadConnection
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseReplicaReadConnectionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseReplicaReadConnectionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseReplicaReadConnectionMetadata::DECODERS
-
-    # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
-    attr_reader :uri
-    # @return [String] The name of the default database.
-    attr_reader :database
-    # @return [String] The FQDN pointing to the database cluster's current primary node.
-    attr_reader :host
-    # @return [Integer] The port on which the database cluster is listening.
-    attr_reader :port
-    # @return [String] The default user for the database. Requires `database:view_credentials` scope.
-    attr_reader :user
-    # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
-    attr_reader :password
-    # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
-    attr_reader :ssl
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseReplicaReadPrivateConnectionMetadata
-    FIELDS = {
-      uri: 'uri',
-      database: 'database',
-      host: 'host',
-      port: 'port',
-      user: 'user',
-      password: 'password',
-      ssl: 'ssl'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseReplicaReadMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    region: "region",
+    size: "size",
+    status: "status",
+    tags: "tags",
+    created_at: "created_at",
+    private_network_uuid: "private_network_uuid",
+    connection: "connection",
+    private_connection: "private_connection",
+    storage_size_mib: "storage_size_mib",
+    do_settings: "do_settings",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::DatabaseReplicaReadStatus.from_value(value)
+    end,
+    connection: lambda do |value|
+      ::OctridevDigitalocean::DatabaseReplicaReadConnection.from_hash(value)
+    end,
+    private_connection: lambda do |value|
+      ::OctridevDigitalocean::DatabaseReplicaReadPrivateConnection.from_hash(value)
+    end,
+    do_settings: lambda do |value|
+      ::OctridevDigitalocean::DoSettings.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DatabaseReplicaRead.
+# Typed representation of the `DatabaseReplicaRead` API schema.
+class DatabaseReplicaRead
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseReplicaReadMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseReplicaReadMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseReplicaReadMetadata::DECODERS
+
+  # @return [String] A unique ID that can be used to identify and reference a database replica.
+  attr_reader :id
+  # @return [String] The name to give the read-only replicating
+  attr_reader :name
+  # @return [String] A slug identifier for the region where the read-only replica will be located. If excluded, the replica will be placed in the same region as the cluster.
+  attr_reader :region
+  # @return [String] A slug identifier representing the size of the node for the read-only replica. The size of the replica must be at least as large as the node size for the database cluster from which it is replicating.
+  attr_reader :size
+  # @return [DatabaseReplicaReadStatus] A string representing the current status of the database cluster.
+  attr_reader :status
+  # @return [Array_of_String] A flat array of tag names as strings applied to the read-only replica. Requires `tag:read` scope.
+  attr_reader :tags
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the database cluster was created.
+  attr_reader :created_at
+  # @return [String] A string specifying the UUID of the VPC to which the read-only replica will be assigned. If excluded, the replica will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+  attr_reader :private_network_uuid
+  # @return [DatabaseReplicaReadConnection] Optional API value serialized in the `connection` wire field.
+  attr_reader :connection
+  # @return [DatabaseReplicaReadPrivateConnection] Optional API value serialized in the `private_connection` wire field.
+  attr_reader :private_connection
+  # @return [Integer] Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.
+  attr_reader :storage_size_mib
+  # @return [DoSettings] DigitalOcean-specific settings for the read-only replica, including custom service CNAMEs.
+  attr_reader :do_settings
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseReplicaReadPrivateConnection.
-  # Optional API value serialized in the `private_connection` wire field.
-  class DatabaseReplicaReadPrivateConnection
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseReplicaReadPrivateConnectionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseReplicaReadPrivateConnectionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseReplicaReadPrivateConnectionMetadata::DECODERS
-
-    # @return [String] A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
-    attr_reader :uri
-    # @return [String] The name of the default database.
-    attr_reader :database
-    # @return [String] The FQDN pointing to the database cluster's current primary node.
-    attr_reader :host
-    # @return [Integer] The port on which the database cluster is listening.
-    attr_reader :port
-    # @return [String] The default user for the database. Requires `database:view_credentials` scope.
-    attr_reader :user
-    # @return [String] The randomly generated password for the default user. Requires `database:view_credentials` scope.
-    attr_reader :password
-    # @return [Boolean] A boolean value indicating if the connection should be made over SSL.
-    attr_reader :ssl
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseReplicaReadMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      region: 'region',
-      size: 'size',
-      status: 'status',
-      tags: 'tags',
-      created_at: 'created_at',
-      private_network_uuid: 'private_network_uuid',
-      connection: 'connection',
-      private_connection: 'private_connection',
-      storage_size_mib: 'storage_size_mib',
-      do_settings: 'do_settings'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::DatabaseReplicaReadStatus.from_value(value)
-      end,
-      connection: lambda do |value|
-        ::OctridevDigitalocean::DatabaseReplicaReadConnection.from_hash(value)
-      end,
-      private_connection: lambda do |value|
-        ::OctridevDigitalocean::DatabaseReplicaReadPrivateConnection.from_hash(value)
-      end,
-      do_settings: lambda do |value|
-        ::OctridevDigitalocean::DoSettings.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the DatabaseReplicaReadStatus SDK namespace.
+module DatabaseReplicaReadStatus
+  CREATING = 'creating'
+  ONLINE = 'online'
+  RESIZING = 'resizing'
+  MIGRATING = 'migrating'
+  FORKING = 'forking'
+  VALUES = ['creating', 'online', 'resizing', 'migrating', 'forking'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseReplicaResponseMetadata
+  FIELDS = {
+    replica: "replica",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    replica: lambda do |value|
+      ::OctridevDigitalocean::DatabaseReplicaRead.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DatabaseReplicaResponse.
+# Typed representation of the `DatabaseReplicaResponse` API schema.
+class DatabaseReplicaResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseReplicaResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseReplicaResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseReplicaResponseMetadata::DECODERS
+
+  # @return [DatabaseReplicaRead] Optional object value serialized in the `replica` wire field.
+  attr_reader :replica
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DatabaseReplicaRead.
-  # Typed representation of the `DatabaseReplicaRead` API schema.
-  class DatabaseReplicaRead
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseReplicaReadMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseReplicaReadMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseReplicaReadMetadata::DECODERS
-
-    # @return [String] A unique ID that can be used to identify and reference a database replica.
-    attr_reader :id
-    # @return [String] The name to give the read-only replicating
-    attr_reader :name
-    # @return [String] A slug identifier for the region where the read-only replica will be located. If excluded, the replica will be placed in the same region as the cluster.
-    attr_reader :region
-    # @return [String] A slug identifier representing the size of the node for the read-only replica. The size of the replica must be at least as large as the node size for the database cluster from which it is replicating.
-    attr_reader :size
-    # @return [DatabaseReplicaReadStatus] A string representing the current status of the database cluster.
-    attr_reader :status
-    # @return [Array_of_String] A flat array of tag names as strings applied to the read-only replica. Requires `tag:read` scope.
-    attr_reader :tags
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the database cluster was created.
-    attr_reader :created_at
-    # @return [String] A string specifying the UUID of the VPC to which the read-only replica will be assigned. If excluded, the replica will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
-    attr_reader :private_network_uuid
-    # @return [DatabaseReplicaReadConnection] Optional API value serialized in the `connection` wire field.
-    attr_reader :connection
-    # @return [DatabaseReplicaReadPrivateConnection] Optional API value serialized in the `private_connection` wire field.
-    attr_reader :private_connection
-    # @return [Integer] Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.
-    attr_reader :storage_size_mib
-    # @return [DoSettings] DigitalOcean-specific settings for the read-only replica, including custom service CNAMEs.
-    attr_reader :do_settings
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the DatabaseReplicaReadStatus SDK namespace.
-  module DatabaseReplicaReadStatus
-    CREATING = 'creating'
-    ONLINE = 'online'
-    RESIZING = 'resizing'
-    MIGRATING = 'migrating'
-    FORKING = 'forking'
-    VALUES = %w[creating online resizing migrating forking].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDatabaseReplicasMetadata
+  FIELDS = {
+    replicas: "replicas",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    replicas: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::DatabaseReplicaRead.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for DatabaseReplicas.
+# Typed representation of the `DatabaseReplicas` API schema.
+class DatabaseReplicas
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDatabaseReplicasMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDatabaseReplicasMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDatabaseReplicasMetadata::DECODERS
+
+  # @return [Array_of_DatabaseReplicaRead] Optional array value serialized in the `replicas` wire field.
+  attr_reader :replicas
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseReplicaResponseMetadata
-    FIELDS = {
-      replica: 'replica'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      replica: lambda do |value|
-        ::OctridevDigitalocean::DatabaseReplicaRead.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DatabaseReplicaResponse.
-  # Typed representation of the `DatabaseReplicaResponse` API schema.
-  class DatabaseReplicaResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseReplicaResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseReplicaResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseReplicaResponseMetadata::DECODERS
-
-    # @return [DatabaseReplicaRead] Optional object value serialized in the `replica` wire field.
-    attr_reader :replica
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseReplicasMetadata
-    FIELDS = {
-      replicas: 'replicas'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      replicas: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::DatabaseReplicaRead.from_hash(item) }
-      end
-    }.freeze
-  end
-
-  # API model for DatabaseReplicas.
-  # Typed representation of the `DatabaseReplicas` API schema.
-  class DatabaseReplicas
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDatabaseReplicasMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDatabaseReplicasMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDatabaseReplicasMetadata::DECODERS
-
-    # @return [Array_of_DatabaseReplicaRead] Optional array value serialized in the `replicas` wire field.
-    attr_reader :replicas
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalDatabaseResponseMetadata
-    FIELDS = {
-      db: 'db'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      db
-    ].freeze
-    DECODERS = {
-      db: lambda do |value|
-        ::OctridevDigitalocean::Database.from_hash(value)
-      end
-    }.freeze
-  end
+# Internal model hydration metadata.
+class SdkInternalDatabaseResponseMetadata
+  FIELDS = {
+    db: "db",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    db
+  ].freeze
+  DECODERS = {
+    db: lambda do |value|
+      ::OctridevDigitalocean::Database.from_hash(value)
+    end,
+  }.freeze
+end
 end

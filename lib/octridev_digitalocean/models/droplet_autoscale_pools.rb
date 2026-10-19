@@ -5,667 +5,671 @@
 
 # droplet_autoscale_pools domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAllAutoscalePoolsMetadata
-    FIELDS = {
-      autoscale_pools: 'autoscale_pools',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      autoscale_pools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AutoscalePool.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAllAutoscalePoolsMetadata
+  FIELDS = {
+    autoscale_pools: "autoscale_pools",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    autoscale_pools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AutoscalePool.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AllAutoscalePools.
+# Typed representation of the `AllAutoscalePools` API schema.
+class AllAutoscalePools
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAllAutoscalePoolsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAllAutoscalePoolsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAllAutoscalePoolsMetadata::DECODERS
+
+  attr_reader :autoscale_pools
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AllAutoscalePools.
-  # Typed representation of the `AllAutoscalePools` API schema.
-  class AllAutoscalePools
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAllAutoscalePoolsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAllAutoscalePoolsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAllAutoscalePoolsMetadata::DECODERS
-
-    attr_reader :autoscale_pools
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAllMembersMetadata
-    FIELDS = {
-      droplets: 'droplets',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      droplets: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Member.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAllMembersMetadata
+  FIELDS = {
+    droplets: "droplets",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    droplets: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Member.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AllMembers.
+# Typed representation of the `AllMembers` API schema.
+class AllMembers
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAllMembersMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAllMembersMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAllMembersMetadata::DECODERS
+
+  attr_reader :droplets
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AllMembers.
-  # Typed representation of the `AllMembers` API schema.
-  class AllMembers
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAllMembersMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAllMembersMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAllMembersMetadata::DECODERS
-
-    attr_reader :droplets
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAutoscalePoolMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      config: 'config',
-      droplet_template: 'droplet_template',
-      current_utilization: 'current_utilization',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      status: 'status',
-      active_resources_count: 'active_resources_count'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      name
-      config
-      droplet_template
-      created_at
-      updated_at
-      status
-      active_resources_count
-    ].freeze
-    DECODERS = {
-      config: lambda do |value|
-        ::OctridevDigitalocean::AutoscalePoolConfig.from_hash(value)
-      end,
-      droplet_template: lambda do |value|
-        ::OctridevDigitalocean::AutoscalePoolDropletTemplate.from_hash(value)
-      end,
-      current_utilization: lambda do |value|
-        ::OctridevDigitalocean::CurrentUtilization.from_hash(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::AutoscalePoolStatus.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAutoscalePoolMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    config: "config",
+    droplet_template: "droplet_template",
+    current_utilization: "current_utilization",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    status: "status",
+    active_resources_count: "active_resources_count",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    name
+    config
+    droplet_template
+    created_at
+    updated_at
+    status
+    active_resources_count
+  ].freeze
+  DECODERS = {
+    config: lambda do |value|
+      ::OctridevDigitalocean::AutoscalePoolConfig.from_hash(value)
+    end,
+    droplet_template: lambda do |value|
+      ::OctridevDigitalocean::AutoscalePoolDropletTemplate.from_hash(value)
+    end,
+    current_utilization: lambda do |value|
+      ::OctridevDigitalocean::CurrentUtilization.from_hash(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::AutoscalePoolStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for AutoscalePool.
+# Typed representation of the `AutoscalePool` API schema.
+class AutoscalePool
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAutoscalePoolMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAutoscalePoolMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAutoscalePoolMetadata::DECODERS
+
+  # @return [String] A unique identifier for each autoscale pool instance. This is automatically generated upon autoscale pool creation.
+  attr_reader :id
+  # @return [String] The human-readable name set for the autoscale pool.
+  attr_reader :name
+  # @return [AutoscalePoolConfig] The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).
+  attr_reader :config
+  # @return [AutoscalePoolDropletTemplate] Required object value serialized in the `droplet_template` wire field.
+  attr_reader :droplet_template
+  # @return [CurrentUtilization] Optional object value serialized in the `current_utilization` wire field.
+  attr_reader :current_utilization
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the autoscale pool was created.
+  attr_reader :created_at
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the autoscale pool was last updated.
+  attr_reader :updated_at
+  # @return [AutoscalePoolStatus] The current status of the autoscale pool.
+  attr_reader :status
+  # @return [Integer] The number of active Droplets in the autoscale pool.
+  attr_reader :active_resources_count
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AutoscalePool.
-  # Typed representation of the `AutoscalePool` API schema.
-  class AutoscalePool
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAutoscalePoolMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAutoscalePoolMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAutoscalePoolMetadata::DECODERS
-
-    # @return [String] A unique identifier for each autoscale pool instance. This is automatically generated upon autoscale pool creation.
-    attr_reader :id
-    # @return [String] The human-readable name set for the autoscale pool.
-    attr_reader :name
-    # @return [AutoscalePoolConfig] The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).
-    attr_reader :config
-    # @return [AutoscalePoolDropletTemplate] Required object value serialized in the `droplet_template` wire field.
-    attr_reader :droplet_template
-    # @return [CurrentUtilization] Optional object value serialized in the `current_utilization` wire field.
-    attr_reader :current_utilization
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the autoscale pool was created.
-    attr_reader :created_at
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the autoscale pool was last updated.
-    attr_reader :updated_at
-    # @return [AutoscalePoolStatus] The current status of the autoscale pool.
-    attr_reader :status
-    # @return [Integer] The number of active Droplets in the autoscale pool.
-    attr_reader :active_resources_count
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the AutoscalePoolStatus SDK namespace.
-  module AutoscalePoolStatus
-    ACTIVE = 'active'
-    DELETING = 'deleting'
-    ERROR = 'error'
-    VALUES = %w[active deleting error].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the AutoscalePoolStatus SDK namespace.
+module AutoscalePoolStatus
+  ACTIVE = 'active'
+  DELETING = 'deleting'
+  ERROR = 'error'
+  VALUES = ['active', 'deleting', 'error'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the AutoscalePoolConfig SDK namespace.
+module AutoscalePoolConfig
+  def self.from_hash(hash)
+    shape_mapping = {
+      "target_number_instances" => AutoscalePoolStaticConfig,
+      "min_instances" => AutoscalePoolDynamicConfig,
+    }
+    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+    decoded = type&.from_hash(hash)
+    return decoded unless type.nil?
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAutoscalePoolCreateMetadata
+  FIELDS = {
+    name: "name",
+    config: "config",
+    droplet_template: "droplet_template",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    config
+    droplet_template
+  ].freeze
+  DECODERS = {
+    config: lambda do |value|
+      ::OctridevDigitalocean::AutoscalePoolCreateConfig.from_hash(value)
+    end,
+    droplet_template: lambda do |value|
+      ::OctridevDigitalocean::AutoscalePoolDropletTemplate.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AutoscalePoolCreate.
+# Typed representation of the `AutoscalePoolCreate` API schema.
+class AutoscalePoolCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAutoscalePoolCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAutoscalePoolCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAutoscalePoolCreateMetadata::DECODERS
+
+  # @return [String] The human-readable name of the autoscale pool. This field cannot be updated
+  attr_reader :name
+  # @return [AutoscalePoolCreateConfig] The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).
+  attr_reader :config
+  # @return [AutoscalePoolDropletTemplate] Required object value serialized in the `droplet_template` wire field.
+  attr_reader :droplet_template
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the AutoscalePoolConfig SDK namespace.
-  module AutoscalePoolConfig
-    def self.from_hash(hash)
-      shape_mapping = {
-        'target_number_instances' => AutoscalePoolStaticConfig,
-        'min_instances' => AutoscalePoolDynamicConfig
-      }
-      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-      decoded = type&.from_hash(hash)
-      decoded unless type.nil?
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAutoscalePoolCreateMetadata
-    FIELDS = {
-      name: 'name',
-      config: 'config',
-      droplet_template: 'droplet_template'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      config
-      droplet_template
-    ].freeze
-    DECODERS = {
-      config: lambda do |value|
-        ::OctridevDigitalocean::AutoscalePoolCreateConfig.from_hash(value)
-      end,
-      droplet_template: lambda do |value|
-        ::OctridevDigitalocean::AutoscalePoolDropletTemplate.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the AutoscalePoolCreateConfig SDK namespace.
+module AutoscalePoolCreateConfig
+  def self.from_hash(hash)
+    shape_mapping = {
+      "target_number_instances" => AutoscalePoolStaticConfig,
+      "min_instances" => AutoscalePoolDynamicConfig,
+    }
+    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+    decoded = type&.from_hash(hash)
+    return decoded unless type.nil?
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAutoscalePoolCreateResponseMetadata
+  FIELDS = {
+    autoscale_pool: "autoscale_pool",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    autoscale_pool: lambda do |value|
+      ::OctridevDigitalocean::AutoscalePool.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AutoscalePoolCreateResponse.
+# Typed representation of the `AutoscalePoolCreateResponse` API schema.
+class AutoscalePoolCreateResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAutoscalePoolCreateResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAutoscalePoolCreateResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAutoscalePoolCreateResponseMetadata::DECODERS
+
+  # @return [AutoscalePool] Optional object value serialized in the `autoscale_pool` wire field.
+  attr_reader :autoscale_pool
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AutoscalePoolCreate.
-  # Typed representation of the `AutoscalePoolCreate` API schema.
-  class AutoscalePoolCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAutoscalePoolCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAutoscalePoolCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAutoscalePoolCreateMetadata::DECODERS
-
-    # @return [String] The human-readable name of the autoscale pool. This field cannot be updated
-    attr_reader :name
-    # @return [AutoscalePoolCreateConfig] The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).
-    attr_reader :config
-    # @return [AutoscalePoolDropletTemplate] Required object value serialized in the `droplet_template` wire field.
-    attr_reader :droplet_template
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the AutoscalePoolCreateConfig SDK namespace.
-  module AutoscalePoolCreateConfig
-    def self.from_hash(hash)
-      shape_mapping = {
-        'target_number_instances' => AutoscalePoolStaticConfig,
-        'min_instances' => AutoscalePoolDynamicConfig
-      }
-      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-      decoded = type&.from_hash(hash)
-      decoded unless type.nil?
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAutoscalePoolDropletTemplateMetadata
+  FIELDS = {
+    name: "name",
+    region: "region",
+    size: "size",
+    image: "image",
+    ssh_keys: "ssh_keys",
+    tags: "tags",
+    vpc_uuid: "vpc_uuid",
+    with_droplet_agent: "with_droplet_agent",
+    project_id: "project_id",
+    ipv6: "ipv6",
+    user_data: "user_data",
+    public_networking: "public_networking",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    region
+    size
+    image
+    ssh_keys
+  ].freeze
+  DECODERS = {
+    region: lambda do |value|
+      ::OctridevDigitalocean::AutoscalePoolDropletTemplateRegion.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for AutoscalePoolDropletTemplate.
+# Typed representation of the `AutoscalePoolDropletTemplate` API schema.
+class AutoscalePoolDropletTemplate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAutoscalePoolDropletTemplateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAutoscalePoolDropletTemplateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAutoscalePoolDropletTemplateMetadata::DECODERS
+
+  # @return [String] The name(s) to be applied to all Droplets in the autoscale pool.
+  attr_reader :name
+  # @return [AutoscalePoolDropletTemplateRegion] The datacenter in which all of the Droplets will be created.
+  attr_reader :region
+  # @return [String] The Droplet size to be used for all Droplets in the autoscale pool.
+  attr_reader :size
+  # @return [String] The Droplet image to be used for all Droplets in the autoscale pool. You may specify the slug or the image ID.
+  attr_reader :image
+  # @return [Array_of_String] The SSH keys to be installed on the Droplets in the autoscale pool. You can either specify the key ID or the fingerprint. Requires `ssh_key:read` scope.
+  attr_reader :ssh_keys
+  # @return [Array_of_String] The tags to apply to each of the Droplets in the autoscale pool. Requires `tag:read` scope.
+  attr_reader :tags
+  # @return [String] The VPC where the Droplets in the autoscale pool will be created. The VPC must be in the region where you want to create the Droplets. Requires `vpc:read` scope.
+  attr_reader :vpc_uuid
+  # @return [Boolean] Installs the Droplet agent. This must be set to true to monitor Droplets for resource utilization scaling.
+  attr_reader :with_droplet_agent
+  # @return [String] The project that the Droplets in the autoscale pool will belong to. Requires `project:read` scope.
+  attr_reader :project_id
+  # @return [Boolean] Assigns a unique IPv6 address to each of the Droplets in the autoscale pool.
+  attr_reader :ipv6
+  # @return [String] A string containing user data that cloud-init consumes to configure a Droplet on first boot. User data is often a cloud-config file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+  attr_reader :user_data
+  # @return [Boolean] An optional boolean indicating whether the Droplets should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+  attr_reader :public_networking
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAutoscalePoolCreateResponseMetadata
-    FIELDS = {
-      autoscale_pool: 'autoscale_pool'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      autoscale_pool: lambda do |value|
-        ::OctridevDigitalocean::AutoscalePool.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AutoscalePoolCreateResponse.
-  # Typed representation of the `AutoscalePoolCreateResponse` API schema.
-  class AutoscalePoolCreateResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAutoscalePoolCreateResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAutoscalePoolCreateResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAutoscalePoolCreateResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [AutoscalePool] Optional object value serialized in the `autoscale_pool` wire field.
-    attr_reader :autoscale_pool
+# Defines the AutoscalePoolDropletTemplateRegion SDK namespace.
+module AutoscalePoolDropletTemplateRegion
+  NYC1 = 'nyc1'
+  NYC2 = 'nyc2'
+  NYC3 = 'nyc3'
+  AMS2 = 'ams2'
+  AMS3 = 'ams3'
+  SFO1 = 'sfo1'
+  SFO2 = 'sfo2'
+  SFO3 = 'sfo3'
+  SGP1 = 'sgp1'
+  LON1 = 'lon1'
+  FRA1 = 'fra1'
+  TOR1 = 'tor1'
+  BLR1 = 'blr1'
+  SYD1 = 'syd1'
+  VALUES = [
+    'nyc1', 'nyc2', 'nyc3', 'ams2', 'ams3', 'sfo1', 'sfo2', 'sfo3', 'sgp1', 'lon1', 'fra1', 'tor1',
+    'blr1', 'syd1'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalAutoscalePoolDynamicConfigMetadata
+  FIELDS = {
+    min_instances: "min_instances",
+    max_instances: "max_instances",
+    target_cpu_utilization: "target_cpu_utilization",
+    target_memory_utilization: "target_memory_utilization",
+    cooldown_minutes: "cooldown_minutes",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    min_instances
+    max_instances
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for AutoscalePoolDynamicConfig.
+# Typed representation of the `AutoscalePoolDynamicConfig` API schema.
+class AutoscalePoolDynamicConfig
+  include AutoscalePoolConfig
+  include AutoscalePoolCreateConfig
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAutoscalePoolDynamicConfigMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAutoscalePoolDynamicConfigMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAutoscalePoolDynamicConfigMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [Integer] The minimum number of Droplets in an autoscale pool.
+  attr_reader :min_instances
+  # @return [Integer] The maximum number of Droplets in an autoscale pool.
+  attr_reader :max_instances
+  # @return [Float] Target CPU utilization as a decimal.
+  attr_reader :target_cpu_utilization
+  # @return [Float] Target memory utilization as a decimal.
+  attr_reader :target_memory_utilization
+  # @return [Integer] The number of minutes to wait between scaling events in an autoscale pool. Defaults to 10 minutes.
+  attr_reader :cooldown_minutes
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAutoscalePoolDropletTemplateMetadata
-    FIELDS = {
-      name: 'name',
-      region: 'region',
-      size: 'size',
-      image: 'image',
-      ssh_keys: 'ssh_keys',
-      tags: 'tags',
-      vpc_uuid: 'vpc_uuid',
-      with_droplet_agent: 'with_droplet_agent',
-      project_id: 'project_id',
-      ipv6: 'ipv6',
-      user_data: 'user_data',
-      public_networking: 'public_networking'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      region
-      size
-      image
-      ssh_keys
-    ].freeze
-    DECODERS = {
-      region: lambda do |value|
-        ::OctridevDigitalocean::AutoscalePoolDropletTemplateRegion.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AutoscalePoolDropletTemplate.
-  # Typed representation of the `AutoscalePoolDropletTemplate` API schema.
-  class AutoscalePoolDropletTemplate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAutoscalePoolDropletTemplateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAutoscalePoolDropletTemplateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAutoscalePoolDropletTemplateMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The name(s) to be applied to all Droplets in the autoscale pool.
-    attr_reader :name
-    # @return [AutoscalePoolDropletTemplateRegion] The datacenter in which all of the Droplets will be created.
-    attr_reader :region
-    # @return [String] The Droplet size to be used for all Droplets in the autoscale pool.
-    attr_reader :size
-    # @return [String] The Droplet image to be used for all Droplets in the autoscale pool. You may specify the slug or the image ID.
-    attr_reader :image
-    # @return [Array_of_String] The SSH keys to be installed on the Droplets in the autoscale pool. You can either specify the key ID or the fingerprint. Requires `ssh_key:read` scope.
-    attr_reader :ssh_keys
-    # @return [Array_of_String] The tags to apply to each of the Droplets in the autoscale pool. Requires `tag:read` scope.
-    attr_reader :tags
-    # @return [String] The VPC where the Droplets in the autoscale pool will be created. The VPC must be in the region where you want to create the Droplets. Requires `vpc:read` scope.
-    attr_reader :vpc_uuid
-    # @return [Boolean] Installs the Droplet agent. This must be set to true to monitor Droplets for resource utilization scaling.
-    attr_reader :with_droplet_agent
-    # @return [String] The project that the Droplets in the autoscale pool will belong to. Requires `project:read` scope.
-    attr_reader :project_id
-    # @return [Boolean] Assigns a unique IPv6 address to each of the Droplets in the autoscale pool.
-    attr_reader :ipv6
-    # @return [String] A string containing user data that cloud-init consumes to configure a Droplet on first boot. User data is often a cloud-config file or Bash script. It must be plain text and may not exceed 64 KiB in size.
-    attr_reader :user_data
-    # @return [Boolean] An optional boolean indicating whether the Droplets should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
-    attr_reader :public_networking
+# Internal model hydration metadata.
+class SdkInternalAutoscalePoolStaticConfigMetadata
+  FIELDS = {
+    target_number_instances: "target_number_instances",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    target_number_instances
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for AutoscalePoolStaticConfig.
+# Typed representation of the `AutoscalePoolStaticConfig` API schema.
+class AutoscalePoolStaticConfig
+  include AutoscalePoolConfig
+  include AutoscalePoolCreateConfig
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAutoscalePoolStaticConfigMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAutoscalePoolStaticConfigMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAutoscalePoolStaticConfigMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Integer] Fixed number of instances in an autoscale pool.
+  attr_reader :target_number_instances
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the AutoscalePoolDropletTemplateRegion SDK namespace.
-  module AutoscalePoolDropletTemplateRegion
-    NYC1 = 'nyc1'
-    NYC2 = 'nyc2'
-    NYC3 = 'nyc3'
-    AMS2 = 'ams2'
-    AMS3 = 'ams3'
-    SFO1 = 'sfo1'
-    SFO2 = 'sfo2'
-    SFO3 = 'sfo3'
-    SGP1 = 'sgp1'
-    LON1 = 'lon1'
-    FRA1 = 'fra1'
-    TOR1 = 'tor1'
-    BLR1 = 'blr1'
-    SYD1 = 'syd1'
-    VALUES = %w[
-      nyc1 nyc2 nyc3 ams2 ams3 sfo1 sfo2 sfo3 sgp1 lon1 fra1 tor1
-      blr1 syd1
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAutoscalePoolDynamicConfigMetadata
-    FIELDS = {
-      min_instances: 'min_instances',
-      max_instances: 'max_instances',
-      target_cpu_utilization: 'target_cpu_utilization',
-      target_memory_utilization: 'target_memory_utilization',
-      cooldown_minutes: 'cooldown_minutes'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      min_instances
-      max_instances
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCurrentUtilizationMetadata
+  FIELDS = {
+    memory: "memory",
+    cpu: "cpu",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CurrentUtilization.
+# Typed representation of the `CurrentUtilization` API schema.
+class CurrentUtilization
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCurrentUtilizationMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCurrentUtilizationMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCurrentUtilizationMetadata::DECODERS
+
+  # @return [Float] The average memory utilization of the autoscale pool.
+  attr_reader :memory
+  # @return [Float] The average CPU utilization of the autoscale pool.
+  attr_reader :cpu
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AutoscalePoolDynamicConfig.
-  # Typed representation of the `AutoscalePoolDynamicConfig` API schema.
-  class AutoscalePoolDynamicConfig
-    include AutoscalePoolConfig
-    include AutoscalePoolCreateConfig
-
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAutoscalePoolDynamicConfigMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAutoscalePoolDynamicConfigMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAutoscalePoolDynamicConfigMetadata::DECODERS
-
-    # @return [Integer] The minimum number of Droplets in an autoscale pool.
-    attr_reader :min_instances
-    # @return [Integer] The maximum number of Droplets in an autoscale pool.
-    attr_reader :max_instances
-    # @return [Float] Target CPU utilization as a decimal.
-    attr_reader :target_cpu_utilization
-    # @return [Float] Target memory utilization as a decimal.
-    attr_reader :target_memory_utilization
-    # @return [Integer] The number of minutes to wait between scaling events in an autoscale pool. Defaults to 10 minutes.
-    attr_reader :cooldown_minutes
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAutoscalePoolStaticConfigMetadata
-    FIELDS = {
-      target_number_instances: 'target_number_instances'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      target_number_instances
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalExistingAutoscalePoolMetadata
+  FIELDS = {
+    autoscale_pool: "autoscale_pool",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    autoscale_pool: lambda do |value|
+      ::OctridevDigitalocean::AutoscalePool.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ExistingAutoscalePool.
+# Typed representation of the `ExistingAutoscalePool` API schema.
+class ExistingAutoscalePool
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExistingAutoscalePoolMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExistingAutoscalePoolMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExistingAutoscalePoolMetadata::DECODERS
+
+  # @return [AutoscalePool] Optional object value serialized in the `autoscale_pool` wire field.
+  attr_reader :autoscale_pool
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AutoscalePoolStaticConfig.
-  # Typed representation of the `AutoscalePoolStaticConfig` API schema.
-  class AutoscalePoolStaticConfig
-    include AutoscalePoolConfig
-    include AutoscalePoolCreateConfig
-
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAutoscalePoolStaticConfigMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAutoscalePoolStaticConfigMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAutoscalePoolStaticConfigMetadata::DECODERS
-
-    # @return [Integer] Fixed number of instances in an autoscale pool.
-    attr_reader :target_number_instances
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCurrentUtilizationMetadata
-    FIELDS = {
-      memory: 'memory',
-      cpu: 'cpu'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalHistoryMetadata
+  FIELDS = {
+    history_event_id: "history_event_id",
+    current_instance_count: "current_instance_count",
+    desired_instance_count: "desired_instance_count",
+    reason: "reason",
+    status: "status",
+    created_at: "created_at",
+    updated_at: "updated_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    history_event_id
+    current_instance_count
+    desired_instance_count
+    reason
+    status
+    created_at
+    updated_at
+  ].freeze
+  DECODERS = {
+    reason: lambda do |value|
+      ::OctridevDigitalocean::HistoryReason.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::HistoryStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for History.
+# Typed representation of the `History` API schema.
+class History
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalHistoryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalHistoryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalHistoryMetadata::DECODERS
+
+  # @return [String] The unique identifier of the history event.
+  attr_reader :history_event_id
+  # @return [Integer] The current number of Droplets in the autoscale pool.
+  attr_reader :current_instance_count
+  # @return [Integer] The target number of Droplets for the autoscale pool after the scaling event.
+  attr_reader :desired_instance_count
+  # @return [HistoryReason] The reason for the scaling event.
+  attr_reader :reason
+  # @return [HistoryStatus] The status of the scaling event.
+  attr_reader :status
+  # @return [String] The creation time of the history event in ISO8601 combined date and time format.
+  attr_reader :created_at
+  # @return [String] The last updated time of the history event in ISO8601 combined date and time format.
+  attr_reader :updated_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CurrentUtilization.
-  # Typed representation of the `CurrentUtilization` API schema.
-  class CurrentUtilization
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCurrentUtilizationMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCurrentUtilizationMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCurrentUtilizationMetadata::DECODERS
-
-    # @return [Float] The average memory utilization of the autoscale pool.
-    attr_reader :memory
-    # @return [Float] The average CPU utilization of the autoscale pool.
-    attr_reader :cpu
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExistingAutoscalePoolMetadata
-    FIELDS = {
-      autoscale_pool: 'autoscale_pool'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      autoscale_pool: lambda do |value|
-        ::OctridevDigitalocean::AutoscalePool.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # API model for ExistingAutoscalePool.
-  # Typed representation of the `ExistingAutoscalePool` API schema.
-  class ExistingAutoscalePool
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExistingAutoscalePoolMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExistingAutoscalePoolMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExistingAutoscalePoolMetadata::DECODERS
-
-    # @return [AutoscalePool] Optional object value serialized in the `autoscale_pool` wire field.
-    attr_reader :autoscale_pool
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# Defines the HistoryReason SDK namespace.
+module HistoryReason
+  CONFIGURATION_CHANGE = 'CONFIGURATION_CHANGE'
+  SCALE_UP = 'SCALE_UP'
+  SCALE_DOWN = 'SCALE_DOWN'
+  VALUES = ['CONFIGURATION_CHANGE', 'SCALE_UP', 'SCALE_DOWN'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # Internal model hydration metadata.
-  class SdkInternalHistoryMetadata
-    FIELDS = {
-      history_event_id: 'history_event_id',
-      current_instance_count: 'current_instance_count',
-      desired_instance_count: 'desired_instance_count',
-      reason: 'reason',
-      status: 'status',
-      created_at: 'created_at',
-      updated_at: 'updated_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      history_event_id
-      current_instance_count
-      desired_instance_count
-      reason
-      status
-      created_at
-      updated_at
-    ].freeze
-    DECODERS = {
-      reason: lambda do |value|
-        ::OctridevDigitalocean::HistoryReason.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::HistoryStatus.from_value(value)
-      end
-    }.freeze
+# Defines the HistoryStatus SDK namespace.
+module HistoryStatus
+  IN_PROGRESS = 'in_progress'
+  SUCCESS = 'success'
+  ERROR = 'error'
+  VALUES = ['in_progress', 'success', 'error'].freeze
+  def self.from_value(value)
+    value
   end
-
-  # API model for History.
-  # Typed representation of the `History` API schema.
-  class History
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalHistoryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalHistoryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalHistoryMetadata::DECODERS
-
-    # @return [String] The unique identifier of the history event.
-    attr_reader :history_event_id
-    # @return [Integer] The current number of Droplets in the autoscale pool.
-    attr_reader :current_instance_count
-    # @return [Integer] The target number of Droplets for the autoscale pool after the scaling event.
-    attr_reader :desired_instance_count
-    # @return [HistoryReason] The reason for the scaling event.
-    attr_reader :reason
-    # @return [HistoryStatus] The status of the scaling event.
-    attr_reader :status
-    # @return [String] The creation time of the history event in ISO8601 combined date and time format.
-    attr_reader :created_at
-    # @return [String] The last updated time of the history event in ISO8601 combined date and time format.
-    attr_reader :updated_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the HistoryReason SDK namespace.
-  module HistoryReason
-    CONFIGURATION_CHANGE = 'CONFIGURATION_CHANGE'
-    SCALE_UP = 'SCALE_UP'
-    SCALE_DOWN = 'SCALE_DOWN'
-    VALUES = %w[CONFIGURATION_CHANGE SCALE_UP SCALE_DOWN].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Defines the HistoryStatus SDK namespace.
-  module HistoryStatus
-    IN_PROGRESS = 'in_progress'
-    SUCCESS = 'success'
-    ERROR = 'error'
-    VALUES = %w[in_progress success error].freeze
-    def self.from_value(value)
-      value
-    end
-  end
+end
 end

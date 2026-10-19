@@ -5,275 +5,285 @@
 
 # apps_app_autoscaling domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAppAutoscalingSpecMetricsCpuMetadata
-    FIELDS = {
-      percent: 'percent'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalAppAutoscalingSpecMetricsCpuMetadata
+  FIELDS = {
+    percent: "percent",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AppAutoscalingSpecMetricsCpu.
+# Settings for scaling the component based on CPU utilization.
+class AppAutoscalingSpecMetricsCpu
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppAutoscalingSpecMetricsCpuMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecMetricsCpuMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppAutoscalingSpecMetricsCpuMetadata::DECODERS
+
+  # @return [Integer] The average target CPU utilization for the component.
+  attr_reader :percent
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppAutoscalingSpecMetricsCpu.
-  # Settings for scaling the component based on CPU utilization.
-  class AppAutoscalingSpecMetricsCpu
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppAutoscalingSpecMetricsCpuMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecMetricsCpuMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppAutoscalingSpecMetricsCpuMetadata::DECODERS
-
-    # @return [Integer] The average target CPU utilization for the component.
-    attr_reader :percent
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppAutoscalingSpecMetricsMetadata
-    FIELDS = {
-      cpu: 'cpu'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      cpu: lambda do |value|
-        ::OctridevDigitalocean::AppAutoscalingSpecMetricsCpu.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppAutoscalingSpecMetricsMetadata
+  FIELDS = {
+    cpu: "cpu",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    cpu: lambda do |value|
+      ::OctridevDigitalocean::AppAutoscalingSpecMetricsCpu.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppAutoscalingSpecMetrics.
+# The metrics that the component is scaled on.
+class AppAutoscalingSpecMetrics
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppAutoscalingSpecMetricsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecMetricsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppAutoscalingSpecMetricsMetadata::DECODERS
+
+  # @return [AppAutoscalingSpecMetricsCpu] Settings for scaling the component based on CPU utilization.
+  attr_reader :cpu
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppAutoscalingSpecMetrics.
-  # The metrics that the component is scaled on.
-  class AppAutoscalingSpecMetrics
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppAutoscalingSpecMetricsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecMetricsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppAutoscalingSpecMetricsMetadata::DECODERS
-
-    # @return [AppAutoscalingSpecMetricsCpu] Settings for scaling the component based on CPU utilization.
-    attr_reader :cpu
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppAutoscalingSpecMetadata
-    FIELDS = {
-      min_instance_count: 'min_instance_count',
-      max_instance_count: 'max_instance_count',
-      metrics: 'metrics'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      metrics: lambda do |value|
-        ::OctridevDigitalocean::AppAutoscalingSpecMetrics.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppAutoscalingSpecMetadata
+  FIELDS = {
+    min_instance_count: "min_instance_count",
+    max_instance_count: "max_instance_count",
+    metrics: "metrics",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    metrics: lambda do |value|
+      ::OctridevDigitalocean::AppAutoscalingSpecMetrics.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppAutoscalingSpec.
+# Configuration for automatically scaling this component based on metrics.
+class AppAutoscalingSpec
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppAutoscalingSpecMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppAutoscalingSpecMetadata::DECODERS
+
+  # @return [Integer] The minimum amount of instances for this component.
+  attr_reader :min_instance_count
+  # @return [Integer] The maximum amount of instances for this component. Maximum 250. Consider using a larger instance size if your application requires more than 250 instances.
+  attr_reader :max_instance_count
+  # @return [AppAutoscalingSpecMetrics] The metrics that the component is scaled on.
+  attr_reader :metrics
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppAutoscalingSpec.
-  # Configuration for automatically scaling this component based on metrics.
-  class AppAutoscalingSpec
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppAutoscalingSpecMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppAutoscalingSpecMetadata::DECODERS
-
-    # @return [Integer] The minimum amount of instances for this component.
-    attr_reader :min_instance_count
-    # @return [Integer] The maximum amount of instances for this component. Maximum 250. Consider using a larger instance size if your application requires more than 250 instances.
-    attr_reader :max_instance_count
-    # @return [AppAutoscalingSpecMetrics] The metrics that the component is scaled on.
-    attr_reader :metrics
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestsPerSecondMetadata
-    FIELDS = {
-      per_instance: 'per_instance'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestsPerSecondMetadata
+  FIELDS = {
+    per_instance: "per_instance",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond.
+# Settings for scaling the component based on requests per second.
+class AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestsPerSecondMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestsPerSecondMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestsPerSecondMetadata::DECODERS
+
+  # @return [Integer] The target number of requests per second per instance for the component.
+  attr_reader :per_instance
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond.
-  # Settings for scaling the component based on requests per second.
-  class AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestsPerSecondMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestsPerSecondMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestsPerSecondMetadata::DECODERS
-
-    # @return [Integer] The target number of requests per second per instance for the component.
-    attr_reader :per_instance
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestDurationMetadata
-    FIELDS = {
-      p95_milliseconds: 'p95_milliseconds'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestDurationMetadata
+  FIELDS = {
+    p95_milliseconds: "p95_milliseconds",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AppAutoscalingSpecServiceVariant1MetricsRequestDuration.
+# Settings for scaling the component based on request duration.
+class AppAutoscalingSpecServiceVariant1MetricsRequestDuration
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestDurationMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestDurationMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestDurationMetadata::DECODERS
+
+  # @return [Integer] The p95 target request duration in milliseconds for the component.
+  attr_reader :p95_milliseconds
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppAutoscalingSpecServiceVariant1MetricsRequestDuration.
-  # Settings for scaling the component based on request duration.
-  class AppAutoscalingSpecServiceVariant1MetricsRequestDuration
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestDurationMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestDurationMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsRequestDurationMetadata::DECODERS
-
-    # @return [Integer] The p95 target request duration in milliseconds for the component.
-    attr_reader :p95_milliseconds
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppAutoscalingSpecServiceVariant1MetricsMetadata
-    FIELDS = {
-      requests_per_second: 'requests_per_second',
-      request_duration: 'request_duration'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      requests_per_second: lambda do |value|
-        ::OctridevDigitalocean::AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond.from_hash(value)
-      end,
-      request_duration: lambda do |value|
-        ::OctridevDigitalocean::AppAutoscalingSpecServiceVariant1MetricsRequestDuration.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppAutoscalingSpecServiceVariant1MetricsMetadata
+  FIELDS = {
+    requests_per_second: "requests_per_second",
+    request_duration: "request_duration",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    requests_per_second: lambda do |value|
+      ::OctridevDigitalocean::AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond.from_hash(value)
+    end,
+    request_duration: lambda do |value|
+      ::OctridevDigitalocean::AppAutoscalingSpecServiceVariant1MetricsRequestDuration.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppAutoscalingSpecServiceVariant1Metrics.
+# Optional object value serialized in the `metrics` wire field.
+class AppAutoscalingSpecServiceVariant1Metrics
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsMetadata::DECODERS
+
+  # @return [AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond] Settings for scaling the component based on requests per second.
+  attr_reader :requests_per_second
+  # @return [AppAutoscalingSpecServiceVariant1MetricsRequestDuration] Settings for scaling the component based on request duration.
+  attr_reader :request_duration
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppAutoscalingSpecServiceVariant1Metrics.
-  # Optional object value serialized in the `metrics` wire field.
-  class AppAutoscalingSpecServiceVariant1Metrics
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppAutoscalingSpecServiceVariant1MetricsMetadata::DECODERS
-
-    # @return [AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond] Settings for scaling the component based on requests per second.
-    attr_reader :requests_per_second
-    # @return [AppAutoscalingSpecServiceVariant1MetricsRequestDuration] Settings for scaling the component based on request duration.
-    attr_reader :request_duration
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppAutoscalingSpecServiceMetadata
-    FIELDS = {
-      min_instance_count: 'min_instance_count',
-      max_instance_count: 'max_instance_count',
-      metrics: 'metrics'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      metrics: lambda do |value|
-        ::OctridevDigitalocean::AppAutoscalingSpecServiceVariant1Metrics.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppAutoscalingSpecServiceMetadata
+  FIELDS = {
+    min_instance_count: "min_instance_count",
+    max_instance_count: "max_instance_count",
+    metrics: "metrics",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    metrics: lambda do |value|
+      ::OctridevDigitalocean::AppAutoscalingSpecServiceVariant1Metrics.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppAutoscalingSpecService.
+# Typed representation of the `AppAutoscalingSpecService` API schema.
+class AppAutoscalingSpecService
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppAutoscalingSpecServiceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecServiceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppAutoscalingSpecServiceMetadata::DECODERS
+
+  # @return [Integer] The minimum amount of instances for this component.
+  attr_reader :min_instance_count
+  # @return [Integer] The maximum amount of instances for this component. Maximum 250. Consider using a larger instance size if your application requires more than 250 instances.
+  attr_reader :max_instance_count
+  # @return [AppAutoscalingSpecServiceVariant1Metrics] Optional object value serialized in the `metrics` wire field.
+  attr_reader :metrics
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppAutoscalingSpecService.
-  # Typed representation of the `AppAutoscalingSpecService` API schema.
-  class AppAutoscalingSpecService
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppAutoscalingSpecServiceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppAutoscalingSpecServiceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppAutoscalingSpecServiceMetadata::DECODERS
-
-    # @return [Integer] The minimum amount of instances for this component.
-    attr_reader :min_instance_count
-    # @return [Integer] The maximum amount of instances for this component. Maximum 250. Consider using a larger instance size if your application requires more than 250 instances.
-    attr_reader :max_instance_count
-    # @return [AppAutoscalingSpecServiceVariant1Metrics] Optional object value serialized in the `metrics` wire field.
-    attr_reader :metrics
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

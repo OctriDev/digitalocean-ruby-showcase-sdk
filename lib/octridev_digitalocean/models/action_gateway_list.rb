@@ -5,587 +5,600 @@
 
 # action_gateway_list domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalListConnectionsResponseMetadata
-    FIELDS = {
-      connections: 'connections',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      connections: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Connection.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::Pagination.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalListConnectionsResponseMetadata
+  FIELDS = {
+    connections: "connections",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    connections: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Connection.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::Pagination.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ListConnectionsResponse.
+# One page of connections.
+class ListConnectionsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListConnectionsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListConnectionsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListConnectionsResponseMetadata::DECODERS
+
+  # @return [Array_of_Connection] Connections on this page.
+  attr_reader :connections
+  # @return [Pagination] Paging applied to this response and the total number of connections.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListConnectionsResponse.
-  # One page of connections.
-  class ListConnectionsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListConnectionsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListConnectionsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListConnectionsResponseMetadata::DECODERS
-
-    # @return [Array_of_Connection] Connections on this page.
-    attr_reader :connections
-    # @return [Pagination] Paging applied to this response and the total number of connections.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListMcpServersResponseMetadata
-    FIELDS = {
-      mcp_servers: 'mcpServers'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      mcp_servers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::McpServer.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListMcpServersResponseMetadata
+  FIELDS = {
+    mcp_servers: "mcpServers",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    mcp_servers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::McpServer.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListMcpServersResponse.
+# Lists your team's MCP servers.
+class ListMcpServersResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListMcpServersResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListMcpServersResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListMcpServersResponseMetadata::DECODERS
+
+  # @return [Array_of_McpServer] Servers sorted by `serverRef`.
+  attr_reader :mcp_servers
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListMcpServersResponse.
-  # Lists your team's MCP servers.
-  class ListMcpServersResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListMcpServersResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListMcpServersResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListMcpServersResponseMetadata::DECODERS
-
-    # @return [Array_of_McpServer] Servers sorted by `serverRef`.
-    attr_reader :mcp_servers
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListMcpServerToolsResponseMetadata
-    FIELDS = {
-      tools: 'tools'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::McpServerTool.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListMcpServerToolsResponseMetadata
+  FIELDS = {
+    tools: "tools",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::McpServerTool.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListMcpServerToolsResponse.
+# Lists an MCP server's discovered tools.
+class ListMcpServerToolsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListMcpServerToolsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListMcpServerToolsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListMcpServerToolsResponseMetadata::DECODERS
+
+  # @return [Array_of_McpServerTool] Tools sorted by name.
+  attr_reader :tools
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListMcpServerToolsResponse.
-  # Lists an MCP server's discovered tools.
-  class ListMcpServerToolsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListMcpServerToolsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListMcpServerToolsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListMcpServerToolsResponseMetadata::DECODERS
-
-    # @return [Array_of_McpServerTool] Tools sorted by name.
-    attr_reader :tools
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListOutputViewsResponseMetadata
-    FIELDS = {
-      views: 'views',
-      tool_id: 'tool_id',
-      tool: 'tool',
-      version: 'version',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      views: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::OutputView.from_hash(item) }
-      end,
-      next_page_token: lambda do |value|
-        ::OctridevDigitalocean::NextPageToken.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListOutputViewsResponseMetadata
+  FIELDS = {
+    views: "views",
+    tool_id: "tool_id",
+    tool: "tool",
+    version: "version",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    views: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::OutputView.from_hash(item) }
+    end,
+    next_page_token: lambda do |value|
+      ::OctridevDigitalocean::NextPageToken.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ListOutputViewsResponse.
+# One page of output views.
+class ListOutputViewsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListOutputViewsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListOutputViewsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListOutputViewsResponseMetadata::DECODERS
+
+  # @return [Array_of_OutputView] Ordered by tool version, then published views before your team's own, then name.
+  attr_reader :views
+  # @return [String] The tool version the views are bound to, echoed so an unpinned request learns which version it resolved. Empty when the request named no tool.
+  attr_reader :tool_id
+  # @return [String] Tool slug of that version. Empty when the request named no tool.
+  attr_reader :tool
+  # @return [String] Version of that tool, for example `v3`. Empty when the request named no tool.
+  attr_reader :version
+  # @return [NextPageToken] Empty on the last page.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListOutputViewsResponse.
-  # One page of output views.
-  class ListOutputViewsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListOutputViewsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListOutputViewsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListOutputViewsResponseMetadata::DECODERS
-
-    # @return [Array_of_OutputView] Ordered by tool version, then published views before your team's own, then name.
-    attr_reader :views
-    # @return [String] The tool version the views are bound to, echoed so an unpinned request learns which version it resolved. Empty when the request named no tool.
-    attr_reader :tool_id
-    # @return [String] Tool slug of that version. Empty when the request named no tool.
-    attr_reader :tool
-    # @return [String] Version of that tool, for example `v3`. Empty when the request named no tool.
-    attr_reader :version
-    # @return [NextPageToken] Empty on the last page.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListProviderHealthResponseMetadata
-    FIELDS = {
-      snapshot: 'snapshot',
-      providers: 'providers',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      snapshot: lambda do |value|
-        ::OctridevDigitalocean::HealthSnapshot.from_hash(value)
-      end,
-      providers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ProviderHealth.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::Pagination.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListProviderHealthResponseMetadata
+  FIELDS = {
+    snapshot: "snapshot",
+    providers: "providers",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    snapshot: lambda do |value|
+      ::OctridevDigitalocean::HealthSnapshot.from_hash(value)
+    end,
+    providers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ProviderHealth.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::Pagination.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ListProviderHealthResponse.
+# One page of provider health.
+class ListProviderHealthResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListProviderHealthResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListProviderHealthResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListProviderHealthResponseMetadata::DECODERS
+
+  # @return [HealthSnapshot] When the metrics were computed and the window they cover.
+  attr_reader :snapshot
+  # @return [Array_of_ProviderHealth] Providers sorted by ID.
+  attr_reader :providers
+  # @return [Pagination] Paging applied to this response and the total number of providers.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListProviderHealthResponse.
-  # One page of provider health.
-  class ListProviderHealthResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListProviderHealthResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListProviderHealthResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListProviderHealthResponseMetadata::DECODERS
-
-    # @return [HealthSnapshot] When the metrics were computed and the window they cover.
-    attr_reader :snapshot
-    # @return [Array_of_ProviderHealth] Providers sorted by ID.
-    attr_reader :providers
-    # @return [Pagination] Paging applied to this response and the total number of providers.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListProvidersResponseMetadata
-    FIELDS = {
-      providers: 'providers'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      providers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ProviderSummary.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListProvidersResponseMetadata
+  FIELDS = {
+    providers: "providers",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    providers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ProviderSummary.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListProvidersResponse.
+# Lists the catalog providers.
+class ListProvidersResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListProvidersResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListProvidersResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListProvidersResponseMetadata::DECODERS
+
+  # @return [Array_of_ProviderSummary] Providers sorted by display name.
+  attr_reader :providers
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListProvidersResponse.
-  # Lists the catalog providers.
-  class ListProvidersResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListProvidersResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListProvidersResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListProvidersResponseMetadata::DECODERS
-
-    # @return [Array_of_ProviderSummary] Providers sorted by display name.
-    attr_reader :providers
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListSessionsResponseMetadata
-    FIELDS = {
-      sessions: 'sessions',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      sessions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Session.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::Pagination.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListSessionsResponseMetadata
+  FIELDS = {
+    sessions: "sessions",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    sessions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Session.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::Pagination.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ListSessionsResponse.
+# One page of sessions.
+class ListSessionsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListSessionsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListSessionsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListSessionsResponseMetadata::DECODERS
+
+  # @return [Array_of_Session] Sessions, newest first.
+  attr_reader :sessions
+  # @return [Pagination] Paging applied to this response and the total number of sessions.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListSessionsResponse.
-  # One page of sessions.
-  class ListSessionsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListSessionsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListSessionsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListSessionsResponseMetadata::DECODERS
-
-    # @return [Array_of_Session] Sessions, newest first.
-    attr_reader :sessions
-    # @return [Pagination] Paging applied to this response and the total number of sessions.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListToolbeltProvidersResponseMetadata
-    FIELDS = {
-      toolbelt: 'toolbelt',
-      providers: 'providers',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      toolbelt: lambda do |value|
-        ::OctridevDigitalocean::Toolbelt.from_hash(value)
-      end,
-      providers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ToolbeltProviderSummary.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::Pagination.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListToolbeltProvidersResponseMetadata
+  FIELDS = {
+    toolbelt: "toolbelt",
+    providers: "providers",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    toolbelt: lambda do |value|
+      ::OctridevDigitalocean::Toolbelt.from_hash(value)
+    end,
+    providers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ToolbeltProviderSummary.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::Pagination.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ListToolbeltProvidersResponse.
+# One page of a toolbelt's providers.
+class ListToolbeltProvidersResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListToolbeltProvidersResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListToolbeltProvidersResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListToolbeltProvidersResponseMetadata::DECODERS
+
+  # @return [Toolbelt] The toolbelt version the providers were read from.
+  attr_reader :toolbelt
+  # @return [Array_of_ToolbeltProviderSummary] Providers sorted by ID.
+  attr_reader :providers
+  # @return [Pagination] Paging applied to this response and the total number of providers.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListToolbeltProvidersResponse.
-  # One page of a toolbelt's providers.
-  class ListToolbeltProvidersResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListToolbeltProvidersResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListToolbeltProvidersResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListToolbeltProvidersResponseMetadata::DECODERS
-
-    # @return [Toolbelt] The toolbelt version the providers were read from.
-    attr_reader :toolbelt
-    # @return [Array_of_ToolbeltProviderSummary] Providers sorted by ID.
-    attr_reader :providers
-    # @return [Pagination] Paging applied to this response and the total number of providers.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListToolbeltProviderToolsResponseMetadata
-    FIELDS = {
-      tools: 'tools',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ToolbeltToolDetail.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::Pagination.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListToolbeltProviderToolsResponseMetadata
+  FIELDS = {
+    tools: "tools",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ToolbeltToolDetail.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::Pagination.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ListToolbeltProviderToolsResponse.
+# One page of a toolbelt's members from one provider.
+class ListToolbeltProviderToolsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListToolbeltProviderToolsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListToolbeltProviderToolsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListToolbeltProviderToolsResponseMetadata::DECODERS
+
+  # @return [Array_of_ToolbeltToolDetail] Members sorted by tool slug.
+  attr_reader :tools
+  # @return [Pagination] Paging applied to this response and the total number of matching members.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListToolbeltProviderToolsResponse.
-  # One page of a toolbelt's members from one provider.
-  class ListToolbeltProviderToolsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListToolbeltProviderToolsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListToolbeltProviderToolsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListToolbeltProviderToolsResponseMetadata::DECODERS
-
-    # @return [Array_of_ToolbeltToolDetail] Members sorted by tool slug.
-    attr_reader :tools
-    # @return [Pagination] Paging applied to this response and the total number of matching members.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListToolHealthResponseMetadata
-    FIELDS = {
-      snapshot: 'snapshot',
-      tools: 'tools',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      snapshot: lambda do |value|
-        ::OctridevDigitalocean::HealthSnapshot.from_hash(value)
-      end,
-      tools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ToolHealth.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::Pagination.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListToolHealthResponseMetadata
+  FIELDS = {
+    snapshot: "snapshot",
+    tools: "tools",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    snapshot: lambda do |value|
+      ::OctridevDigitalocean::HealthSnapshot.from_hash(value)
+    end,
+    tools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ToolHealth.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::Pagination.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ListToolHealthResponse.
+# One page of tool health.
+class ListToolHealthResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListToolHealthResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListToolHealthResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListToolHealthResponseMetadata::DECODERS
+
+  # @return [HealthSnapshot] When the metrics were computed and the window they cover.
+  attr_reader :snapshot
+  # @return [Array_of_ToolHealth] Tools sorted by provider, then tool slug.
+  attr_reader :tools
+  # @return [Pagination] Paging applied to this response and the total number of tools.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListToolHealthResponse.
-  # One page of tool health.
-  class ListToolHealthResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListToolHealthResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListToolHealthResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListToolHealthResponseMetadata::DECODERS
-
-    # @return [HealthSnapshot] When the metrics were computed and the window they cover.
-    attr_reader :snapshot
-    # @return [Array_of_ToolHealth] Tools sorted by provider, then tool slug.
-    attr_reader :tools
-    # @return [Pagination] Paging applied to this response and the total number of tools.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListToolkitsResponseMetadata
-    FIELDS = {
-      version: 'version',
-      toolkits: 'toolkits'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      toolkits: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Toolkit.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListToolkitsResponseMetadata
+  FIELDS = {
+    version: "version",
+    toolkits: "toolkits",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    toolkits: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Toolkit.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListToolkitsResponse.
+# Lists the toolkits available to your team.
+class ListToolkitsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListToolkitsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListToolkitsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListToolkitsResponseMetadata::DECODERS
+
+  # @return [String] Catalog version identifier, for example `v1`.
+  attr_reader :version
+  # @return [Array_of_Toolkit] Toolkits available to your team.
+  attr_reader :toolkits
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListToolkitsResponse.
-  # Lists the toolkits available to your team.
-  class ListToolkitsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListToolkitsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListToolkitsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListToolkitsResponseMetadata::DECODERS
-
-    # @return [String] Catalog version identifier, for example `v1`.
-    attr_reader :version
-    # @return [Array_of_Toolkit] Toolkits available to your team.
-    attr_reader :toolkits
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListToolsResponseMetadata
-    FIELDS = {
-      version: 'version',
-      tools: 'tools',
-      definitions: 'definitions',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Tool.from_hash(item) }
-      end,
-      definitions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ToolDefinition.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::Pagination.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListToolsResponseMetadata
+  FIELDS = {
+    version: "version",
+    tools: "tools",
+    definitions: "definitions",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Tool.from_hash(item) }
+    end,
+    definitions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ToolDefinition.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::Pagination.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ListToolsResponse.
+# One page of the tool catalog.
+class ListToolsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListToolsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListToolsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListToolsResponseMetadata::DECODERS
+
+  # @return [String] Catalog version identifier, for example `v1`.
+  attr_reader :version
+  # @return [Array_of_Tool] Tools on this page, grouped by provider and sorted by name within a provider.
+  attr_reader :tools
+  # @return [Array_of_ToolDefinition] definitions[i] describes tools[i].
+  attr_reader :definitions
+  # @return [Pagination] page and `per_page` echo the values applied; total is the number of tools matching `toolkitId` across all pages.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListToolsResponse.
-  # One page of the tool catalog.
-  class ListToolsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListToolsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListToolsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListToolsResponseMetadata::DECODERS
-
-    # @return [String] Catalog version identifier, for example `v1`.
-    attr_reader :version
-    # @return [Array_of_Tool] Tools on this page, grouped by provider and sorted by name within a provider.
-    attr_reader :tools
-    # @return [Array_of_ToolDefinition] definitions[i] describes tools[i].
-    attr_reader :definitions
-    # @return [Pagination] page and `per_page` echo the values applied; total is the number of tools matching `toolkitId` across all pages.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListUsersResponseMetadata
-    FIELDS = {
-      user_ids: 'user_ids',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::Pagination.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListUsersResponseMetadata
+  FIELDS = {
+    user_ids: "user_ids",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::Pagination.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ListUsersResponse.
+# One page of user IDs.
+class ListUsersResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListUsersResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListUsersResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListUsersResponseMetadata::DECODERS
+
+  # @return [Array_of_String] User IDs on this page.
+  attr_reader :user_ids
+  # @return [Pagination] Paging applied to this response and the total number of users.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListUsersResponse.
-  # One page of user IDs.
-  class ListUsersResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListUsersResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListUsersResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListUsersResponseMetadata::DECODERS
-
-    # @return [Array_of_String] User IDs on this page.
-    attr_reader :user_ids
-    # @return [Pagination] Paging applied to this response and the total number of users.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -5,263 +5,267 @@
 
 # insights domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalEmailNotificationConfigMetadata
-    FIELDS = {
-      to: 'to'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      to
-    ].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalEmailNotificationConfigMetadata
+  FIELDS = {
+    to: "to",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    to
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for EmailNotificationConfig.
+# Email notification channel configuration. Recipients must be verified team member email addresses.
+class EmailNotificationConfig
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmailNotificationConfigMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmailNotificationConfigMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmailNotificationConfigMetadata::DECODERS
+
+  # @return [String] One or more recipient email addresses, separated by commas, semicolons, or spaces.
+  attr_reader :to
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for EmailNotificationConfig.
-  # Email notification channel configuration. Recipients must be verified team member email addresses.
-  class EmailNotificationConfig
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmailNotificationConfigMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmailNotificationConfigMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmailNotificationConfigMetadata::DECODERS
-
-    # @return [String] One or more recipient email addresses, separated by commas, semicolons, or spaces.
-    attr_reader :to
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalMetricsQueryMetadata
-    FIELDS = {
-      metric: 'metric',
-      filters: 'filters',
-      resource_urns: 'resource_urns',
-      tags: 'tags'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      metric
-    ].freeze
-    DECODERS = {
-      filters: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::QueryFilter.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalMetricsQueryMetadata
+  FIELDS = {
+    metric: "metric",
+    filters: "filters",
+    resource_urns: "resource_urns",
+    tags: "tags",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    metric
+  ].freeze
+  DECODERS = {
+    filters: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::QueryFilter.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for MetricsQuery.
+# Metrics query that the alert rule evaluates. `metric` must be a dotted OpenTelemetry name (for example `do.droplets.cpu_utilization`). Underscored Prometheus-style names are rejected. When `resource_urns` is omitted or empty, the rule is not scoped to specific resources.
+class MetricsQuery
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMetricsQueryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMetricsQueryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMetricsQueryMetadata::DECODERS
+
+  # @return [String] Dotted OpenTelemetry metric name to evaluate (for example `do.droplets.cpu_utilization`).
+  attr_reader :metric
+  # @return [Array_of_QueryFilter] Optional label filters applied to the metric series.
+  attr_reader :filters
+  # @return [Array_of_String] Optional list of DigitalOcean resource URNs the rule applies to. Empty or omitted means the rule is not scoped to specific resources.
+  attr_reader :resource_urns
+  # @return [Array_of_String] Optional resource tags used to select matching resources.
+  attr_reader :tags
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for MetricsQuery.
-  # Metrics query that the alert rule evaluates. `metric` must be a dotted OpenTelemetry name (for example `do.droplets.cpu_utilization`). Underscored Prometheus-style names are rejected. When `resource_urns` is omitted or empty, the rule is not scoped to specific resources.
-  class MetricsQuery
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMetricsQueryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMetricsQueryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMetricsQueryMetadata::DECODERS
-
-    # @return [String] Dotted OpenTelemetry metric name to evaluate (for example `do.droplets.cpu_utilization`).
-    attr_reader :metric
-    # @return [Array_of_QueryFilter] Optional label filters applied to the metric series.
-    attr_reader :filters
-    # @return [Array_of_String] Optional list of DigitalOcean resource URNs the rule applies to. Empty or omitted means the rule is not scoped to specific resources.
-    attr_reader :resource_urns
-    # @return [Array_of_String] Optional resource tags used to select matching resources.
-    attr_reader :tags
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalQueryFilterMetadata
-    FIELDS = {
-      field: 'field',
-      operator: 'operator',
-      value: 'value'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      field
-      operator
-      value
-    ].freeze
-    DECODERS = {
-      operator: lambda do |value|
-        ::OctridevDigitalocean::QueryFilterOperator.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalQueryFilterMetadata
+  FIELDS = {
+    field: "field",
+    operator: "operator",
+    value: "value",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    field
+    operator
+    value
+  ].freeze
+  DECODERS = {
+    operator: lambda do |value|
+      ::OctridevDigitalocean::QueryFilterOperator.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for QueryFilter.
+# A filter applied to the metrics query.
+class QueryFilter
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalQueryFilterMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalQueryFilterMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalQueryFilterMetadata::DECODERS
+
+  # @return [String] The metric label or field to filter on.
+  attr_reader :field
+  # @return [QueryFilterOperator] Comparison operator for the filter. Allowed values: - `FILTER_OPERATOR_EQUAL` = equal - `FILTER_OPERATOR_NOT_EQUAL` = `not_equal` - `FILTER_OPERATOR_LESS_THAN` = `less_than` - `FILTER_OPERATOR_LESS_THAN_OR_EQUAL` = `less_than_or_equal` - `FILTER_OPERATOR_GREATER_THAN` = `greater_than` - `FILTER_OPERATOR_GREATER_THAN_OR_EQUAL` = `greater_than_or_equal`
+  attr_reader :operator
+  # @return [String] Value compared against the field.
+  attr_reader :value
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for QueryFilter.
-  # A filter applied to the metrics query.
-  class QueryFilter
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalQueryFilterMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalQueryFilterMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalQueryFilterMetadata::DECODERS
-
-    # @return [String] The metric label or field to filter on.
-    attr_reader :field
-    # @return [QueryFilterOperator] Comparison operator for the filter. Allowed values: - `FILTER_OPERATOR_EQUAL` = equal - `FILTER_OPERATOR_NOT_EQUAL` = `not_equal` - `FILTER_OPERATOR_LESS_THAN` = `less_than` - `FILTER_OPERATOR_LESS_THAN_OR_EQUAL` = `less_than_or_equal` - `FILTER_OPERATOR_GREATER_THAN` = `greater_than` - `FILTER_OPERATOR_GREATER_THAN_OR_EQUAL` = `greater_than_or_equal`
-    attr_reader :operator
-    # @return [String] Value compared against the field.
-    attr_reader :value
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the QueryFilterOperator SDK namespace.
-  module QueryFilterOperator
-    FILTER_OPERATOR_EQUAL = 'FILTER_OPERATOR_EQUAL'
-    FILTER_OPERATOR_NOT_EQUAL = 'FILTER_OPERATOR_NOT_EQUAL'
-    FILTER_OPERATOR_LESS_THAN = 'FILTER_OPERATOR_LESS_THAN'
-    FILTER_OPERATOR_LESS_THAN_OR_EQUAL = 'FILTER_OPERATOR_LESS_THAN_OR_EQUAL'
-    FILTER_OPERATOR_GREATER_THAN = 'FILTER_OPERATOR_GREATER_THAN'
-    FILTER_OPERATOR_GREATER_THAN_OR_EQUAL = 'FILTER_OPERATOR_GREATER_THAN_OR_EQUAL'
-    VALUES = %w[
-      FILTER_OPERATOR_EQUAL FILTER_OPERATOR_NOT_EQUAL FILTER_OPERATOR_LESS_THAN
-      FILTER_OPERATOR_LESS_THAN_OR_EQUAL FILTER_OPERATOR_GREATER_THAN
-      FILTER_OPERATOR_GREATER_THAN_OR_EQUAL
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the QueryFilterOperator SDK namespace.
+module QueryFilterOperator
+  FILTER_OPERATOR_EQUAL = 'FILTER_OPERATOR_EQUAL'
+  FILTER_OPERATOR_NOT_EQUAL = 'FILTER_OPERATOR_NOT_EQUAL'
+  FILTER_OPERATOR_LESS_THAN = 'FILTER_OPERATOR_LESS_THAN'
+  FILTER_OPERATOR_LESS_THAN_OR_EQUAL = 'FILTER_OPERATOR_LESS_THAN_OR_EQUAL'
+  FILTER_OPERATOR_GREATER_THAN = 'FILTER_OPERATOR_GREATER_THAN'
+  FILTER_OPERATOR_GREATER_THAN_OR_EQUAL = 'FILTER_OPERATOR_GREATER_THAN_OR_EQUAL'
+  VALUES = [
+    'FILTER_OPERATOR_EQUAL', 'FILTER_OPERATOR_NOT_EQUAL', 'FILTER_OPERATOR_LESS_THAN',
+    'FILTER_OPERATOR_LESS_THAN_OR_EQUAL', 'FILTER_OPERATOR_GREATER_THAN',
+    'FILTER_OPERATOR_GREATER_THAN_OR_EQUAL'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalSecretStatusMetadata
+  FIELDS = {
+    configured: "configured",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    configured
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for SecretStatus.
+# Indicates whether a secret credential is configured without exposing its value. Status fields that use this schema are omitted from responses when the secret is not set.
+class SecretStatus
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSecretStatusMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSecretStatusMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSecretStatusMetadata::DECODERS
+
+  # @return [Boolean] Whether the secret is configured.
+  attr_reader :configured
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalSecretStatusMetadata
-    FIELDS = {
-      configured: 'configured'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      configured
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for SecretStatus.
-  # Indicates whether a secret credential is configured without exposing its value. Status fields that use this schema are omitted from responses when the secret is not set.
-  class SecretStatus
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSecretStatusMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSecretStatusMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSecretStatusMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Boolean] Whether the secret is configured.
-    attr_reader :configured
+# Internal model hydration metadata.
+class SdkInternalSpanRecordMetadata
+  FIELDS = {
+    trace_id: "traceId",
+    span_id: "spanId",
+    parent_span_id: "parentSpanId",
+    start_time: "startTime",
+    end_time: "endTime",
+    duration_ns: "durationNs",
+    name: "name",
+    kind: "kind",
+    status_code: "statusCode",
+    status_message: "statusMessage",
+    service_name: "serviceName",
+    resource: "resource",
+    attributes: "attributes",
+    region: "region",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for SpanRecord.
+# A single span returned by a spans search.
+class SpanRecord
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSpanRecordMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSpanRecordMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSpanRecordMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The trace identifier the span belongs to.
+  attr_reader :trace_id
+  # @return [String] The span identifier.
+  attr_reader :span_id
+  # @return [String] The parent span identifier. Omitted for root spans.
+  attr_reader :parent_span_id
+  # @return [String] The span start time.
+  attr_reader :start_time
+  # @return [String] The span end time.
+  attr_reader :end_time
+  # @return [Integer] The span duration in nanoseconds.
+  attr_reader :duration_ns
+  # @return [String] The span name.
+  attr_reader :name
+  # @return [String] The span kind.
+  attr_reader :kind
+  # @return [String] The span status code.
+  attr_reader :status_code
+  # @return [String] The span status message. Omitted when empty.
+  attr_reader :status_message
+  # @return [String] The name of the service that emitted the span.
+  attr_reader :service_name
+  # @return [Hash] Resource attributes associated with the span.
+  attr_reader :resource
+  # @return [Hash] Span attributes.
+  attr_reader :attributes
+  # @return [String] The datacenter region slug the span was queried from.
+  attr_reader :region
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalSpanRecordMetadata
-    FIELDS = {
-      trace_id: 'traceId',
-      span_id: 'spanId',
-      parent_span_id: 'parentSpanId',
-      start_time: 'startTime',
-      end_time: 'endTime',
-      duration_ns: 'durationNs',
-      name: 'name',
-      kind: 'kind',
-      status_code: 'statusCode',
-      status_message: 'statusMessage',
-      service_name: 'serviceName',
-      resource: 'resource',
-      attributes: 'attributes',
-      region: 'region'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for SpanRecord.
-  # A single span returned by a spans search.
-  class SpanRecord
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSpanRecordMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSpanRecordMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSpanRecordMetadata::DECODERS
-
-    # @return [String] The trace identifier the span belongs to.
-    attr_reader :trace_id
-    # @return [String] The span identifier.
-    attr_reader :span_id
-    # @return [String] The parent span identifier. Omitted for root spans.
-    attr_reader :parent_span_id
-    # @return [String] The span start time.
-    attr_reader :start_time
-    # @return [String] The span end time.
-    attr_reader :end_time
-    # @return [Integer] The span duration in nanoseconds.
-    attr_reader :duration_ns
-    # @return [String] The span name.
-    attr_reader :name
-    # @return [String] The span kind.
-    attr_reader :kind
-    # @return [String] The span status code.
-    attr_reader :status_code
-    # @return [String] The span status message. Omitted when empty.
-    attr_reader :status_message
-    # @return [String] The name of the service that emitted the span.
-    attr_reader :service_name
-    # @return [Hash] Resource attributes associated with the span.
-    attr_reader :resource
-    # @return [Hash] Span attributes.
-    attr_reader :attributes
-    # @return [String] The datacenter region slug the span was queried from.
-    attr_reader :region
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

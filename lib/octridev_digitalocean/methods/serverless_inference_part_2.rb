@@ -27,21 +27,22 @@ module OctridevDigitalocean
         encoding_format: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v1/embeddings',
+          "/v1/embeddings",
           config: config,
           body: {
             'model' => model,
             'input' => input,
             'user' => user,
-            'encoding_format' => encoding_format
+            'encoding_format' => encoding_format,
           },
           return_type: ::OctridevDigitalocean::EmbeddingsResponse,
           decoder: :json,
           operation_id: 'inference_create_embedding',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -92,6 +93,7 @@ module OctridevDigitalocean
         user: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_length('prompt', prompt, min: 1)
 
         Validation.validate_range('n', count, min: 1, max: 10)
@@ -108,7 +110,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          '/v1/images/generations',
+          "/v1/images/generations",
           config: config,
           body: {
             'prompt' => prompt,
@@ -122,13 +124,13 @@ module OctridevDigitalocean
             'size' => size,
             'stream' => stream,
             'partial_images' => partial_images,
-            'user' => user
+            'user' => user,
           },
           return_type: ::OctridevDigitalocean::ImagesResponse,
           decoder: :json,
           operation_id: 'inference_create_image',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -180,27 +182,25 @@ module OctridevDigitalocean
         request_options: nil,
         &block
       )
-        unless block
-          return enum_for(
-            __method__,
-            config: config,
-            prompt: prompt,
-            model: model,
-            count: count,
-            stream: stream,
-            moderation: moderation,
-            background: background,
-            output_format: output_format,
-            output_compression: output_compression,
-            quality: quality,
-            size: size,
-            partial_images: partial_images,
-            user: user,
-            request_options: request_options
-          )
-        end
+    return enum_for(
+          __method__,
+          config: config,
+          prompt: prompt,
+          model: model,
+          count: count,
+          stream: stream,
+          moderation: moderation,
+          background: background,
+          output_format: output_format,
+          output_compression: output_compression,
+          quality: quality,
+          size: size,
+          partial_images: partial_images,
+          user: user,
+          request_options: request_options,
+        ) unless block
         SdkClient.stream(
-          'POST', '/v1/images/generations',
+          'POST', "/v1/images/generations",
           config: config,
           body: {
             'prompt' => prompt,
@@ -214,17 +214,16 @@ module OctridevDigitalocean
             'quality' => quality,
             'size' => size,
             'partial_images' => partial_images,
-            'user' => user
+            'user' => user,
           },
           content_type: 'application/json',
           operation_id: 'inference_create_image_stream',
           stream_format: :sse,
-          stream_media_type: 'text/event-stream',
+          stream_media_type: "text/event-stream",
           request_options: request_options,
           errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
         ).each do |ev|
           break if ev.data == '[DONE]'
-
           decoded = JSON.parse(ev.data)
           block.call(SdkClient.decode_event(decoded, ::OctridevDigitalocean::ImageGenPartialImageEvent))
         end
@@ -235,15 +234,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v1/models',
+          "/v1/models",
           config: config,
           return_type: ::OctridevDigitalocean::ListModelsResponse,
           decoder: :json,
           operation_id: 'inference_list_models',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -261,20 +261,21 @@ module OctridevDigitalocean
         questions:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v1/systemone',
+          "/v1/systemone",
           config: config,
           body: {
             'state' => state,
             'model' => model,
-            'questions' => questions
+            'questions' => questions,
           },
           return_type: ::OctridevDigitalocean::SystemoneResponse,
           decoder: :json,
           operation_id: 'inference_create_systemone',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '424' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '424' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -324,6 +325,7 @@ module OctridevDigitalocean
         user: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(max_output_tokens) do
           Validation.validate_range('max_output_tokens', max_output_tokens, min: 1)
         end
@@ -334,7 +336,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          '/v1/responses',
+          "/v1/responses",
           config: config,
           body: {
             'model' => model,
@@ -349,13 +351,13 @@ module OctridevDigitalocean
             'tool_choice' => tool_choice,
             'stop' => stop,
             'metadata' => metadata,
-            'user' => user
+            'user' => user,
           },
           return_type: ::OctridevDigitalocean::CreateResponseResponse,
           decoder: :json,
           operation_id: 'inference_create_response',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -406,28 +408,26 @@ module OctridevDigitalocean
         request_options: nil,
         &block
       )
-        unless block
-          return enum_for(
-            __method__,
-            config: config,
-            model: model,
-            input: input,
-            stream: stream,
-            max_output_tokens: max_output_tokens,
-            temperature: temperature,
-            instructions: instructions,
-            top_p: top_p,
-            stream_options: stream_options,
-            tools: tools,
-            tool_choice: tool_choice,
-            stop: stop,
-            metadata: metadata,
-            user: user,
-            request_options: request_options
-          )
-        end
+    return enum_for(
+          __method__,
+          config: config,
+          model: model,
+          input: input,
+          stream: stream,
+          max_output_tokens: max_output_tokens,
+          temperature: temperature,
+          instructions: instructions,
+          top_p: top_p,
+          stream_options: stream_options,
+          tools: tools,
+          tool_choice: tool_choice,
+          stop: stop,
+          metadata: metadata,
+          user: user,
+          request_options: request_options,
+        ) unless block
         SdkClient.stream(
-          'POST', '/v1/responses',
+          'POST', "/v1/responses",
           config: config,
           body: {
             'model' => model,
@@ -442,17 +442,16 @@ module OctridevDigitalocean
             'tool_choice' => tool_choice,
             'stop' => stop,
             'metadata' => metadata,
-            'user' => user
+            'user' => user,
           },
           content_type: 'application/json',
           operation_id: 'inference_create_response_stream',
           stream_format: :sse,
-          stream_media_type: 'text/event-stream',
+          stream_media_type: "text/event-stream",
           request_options: request_options,
           errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
         ).each do |ev|
           break if ev.data == '[DONE]'
-
           decoded = JSON.parse(ev.data)
           block.call(SdkClient.decode_event(decoded, ::OctridevDigitalocean::CreateResponseStreamResponse))
         end
@@ -477,20 +476,21 @@ module OctridevDigitalocean
         tags: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v1/async-invoke',
+          "/v1/async-invoke",
           config: config,
           body: {
             'model_id' => model_id,
             'input' => input,
-            'tags' => tags
+            'tags' => tags,
           },
           return_type: ::OctridevDigitalocean::AsyncInvokeResponse,
           decoder: :json,
           operation_id: 'inference_create_async_invoke',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -513,24 +513,25 @@ module OctridevDigitalocean
         instructions: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_length('input', input, min: 1)
 
         SdkClient.request(
           'POST',
-          '/v1/audio/speech',
+          "/v1/audio/speech",
           config: config,
           body: {
             'model' => model,
             'input' => input,
             'voice' => voice,
             'response_format' => response_format,
-            'instructions' => instructions
+            'instructions' => instructions,
           },
           return_type: ::OctridevDigitalocean::SpeechResponse,
           decoder: :json,
           operation_id: 'inference_create_speech',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -548,25 +549,26 @@ module OctridevDigitalocean
         fps: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_length('prompt', prompt, min: 1)
 
         Validation.if_given(fps) { Validation.validate_range('fps', fps, min: 1) }
 
         SdkClient.request(
           'POST',
-          '/v1/videos',
+          "/v1/videos",
           config: config,
           body: {
             'model' => model,
             'prompt' => prompt,
             'size' => size,
-            'fps' => fps
+            'fps' => fps,
           },
           return_type: ::OctridevDigitalocean::VideoGeneration,
           decoder: :json,
           operation_id: 'inference_create_video',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

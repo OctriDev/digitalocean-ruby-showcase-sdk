@@ -31,25 +31,26 @@ module OctridevDigitalocean
         pagination: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/insights/query/',
+            "/v2/insights/query/",
             SdkClient.encode_path_segment(region),
-            '/spans/search'
+            "/spans/search"
           ].join,
           config: config,
           body: {
             'timeRange' => time_range,
             'filter' => filter,
             'orderBy' => order_by,
-            'pagination' => pagination
+            'pagination' => pagination,
           },
           return_type: ::OctridevDigitalocean::SpansSearchResponse,
           decoder: :json,
           operation_id: 'insights_post_spans_search',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -18,21 +18,22 @@ module OctridevDigitalocean
         actor_id:,
         request_options: nil
       )
+
         Validation.validate_pattern('actor_id', actor_id, '^[A-Za-z0-9._-]{1,64}$')
 
         SdkClient.request(
           'GET',
           [
-            '/v2/action-gateway/actors/',
+            "/v2/action-gateway/actors/",
             SdkClient.encode_path_segment(actor_id),
-            '/limits'
+            "/limits"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::GetActorLimitsResponse,
           decoder: :json,
           operation_id: 'actor_limits_get',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -48,6 +49,7 @@ module OctridevDigitalocean
         categories:,
         request_options: nil
       )
+
         Validation.validate_pattern('actor_id', actor_id, '^[A-Za-z0-9._-]{1,64}$')
 
         Validation.validate_items('categories', categories, min: 1)
@@ -55,19 +57,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            '/v2/action-gateway/actors/',
+            "/v2/action-gateway/actors/",
             SdkClient.encode_path_segment(actor_id),
-            '/limits:clear'
+            "/limits:clear"
           ].join,
           config: config,
           body: {
-            'categories' => categories
+            'categories' => categories,
           },
           return_type: ::OctridevDigitalocean::EmptyResponse,
           decoder: :json,
           operation_id: 'actor_limits_delete',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -83,6 +85,7 @@ module OctridevDigitalocean
         overrides:,
         request_options: nil
       )
+
         Validation.validate_pattern('actor_id', actor_id, '^[A-Za-z0-9._-]{1,64}$')
 
         Validation.validate_items('overrides', overrides, min: 1)
@@ -90,19 +93,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            '/v2/action-gateway/actors/',
+            "/v2/action-gateway/actors/",
             SdkClient.encode_path_segment(actor_id),
-            '/limits:set'
+            "/limits:set"
           ].join,
           config: config,
           body: {
-            'overrides' => overrides
+            'overrides' => overrides,
           },
           return_type: ::OctridevDigitalocean::EmptyResponse,
           decoder: :json,
           operation_id: 'actor_limits_update',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -133,11 +136,12 @@ module OctridevDigitalocean
         network: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_pattern('user_id', user_id, '^[A-Za-z0-9._-]{1,64}$')
 
         SdkClient.request(
           'POST',
-          '/v2/action-gateway/connections',
+          "/v2/action-gateway/connections",
           config: config,
           body: {
             'provider' => provider,
@@ -145,13 +149,13 @@ module OctridevDigitalocean
             'scopes' => scopes,
             'connection_parameters' => connection_parameters,
             'credential' => credential,
-            'network' => network
+            'network' => network,
           },
           return_type: ::OctridevDigitalocean::ConnectionResponse,
           decoder: :json,
           operation_id: 'connections_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -180,13 +184,14 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/connections',
+          "/v2/action-gateway/connections",
           config: config,
           query: {
             'provider' => QueryValue.new(provider, style: 'form', explode: true),
@@ -195,13 +200,13 @@ module OctridevDigitalocean
             'sort' => QueryValue.new(sort, style: 'form', explode: true),
             'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListConnectionsResponse,
           decoder: :json,
           operation_id: 'connections_list',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -213,10 +218,11 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/action-gateway/connections/',
+            "/v2/action-gateway/connections/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -224,7 +230,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'connections_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -236,10 +242,11 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/v2/action-gateway/connections/',
+            "/v2/action-gateway/connections/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -247,7 +254,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'connections_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -311,13 +318,14 @@ module OctridevDigitalocean
         oauth_authorization_ttl_seconds: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_pattern('serverRef', server_ref, '^[a-z][a-z0-9-]{0,63}$')
 
         Validation.if_given(description) { Validation.validate_length('description', description, max: 1024) }
 
         SdkClient.request(
           'POST',
-          '/v2/action-gateway/mcp-servers',
+          "/v2/action-gateway/mcp-servers",
           config: config,
           body: {
             'serverRef' => server_ref,
@@ -332,13 +340,13 @@ module OctridevDigitalocean
             'oauth_authorize_url' => oauth_authorize_url,
             'oauth_token_url' => oauth_token_url,
             'oauth_scopes' => oauth_scopes,
-            'oauth_authorization_ttl_seconds' => oauth_authorization_ttl_seconds
+            'oauth_authorization_ttl_seconds' => oauth_authorization_ttl_seconds,
           },
           return_type: ::OctridevDigitalocean::McpServerResponse,
           decoder: :json,
           operation_id: 'mcp_servers_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -347,15 +355,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/mcp-servers',
+          "/v2/action-gateway/mcp-servers",
           config: config,
           return_type: ::OctridevDigitalocean::ListMcpServersResponse,
           decoder: :json,
           operation_id: 'mcp_servers_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -368,10 +377,11 @@ module OctridevDigitalocean
         server_ref:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/action-gateway/mcp-servers/',
+            "/v2/action-gateway/mcp-servers/",
             SdkClient.encode_path_segment(server_ref)
           ].join,
           config: config,
@@ -379,7 +389,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'mcp_servers_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -397,23 +407,24 @@ module OctridevDigitalocean
         description: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(description) { Validation.validate_length('description', description, max: 1024) }
 
         SdkClient.request(
           'PATCH',
           [
-            '/v2/action-gateway/mcp-servers/',
+            "/v2/action-gateway/mcp-servers/",
             SdkClient.encode_path_segment(server_ref)
           ].join,
           config: config,
           body: {
-            'description' => description
+            'description' => description,
           },
           return_type: ::OctridevDigitalocean::McpServerResponse,
           decoder: :json,
           operation_id: 'mcp_servers_patch',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -426,10 +437,11 @@ module OctridevDigitalocean
         server_ref:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/v2/action-gateway/mcp-servers/',
+            "/v2/action-gateway/mcp-servers/",
             SdkClient.encode_path_segment(server_ref)
           ].join,
           config: config,
@@ -437,7 +449,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'mcp_servers_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -455,22 +467,23 @@ module OctridevDigitalocean
         user_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/action-gateway/mcp-servers/',
+            "/v2/action-gateway/mcp-servers/",
             SdkClient.encode_path_segment(server_ref),
-            '/resync'
+            "/resync"
           ].join,
           config: config,
           body: {
-            'user_id' => user_id
+            'user_id' => user_id,
           },
           return_type: ::OctridevDigitalocean::ResyncMcpServerResponse,
           decoder: :json,
           operation_id: 'mcp_servers_run_resync',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -483,19 +496,20 @@ module OctridevDigitalocean
         server_ref:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/action-gateway/mcp-servers/',
+            "/v2/action-gateway/mcp-servers/",
             SdkClient.encode_path_segment(server_ref),
-            '/tools'
+            "/tools"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ListMcpServerToolsResponse,
           decoder: :json,
           operation_id: 'mcp_servers_list_tools',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -517,23 +531,24 @@ module OctridevDigitalocean
         user_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/action-gateway/mcp-servers/',
+            "/v2/action-gateway/mcp-servers/",
             SdkClient.encode_path_segment(server_ref),
-            '/tools'
+            "/tools"
           ].join,
           config: config,
           body: {
             'enabledToolSlugs' => enabled_tool_slugs,
-            'user_id' => user_id
+            'user_id' => user_id,
           },
           return_type: ::OctridevDigitalocean::ListMcpServerToolsResponse,
           decoder: :json,
           operation_id: 'mcp_servers_update_tools',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

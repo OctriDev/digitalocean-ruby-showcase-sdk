@@ -5,220 +5,227 @@
 
 # shared_vpc domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalVpcMemberMetadata
-    FIELDS = {
-      name: 'name',
-      urn: 'urn',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      urn: lambda do |value|
-        ::OctridevDigitalocean::Urn.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalVpcMemberMetadata
+  FIELDS = {
+    name: "name",
+    urn: "urn",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    urn: lambda do |value|
+      ::OctridevDigitalocean::Urn.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for VpcMember.
+# Typed representation of the `VpcMember` API schema.
+class VpcMember
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcMemberMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcMemberMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcMemberMetadata::DECODERS
+
+  # @return [String] The name of the resource.
+  attr_reader :name
+  # @return [Urn] The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
+  attr_reader :urn
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the resource was created.
+  attr_reader :created_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VpcMember.
-  # Typed representation of the `VpcMember` API schema.
-  class VpcMember
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcMemberMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcMemberMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcMemberMetadata::DECODERS
-
-    # @return [String] The name of the resource.
-    attr_reader :name
-    # @return [Urn] The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
-    attr_reader :urn
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the resource was created.
-    attr_reader :created_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcPeeringMetadata
-    FIELDS = {
-      id: 'id',
-      created_at: 'created_at',
-      status: 'status',
-      vpc_ids: 'vpc_ids',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::VpcPeeringBaseStatus.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalVpcPeeringMetadata
+  FIELDS = {
+    id: "id",
+    created_at: "created_at",
+    status: "status",
+    vpc_ids: "vpc_ids",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::VpcPeeringBaseStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for VpcPeering.
+# Typed representation of the `VpcPeering` API schema.
+class VpcPeering
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcPeeringMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcPeeringMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcPeeringMetadata::DECODERS
+
+  # @return [String] A unique ID that can be used to identify and reference the VPC peering.
+  attr_reader :id
+  # @return [String] A time value given in ISO8601 combined date and time format.
+  attr_reader :created_at
+  # @return [VpcPeeringBaseStatus] The current status of the VPC peering.
+  attr_reader :status
+  # @return [Array_of_String] An array of the two peered VPCs IDs.
+  attr_reader :vpc_ids
+  # @return [String] The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VpcPeering.
-  # Typed representation of the `VpcPeering` API schema.
-  class VpcPeering
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcPeeringMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcPeeringMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcPeeringMetadata::DECODERS
-
-    # @return [String] A unique ID that can be used to identify and reference the VPC peering.
-    attr_reader :id
-    # @return [String] A time value given in ISO8601 combined date and time format.
-    attr_reader :created_at
-    # @return [VpcPeeringBaseStatus] The current status of the VPC peering.
-    attr_reader :status
-    # @return [Array_of_String] An array of the two peered VPCs IDs.
-    attr_reader :vpc_ids
-    # @return [String] The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcPeeringBaseMetadata
-    FIELDS = {
-      id: 'id',
-      created_at: 'created_at',
-      status: 'status'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::VpcPeeringBaseStatus.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalVpcPeeringBaseMetadata
+  FIELDS = {
+    id: "id",
+    created_at: "created_at",
+    status: "status",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::VpcPeeringBaseStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for VpcPeeringBase.
+# Typed representation of the `VpcPeeringBase` API schema.
+class VpcPeeringBase
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcPeeringBaseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcPeeringBaseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcPeeringBaseMetadata::DECODERS
+
+  # @return [String] A unique ID that can be used to identify and reference the VPC peering.
+  attr_reader :id
+  # @return [String] A time value given in ISO8601 combined date and time format.
+  attr_reader :created_at
+  # @return [VpcPeeringBaseStatus] The current status of the VPC peering.
+  attr_reader :status
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VpcPeeringBase.
-  # Typed representation of the `VpcPeeringBase` API schema.
-  class VpcPeeringBase
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcPeeringBaseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcPeeringBaseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcPeeringBaseMetadata::DECODERS
-
-    # @return [String] A unique ID that can be used to identify and reference the VPC peering.
-    attr_reader :id
-    # @return [String] A time value given in ISO8601 combined date and time format.
-    attr_reader :created_at
-    # @return [VpcPeeringBaseStatus] The current status of the VPC peering.
-    attr_reader :status
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the VpcPeeringBaseStatus SDK namespace.
-  module VpcPeeringBaseStatus
-    PROVISIONING = 'PROVISIONING'
-    ACTIVE = 'ACTIVE'
-    DELETING = 'DELETING'
-    VALUES = %w[PROVISIONING ACTIVE DELETING].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the VpcPeeringBaseStatus SDK namespace.
+module VpcPeeringBaseStatus
+  PROVISIONING = 'PROVISIONING'
+  ACTIVE = 'ACTIVE'
+  DELETING = 'DELETING'
+  VALUES = ['PROVISIONING', 'ACTIVE', 'DELETING'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalVpcPeeringCreateMetadata
+  FIELDS = {
+    vpc_ids: "vpc_ids",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for VpcPeeringCreate.
+# Typed representation of the `VpcPeeringCreate` API schema.
+class VpcPeeringCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcPeeringCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcPeeringCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcPeeringCreateMetadata::DECODERS
+
+  # @return [Array_of_String] An array of the two peered VPCs IDs.
+  attr_reader :vpc_ids
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcPeeringCreateMetadata
-    FIELDS = {
-      vpc_ids: 'vpc_ids'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for VpcPeeringCreate.
-  # Typed representation of the `VpcPeeringCreate` API schema.
-  class VpcPeeringCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcPeeringCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcPeeringCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcPeeringCreateMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_String] An array of the two peered VPCs IDs.
-    attr_reader :vpc_ids
+# Internal model hydration metadata.
+class SdkInternalVpcPeeringUpdatableMetadata
+  FIELDS = {
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for VpcPeeringUpdatable.
+# Typed representation of the `VpcPeeringUpdatable` API schema.
+class VpcPeeringUpdatable
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcPeeringUpdatableMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcPeeringUpdatableMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcPeeringUpdatableMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes.
+  attr_reader :name
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcPeeringUpdatableMetadata
-    FIELDS = {
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for VpcPeeringUpdatable.
-  # Typed representation of the `VpcPeeringUpdatable` API schema.
-  class VpcPeeringUpdatable
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcPeeringUpdatableMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcPeeringUpdatableMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcPeeringUpdatableMetadata::DECODERS
-
-    # @return [String] The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

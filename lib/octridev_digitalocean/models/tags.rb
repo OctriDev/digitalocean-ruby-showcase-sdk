@@ -5,446 +5,456 @@
 
 # tags domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalErrorWithRootCausesMetadata
-    FIELDS = {
-      error: 'error',
-      messages: 'messages',
-      root_causes: 'root_causes'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      error
-      root_causes
-    ].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalErrorWithRootCausesMetadata
+  FIELDS = {
+    error: "error",
+    messages: "messages",
+    root_causes: "root_causes",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    error
+    root_causes
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ErrorWithRootCauses.
+# Typed representation of the `ErrorWithRootCauses` API schema.
+class ErrorWithRootCauses
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalErrorWithRootCausesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalErrorWithRootCausesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalErrorWithRootCausesMetadata::DECODERS
+
+  # @return [String] A message providing information about the error.
+  attr_reader :error
+  # @return [Array_of_String] A list of error messages.
+  attr_reader :messages
+  # @return [Array_of_String] A list of underlying causes for the error, including details to help resolve it when possible.
+  attr_reader :root_causes
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ErrorWithRootCauses.
-  # Typed representation of the `ErrorWithRootCauses` API schema.
-  class ErrorWithRootCauses
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalErrorWithRootCausesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalErrorWithRootCausesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalErrorWithRootCausesMetadata::DECODERS
-
-    # @return [String] A message providing information about the error.
-    attr_reader :error
-    # @return [Array_of_String] A list of error messages.
-    attr_reader :messages
-    # @return [Array_of_String] A list of underlying causes for the error, including details to help resolve it when possible.
-    attr_reader :root_causes
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsResourcesMetadata
-    FIELDS = {
-      count: 'count',
-      last_tagged_uri: 'last_tagged_uri',
-      droplets: 'droplets',
-      imgages: 'imgages',
-      volumes: 'volumes',
-      volume_snapshots: 'volume_snapshots',
-      databases: 'databases'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      droplets: lambda do |value|
-        ::OctridevDigitalocean::TagsMetadata.from_hash(value)
-      end,
-      imgages: lambda do |value|
-        ::OctridevDigitalocean::TagsMetadata.from_hash(value)
-      end,
-      volumes: lambda do |value|
-        ::OctridevDigitalocean::TagsMetadata.from_hash(value)
-      end,
-      volume_snapshots: lambda do |value|
-        ::OctridevDigitalocean::TagsMetadata.from_hash(value)
-      end,
-      databases: lambda do |value|
-        ::OctridevDigitalocean::TagsMetadata.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsResourcesMetadata
+  FIELDS = {
+    count: "count",
+    last_tagged_uri: "last_tagged_uri",
+    droplets: "droplets",
+    imgages: "imgages",
+    volumes: "volumes",
+    volume_snapshots: "volume_snapshots",
+    databases: "databases",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    droplets: lambda do |value|
+      ::OctridevDigitalocean::TagsMetadata.from_hash(value)
+    end,
+    imgages: lambda do |value|
+      ::OctridevDigitalocean::TagsMetadata.from_hash(value)
+    end,
+    volumes: lambda do |value|
+      ::OctridevDigitalocean::TagsMetadata.from_hash(value)
+    end,
+    volume_snapshots: lambda do |value|
+      ::OctridevDigitalocean::TagsMetadata.from_hash(value)
+    end,
+    databases: lambda do |value|
+      ::OctridevDigitalocean::TagsMetadata.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for TagsResources.
+# An embedded object containing key value pairs of resource type and resource statistics. It also includes a count of the total number of resources tagged with the current tag as well as a `last_tagged_uri` attribute set to the last resource tagged with the current tag. This will only include resources that you are authorized to see. For example, to see tagged Droplets, include the `droplet:read` scope.
+class TagsResources
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsResourcesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsResourcesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsResourcesMetadata::DECODERS
+
+  # @return [Integer] The number of tagged objects for this type of resource.
+  attr_reader :count
+  # @return [String] The URI for the last tagged object for this type of resource.
+  attr_reader :last_tagged_uri
+  # @return [TagsMetadata] Droplets that are tagged with the specified tag. Requires `droplet:read` scope.
+  attr_reader :droplets
+  # @return [TagsMetadata] Images that are tagged with the specified tag. Requires `image:read` scope.
+  attr_reader :imgages
+  # @return [TagsMetadata] Volumes that are tagged with the specified tag. Requires `block_storage:read` scope.
+  attr_reader :volumes
+  # @return [TagsMetadata] Volume Snapshots that are tagged with the specified tag. Requires `block_storage_snapshot:read` scope.
+  attr_reader :volume_snapshots
+  # @return [TagsMetadata] Databases that are tagged with the specified tag. Requires `database:read` scope.
+  attr_reader :databases
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TagsResources.
-  # An embedded object containing key value pairs of resource type and resource statistics. It also includes a count of the total number of resources tagged with the current tag as well as a `last_tagged_uri` attribute set to the last resource tagged with the current tag. This will only include resources that you are authorized to see. For example, to see tagged Droplets, include the `droplet:read` scope.
-  class TagsResources
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsResourcesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsResourcesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsResourcesMetadata::DECODERS
-
-    # @return [Integer] The number of tagged objects for this type of resource.
-    attr_reader :count
-    # @return [String] The URI for the last tagged object for this type of resource.
-    attr_reader :last_tagged_uri
-    # @return [TagsMetadata] Droplets that are tagged with the specified tag. Requires `droplet:read` scope.
-    attr_reader :droplets
-    # @return [TagsMetadata] Images that are tagged with the specified tag. Requires `image:read` scope.
-    attr_reader :imgages
-    # @return [TagsMetadata] Volumes that are tagged with the specified tag. Requires `block_storage:read` scope.
-    attr_reader :volumes
-    # @return [TagsMetadata] Volume Snapshots that are tagged with the specified tag. Requires `block_storage_snapshot:read` scope.
-    attr_reader :volume_snapshots
-    # @return [TagsMetadata] Databases that are tagged with the specified tag. Requires `database:read` scope.
-    attr_reader :databases
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsMetadata
-    FIELDS = {
-      name: 'name',
-      resources: 'resources'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      resources: lambda do |value|
-        ::OctridevDigitalocean::TagsResources.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsMetadata
+  FIELDS = {
+    name: "name",
+    resources: "resources",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    resources: lambda do |value|
+      ::OctridevDigitalocean::TagsResources.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for Tags.
+# A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters) in order to better organize or facilitate the lookups and actions on it. Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
+class Tags
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsMetadata::DECODERS
+
+  # @return [String] The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag. **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical. When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `api.digitalocean.com (not…
+  attr_reader :name
+  # @return [TagsResources] An embedded object containing key value pairs of resource type and resource statistics. It also includes a count of the total number of resources tagged with the current tag as well as a `last_tagged_uri` attribute set to the last resource tagged with the current tag. This will only include resources that you are authorized to see. For example, to see tagged Droplets, include the `droplet:read` scope.
+  attr_reader :resources
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Tags.
-  # A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters) in order to better organize or facilitate the lookups and actions on it. Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
-  class Tags
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsMetadata::DECODERS
-
-    # @return [String] The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag. **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical. When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `api.digitalocean.com (not…
-    attr_reader :name
-    # @return [TagsResources] An embedded object containing key value pairs of resource type and resource statistics. It also includes a count of the total number of resources tagged with the current tag as well as a `last_tagged_uri` attribute set to the last resource tagged with the current tag. This will only include resources that you are authorized to see. For example, to see tagged Droplets, include the `droplet:read` scope.
-    attr_reader :resources
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsAllMetadata
-    FIELDS = {
-      tags: 'tags',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      tags: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Tags.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsAllMetadata
+  FIELDS = {
+    tags: "tags",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    tags: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Tags.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for TagsAll.
+# Typed representation of the `TagsAll` API schema.
+class TagsAll
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsAllMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsAllMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsAllMetadata::DECODERS
+
+  attr_reader :tags
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TagsAll.
-  # Typed representation of the `TagsAll` API schema.
-  class TagsAll
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsAllMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsAllMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsAllMetadata::DECODERS
-
-    attr_reader :tags
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsExistingMetadata
-    FIELDS = {
-      tag: 'tag'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tag: lambda do |value|
-        ::OctridevDigitalocean::Tags.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsExistingMetadata
+  FIELDS = {
+    tag: "tag",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tag: lambda do |value|
+      ::OctridevDigitalocean::Tags.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for TagsExisting.
+# Typed representation of the `TagsExisting` API schema.
+class TagsExisting
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsExistingMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsExistingMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsExistingMetadata::DECODERS
+
+  # @return [Tags] A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters) in order to better organize or facilitate the lookups and actions on it. Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
+  attr_reader :tag
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TagsExisting.
-  # Typed representation of the `TagsExisting` API schema.
-  class TagsExisting
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsExistingMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsExistingMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsExistingMetadata::DECODERS
-
-    # @return [Tags] A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters) in order to better organize or facilitate the lookups and actions on it. Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
-    attr_reader :tag
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsMetadataMetadata
-    FIELDS = {
-      count: 'count',
-      last_tagged_uri: 'last_tagged_uri'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsMetadataMetadata
+  FIELDS = {
+    count: "count",
+    last_tagged_uri: "last_tagged_uri",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for TagsMetadata.
+# Tagged Resource Statistics include metadata regarding the resource type that has been tagged.
+class TagsMetadata
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsMetadataMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsMetadataMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsMetadataMetadata::DECODERS
+
+  # @return [Integer] The number of tagged objects for this type of resource.
+  attr_reader :count
+  # @return [String] The URI for the last tagged object for this type of resource.
+  attr_reader :last_tagged_uri
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TagsMetadata.
-  # Tagged Resource Statistics include metadata regarding the resource type that has been tagged.
-  class TagsMetadata
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsMetadataMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsMetadataMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsMetadataMetadata::DECODERS
-
-    # @return [Integer] The number of tagged objects for this type of resource.
-    attr_reader :count
-    # @return [String] The URI for the last tagged object for this type of resource.
-    attr_reader :last_tagged_uri
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsNewMetadata
-    FIELDS = {
-      tag: 'tag'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tag: lambda do |value|
-        ::OctridevDigitalocean::Tags.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsNewMetadata
+  FIELDS = {
+    tag: "tag",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tag: lambda do |value|
+      ::OctridevDigitalocean::Tags.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for TagsNew.
+# Typed representation of the `TagsNew` API schema.
+class TagsNew
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsNewMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsNewMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsNewMetadata::DECODERS
+
+  # @return [Tags] A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters) in order to better organize or facilitate the lookups and actions on it. Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
+  attr_reader :tag
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TagsNew.
-  # Typed representation of the `TagsNew` API schema.
-  class TagsNew
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsNewMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsNewMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsNewMetadata::DECODERS
-
-    # @return [Tags] A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters) in order to better organize or facilitate the lookups and actions on it. Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
-    attr_reader :tag
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsRequestMetadata
-    FIELDS = {
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsRequestMetadata
+  FIELDS = {
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for TagsRequest.
+# A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters) in order to better organize or facilitate the lookups and actions on it. Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
+class TagsRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsRequestMetadata::DECODERS
+
+  # @return [String] The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag. **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical. When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `api.digitalocean.com (not…
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TagsRequest.
-  # A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters) in order to better organize or facilitate the lookups and actions on it. Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
-  class TagsRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsRequestMetadata::DECODERS
-
-    # @return [String] The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag. **Note:** Tag names are case stable, which means the capitalization you use when you first create a tag is canonical. When working with tags in the API, you must use the tag's canonical capitalization. For example, if you create a tag named "PROD", the URL to add that tag to a resource would be `api.digitalocean.com (not…
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsResourceResourcesItemMetadata
-    FIELDS = {
-      resource_id: 'resource_id',
-      resource_type: 'resource_type'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      resource_type: lambda do |value|
-        ::OctridevDigitalocean::TagsResourceResourcesItemResourceType.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsResourceResourcesItemMetadata
+  FIELDS = {
+    resource_id: "resource_id",
+    resource_type: "resource_type",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    resource_type: lambda do |value|
+      ::OctridevDigitalocean::TagsResourceResourcesItemResourceType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for TagsResourceResourcesItem.
+# Required object value serialized in the `resources[]` wire field.
+class TagsResourceResourcesItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsResourceResourcesItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsResourceResourcesItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsResourceResourcesItemMetadata::DECODERS
+
+  # @return [String] The identifier of a resource.
+  attr_reader :resource_id
+  # @return [TagsResourceResourcesItemResourceType] The type of the resource.
+  attr_reader :resource_type
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TagsResourceResourcesItem.
-  # Required object value serialized in the `resources[]` wire field.
-  class TagsResourceResourcesItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsResourceResourcesItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsResourceResourcesItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsResourceResourcesItemMetadata::DECODERS
-
-    # @return [String] The identifier of a resource.
-    attr_reader :resource_id
-    # @return [TagsResourceResourcesItemResourceType] The type of the resource.
-    attr_reader :resource_type
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTagsResourceMetadata
-    FIELDS = {
-      resources: 'resources'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      resources
-    ].freeze
-    DECODERS = {
-      resources: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::TagsResourceResourcesItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTagsResourceMetadata
+  FIELDS = {
+    resources: "resources",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    resources
+  ].freeze
+  DECODERS = {
+    resources: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::TagsResourceResourcesItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for TagsResource.
+# Typed representation of the `TagsResource` API schema.
+class TagsResource
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTagsResourceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTagsResourceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTagsResourceMetadata::DECODERS
+
+  # @return [Array_of_TagsResourceResourcesItem] An array of objects containing resource_id and resource_type attributes. This response will only include resources that you are authorized to see. For example, to see Droplets, include the `droplet:read` scope.
+  attr_reader :resources
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TagsResource.
-  # Typed representation of the `TagsResource` API schema.
-  class TagsResource
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTagsResourceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTagsResourceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTagsResourceMetadata::DECODERS
-
-    # @return [Array_of_TagsResourceResourcesItem] An array of objects containing resource_id and resource_type attributes. This response will only include resources that you are authorized to see. For example, to see Droplets, include the `droplet:read` scope.
-    attr_reader :resources
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the TagsResourceResourcesItemResourceType SDK namespace.
-  module TagsResourceResourcesItemResourceType
-    DROPLET = 'droplet'
-    IMAGE = 'image'
-    VOLUME = 'volume'
-    VOLUME_SNAPSHOT = 'volume_snapshot'
-    VALUES = %w[droplet image volume volume_snapshot].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Defines the TagsResourceResourcesItemResourceType SDK namespace.
+module TagsResourceResourcesItemResourceType
+  DROPLET = 'droplet'
+  IMAGE = 'image'
+  VOLUME = 'volume'
+  VOLUME_SNAPSHOT = 'volume_snapshot'
+  VALUES = ['droplet', 'image', 'volume', 'volume_snapshot'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

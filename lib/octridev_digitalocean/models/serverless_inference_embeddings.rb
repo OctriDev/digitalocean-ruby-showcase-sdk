@@ -5,170 +5,171 @@
 
 # serverless_inference_embeddings domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalEmbeddingsRequestMetadata
-    FIELDS = {
-      model: 'model',
-      input: 'input',
-      user: 'user',
-      encoding_format: 'encoding_format'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      model
-      input
-    ].freeze
-    DECODERS = {
-      encoding_format: lambda do |value|
-        ::OctridevDigitalocean::EmbeddingsRequestEncodingFormat.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalEmbeddingsRequestMetadata
+  FIELDS = {
+    model: "model",
+    input: "input",
+    user: "user",
+    encoding_format: "encoding_format",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    model
+    input
+  ].freeze
+  DECODERS = {
+    encoding_format: lambda do |value|
+      ::OctridevDigitalocean::EmbeddingsRequestEncodingFormat.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for EmbeddingsRequest.
+# Request body for `POST /v1/embeddings` (OpenAI-compatible). Extra fields are rejected.
+class EmbeddingsRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmbeddingsRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmbeddingsRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmbeddingsRequestMetadata::DECODERS
+
+  # @return [String] Model id to use for embeddings. Must match a model your account can access.
+  attr_reader :model
+  # @return [Object] A single string or 1–2048 strings; each string produces one row in `data`, in order.
+  attr_reader :input
+  # @return [String] Optional end-user identifier to help with abuse monitoring.
+  attr_reader :user
+  # @return [EmbeddingsRequestEncodingFormat] How embedding values are returned in each `data[].embedding` field.
+  attr_reader :encoding_format
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for EmbeddingsRequest.
-  # Request body for `POST /v1/embeddings` (OpenAI-compatible). Extra fields are rejected.
-  class EmbeddingsRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmbeddingsRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmbeddingsRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmbeddingsRequestMetadata::DECODERS
-
-    # @return [String] Model id to use for embeddings. Must match a model your account can access.
-    attr_reader :model
-    # @return [Object] A single string or 1–2048 strings; each string produces one row in `data`, in order.
-    attr_reader :input
-    # @return [String] Optional end-user identifier to help with abuse monitoring.
-    attr_reader :user
-    # @return [EmbeddingsRequestEncodingFormat] How embedding values are returned in each `data[].embedding` field.
-    attr_reader :encoding_format
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the EmbeddingsRequestEncodingFormat SDK namespace.
-  module EmbeddingsRequestEncodingFormat
-    FLOAT = 'float'
-    BASE64 = 'base64'
-    VALUES = %w[float base64].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the EmbeddingsRequestEncodingFormat SDK namespace.
+module EmbeddingsRequestEncodingFormat
+  FLOAT = 'float'
+  BASE64 = 'base64'
+  VALUES = ['float', 'base64'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalEmbeddingsResponseMetadata
+  FIELDS = {
+    object: "object",
+    model: "model",
+    data: "data",
+    usage: "usage",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    object
+    model
+    data
+    usage
+  ].freeze
+  DECODERS = {
+    object: lambda do |value|
+      ::OctridevDigitalocean::EmbeddingsResponseObject.from_value(value)
+    end,
+    data: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::EmbeddingDataItem.from_hash(item) }
+    end,
+    usage: lambda do |value|
+      ::OctridevDigitalocean::EmbeddingsUsage.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for EmbeddingsResponse.
+# OpenAI-style embeddings response.
+class EmbeddingsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmbeddingsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmbeddingsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmbeddingsResponseMetadata::DECODERS
+
+  # @return [EmbeddingsResponseObject] The object type, which is always the string `list`.
+  attr_reader :object
+  # @return [String] The embedding model that produced the vectors.
+  attr_reader :model
+  # @return [Array_of_EmbeddingDataItem] One entry for each `input` string, in the same order.
+  attr_reader :data
+  # @return [EmbeddingsUsage] Token usage for the embeddings request.
+  attr_reader :usage
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalEmbeddingsResponseMetadata
-    FIELDS = {
-      object: 'object',
-      model: 'model',
-      data: 'data',
-      usage: 'usage'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      object
-      model
-      data
-      usage
-    ].freeze
-    DECODERS = {
-      object: lambda do |value|
-        ::OctridevDigitalocean::EmbeddingsResponseObject.from_value(value)
-      end,
-      data: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::EmbeddingDataItem.from_hash(item) }
-      end,
-      usage: lambda do |value|
-        ::OctridevDigitalocean::EmbeddingsUsage.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for EmbeddingsResponse.
-  # OpenAI-style embeddings response.
-  class EmbeddingsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmbeddingsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmbeddingsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmbeddingsResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [EmbeddingsResponseObject] The object type, which is always the string `list`.
-    attr_reader :object
-    # @return [String] The embedding model that produced the vectors.
-    attr_reader :model
-    # @return [Array_of_EmbeddingDataItem] One entry for each `input` string, in the same order.
-    attr_reader :data
-    # @return [EmbeddingsUsage] Token usage for the embeddings request.
-    attr_reader :usage
+# Defines the EmbeddingsResponseObject SDK namespace.
+module EmbeddingsResponseObject
+  LIST = 'list'
+  VALUES = ['list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalEmbeddingsUsageMetadata
+  FIELDS = {
+    prompt_tokens: "prompt_tokens",
+    total_tokens: "total_tokens",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    prompt_tokens
+    total_tokens
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for EmbeddingsUsage.
+# Token usage for the embeddings request.
+class EmbeddingsUsage
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalEmbeddingsUsageMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalEmbeddingsUsageMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalEmbeddingsUsageMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [Integer] Number of input tokens used for the embedding.
+  attr_reader :prompt_tokens
+  # @return [Integer] Total billable tokens for the request.
+  attr_reader :total_tokens
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the EmbeddingsResponseObject SDK namespace.
-  module EmbeddingsResponseObject
-    LIST = 'list'
-    VALUES = ['list'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalEmbeddingsUsageMetadata
-    FIELDS = {
-      prompt_tokens: 'prompt_tokens',
-      total_tokens: 'total_tokens'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      prompt_tokens
-      total_tokens
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for EmbeddingsUsage.
-  # Token usage for the embeddings request.
-  class EmbeddingsUsage
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalEmbeddingsUsageMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalEmbeddingsUsageMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalEmbeddingsUsageMetadata::DECODERS
-
-    # @return [Integer] Number of input tokens used for the embedding.
-    attr_reader :prompt_tokens
-    # @return [Integer] Total billable tokens for the request.
-    attr_reader :total_tokens
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

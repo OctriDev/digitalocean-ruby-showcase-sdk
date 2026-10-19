@@ -5,663 +5,673 @@
 
 # action_gateway_data_plane domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApprovalDecisionMetadata
-    FIELDS = {
-      decision: 'decision'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      decision
-    ].freeze
-    DECODERS = {
-      decision: lambda do |value|
-        ::OctridevDigitalocean::ApprovalDecisionDecision.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalApprovalDecisionMetadata
+  FIELDS = {
+    decision: "decision",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    decision
+  ].freeze
+  DECODERS = {
+    decision: lambda do |value|
+      ::OctridevDigitalocean::ApprovalDecisionDecision.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ApprovalDecision.
+# Typed representation of the `ApprovalDecision` API schema.
+class ApprovalDecision
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApprovalDecisionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApprovalDecisionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApprovalDecisionMetadata::DECODERS
+
+  # @return [ApprovalDecisionDecision] Whether to let the pending call run.
+  attr_reader :decision
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApprovalDecision.
-  # Typed representation of the `ApprovalDecision` API schema.
-  class ApprovalDecision
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApprovalDecisionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApprovalDecisionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApprovalDecisionMetadata::DECODERS
-
-    # @return [ApprovalDecisionDecision] Whether to let the pending call run.
-    attr_reader :decision
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ApprovalDecisionDecision SDK namespace.
-  module ApprovalDecisionDecision
-    APPROVE = 'approve'
-    DENY = 'deny'
-    VALUES = %w[approve deny].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ApprovalDecisionDecision SDK namespace.
+module ApprovalDecisionDecision
+  APPROVE = 'approve'
+  DENY = 'deny'
+  VALUES = ['approve', 'deny'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApprovalDecisionResponseMetadata
+  FIELDS = {
+    id: "id",
+    status: "status",
+    expires_at: "expires_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::ApprovalDecisionResponseStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ApprovalDecisionResponse.
+# Typed representation of the `ApprovalDecisionResponse` API schema.
+class ApprovalDecisionResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApprovalDecisionResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApprovalDecisionResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApprovalDecisionResponseMetadata::DECODERS
+
+  # @return [String] The approval ID.
+  attr_reader :id
+  # @return [ApprovalDecisionResponseStatus] Optional enumerated value serialized in the `status` wire field.
+  attr_reader :status
+  # @return [String] Repeat an approved call with the same arguments before this time.
+  attr_reader :expires_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApprovalDecisionResponseMetadata
-    FIELDS = {
-      id: 'id',
-      status: 'status',
-      expires_at: 'expires_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::ApprovalDecisionResponseStatus.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApprovalDecisionResponse.
-  # Typed representation of the `ApprovalDecisionResponse` API schema.
-  class ApprovalDecisionResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApprovalDecisionResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApprovalDecisionResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApprovalDecisionResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The approval ID.
-    attr_reader :id
-    # @return [ApprovalDecisionResponseStatus] Optional enumerated value serialized in the `status` wire field.
-    attr_reader :status
-    # @return [String] Repeat an approved call with the same arguments before this time.
-    attr_reader :expires_at
+# Defines the ApprovalDecisionResponseStatus SDK namespace.
+module ApprovalDecisionResponseStatus
+  APPROVED = 'approved'
+  DENIED = 'denied'
+  VALUES = ['approved', 'denied'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalDataPlaneSearchToolsResponseVariant1OutputMetadata
+  FIELDS = {
+    results: "results",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    results: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::SearchToolsGroup.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for DataPlaneSearchToolsResponseVariant1Output.
+class DataPlaneSearchToolsResponseVariant1Output
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDataPlaneSearchToolsResponseVariant1OutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDataPlaneSearchToolsResponseVariant1OutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDataPlaneSearchToolsResponseVariant1OutputMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [Array_of_SearchToolsGroup] One result group per query, in request order.
+  attr_reader :results
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ApprovalDecisionResponseStatus SDK namespace.
-  module ApprovalDecisionResponseStatus
-    APPROVED = 'approved'
-    DENIED = 'denied'
-    VALUES = %w[approved denied].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDataPlaneSearchToolsResponseVariant1OutputMetadata
-    FIELDS = {
-      results: 'results'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      results: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::SearchToolsGroup.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDataPlaneSearchToolsResponseMetadata
+  FIELDS = {
+    status: "status",
+    output: "output",
+    error: "error",
+    call_id: "call_id",
+    meta: "_meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    status
+    call_id
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::ToolResultStatus.from_value(value)
+    end,
+    output: lambda do |value|
+      ::OctridevDigitalocean::DataPlaneSearchToolsResponseVariant1Output.from_hash(value)
+    end,
+    error: lambda do |value|
+      ::OctridevDigitalocean::ErrorEnvelope.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DataPlaneSearchToolsResponse.
+# Typed representation of the `DataPlaneSearchToolsResponse` API schema.
+class DataPlaneSearchToolsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDataPlaneSearchToolsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDataPlaneSearchToolsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDataPlaneSearchToolsResponseMetadata::DECODERS
+
+  attr_reader :output
+  # @return [ToolResultStatus] Required enumerated value serialized in the `status` wire field.
+  attr_reader :status
+  # @return [ErrorEnvelope] Describes why a request or tool call failed and whether retrying can help.
+  attr_reader :error
+  # @return [String] A unique identifier for this call. Include it when contacting support.
+  attr_reader :call_id
+  # @return [Hash] Additional result metadata. Keys include: - `status`: `requires_approval`, `requires_authorization`, or `requires_connection_configuration` when the call stopped before running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request to send. Approve the call, then repeat it with the same arguments before `expires_at`. - `retry`: `{"attempt_count": N, "exhausted":…
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DataPlaneSearchToolsResponseVariant1Output.
-  class DataPlaneSearchToolsResponseVariant1Output
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDataPlaneSearchToolsResponseVariant1OutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDataPlaneSearchToolsResponseVariant1OutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDataPlaneSearchToolsResponseVariant1OutputMetadata::DECODERS
-
-    # @return [Array_of_SearchToolsGroup] One result group per query, in request order.
-    attr_reader :results
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDataPlaneSearchToolsResponseMetadata
-    FIELDS = {
-      status: 'status',
-      output: 'output',
-      error: 'error',
-      call_id: 'call_id',
-      meta: '_meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      status
-      call_id
-    ].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::ToolResultStatus.from_value(value)
-      end,
-      output: lambda do |value|
-        ::OctridevDigitalocean::DataPlaneSearchToolsResponseVariant1Output.from_hash(value)
-      end,
-      error: lambda do |value|
-        ::OctridevDigitalocean::ErrorEnvelope.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalErrorEnvelopeMetadata
+  FIELDS = {
+    class_: "class",
+    message: "message",
+    retriable: "retriable",
+    recovery_hint: "recovery_hint",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    class_: lambda do |value|
+      ::OctridevDigitalocean::ErrorEnvelopeClass.from_value(value)
+    end,
+    recovery_hint: lambda do |value|
+      ::OctridevDigitalocean::ErrorEnvelopeRecoveryHint.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ErrorEnvelope.
+# Describes why a request or tool call failed and whether retrying can help.
+class ErrorEnvelope
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalErrorEnvelopeMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalErrorEnvelopeMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalErrorEnvelopeMetadata::DECODERS
+
+  # @return [ErrorEnvelopeClass] The failure class. Branch on this value rather than on `message`, which may change.
+  attr_reader :class_
+  # @return [String] A human-readable explanation that is safe to show to an agent or end user.
+  attr_reader :message
+  # @return [Boolean] Whether retrying the same request later can succeed.
+  attr_reader :retriable
+  # @return [ErrorEnvelopeRecoveryHint] The suggested next step.
+  attr_reader :recovery_hint
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DataPlaneSearchToolsResponse.
-  # Typed representation of the `DataPlaneSearchToolsResponse` API schema.
-  class DataPlaneSearchToolsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDataPlaneSearchToolsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDataPlaneSearchToolsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDataPlaneSearchToolsResponseMetadata::DECODERS
-
-    attr_reader :output
-    # @return [ToolResultStatus] Required enumerated value serialized in the `status` wire field.
-    attr_reader :status
-    # @return [ErrorEnvelope] Describes why a request or tool call failed and whether retrying can help.
-    attr_reader :error
-    # @return [String] A unique identifier for this call. Include it when contacting support.
-    attr_reader :call_id
-    # @return [Hash] Additional result metadata. Keys include: - `status`: `requires_approval`, `requires_authorization`, or `requires_connection_configuration` when the call stopped before running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request to send. Approve the call, then repeat it with the same arguments before `expires_at`. - `retry`: `{"attempt_count": N, "exhausted":…
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalErrorEnvelopeMetadata
-    FIELDS = {
-      class_: 'class',
-      message: 'message',
-      retriable: 'retriable',
-      recovery_hint: 'recovery_hint'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      class_: lambda do |value|
-        ::OctridevDigitalocean::ErrorEnvelopeClass.from_value(value)
-      end,
-      recovery_hint: lambda do |value|
-        ::OctridevDigitalocean::ErrorEnvelopeRecoveryHint.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ErrorEnvelopeClass SDK namespace.
+module ErrorEnvelopeClass
+  INVALID_ARGUMENT = 'invalid_argument'
+  UNAUTHORIZED = 'unauthorized'
+  FORBIDDEN = 'forbidden'
+  RATE_LIMITED = 'rate_limited'
+  NOT_FOUND = 'not_found'
+  TIMEOUT = 'timeout'
+  UPSTREAM_ERROR = 'upstream_error'
+  OUTPUT_TOO_LARGE = 'output_too_large'
+  EXECUTION_FAILED = 'execution_failed'
+  UNAVAILABLE = 'unavailable'
+  CANCELED = 'canceled'
+  RENDER_REQUIRED = 'render_required'
+  UNSUPPORTED_MEDIA_TYPE = 'unsupported_media_type'
+  VIEW_MATERIALIZATION_FAILED = 'view_materialization_failed'
+  VALUES = [
+    'invalid_argument', 'unauthorized', 'forbidden', 'rate_limited', 'not_found', 'timeout',
+    'upstream_error', 'output_too_large', 'execution_failed', 'unavailable', 'canceled',
+    'render_required', 'unsupported_media_type', 'view_materialization_failed'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the ErrorEnvelopeRecoveryHint SDK namespace.
+module ErrorEnvelopeRecoveryHint
+  FIX_ARGS = 'fix_args'
+  REFRESH_AUTH = 'refresh_auth'
+  RETRY_LATER = 'retry_later'
+  NARROW_OUTPUT = 'narrow_output'
+  CONTACT_SUPPORT = 'contact_support'
+  VERIFY_PROVIDER_STATE = 'verify_provider_state'
+  VALUES = [
+    'fix_args', 'refresh_auth', 'retry_later', 'narrow_output', 'contact_support',
+    'verify_provider_state'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalExecuteCodeRequestMetadata
+  FIELDS = {
+    code: "code",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    code
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ExecuteCodeRequest.
+# Typed representation of the `ExecuteCodeRequest` API schema.
+class ExecuteCodeRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExecuteCodeRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExecuteCodeRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExecuteCodeRequestMetadata::DECODERS
+
+  # @return [String] Python source to run. The sandbox provides `invoke_digitalocean_tool(name: str, arguments: dict) -> dict`, which calls a catalog tool under the session's policy and returns a tool result.
+  attr_reader :code
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ErrorEnvelope.
-  # Describes why a request or tool call failed and whether retrying can help.
-  class ErrorEnvelope
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalErrorEnvelopeMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalErrorEnvelopeMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalErrorEnvelopeMetadata::DECODERS
-
-    # @return [ErrorEnvelopeClass] The failure class. Branch on this value rather than on `message`, which may change.
-    attr_reader :class_
-    # @return [String] A human-readable explanation that is safe to show to an agent or end user.
-    attr_reader :message
-    # @return [Boolean] Whether retrying the same request later can succeed.
-    attr_reader :retriable
-    # @return [ErrorEnvelopeRecoveryHint] The suggested next step.
-    attr_reader :recovery_hint
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ErrorEnvelopeClass SDK namespace.
-  module ErrorEnvelopeClass
-    INVALID_ARGUMENT = 'invalid_argument'
-    UNAUTHORIZED = 'unauthorized'
-    FORBIDDEN = 'forbidden'
-    RATE_LIMITED = 'rate_limited'
-    NOT_FOUND = 'not_found'
-    TIMEOUT = 'timeout'
-    UPSTREAM_ERROR = 'upstream_error'
-    OUTPUT_TOO_LARGE = 'output_too_large'
-    EXECUTION_FAILED = 'execution_failed'
-    UNAVAILABLE = 'unavailable'
-    CANCELED = 'canceled'
-    RENDER_REQUIRED = 'render_required'
-    UNSUPPORTED_MEDIA_TYPE = 'unsupported_media_type'
-    VIEW_MATERIALIZATION_FAILED = 'view_materialization_failed'
-    VALUES = %w[
-      invalid_argument unauthorized forbidden rate_limited not_found timeout
-      upstream_error output_too_large execution_failed unavailable canceled
-      render_required unsupported_media_type view_materialization_failed
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalExecuteCodeResponseVariant1OutputMetadata
+  FIELDS = {
+    stdout: "stdout",
+    stderr: "stderr",
+    exit_code: "exit_code",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ExecuteCodeResponseVariant1Output.
+class ExecuteCodeResponseVariant1Output
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExecuteCodeResponseVariant1OutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExecuteCodeResponseVariant1OutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExecuteCodeResponseVariant1OutputMetadata::DECODERS
+
+  attr_reader :stdout
+  # @return [String] Omitted when empty.
+  attr_reader :stderr
+  # @return [Integer] The process exit code. A nonzero exit code is still a succeeded result.
+  attr_reader :exit_code
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ErrorEnvelopeRecoveryHint SDK namespace.
-  module ErrorEnvelopeRecoveryHint
-    FIX_ARGS = 'fix_args'
-    REFRESH_AUTH = 'refresh_auth'
-    RETRY_LATER = 'retry_later'
-    NARROW_OUTPUT = 'narrow_output'
-    CONTACT_SUPPORT = 'contact_support'
-    VERIFY_PROVIDER_STATE = 'verify_provider_state'
-    VALUES = %w[
-      fix_args refresh_auth retry_later narrow_output contact_support
-      verify_provider_state
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExecuteCodeRequestMetadata
-    FIELDS = {
-      code: 'code'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      code
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalExecuteCodeResponseMetadata
+  FIELDS = {
+    status: "status",
+    output: "output",
+    error: "error",
+    call_id: "call_id",
+    meta: "_meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    status
+    call_id
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::ToolResultStatus.from_value(value)
+    end,
+    output: lambda do |value|
+      ::OctridevDigitalocean::ExecuteCodeResponseVariant1Output.from_hash(value)
+    end,
+    error: lambda do |value|
+      ::OctridevDigitalocean::ErrorEnvelope.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ExecuteCodeResponse.
+# Typed representation of the `ExecuteCodeResponse` API schema.
+class ExecuteCodeResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExecuteCodeResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExecuteCodeResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExecuteCodeResponseMetadata::DECODERS
+
+  attr_reader :output
+  # @return [ToolResultStatus] Required enumerated value serialized in the `status` wire field.
+  attr_reader :status
+  # @return [ErrorEnvelope] Describes why a request or tool call failed and whether retrying can help.
+  attr_reader :error
+  # @return [String] A unique identifier for this call. Include it when contacting support.
+  attr_reader :call_id
+  # @return [Hash] Additional result metadata. Keys include: - `status`: `requires_approval`, `requires_authorization`, or `requires_connection_configuration` when the call stopped before running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request to send. Approve the call, then repeat it with the same arguments before `expires_at`. - `retry`: `{"attempt_count": N, "exhausted":…
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ExecuteCodeRequest.
-  # Typed representation of the `ExecuteCodeRequest` API schema.
-  class ExecuteCodeRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExecuteCodeRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExecuteCodeRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExecuteCodeRequestMetadata::DECODERS
-
-    # @return [String] Python source to run. The sandbox provides `invoke_digitalocean_tool(name: str, arguments: dict) -> dict`, which calls a catalog tool under the session's policy and returns a tool result.
-    attr_reader :code
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExecuteCodeResponseVariant1OutputMetadata
-    FIELDS = {
-      stdout: 'stdout',
-      stderr: 'stderr',
-      exit_code: 'exit_code'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the Forbidden SDK namespace.
+module Forbidden
+  def self.from_hash(hash)
+    shape_mapping = {
+      "status" => ToolResultError,
+      "id" => Error2,
+    }
+    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+    decoded = type&.from_hash(hash)
+    return decoded unless type.nil?
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalInvokeToolsItemMetadata
+  FIELDS = {
+    index: "index",
+    tool: "tool",
+    version: "version",
+    result: "result",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    result: lambda do |value|
+      ::OctridevDigitalocean::ToolResult.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for InvokeToolsItem.
+# Typed representation of the `InvokeToolsItem` API schema.
+class InvokeToolsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInvokeToolsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInvokeToolsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInvokeToolsItemMetadata::DECODERS
+
+  # @return [Integer] The 0-based position of the call in the request.
+  attr_reader :index
+  # @return [String] The canonical tool name.
+  attr_reader :tool
+  # @return [String] The tool version that ran.
+  attr_reader :version
+  # @return [ToolResult] The result of one tool call. Check `status` before reading `output`. A call that needs approval, authorization, or connection setup fails with a `_meta.status` that names the step to complete.
+  attr_reader :result
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ExecuteCodeResponseVariant1Output.
-  class ExecuteCodeResponseVariant1Output
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExecuteCodeResponseVariant1OutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExecuteCodeResponseVariant1OutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExecuteCodeResponseVariant1OutputMetadata::DECODERS
-
-    attr_reader :stdout
-    # @return [String] Omitted when empty.
-    attr_reader :stderr
-    # @return [Integer] The process exit code. A nonzero exit code is still a succeeded result.
-    attr_reader :exit_code
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExecuteCodeResponseMetadata
-    FIELDS = {
-      status: 'status',
-      output: 'output',
-      error: 'error',
-      call_id: 'call_id',
-      meta: '_meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      status
-      call_id
-    ].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::ToolResultStatus.from_value(value)
-      end,
-      output: lambda do |value|
-        ::OctridevDigitalocean::ExecuteCodeResponseVariant1Output.from_hash(value)
-      end,
-      error: lambda do |value|
-        ::OctridevDigitalocean::ErrorEnvelope.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalInvokeToolsRequestMetadata
+  FIELDS = {
+    rationale: "rationale",
+    tools: "tools",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    tools
+  ].freeze
+  DECODERS = {
+    tools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ToolCall.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for InvokeToolsRequest.
+# Typed representation of the `InvokeToolsRequest` API schema.
+class InvokeToolsRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInvokeToolsRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInvokeToolsRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInvokeToolsRequestMetadata::DECODERS
+
+  # @return [String] One sentence explaining why the tools are being called. Values longer than 512 characters are truncated.
+  attr_reader :rationale
+  # @return [Array_of_ToolCall] The tool calls to run in parallel.
+  attr_reader :tools
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ExecuteCodeResponse.
-  # Typed representation of the `ExecuteCodeResponse` API schema.
-  class ExecuteCodeResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExecuteCodeResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExecuteCodeResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExecuteCodeResponseMetadata::DECODERS
-
-    attr_reader :output
-    # @return [ToolResultStatus] Required enumerated value serialized in the `status` wire field.
-    attr_reader :status
-    # @return [ErrorEnvelope] Describes why a request or tool call failed and whether retrying can help.
-    attr_reader :error
-    # @return [String] A unique identifier for this call. Include it when contacting support.
-    attr_reader :call_id
-    # @return [Hash] Additional result metadata. Keys include: - `status`: `requires_approval`, `requires_authorization`, or `requires_connection_configuration` when the call stopped before running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request to send. Approve the call, then repeat it with the same arguments before `expires_at`. - `retry`: `{"attempt_count": N, "exhausted":…
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the Forbidden SDK namespace.
-  module Forbidden
-    def self.from_hash(hash)
-      shape_mapping = {
-        'status' => ToolResultError,
-        'id' => Error2
-      }
-      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-      decoded = type&.from_hash(hash)
-      decoded unless type.nil?
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalInvokeToolsResponseMetadata
+  FIELDS = {
+    total_count: "total_count",
+    success_count: "success_count",
+    error_count: "error_count",
+    results: "results",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    results: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::InvokeToolsItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for InvokeToolsResponse.
+# Typed representation of the `InvokeToolsResponse` API schema.
+class InvokeToolsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalInvokeToolsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalInvokeToolsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalInvokeToolsResponseMetadata::DECODERS
+
+  # @return [Integer] Optional `integer` value serialized in the `total_count` wire field.
+  attr_reader :total_count
+  # @return [Integer] Optional `integer` value serialized in the `success_count` wire field.
+  attr_reader :success_count
+  # @return [Integer] Optional `integer` value serialized in the `error_count` wire field.
+  attr_reader :error_count
+  # @return [Array_of_InvokeToolsItem] One result per call, in request order.
+  attr_reader :results
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInvokeToolsItemMetadata
-    FIELDS = {
-      index: 'index',
-      tool: 'tool',
-      version: 'version',
-      result: 'result'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      result: lambda do |value|
-        ::OctridevDigitalocean::ToolResult.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for InvokeToolsItem.
-  # Typed representation of the `InvokeToolsItem` API schema.
-  class InvokeToolsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInvokeToolsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInvokeToolsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInvokeToolsItemMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] The 0-based position of the call in the request.
-    attr_reader :index
-    # @return [String] The canonical tool name.
-    attr_reader :tool
-    # @return [String] The tool version that ran.
-    attr_reader :version
-    # @return [ToolResult] The result of one tool call. Check `status` before reading `output`. A call that needs approval, authorization, or connection setup fails with a `_meta.status` that names the step to complete.
-    attr_reader :result
+# Internal model hydration metadata.
+class SdkInternalListSessionToolsResponseMetadata
+  FIELDS = {
+    version: "version",
+    tools: "tools",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::SessionTool.from_hash(item) }
+    end,
+    next_page_token: lambda do |value|
+      ::OctridevDigitalocean::NextPageToken.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ListSessionToolsResponse.
+# Typed representation of the `ListSessionToolsResponse` API schema.
+class ListSessionToolsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListSessionToolsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListSessionToolsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListSessionToolsResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The catalog version.
+  attr_reader :version
+  # @return [Array_of_SessionTool] Tools ordered by name.
+  attr_reader :tools
+  # @return [NextPageToken] An opaque cursor for the next page of results. Pass it back verbatim as `page_token`. It is empty on the last page.
+  attr_reader :next_page_token
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInvokeToolsRequestMetadata
-    FIELDS = {
-      rationale: 'rationale',
-      tools: 'tools'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      tools
-    ].freeze
-    DECODERS = {
-      tools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ToolCall.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for InvokeToolsRequest.
-  # Typed representation of the `InvokeToolsRequest` API schema.
-  class InvokeToolsRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInvokeToolsRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInvokeToolsRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInvokeToolsRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] One sentence explaining why the tools are being called. Values longer than 512 characters are truncated.
-    attr_reader :rationale
-    # @return [Array_of_ToolCall] The tool calls to run in parallel.
-    attr_reader :tools
+# Internal model hydration metadata.
+class SdkInternalSearchQueryMetadata
+  FIELDS = {
+    use_case: "use_case",
+    known_fields: "known_fields",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    use_case
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for SearchQuery.
+# Typed representation of the `SearchQuery` API schema.
+class SearchQuery
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSearchQueryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSearchQueryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSearchQueryMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] A normalized English description of one complete use case: the action and the intended outcome, including any app the user named. Put personal identifiers in `known_fields` instead. Up to 512 bytes and 32 search terms, with at least one letter or digit.
+  attr_reader :use_case
+  # @return [String] Known workflow inputs as one string of comma-separated `key:value` pairs, such as identifiers or settings. Used as context, not for keyword matching.
+  attr_reader :known_fields
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalInvokeToolsResponseMetadata
-    FIELDS = {
-      total_count: 'total_count',
-      success_count: 'success_count',
-      error_count: 'error_count',
-      results: 'results'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      results: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::InvokeToolsItem.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for InvokeToolsResponse.
-  # Typed representation of the `InvokeToolsResponse` API schema.
-  class InvokeToolsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalInvokeToolsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalInvokeToolsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalInvokeToolsResponseMetadata::DECODERS
-
-    # @return [Integer] Optional `integer` value serialized in the `total_count` wire field.
-    attr_reader :total_count
-    # @return [Integer] Optional `integer` value serialized in the `success_count` wire field.
-    attr_reader :success_count
-    # @return [Integer] Optional `integer` value serialized in the `error_count` wire field.
-    attr_reader :error_count
-    # @return [Array_of_InvokeToolsItem] One result per call, in request order.
-    attr_reader :results
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # Internal model hydration metadata.
-  class SdkInternalListSessionToolsResponseMetadata
-    FIELDS = {
-      version: 'version',
-      tools: 'tools',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::SessionTool.from_hash(item) }
-      end,
-      next_page_token: lambda do |value|
-        ::OctridevDigitalocean::NextPageToken.from_value(value)
-      end
-    }.freeze
-  end
-
-  # API model for ListSessionToolsResponse.
-  # Typed representation of the `ListSessionToolsResponse` API schema.
-  class ListSessionToolsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListSessionToolsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListSessionToolsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListSessionToolsResponseMetadata::DECODERS
-
-    # @return [String] The catalog version.
-    attr_reader :version
-    # @return [Array_of_SessionTool] Tools ordered by name.
-    attr_reader :tools
-    # @return [NextPageToken] An opaque cursor for the next page of results. Pass it back verbatim as `page_token`. It is empty on the last page.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalSearchQueryMetadata
-    FIELDS = {
-      use_case: 'use_case',
-      known_fields: 'known_fields'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      use_case
-    ].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for SearchQuery.
-  # Typed representation of the `SearchQuery` API schema.
-  class SearchQuery
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSearchQueryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSearchQueryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSearchQueryMetadata::DECODERS
-
-    # @return [String] A normalized English description of one complete use case: the action and the intended outcome, including any app the user named. Put personal identifiers in `known_fields` instead. Up to 512 bytes and 32 search terms, with at least one letter or digit.
-    attr_reader :use_case
-    # @return [String] Known workflow inputs as one string of comma-separated `key:value` pairs, such as identifiers or settings. Used as context, not for keyword matching.
-    attr_reader :known_fields
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

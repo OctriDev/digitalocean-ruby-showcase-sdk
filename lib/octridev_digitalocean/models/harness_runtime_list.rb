@@ -5,328 +5,336 @@
 
 # harness_runtime_list domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalListAgentConfigsResponseMetadata
-    FIELDS = {
-      configs: 'configs',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      configs: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AgentConfigSummary.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalListAgentConfigsResponseMetadata
+  FIELDS = {
+    configs: "configs",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    configs: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AgentConfigSummary.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListAgentConfigsResponse.
+# Typed representation of the `ListAgentConfigsResponse` API schema.
+class ListAgentConfigsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListAgentConfigsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListAgentConfigsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListAgentConfigsResponseMetadata::DECODERS
+
+  # @return [Array_of_AgentConfigSummary] Optional array value serialized in the `configs` wire field.
+  attr_reader :configs
+  # @return [String] Optional `string` value serialized in the `next_page_token` wire field.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListAgentConfigsResponse.
-  # Typed representation of the `ListAgentConfigsResponse` API schema.
-  class ListAgentConfigsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListAgentConfigsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListAgentConfigsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListAgentConfigsResponseMetadata::DECODERS
-
-    # @return [Array_of_AgentConfigSummary] Optional array value serialized in the `configs` wire field.
-    attr_reader :configs
-    # @return [String] Optional `string` value serialized in the `next_page_token` wire field.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListCheckpointsResponseMetadata
-    FIELDS = {
-      checkpoints: 'checkpoints',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      checkpoints: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Checkpoint.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListCheckpointsResponseMetadata
+  FIELDS = {
+    checkpoints: "checkpoints",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    checkpoints: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Checkpoint.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListCheckpointsResponse.
+# Typed representation of the `ListCheckpointsResponse` API schema.
+class ListCheckpointsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListCheckpointsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListCheckpointsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListCheckpointsResponseMetadata::DECODERS
+
+  # @return [Array_of_Checkpoint] Newest first.
+  attr_reader :checkpoints
+  # @return [String] Opaque cursor for the next page. Empty when there are no further pages.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListCheckpointsResponse.
-  # Typed representation of the `ListCheckpointsResponse` API schema.
-  class ListCheckpointsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListCheckpointsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListCheckpointsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListCheckpointsResponseMetadata::DECODERS
-
-    # @return [Array_of_Checkpoint] Newest first.
-    attr_reader :checkpoints
-    # @return [String] Opaque cursor for the next page. Empty when there are no further pages.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListReusableSessionsResponseMetadata
-    FIELDS = {
-      sessions: 'sessions',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      sessions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ReusableSession.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListReusableSessionsResponseMetadata
+  FIELDS = {
+    sessions: "sessions",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    sessions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ReusableSession.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListReusableSessionsResponse.
+# Typed representation of the `ListReusableSessionsResponse` API schema.
+class ListReusableSessionsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListReusableSessionsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListReusableSessionsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListReusableSessionsResponseMetadata::DECODERS
+
+  # @return [Array_of_ReusableSession] Optional array value serialized in the `sessions` wire field.
+  attr_reader :sessions
+  # @return [String] Opaque cursor for the next page. Empty when there are no further pages.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListReusableSessionsResponse.
-  # Typed representation of the `ListReusableSessionsResponse` API schema.
-  class ListReusableSessionsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListReusableSessionsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListReusableSessionsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListReusableSessionsResponseMetadata::DECODERS
-
-    # @return [Array_of_ReusableSession] Optional array value serialized in the `sessions` wire field.
-    attr_reader :sessions
-    # @return [String] Opaque cursor for the next page. Empty when there are no further pages.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListTemplateBuildsResponseMetadata
-    FIELDS = {
-      builds: 'builds',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      builds: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::SandboxTemplateBuild.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListTemplateBuildsResponseMetadata
+  FIELDS = {
+    builds: "builds",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    builds: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::SandboxTemplateBuild.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListTemplateBuildsResponse.
+# Typed representation of the `ListTemplateBuildsResponse` API schema.
+class ListTemplateBuildsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListTemplateBuildsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListTemplateBuildsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListTemplateBuildsResponseMetadata::DECODERS
+
+  # @return [Array_of_SandboxTemplateBuild] Optional array value serialized in the `builds` wire field.
+  attr_reader :builds
+  # @return [String] Optional `string` value serialized in the `next_page_token` wire field.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListTemplateBuildsResponse.
-  # Typed representation of the `ListTemplateBuildsResponse` API schema.
-  class ListTemplateBuildsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListTemplateBuildsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListTemplateBuildsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListTemplateBuildsResponseMetadata::DECODERS
-
-    # @return [Array_of_SandboxTemplateBuild] Optional array value serialized in the `builds` wire field.
-    attr_reader :builds
-    # @return [String] Optional `string` value serialized in the `next_page_token` wire field.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListTemplatesResponseMetadata
-    FIELDS = {
-      templates: 'templates',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      templates: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::SandboxTemplate.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListTemplatesResponseMetadata
+  FIELDS = {
+    templates: "templates",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    templates: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::SandboxTemplate.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListTemplatesResponse.
+# Typed representation of the `ListTemplatesResponse` API schema.
+class ListTemplatesResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListTemplatesResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListTemplatesResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListTemplatesResponseMetadata::DECODERS
+
+  # @return [Array_of_SandboxTemplate] Optional array value serialized in the `templates` wire field.
+  attr_reader :templates
+  # @return [String] Optional `string` value serialized in the `next_page_token` wire field.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListTemplatesResponse.
-  # Typed representation of the `ListTemplatesResponse` API schema.
-  class ListTemplatesResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListTemplatesResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListTemplatesResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListTemplatesResponseMetadata::DECODERS
-
-    # @return [Array_of_SandboxTemplate] Optional array value serialized in the `templates` wire field.
-    attr_reader :templates
-    # @return [String] Optional `string` value serialized in the `next_page_token` wire field.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListTriggerExecutionsResponseMetadata
-    FIELDS = {
-      executions: 'executions',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      executions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::TriggerExecution.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListTriggerExecutionsResponseMetadata
+  FIELDS = {
+    executions: "executions",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    executions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::TriggerExecution.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListTriggerExecutionsResponse.
+# Typed representation of the `ListTriggerExecutionsResponse` API schema.
+class ListTriggerExecutionsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListTriggerExecutionsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListTriggerExecutionsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListTriggerExecutionsResponseMetadata::DECODERS
+
+  # @return [Array_of_TriggerExecution] Optional array value serialized in the `executions` wire field.
+  attr_reader :executions
+  # @return [String] Opaque cursor for the next page. Empty when there are no further pages.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListTriggerExecutionsResponse.
-  # Typed representation of the `ListTriggerExecutionsResponse` API schema.
-  class ListTriggerExecutionsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListTriggerExecutionsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListTriggerExecutionsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListTriggerExecutionsResponseMetadata::DECODERS
-
-    # @return [Array_of_TriggerExecution] Optional array value serialized in the `executions` wire field.
-    attr_reader :executions
-    # @return [String] Opaque cursor for the next page. Empty when there are no further pages.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListTriggersResponseMetadata
-    FIELDS = {
-      triggers: 'triggers',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      triggers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Trigger.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListTriggersResponseMetadata
+  FIELDS = {
+    triggers: "triggers",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    triggers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Trigger.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListTriggersResponse.
+# Typed representation of the `ListTriggersResponse` API schema.
+class ListTriggersResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListTriggersResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListTriggersResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListTriggersResponseMetadata::DECODERS
+
+  # @return [Array_of_Trigger] Optional array value serialized in the `triggers` wire field.
+  attr_reader :triggers
+  # @return [String] Opaque cursor for the next page. Empty when there are no further pages.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListTriggersResponse.
-  # Typed representation of the `ListTriggersResponse` API schema.
-  class ListTriggersResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListTriggersResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListTriggersResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListTriggersResponseMetadata::DECODERS
-
-    # @return [Array_of_Trigger] Optional array value serialized in the `triggers` wire field.
-    attr_reader :triggers
-    # @return [String] Opaque cursor for the next page. Empty when there are no further pages.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListWebhookProvidersResponseMetadata
-    FIELDS = {
-      providers: 'providers'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      providers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::WebhookProvider.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListWebhookProvidersResponseMetadata
+  FIELDS = {
+    providers: "providers",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    providers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::WebhookProvider.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListWebhookProvidersResponse.
+# Typed representation of the `ListWebhookProvidersResponse` API schema.
+class ListWebhookProvidersResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListWebhookProvidersResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListWebhookProvidersResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListWebhookProvidersResponseMetadata::DECODERS
+
+  # @return [Array_of_WebhookProvider] Optional array value serialized in the `providers` wire field.
+  attr_reader :providers
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListWebhookProvidersResponse.
-  # Typed representation of the `ListWebhookProvidersResponse` API schema.
-  class ListWebhookProvidersResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListWebhookProvidersResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListWebhookProvidersResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListWebhookProvidersResponseMetadata::DECODERS
-
-    # @return [Array_of_WebhookProvider] Optional array value serialized in the `providers` wire field.
-    attr_reader :providers
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

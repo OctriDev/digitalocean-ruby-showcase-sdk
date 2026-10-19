@@ -5,123 +5,125 @@
 
 # apps_apps_create domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAppsCreateAppRequestMetadata
-    FIELDS = {
-      spec: 'spec',
-      project_id: 'project_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      spec
-    ].freeze
-    DECODERS = {
-      spec: lambda do |value|
-        ::OctridevDigitalocean::AppSpec.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAppsCreateAppRequestMetadata
+  FIELDS = {
+    spec: "spec",
+    project_id: "project_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    spec
+  ].freeze
+  DECODERS = {
+    spec: lambda do |value|
+      ::OctridevDigitalocean::AppSpec.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppsCreateAppRequest.
+# Typed representation of the `AppsCreateAppRequest` API schema.
+class AppsCreateAppRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsCreateAppRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsCreateAppRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsCreateAppRequestMetadata::DECODERS
+
+  # @return [AppSpec] The desired configuration of an application.
+  attr_reader :spec
+  # @return [String] The ID of the project the app should be assigned to. If omitted, it will be assigned to your default project. Requires `project:assign_resource` and `project:update` scopes.
+  attr_reader :project_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsCreateAppRequest.
-  # Typed representation of the `AppsCreateAppRequest` API schema.
-  class AppsCreateAppRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsCreateAppRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsCreateAppRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsCreateAppRequestMetadata::DECODERS
-
-    # @return [AppSpec] The desired configuration of an application.
-    attr_reader :spec
-    # @return [String] The ID of the project the app should be assigned to. If omitted, it will be assigned to your default project. Requires `project:assign_resource` and `project:update` scopes.
-    attr_reader :project_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppsCreateAppRequestRequestMetadata
-    FIELDS = {
-      spec: 'spec',
-      project_id: 'project_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      spec
-    ].freeze
-    DECODERS = {
-      spec: lambda do |value|
-        ::OctridevDigitalocean::AppSpecRequest.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppsCreateAppRequestRequestMetadata
+  FIELDS = {
+    spec: "spec",
+    project_id: "project_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    spec
+  ].freeze
+  DECODERS = {
+    spec: lambda do |value|
+      ::OctridevDigitalocean::AppSpecRequest.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppsCreateAppRequestRequest.
+# Typed representation of the `AppsCreateAppRequestRequest` API schema.
+class AppsCreateAppRequestRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsCreateAppRequestRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsCreateAppRequestRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsCreateAppRequestRequestMetadata::DECODERS
+
+  # @return [AppSpecRequest] The desired configuration of an application.
+  attr_reader :spec
+  # @return [String] The ID of the project the app should be assigned to. If omitted, it will be assigned to your default project. Requires `project:assign_resource` and `project:update` scopes.
+  attr_reader :project_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsCreateAppRequestRequest.
-  # Typed representation of the `AppsCreateAppRequestRequest` API schema.
-  class AppsCreateAppRequestRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsCreateAppRequestRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsCreateAppRequestRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsCreateAppRequestRequestMetadata::DECODERS
-
-    # @return [AppSpecRequest] The desired configuration of an application.
-    attr_reader :spec
-    # @return [String] The ID of the project the app should be assigned to. If omitted, it will be assigned to your default project. Requires `project:assign_resource` and `project:update` scopes.
-    attr_reader :project_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppsCreateDeploymentRequestMetadata
-    FIELDS = {
-      force_build: 'force_build'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppsCreateDeploymentRequestMetadata
+  FIELDS = {
+    force_build: "force_build",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AppsCreateDeploymentRequest.
+# Typed representation of the `AppsCreateDeploymentRequest` API schema.
+class AppsCreateDeploymentRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsCreateDeploymentRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsCreateDeploymentRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsCreateDeploymentRequestMetadata::DECODERS
+
+  # @return [Boolean] Optional `boolean` value serialized in the `force_build` wire field.
+  attr_reader :force_build
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsCreateDeploymentRequest.
-  # Typed representation of the `AppsCreateDeploymentRequest` API schema.
-  class AppsCreateDeploymentRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsCreateDeploymentRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsCreateDeploymentRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsCreateDeploymentRequestMetadata::DECODERS
-
-    # @return [Boolean] Optional `boolean` value serialized in the `force_build` wire field.
-    attr_reader :force_build
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

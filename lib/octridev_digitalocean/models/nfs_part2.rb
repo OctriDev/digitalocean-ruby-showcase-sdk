@@ -5,143 +5,144 @@
 
 # nfs domain models (part 2)
 module OctridevDigitalocean
-  # API model for NfsSnapshotGetResponse.
-  # Typed representation of the `NfsSnapshotGetResponse` API schema.
-  class NfsSnapshotGetResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalNfsSnapshotGetResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalNfsSnapshotGetResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalNfsSnapshotGetResponseMetadata::DECODERS
+# API model for NfsSnapshotGetResponse.
+# Typed representation of the `NfsSnapshotGetResponse` API schema.
+class NfsSnapshotGetResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalNfsSnapshotGetResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalNfsSnapshotGetResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalNfsSnapshotGetResponseMetadata::DECODERS
 
-    # @return [NfsSnapshotResponse] Represents an NFS snapshot.
-    attr_reader :snapshot
+  # @return [NfsSnapshotResponse] Represents an NFS snapshot.
+  attr_reader :snapshot
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalNfsSnapshotListResponseMetadata
-    FIELDS = {
-      snapshots: 'snapshots'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      snapshots: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::NfsSnapshotResponse.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for NfsSnapshotListResponse.
-  # Typed representation of the `NfsSnapshotListResponse` API schema.
-  class NfsSnapshotListResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalNfsSnapshotListResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalNfsSnapshotListResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalNfsSnapshotListResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_NfsSnapshotResponse] Optional array value serialized in the `snapshots` wire field.
-    attr_reader :snapshots
+# Internal model hydration metadata.
+class SdkInternalNfsSnapshotListResponseMetadata
+  FIELDS = {
+    snapshots: "snapshots",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    snapshots: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::NfsSnapshotResponse.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for NfsSnapshotListResponse.
+# Typed representation of the `NfsSnapshotListResponse` API schema.
+class NfsSnapshotListResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalNfsSnapshotListResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalNfsSnapshotListResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalNfsSnapshotListResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_NfsSnapshotResponse] Optional array value serialized in the `snapshots` wire field.
+  attr_reader :snapshots
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalNfsSnapshotResponseMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      size_gib: 'size_gib',
-      region: 'region',
-      status: 'status',
-      created_at: 'created_at',
-      share_id: 'share_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      name
-      size_gib
-      region
-      status
-      created_at
-      share_id
-    ].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::NfsSnapshotResponseStatus.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for NfsSnapshotResponse.
-  # Represents an NFS snapshot.
-  class NfsSnapshotResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalNfsSnapshotResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalNfsSnapshotResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalNfsSnapshotResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The unique identifier of the snapshot.
-    attr_reader :id
-    # @return [String] The human-readable name of the snapshot.
-    attr_reader :name
-    # @return [Integer] The size of the snapshot in GiB.
-    attr_reader :size_gib
-    # @return [String] The DigitalOcean region slug where the snapshot is located.
-    attr_reader :region
-    # @return [NfsSnapshotResponseStatus] The current status of the snapshot.
-    attr_reader :status
-    # @return [String] The timestamp when the snapshot was created.
-    attr_reader :created_at
-    # @return [String] The unique identifier of the share from which this snapshot was created.
-    attr_reader :share_id
+# Internal model hydration metadata.
+class SdkInternalNfsSnapshotResponseMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    size_gib: "size_gib",
+    region: "region",
+    status: "status",
+    created_at: "created_at",
+    share_id: "share_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    name
+    size_gib
+    region
+    status
+    created_at
+    share_id
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::NfsSnapshotResponseStatus.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for NfsSnapshotResponse.
+# Represents an NFS snapshot.
+class NfsSnapshotResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalNfsSnapshotResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalNfsSnapshotResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalNfsSnapshotResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The unique identifier of the snapshot.
+  attr_reader :id
+  # @return [String] The human-readable name of the snapshot.
+  attr_reader :name
+  # @return [Integer] The size of the snapshot in GiB.
+  attr_reader :size_gib
+  # @return [String] The DigitalOcean region slug where the snapshot is located.
+  attr_reader :region
+  # @return [NfsSnapshotResponseStatus] The current status of the snapshot.
+  attr_reader :status
+  # @return [String] The timestamp when the snapshot was created.
+  attr_reader :created_at
+  # @return [String] The unique identifier of the share from which this snapshot was created.
+  attr_reader :share_id
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the NfsSnapshotResponseStatus SDK namespace.
-  module NfsSnapshotResponseStatus
-    UNKNOWN = 'UNKNOWN'
-    CREATING = 'CREATING'
-    ACTIVE = 'ACTIVE'
-    FAILED = 'FAILED'
-    DELETED = 'DELETED'
-    VALUES = %w[UNKNOWN CREATING ACTIVE FAILED DELETED].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the NfsSnapshotResponseStatus SDK namespace.
+module NfsSnapshotResponseStatus
+  UNKNOWN = 'UNKNOWN'
+  CREATING = 'CREATING'
+  ACTIVE = 'ACTIVE'
+  FAILED = 'FAILED'
+  DELETED = 'DELETED'
+  VALUES = ['UNKNOWN', 'CREATING', 'ACTIVE', 'FAILED', 'DELETED'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

@@ -18,19 +18,20 @@ module OctridevDigitalocean
         image_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/images/',
+            "/v2/images/",
             SdkClient.encode_path_segment(image_id),
-            '/actions'
+            "/actions"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::GetImageActionsResponse,
           decoder: :json,
           operation_id: 'image_actions_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -46,12 +47,13 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/images/',
+            "/v2/images/",
             SdkClient.encode_path_segment(image_id),
-            '/actions'
+            "/actions"
           ].join,
           config: config,
           body: body,
@@ -59,7 +61,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'image_actions_post',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -75,14 +77,15 @@ module OctridevDigitalocean
         action_id:,
         request_options: nil
       )
+
         Validation.validate_range('action_id', action_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/images/',
+            "/v2/images/",
             SdkClient.encode_path_segment(image_id),
-            '/actions/',
+            "/actions/",
             SdkClient.encode_path_segment(action_id)
           ].join,
           config: config,
@@ -90,7 +93,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'image_actions_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

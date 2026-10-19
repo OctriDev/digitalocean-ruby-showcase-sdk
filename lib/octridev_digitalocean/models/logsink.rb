@@ -5,99 +5,101 @@
 
 # logsink domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalLogsinkCreateMetadata
-    FIELDS = {
-      sink_name: 'sink_name',
-      sink_type: 'sink_type',
-      config: 'config'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      sink_type: lambda do |value|
-        ::OctridevDigitalocean::LogsinkBaseSinkType.from_value(value)
-      end,
-      config: lambda do |value|
-        SdkModel.union_branch(value, [::OctridevDigitalocean::RsyslogLogsink, ::OctridevDigitalocean::ElasticsearchLogsink, ::OctridevDigitalocean::OpensearchLogsink, ::OctridevDigitalocean::DatadogLogsink])
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalLogsinkCreateMetadata
+  FIELDS = {
+    sink_name: "sink_name",
+    sink_type: "sink_type",
+    config: "config",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    sink_type: lambda do |value|
+      ::OctridevDigitalocean::LogsinkBaseSinkType.from_value(value)
+    end,
+    config: lambda do |value|
+      SdkModel.union_branch(value, [::OctridevDigitalocean::RsyslogLogsink, ::OctridevDigitalocean::ElasticsearchLogsink, ::OctridevDigitalocean::OpensearchLogsink, ::OctridevDigitalocean::DatadogLogsink])
+    end,
+  }.freeze
+end
+
+# API model for LogsinkCreate.
+# Typed representation of the `LogsinkCreate` API schema.
+class LogsinkCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLogsinkCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLogsinkCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLogsinkCreateMetadata::DECODERS
+
+  attr_reader :config
+  # @return [String] The name of the Logsink
+  attr_reader :sink_name
+  # @return [LogsinkBaseSinkType] Type of logsink integration. - Use `datadog` for Datadog integration **only with MongoDB clusters**. - For non-MongoDB clusters, use `rsyslog` for general syslog forwarding. - Other supported types include `elasticsearch` and `opensearch`. More details about the configuration can be found in the `config` property.
+  attr_reader :sink_type
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for LogsinkCreate.
-  # Typed representation of the `LogsinkCreate` API schema.
-  class LogsinkCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLogsinkCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLogsinkCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLogsinkCreateMetadata::DECODERS
-
-    attr_reader :config
-    # @return [String] The name of the Logsink
-    attr_reader :sink_name
-    # @return [LogsinkBaseSinkType] Type of logsink integration. - Use `datadog` for Datadog integration **only with MongoDB clusters**. - For non-MongoDB clusters, use `rsyslog` for general syslog forwarding. - Other supported types include `elasticsearch` and `opensearch`. More details about the configuration can be found in the `config` property.
-    attr_reader :sink_type
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalLogsinkVerboseMetadata
-    FIELDS = {
-      sink_id: 'sink_id',
-      sink_name: 'sink_name',
-      sink_type: 'sink_type',
-      config: 'config'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      sink_type: lambda do |value|
-        ::OctridevDigitalocean::LogsinkBaseVerboseSinkType.from_value(value)
-      end,
-      config: lambda do |value|
-        SdkModel.union_branch(value, [::OctridevDigitalocean::RsyslogLogsink, ::OctridevDigitalocean::ElasticsearchLogsink, ::OctridevDigitalocean::OpensearchLogsink, ::OctridevDigitalocean::DatadogLogsink])
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalLogsinkVerboseMetadata
+  FIELDS = {
+    sink_id: "sink_id",
+    sink_name: "sink_name",
+    sink_type: "sink_type",
+    config: "config",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    sink_type: lambda do |value|
+      ::OctridevDigitalocean::LogsinkBaseVerboseSinkType.from_value(value)
+    end,
+    config: lambda do |value|
+      SdkModel.union_branch(value, [::OctridevDigitalocean::RsyslogLogsink, ::OctridevDigitalocean::ElasticsearchLogsink, ::OctridevDigitalocean::OpensearchLogsink, ::OctridevDigitalocean::DatadogLogsink])
+    end,
+  }.freeze
+end
+
+# API model for LogsinkVerbose.
+# Typed representation of the `LogsinkVerbose` API schema.
+class LogsinkVerbose
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLogsinkVerboseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLogsinkVerboseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLogsinkVerboseMetadata::DECODERS
+
+  # @return [String] A unique identifier for Logsink
+  attr_reader :sink_id
+  # @return [String] The name of the Logsink
+  attr_reader :sink_name
+  # @return [LogsinkBaseVerboseSinkType] Optional enumerated value serialized in the `sink_type` wire field.
+  attr_reader :sink_type
+  # @return [Object] Required API value serialized in the `config` wire field.
+  attr_reader :config
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for LogsinkVerbose.
-  # Typed representation of the `LogsinkVerbose` API schema.
-  class LogsinkVerbose
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLogsinkVerboseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLogsinkVerboseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLogsinkVerboseMetadata::DECODERS
-
-    # @return [String] A unique identifier for Logsink
-    attr_reader :sink_id
-    # @return [String] The name of the Logsink
-    attr_reader :sink_name
-    # @return [LogsinkBaseVerboseSinkType] Optional enumerated value serialized in the `sink_type` wire field.
-    attr_reader :sink_type
-    # @return [Object] Required API value serialized in the `config` wire field.
-    attr_reader :config
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

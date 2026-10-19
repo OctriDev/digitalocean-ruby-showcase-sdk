@@ -5,165 +5,168 @@
 
 # insights_logs domain models (part 2)
 module OctridevDigitalocean
-  # API model for LogsSearchRequest.
-  # Request body for searching logs.
-  class LogsSearchRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLogsSearchRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLogsSearchRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLogsSearchRequestMetadata::DECODERS
+# API model for LogsSearchRequest.
+# Request body for searching logs.
+class LogsSearchRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLogsSearchRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLogsSearchRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLogsSearchRequestMetadata::DECODERS
 
-    # @return [LogsTimeRange] An inclusive query time window.
-    attr_reader :time_range
-    # @return [LogsFilterExpression] A boolean filter tree for logs queries. Exactly one node is set per message.
-    attr_reader :filter
-    # @return [Array_of_LogsOrderBy] Sort clauses applied to the result set.
-    attr_reader :order_by
-    # @return [LogsPaginationRequest] Opaque keyset pagination request. Cursors are only valid when ordering by `timestamp` alone.
-    attr_reader :pagination
+  # @return [LogsTimeRange] An inclusive query time window.
+  attr_reader :time_range
+  # @return [LogsFilterExpression] A boolean filter tree for logs queries. Exactly one node is set per message.
+  attr_reader :filter
+  # @return [Array_of_LogsOrderBy] Sort clauses applied to the result set.
+  attr_reader :order_by
+  # @return [LogsPaginationRequest] Opaque keyset pagination request. Cursors are only valid when ordering by `timestamp` alone.
+  attr_reader :pagination
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalLogsSearchResponseMetadata
-    FIELDS = {
-      data: 'data',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::LogsLogRecord.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::LogsPaginationResponse.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for LogsSearchResponse.
-  # Response body for a logs search.
-  class LogsSearchResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLogsSearchResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLogsSearchResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLogsSearchResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_LogsLogRecord] Matching log records. Omitted when no records match.
-    attr_reader :data
-    # @return [LogsPaginationResponse] Pagination response.
-    attr_reader :pagination
+# Internal model hydration metadata.
+class SdkInternalLogsSearchResponseMetadata
+  FIELDS = {
+    data: "data",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::LogsLogRecord.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::LogsPaginationResponse.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for LogsSearchResponse.
+# Response body for a logs search.
+class LogsSearchResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLogsSearchResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLogsSearchResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLogsSearchResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_LogsLogRecord] Matching log records. Omitted when no records match.
+  attr_reader :data
+  # @return [LogsPaginationResponse] Pagination response.
+  attr_reader :pagination
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalLogsTimeInstantMetadata
-    FIELDS = {
-      absolute: 'absolute',
-      relative: 'relative',
-      unix_nano: 'unix_nano'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for LogsTimeInstant.
-  # A single point in time. Exactly one value form is set per message.
-  class LogsTimeInstant
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLogsTimeInstantMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLogsTimeInstantMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLogsTimeInstantMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] An absolute timestamp. Accepts RFC3339/RFC3339Nano strings or Unix seconds/nanoseconds as decimal strings.
-    attr_reader :absolute
-    # @return [String] A relative time. Use `now` for the current time, a bare duration such as `1h` or `7d` to look back from now, or an offset such as `now-1h` or `now+30m`. Supported units are `s`, `m`, `h`, `d`, and `w`.
-    attr_reader :relative
-    # @return [String] A Unix nanosecond timestamp, encoded as a string to preserve 64-bit precision.
-    attr_reader :unix_nano
+# Internal model hydration metadata.
+class SdkInternalLogsTimeInstantMetadata
+  FIELDS = {
+    absolute: "absolute",
+    relative: "relative",
+    unix_nano: "unix_nano",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for LogsTimeInstant.
+# A single point in time. Exactly one value form is set per message.
+class LogsTimeInstant
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLogsTimeInstantMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLogsTimeInstantMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLogsTimeInstantMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] An absolute timestamp. Accepts RFC3339/RFC3339Nano strings or Unix seconds/nanoseconds as decimal strings.
+  attr_reader :absolute
+  # @return [String] A relative time. Use `now` for the current time, a bare duration such as `1h` or `7d` to look back from now, or an offset such as `now-1h` or `now+30m`. Supported units are `s`, `m`, `h`, `d`, and `w`.
+  attr_reader :relative
+  # @return [String] A Unix nanosecond timestamp, encoded as a string to preserve 64-bit precision.
+  attr_reader :unix_nano
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalLogsTimeRangeMetadata
-    FIELDS = {
-      from: 'from',
-      to: 'to'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      from
-      to
-    ].freeze
-    DECODERS = {
-      from: lambda do |value|
-        ::OctridevDigitalocean::LogsTimeInstant.from_hash(value)
-      end,
-      to: lambda do |value|
-        ::OctridevDigitalocean::LogsTimeInstant.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for LogsTimeRange.
-  # An inclusive query time window.
-  class LogsTimeRange
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLogsTimeRangeMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLogsTimeRangeMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLogsTimeRangeMetadata::DECODERS
-
-    # @return [LogsTimeInstant] A single point in time. Exactly one value form is set per message.
-    attr_reader :from
-    # @return [LogsTimeInstant] A single point in time. Exactly one value form is set per message.
-    attr_reader :to
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Internal model hydration metadata.
+class SdkInternalLogsTimeRangeMetadata
+  FIELDS = {
+    from: "from",
+    to: "to",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    from
+    to
+  ].freeze
+  DECODERS = {
+    from: lambda do |value|
+      ::OctridevDigitalocean::LogsTimeInstant.from_hash(value)
+    end,
+    to: lambda do |value|
+      ::OctridevDigitalocean::LogsTimeInstant.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for LogsTimeRange.
+# An inclusive query time window.
+class LogsTimeRange
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLogsTimeRangeMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLogsTimeRangeMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLogsTimeRangeMetadata::DECODERS
+
+  # @return [LogsTimeInstant] A single point in time. Exactly one value form is set per message.
+  attr_reader :from
+  # @return [LogsTimeInstant] A single point in time. Exactly one value form is set per message.
+  attr_reader :to
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
+  end
+
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -21,24 +21,25 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          '/v2/certificates',
+          "/v2/certificates",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'name' => QueryValue.new(name, style: 'form', explode: true)
+            'name' => QueryValue.new(name, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::AllCertificates,
           decoder: :json,
           operation_id: 'certificates_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -50,16 +51,17 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/certificates',
+          "/v2/certificates",
           config: config,
           body: body,
           return_type: ::OctridevDigitalocean::NewCertificate,
           decoder: :json,
           operation_id: 'certificates_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -71,12 +73,13 @@ module OctridevDigitalocean
         certificate_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('certificate_id', certificate_id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/certificates/',
+            "/v2/certificates/",
             SdkClient.encode_path_segment(certificate_id)
           ].join,
           config: config,
@@ -84,7 +87,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'certificates_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -96,19 +99,20 @@ module OctridevDigitalocean
         certificate_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('certificate_id', certificate_id)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/certificates/',
+            "/v2/certificates/",
             SdkClient.encode_path_segment(certificate_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'certificates_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

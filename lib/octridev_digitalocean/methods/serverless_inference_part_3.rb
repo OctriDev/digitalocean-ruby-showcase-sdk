@@ -17,10 +17,11 @@ module OctridevDigitalocean
         video_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v1/videos/',
+            "/v1/videos/",
             SdkClient.encode_path_segment(video_id)
           ].join,
           config: config,
@@ -28,7 +29,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'inference_get_video',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -40,18 +41,19 @@ module OctridevDigitalocean
         video_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v1/videos/',
+            "/v1/videos/",
             SdkClient.encode_path_segment(video_id),
-            '/content'
+            "/content"
           ].join,
           config: config,
           decoder: :bytes,
           operation_id: 'inference_get_video_content',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

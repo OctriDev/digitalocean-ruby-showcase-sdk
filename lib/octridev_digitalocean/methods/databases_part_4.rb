@@ -18,21 +18,22 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/replicas'
+            "/replicas"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::DatabaseReplicas,
           decoder: :json,
           operation_id: 'databases_list_replicas',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -76,14 +77,15 @@ module OctridevDigitalocean
         do_settings: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/replicas'
+            "/replicas"
           ].join,
           config: config,
           body: {
@@ -95,13 +97,13 @@ module OctridevDigitalocean
             'connection' => connection,
             'private_connection' => private_connection,
             'storage_size_mib' => storage_size_mib,
-            'do_settings' => do_settings
+            'do_settings' => do_settings,
           },
           return_type: ::OctridevDigitalocean::DatabaseReplicaResponse,
           decoder: :json,
           operation_id: 'databases_create_replica',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -114,21 +116,22 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/events'
+            "/events"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::EventsLogsResponse,
           decoder: :json,
           operation_id: 'databases_list_events_logs',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -143,14 +146,15 @@ module OctridevDigitalocean
         replica_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/replicas/',
+            "/replicas/",
             SdkClient.encode_path_segment(replica_name)
           ].join,
           config: config,
@@ -158,7 +162,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_get_replica',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -173,21 +177,22 @@ module OctridevDigitalocean
         replica_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/replicas/',
+            "/replicas/",
             SdkClient.encode_path_segment(replica_name)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'databases_destroy_replica',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -202,22 +207,23 @@ module OctridevDigitalocean
         replica_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'PUT',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/replicas/',
+            "/replicas/",
             SdkClient.encode_path_segment(replica_name),
-            '/promote'
+            "/promote"
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'databases_promote_replica',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -230,21 +236,22 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/users'
+            "/users"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::Users,
           decoder: :json,
           operation_id: 'databases_list_users',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -260,14 +267,15 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/users'
+            "/users"
           ].join,
           config: config,
           body: body,
@@ -275,7 +283,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_add_user',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -290,14 +298,15 @@ module OctridevDigitalocean
         username:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/users/',
+            "/users/",
             SdkClient.encode_path_segment(username)
           ].join,
           config: config,
@@ -305,7 +314,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_get_user',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -320,21 +329,22 @@ module OctridevDigitalocean
         username:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/users/',
+            "/users/",
             SdkClient.encode_path_segment(username)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'databases_delete_user',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -350,14 +360,15 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'PUT',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/users/',
+            "/users/",
             SdkClient.encode_path_segment(username)
           ].join,
           config: config,
@@ -366,7 +377,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_update_user',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -384,26 +395,27 @@ module OctridevDigitalocean
         mysql_settings: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/users/',
+            "/users/",
             SdkClient.encode_path_segment(username),
-            '/reset_auth'
+            "/reset_auth"
           ].join,
           config: config,
           body: {
-            'mysql_settings' => mysql_settings
+            'mysql_settings' => mysql_settings,
           },
           return_type: ::OctridevDigitalocean::UserResponse,
           decoder: :json,
           operation_id: 'databases_reset_auth',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -416,21 +428,22 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/dbs'
+            "/dbs"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::Databases,
           decoder: :json,
           operation_id: 'databases_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -445,24 +458,25 @@ module OctridevDigitalocean
         name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/dbs'
+            "/dbs"
           ].join,
           config: config,
           body: {
-            'name' => name
+            'name' => name,
           },
           return_type: ::OctridevDigitalocean::DatabaseResponse,
           decoder: :json,
           operation_id: 'databases_add',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -477,14 +491,15 @@ module OctridevDigitalocean
         database_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/dbs/',
+            "/dbs/",
             SdkClient.encode_path_segment(database_name)
           ].join,
           config: config,
@@ -492,7 +507,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -507,21 +522,22 @@ module OctridevDigitalocean
         database_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/dbs/',
+            "/dbs/",
             SdkClient.encode_path_segment(database_name)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'databases_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -534,21 +550,22 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/pools'
+            "/pools"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ConnectionPools,
           decoder: :json,
           operation_id: 'databases_list_connection_pools',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

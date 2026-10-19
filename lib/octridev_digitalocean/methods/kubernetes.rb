@@ -12,10 +12,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalKubernetesUpgradeClusterMetadata
         FIELDS = {
-          version: 'version'
+          version: "version",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for KubernetesUpgradeCluster.
@@ -45,10 +47,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalKubernetesRecycleNodePoolMetadata
         FIELDS = {
-          nodes: 'nodes'
+          nodes: "nodes",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for KubernetesRecycleNodePool.
@@ -84,23 +88,24 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          '/v2/kubernetes/clusters',
+          "/v2/kubernetes/clusters",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::AllClusters,
           decoder: :json,
           operation_id: 'kubernetes_list_clusters',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -221,20 +226,20 @@ module OctridevDigitalocean
         coredns_autoscaler: NOT_GIVEN,
         request_options: nil
       )
+
         __sdk_validate_kubernetes_create_cluster(vpc_uuid: vpc_uuid, worker_subnet_uuid: worker_subnet_uuid)
 
         SdkClient.request(
           'POST',
-          '/v2/kubernetes/clusters',
+          "/v2/kubernetes/clusters",
           config: config,
           body: __sdk_body_kubernetes_create_cluster_part1(name: name, region: region, version: version, node_pools: node_pools, cluster_subnet: cluster_subnet, service_subnet: service_subnet, vpc_uuid: vpc_uuid, worker_subnet_uuid: worker_subnet_uuid, tags: tags, maintenance_policy: maintenance_policy, auto_upgrade: auto_upgrade, isolated_workers: isolated_workers, gpu_operator_ready: gpu_operator_ready, surge_upgrade: surge_upgrade, ha: ha, control_plane_firewall: control_plane_firewall, cluster_autoscaler_configuration: cluster_autoscaler_configuration, sso: sso).merge(
-            __sdk_body_kubernetes_create_cluster_part2(routing_agent: routing_agent, p2p_oci_registry_plugin: p2p_oci_registry_plugin, nfs_csi_plugin: nfs_csi_plugin, amd_gpu_device_plugin: amd_gpu_device_plugin, amd_gpu_device_metrics_exporter_plugin: amd_gpu_device_metrics_exporter_plugin, nvidia_gpu_device_plugin: nvidia_gpu_device_plugin, nvidia_gpu_dra_driver: nvidia_gpu_dra_driver, amd_gpu_dra_driver: amd_gpu_dra_driver, rdma_shared_dev_plugin: rdma_shared_dev_plugin, coredns_autoscaler: coredns_autoscaler)
-          ),
+            __sdk_body_kubernetes_create_cluster_part2(routing_agent: routing_agent, p2p_oci_registry_plugin: p2p_oci_registry_plugin, nfs_csi_plugin: nfs_csi_plugin, amd_gpu_device_plugin: amd_gpu_device_plugin, amd_gpu_device_metrics_exporter_plugin: amd_gpu_device_metrics_exporter_plugin, nvidia_gpu_device_plugin: nvidia_gpu_device_plugin, nvidia_gpu_dra_driver: nvidia_gpu_dra_driver, amd_gpu_dra_driver: amd_gpu_dra_driver, rdma_shared_dev_plugin: rdma_shared_dev_plugin, coredns_autoscaler: coredns_autoscaler)),
           return_type: ::OctridevDigitalocean::ClusterCreate,
           decoder: :json,
           operation_id: 'kubernetes_create_cluster',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -288,7 +293,7 @@ module OctridevDigitalocean
           'ha' => ha,
           'control_plane_firewall' => control_plane_firewall,
           'cluster_autoscaler_configuration' => cluster_autoscaler_configuration,
-          'sso' => sso
+          'sso' => sso,
         }
       end
       private_class_method :__sdk_body_kubernetes_create_cluster_part1
@@ -315,7 +320,7 @@ module OctridevDigitalocean
           'nvidia_gpu_dra_driver' => nvidia_gpu_dra_driver,
           'amd_gpu_dra_driver' => amd_gpu_dra_driver,
           'rdma_shared_dev_plugin' => rdma_shared_dev_plugin,
-          'coredns_autoscaler' => coredns_autoscaler
+          'coredns_autoscaler' => coredns_autoscaler,
         }
       end
       private_class_method :__sdk_body_kubernetes_create_cluster_part2
@@ -329,12 +334,13 @@ module OctridevDigitalocean
         cluster_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id)
           ].join,
           config: config,
@@ -342,7 +348,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'kubernetes_get_cluster',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -434,23 +440,23 @@ module OctridevDigitalocean
         coredns_autoscaler: NOT_GIVEN,
         request_options: nil
       )
+
         __sdk_validate_kubernetes_update_cluster(cluster_id: cluster_id)
 
         SdkClient.request(
           'PUT',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id)
           ].join,
           config: config,
           body: __sdk_body_kubernetes_update_cluster_part1(name: name, tags: tags, maintenance_policy: maintenance_policy, auto_upgrade: auto_upgrade, surge_upgrade: surge_upgrade, ha: ha, gpu_operator_ready: gpu_operator_ready, control_plane_firewall: control_plane_firewall, cluster_autoscaler_configuration: cluster_autoscaler_configuration, sso: sso, routing_agent: routing_agent, p2p_oci_registry_plugin: p2p_oci_registry_plugin, nfs_csi_plugin: nfs_csi_plugin, amd_gpu_device_plugin: amd_gpu_device_plugin, amd_gpu_device_metrics_exporter_plugin: amd_gpu_device_metrics_exporter_plugin, nvidia_gpu_device_plugin: nvidia_gpu_device_plugin, nvidia_gpu_dra_driver: nvidia_gpu_dra_driver, amd_gpu_dra_driver: amd_gpu_dra_driver).merge(
-            __sdk_body_kubernetes_update_cluster_part2(rdma_shared_dev_plugin: rdma_shared_dev_plugin, coredns_autoscaler: coredns_autoscaler)
-          ),
+            __sdk_body_kubernetes_update_cluster_part2(rdma_shared_dev_plugin: rdma_shared_dev_plugin, coredns_autoscaler: coredns_autoscaler)),
           return_type: ::OctridevDigitalocean::UpdatedCluster,
           decoder: :json,
           operation_id: 'kubernetes_update_cluster',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -499,7 +505,7 @@ module OctridevDigitalocean
           'amd_gpu_device_metrics_exporter_plugin' => amd_gpu_device_metrics_exporter_plugin,
           'nvidia_gpu_device_plugin' => nvidia_gpu_device_plugin,
           'nvidia_gpu_dra_driver' => nvidia_gpu_dra_driver,
-          'amd_gpu_dra_driver' => amd_gpu_dra_driver
+          'amd_gpu_dra_driver' => amd_gpu_dra_driver,
         }
       end
       private_class_method :__sdk_body_kubernetes_update_cluster_part1
@@ -510,7 +516,7 @@ module OctridevDigitalocean
       )
         {
           'rdma_shared_dev_plugin' => rdma_shared_dev_plugin,
-          'coredns_autoscaler' => coredns_autoscaler
+          'coredns_autoscaler' => coredns_autoscaler,
         }
       end
       private_class_method :__sdk_body_kubernetes_update_cluster_part2
@@ -524,19 +530,20 @@ module OctridevDigitalocean
         cluster_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'kubernetes_delete_cluster',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -549,21 +556,22 @@ module OctridevDigitalocean
         cluster_id:,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/destroy_with_associated_resources'
+            "/destroy_with_associated_resources"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AssociatedKubernetesResources,
           decoder: :json,
           operation_id: 'kubernetes_list_associated_resources',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

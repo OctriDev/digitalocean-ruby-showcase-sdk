@@ -5,657 +5,669 @@
 
 # agent_platform_api_api_simulation domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationEpisodeMetadata
-    FIELDS = {
-      created_at: 'created_at',
-      duration_sec: 'duration_sec',
-      failure_reason: 'failure_reason',
-      episode_index: 'episode_index',
-      episode_uuid: 'episode_uuid',
-      judge_reasoning: 'judge_reasoning',
-      run_uuid: 'run_uuid',
-      scenario_uuid: 'scenario_uuid',
-      session_id: 'session_id',
-      status: 'status',
-      token_usage: 'token_usage',
-      trajectory_bucket_name: 'trajectory_bucket_name',
-      trajectory_bucket_region: 'trajectory_bucket_region',
-      trajectory_spaces_key: 'trajectory_spaces_key',
-      updated_at: 'updated_at',
-      verdict: 'verdict'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationEpisodeStatus.from_value(value)
-      end,
-      token_usage: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationTokenUsage.from_hash(value)
-      end,
-      verdict: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationEpisodeVerdict.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalApiSimulationEpisodeMetadata
+  FIELDS = {
+    created_at: "created_at",
+    duration_sec: "duration_sec",
+    failure_reason: "failure_reason",
+    episode_index: "episode_index",
+    episode_uuid: "episode_uuid",
+    judge_reasoning: "judge_reasoning",
+    run_uuid: "run_uuid",
+    scenario_uuid: "scenario_uuid",
+    session_id: "session_id",
+    status: "status",
+    token_usage: "token_usage",
+    trajectory_bucket_name: "trajectory_bucket_name",
+    trajectory_bucket_region: "trajectory_bucket_region",
+    trajectory_spaces_key: "trajectory_spaces_key",
+    updated_at: "updated_at",
+    verdict: "verdict",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationEpisodeStatus.from_value(value)
+    end,
+    token_usage: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationTokenUsage.from_hash(value)
+    end,
+    verdict: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationEpisodeVerdict.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiSimulationEpisode.
+# One independent execution within a simulation run, including its trajectory and verdict.
+class ApiSimulationEpisode
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationEpisodeMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationEpisodeMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationEpisodeMetadata::DECODERS
+
+  # @return [String] Time created at.
+  attr_reader :created_at
+  # @return [String] Wall-clock time taken for the episode to complete, in seconds.
+  attr_reader :duration_sec
+  # @return [String] Human-readable explanation of a terminal FAILED status. Empty otherwise.
+  attr_reader :failure_reason
+  # @return [Integer] Zero-based index of this episode within its scenario's exploration budget.
+  attr_reader :episode_index
+  # @return [String] UUID of the episode.
+  attr_reader :episode_uuid
+  # @return [String] Optional judge reasoning for the verdict.
+  attr_reader :judge_reasoning
+  # @return [String] UUID of the run this episode belongs to.
+  attr_reader :run_uuid
+  # @return [String] UUID of the scenario this episode executed.
+  attr_reader :scenario_uuid
+  # @return [String] Session identifier for this episode.
+  attr_reader :session_id
+  # @return [ApiSimulationEpisodeStatus] Lifecycle status of a single episode. - SIMULATION_EPISODE_STATUS_RUNNING: The episode is executing and a trajectory is available to retrieve. - SIMULATION_EPISODE_STATUS_FINISHED: The episode reached a stop condition and produced a verdict. - SIMULATION_EPISODE_STATUS_FAILED: The episode failed because of a cancel, timeout, or error. - SIMULATION_EPISODE_STATUS_PREPARING: The episode is allocated but its trajectory is not available yet.
+  attr_reader :status
+  # @return [ApiSimulationTokenUsage] Per-actor token accounting for a run or episode.
+  attr_reader :token_usage
+  # @return [String] Object storage bucket holding the trajectory JSON. Set when the episode finishes.
+  attr_reader :trajectory_bucket_name
+  # @return [String] Object storage bucket region for the trajectory JSON. Set when the episode finishes.
+  attr_reader :trajectory_bucket_region
+  # @return [String] Object storage key for the trajectory JSON. Set when the episode finishes.
+  attr_reader :trajectory_spaces_key
+  # @return [String] Time last updated at.
+  attr_reader :updated_at
+  # @return [ApiSimulationEpisodeVerdict] The judge's verdict for an episode. - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria. - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria. - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
+  attr_reader :verdict
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiSimulationEpisode.
-  # One independent execution within a simulation run, including its trajectory and verdict.
-  class ApiSimulationEpisode
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationEpisodeMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationEpisodeMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationEpisodeMetadata::DECODERS
-
-    # @return [String] Time created at.
-    attr_reader :created_at
-    # @return [String] Wall-clock time taken for the episode to complete, in seconds.
-    attr_reader :duration_sec
-    # @return [String] Human-readable explanation of a terminal FAILED status. Empty otherwise.
-    attr_reader :failure_reason
-    # @return [Integer] Zero-based index of this episode within its scenario's exploration budget.
-    attr_reader :episode_index
-    # @return [String] UUID of the episode.
-    attr_reader :episode_uuid
-    # @return [String] Optional judge reasoning for the verdict.
-    attr_reader :judge_reasoning
-    # @return [String] UUID of the run this episode belongs to.
-    attr_reader :run_uuid
-    # @return [String] UUID of the scenario this episode executed.
-    attr_reader :scenario_uuid
-    # @return [String] Session identifier for this episode.
-    attr_reader :session_id
-    # @return [ApiSimulationEpisodeStatus] Lifecycle status of a single episode. - SIMULATION_EPISODE_STATUS_RUNNING: The episode is executing and a trajectory is available to retrieve. - SIMULATION_EPISODE_STATUS_FINISHED: The episode reached a stop condition and produced a verdict. - SIMULATION_EPISODE_STATUS_FAILED: The episode failed because of a cancel, timeout, or error. - SIMULATION_EPISODE_STATUS_PREPARING: The episode is allocated but its trajectory is not available yet.
-    attr_reader :status
-    # @return [ApiSimulationTokenUsage] Per-actor token accounting for a run or episode.
-    attr_reader :token_usage
-    # @return [String] Object storage bucket holding the trajectory JSON. Set when the episode finishes.
-    attr_reader :trajectory_bucket_name
-    # @return [String] Object storage bucket region for the trajectory JSON. Set when the episode finishes.
-    attr_reader :trajectory_bucket_region
-    # @return [String] Object storage key for the trajectory JSON. Set when the episode finishes.
-    attr_reader :trajectory_spaces_key
-    # @return [String] Time last updated at.
-    attr_reader :updated_at
-    # @return [ApiSimulationEpisodeVerdict] The judge's verdict for an episode. - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria. - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria. - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
-    attr_reader :verdict
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationEpisodeCountsMetadata
-    FIELDS = {
-      failure_count: 'failure_count',
-      inconclusive_count: 'inconclusive_count',
-      success_count: 'success_count'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiSimulationEpisodeCountsMetadata
+  FIELDS = {
+    failure_count: "failure_count",
+    inconclusive_count: "inconclusive_count",
+    success_count: "success_count",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiSimulationEpisodeCounts.
+# Breakdown of episode outcomes by judge verdict. Reused wherever a success / failure / inconclusive tally is reported (run row, result summary, per-scenario rollup).
+class ApiSimulationEpisodeCounts
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationEpisodeCountsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationEpisodeCountsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationEpisodeCountsMetadata::DECODERS
+
+  # @return [Integer] Number of episodes with a FAILURE verdict.
+  attr_reader :failure_count
+  # @return [Integer] Number of episodes with an INCONCLUSIVE verdict.
+  attr_reader :inconclusive_count
+  # @return [Integer] Number of episodes with a SUCCESS verdict.
+  attr_reader :success_count
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiSimulationEpisodeCounts.
-  # Breakdown of episode outcomes by judge verdict. Reused wherever a success / failure / inconclusive tally is reported (run row, result summary, per-scenario rollup).
-  class ApiSimulationEpisodeCounts
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationEpisodeCountsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationEpisodeCountsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationEpisodeCountsMetadata::DECODERS
-
-    # @return [Integer] Number of episodes with a FAILURE verdict.
-    attr_reader :failure_count
-    # @return [Integer] Number of episodes with an INCONCLUSIVE verdict.
-    attr_reader :inconclusive_count
-    # @return [Integer] Number of episodes with a SUCCESS verdict.
-    attr_reader :success_count
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ApiSimulationEpisodeSortField SDK namespace.
-  module ApiSimulationEpisodeSortField
-    SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED = 'SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED'
-    SIMULATION_EPISODE_SORT_FIELD_SCENARIO = 'SIMULATION_EPISODE_SORT_FIELD_SCENARIO'
-    SIMULATION_EPISODE_SORT_FIELD_CREATED_AT = 'SIMULATION_EPISODE_SORT_FIELD_CREATED_AT'
-    SIMULATION_EPISODE_SORT_FIELD_STATUS = 'SIMULATION_EPISODE_SORT_FIELD_STATUS'
-    SIMULATION_EPISODE_SORT_FIELD_VERDICT = 'SIMULATION_EPISODE_SORT_FIELD_VERDICT'
-    VALUES = %w[
-      SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED SIMULATION_EPISODE_SORT_FIELD_SCENARIO
-      SIMULATION_EPISODE_SORT_FIELD_CREATED_AT SIMULATION_EPISODE_SORT_FIELD_STATUS
-      SIMULATION_EPISODE_SORT_FIELD_VERDICT
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ApiSimulationEpisodeSortField SDK namespace.
+module ApiSimulationEpisodeSortField
+  SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED = 'SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED'
+  SIMULATION_EPISODE_SORT_FIELD_SCENARIO = 'SIMULATION_EPISODE_SORT_FIELD_SCENARIO'
+  SIMULATION_EPISODE_SORT_FIELD_CREATED_AT = 'SIMULATION_EPISODE_SORT_FIELD_CREATED_AT'
+  SIMULATION_EPISODE_SORT_FIELD_STATUS = 'SIMULATION_EPISODE_SORT_FIELD_STATUS'
+  SIMULATION_EPISODE_SORT_FIELD_VERDICT = 'SIMULATION_EPISODE_SORT_FIELD_VERDICT'
+  VALUES = [
+    'SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED', 'SIMULATION_EPISODE_SORT_FIELD_SCENARIO',
+    'SIMULATION_EPISODE_SORT_FIELD_CREATED_AT', 'SIMULATION_EPISODE_SORT_FIELD_STATUS',
+    'SIMULATION_EPISODE_SORT_FIELD_VERDICT'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the ApiSimulationEpisodeStatus SDK namespace.
+module ApiSimulationEpisodeStatus
+  SIMULATION_EPISODE_STATUS_UNSPECIFIED = 'SIMULATION_EPISODE_STATUS_UNSPECIFIED'
+  SIMULATION_EPISODE_STATUS_RUNNING = 'SIMULATION_EPISODE_STATUS_RUNNING'
+  SIMULATION_EPISODE_STATUS_FINISHED = 'SIMULATION_EPISODE_STATUS_FINISHED'
+  SIMULATION_EPISODE_STATUS_FAILED = 'SIMULATION_EPISODE_STATUS_FAILED'
+  SIMULATION_EPISODE_STATUS_PREPARING = 'SIMULATION_EPISODE_STATUS_PREPARING'
+  VALUES = [
+    'SIMULATION_EPISODE_STATUS_UNSPECIFIED', 'SIMULATION_EPISODE_STATUS_RUNNING',
+    'SIMULATION_EPISODE_STATUS_FINISHED', 'SIMULATION_EPISODE_STATUS_FAILED',
+    'SIMULATION_EPISODE_STATUS_PREPARING'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the ApiSimulationEpisodeVerdict SDK namespace.
+module ApiSimulationEpisodeVerdict
+  SIMULATION_EPISODE_VERDICT_UNSPECIFIED = 'SIMULATION_EPISODE_VERDICT_UNSPECIFIED'
+  SIMULATION_EPISODE_VERDICT_SUCCESS = 'SIMULATION_EPISODE_VERDICT_SUCCESS'
+  SIMULATION_EPISODE_VERDICT_FAILURE = 'SIMULATION_EPISODE_VERDICT_FAILURE'
+  SIMULATION_EPISODE_VERDICT_INCONCLUSIVE = 'SIMULATION_EPISODE_VERDICT_INCONCLUSIVE'
+  VALUES = [
+    'SIMULATION_EPISODE_VERDICT_UNSPECIFIED', 'SIMULATION_EPISODE_VERDICT_SUCCESS',
+    'SIMULATION_EPISODE_VERDICT_FAILURE', 'SIMULATION_EPISODE_VERDICT_INCONCLUSIVE'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiSimulationEvaluationConfigMetadata
+  FIELDS = {
+    metric_uuids: "metric_uuids",
+    star_metric: "star_metric",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    star_metric: lambda do |value|
+      ::OctridevDigitalocean::ApiStarMetric.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiSimulationEvaluationConfig.
+# Optional configuration that opts a simulation run into an evaluation. When included on the create-run request, the platform reserves a model_evaluation_run linked to this simulation run and dispatches the evaluation automatically after the simulation finishes. The evaluation reuses the simulation run's judge_model_uuid.
+class ApiSimulationEvaluationConfig
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationEvaluationConfigMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationEvaluationConfigMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationEvaluationConfigMetadata::DECODERS
+
+  # @return [Array_of_String] Evaluation metric UUIDs (from the evaluation metrics catalog). Must be simulation-eligible (multi-turn) metrics; the create request is rejected if any UUID is unknown or ineligible.
+  attr_reader :metric_uuids
+  # @return [ApiStarMetric] Optional object value serialized in the `star_metric` wire field.
+  attr_reader :star_metric
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ApiSimulationEpisodeStatus SDK namespace.
-  module ApiSimulationEpisodeStatus
-    SIMULATION_EPISODE_STATUS_UNSPECIFIED = 'SIMULATION_EPISODE_STATUS_UNSPECIFIED'
-    SIMULATION_EPISODE_STATUS_RUNNING = 'SIMULATION_EPISODE_STATUS_RUNNING'
-    SIMULATION_EPISODE_STATUS_FINISHED = 'SIMULATION_EPISODE_STATUS_FINISHED'
-    SIMULATION_EPISODE_STATUS_FAILED = 'SIMULATION_EPISODE_STATUS_FAILED'
-    SIMULATION_EPISODE_STATUS_PREPARING = 'SIMULATION_EPISODE_STATUS_PREPARING'
-    VALUES = %w[
-      SIMULATION_EPISODE_STATUS_UNSPECIFIED SIMULATION_EPISODE_STATUS_RUNNING
-      SIMULATION_EPISODE_STATUS_FINISHED SIMULATION_EPISODE_STATUS_FAILED
-      SIMULATION_EPISODE_STATUS_PREPARING
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ApiSimulationEpisodeVerdict SDK namespace.
-  module ApiSimulationEpisodeVerdict
-    SIMULATION_EPISODE_VERDICT_UNSPECIFIED = 'SIMULATION_EPISODE_VERDICT_UNSPECIFIED'
-    SIMULATION_EPISODE_VERDICT_SUCCESS = 'SIMULATION_EPISODE_VERDICT_SUCCESS'
-    SIMULATION_EPISODE_VERDICT_FAILURE = 'SIMULATION_EPISODE_VERDICT_FAILURE'
-    SIMULATION_EPISODE_VERDICT_INCONCLUSIVE = 'SIMULATION_EPISODE_VERDICT_INCONCLUSIVE'
-    VALUES = %w[
-      SIMULATION_EPISODE_VERDICT_UNSPECIFIED SIMULATION_EPISODE_VERDICT_SUCCESS
-      SIMULATION_EPISODE_VERDICT_FAILURE SIMULATION_EPISODE_VERDICT_INCONCLUSIVE
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiSimulationRunMetadata
+  FIELDS = {
+    agent_config: "agent_config",
+    created_at: "created_at",
+    created_by_user_email: "created_by_user_email",
+    created_by_user_id: "created_by_user_id",
+    deleted_at: "deleted_at",
+    evaluation_run_uuid: "evaluation_run_uuid",
+    exploration_budget: "exploration_budget",
+    failure_reason: "failure_reason",
+    episodes_finished: "episodes_finished",
+    judge_model_name: "judge_model_name",
+    judge_model_uuid: "judge_model_uuid",
+    max_turns: "max_turns",
+    name: "name",
+    result_summary: "result_summary",
+    run_uuid: "run_uuid",
+    scenario_count: "scenario_count",
+    scenario_set_uuid: "scenario_set_uuid",
+    status: "status",
+    total_episodes: "total_episodes",
+    updated_at: "updated_at",
+    user_simulator_config: "user_simulator_config",
+    user_simulator_model_name: "user_simulator_model_name",
+    user_simulator_model_uuid: "user_simulator_model_uuid",
+    workflow_uuid: "workflow_uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    agent_config: lambda do |value|
+      ::OctridevDigitalocean::ApiCandidateAgentConfig.from_hash(value)
+    end,
+    result_summary: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationRunResultSummary.from_hash(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationRunStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiSimulationRun.
+# One execution of a scenario set against a candidate agent.
+class ApiSimulationRun
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationRunMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationRunMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationRunMetadata::DECODERS
+
+  # @return [ApiCandidateAgentConfig] Configuration of the candidate agent under test for a simulation run.
+  attr_reader :agent_config
+  # @return [String] Time created at.
+  attr_reader :created_at
+  # @return [String] Email of the user who triggered this run.
+  attr_reader :created_by_user_email
+  # @return [String] User id of the actor who triggered this run.
+  attr_reader :created_by_user_id
+  # @return [String] Time deleted at. Unset unless the run has been deleted.
+  attr_reader :deleted_at
+  # @return [String] UUID of the evaluation run reserved for this simulation, when the create request included evaluation_config. Empty when no evaluation is attached.
+  attr_reader :evaluation_run_uuid
+  # @return [Integer] Optional run-level episodes-per-scenario override. When set, overrides each scenario's exploration_budget.
+  attr_reader :exploration_budget
+  # @return [String] Human-readable explanation of a terminal FAILED status. Empty otherwise.
+  attr_reader :failure_reason
+  # @return [Integer] Number of episodes that have finished (successfully or not).
+  attr_reader :episodes_finished
+  # @return [String] Display name of the judge model (from the model catalog).
+  attr_reader :judge_model_name
+  # @return [String] Model used by the judge.
+  attr_reader :judge_model_uuid
+  # @return [Integer] Optional run-level turn budget. When set, overrides each scenario's max_turns.
+  attr_reader :max_turns
+  # @return [String] Optional run name.
+  attr_reader :name
+  # @return [ApiSimulationRunResultSummary] Aggregated final result of a simulation run: verdict counts plus token and duration totals.
+  attr_reader :result_summary
+  # @return [String] UUID of the run.
+  attr_reader :run_uuid
+  # @return [Integer] Number of scenarios in the scenario set for this run.
+  attr_reader :scenario_count
+  # @return [String] UUID of the scenario set being executed (must exist at run create).
+  attr_reader :scenario_set_uuid
+  # @return [ApiSimulationRunStatus] Lifecycle status of a simulation run. - SIMULATION_RUN_STATUS_PENDING: Accepted and queued, not yet executing. - SIMULATION_RUN_STATUS_RUNNING: Episodes are executing. - SIMULATION_RUN_STATUS_SUCCEEDED: All episodes finished successfully. - SIMULATION_RUN_STATUS_FAILED: The run failed, for example because of a timeout or workflow error. - SIMULATION_RUN_STATUS_CANCELLED: The run was cancelled. - SIMULATION_RUN_STATUS_EVALUATING: Episodes finished and an attached evaluation…
+  attr_reader :status
+  # @return [Integer] Total number of episodes (sum of exploration budgets).
+  attr_reader :total_episodes
+  # @return [String] Time last updated at.
+  attr_reader :updated_at
+  # @return [Hash] Optional user simulator model settings such as temperature and max_tokens.
+  attr_reader :user_simulator_config
+  # @return [String] Display name of the user simulator model (from the model catalog).
+  attr_reader :user_simulator_model_name
+  # @return [String] Model used by the user simulator.
+  attr_reader :user_simulator_model_uuid
+  # @return [String] Identifier of the workflow executing this run.
+  attr_reader :workflow_uuid
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationEvaluationConfigMetadata
-    FIELDS = {
-      metric_uuids: 'metric_uuids',
-      star_metric: 'star_metric'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      star_metric: lambda do |value|
-        ::OctridevDigitalocean::ApiStarMetric.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiSimulationEvaluationConfig.
-  # Optional configuration that opts a simulation run into an evaluation. When included on the create-run request, the platform reserves a model_evaluation_run linked to this simulation run and dispatches the evaluation automatically after the simulation finishes. The evaluation reuses the simulation run's judge_model_uuid.
-  class ApiSimulationEvaluationConfig
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationEvaluationConfigMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationEvaluationConfigMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationEvaluationConfigMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_String] Evaluation metric UUIDs (from the evaluation metrics catalog). Must be simulation-eligible (multi-turn) metrics; the create request is rejected if any UUID is unknown or ineligible.
-    attr_reader :metric_uuids
-    # @return [ApiStarMetric] Optional object value serialized in the `star_metric` wire field.
-    attr_reader :star_metric
+# Internal model hydration metadata.
+class SdkInternalApiSimulationRunResultSummaryMetadata
+  FIELDS = {
+    token_usage: "token_usage",
+    total_duration_sec: "total_duration_sec",
+    verdict_counts: "verdict_counts",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    token_usage: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationTokenUsage.from_hash(value)
+    end,
+    verdict_counts: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationEpisodeCounts.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiSimulationRunResultSummary.
+# Aggregated final result of a simulation run: verdict counts plus token and duration totals.
+class ApiSimulationRunResultSummary
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationRunResultSummaryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationRunResultSummaryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationRunResultSummaryMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ApiSimulationTokenUsage] Per-actor token accounting for a run or episode.
+  attr_reader :token_usage
+  # @return [String] Total wall-clock duration across the run, in seconds.
+  attr_reader :total_duration_sec
+  # @return [ApiSimulationEpisodeCounts] Breakdown of episode outcomes by judge verdict. Reused wherever a success / failure / inconclusive tally is reported (run row, result summary, per-scenario rollup).
+  attr_reader :verdict_counts
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationRunMetadata
-    FIELDS = {
-      agent_config: 'agent_config',
-      created_at: 'created_at',
-      created_by_user_email: 'created_by_user_email',
-      created_by_user_id: 'created_by_user_id',
-      deleted_at: 'deleted_at',
-      evaluation_run_uuid: 'evaluation_run_uuid',
-      exploration_budget: 'exploration_budget',
-      failure_reason: 'failure_reason',
-      episodes_finished: 'episodes_finished',
-      judge_model_name: 'judge_model_name',
-      judge_model_uuid: 'judge_model_uuid',
-      max_turns: 'max_turns',
-      name: 'name',
-      result_summary: 'result_summary',
-      run_uuid: 'run_uuid',
-      scenario_count: 'scenario_count',
-      scenario_set_uuid: 'scenario_set_uuid',
-      status: 'status',
-      total_episodes: 'total_episodes',
-      updated_at: 'updated_at',
-      user_simulator_config: 'user_simulator_config',
-      user_simulator_model_name: 'user_simulator_model_name',
-      user_simulator_model_uuid: 'user_simulator_model_uuid',
-      workflow_uuid: 'workflow_uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      agent_config: lambda do |value|
-        ::OctridevDigitalocean::ApiCandidateAgentConfig.from_hash(value)
-      end,
-      result_summary: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationRunResultSummary.from_hash(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationRunStatus.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiSimulationRun.
-  # One execution of a scenario set against a candidate agent.
-  class ApiSimulationRun
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationRunMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationRunMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationRunMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiCandidateAgentConfig] Configuration of the candidate agent under test for a simulation run.
-    attr_reader :agent_config
-    # @return [String] Time created at.
-    attr_reader :created_at
-    # @return [String] Email of the user who triggered this run.
-    attr_reader :created_by_user_email
-    # @return [String] User id of the actor who triggered this run.
-    attr_reader :created_by_user_id
-    # @return [String] Time deleted at. Unset unless the run has been deleted.
-    attr_reader :deleted_at
-    # @return [String] UUID of the evaluation run reserved for this simulation, when the create request included evaluation_config. Empty when no evaluation is attached.
-    attr_reader :evaluation_run_uuid
-    # @return [Integer] Optional run-level episodes-per-scenario override. When set, overrides each scenario's exploration_budget.
-    attr_reader :exploration_budget
-    # @return [String] Human-readable explanation of a terminal FAILED status. Empty otherwise.
-    attr_reader :failure_reason
-    # @return [Integer] Number of episodes that have finished (successfully or not).
-    attr_reader :episodes_finished
-    # @return [String] Display name of the judge model (from the model catalog).
-    attr_reader :judge_model_name
-    # @return [String] Model used by the judge.
-    attr_reader :judge_model_uuid
-    # @return [Integer] Optional run-level turn budget. When set, overrides each scenario's max_turns.
-    attr_reader :max_turns
-    # @return [String] Optional run name.
-    attr_reader :name
-    # @return [ApiSimulationRunResultSummary] Aggregated final result of a simulation run: verdict counts plus token and duration totals.
-    attr_reader :result_summary
-    # @return [String] UUID of the run.
-    attr_reader :run_uuid
-    # @return [Integer] Number of scenarios in the scenario set for this run.
-    attr_reader :scenario_count
-    # @return [String] UUID of the scenario set being executed (must exist at run create).
-    attr_reader :scenario_set_uuid
-    # @return [ApiSimulationRunStatus] Lifecycle status of a simulation run. - SIMULATION_RUN_STATUS_PENDING: Accepted and queued, not yet executing. - SIMULATION_RUN_STATUS_RUNNING: Episodes are executing. - SIMULATION_RUN_STATUS_SUCCEEDED: All episodes finished successfully. - SIMULATION_RUN_STATUS_FAILED: The run failed, for example because of a timeout or workflow error. - SIMULATION_RUN_STATUS_CANCELLED: The run was cancelled. - SIMULATION_RUN_STATUS_EVALUATING: Episodes finished and an attached evaluation…
-    attr_reader :status
-    # @return [Integer] Total number of episodes (sum of exploration budgets).
-    attr_reader :total_episodes
-    # @return [String] Time last updated at.
-    attr_reader :updated_at
-    # @return [Hash] Optional user simulator model settings such as temperature and max_tokens.
-    attr_reader :user_simulator_config
-    # @return [String] Display name of the user simulator model (from the model catalog).
-    attr_reader :user_simulator_model_name
-    # @return [String] Model used by the user simulator.
-    attr_reader :user_simulator_model_uuid
-    # @return [String] Identifier of the workflow executing this run.
-    attr_reader :workflow_uuid
+# Defines the ApiSimulationRunSortField SDK namespace.
+module ApiSimulationRunSortField
+  SIMULATION_RUN_SORT_FIELD_UNSPECIFIED = 'SIMULATION_RUN_SORT_FIELD_UNSPECIFIED'
+  SIMULATION_RUN_SORT_FIELD_CREATED_AT = 'SIMULATION_RUN_SORT_FIELD_CREATED_AT'
+  SIMULATION_RUN_SORT_FIELD_NAME = 'SIMULATION_RUN_SORT_FIELD_NAME'
+  SIMULATION_RUN_SORT_FIELD_STATUS = 'SIMULATION_RUN_SORT_FIELD_STATUS'
+  SIMULATION_RUN_SORT_FIELD_UPDATED_AT = 'SIMULATION_RUN_SORT_FIELD_UPDATED_AT'
+  VALUES = [
+    'SIMULATION_RUN_SORT_FIELD_UNSPECIFIED', 'SIMULATION_RUN_SORT_FIELD_CREATED_AT',
+    'SIMULATION_RUN_SORT_FIELD_NAME', 'SIMULATION_RUN_SORT_FIELD_STATUS',
+    'SIMULATION_RUN_SORT_FIELD_UPDATED_AT'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Defines the ApiSimulationRunStatus SDK namespace.
+module ApiSimulationRunStatus
+  SIMULATION_RUN_STATUS_UNSPECIFIED = 'SIMULATION_RUN_STATUS_UNSPECIFIED'
+  SIMULATION_RUN_STATUS_PENDING = 'SIMULATION_RUN_STATUS_PENDING'
+  SIMULATION_RUN_STATUS_RUNNING = 'SIMULATION_RUN_STATUS_RUNNING'
+  SIMULATION_RUN_STATUS_SUCCEEDED = 'SIMULATION_RUN_STATUS_SUCCEEDED'
+  SIMULATION_RUN_STATUS_FAILED = 'SIMULATION_RUN_STATUS_FAILED'
+  SIMULATION_RUN_STATUS_CANCELLED = 'SIMULATION_RUN_STATUS_CANCELLED'
+  SIMULATION_RUN_STATUS_EVALUATING = 'SIMULATION_RUN_STATUS_EVALUATING'
+  SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL = 'SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL'
+  VALUES = [
+    'SIMULATION_RUN_STATUS_UNSPECIFIED', 'SIMULATION_RUN_STATUS_PENDING',
+    'SIMULATION_RUN_STATUS_RUNNING', 'SIMULATION_RUN_STATUS_SUCCEEDED',
+    'SIMULATION_RUN_STATUS_FAILED', 'SIMULATION_RUN_STATUS_CANCELLED',
+    'SIMULATION_RUN_STATUS_EVALUATING', 'SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Internal model hydration metadata.
+class SdkInternalApiSimulationScenarioResultMetadata
+  FIELDS = {
+    episodes_finished: "episodes_finished",
+    scenario_uuid: "scenario_uuid",
+    total_episodes: "total_episodes",
+    verdict_counts: "verdict_counts",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    verdict_counts: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationEpisodeCounts.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# API model for ApiSimulationScenarioResult.
+# Per-scenario rollup of episode outcomes within a run, aggregated from the run's episode rows.
+class ApiSimulationScenarioResult
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationScenarioResultMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationScenarioResultMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationScenarioResultMetadata::DECODERS
+
+  # @return [Integer] Episodes that have finished (successfully or not).
+  attr_reader :episodes_finished
+  # @return [String] UUID of the scenario.
+  attr_reader :scenario_uuid
+  # @return [Integer] Total episodes for this scenario (its exploration budget).
+  attr_reader :total_episodes
+  # @return [ApiSimulationEpisodeCounts] Breakdown of episode outcomes by judge verdict. Reused wherever a success / failure / inconclusive tally is reported (run row, result summary, per-scenario rollup).
+  attr_reader :verdict_counts
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationRunResultSummaryMetadata
-    FIELDS = {
-      token_usage: 'token_usage',
-      total_duration_sec: 'total_duration_sec',
-      verdict_counts: 'verdict_counts'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      token_usage: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationTokenUsage.from_hash(value)
-      end,
-      verdict_counts: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationEpisodeCounts.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiSimulationRunResultSummary.
-  # Aggregated final result of a simulation run: verdict counts plus token and duration totals.
-  class ApiSimulationRunResultSummary
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationRunResultSummaryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationRunResultSummaryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationRunResultSummaryMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiSimulationTokenUsage] Per-actor token accounting for a run or episode.
-    attr_reader :token_usage
-    # @return [String] Total wall-clock duration across the run, in seconds.
-    attr_reader :total_duration_sec
-    # @return [ApiSimulationEpisodeCounts] Breakdown of episode outcomes by judge verdict. Reused wherever a success / failure / inconclusive tally is reported (run row, result summary, per-scenario rollup).
-    attr_reader :verdict_counts
+# Internal model hydration metadata.
+class SdkInternalApiSimulationTokenUsageMetadata
+  FIELDS = {
+    candidate_agent_tokens: "candidate_agent_tokens",
+    generator_tokens: "generator_tokens",
+    judge_tokens: "judge_tokens",
+    simulator_tokens: "simulator_tokens",
+    total_tokens: "total_tokens",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiSimulationTokenUsage.
+# Per-actor token accounting for a run or episode.
+class ApiSimulationTokenUsage
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationTokenUsageMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationTokenUsageMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationTokenUsageMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Tokens consumed by the candidate agent.
+  attr_reader :candidate_agent_tokens
+  # @return [String] Tokens consumed by the scenario generator.
+  attr_reader :generator_tokens
+  # @return [String] Tokens consumed by the judge.
+  attr_reader :judge_tokens
+  # @return [String] Tokens consumed by the user simulator.
+  attr_reader :simulator_tokens
+  # @return [String] Total tokens across all actors.
+  attr_reader :total_tokens
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ApiSimulationRunSortField SDK namespace.
-  module ApiSimulationRunSortField
-    SIMULATION_RUN_SORT_FIELD_UNSPECIFIED = 'SIMULATION_RUN_SORT_FIELD_UNSPECIFIED'
-    SIMULATION_RUN_SORT_FIELD_CREATED_AT = 'SIMULATION_RUN_SORT_FIELD_CREATED_AT'
-    SIMULATION_RUN_SORT_FIELD_NAME = 'SIMULATION_RUN_SORT_FIELD_NAME'
-    SIMULATION_RUN_SORT_FIELD_STATUS = 'SIMULATION_RUN_SORT_FIELD_STATUS'
-    SIMULATION_RUN_SORT_FIELD_UPDATED_AT = 'SIMULATION_RUN_SORT_FIELD_UPDATED_AT'
-    VALUES = %w[
-      SIMULATION_RUN_SORT_FIELD_UNSPECIFIED SIMULATION_RUN_SORT_FIELD_CREATED_AT
-      SIMULATION_RUN_SORT_FIELD_NAME SIMULATION_RUN_SORT_FIELD_STATUS
-      SIMULATION_RUN_SORT_FIELD_UPDATED_AT
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ApiSimulationRunStatus SDK namespace.
-  module ApiSimulationRunStatus
-    SIMULATION_RUN_STATUS_UNSPECIFIED = 'SIMULATION_RUN_STATUS_UNSPECIFIED'
-    SIMULATION_RUN_STATUS_PENDING = 'SIMULATION_RUN_STATUS_PENDING'
-    SIMULATION_RUN_STATUS_RUNNING = 'SIMULATION_RUN_STATUS_RUNNING'
-    SIMULATION_RUN_STATUS_SUCCEEDED = 'SIMULATION_RUN_STATUS_SUCCEEDED'
-    SIMULATION_RUN_STATUS_FAILED = 'SIMULATION_RUN_STATUS_FAILED'
-    SIMULATION_RUN_STATUS_CANCELLED = 'SIMULATION_RUN_STATUS_CANCELLED'
-    SIMULATION_RUN_STATUS_EVALUATING = 'SIMULATION_RUN_STATUS_EVALUATING'
-    SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL = 'SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL'
-    VALUES = %w[
-      SIMULATION_RUN_STATUS_UNSPECIFIED SIMULATION_RUN_STATUS_PENDING
-      SIMULATION_RUN_STATUS_RUNNING SIMULATION_RUN_STATUS_SUCCEEDED
-      SIMULATION_RUN_STATUS_FAILED SIMULATION_RUN_STATUS_CANCELLED
-      SIMULATION_RUN_STATUS_EVALUATING SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiSimulationTrajectoryMetadata
+  FIELDS = {
+    agent_id: "agent_id",
+    completed_at: "completed_at",
+    duration_sec: "duration_sec",
+    evaluation_metrics: "evaluation_metrics",
+    failure_reason: "failure_reason",
+    episode_index: "episode_index",
+    episode_uuid: "episode_uuid",
+    judge: "judge",
+    max_turns: "max_turns",
+    messages: "messages",
+    run_uuid: "run_uuid",
+    scenario_uuid: "scenario_uuid",
+    session_id: "session_id",
+    started_at: "started_at",
+    status: "status",
+    token_usage: "token_usage",
+    turn_count: "turn_count",
+    verdict: "verdict",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    evaluation_metrics: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(item) }
+    end,
+    judge: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationTrajectoryJudgeResult.from_hash(value)
+    end,
+    messages: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiSimulationTrajectoryMessage.from_hash(item) }
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationTrajectoryStatus.from_value(value)
+    end,
+    token_usage: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationTokenUsage.from_hash(value)
+    end,
+    verdict: lambda do |value|
+      ::OctridevDigitalocean::ApiSimulationEpisodeVerdict.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiSimulationTrajectory.
+# Turn-by-turn trajectory for one episode. Poll this resource while the episode is running to watch live progress.
+class ApiSimulationTrajectory
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationTrajectoryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationTrajectoryMetadata::DECODERS
+
+  # @return [String] Identifier of the candidate agent under test for this episode.
+  attr_reader :agent_id
+  # @return [String] Optional `string` value serialized in the `completed_at` wire field.
+  attr_reader :completed_at
+  # @return [String] Optional `uint64`-formatted value serialized in the `duration_sec` wire field.
+  attr_reader :duration_sec
+  # @return [Array_of_ApiEvaluationMetricResult] Per-metric scores and judge reasoning for this trajectory. Empty when the simulation run has no associated evaluation.
+  attr_reader :evaluation_metrics
+  # @return [String] Optional `string` value serialized in the `failure_reason` wire field.
+  attr_reader :failure_reason
+  # @return [Integer] Optional `int64`-formatted value serialized in the `episode_index` wire field.
+  attr_reader :episode_index
+  # @return [String] Optional `string` value serialized in the `episode_uuid` wire field.
+  attr_reader :episode_uuid
+  # @return [ApiSimulationTrajectoryJudgeResult] Judge output embedded in the trajectory JSON.
+  attr_reader :judge
+  # @return [Integer] Turn budget configured for this episode (per-scenario max_turns, after any run-level override). Compare with turn_count to see how many of the budgeted turns actually ran.
+  attr_reader :max_turns
+  # @return [Array_of_ApiSimulationTrajectoryMessage] Optional array value serialized in the `messages` wire field.
+  attr_reader :messages
+  # @return [String] Optional `string` value serialized in the `run_uuid` wire field.
+  attr_reader :run_uuid
+  # @return [String] Optional `string` value serialized in the `scenario_uuid` wire field.
+  attr_reader :scenario_uuid
+  # @return [String] Optional `string` value serialized in the `session_id` wire field.
+  attr_reader :session_id
+  # @return [String] Optional `string` value serialized in the `started_at` wire field.
+  attr_reader :started_at
+  # @return [ApiSimulationTrajectoryStatus] Lifecycle status of the trajectory. Distinct from episode status: the trajectory is updated on every turn while the episode is executing. - SIMULATION_TRAJECTORY_STATUS_RUNNING: The episode loop is in progress; messages may grow on each poll. - SIMULATION_TRAJECTORY_STATUS_COMPLETED: The episode reached a stop condition and the trajectory is complete. - SIMULATION_TRAJECTORY_STATUS_FAILED: The episode failed before or during execution. -…
+  attr_reader :status
+  # @return [ApiSimulationTokenUsage] Per-actor token accounting for a run or episode.
+  attr_reader :token_usage
+  # @return [Integer] Optional `int64`-formatted value serialized in the `turn_count` wire field.
+  attr_reader :turn_count
+  # @return [ApiSimulationEpisodeVerdict] The judge's verdict for an episode. - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria. - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria. - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
+  attr_reader :verdict
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationScenarioResultMetadata
-    FIELDS = {
-      episodes_finished: 'episodes_finished',
-      scenario_uuid: 'scenario_uuid',
-      total_episodes: 'total_episodes',
-      verdict_counts: 'verdict_counts'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      verdict_counts: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationEpisodeCounts.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiSimulationScenarioResult.
-  # Per-scenario rollup of episode outcomes within a run, aggregated from the run's episode rows.
-  class ApiSimulationScenarioResult
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationScenarioResultMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationScenarioResultMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationScenarioResultMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] Episodes that have finished (successfully or not).
-    attr_reader :episodes_finished
-    # @return [String] UUID of the scenario.
-    attr_reader :scenario_uuid
-    # @return [Integer] Total episodes for this scenario (its exploration budget).
-    attr_reader :total_episodes
-    # @return [ApiSimulationEpisodeCounts] Breakdown of episode outcomes by judge verdict. Reused wherever a success / failure / inconclusive tally is reported (run row, result summary, per-scenario rollup).
-    attr_reader :verdict_counts
+# Internal model hydration metadata.
+class SdkInternalApiSimulationTrajectoryJudgeCriterionMetadata
+  FIELDS = {
+    criterion: "criterion",
+    passed: "passed",
+    reasoning: "reasoning",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiSimulationTrajectoryJudgeCriterion.
+# Per-criterion judge evaluation recorded in the trajectory JSON.
+class ApiSimulationTrajectoryJudgeCriterion
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSimulationTrajectoryJudgeCriterionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryJudgeCriterionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSimulationTrajectoryJudgeCriterionMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Optional `string` value serialized in the `criterion` wire field.
+  attr_reader :criterion
+  # @return [Boolean] Optional `boolean` value serialized in the `passed` wire field.
+  attr_reader :passed
+  # @return [String] Optional `string` value serialized in the `reasoning` wire field.
+  attr_reader :reasoning
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationTokenUsageMetadata
-    FIELDS = {
-      candidate_agent_tokens: 'candidate_agent_tokens',
-      generator_tokens: 'generator_tokens',
-      judge_tokens: 'judge_tokens',
-      simulator_tokens: 'simulator_tokens',
-      total_tokens: 'total_tokens'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiSimulationTokenUsage.
-  # Per-actor token accounting for a run or episode.
-  class ApiSimulationTokenUsage
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationTokenUsageMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationTokenUsageMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationTokenUsageMetadata::DECODERS
-
-    # @return [String] Tokens consumed by the candidate agent.
-    attr_reader :candidate_agent_tokens
-    # @return [String] Tokens consumed by the scenario generator.
-    attr_reader :generator_tokens
-    # @return [String] Tokens consumed by the judge.
-    attr_reader :judge_tokens
-    # @return [String] Tokens consumed by the user simulator.
-    attr_reader :simulator_tokens
-    # @return [String] Total tokens across all actors.
-    attr_reader :total_tokens
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationTrajectoryMetadata
-    FIELDS = {
-      agent_id: 'agent_id',
-      completed_at: 'completed_at',
-      duration_sec: 'duration_sec',
-      evaluation_metrics: 'evaluation_metrics',
-      failure_reason: 'failure_reason',
-      episode_index: 'episode_index',
-      episode_uuid: 'episode_uuid',
-      judge: 'judge',
-      max_turns: 'max_turns',
-      messages: 'messages',
-      run_uuid: 'run_uuid',
-      scenario_uuid: 'scenario_uuid',
-      session_id: 'session_id',
-      started_at: 'started_at',
-      status: 'status',
-      token_usage: 'token_usage',
-      turn_count: 'turn_count',
-      verdict: 'verdict'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      evaluation_metrics: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(item) }
-      end,
-      judge: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationTrajectoryJudgeResult.from_hash(value)
-      end,
-      messages: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiSimulationTrajectoryMessage.from_hash(item) }
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationTrajectoryStatus.from_value(value)
-      end,
-      token_usage: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationTokenUsage.from_hash(value)
-      end,
-      verdict: lambda do |value|
-        ::OctridevDigitalocean::ApiSimulationEpisodeVerdict.from_value(value)
-      end
-    }.freeze
-  end
-
-  # API model for ApiSimulationTrajectory.
-  # Turn-by-turn trajectory for one episode. Poll this resource while the episode is running to watch live progress.
-  class ApiSimulationTrajectory
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationTrajectoryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationTrajectoryMetadata::DECODERS
-
-    # @return [String] Identifier of the candidate agent under test for this episode.
-    attr_reader :agent_id
-    # @return [String] Optional `string` value serialized in the `completed_at` wire field.
-    attr_reader :completed_at
-    # @return [String] Optional `uint64`-formatted value serialized in the `duration_sec` wire field.
-    attr_reader :duration_sec
-    # @return [Array_of_ApiEvaluationMetricResult] Per-metric scores and judge reasoning for this trajectory. Empty when the simulation run has no associated evaluation.
-    attr_reader :evaluation_metrics
-    # @return [String] Optional `string` value serialized in the `failure_reason` wire field.
-    attr_reader :failure_reason
-    # @return [Integer] Optional `int64`-formatted value serialized in the `episode_index` wire field.
-    attr_reader :episode_index
-    # @return [String] Optional `string` value serialized in the `episode_uuid` wire field.
-    attr_reader :episode_uuid
-    # @return [ApiSimulationTrajectoryJudgeResult] Judge output embedded in the trajectory JSON.
-    attr_reader :judge
-    # @return [Integer] Turn budget configured for this episode (per-scenario max_turns, after any run-level override). Compare with turn_count to see how many of the budgeted turns actually ran.
-    attr_reader :max_turns
-    # @return [Array_of_ApiSimulationTrajectoryMessage] Optional array value serialized in the `messages` wire field.
-    attr_reader :messages
-    # @return [String] Optional `string` value serialized in the `run_uuid` wire field.
-    attr_reader :run_uuid
-    # @return [String] Optional `string` value serialized in the `scenario_uuid` wire field.
-    attr_reader :scenario_uuid
-    # @return [String] Optional `string` value serialized in the `session_id` wire field.
-    attr_reader :session_id
-    # @return [String] Optional `string` value serialized in the `started_at` wire field.
-    attr_reader :started_at
-    # @return [ApiSimulationTrajectoryStatus] Lifecycle status of the trajectory. Distinct from episode status: the trajectory is updated on every turn while the episode is executing. - SIMULATION_TRAJECTORY_STATUS_RUNNING: The episode loop is in progress; messages may grow on each poll. - SIMULATION_TRAJECTORY_STATUS_COMPLETED: The episode reached a stop condition and the trajectory is complete. - SIMULATION_TRAJECTORY_STATUS_FAILED: The episode failed before or during execution. -…
-    attr_reader :status
-    # @return [ApiSimulationTokenUsage] Per-actor token accounting for a run or episode.
-    attr_reader :token_usage
-    # @return [Integer] Optional `int64`-formatted value serialized in the `turn_count` wire field.
-    attr_reader :turn_count
-    # @return [ApiSimulationEpisodeVerdict] The judge's verdict for an episode. - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria. - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria. - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
-    attr_reader :verdict
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalApiSimulationTrajectoryJudgeCriterionMetadata
-    FIELDS = {
-      criterion: 'criterion',
-      passed: 'passed',
-      reasoning: 'reasoning'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for ApiSimulationTrajectoryJudgeCriterion.
-  # Per-criterion judge evaluation recorded in the trajectory JSON.
-  class ApiSimulationTrajectoryJudgeCriterion
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSimulationTrajectoryJudgeCriterionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryJudgeCriterionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSimulationTrajectoryJudgeCriterionMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `criterion` wire field.
-    attr_reader :criterion
-    # @return [Boolean] Optional `boolean` value serialized in the `passed` wire field.
-    attr_reader :passed
-    # @return [String] Optional `string` value serialized in the `reasoning` wire field.
-    attr_reader :reasoning
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

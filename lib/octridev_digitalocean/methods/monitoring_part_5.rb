@@ -21,18 +21,19 @@ module OctridevDigitalocean
         resources: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/monitoring/sinks',
+          "/v2/monitoring/sinks",
           config: config,
           body: {
             'destination_uuid' => destination_uuid,
-            'resources' => resources
+            'resources' => resources,
           },
           decoder: :empty,
           operation_id: 'monitoring_create_sink',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -44,22 +45,23 @@ module OctridevDigitalocean
         resource_id: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(resource_id) do
           Validation.validate_pattern('resource_id', resource_id, '^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*')
         end
 
         SdkClient.request(
           'GET',
-          '/v2/monitoring/sinks',
+          "/v2/monitoring/sinks",
           config: config,
           query: {
-            'resource_id' => QueryValue.new(resource_id, style: 'form', explode: true)
+            'resource_id' => QueryValue.new(resource_id, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListSinks,
           decoder: :json,
           operation_id: 'monitoring_list_sinks',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -71,10 +73,11 @@ module OctridevDigitalocean
         sink_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/monitoring/sinks/',
+            "/v2/monitoring/sinks/",
             SdkClient.encode_path_segment(sink_uuid)
           ].join,
           config: config,
@@ -82,7 +85,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'monitoring_get_sink',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -94,17 +97,18 @@ module OctridevDigitalocean
         sink_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/v2/monitoring/sinks/',
+            "/v2/monitoring/sinks/",
             SdkClient.encode_path_segment(sink_uuid)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'monitoring_delete_sink',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

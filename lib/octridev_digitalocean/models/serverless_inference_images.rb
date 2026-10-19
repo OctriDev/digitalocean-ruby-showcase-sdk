@@ -5,157 +5,158 @@
 
 # serverless_inference_images domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalImagesResponseMetadata
-    FIELDS = {
-      created: 'created',
-      data: 'data',
-      background: 'background',
-      output_format: 'output_format',
-      quality: 'quality',
-      size: 'size',
-      usage: 'usage'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      created
-      data
-    ].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::GeneratedImage.from_hash(item) }
-      end,
-      usage: lambda do |value|
-        ::OctridevDigitalocean::ImagesUsage.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalImagesResponseMetadata
+  FIELDS = {
+    created: "created",
+    data: "data",
+    background: "background",
+    output_format: "output_format",
+    quality: "quality",
+    size: "size",
+    usage: "usage",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    created
+    data
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::GeneratedImage.from_hash(item) }
+    end,
+    usage: lambda do |value|
+      ::OctridevDigitalocean::ImagesUsage.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ImagesResponse.
+# The response from the image generation endpoint.
+class ImagesResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalImagesResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalImagesResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalImagesResponseMetadata::DECODERS
+
+  # @return [Integer] The Unix timestamp (in seconds) of when the images were created.
+  attr_reader :created
+  # @return [Array_of_GeneratedImage] The list of generated images.
+  attr_reader :data
+  # @return [String] The background setting used for the image generation.
+  attr_reader :background
+  # @return [String] The output format of the generated image.
+  attr_reader :output_format
+  # @return [String] The quality setting used for the image generation.
+  attr_reader :quality
+  # @return [String] The size of the generated image.
+  attr_reader :size
+  # @return [ImagesUsage] Usage statistics for the image generation request.
+  attr_reader :usage
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ImagesResponse.
-  # The response from the image generation endpoint.
-  class ImagesResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalImagesResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalImagesResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalImagesResponseMetadata::DECODERS
-
-    # @return [Integer] The Unix timestamp (in seconds) of when the images were created.
-    attr_reader :created
-    # @return [Array_of_GeneratedImage] The list of generated images.
-    attr_reader :data
-    # @return [String] The background setting used for the image generation.
-    attr_reader :background
-    # @return [String] The output format of the generated image.
-    attr_reader :output_format
-    # @return [String] The quality setting used for the image generation.
-    attr_reader :quality
-    # @return [String] The size of the generated image.
-    attr_reader :size
-    # @return [ImagesUsage] Usage statistics for the image generation request.
-    attr_reader :usage
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalImagesUsageInputTokensDetailsMetadata
-    FIELDS = {
-      text_tokens: 'text_tokens',
-      image_tokens: 'image_tokens'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      text_tokens
-      image_tokens
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalImagesUsageInputTokensDetailsMetadata
+  FIELDS = {
+    text_tokens: "text_tokens",
+    image_tokens: "image_tokens",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    text_tokens
+    image_tokens
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ImagesUsageInputTokensDetails.
+# Detailed breakdown of input tokens.
+class ImagesUsageInputTokensDetails
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalImagesUsageInputTokensDetailsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalImagesUsageInputTokensDetailsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalImagesUsageInputTokensDetailsMetadata::DECODERS
+
+  # @return [Integer] The number of text tokens in the input prompt.
+  attr_reader :text_tokens
+  # @return [Integer] The number of image tokens in the input prompt.
+  attr_reader :image_tokens
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ImagesUsageInputTokensDetails.
-  # Detailed breakdown of input tokens.
-  class ImagesUsageInputTokensDetails
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalImagesUsageInputTokensDetailsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalImagesUsageInputTokensDetailsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalImagesUsageInputTokensDetailsMetadata::DECODERS
-
-    # @return [Integer] The number of text tokens in the input prompt.
-    attr_reader :text_tokens
-    # @return [Integer] The number of image tokens in the input prompt.
-    attr_reader :image_tokens
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalImagesUsageMetadata
-    FIELDS = {
-      total_tokens: 'total_tokens',
-      input_tokens: 'input_tokens',
-      output_tokens: 'output_tokens',
-      input_tokens_details: 'input_tokens_details'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      total_tokens
-      input_tokens
-      output_tokens
-      input_tokens_details
-    ].freeze
-    DECODERS = {
-      input_tokens_details: lambda do |value|
-        ::OctridevDigitalocean::ImagesUsageInputTokensDetails.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalImagesUsageMetadata
+  FIELDS = {
+    total_tokens: "total_tokens",
+    input_tokens: "input_tokens",
+    output_tokens: "output_tokens",
+    input_tokens_details: "input_tokens_details",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    total_tokens
+    input_tokens
+    output_tokens
+    input_tokens_details
+  ].freeze
+  DECODERS = {
+    input_tokens_details: lambda do |value|
+      ::OctridevDigitalocean::ImagesUsageInputTokensDetails.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ImagesUsage.
+# Token usage information for the image generation.
+class ImagesUsage
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalImagesUsageMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalImagesUsageMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalImagesUsageMetadata::DECODERS
+
+  # @return [Integer] The total number of tokens (images and text) used for the image generation.
+  attr_reader :total_tokens
+  # @return [Integer] The number of tokens (images and text) in the input prompt.
+  attr_reader :input_tokens
+  # @return [Integer] The number of image tokens in the output image.
+  attr_reader :output_tokens
+  # @return [ImagesUsageInputTokensDetails] Detailed breakdown of input tokens.
+  attr_reader :input_tokens_details
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ImagesUsage.
-  # Token usage information for the image generation.
-  class ImagesUsage
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalImagesUsageMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalImagesUsageMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalImagesUsageMetadata::DECODERS
-
-    # @return [Integer] The total number of tokens (images and text) used for the image generation.
-    attr_reader :total_tokens
-    # @return [Integer] The number of tokens (images and text) in the input prompt.
-    attr_reader :input_tokens
-    # @return [Integer] The number of image tokens in the output image.
-    attr_reader :output_tokens
-    # @return [ImagesUsageInputTokensDetails] Detailed breakdown of input tokens.
-    attr_reader :input_tokens_details
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end
