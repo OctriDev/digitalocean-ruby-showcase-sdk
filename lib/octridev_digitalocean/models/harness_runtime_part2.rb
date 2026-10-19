@@ -5,207 +5,206 @@
 
 # harness_runtime domain models (part 2)
 module OctridevDigitalocean
-# API model for StreamEvent.
-# The JSON payload carried in each SSE event's `data:` field (canonical SPI event envelope). The SSE `event:` field repeats `type`, and the `id:` field repeats `event_id`.
-class StreamEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalStreamEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalStreamEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalStreamEventMetadata::DECODERS
+  # API model for StreamEvent.
+  # The JSON payload carried in each SSE event's `data:` field (canonical SPI event envelope). The SSE `event:` field repeats `type`, and the `id:` field repeats `event_id`.
+  class StreamEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalStreamEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalStreamEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalStreamEventMetadata::DECODERS
 
-  # @return [String] Optional `string` value serialized in the `event_id` wire field.
-  attr_reader :event_id
-  # @return [String] Optional `string` value serialized in the `run_id` wire field.
-  attr_reader :run_id
-  # @return [String] DO Team ID rendered as a decimal string.
-  attr_reader :tenant_id
-  # @return [String] Optional `string` value serialized in the `session_id` wire field.
-  attr_reader :session_id
-  # @return [String] Optional `string` value serialized in the `trace_parent` wire field.
-  attr_reader :trace_parent
-  # @return [String] Optional `date-time`-formatted value serialized in the `timestamp` wire field.
-  attr_reader :timestamp
-  # @return [Integer] Producer-supplied sequence number; nonzero values increase monotonically within an ingress stream.
-  attr_reader :seq
-  # @return [String] Optional `string` value serialized in the `source_event_id` wire field.
-  attr_reader :source_event_id
-  # @return [String] Optional `string` value serialized in the `source_event_type` wire field.
-  attr_reader :source_event_type
-  # @return [String] Optional runtime-native tenant identifier; distinct from authoritative tenant_id.
-  attr_reader :source_tenant_id
-  # @return [StreamEventProducer] Server-assigned component that submitted the event.
-  attr_reader :producer
-  # @return [String] Optional `string` value serialized in the `definition_id` wire field.
-  attr_reader :definition_id
-  # @return [String] Optional `string` value serialized in the `revision_id` wire field.
-  attr_reader :revision_id
-  # @return [String] Optional `string` value serialized in the `credential_binding_set_id` wire field.
-  attr_reader :credential_binding_set_id
-  # @return [StreamEventType] Canonical SPI event type. The SSE `event:` field carries the same value.
-  attr_reader :type
-  # @return [Hash] Type-specific payload, discriminated by `type` (canonical SPI shapes; numeric fields are JSON numbers): - run.started: {agent} - run.token_delta: {text} - run.tool_call_started: {tool_call_id, name, input} - run.tool_call_completed: {tool_call_id, ok, duration_ms, summary} - run.human_input_requested: {hitl_id, payload} - run.human_input_received: {hitl_id, outcome, actor, reason} - run.completed: {total_tokens_in, total_tokens_out, run_cost_micros} - run.failed: {code,…
-  attr_reader :data
+    # @return [String] Optional `string` value serialized in the `event_id` wire field.
+    attr_reader :event_id
+    # @return [String] Optional `string` value serialized in the `run_id` wire field.
+    attr_reader :run_id
+    # @return [String] DO Team ID rendered as a decimal string.
+    attr_reader :tenant_id
+    # @return [String] Optional `string` value serialized in the `session_id` wire field.
+    attr_reader :session_id
+    # @return [String] Optional `string` value serialized in the `trace_parent` wire field.
+    attr_reader :trace_parent
+    # @return [String] Optional `date-time`-formatted value serialized in the `timestamp` wire field.
+    attr_reader :timestamp
+    # @return [Integer] Producer-supplied sequence number; nonzero values increase monotonically within an ingress stream.
+    attr_reader :seq
+    # @return [String] Optional `string` value serialized in the `source_event_id` wire field.
+    attr_reader :source_event_id
+    # @return [String] Optional `string` value serialized in the `source_event_type` wire field.
+    attr_reader :source_event_type
+    # @return [String] Optional runtime-native tenant identifier; distinct from authoritative tenant_id.
+    attr_reader :source_tenant_id
+    # @return [StreamEventProducer] Server-assigned component that submitted the event.
+    attr_reader :producer
+    # @return [String] Optional `string` value serialized in the `definition_id` wire field.
+    attr_reader :definition_id
+    # @return [String] Optional `string` value serialized in the `revision_id` wire field.
+    attr_reader :revision_id
+    # @return [String] Optional `string` value serialized in the `credential_binding_set_id` wire field.
+    attr_reader :credential_binding_set_id
+    # @return [StreamEventType] Canonical SPI event type. The SSE `event:` field carries the same value.
+    attr_reader :type
+    # @return [Hash] Type-specific payload, discriminated by `type` (canonical SPI shapes; numeric fields are JSON numbers): - run.started: {agent} - run.token_delta: {text} - run.tool_call_started: {tool_call_id, name, input} - run.tool_call_completed: {tool_call_id, ok, duration_ms, summary} - run.human_input_requested: {hitl_id, payload} - run.human_input_received: {hitl_id, outcome, actor, reason} - run.completed: {total_tokens_in, total_tokens_out, run_cost_micros} - run.failed: {code,…
+    attr_reader :data
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the StreamEventProducer SDK namespace.
+  module StreamEventProducer
+    AGENT = 'agent'
+    OHR = 'ohr'
+    OHP = 'ohp'
+    OHS = 'ohs'
+    VALUES = %w[agent ohr ohp ohs].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the StreamEventProducer SDK namespace.
-module StreamEventProducer
-  AGENT = 'agent'
-  OHR = 'ohr'
-  OHP = 'ohp'
-  OHS = 'ohs'
-  VALUES = ['agent', 'ohr', 'ohp', 'ohs'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the StreamEventType SDK namespace.
-module StreamEventType
-  RUN_STARTED = 'run.started'
-  RUN_TOKEN_DELTA = 'run.token_delta'
-  RUN_TOOL_CALL_STARTED = 'run.tool_call_started'
-  RUN_TOOL_CALL_COMPLETED = 'run.tool_call_completed'
-  RUN_HUMAN_INPUT_REQUESTED = 'run.human_input_requested'
-  RUN_HUMAN_INPUT_RECEIVED = 'run.human_input_received'
-  RUN_COMPLETED = 'run.completed'
-  RUN_FAILED = 'run.failed'
-  RUN_PAUSED = 'run.paused'
-  RUN_RESUMED = 'run.resumed'
-  SESSION_UPDATED = 'session.updated'
-  RUN_STATE_CHECKPOINTED = 'run.state_checkpointed'
-  RUN_HANDOFF = 'run.handoff'
-  RUN_USAGE_RECORDED = 'run.usage_recorded'
-  RUN_SANDBOX_ALLOCATED = 'run.sandbox_allocated'
-  RUN_SANDBOX_RELEASED = 'run.sandbox_released'
-  RUN_COST_ACCRUED = 'run.cost_accrued'
-  RUN_LOG = 'run.log'
-  POLICY_DENIED = 'policy.denied'
-  STREAM_STATE = 'stream.state'
-  VALUES = [
-    'run.started', 'run.token_delta', 'run.tool_call_started', 'run.tool_call_completed',
-    'run.human_input_requested', 'run.human_input_received', 'run.completed', 'run.failed',
-    'run.paused', 'run.resumed', 'session.updated', 'run.state_checkpointed', 'run.handoff',
-    'run.usage_recorded', 'run.sandbox_allocated', 'run.sandbox_released', 'run.cost_accrued',
-    'run.log', 'policy.denied', 'stream.state'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalValidationResultMetadata
-  FIELDS = {
-    agent: "agent",
-    version: "version",
-    ok: "ok",
-    default_action: "defaultAction",
-    default_action_verdict: "defaultActionVerdict",
-    default_action_rendered: "defaultActionRendered",
-    default_action_reason: "defaultActionReason",
-    verdicts: "verdicts",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    default_action: lambda do |value|
-      ::OctridevDigitalocean::ValidationResultDefaultAction.from_value(value)
-    end,
-    default_action_verdict: lambda do |value|
-      ::OctridevDigitalocean::ValidationResultDefaultActionVerdict.from_value(value)
-    end,
-    default_action_rendered: lambda do |value|
-      ::OctridevDigitalocean::ValidationResultDefaultActionRendered.from_value(value)
-    end,
-    verdicts: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::RuleVerdict.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ValidationResult.
-# Response of POST /v2/agents/sessions/policy/validate: per-rule verdicts for the (agent, version). The same shape is persisted per session in session_policies.verdicts.
-class ValidationResult
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalValidationResultMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalValidationResultMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalValidationResultMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `agent` wire field.
-  attr_reader :agent
-  # @return [String] Optional `string` value serialized in the `version` wire field.
-  attr_reader :version
-  # @return [Boolean] False when any strict rule is unsupported or unverified — i.e. CreateSession would reject this policy for this (agent, version).
-  attr_reader :ok
-  # @return [ValidationResultDefaultAction] Catch-all disposition AS SHIPPED (after unverified allow→ask downgrade). When defaultActionVerdict is degraded, this remains the shipped value; see defaultActionRendered for what the agent will actually enforce.
-  attr_reader :default_action
-  # @return [ValidationResultDefaultActionVerdict] exact — agent can enforce the catch-all as written; degraded — agent cannot enforce the requested defaultAction (warn-only; shipped value unchanged); omitted when no descriptor was available to classify against.
-  attr_reader :default_action_verdict
-  # @return [ValidationResultDefaultActionRendered] Disposition the agent will actually enforce as the catch-all: equals defaultAction when exact; the more-restrictive degrade target (usually ask) when degraded.
-  attr_reader :default_action_rendered
-  # @return [String] Human-readable explanation when defaultActionVerdict is degraded.
-  attr_reader :default_action_reason
-  # @return [Array_of_RuleVerdict] Optional array value serialized in the `verdicts` wire field.
-  attr_reader :verdicts
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the StreamEventType SDK namespace.
+  module StreamEventType
+    RUN_STARTED = 'run.started'
+    RUN_TOKEN_DELTA = 'run.token_delta'
+    RUN_TOOL_CALL_STARTED = 'run.tool_call_started'
+    RUN_TOOL_CALL_COMPLETED = 'run.tool_call_completed'
+    RUN_HUMAN_INPUT_REQUESTED = 'run.human_input_requested'
+    RUN_HUMAN_INPUT_RECEIVED = 'run.human_input_received'
+    RUN_COMPLETED = 'run.completed'
+    RUN_FAILED = 'run.failed'
+    RUN_PAUSED = 'run.paused'
+    RUN_RESUMED = 'run.resumed'
+    SESSION_UPDATED = 'session.updated'
+    RUN_STATE_CHECKPOINTED = 'run.state_checkpointed'
+    RUN_HANDOFF = 'run.handoff'
+    RUN_USAGE_RECORDED = 'run.usage_recorded'
+    RUN_SANDBOX_ALLOCATED = 'run.sandbox_allocated'
+    RUN_SANDBOX_RELEASED = 'run.sandbox_released'
+    RUN_COST_ACCRUED = 'run.cost_accrued'
+    RUN_LOG = 'run.log'
+    POLICY_DENIED = 'policy.denied'
+    STREAM_STATE = 'stream.state'
+    VALUES = [
+      'run.started', 'run.token_delta', 'run.tool_call_started', 'run.tool_call_completed',
+      'run.human_input_requested', 'run.human_input_received', 'run.completed', 'run.failed',
+      'run.paused', 'run.resumed', 'session.updated', 'run.state_checkpointed', 'run.handoff',
+      'run.usage_recorded', 'run.sandbox_allocated', 'run.sandbox_released', 'run.cost_accrued',
+      'run.log', 'policy.denied', 'stream.state'
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalValidationResultMetadata
+    FIELDS = {
+      agent: 'agent',
+      version: 'version',
+      ok: 'ok',
+      default_action: 'defaultAction',
+      default_action_verdict: 'defaultActionVerdict',
+      default_action_rendered: 'defaultActionRendered',
+      default_action_reason: 'defaultActionReason',
+      verdicts: 'verdicts'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      default_action: lambda do |value|
+        ::OctridevDigitalocean::ValidationResultDefaultAction.from_value(value)
+      end,
+      default_action_verdict: lambda do |value|
+        ::OctridevDigitalocean::ValidationResultDefaultActionVerdict.from_value(value)
+      end,
+      default_action_rendered: lambda do |value|
+        ::OctridevDigitalocean::ValidationResultDefaultActionRendered.from_value(value)
+      end,
+      verdicts: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::RuleVerdict.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ValidationResult.
+  # Response of POST /v2/agents/sessions/policy/validate: per-rule verdicts for the (agent, version). The same shape is persisted per session in session_policies.verdicts.
+  class ValidationResult
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalValidationResultMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalValidationResultMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalValidationResultMetadata::DECODERS
 
-# Defines the ValidationResultDefaultAction SDK namespace.
-module ValidationResultDefaultAction
-  ALLOW = 'allow'
-  ASK = 'ask'
-  DENY = 'deny'
-  VALUES = ['allow', 'ask', 'deny'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Optional `string` value serialized in the `agent` wire field.
+    attr_reader :agent
+    # @return [String] Optional `string` value serialized in the `version` wire field.
+    attr_reader :version
+    # @return [Boolean] False when any strict rule is unsupported or unverified — i.e. CreateSession would reject this policy for this (agent, version).
+    attr_reader :ok
+    # @return [ValidationResultDefaultAction] Catch-all disposition AS SHIPPED (after unverified allow→ask downgrade). When defaultActionVerdict is degraded, this remains the shipped value; see defaultActionRendered for what the agent will actually enforce.
+    attr_reader :default_action
+    # @return [ValidationResultDefaultActionVerdict] exact — agent can enforce the catch-all as written; degraded — agent cannot enforce the requested defaultAction (warn-only; shipped value unchanged); omitted when no descriptor was available to classify against.
+    attr_reader :default_action_verdict
+    # @return [ValidationResultDefaultActionRendered] Disposition the agent will actually enforce as the catch-all: equals defaultAction when exact; the more-restrictive degrade target (usually ask) when degraded.
+    attr_reader :default_action_rendered
+    # @return [String] Human-readable explanation when defaultActionVerdict is degraded.
+    attr_reader :default_action_reason
+    # @return [Array_of_RuleVerdict] Optional array value serialized in the `verdicts` wire field.
+    attr_reader :verdicts
 
-# Defines the ValidationResultDefaultActionRendered SDK namespace.
-module ValidationResultDefaultActionRendered
-  ALLOW = 'allow'
-  ASK = 'ask'
-  DENY = 'deny'
-  VALUES = ['allow', 'ask', 'deny'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Defines the ValidationResultDefaultActionVerdict SDK namespace.
-module ValidationResultDefaultActionVerdict
-  EXACT = 'exact'
-  DEGRADED = 'degraded'
-  UNSUPPORTED = 'unsupported'
-  UNVERIFIED = 'unverified'
-  VALUES = ['exact', 'degraded', 'unsupported', 'unverified'].freeze
-  def self.from_value(value)
-    value
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the ValidationResultDefaultAction SDK namespace.
+  module ValidationResultDefaultAction
+    ALLOW = 'allow'
+    ASK = 'ask'
+    DENY = 'deny'
+    VALUES = %w[allow ask deny].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the ValidationResultDefaultActionRendered SDK namespace.
+  module ValidationResultDefaultActionRendered
+    ALLOW = 'allow'
+    ASK = 'ask'
+    DENY = 'deny'
+    VALUES = %w[allow ask deny].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the ValidationResultDefaultActionVerdict SDK namespace.
+  module ValidationResultDefaultActionVerdict
+    EXACT = 'exact'
+    DEGRADED = 'degraded'
+    UNSUPPORTED = 'unsupported'
+    UNVERIFIED = 'unverified'
+    VALUES = %w[exact degraded unsupported unverified].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

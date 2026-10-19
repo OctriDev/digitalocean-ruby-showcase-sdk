@@ -5,115 +5,111 @@
 
 # shared_meta domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalMetaMetaMetadata
-  FIELDS = {
-    total: "total",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for MetaMeta.
-# Required API value serialized in the `meta` wire field.
-class MetaMeta
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMetaMetaMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMetaMetaMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMetaMetaMetadata::DECODERS
-
-  # @return [Integer] Number of objects returned by the request.
-  attr_reader :total
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalMetaMetaMetadata
+    FIELDS = {
+      total: 'total'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for MetaMeta.
+  # Required API value serialized in the `meta` wire field.
+  class MetaMeta
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMetaMetaMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMetaMetaMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMetaMetaMetadata::DECODERS
+
+    # @return [Integer] Number of objects returned by the request.
+    attr_reader :total
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalMetaMetadata
-  FIELDS = {
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Meta.
-# Typed representation of the `Meta` API schema.
-class Meta
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMetaMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMetaMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMetaMetadata::DECODERS
-
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalMetaMetadata
+    FIELDS = {
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Meta.
+  # Typed representation of the `Meta` API schema.
+  class Meta
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMetaMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMetaMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMetaMetadata::DECODERS
+
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalMetaPropertiesMetadata
-  FIELDS = {
-    total: "total",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for MetaProperties.
-# Information about the response itself.
-class MetaProperties
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMetaPropertiesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMetaPropertiesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMetaPropertiesMetadata::DECODERS
-
-  # @return [Integer] Number of objects returned by the request.
-  attr_reader :total
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalMetaPropertiesMetadata
+    FIELDS = {
+      total: 'total'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for MetaProperties.
+  # Information about the response itself.
+  class MetaProperties
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMetaPropertiesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMetaPropertiesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMetaPropertiesMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [Integer] Number of objects returned by the request.
+    attr_reader :total
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

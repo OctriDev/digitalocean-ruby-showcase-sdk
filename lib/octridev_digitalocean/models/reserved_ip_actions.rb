@@ -5,311 +5,309 @@
 
 # reserved_ip_actions domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalReservedIpActionActionMetadata
-  FIELDS = {
-    id: "id",
-    status: "status",
-    type: "type",
-    started_at: "started_at",
-    completed_at: "completed_at",
-    resource_id: "resource_id",
-    resource_type: "resource_type",
-    region: "region",
-    region_slug: "region_slug",
-    project_id: "project_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::ReservedIpActionActionStatus.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevDigitalocean::Region.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ReservedIpActionAction.
-# Optional object value serialized in the `action` wire field.
-class ReservedIpActionAction
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpActionActionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpActionActionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpActionActionMetadata::DECODERS
-
-  # @return [Integer] A unique numeric ID that can be used to identify and reference an action.
-  attr_reader :id
-  # @return [ReservedIpActionActionStatus] The current status of the action. This can be "in-progress", "completed", or "errored".
-  attr_reader :status
-  # @return [String] This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
-  attr_reader :type
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was initiated.
-  attr_reader :started_at
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was completed.
-  attr_reader :completed_at
-  # @return [Integer] A unique identifier for the resource that the action is associated with.
-  attr_reader :resource_id
-  # @return [String] The type of resource that the action is associated with.
-  attr_reader :resource_type
-  # @return [Region] Optional object value serialized in the `region` wire field.
-  attr_reader :region
-  # @return [String] A human-readable string that is used as a unique identifier for each region.
-  attr_reader :region_slug
-  # @return [String] The UUID of the project to which the reserved IP currently belongs.
-  attr_reader :project_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpActionActionMetadata
+    FIELDS = {
+      id: 'id',
+      status: 'status',
+      type: 'type',
+      started_at: 'started_at',
+      completed_at: 'completed_at',
+      resource_id: 'resource_id',
+      resource_type: 'resource_type',
+      region: 'region',
+      region_slug: 'region_slug',
+      project_id: 'project_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::ReservedIpActionActionStatus.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevDigitalocean::Region.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ReservedIpActionAction.
+  # Optional object value serialized in the `action` wire field.
+  class ReservedIpActionAction
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpActionActionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpActionActionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpActionActionMetadata::DECODERS
+
+    # @return [Integer] A unique numeric ID that can be used to identify and reference an action.
+    attr_reader :id
+    # @return [ReservedIpActionActionStatus] The current status of the action. This can be "in-progress", "completed", or "errored".
+    attr_reader :status
+    # @return [String] This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
+    attr_reader :type
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was initiated.
+    attr_reader :started_at
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was completed.
+    attr_reader :completed_at
+    # @return [Integer] A unique identifier for the resource that the action is associated with.
+    attr_reader :resource_id
+    # @return [String] The type of resource that the action is associated with.
+    attr_reader :resource_type
+    # @return [Region] Optional object value serialized in the `region` wire field.
+    attr_reader :region
+    # @return [String] A human-readable string that is used as a unique identifier for each region.
+    attr_reader :region_slug
+    # @return [String] The UUID of the project to which the reserved IP currently belongs.
+    attr_reader :project_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReservedIpActionMetadata
-  FIELDS = {
-    action: "action",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    action: lambda do |value|
-      ::OctridevDigitalocean::ReservedIpActionAction.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ReservedIpAction.
-# Typed representation of the `ReservedIpAction` API schema.
-class ReservedIpAction
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpActionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpActionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpActionMetadata::DECODERS
-
-  # @return [ReservedIpActionAction] Optional object value serialized in the `action` wire field.
-  attr_reader :action
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpActionMetadata
+    FIELDS = {
+      action: 'action'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      action: lambda do |value|
+        ::OctridevDigitalocean::ReservedIpActionAction.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ReservedIpAction.
+  # Typed representation of the `ReservedIpAction` API schema.
+  class ReservedIpAction
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpActionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpActionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpActionMetadata::DECODERS
+
+    # @return [ReservedIpActionAction] Optional object value serialized in the `action` wire field.
+    attr_reader :action
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ReservedIpActionActionStatus SDK namespace.
-module ReservedIpActionActionStatus
-  IN_PROGRESS = 'in-progress'
-  COMPLETED = 'completed'
-  ERRORED = 'errored'
-  VALUES = ['in-progress', 'completed', 'errored'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReservedIpActionAssignMetadata
-  FIELDS = {
-    type: "type",
-    droplet_id: "droplet_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    droplet_id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ReservedIpActionTypeType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ReservedIpActionAssign.
-# Typed representation of the `ReservedIpActionAssign` API schema.
-class ReservedIpActionAssign
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpActionAssignMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpActionAssignMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpActionAssignMetadata::DECODERS
-
-  # @return [ReservedIpActionTypeType] The type of action to initiate for the reserved IP.
-  attr_reader :type
-  # @return [Integer] The ID of the Droplet that the reserved IP will be assigned to.
-  attr_reader :droplet_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ReservedIpActionActionStatus SDK namespace.
+  module ReservedIpActionActionStatus
+    IN_PROGRESS = 'in-progress'
+    COMPLETED = 'completed'
+    ERRORED = 'errored'
+    VALUES = %w[in-progress completed errored].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpActionAssignMetadata
+    FIELDS = {
+      type: 'type',
+      droplet_id: 'droplet_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      droplet_id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ReservedIpActionTypeType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ReservedIpActionAssign.
+  # Typed representation of the `ReservedIpActionAssign` API schema.
+  class ReservedIpActionAssign
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpActionAssignMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpActionAssignMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpActionAssignMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalReservedIpActionsMetadata
-  FIELDS = {
-    actions: "actions",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    actions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [ReservedIpActionTypeType] The type of action to initiate for the reserved IP.
+    attr_reader :type
+    # @return [Integer] The ID of the Droplet that the reserved IP will be assigned to.
+    attr_reader :droplet_id
 
-# API model for ReservedIpActions.
-# Typed representation of the `ReservedIpActions` API schema.
-class ReservedIpActions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpActionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpActionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpActionsMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  attr_reader :actions
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpActionsMetadata
+    FIELDS = {
+      actions: 'actions',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      actions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ReservedIpActions.
+  # Typed representation of the `ReservedIpActions` API schema.
+  class ReservedIpActions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpActionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpActionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpActionsMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalReservedIpActionTypeMetadata
-  FIELDS = {
-    type: "type",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ReservedIpActionTypeType.from_value(value)
-    end,
-  }.freeze
-end
+    attr_reader :actions
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
 
-# API model for ReservedIpActionType.
-# Typed representation of the `ReservedIpActionType` API schema.
-class ReservedIpActionType
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpActionTypeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpActionTypeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpActionTypeMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ReservedIpActionTypeType] The type of action to initiate for the reserved IP.
-  attr_reader :type
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpActionTypeMetadata
+    FIELDS = {
+      type: 'type'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ReservedIpActionTypeType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ReservedIpActionType.
+  # Typed representation of the `ReservedIpActionType` API schema.
+  class ReservedIpActionType
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpActionTypeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpActionTypeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpActionTypeMetadata::DECODERS
 
-# Defines the ReservedIpActionTypeType SDK namespace.
-module ReservedIpActionTypeType
-  ASSIGN = 'assign'
-  UNASSIGN = 'unassign'
-  VALUES = ['assign', 'unassign'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+    # @return [ReservedIpActionTypeType] The type of action to initiate for the reserved IP.
+    attr_reader :type
 
-    raise SdkValidationError.new('ReservedIpActionTypeType', 'enum', "Unknown ReservedIpActionTypeType: #{value}")
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalReservedIpActionUnassignMetadata
-  FIELDS = {
-    type: "type",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ReservedIpActionTypeType.from_value(value)
-    end,
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for ReservedIpActionUnassign.
-# Typed representation of the `ReservedIpActionUnassign` API schema.
-class ReservedIpActionUnassign
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpActionUnassignMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpActionUnassignMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpActionUnassignMetadata::DECODERS
-
-  # @return [ReservedIpActionTypeType] The type of action to initiate for the reserved IP.
-  attr_reader :type
-  # @return [Hash{String => Object}] Keys the schema admits beside the declared fields.
-  attr_reader :additional_properties
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS, extras: true)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, extras: true)
+  # Defines the ReservedIpActionTypeType SDK namespace.
+  module ReservedIpActionTypeType
+    ASSIGN = 'assign'
+    UNASSIGN = 'unassign'
+    VALUES = %w[assign unassign].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('ReservedIpActionTypeType', 'enum', "Unknown ReservedIpActionTypeType: #{value}")
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS, extras: true)
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpActionUnassignMetadata
+    FIELDS = {
+      type: 'type'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ReservedIpActionTypeType.from_value(value)
+      end
+    }.freeze
   end
-end
+
+  # API model for ReservedIpActionUnassign.
+  # Typed representation of the `ReservedIpActionUnassign` API schema.
+  class ReservedIpActionUnassign
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpActionUnassignMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpActionUnassignMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpActionUnassignMetadata::DECODERS
+
+    # @return [ReservedIpActionTypeType] The type of action to initiate for the reserved IP.
+    attr_reader :type
+    # @return [Hash{String => Object}] Keys the schema admits beside the declared fields.
+    attr_reader :additional_properties
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS, extras: true)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, extras: true)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS, extras: true)
+    end
+  end
 end

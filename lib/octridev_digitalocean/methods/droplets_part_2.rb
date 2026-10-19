@@ -14,16 +14,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/reports/droplet_neighbors_ids",
+          '/v2/reports/droplet_neighbors_ids',
           config: config,
           return_type: ::OctridevDigitalocean::NeighborIds,
           decoder: :json,
           operation_id: 'droplets_list_neighbors_ids',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

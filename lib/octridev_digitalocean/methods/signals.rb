@@ -12,13 +12,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalSignalsUpdateTeamConsentMetadata
         FIELDS = {
-          enabled: "enabled",
+          enabled: 'enabled'
         }.freeze
         REQUIRED_FIELDS = %i[
           enabled
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for SignalsUpdateTeamConsent.
@@ -48,13 +47,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalSignalsUpdateConsentMetadata
         FIELDS = {
-          enabled: "enabled",
+          enabled: 'enabled'
         }.freeze
         REQUIRED_FIELDS = %i[
           enabled
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for SignalsUpdateConsent.
@@ -92,19 +90,18 @@ module OctridevDigitalocean
         source: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v1/consent",
+          '/v1/consent',
           config: config,
           query: {
-            'source' => QueryValue.new(source, style: 'form', explode: true),
+            'source' => QueryValue.new(source, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListConsents,
           decoder: :json,
           operation_id: 'signals_list_consents',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -122,22 +119,21 @@ module OctridevDigitalocean
         enabled:,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
-          "/v1/consent",
+          '/v1/consent',
           config: config,
           query: {
-            'source' => QueryValue.new(source, style: 'form', explode: true),
+            'source' => QueryValue.new(source, style: 'form', explode: true)
           },
           body: {
-            'enabled' => enabled,
+            'enabled' => enabled
           },
           return_type: ::OctridevDigitalocean::UpdateTeamConsentResponse,
           decoder: :json,
           operation_id: 'signals_update_team_consent',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -150,13 +146,12 @@ module OctridevDigitalocean
         agent_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('agent_id', agent_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v1/consent/",
+            '/v1/consent/',
             SdkClient.encode_path_segment(agent_id)
           ].join,
           config: config,
@@ -164,7 +159,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'signals_get_consent',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -180,24 +175,23 @@ module OctridevDigitalocean
         enabled:,
         request_options: nil
       )
-
         Validation.validate_uuid('agent_id', agent_id)
 
         SdkClient.request(
           'PUT',
           [
-            "/v1/consent/",
+            '/v1/consent/',
             SdkClient.encode_path_segment(agent_id)
           ].join,
           config: config,
           body: {
-            'enabled' => enabled,
+            'enabled' => enabled
           },
           return_type: ::OctridevDigitalocean::UpdateConsentResponse,
           decoder: :json,
           operation_id: 'signals_update_consent',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -224,7 +218,6 @@ module OctridevDigitalocean
         signal_type: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('agent_id', agent_id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -236,9 +229,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v1/signals/agents/",
+            '/v1/signals/agents/',
             SdkClient.encode_path_segment(agent_id),
-            "/sessions"
+            '/sessions'
           ].join,
           config: config,
           query: {
@@ -246,13 +239,13 @@ module OctridevDigitalocean
             'after' => QueryValue.new(after, style: 'form', explode: true),
             'start_time' => QueryValue.new(start_time, style: 'form', explode: true),
             'end_time' => QueryValue.new(end_time, style: 'form', explode: true),
-            'signal_type' => QueryValue.new(signal_type, style: 'form', explode: true),
+            'signal_type' => QueryValue.new(signal_type, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListSessionsResponseResponse,
           decoder: :json,
           operation_id: 'signals_list_agent_sessions',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -278,7 +271,6 @@ module OctridevDigitalocean
         signal_type: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('session_id', session_id)
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
@@ -290,9 +282,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v1/signals/sessions/",
+            '/v1/signals/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/dialogues"
+            '/dialogues'
           ].join,
           config: config,
           query: {
@@ -300,13 +292,13 @@ module OctridevDigitalocean
             'after' => QueryValue.new(after, style: 'form', explode: true),
             'start_time' => QueryValue.new(start_time, style: 'form', explode: true),
             'end_time' => QueryValue.new(end_time, style: 'form', explode: true),
-            'signal_type' => QueryValue.new(signal_type, style: 'form', explode: true),
+            'signal_type' => QueryValue.new(signal_type, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListDialoguesResponse,
           decoder: :json,
           operation_id: 'signals_list_session_dialogues',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -321,22 +313,21 @@ module OctridevDigitalocean
         after: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/v1/signals/exports",
+          '/v1/signals/exports',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
-            'after' => QueryValue.new(after, style: 'form', explode: true),
+            'after' => QueryValue.new(after, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListExportsResponse,
           decoder: :json,
           operation_id: 'signals_list_exports',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -369,7 +360,6 @@ module OctridevDigitalocean
         end_time: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(agent_id) { Validation.validate_uuid('agent_id', agent_id) }
 
         Validation.if_given(start_time) { Validation.validate_date_time('start_time', start_time) }
@@ -378,7 +368,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          "/v1/signals/exports",
+          '/v1/signals/exports',
           config: config,
           body: {
             'type' => type,
@@ -386,13 +376,13 @@ module OctridevDigitalocean
             'signal_type' => signal_type,
             'session_ids' => session_ids,
             'start_time' => start_time,
-            'end_time' => end_time,
+            'end_time' => end_time
           },
           return_type: ::OctridevDigitalocean::ExportJob,
           decoder: :json,
           operation_id: 'signals_create_export',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -401,16 +391,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v1/signals/exports/options",
+          '/v1/signals/exports/options',
           config: config,
           return_type: ::OctridevDigitalocean::ExportOptions,
           decoder: :json,
           operation_id: 'signals_get_export_options',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -422,13 +411,12 @@ module OctridevDigitalocean
         export_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('export_id', export_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v1/signals/exports/",
+            '/v1/signals/exports/',
             SdkClient.encode_path_segment(export_id)
           ].join,
           config: config,
@@ -436,7 +424,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'signals_get_export',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -448,22 +436,21 @@ module OctridevDigitalocean
         export_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('export_id', export_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v1/signals/exports/",
+            '/v1/signals/exports/',
             SdkClient.encode_path_segment(export_id),
-            "/download"
+            '/download'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ExportDownload,
           decoder: :json,
           operation_id: 'signals_get_export_download',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -478,22 +465,21 @@ module OctridevDigitalocean
         after: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/v1/signals/deletions",
+          '/v1/signals/deletions',
           config: config,
           query: {
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
-            'after' => QueryValue.new(after, style: 'form', explode: true),
+            'after' => QueryValue.new(after, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListDeletionsResponse,
           decoder: :json,
           operation_id: 'signals_list_deletions',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -516,23 +502,22 @@ module OctridevDigitalocean
         agent_id: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(agent_id) { Validation.validate_uuid('agent_id', agent_id) }
 
         SdkClient.request(
           'POST',
-          "/v1/signals/deletions",
+          '/v1/signals/deletions',
           config: config,
           body: {
             'type' => type,
             'team_id' => team_id,
-            'agent_id' => agent_id,
+            'agent_id' => agent_id
           },
           return_type: ::OctridevDigitalocean::DeletionJob,
           decoder: :json,
           operation_id: 'signals_create_deletion',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -544,11 +529,10 @@ module OctridevDigitalocean
         deletion_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v1/signals/deletions/",
+            '/v1/signals/deletions/',
             SdkClient.encode_path_segment(deletion_id)
           ].join,
           config: config,
@@ -556,7 +540,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'signals_get_deletion',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

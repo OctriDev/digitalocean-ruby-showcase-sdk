@@ -12,13 +12,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalFunctionsAccessKeyUpdateMetadata
         FIELDS = {
-          name: "name",
+          name: 'name'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for FunctionsAccessKeyUpdate.
@@ -50,16 +49,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/functions/namespaces",
+          '/v2/functions/namespaces',
           config: config,
           return_type: ::OctridevDigitalocean::ListNamespaces,
           decoder: :json,
           operation_id: 'functions_list_namespaces',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -74,20 +72,19 @@ module OctridevDigitalocean
         label:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/functions/namespaces",
+          '/v2/functions/namespaces',
           config: config,
           body: {
             'region' => region,
-            'label' => label,
+            'label' => label
           },
           return_type: ::OctridevDigitalocean::NamespaceCreated,
           decoder: :json,
           operation_id: 'functions_create_namespace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -99,11 +96,10 @@ module OctridevDigitalocean
         namespace_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id)
           ].join,
           config: config,
@@ -111,7 +107,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'functions_get_namespace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -123,18 +119,17 @@ module OctridevDigitalocean
         namespace_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'functions_delete_namespace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -146,20 +141,19 @@ module OctridevDigitalocean
         namespace_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/triggers"
+            '/triggers'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ListTriggers,
           decoder: :json,
           operation_id: 'functions_list_triggers',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -185,13 +179,12 @@ module OctridevDigitalocean
         scheduled_details:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/triggers"
+            '/triggers'
           ].join,
           config: config,
           body: {
@@ -199,13 +192,13 @@ module OctridevDigitalocean
             'function' => function,
             'type' => type,
             'is_enabled' => is_enabled,
-            'scheduled_details' => scheduled_details,
+            'scheduled_details' => scheduled_details
           },
           return_type: ::OctridevDigitalocean::TriggerResponse,
           decoder: :json,
           operation_id: 'functions_create_trigger',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -219,13 +212,12 @@ module OctridevDigitalocean
         trigger_name:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/triggers/",
+            '/triggers/',
             SdkClient.encode_path_segment(trigger_name)
           ].join,
           config: config,
@@ -233,7 +225,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'functions_get_trigger',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -253,25 +245,24 @@ module OctridevDigitalocean
         scheduled_details: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/triggers/",
+            '/triggers/',
             SdkClient.encode_path_segment(trigger_name)
           ].join,
           config: config,
           body: {
             'is_enabled' => is_enabled,
-            'scheduled_details' => scheduled_details,
+            'scheduled_details' => scheduled_details
           },
           return_type: ::OctridevDigitalocean::TriggerResponse,
           decoder: :json,
           operation_id: 'functions_update_trigger',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -285,20 +276,19 @@ module OctridevDigitalocean
         trigger_name:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/triggers/",
+            '/triggers/',
             SdkClient.encode_path_segment(trigger_name)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'functions_delete_trigger',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -310,20 +300,19 @@ module OctridevDigitalocean
         namespace_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/keys"
+            '/keys'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AccessKeyList,
           decoder: :json,
           operation_id: 'functions_access_key_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -342,24 +331,23 @@ module OctridevDigitalocean
         expires_in: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/keys"
+            '/keys'
           ].join,
           config: config,
           body: {
             'name' => name,
-            'expires_in' => expires_in,
+            'expires_in' => expires_in
           },
           return_type: ::OctridevDigitalocean::AccessKeyCreate,
           decoder: :json,
           operation_id: 'functions_access_key_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -375,24 +363,23 @@ module OctridevDigitalocean
         name:,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/keys/",
+            '/keys/',
             SdkClient.encode_path_segment(key_id)
           ].join,
           config: config,
           body: {
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::AccessKeyUpdate,
           decoder: :json,
           operation_id: 'functions_access_key_update',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -406,20 +393,19 @@ module OctridevDigitalocean
         key_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/functions/namespaces/",
+            '/v2/functions/namespaces/',
             SdkClient.encode_path_segment(namespace_id),
-            "/keys/",
+            '/keys/',
             SdkClient.encode_path_segment(key_id)
           ].join,
           config: config,
           decoder: :json,
           operation_id: 'functions_access_key_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

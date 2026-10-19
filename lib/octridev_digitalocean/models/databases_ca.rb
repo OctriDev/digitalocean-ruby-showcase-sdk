@@ -5,80 +5,79 @@
 
 # databases_ca domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalCaMetadata
-  FIELDS = {
-    certificate: "certificate",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    certificate
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for Ca.
-# Typed representation of the `Ca` API schema.
-class Ca
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCaMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCaMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCaMetadata::DECODERS
-
-  # @return [String] base64 encoding of the certificate used to secure database connections
-  attr_reader :certificate
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCaMetadata
+    FIELDS = {
+      certificate: 'certificate'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      certificate
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Ca.
+  # Typed representation of the `Ca` API schema.
+  class Ca
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCaMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCaMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCaMetadata::DECODERS
+
+    # @return [String] base64 encoding of the certificate used to secure database connections
+    attr_reader :certificate
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalCaResponseMetadata
-  FIELDS = {
-    ca: "ca",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    ca
-  ].freeze
-  DECODERS = {
-    ca: lambda do |value|
-      ::OctridevDigitalocean::Ca.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for CaResponse.
-# Typed representation of the `CaResponse` API schema.
-class CaResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCaResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCaResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCaResponseMetadata::DECODERS
-
-  # @return [Ca] Required object value serialized in the `ca` wire field.
-  attr_reader :ca
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCaResponseMetadata
+    FIELDS = {
+      ca: 'ca'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      ca
+    ].freeze
+    DECODERS = {
+      ca: lambda do |value|
+        ::OctridevDigitalocean::Ca.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for CaResponse.
+  # Typed representation of the `CaResponse` API schema.
+  class CaResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCaResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCaResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCaResponseMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [Ca] Required object value serialized in the `ca` wire field.
+    attr_reader :ca
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

@@ -19,7 +19,6 @@ module OctridevDigitalocean
         alert_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('check_id', check_id)
 
         Validation.validate_uuid('alert_id', alert_id)
@@ -27,9 +26,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/uptime/checks/",
+            '/v2/uptime/checks/',
             SdkClient.encode_path_segment(check_id),
-            "/alerts/",
+            '/alerts/',
             SdkClient.encode_path_segment(alert_id)
           ].join,
           config: config,
@@ -37,7 +36,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'uptime_get_alert',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -67,7 +66,6 @@ module OctridevDigitalocean
         comparison: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('check_id', check_id)
 
         Validation.validate_uuid('alert_id', alert_id)
@@ -75,9 +73,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'PUT',
           [
-            "/v2/uptime/checks/",
+            '/v2/uptime/checks/',
             SdkClient.encode_path_segment(check_id),
-            "/alerts/",
+            '/alerts/',
             SdkClient.encode_path_segment(alert_id)
           ].join,
           config: config,
@@ -87,13 +85,13 @@ module OctridevDigitalocean
             'notifications' => notifications,
             'period' => period,
             'threshold' => threshold,
-            'comparison' => comparison,
+            'comparison' => comparison
           },
           return_type: ::OctridevDigitalocean::ExistingAlert,
           decoder: :json,
           operation_id: 'uptime_update_alert',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -107,7 +105,6 @@ module OctridevDigitalocean
         alert_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('check_id', check_id)
 
         Validation.validate_uuid('alert_id', alert_id)
@@ -115,16 +112,16 @@ module OctridevDigitalocean
         SdkClient.request(
           'DELETE',
           [
-            "/v2/uptime/checks/",
+            '/v2/uptime/checks/',
             SdkClient.encode_path_segment(check_id),
-            "/alerts/",
+            '/alerts/',
             SdkClient.encode_path_segment(alert_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'uptime_delete_alert',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

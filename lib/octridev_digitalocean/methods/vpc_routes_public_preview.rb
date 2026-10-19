@@ -21,7 +21,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('vpc_uuid', vpc_uuid)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -31,20 +30,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/vpcs/",
+            '/v2/vpcs/',
             SdkClient.encode_path_segment(vpc_uuid),
-            "/routes"
+            '/routes'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllVpcRoutes,
           decoder: :json,
           operation_id: 'vpc_routes_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -62,7 +61,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('vpc_uuid', vpc_uuid)
 
         Validation.validate_uuid('subnet_uuid', subnet_uuid)
@@ -74,22 +72,22 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/vpcs/",
+            '/v2/vpcs/',
             SdkClient.encode_path_segment(vpc_uuid),
-            "/subnets/",
+            '/subnets/',
             SdkClient.encode_path_segment(subnet_uuid),
-            "/routes"
+            '/routes'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllVpcSubnetRoutes,
           decoder: :json,
           operation_id: 'vpc_subnet_routes_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -111,7 +109,6 @@ module OctridevDigitalocean
         target_urns:,
         request_options: nil
       )
-
         Validation.validate_uuid('vpc_uuid', vpc_uuid)
 
         Validation.validate_uuid('subnet_uuid', subnet_uuid)
@@ -119,22 +116,22 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/v2/vpcs/",
+            '/v2/vpcs/',
             SdkClient.encode_path_segment(vpc_uuid),
-            "/subnets/",
+            '/subnets/',
             SdkClient.encode_path_segment(subnet_uuid),
-            "/routes"
+            '/routes'
           ].join,
           config: config,
           body: {
             'destination_cidr' => destination_cidr,
-            'target_urns' => target_urns,
+            'target_urns' => target_urns
           },
           return_type: ::OctridevDigitalocean::SingleRoute,
           decoder: :json,
           operation_id: 'vpc_subnet_routes_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -155,7 +152,6 @@ module OctridevDigitalocean
         target_urns:,
         request_options: nil
       )
-
         Validation.validate_uuid('vpc_uuid', vpc_uuid)
 
         Validation.validate_uuid('subnet_uuid', subnet_uuid)
@@ -165,22 +161,22 @@ module OctridevDigitalocean
         SdkClient.request(
           'PATCH',
           [
-            "/v2/vpcs/",
+            '/v2/vpcs/',
             SdkClient.encode_path_segment(vpc_uuid),
-            "/subnets/",
+            '/subnets/',
             SdkClient.encode_path_segment(subnet_uuid),
-            "/routes/",
+            '/routes/',
             SdkClient.encode_path_segment(route_uuid)
           ].join,
           config: config,
           body: {
-            'target_urns' => target_urns,
+            'target_urns' => target_urns
           },
           return_type: ::OctridevDigitalocean::SingleRoute,
           decoder: :json,
           operation_id: 'vpc_subnet_routes_update',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -196,7 +192,6 @@ module OctridevDigitalocean
         route_uuid:,
         request_options: nil
       )
-
         Validation.validate_uuid('vpc_uuid', vpc_uuid)
 
         Validation.validate_uuid('subnet_uuid', subnet_uuid)
@@ -206,18 +201,18 @@ module OctridevDigitalocean
         SdkClient.request(
           'DELETE',
           [
-            "/v2/vpcs/",
+            '/v2/vpcs/',
             SdkClient.encode_path_segment(vpc_uuid),
-            "/subnets/",
+            '/subnets/',
             SdkClient.encode_path_segment(subnet_uuid),
-            "/routes/",
+            '/routes/',
             SdkClient.encode_path_segment(route_uuid)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'vpc_subnet_routes_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -5,189 +5,187 @@
 
 # agent_platform_api_api_knowledge domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiKnowledgeBaseMetadata
-  FIELDS = {
-    added_to_agent_at: "added_to_agent_at",
-    created_at: "created_at",
-    database_id: "database_id",
-    embedding_model_uuid: "embedding_model_uuid",
-    is_public: "is_public",
-    last_indexing_job: "last_indexing_job",
-    name: "name",
-    project_id: "project_id",
-    region: "region",
-    reranking_config: "reranking_config",
-    tags: "tags",
-    updated_at: "updated_at",
-    user_id: "user_id",
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    last_indexing_job: lambda do |value|
-      ::OctridevDigitalocean::ApiIndexingJob.from_hash(value)
-    end,
-    reranking_config: lambda do |value|
-      ::OctridevDigitalocean::ApiRerankingConfiguration.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiKnowledgeBase.
-# Knowledgebase Description
-class ApiKnowledgeBase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiKnowledgeBaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiKnowledgeBaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiKnowledgeBaseMetadata::DECODERS
-
-  # @return [String] Time when the knowledge base was added to the agent
-  attr_reader :added_to_agent_at
-  # @return [String] Creation date / time
-  attr_reader :created_at
-  # @return [String] Optional `string` value serialized in the `database_id` wire field.
-  attr_reader :database_id
-  # @return [String] Optional `string` value serialized in the `embedding_model_uuid` wire field.
-  attr_reader :embedding_model_uuid
-  # @return [Boolean] Whether the knowledge base is public or not
-  attr_reader :is_public
-  # @return [ApiIndexingJob] IndexingJob description
-  attr_reader :last_indexing_job
-  # @return [String] Name of knowledge base
-  attr_reader :name
-  # @return [String] Optional `string` value serialized in the `project_id` wire field.
-  attr_reader :project_id
-  # @return [String] Region code
-  attr_reader :region
-  # @return [ApiRerankingConfiguration] Configuration for cross-encoder reranking during retrieval.
-  attr_reader :reranking_config
-  # @return [Array_of_String] Tags to organize related resources
-  attr_reader :tags
-  # @return [String] Last modified
-  attr_reader :updated_at
-  # @return [String] Id of user that created the knowledge base
-  attr_reader :user_id
-  # @return [String] Unique id for knowledge base
-  attr_reader :uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiKnowledgeBaseMetadata
+    FIELDS = {
+      added_to_agent_at: 'added_to_agent_at',
+      created_at: 'created_at',
+      database_id: 'database_id',
+      embedding_model_uuid: 'embedding_model_uuid',
+      is_public: 'is_public',
+      last_indexing_job: 'last_indexing_job',
+      name: 'name',
+      project_id: 'project_id',
+      region: 'region',
+      reranking_config: 'reranking_config',
+      tags: 'tags',
+      updated_at: 'updated_at',
+      user_id: 'user_id',
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      last_indexing_job: lambda do |value|
+        ::OctridevDigitalocean::ApiIndexingJob.from_hash(value)
+      end,
+      reranking_config: lambda do |value|
+        ::OctridevDigitalocean::ApiRerankingConfiguration.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiKnowledgeBase.
+  # Knowledgebase Description
+  class ApiKnowledgeBase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiKnowledgeBaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiKnowledgeBaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiKnowledgeBaseMetadata::DECODERS
+
+    # @return [String] Time when the knowledge base was added to the agent
+    attr_reader :added_to_agent_at
+    # @return [String] Creation date / time
+    attr_reader :created_at
+    # @return [String] Optional `string` value serialized in the `database_id` wire field.
+    attr_reader :database_id
+    # @return [String] Optional `string` value serialized in the `embedding_model_uuid` wire field.
+    attr_reader :embedding_model_uuid
+    # @return [Boolean] Whether the knowledge base is public or not
+    attr_reader :is_public
+    # @return [ApiIndexingJob] IndexingJob description
+    attr_reader :last_indexing_job
+    # @return [String] Name of knowledge base
+    attr_reader :name
+    # @return [String] Optional `string` value serialized in the `project_id` wire field.
+    attr_reader :project_id
+    # @return [String] Region code
+    attr_reader :region
+    # @return [ApiRerankingConfiguration] Configuration for cross-encoder reranking during retrieval.
+    attr_reader :reranking_config
+    # @return [Array_of_String] Tags to organize related resources
+    attr_reader :tags
+    # @return [String] Last modified
+    attr_reader :updated_at
+    # @return [String] Id of user that created the knowledge base
+    attr_reader :user_id
+    # @return [String] Unique id for knowledge base
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiKnowledgeBaseDataSourceMetadata
-  FIELDS = {
-    aws_data_source: "aws_data_source",
-    bucket_name: "bucket_name",
-    chunking_algorithm: "chunking_algorithm",
-    chunking_options: "chunking_options",
-    created_at: "created_at",
-    dropbox_data_source: "dropbox_data_source",
-    file_upload_data_source: "file_upload_data_source",
-    google_drive_data_source: "google_drive_data_source",
-    item_path: "item_path",
-    last_datasource_indexing_job: "last_datasource_indexing_job",
-    region: "region",
-    spaces_data_source: "spaces_data_source",
-    updated_at: "updated_at",
-    uuid: "uuid",
-    web_crawler_data_source: "web_crawler_data_source",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    aws_data_source: lambda do |value|
-      ::OctridevDigitalocean::ApiAWSDataSourceDisplay.from_hash(value)
-    end,
-    chunking_algorithm: lambda do |value|
-      ::OctridevDigitalocean::ApiChunkingAlgorithm.from_value(value)
-    end,
-    chunking_options: lambda do |value|
-      ::OctridevDigitalocean::ApiChunkingOptions.from_hash(value)
-    end,
-    dropbox_data_source: lambda do |value|
-      ::OctridevDigitalocean::ApiDropboxDataSourceDisplay.from_hash(value)
-    end,
-    file_upload_data_source: lambda do |value|
-      ::OctridevDigitalocean::ApiFileUploadDataSource.from_hash(value)
-    end,
-    google_drive_data_source: lambda do |value|
-      ::OctridevDigitalocean::ApiGoogleDriveDataSourceDisplay.from_hash(value)
-    end,
-    last_datasource_indexing_job: lambda do |value|
-      ::OctridevDigitalocean::ApiIndexedDataSource.from_hash(value)
-    end,
-    spaces_data_source: lambda do |value|
-      ::OctridevDigitalocean::ApiSpacesDataSource.from_hash(value)
-    end,
-    web_crawler_data_source: lambda do |value|
-      ::OctridevDigitalocean::ApiWebCrawlerDataSource.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiKnowledgeBaseDataSource.
-# Data Source configuration for Knowledge Bases
-class ApiKnowledgeBaseDataSource
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiKnowledgeBaseDataSourceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiKnowledgeBaseDataSourceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiKnowledgeBaseDataSourceMetadata::DECODERS
-
-  # @return [ApiAWSDataSourceDisplay] AWS S3 Data Source for Display
-  attr_reader :aws_data_source
-  # @return [String] Name of storage bucket - Deprecated, moved to data_source_details
-  attr_reader :bucket_name
-  # @return [ApiChunkingAlgorithm] Optional enumerated value serialized in the `chunking_algorithm` wire field.
-  attr_reader :chunking_algorithm
-  # @return [ApiChunkingOptions] Optional object value serialized in the `chunking_options` wire field.
-  attr_reader :chunking_options
-  # @return [String] Creation date / time
-  attr_reader :created_at
-  # @return [ApiDropboxDataSourceDisplay] Dropbox Data Source for Display
-  attr_reader :dropbox_data_source
-  # @return [ApiFileUploadDataSource] File to upload as data source for knowledge base.
-  attr_reader :file_upload_data_source
-  # @return [ApiGoogleDriveDataSourceDisplay] Google Drive Data Source for Display
-  attr_reader :google_drive_data_source
-  # @return [String] Path of folder or object in bucket - Deprecated, moved to data_source_details
-  attr_reader :item_path
-  # @return [ApiIndexedDataSource] Optional object value serialized in the `last_datasource_indexing_job` wire field.
-  attr_reader :last_datasource_indexing_job
-  # @return [String] Region code - Deprecated, moved to data_source_details
-  attr_reader :region
-  # @return [ApiSpacesDataSource] Spaces Bucket Data Source
-  attr_reader :spaces_data_source
-  # @return [String] Last modified
-  attr_reader :updated_at
-  # @return [String] Unique id of knowledge base
-  attr_reader :uuid
-  # @return [ApiWebCrawlerDataSource] WebCrawlerDataSource
-  attr_reader :web_crawler_data_source
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiKnowledgeBaseDataSourceMetadata
+    FIELDS = {
+      aws_data_source: 'aws_data_source',
+      bucket_name: 'bucket_name',
+      chunking_algorithm: 'chunking_algorithm',
+      chunking_options: 'chunking_options',
+      created_at: 'created_at',
+      dropbox_data_source: 'dropbox_data_source',
+      file_upload_data_source: 'file_upload_data_source',
+      google_drive_data_source: 'google_drive_data_source',
+      item_path: 'item_path',
+      last_datasource_indexing_job: 'last_datasource_indexing_job',
+      region: 'region',
+      spaces_data_source: 'spaces_data_source',
+      updated_at: 'updated_at',
+      uuid: 'uuid',
+      web_crawler_data_source: 'web_crawler_data_source'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      aws_data_source: lambda do |value|
+        ::OctridevDigitalocean::ApiAWSDataSourceDisplay.from_hash(value)
+      end,
+      chunking_algorithm: lambda do |value|
+        ::OctridevDigitalocean::ApiChunkingAlgorithm.from_value(value)
+      end,
+      chunking_options: lambda do |value|
+        ::OctridevDigitalocean::ApiChunkingOptions.from_hash(value)
+      end,
+      dropbox_data_source: lambda do |value|
+        ::OctridevDigitalocean::ApiDropboxDataSourceDisplay.from_hash(value)
+      end,
+      file_upload_data_source: lambda do |value|
+        ::OctridevDigitalocean::ApiFileUploadDataSource.from_hash(value)
+      end,
+      google_drive_data_source: lambda do |value|
+        ::OctridevDigitalocean::ApiGoogleDriveDataSourceDisplay.from_hash(value)
+      end,
+      last_datasource_indexing_job: lambda do |value|
+        ::OctridevDigitalocean::ApiIndexedDataSource.from_hash(value)
+      end,
+      spaces_data_source: lambda do |value|
+        ::OctridevDigitalocean::ApiSpacesDataSource.from_hash(value)
+      end,
+      web_crawler_data_source: lambda do |value|
+        ::OctridevDigitalocean::ApiWebCrawlerDataSource.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ApiKnowledgeBaseDataSource.
+  # Data Source configuration for Knowledge Bases
+  class ApiKnowledgeBaseDataSource
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiKnowledgeBaseDataSourceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiKnowledgeBaseDataSourceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiKnowledgeBaseDataSourceMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [ApiAWSDataSourceDisplay] AWS S3 Data Source for Display
+    attr_reader :aws_data_source
+    # @return [String] Name of storage bucket - Deprecated, moved to data_source_details
+    attr_reader :bucket_name
+    # @return [ApiChunkingAlgorithm] Optional enumerated value serialized in the `chunking_algorithm` wire field.
+    attr_reader :chunking_algorithm
+    # @return [ApiChunkingOptions] Optional object value serialized in the `chunking_options` wire field.
+    attr_reader :chunking_options
+    # @return [String] Creation date / time
+    attr_reader :created_at
+    # @return [ApiDropboxDataSourceDisplay] Dropbox Data Source for Display
+    attr_reader :dropbox_data_source
+    # @return [ApiFileUploadDataSource] File to upload as data source for knowledge base.
+    attr_reader :file_upload_data_source
+    # @return [ApiGoogleDriveDataSourceDisplay] Google Drive Data Source for Display
+    attr_reader :google_drive_data_source
+    # @return [String] Path of folder or object in bucket - Deprecated, moved to data_source_details
+    attr_reader :item_path
+    # @return [ApiIndexedDataSource] Optional object value serialized in the `last_datasource_indexing_job` wire field.
+    attr_reader :last_datasource_indexing_job
+    # @return [String] Region code - Deprecated, moved to data_source_details
+    attr_reader :region
+    # @return [ApiSpacesDataSource] Spaces Bucket Data Source
+    attr_reader :spaces_data_source
+    # @return [String] Last modified
+    attr_reader :updated_at
+    # @return [String] Unique id of knowledge base
+    attr_reader :uuid
+    # @return [ApiWebCrawlerDataSource] WebCrawlerDataSource
+    attr_reader :web_crawler_data_source
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

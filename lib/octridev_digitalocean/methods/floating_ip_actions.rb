@@ -17,20 +17,19 @@ module OctridevDigitalocean
         floating_ip:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/floating_ips/",
+            '/v2/floating_ips/',
             SdkClient.encode_path_segment(floating_ip),
-            "/actions"
+            '/actions'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::FloatingIpActions,
           decoder: :json,
           operation_id: 'floating_ips_action_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -45,13 +44,12 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/floating_ips/",
+            '/v2/floating_ips/',
             SdkClient.encode_path_segment(floating_ip),
-            "/actions"
+            '/actions'
           ].join,
           config: config,
           body: body,
@@ -59,7 +57,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'floating_ips_action_post',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -74,15 +72,14 @@ module OctridevDigitalocean
         action_id:,
         request_options: nil
       )
-
         Validation.validate_range('action_id', action_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/floating_ips/",
+            '/v2/floating_ips/',
             SdkClient.encode_path_segment(floating_ip),
-            "/actions/",
+            '/actions/',
             SdkClient.encode_path_segment(action_id)
           ].join,
           config: config,
@@ -90,7 +87,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'floating_ips_action_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -35,7 +35,6 @@ module OctridevDigitalocean
         description: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         Validation.validate_items('fields', fields, min: 1, max: 64)
@@ -44,20 +43,20 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          "/v2/action-gateway/output-views",
+          '/v2/action-gateway/output-views',
           config: config,
           body: {
             'name' => name,
             'fields' => fields,
             'tool' => tool,
             'tool_id' => tool_id,
-            'description' => description,
+            'description' => description
           },
           return_type: ::OctridevDigitalocean::OutputViewResponse,
           decoder: :json,
           operation_id: 'output_views_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -81,28 +80,27 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/v2/action-gateway/output-views",
+          '/v2/action-gateway/output-views',
           config: config,
           query: {
             'tool' => QueryValue.new(tool, style: 'form', explode: true),
             'tool_id' => QueryValue.new(tool_id, style: 'form', explode: true),
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListOutputViewsResponse,
           decoder: :json,
           operation_id: 'output_views_list',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
-    OutputViewsListPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      OutputViewsListPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Returns the output views your team can use: views DigitalOcean publishes to every team, plus your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
       #
@@ -137,9 +135,11 @@ module OctridevDigitalocean
             )
             items = page.views || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -166,10 +166,12 @@ module OctridevDigitalocean
             )
             items = page.views || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << OutputViewsListPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end
@@ -193,23 +195,22 @@ module OctridevDigitalocean
         description: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/action-gateway/output-views/preview",
+          '/v2/action-gateway/output-views/preview',
           config: config,
           body: {
             'fields' => fields,
             'tool' => tool,
             'tool_id' => tool_id,
             'name' => name,
-            'description' => description,
+            'description' => description
           },
           return_type: ::OctridevDigitalocean::OutputViewResponse,
           decoder: :json,
           operation_id: 'output_views_validate',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -221,11 +222,10 @@ module OctridevDigitalocean
         view_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/action-gateway/output-views/",
+            '/v2/action-gateway/output-views/',
             SdkClient.encode_path_segment(view_id)
           ].join,
           config: config,
@@ -233,7 +233,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'output_views_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -245,11 +245,10 @@ module OctridevDigitalocean
         view_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/action-gateway/output-views/",
+            '/v2/action-gateway/output-views/',
             SdkClient.encode_path_segment(view_id)
           ].join,
           config: config,
@@ -257,7 +256,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'output_views_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -296,14 +295,13 @@ module OctridevDigitalocean
         insights: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(actor_id) do
           Validation.validate_pattern('actorId', actor_id, '^[A-Za-z0-9._-]{1,64}$')
         end
 
         SdkClient.request(
           'POST',
-          "/v2/action-gateway/sessions",
+          '/v2/action-gateway/sessions',
           config: config,
           body: {
             'name' => name,
@@ -312,13 +310,13 @@ module OctridevDigitalocean
             'tools' => tools,
             'config' => request_config,
             'network' => network,
-            'insights' => insights,
+            'insights' => insights
           },
           return_type: ::OctridevDigitalocean::CreateSessionResponse,
           decoder: :json,
           operation_id: 'sessions_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -335,25 +333,24 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/v2/action-gateway/sessions",
+          '/v2/action-gateway/sessions',
           config: config,
           query: {
             'end_user_id' => QueryValue.new(end_user_id, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListSessionsResponse,
           decoder: :json,
           operation_id: 'sessions_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -380,28 +377,27 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/v2/action-gateway/sessions/search",
+          '/v2/action-gateway/sessions/search',
           config: config,
           query: {
             'query' => QueryValue.new(query, style: 'form', explode: true),
             'end_user_id' => QueryValue.new(end_user_id, style: 'form', explode: true),
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::SearchSessionsResponse,
           decoder: :json,
           operation_id: 'sessions_list_search',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
-    SessionsListSearchPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      SessionsListSearchPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName` contains query, case-insensitively, ranked across the whole result set. Cursor-paged with `page_size` and `page_token`; no total is reported.
       #
@@ -439,9 +435,11 @@ module OctridevDigitalocean
             )
             items = page.sessions || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -468,10 +466,12 @@ module OctridevDigitalocean
             )
             items = page.sessions || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << SessionsListSearchPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end
@@ -486,11 +486,10 @@ module OctridevDigitalocean
         session_urn:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/action-gateway/sessions/",
+            '/v2/action-gateway/sessions/',
             SdkClient.encode_path_segment(session_urn)
           ].join,
           config: config,
@@ -498,7 +497,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'sessions_delete',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -526,7 +525,6 @@ module OctridevDigitalocean
         tools: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         Validation.if_given(version) { Validation.validate_pattern('version', version, '^[0-9]+$') }
@@ -539,20 +537,20 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          "/v2/action-gateway/toolbelts",
+          '/v2/action-gateway/toolbelts',
           config: config,
           body: {
             'name' => name,
             'version' => version,
             'display_name' => display_name,
             'description' => description,
-            'tools' => tools,
+            'tools' => tools
           },
           return_type: ::OctridevDigitalocean::ToolbeltResponse,
           decoder: :json,
           operation_id: 'toolbelts_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

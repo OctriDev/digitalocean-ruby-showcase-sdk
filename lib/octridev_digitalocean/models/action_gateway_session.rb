@@ -5,435 +5,426 @@
 
 # action_gateway_session domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalSessionToolsReferencesItemMetadata
-  FIELDS = {
-    kind: "kind",
-    name: "name",
-    version: "version",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    kind: lambda do |value|
-      ::OctridevDigitalocean::SessionToolsReferencesItemKind.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for SessionToolsReferencesItem.
-# Required object value serialized in the `references[]` wire field.
-class SessionToolsReferencesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSessionToolsReferencesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSessionToolsReferencesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSessionToolsReferencesItemMetadata::DECODERS
-
-  # @return [SessionToolsReferencesItemKind] Whether name is a tool or a toolbelt.
-  attr_reader :kind
-  # @return [String] Tool slug or toolbelt name.
-  attr_reader :name
-  # @return [String] Pinned version.
-  attr_reader :version
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSessionToolsReferencesItemMetadata
+    FIELDS = {
+      kind: 'kind',
+      name: 'name',
+      version: 'version'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      kind: lambda do |value|
+        ::OctridevDigitalocean::SessionToolsReferencesItemKind.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SessionToolsReferencesItem.
+  # Required object value serialized in the `references[]` wire field.
+  class SessionToolsReferencesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSessionToolsReferencesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSessionToolsReferencesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSessionToolsReferencesItemMetadata::DECODERS
+
+    # @return [SessionToolsReferencesItemKind] Whether name is a tool or a toolbelt.
+    attr_reader :kind
+    # @return [String] Tool slug or toolbelt name.
+    attr_reader :name
+    # @return [String] Pinned version.
+    attr_reader :version
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSessionToolsMetadata
-  FIELDS = {
-    references: "references",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    references: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::SessionToolsReferencesItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for SessionTools.
-# Omitted when the request omitted tools (all tools). A present selection with no references represents tools: [].
-class SessionTools
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSessionToolsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSessionToolsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSessionToolsMetadata::DECODERS
-
-  # @return [Array_of_SessionToolsReferencesItem] The selected references. Empty means the session exposes no tools.
-  attr_reader :references
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSessionToolsMetadata
+    FIELDS = {
+      references: 'references'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      references: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::SessionToolsReferencesItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SessionTools.
+  # Omitted when the request omitted tools (all tools). A present selection with no references represents tools: [].
+  class SessionTools
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSessionToolsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSessionToolsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSessionToolsMetadata::DECODERS
+
+    # @return [Array_of_SessionToolsReferencesItem] The selected references. Empty means the session exposes no tools.
+    attr_reader :references
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSessionMetadata
-  FIELDS = {
-    session_urn: "sessionUrn",
-    name: "name",
-    actor_id: "actorId",
-    policy: "policy",
-    tools: "tools",
-    config: "config",
-    network: "network",
-    insights: "insights",
-    agent_urn: "agentUrn",
-    agent_name: "agentName",
-    created_at: "createdAt",
-    updated_at: "updatedAt",
-    owning_user_id: "owning_user_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    policy: lambda do |value|
-      ::OctridevDigitalocean::SessionPolicy.from_hash(value)
-    end,
-    tools: lambda do |value|
-      ::OctridevDigitalocean::SessionTools.from_hash(value)
-    end,
-    network: lambda do |value|
-      ::OctridevDigitalocean::SessionNetwork.from_hash(value)
-    end,
-    insights: lambda do |value|
-      ::OctridevDigitalocean::SessionInsights.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Session.
-# A session and the tool-permission policy bound to it.
-class Session
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSessionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSessionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSessionMetadata::DECODERS
-
-  # @return [String] Session URN, for example `do:managed_agent_session:<uuid>`.
-  attr_reader :session_urn
-  # @return [String] The required human-readable session name.
-  attr_reader :name
-  # @return [String] Empty when the session is not bound to an actor.
-  attr_reader :actor_id
-  # @return [SessionPolicy] The session's tool-permission policy.
-  attr_reader :policy
-  # @return [SessionTools] Omitted when the request omitted tools (all tools). A present selection with no references represents tools: [].
-  attr_reader :tools
-  # @return [Hash] Session options as supplied at creation. Omitted when none were supplied.
-  attr_reader :config
-  # @return [SessionNetwork] Omitted when the request omitted network. A present binding currently supports only VPC attachment by UUID.
-  attr_reader :network
-  # @return [SessionInsights] Omitted when no explicit customer Insights choice was stored.
-  attr_reader :insights
-  # @return [String] URN of the agent that started the session. Empty for sessions created through this API.
-  attr_reader :agent_urn
-  # @return [String] Name of the agent that started the session. Empty for sessions created through this API.
-  attr_reader :agent_name
-  # @return [String] When the session was created.
-  attr_reader :created_at
-  # @return [String] When the session was last modified.
-  attr_reader :updated_at
-  # @return [String] DigitalOcean user ID of the user who created the session, when recorded.
-  attr_reader :owning_user_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSessionMetadata
+    FIELDS = {
+      session_urn: 'sessionUrn',
+      name: 'name',
+      actor_id: 'actorId',
+      policy: 'policy',
+      tools: 'tools',
+      config: 'config',
+      network: 'network',
+      insights: 'insights',
+      agent_urn: 'agentUrn',
+      agent_name: 'agentName',
+      created_at: 'createdAt',
+      updated_at: 'updatedAt',
+      owning_user_id: 'owning_user_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      policy: lambda do |value|
+        ::OctridevDigitalocean::SessionPolicy.from_hash(value)
+      end,
+      tools: lambda do |value|
+        ::OctridevDigitalocean::SessionTools.from_hash(value)
+      end,
+      network: lambda do |value|
+        ::OctridevDigitalocean::SessionNetwork.from_hash(value)
+      end,
+      insights: lambda do |value|
+        ::OctridevDigitalocean::SessionInsights.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Session.
+  # A session and the tool-permission policy bound to it.
+  class Session
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSessionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSessionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSessionMetadata::DECODERS
+
+    # @return [String] Session URN, for example `do:managed_agent_session:<uuid>`.
+    attr_reader :session_urn
+    # @return [String] The required human-readable session name.
+    attr_reader :name
+    # @return [String] Empty when the session is not bound to an actor.
+    attr_reader :actor_id
+    # @return [SessionPolicy] The session's tool-permission policy.
+    attr_reader :policy
+    # @return [SessionTools] Omitted when the request omitted tools (all tools). A present selection with no references represents tools: [].
+    attr_reader :tools
+    # @return [Hash] Session options as supplied at creation. Omitted when none were supplied.
+    attr_reader :config
+    # @return [SessionNetwork] Omitted when the request omitted network. A present binding currently supports only VPC attachment by UUID.
+    attr_reader :network
+    # @return [SessionInsights] Omitted when no explicit customer Insights choice was stored.
+    attr_reader :insights
+    # @return [String] URN of the agent that started the session. Empty for sessions created through this API.
+    attr_reader :agent_urn
+    # @return [String] Name of the agent that started the session. Empty for sessions created through this API.
+    attr_reader :agent_name
+    # @return [String] When the session was created.
+    attr_reader :created_at
+    # @return [String] When the session was last modified.
+    attr_reader :updated_at
+    # @return [String] DigitalOcean user ID of the user who created the session, when recorded.
+    attr_reader :owning_user_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the SessionToolsReferencesItemKind SDK namespace.
-module SessionToolsReferencesItemKind
-  SESSION_TOOL_REFERENCE_KIND_TOOL = 'SESSION_TOOL_REFERENCE_KIND_TOOL'
-  SESSION_TOOL_REFERENCE_KIND_TOOLBELT = 'SESSION_TOOL_REFERENCE_KIND_TOOLBELT'
-  VALUES = ['SESSION_TOOL_REFERENCE_KIND_TOOL', 'SESSION_TOOL_REFERENCE_KIND_TOOLBELT'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSessionCreateMetadata
-  FIELDS = {
-    name: "name",
-    actor_id: "actorId",
-    policy: "policy",
-    tools: "tools",
-    config: "config",
-    network: "network",
-    insights: "insights",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-    policy: lambda do |value|
-      ::OctridevDigitalocean::SessionPolicy.from_hash(value)
-    end,
-    network: lambda do |value|
-      ::OctridevDigitalocean::SessionNetwork.from_hash(value)
-    end,
-    insights: lambda do |value|
-      ::OctridevDigitalocean::SessionInsights.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for SessionCreate.
-# Describes a session to create.
-class SessionCreate
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSessionCreateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSessionCreateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSessionCreateMetadata::DECODERS
-
-  # @return [String] Required human-readable session name.
-  attr_reader :name
-  # @return [String] Optional actor binding: the user whose connections the session's tool calls use, matched against connection `user_id`. When set it must use the same alphabet as a connection's `user_id`, `[A-Za-z0-9._-]`, at most 64 characters; anything else is rejected with 400.
-  attr_reader :actor_id
-  # @return [SessionPolicy] Optional tool-permission policy. Omitted asks before every call.
-  attr_reader :policy
-  # @return [Array_of_String] Omitted enables every tool. An explicit empty array enables no tools. Direct tools may be `<tool>` or `<tool>@<version>`, using provider-qualified tool slugs, and a pinned version must be the released one; toolbelt references must be version-pinned as `toolbelt:<belt-name>@<version>`.
-  attr_reader :tools
-  # @return [Hash] Optional session options. config.preloadTools may contain concrete tool names (optionally version-pinned) and version-pinned toolbelt references. config.customInstructions is a string of at most 1000 characters. config.outputViews maps up to 100 tool slugs to the name of an output view to apply to that tool's results.
-  attr_reader :config
-  # @return [SessionNetwork] Product-level session network binding. When set, `vpc_uuid` must identify a VPC owned by the session's team.
-  attr_reader :network
-  # @return [SessionInsights] Omitted when the request omitted insights or explicitly sent null.
-  attr_reader :insights
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the SessionToolsReferencesItemKind SDK namespace.
+  module SessionToolsReferencesItemKind
+    SESSION_TOOL_REFERENCE_KIND_TOOL = 'SESSION_TOOL_REFERENCE_KIND_TOOL'
+    SESSION_TOOL_REFERENCE_KIND_TOOLBELT = 'SESSION_TOOL_REFERENCE_KIND_TOOLBELT'
+    VALUES = %w[SESSION_TOOL_REFERENCE_KIND_TOOL SESSION_TOOL_REFERENCE_KIND_TOOLBELT].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalSessionCreateMetadata
+    FIELDS = {
+      name: 'name',
+      actor_id: 'actorId',
+      policy: 'policy',
+      tools: 'tools',
+      config: 'config',
+      network: 'network',
+      insights: 'insights'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {
+      policy: lambda do |value|
+        ::OctridevDigitalocean::SessionPolicy.from_hash(value)
+      end,
+      network: lambda do |value|
+        ::OctridevDigitalocean::SessionNetwork.from_hash(value)
+      end,
+      insights: lambda do |value|
+        ::OctridevDigitalocean::SessionInsights.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for SessionCreate.
+  # Describes a session to create.
+  class SessionCreate
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSessionCreateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSessionCreateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSessionCreateMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalSessionInsightsMetadata
-  FIELDS = {
-    metrics: "metrics",
-    logs: "logs",
-    traces: "traces",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] Required human-readable session name.
+    attr_reader :name
+    # @return [String] Optional actor binding: the user whose connections the session's tool calls use, matched against connection `user_id`. When set it must use the same alphabet as a connection's `user_id`, `[A-Za-z0-9._-]`, at most 64 characters; anything else is rejected with 400.
+    attr_reader :actor_id
+    # @return [SessionPolicy] Optional tool-permission policy. Omitted asks before every call.
+    attr_reader :policy
+    # @return [Array_of_String] Omitted enables every tool. An explicit empty array enables no tools. Direct tools may be `<tool>` or `<tool>@<version>`, using provider-qualified tool slugs, and a pinned version must be the released one; toolbelt references must be version-pinned as `toolbelt:<belt-name>@<version>`.
+    attr_reader :tools
+    # @return [Hash] Optional session options. config.preloadTools may contain concrete tool names (optionally version-pinned) and version-pinned toolbelt references. config.customInstructions is a string of at most 1000 characters. config.outputViews maps up to 100 tool slugs to the name of an output view to apply to that tool's results.
+    attr_reader :config
+    # @return [SessionNetwork] Product-level session network binding. When set, `vpc_uuid` must identify a VPC owned by the session's team.
+    attr_reader :network
+    # @return [SessionInsights] Omitted when the request omitted insights or explicitly sent null.
+    attr_reader :insights
 
-# API model for SessionInsights.
-# Records which of a session's telemetry is sent to Insights.
-class SessionInsights
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSessionInsightsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSessionInsightsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSessionInsightsMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Boolean] Accepted and stored for parity with the Insights schema.
-  attr_reader :metrics
-  # @return [Boolean] Whether the session's customer logs are sent to Insights.
-  attr_reader :logs
-  # @return [Boolean] Whether the session's customer traces are sent to Insights.
-  attr_reader :traces
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSessionNetworkMetadata
-  FIELDS = {
-    vpc_uuid: "vpcUuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SessionNetwork.
-# Attaches a session to a VPC.
-class SessionNetwork
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSessionNetworkMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSessionNetworkMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSessionNetworkMetadata::DECODERS
-
-  # @return [String] UUID of a VPC owned by your team, in a region that supports sessions.
-  attr_reader :vpc_uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSessionInsightsMetadata
+    FIELDS = {
+      metrics: 'metrics',
+      logs: 'logs',
+      traces: 'traces'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SessionInsights.
+  # Records which of a session's telemetry is sent to Insights.
+  class SessionInsights
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSessionInsightsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSessionInsightsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSessionInsightsMetadata::DECODERS
+
+    # @return [Boolean] Accepted and stored for parity with the Insights schema.
+    attr_reader :metrics
+    # @return [Boolean] Whether the session's customer logs are sent to Insights.
+    attr_reader :logs
+    # @return [Boolean] Whether the session's customer traces are sent to Insights.
+    attr_reader :traces
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSessionPolicyRulesItemMetadata
-  FIELDS = {
-    tool: "tool",
-    match: "match",
-    action: "action",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    action: lambda do |value|
-      ::OctridevDigitalocean::SessionPolicyRulesItemAction.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for SessionPolicyRulesItem.
-# Required object value serialized in the `rules[]` wire field.
-class SessionPolicyRulesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSessionPolicyRulesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSessionPolicyRulesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSessionPolicyRulesItemMetadata::DECODERS
-
-  # @return [String] Required. A tool slug, optionally `<tool_slug>@<version>`, or a toolbelt as `toolbelt:<name>@<version>`. When the session selects tools, the rule must name one of them.
-  attr_reader :tool
-  # @return [Hash] Optional argument conditions, keyed by argument name; the rule applies only to calls whose arguments match.
-  attr_reader :match
-  # @return [SessionPolicyRulesItemAction] Required: allow, ask, or deny.
-  attr_reader :action
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSessionNetworkMetadata
+    FIELDS = {
+      vpc_uuid: 'vpcUuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SessionNetwork.
+  # Attaches a session to a VPC.
+  class SessionNetwork
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSessionNetworkMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSessionNetworkMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSessionNetworkMetadata::DECODERS
+
+    # @return [String] UUID of a VPC owned by your team, in a region that supports sessions.
+    attr_reader :vpc_uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSessionPolicyMetadata
-  FIELDS = {
-    default_action: "defaultAction",
-    rules: "rules",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    default_action: lambda do |value|
-      ::OctridevDigitalocean::SessionPolicyDefaultAction.from_value(value)
-    end,
-    rules: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::SessionPolicyRulesItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for SessionPolicy.
-# Tool-permission policy of a session.
-class SessionPolicy
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSessionPolicyMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSessionPolicyMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSessionPolicyMetadata::DECODERS
-
-  # @return [SessionPolicyDefaultAction] Action for calls no rule matches. Empty means ask; otherwise this must be allow, ask, or deny.
-  attr_reader :default_action
-  # @return [Array_of_SessionPolicyRulesItem] Rules for specific tools or toolbelts.
-  attr_reader :rules
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSessionPolicyRulesItemMetadata
+    FIELDS = {
+      tool: 'tool',
+      match: 'match',
+      action: 'action'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      action: lambda do |value|
+        ::OctridevDigitalocean::SessionPolicyRulesItemAction.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SessionPolicyRulesItem.
+  # Required object value serialized in the `rules[]` wire field.
+  class SessionPolicyRulesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSessionPolicyRulesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSessionPolicyRulesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSessionPolicyRulesItemMetadata::DECODERS
+
+    # @return [String] Required. A tool slug, optionally `<tool_slug>@<version>`, or a toolbelt as `toolbelt:<name>@<version>`. When the session selects tools, the rule must name one of them.
+    attr_reader :tool
+    # @return [Hash] Optional argument conditions, keyed by argument name; the rule applies only to calls whose arguments match.
+    attr_reader :match
+    # @return [SessionPolicyRulesItemAction] Required: allow, ask, or deny.
+    attr_reader :action
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalSessionPolicyMetadata
+    FIELDS = {
+      default_action: 'defaultAction',
+      rules: 'rules'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      default_action: lambda do |value|
+        ::OctridevDigitalocean::SessionPolicyDefaultAction.from_value(value)
+      end,
+      rules: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::SessionPolicyRulesItem.from_hash(item) }
+      end
+    }.freeze
   end
-end
 
-# Defines the SessionPolicyDefaultAction SDK namespace.
-module SessionPolicyDefaultAction
-  ALLOW = 'allow'
-  ASK = 'ask'
-  DENY = 'deny'
-  VALUES = ['allow', 'ask', 'deny'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+  # API model for SessionPolicy.
+  # Tool-permission policy of a session.
+  class SessionPolicy
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSessionPolicyMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSessionPolicyMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSessionPolicyMetadata::DECODERS
 
-# Defines the SessionPolicyRulesItemAction SDK namespace.
-module SessionPolicyRulesItemAction
-  ALLOW = 'allow'
-  ASK = 'ask'
-  DENY = 'deny'
-  VALUES = ['allow', 'ask', 'deny'].freeze
-  def self.from_value(value)
-    value
+    # @return [SessionPolicyDefaultAction] Action for calls no rule matches. Empty means ask; otherwise this must be allow, ask, or deny.
+    attr_reader :default_action
+    # @return [Array_of_SessionPolicyRulesItem] Rules for specific tools or toolbelts.
+    attr_reader :rules
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the SessionPolicyDefaultAction SDK namespace.
+  module SessionPolicyDefaultAction
+    ALLOW = 'allow'
+    ASK = 'ask'
+    DENY = 'deny'
+    VALUES = %w[allow ask deny].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the SessionPolicyRulesItemAction SDK namespace.
+  module SessionPolicyRulesItemAction
+    ALLOW = 'allow'
+    ASK = 'ask'
+    DENY = 'deny'
+    VALUES = %w[allow ask deny].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

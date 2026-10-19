@@ -5,153 +5,153 @@
 
 # image_actions domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalGetImageActionsResponseMetadata
-  FIELDS = {
-    actions: "actions",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    actions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for GetImageActionsResponse.
-# Typed representation of the `GetImageActionsResponse` API schema.
-class GetImageActionsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalGetImageActionsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalGetImageActionsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalGetImageActionsResponseMetadata::DECODERS
-
-  attr_reader :actions
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalGetImageActionsResponseMetadata
+    FIELDS = {
+      actions: 'actions',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      actions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for GetImageActionsResponse.
+  # Typed representation of the `GetImageActionsResponse` API schema.
+  class GetImageActionsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalGetImageActionsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalGetImageActionsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalGetImageActionsResponseMetadata::DECODERS
+
+    attr_reader :actions
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalImageActionBaseMetadata
-  FIELDS = {
-    type: "type",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ImageActionBaseType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ImageActionBase.
-# Typed representation of the `ImageActionBase` API schema.
-class ImageActionBase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalImageActionBaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalImageActionBaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalImageActionBaseMetadata::DECODERS
-
-  # @return [ImageActionBaseType] The action to be taken on the image. Can be either `convert` or `transfer`.
-  attr_reader :type
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalImageActionBaseMetadata
+    FIELDS = {
+      type: 'type'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ImageActionBaseType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ImageActionBase.
+  # Typed representation of the `ImageActionBase` API schema.
+  class ImageActionBase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalImageActionBaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalImageActionBaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalImageActionBaseMetadata::DECODERS
+
+    # @return [ImageActionBaseType] The action to be taken on the image. Can be either `convert` or `transfer`.
+    attr_reader :type
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # Defines the ImageActionBaseType SDK namespace.
+  module ImageActionBaseType
+    CONVERT = 'convert'
+    TRANSFER = 'transfer'
+    VALUES = %w[convert transfer].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
 
-# Defines the ImageActionBaseType SDK namespace.
-module ImageActionBaseType
-  CONVERT = 'convert'
-  TRANSFER = 'transfer'
-  VALUES = ['convert', 'transfer'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
-
-    raise SdkValidationError.new('ImageActionBaseType', 'enum', "Unknown ImageActionBaseType: #{value}")
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalImageActionTransferMetadata
-  FIELDS = {
-    type: "type",
-    region: "region",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    region
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ImageActionBaseType.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevDigitalocean::RegionSlug.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ImageActionTransfer.
-# Typed representation of the `ImageActionTransfer` API schema.
-class ImageActionTransfer
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalImageActionTransferMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalImageActionTransferMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalImageActionTransferMetadata::DECODERS
-
-  # @return [ImageActionBaseType] The action to be taken on the image. Can be either `convert` or `transfer`.
-  attr_reader :type
-  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-  attr_reader :region
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+      raise SdkValidationError.new('ImageActionBaseType', 'enum', "Unknown ImageActionBaseType: #{value}")
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalImageActionTransferMetadata
+    FIELDS = {
+      type: 'type',
+      region: 'region'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      region
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ImageActionBaseType.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevDigitalocean::RegionSlug.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ImageActionTransfer.
+  # Typed representation of the `ImageActionTransfer` API schema.
+  class ImageActionTransfer
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalImageActionTransferMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalImageActionTransferMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalImageActionTransferMetadata::DECODERS
+
+    # @return [ImageActionBaseType] The action to be taken on the image. Can be either `convert` or `transfer`.
+    attr_reader :type
+    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+    attr_reader :region
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

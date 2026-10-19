@@ -5,404 +5,395 @@
 
 # harness_runtime_workspace domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalWorkspacePartUploadUrlMetadata
-  FIELDS = {
-    part_number: "part_number",
-    upload_url: "upload_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for WorkspacePartUploadUrl.
-# Typed representation of the `WorkspacePartUploadUrl` API schema.
-class WorkspacePartUploadUrl
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWorkspacePartUploadUrlMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWorkspacePartUploadUrlMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWorkspacePartUploadUrlMetadata::DECODERS
-
-  # @return [Integer] Optional `int32`-formatted value serialized in the `part_number` wire field.
-  attr_reader :part_number
-  # @return [String] Presigned PUT URL for this part. PUT the part bytes here directly.
-  attr_reader :upload_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWorkspacePartUploadUrlMetadata
+    FIELDS = {
+      part_number: 'part_number',
+      upload_url: 'upload_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for WorkspacePartUploadUrl.
+  # Typed representation of the `WorkspacePartUploadUrl` API schema.
+  class WorkspacePartUploadUrl
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWorkspacePartUploadUrlMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWorkspacePartUploadUrlMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWorkspacePartUploadUrlMetadata::DECODERS
+
+    # @return [Integer] Optional `int32`-formatted value serialized in the `part_number` wire field.
+    attr_reader :part_number
+    # @return [String] Presigned PUT URL for this part. PUT the part bytes here directly.
+    attr_reader :upload_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalWorkspacePartUploadUrlsMetadata
-  FIELDS = {
-    transfer_id: "transfer_id",
-    part_urls: "part_urls",
-    expires_at: "expires_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    part_urls: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::WorkspacePartUploadUrl.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for WorkspacePartUploadUrls.
-# Typed representation of the `WorkspacePartUploadUrls` API schema.
-class WorkspacePartUploadUrls
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWorkspacePartUploadUrlsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWorkspacePartUploadUrlsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWorkspacePartUploadUrlsMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `transfer_id` wire field.
-  attr_reader :transfer_id
-  # @return [Array_of_WorkspacePartUploadUrl] One presigned PUT URL per requested part number, in request order.
-  attr_reader :part_urls
-  # @return [String] Shared expiry for all URLs in this batch.
-  attr_reader :expires_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWorkspacePartUploadUrlsMetadata
+    FIELDS = {
+      transfer_id: 'transfer_id',
+      part_urls: 'part_urls',
+      expires_at: 'expires_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      part_urls: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::WorkspacePartUploadUrl.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for WorkspacePartUploadUrls.
+  # Typed representation of the `WorkspacePartUploadUrls` API schema.
+  class WorkspacePartUploadUrls
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWorkspacePartUploadUrlsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWorkspacePartUploadUrlsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWorkspacePartUploadUrlsMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `transfer_id` wire field.
+    attr_reader :transfer_id
+    # @return [Array_of_WorkspacePartUploadUrl] One presigned PUT URL per requested part number, in request order.
+    attr_reader :part_urls
+    # @return [String] Shared expiry for all URLs in this batch.
+    attr_reader :expires_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalWorkspaceTransferCancelledMetadata
-  FIELDS = {
-    transfer_id: "transfer_id",
-    aborted: "aborted",
-    status: "status",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::WorkspaceTransferCancelledStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for WorkspaceTransferCancelled.
-# Typed representation of the `WorkspaceTransferCancelled` API schema.
-class WorkspaceTransferCancelled
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWorkspaceTransferCancelledMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWorkspaceTransferCancelledMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWorkspaceTransferCancelledMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `transfer_id` wire field.
-  attr_reader :transfer_id
-  # @return [Boolean] True if this call transitioned an active transfer to terminal; false if it was already terminal.
-  attr_reader :aborted
-  # @return [WorkspaceTransferCancelledStatus] Optional enumerated value serialized in the `status` wire field.
-  attr_reader :status
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWorkspaceTransferCancelledMetadata
+    FIELDS = {
+      transfer_id: 'transfer_id',
+      aborted: 'aborted',
+      status: 'status'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::WorkspaceTransferCancelledStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for WorkspaceTransferCancelled.
+  # Typed representation of the `WorkspaceTransferCancelled` API schema.
+  class WorkspaceTransferCancelled
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWorkspaceTransferCancelledMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWorkspaceTransferCancelledMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWorkspaceTransferCancelledMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `transfer_id` wire field.
+    attr_reader :transfer_id
+    # @return [Boolean] True if this call transitioned an active transfer to terminal; false if it was already terminal.
+    attr_reader :aborted
+    # @return [WorkspaceTransferCancelledStatus] Optional enumerated value serialized in the `status` wire field.
+    attr_reader :status
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the WorkspaceTransferCancelledStatus SDK namespace.
-module WorkspaceTransferCancelledStatus
-  PENDING = 'pending'
-  IN_PROGRESS = 'in_progress'
-  COMPLETED = 'completed'
-  FAILED = 'failed'
-  VALUES = ['pending', 'in_progress', 'completed', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalWorkspaceTransferCreatedMetadata
-  FIELDS = {
-    transfer_id: "transfer_id",
-    direction: "direction",
-    status: "status",
-    upload_id: "upload_id",
-    part_size: "part_size",
-    expires_at: "expires_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    direction: lambda do |value|
-      ::OctridevDigitalocean::WorkspaceTransferCreatedDirection.from_value(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::WorkspaceTransferCreatedStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for WorkspaceTransferCreated.
-# Response to CreateWorkspaceTransfer. Upload responses carry `upload_id`, `part_size`, and `expires_at`; download responses carry only `transfer_id`, `direction`, and `status`.
-class WorkspaceTransferCreated
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWorkspaceTransferCreatedMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWorkspaceTransferCreatedMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWorkspaceTransferCreatedMetadata::DECODERS
-
-  # @return [String] Opaque id used on all subsequent calls.
-  attr_reader :transfer_id
-  # @return [WorkspaceTransferCreatedDirection] Optional enumerated value serialized in the `direction` wire field.
-  attr_reader :direction
-  # @return [WorkspaceTransferCreatedStatus] Optional enumerated value serialized in the `status` wire field.
-  attr_reader :status
-  # @return [String] Upload only. Multipart upload id (informational).
-  attr_reader :upload_id
-  # @return [Integer] Upload only. Split the payload into parts of this size; the last part may be smaller.
-  attr_reader :part_size
-  # @return [String] Transfer credential window.
-  attr_reader :expires_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the WorkspaceTransferCancelledStatus SDK namespace.
+  module WorkspaceTransferCancelledStatus
+    PENDING = 'pending'
+    IN_PROGRESS = 'in_progress'
+    COMPLETED = 'completed'
+    FAILED = 'failed'
+    VALUES = %w[pending in_progress completed failed].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalWorkspaceTransferCreatedMetadata
+    FIELDS = {
+      transfer_id: 'transfer_id',
+      direction: 'direction',
+      status: 'status',
+      upload_id: 'upload_id',
+      part_size: 'part_size',
+      expires_at: 'expires_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      direction: lambda do |value|
+        ::OctridevDigitalocean::WorkspaceTransferCreatedDirection.from_value(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::WorkspaceTransferCreatedStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for WorkspaceTransferCreated.
+  # Response to CreateWorkspaceTransfer. Upload responses carry `upload_id`, `part_size`, and `expires_at`; download responses carry only `transfer_id`, `direction`, and `status`.
+  class WorkspaceTransferCreated
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWorkspaceTransferCreatedMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWorkspaceTransferCreatedMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWorkspaceTransferCreatedMetadata::DECODERS
 
-# Defines the WorkspaceTransferCreatedDirection SDK namespace.
-module WorkspaceTransferCreatedDirection
-  UPLOAD = 'upload'
-  DOWNLOAD = 'download'
-  VALUES = ['upload', 'download'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Opaque id used on all subsequent calls.
+    attr_reader :transfer_id
+    # @return [WorkspaceTransferCreatedDirection] Optional enumerated value serialized in the `direction` wire field.
+    attr_reader :direction
+    # @return [WorkspaceTransferCreatedStatus] Optional enumerated value serialized in the `status` wire field.
+    attr_reader :status
+    # @return [String] Upload only. Multipart upload id (informational).
+    attr_reader :upload_id
+    # @return [Integer] Upload only. Split the payload into parts of this size; the last part may be smaller.
+    attr_reader :part_size
+    # @return [String] Transfer credential window.
+    attr_reader :expires_at
 
-# Defines the WorkspaceTransferCreatedStatus SDK namespace.
-module WorkspaceTransferCreatedStatus
-  PENDING = 'pending'
-  IN_PROGRESS = 'in_progress'
-  COMPLETED = 'completed'
-  FAILED = 'failed'
-  VALUES = ['pending', 'in_progress', 'completed', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalWorkspaceTransferStatusMetadata
-  FIELDS = {
-    transfer_id: "transfer_id",
-    direction: "direction",
-    status: "status",
-    bytes_written: "bytes_written",
-    sha256: "sha256",
-    download_url: "download_url",
-    expires_at: "expires_at",
-    error_message: "error_message",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    direction: lambda do |value|
-      ::OctridevDigitalocean::WorkspaceTransferStatusDirection.from_value(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::WorkspaceTransferStatusStatus.from_value(value)
-    end,
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for WorkspaceTransferStatus.
-# Typed representation of the `WorkspaceTransferStatus` API schema.
-class WorkspaceTransferStatus
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWorkspaceTransferStatusMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWorkspaceTransferStatusMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWorkspaceTransferStatusMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `transfer_id` wire field.
-  attr_reader :transfer_id
-  # @return [WorkspaceTransferStatusDirection] Optional enumerated value serialized in the `direction` wire field.
-  attr_reader :direction
-  # @return [WorkspaceTransferStatusStatus] Optional enumerated value serialized in the `status` wire field.
-  attr_reader :status
-  # @return [Integer] Optional `int64`-formatted value serialized in the `bytes_written` wire field.
-  attr_reader :bytes_written
-  # @return [String] Lowercase hex SHA-256 of the payload, when known. Verify the downloaded object against this.
-  attr_reader :sha256
-  # @return [String] Download + completed only. Presigned GET URL; fetch the object directly.
-  attr_reader :download_url
-  # @return [String] Expiry of download_url when present.
-  attr_reader :expires_at
-  # @return [String] Populated when status is failed.
-  attr_reader :error_message
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the WorkspaceTransferCreatedDirection SDK namespace.
+  module WorkspaceTransferCreatedDirection
+    UPLOAD = 'upload'
+    DOWNLOAD = 'download'
+    VALUES = %w[upload download].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the WorkspaceTransferStatusDirection SDK namespace.
-module WorkspaceTransferStatusDirection
-  UPLOAD = 'upload'
-  DOWNLOAD = 'download'
-  VALUES = ['upload', 'download'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the WorkspaceTransferStatusStatus SDK namespace.
-module WorkspaceTransferStatusStatus
-  PENDING = 'pending'
-  IN_PROGRESS = 'in_progress'
-  COMPLETED = 'completed'
-  FAILED = 'failed'
-  VALUES = ['pending', 'in_progress', 'completed', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalWorkspaceUploadCommittedMetadata
-  FIELDS = {
-    transfer_id: "transfer_id",
-    status: "status",
-    size_bytes: "size_bytes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::WorkspaceUploadCommittedStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for WorkspaceUploadCommitted.
-# Typed representation of the `WorkspaceUploadCommitted` API schema.
-class WorkspaceUploadCommitted
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWorkspaceUploadCommittedMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWorkspaceUploadCommittedMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWorkspaceUploadCommittedMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `transfer_id` wire field.
-  attr_reader :transfer_id
-  # @return [WorkspaceUploadCommittedStatus] Optional enumerated value serialized in the `status` wire field.
-  attr_reader :status
-  # @return [Integer] Size of the completed staging object, when known.
-  attr_reader :size_bytes
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the WorkspaceTransferCreatedStatus SDK namespace.
+  module WorkspaceTransferCreatedStatus
+    PENDING = 'pending'
+    IN_PROGRESS = 'in_progress'
+    COMPLETED = 'completed'
+    FAILED = 'failed'
+    VALUES = %w[pending in_progress completed failed].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalWorkspaceTransferStatusMetadata
+    FIELDS = {
+      transfer_id: 'transfer_id',
+      direction: 'direction',
+      status: 'status',
+      bytes_written: 'bytes_written',
+      sha256: 'sha256',
+      download_url: 'download_url',
+      expires_at: 'expires_at',
+      error_message: 'error_message'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      direction: lambda do |value|
+        ::OctridevDigitalocean::WorkspaceTransferStatusDirection.from_value(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::WorkspaceTransferStatusStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for WorkspaceTransferStatus.
+  # Typed representation of the `WorkspaceTransferStatus` API schema.
+  class WorkspaceTransferStatus
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWorkspaceTransferStatusMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWorkspaceTransferStatusMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWorkspaceTransferStatusMetadata::DECODERS
 
-# Defines the WorkspaceUploadCommittedStatus SDK namespace.
-module WorkspaceUploadCommittedStatus
-  PENDING = 'pending'
-  IN_PROGRESS = 'in_progress'
-  COMPLETED = 'completed'
-  FAILED = 'failed'
-  VALUES = ['pending', 'in_progress', 'completed', 'failed'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Optional `string` value serialized in the `transfer_id` wire field.
+    attr_reader :transfer_id
+    # @return [WorkspaceTransferStatusDirection] Optional enumerated value serialized in the `direction` wire field.
+    attr_reader :direction
+    # @return [WorkspaceTransferStatusStatus] Optional enumerated value serialized in the `status` wire field.
+    attr_reader :status
+    # @return [Integer] Optional `int64`-formatted value serialized in the `bytes_written` wire field.
+    attr_reader :bytes_written
+    # @return [String] Lowercase hex SHA-256 of the payload, when known. Verify the downloaded object against this.
+    attr_reader :sha256
+    # @return [String] Download + completed only. Presigned GET URL; fetch the object directly.
+    attr_reader :download_url
+    # @return [String] Expiry of download_url when present.
+    attr_reader :expires_at
+    # @return [String] Populated when status is failed.
+    attr_reader :error_message
 
-# Internal model hydration metadata.
-class SdkInternalWorkspaceUploadResponseMetadata
-  FIELDS = {
-    path: "path",
-    bytes_written: "bytes_written",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for WorkspaceUploadResponse.
-# Typed representation of the `WorkspaceUploadResponse` API schema.
-class WorkspaceUploadResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWorkspaceUploadResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWorkspaceUploadResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWorkspaceUploadResponseMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] Absolute guest path the payload was written to.
-  attr_reader :path
-  # @return [Integer] Number of bytes committed to the workspace.
-  attr_reader :bytes_written
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the WorkspaceTransferStatusDirection SDK namespace.
+  module WorkspaceTransferStatusDirection
+    UPLOAD = 'upload'
+    DOWNLOAD = 'download'
+    VALUES = %w[upload download].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the WorkspaceTransferStatusStatus SDK namespace.
+  module WorkspaceTransferStatusStatus
+    PENDING = 'pending'
+    IN_PROGRESS = 'in_progress'
+    COMPLETED = 'completed'
+    FAILED = 'failed'
+    VALUES = %w[pending in_progress completed failed].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalWorkspaceUploadCommittedMetadata
+    FIELDS = {
+      transfer_id: 'transfer_id',
+      status: 'status',
+      size_bytes: 'size_bytes'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::WorkspaceUploadCommittedStatus.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for WorkspaceUploadCommitted.
+  # Typed representation of the `WorkspaceUploadCommitted` API schema.
+  class WorkspaceUploadCommitted
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWorkspaceUploadCommittedMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWorkspaceUploadCommittedMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWorkspaceUploadCommittedMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `transfer_id` wire field.
+    attr_reader :transfer_id
+    # @return [WorkspaceUploadCommittedStatus] Optional enumerated value serialized in the `status` wire field.
+    attr_reader :status
+    # @return [Integer] Size of the completed staging object, when known.
+    attr_reader :size_bytes
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the WorkspaceUploadCommittedStatus SDK namespace.
+  module WorkspaceUploadCommittedStatus
+    PENDING = 'pending'
+    IN_PROGRESS = 'in_progress'
+    COMPLETED = 'completed'
+    FAILED = 'failed'
+    VALUES = %w[pending in_progress completed failed].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalWorkspaceUploadResponseMetadata
+    FIELDS = {
+      path: 'path',
+      bytes_written: 'bytes_written'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for WorkspaceUploadResponse.
+  # Typed representation of the `WorkspaceUploadResponse` API schema.
+  class WorkspaceUploadResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWorkspaceUploadResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWorkspaceUploadResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWorkspaceUploadResponseMetadata::DECODERS
+
+    # @return [String] Absolute guest path the payload was written to.
+    attr_reader :path
+    # @return [Integer] Number of bytes committed to the workspace.
+    attr_reader :bytes_written
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

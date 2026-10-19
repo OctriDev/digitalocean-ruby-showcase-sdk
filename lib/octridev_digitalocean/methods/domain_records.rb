@@ -28,7 +28,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
@@ -36,22 +35,22 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/domains/",
+            '/v2/domains/',
             SdkClient.encode_path_segment(domain_name),
-            "/records"
+            '/records'
           ].join,
           config: config,
           query: {
             'name' => QueryValue.new(name, style: 'form', explode: true),
             'type' => QueryValue.new(type, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllDomainRecordsResponse,
           decoder: :json,
           operation_id: 'domains_list_records',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -66,13 +65,12 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/domains/",
+            '/v2/domains/',
             SdkClient.encode_path_segment(domain_name),
-            "/records"
+            '/records'
           ].join,
           config: config,
           body: body,
@@ -80,7 +78,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'domains_create_record',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -95,13 +93,12 @@ module OctridevDigitalocean
         domain_record_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/domains/",
+            '/v2/domains/',
             SdkClient.encode_path_segment(domain_name),
-            "/records/",
+            '/records/',
             SdkClient.encode_path_segment(domain_record_id)
           ].join,
           config: config,
@@ -109,7 +106,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'domains_get_record',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -151,13 +148,12 @@ module OctridevDigitalocean
         tag: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
           [
-            "/v2/domains/",
+            '/v2/domains/',
             SdkClient.encode_path_segment(domain_name),
-            "/records/",
+            '/records/',
             SdkClient.encode_path_segment(domain_record_id)
           ].join,
           config: config,
@@ -170,13 +166,13 @@ module OctridevDigitalocean
             'ttl' => ttl,
             'weight' => weight,
             'flags' => flags,
-            'tag' => tag,
+            'tag' => tag
           },
           return_type: ::OctridevDigitalocean::DomainRecordResponse,
           decoder: :json,
           operation_id: 'domains_patch_record',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -218,13 +214,12 @@ module OctridevDigitalocean
         tag: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/domains/",
+            '/v2/domains/',
             SdkClient.encode_path_segment(domain_name),
-            "/records/",
+            '/records/',
             SdkClient.encode_path_segment(domain_record_id)
           ].join,
           config: config,
@@ -237,13 +232,13 @@ module OctridevDigitalocean
             'ttl' => ttl,
             'weight' => weight,
             'flags' => flags,
-            'tag' => tag,
+            'tag' => tag
           },
           return_type: ::OctridevDigitalocean::DomainRecordResponse,
           decoder: :json,
           operation_id: 'domains_update_record',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -258,20 +253,19 @@ module OctridevDigitalocean
         domain_record_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/domains/",
+            '/v2/domains/',
             SdkClient.encode_path_segment(domain_name),
-            "/records/",
+            '/records/',
             SdkClient.encode_path_segment(domain_record_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'domains_delete_record',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

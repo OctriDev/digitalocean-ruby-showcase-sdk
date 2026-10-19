@@ -5,311 +5,306 @@
 
 # apps_app_service domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAppServiceSpecVariant2CorsMetadata
-  FIELDS = {
-    allow_origins: "allow_origins",
-    allow_methods: "allow_methods",
-    allow_headers: "allow_headers",
-    expose_headers: "expose_headers",
-    max_age: "max_age",
-    allow_credentials: "allow_credentials",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    allow_origins: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppsStringMatch.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AppServiceSpecVariant2Cors.
-# Optional API value serialized in the `cors` wire field.
-class AppServiceSpecVariant2Cors
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppServiceSpecVariant2CorsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppServiceSpecVariant2CorsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppServiceSpecVariant2CorsMetadata::DECODERS
-
-  # @return [Array_of_AppsStringMatch] The set of allowed CORS origins.
-  attr_reader :allow_origins
-  # @return [Array_of_String] The set of allowed HTTP methods. This configures the `Access-Control-Allow-Methods` header.
-  attr_reader :allow_methods
-  # @return [Array_of_String] The set of allowed HTTP request headers. This configures the `Access-Control-Allow-Headers` header.
-  attr_reader :allow_headers
-  # @return [Array_of_String] The set of HTTP response headers that browsers are allowed to access. This configures the `Access-Control-Expose-Headers` header.
-  attr_reader :expose_headers
-  # @return [String] An optional duration specifying how long browsers can cache the results of a preflight request. This configures the `Access-Control-Max-Age` header.
-  attr_reader :max_age
-  # @return [Boolean] Whether browsers should expose the response to the client-side JavaScript code when the request’s credentials mode is include. This configures the `Access-Control-Allow-Credentials` header.
-  attr_reader :allow_credentials
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppServiceSpecVariant2CorsMetadata
+    FIELDS = {
+      allow_origins: 'allow_origins',
+      allow_methods: 'allow_methods',
+      allow_headers: 'allow_headers',
+      expose_headers: 'expose_headers',
+      max_age: 'max_age',
+      allow_credentials: 'allow_credentials'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      allow_origins: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppsStringMatch.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppServiceSpecVariant2Cors.
+  # Optional API value serialized in the `cors` wire field.
+  class AppServiceSpecVariant2Cors
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppServiceSpecVariant2CorsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppServiceSpecVariant2CorsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppServiceSpecVariant2CorsMetadata::DECODERS
+
+    # @return [Array_of_AppsStringMatch] The set of allowed CORS origins.
+    attr_reader :allow_origins
+    # @return [Array_of_String] The set of allowed HTTP methods. This configures the `Access-Control-Allow-Methods` header.
+    attr_reader :allow_methods
+    # @return [Array_of_String] The set of allowed HTTP request headers. This configures the `Access-Control-Allow-Headers` header.
+    attr_reader :allow_headers
+    # @return [Array_of_String] The set of HTTP response headers that browsers are allowed to access. This configures the `Access-Control-Expose-Headers` header.
+    attr_reader :expose_headers
+    # @return [String] An optional duration specifying how long browsers can cache the results of a preflight request. This configures the `Access-Control-Max-Age` header.
+    attr_reader :max_age
+    # @return [Boolean] Whether browsers should expose the response to the client-side JavaScript code when the request’s credentials mode is include. This configures the `Access-Control-Allow-Credentials` header.
+    attr_reader :allow_credentials
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppServiceSpecMetadata
-  FIELDS = {
-    name: "name",
-    git: "git",
-    github: "github",
-    gitlab: "gitlab",
-    bitbucket: "bitbucket",
-    image: "image",
-    dockerfile_path: "dockerfile_path",
-    build_command: "build_command",
-    run_command: "run_command",
-    source_dir: "source_dir",
-    envs: "envs",
-    environment_slug: "environment_slug",
-    log_destinations: "log_destinations",
-    instance_count: "instance_count",
-    instance_size_slug: "instance_size_slug",
-    autoscaling: "autoscaling",
-    cors: "cors",
-    health_check: "health_check",
-    liveness_health_check: "liveness_health_check",
-    protocol: "protocol",
-    http_port: "http_port",
-    internal_ports: "internal_ports",
-    routes: "routes",
-    termination: "termination",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-    git: lambda do |value|
-      ::OctridevDigitalocean::AppsGitSourceSpec.from_hash(value)
-    end,
-    github: lambda do |value|
-      ::OctridevDigitalocean::AppsGithubSourceSpec.from_hash(value)
-    end,
-    gitlab: lambda do |value|
-      ::OctridevDigitalocean::AppsGitlabSourceSpec.from_hash(value)
-    end,
-    bitbucket: lambda do |value|
-      ::OctridevDigitalocean::AppsBitbucketSourceSpec.from_hash(value)
-    end,
-    image: lambda do |value|
-      ::OctridevDigitalocean::AppsImageSourceSpec.from_hash(value)
-    end,
-    envs: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppVariableDefinition.from_hash(item) }
-    end,
-    log_destinations: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppLogDestinationDefinition.from_hash(item) }
-    end,
-    instance_size_slug: lambda do |value|
-      ::OctridevDigitalocean::AppComponentInstanceBaseInstanceSizeSlugVariant0.from_value(value)
-    end,
-    autoscaling: lambda do |value|
-      ::OctridevDigitalocean::AppAutoscalingSpecService.from_hash(value)
-    end,
-    cors: lambda do |value|
-      ::OctridevDigitalocean::AppServiceSpecVariant2Cors.from_hash(value)
-    end,
-    health_check: lambda do |value|
-      ::OctridevDigitalocean::AppServiceSpecHealthCheck.from_hash(value)
-    end,
-    liveness_health_check: lambda do |value|
-      ::OctridevDigitalocean::AppHealthCheckSpec.from_hash(value)
-    end,
-    protocol: lambda do |value|
-      ::OctridevDigitalocean::AppServiceSpecVariant2Protocol.from_value(value)
-    end,
-    routes: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppRouteSpec.from_hash(item) }
-    end,
-    termination: lambda do |value|
-      ::OctridevDigitalocean::AppServiceSpecTermination.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppServiceSpec.
-# Typed representation of the `AppServiceSpec` API schema.
-class AppServiceSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppServiceSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppServiceSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppServiceSpecMetadata::DECODERS
-
-  # @return [String] The name. Must be unique across all components within the same app.
-  attr_reader :name
-  # @return [AppsGitSourceSpec] Optional object value serialized in the `git` wire field.
-  attr_reader :git
-  # @return [AppsGithubSourceSpec] Optional object value serialized in the `github` wire field.
-  attr_reader :github
-  # @return [AppsGitlabSourceSpec] Optional object value serialized in the `gitlab` wire field.
-  attr_reader :gitlab
-  # @return [AppsBitbucketSourceSpec] Optional object value serialized in the `bitbucket` wire field.
-  attr_reader :bitbucket
-  # @return [AppsImageSourceSpec] Optional object value serialized in the `image` wire field.
-  attr_reader :image
-  # @return [String] The path to the Dockerfile relative to the root of the repo. If set, it will be used to build this component. Otherwise, App Platform will attempt to build it using buildpacks.
-  attr_reader :dockerfile_path
-  # @return [String] An optional build command to run while building this component from source.
-  attr_reader :build_command
-  # @return [String] An optional run command to override the component's default.
-  attr_reader :run_command
-  # @return [String] An optional path to the working directory to use for the build. For Dockerfile builds, this will be used as the build context. Must be relative to the root of the repo.
-  attr_reader :source_dir
-  # @return [Array_of_AppVariableDefinition] A list of environment variables made available to the component.
-  attr_reader :envs
-  # @return [String] An environment slug describing the type of this app. For a full list, please refer to the product documentation.
-  attr_reader :environment_slug
-  # @return [Array_of_AppLogDestinationDefinition] A list of configured log forwarding destinations.
-  attr_reader :log_destinations
-  # @return [Integer] The amount of instances that this component should be scaled to. Default: 1. Must not be set if autoscaling is used.
-  attr_reader :instance_count
-  # @return [AppComponentInstanceBaseInstanceSizeSlugVariant0] The instance size to use for this component. Default: `apps-s-1vcpu-0.5gb`
-  attr_reader :instance_size_slug
-  # @return [AppAutoscalingSpecService] Optional API value serialized in the `autoscaling` wire field.
-  attr_reader :autoscaling
-  # @return [AppServiceSpecVariant2Cors] Optional API value serialized in the `cors` wire field.
-  attr_reader :cors
-  # @return [AppServiceSpecHealthCheck] Optional object value serialized in the `health_check` wire field.
-  attr_reader :health_check
-  # @return [AppHealthCheckSpec] Optional object value serialized in the `liveness_health_check` wire field.
-  attr_reader :liveness_health_check
-  # @return [AppServiceSpecVariant2Protocol] The protocol which the service uses to serve traffic on the http_port. - `HTTP`: The app is serving the HTTP protocol. Default. - `HTTP2`: The app is serving the HTTP/2 protocol. Currently, this needs to be implemented in the service by serving HTTP/2 cleartext (h2c).
-  attr_reader :protocol
-  # @return [Integer] The internal port on which this service's run command will listen. Default: 8080 If there is not an environment variable with the name `PORT`, one will be automatically added with its value set to the value of this field.
-  attr_reader :http_port
-  # @return [Array_of_Integer] The ports on which this service will listen for internal traffic.
-  attr_reader :internal_ports
-  # @return [Array_of_AppRouteSpec] (Deprecated - Use Ingress Rules instead). A list of HTTP routes that should be routed to this component.
-  attr_reader :routes
-  # @return [AppServiceSpecTermination] Optional object value serialized in the `termination` wire field.
-  attr_reader :termination
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppServiceSpecMetadata
+    FIELDS = {
+      name: 'name',
+      git: 'git',
+      github: 'github',
+      gitlab: 'gitlab',
+      bitbucket: 'bitbucket',
+      image: 'image',
+      dockerfile_path: 'dockerfile_path',
+      build_command: 'build_command',
+      run_command: 'run_command',
+      source_dir: 'source_dir',
+      envs: 'envs',
+      environment_slug: 'environment_slug',
+      log_destinations: 'log_destinations',
+      instance_count: 'instance_count',
+      instance_size_slug: 'instance_size_slug',
+      autoscaling: 'autoscaling',
+      cors: 'cors',
+      health_check: 'health_check',
+      liveness_health_check: 'liveness_health_check',
+      protocol: 'protocol',
+      http_port: 'http_port',
+      internal_ports: 'internal_ports',
+      routes: 'routes',
+      termination: 'termination'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {
+      git: lambda do |value|
+        ::OctridevDigitalocean::AppsGitSourceSpec.from_hash(value)
+      end,
+      github: lambda do |value|
+        ::OctridevDigitalocean::AppsGithubSourceSpec.from_hash(value)
+      end,
+      gitlab: lambda do |value|
+        ::OctridevDigitalocean::AppsGitlabSourceSpec.from_hash(value)
+      end,
+      bitbucket: lambda do |value|
+        ::OctridevDigitalocean::AppsBitbucketSourceSpec.from_hash(value)
+      end,
+      image: lambda do |value|
+        ::OctridevDigitalocean::AppsImageSourceSpec.from_hash(value)
+      end,
+      envs: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppVariableDefinition.from_hash(item) }
+      end,
+      log_destinations: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppLogDestinationDefinition.from_hash(item) }
+      end,
+      instance_size_slug: lambda do |value|
+        ::OctridevDigitalocean::AppComponentInstanceBaseInstanceSizeSlugVariant0.from_value(value)
+      end,
+      autoscaling: lambda do |value|
+        ::OctridevDigitalocean::AppAutoscalingSpecService.from_hash(value)
+      end,
+      cors: lambda do |value|
+        ::OctridevDigitalocean::AppServiceSpecVariant2Cors.from_hash(value)
+      end,
+      health_check: lambda do |value|
+        ::OctridevDigitalocean::AppServiceSpecHealthCheck.from_hash(value)
+      end,
+      liveness_health_check: lambda do |value|
+        ::OctridevDigitalocean::AppHealthCheckSpec.from_hash(value)
+      end,
+      protocol: lambda do |value|
+        ::OctridevDigitalocean::AppServiceSpecVariant2Protocol.from_value(value)
+      end,
+      routes: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppRouteSpec.from_hash(item) }
+      end,
+      termination: lambda do |value|
+        ::OctridevDigitalocean::AppServiceSpecTermination.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppServiceSpec.
+  # Typed representation of the `AppServiceSpec` API schema.
+  class AppServiceSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppServiceSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppServiceSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppServiceSpecMetadata::DECODERS
+
+    # @return [String] The name. Must be unique across all components within the same app.
+    attr_reader :name
+    # @return [AppsGitSourceSpec] Optional object value serialized in the `git` wire field.
+    attr_reader :git
+    # @return [AppsGithubSourceSpec] Optional object value serialized in the `github` wire field.
+    attr_reader :github
+    # @return [AppsGitlabSourceSpec] Optional object value serialized in the `gitlab` wire field.
+    attr_reader :gitlab
+    # @return [AppsBitbucketSourceSpec] Optional object value serialized in the `bitbucket` wire field.
+    attr_reader :bitbucket
+    # @return [AppsImageSourceSpec] Optional object value serialized in the `image` wire field.
+    attr_reader :image
+    # @return [String] The path to the Dockerfile relative to the root of the repo. If set, it will be used to build this component. Otherwise, App Platform will attempt to build it using buildpacks.
+    attr_reader :dockerfile_path
+    # @return [String] An optional build command to run while building this component from source.
+    attr_reader :build_command
+    # @return [String] An optional run command to override the component's default.
+    attr_reader :run_command
+    # @return [String] An optional path to the working directory to use for the build. For Dockerfile builds, this will be used as the build context. Must be relative to the root of the repo.
+    attr_reader :source_dir
+    # @return [Array_of_AppVariableDefinition] A list of environment variables made available to the component.
+    attr_reader :envs
+    # @return [String] An environment slug describing the type of this app. For a full list, please refer to the product documentation.
+    attr_reader :environment_slug
+    # @return [Array_of_AppLogDestinationDefinition] A list of configured log forwarding destinations.
+    attr_reader :log_destinations
+    # @return [Integer] The amount of instances that this component should be scaled to. Default: 1. Must not be set if autoscaling is used.
+    attr_reader :instance_count
+    # @return [AppComponentInstanceBaseInstanceSizeSlugVariant0] The instance size to use for this component. Default: `apps-s-1vcpu-0.5gb`
+    attr_reader :instance_size_slug
+    # @return [AppAutoscalingSpecService] Optional API value serialized in the `autoscaling` wire field.
+    attr_reader :autoscaling
+    # @return [AppServiceSpecVariant2Cors] Optional API value serialized in the `cors` wire field.
+    attr_reader :cors
+    # @return [AppServiceSpecHealthCheck] Optional object value serialized in the `health_check` wire field.
+    attr_reader :health_check
+    # @return [AppHealthCheckSpec] Optional object value serialized in the `liveness_health_check` wire field.
+    attr_reader :liveness_health_check
+    # @return [AppServiceSpecVariant2Protocol] The protocol which the service uses to serve traffic on the http_port. - `HTTP`: The app is serving the HTTP protocol. Default. - `HTTP2`: The app is serving the HTTP/2 protocol. Currently, this needs to be implemented in the service by serving HTTP/2 cleartext (h2c).
+    attr_reader :protocol
+    # @return [Integer] The internal port on which this service's run command will listen. Default: 8080 If there is not an environment variable with the name `PORT`, one will be automatically added with its value set to the value of this field.
+    attr_reader :http_port
+    # @return [Array_of_Integer] The ports on which this service will listen for internal traffic.
+    attr_reader :internal_ports
+    # @return [Array_of_AppRouteSpec] (Deprecated - Use Ingress Rules instead). A list of HTTP routes that should be routed to this component.
+    attr_reader :routes
+    # @return [AppServiceSpecTermination] Optional object value serialized in the `termination` wire field.
+    attr_reader :termination
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AppServiceSpecVariant2Protocol SDK namespace.
-module AppServiceSpecVariant2Protocol
-  HTTP = 'HTTP'
-  HTTP2 = 'HTTP2'
-  VALUES = ['HTTP', 'HTTP2'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppServiceSpecHealthCheckMetadata
-  FIELDS = {
-    failure_threshold: "failure_threshold",
-    port: "port",
-    http_path: "http_path",
-    initial_delay_seconds: "initial_delay_seconds",
-    period_seconds: "period_seconds",
-    success_threshold: "success_threshold",
-    timeout_seconds: "timeout_seconds",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppServiceSpecHealthCheck.
-# Typed representation of the `AppServiceSpecHealthCheck` API schema.
-class AppServiceSpecHealthCheck
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppServiceSpecHealthCheckMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppServiceSpecHealthCheckMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppServiceSpecHealthCheckMetadata::DECODERS
-
-  # @return [Integer] The number of failed health checks before considered unhealthy.
-  attr_reader :failure_threshold
-  # @return [Integer] The port on which the health check will be performed. If not set, the health check will be performed on the component's http_port.
-  attr_reader :port
-  # @return [String] The route path used for the HTTP health check ping. If not set, the HTTP health check will be disabled and a TCP health check used instead.
-  attr_reader :http_path
-  # @return [Integer] The number of seconds to wait before beginning health checks.
-  attr_reader :initial_delay_seconds
-  # @return [Integer] The number of seconds to wait between health checks.
-  attr_reader :period_seconds
-  # @return [Integer] The number of successful health checks before considered healthy.
-  attr_reader :success_threshold
-  # @return [Integer] The number of seconds after which the check times out.
-  attr_reader :timeout_seconds
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AppServiceSpecVariant2Protocol SDK namespace.
+  module AppServiceSpecVariant2Protocol
+    HTTP = 'HTTP'
+    HTTP2 = 'HTTP2'
+    VALUES = %w[HTTP HTTP2].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppServiceSpecHealthCheckMetadata
+    FIELDS = {
+      failure_threshold: 'failure_threshold',
+      port: 'port',
+      http_path: 'http_path',
+      initial_delay_seconds: 'initial_delay_seconds',
+      period_seconds: 'period_seconds',
+      success_threshold: 'success_threshold',
+      timeout_seconds: 'timeout_seconds'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AppServiceSpecHealthCheck.
+  # Typed representation of the `AppServiceSpecHealthCheck` API schema.
+  class AppServiceSpecHealthCheck
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppServiceSpecHealthCheckMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppServiceSpecHealthCheckMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppServiceSpecHealthCheckMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAppServiceSpecTerminationMetadata
-  FIELDS = {
-    drain_seconds: "drain_seconds",
-    grace_period_seconds: "grace_period_seconds",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [Integer] The number of failed health checks before considered unhealthy.
+    attr_reader :failure_threshold
+    # @return [Integer] The port on which the health check will be performed. If not set, the health check will be performed on the component's http_port.
+    attr_reader :port
+    # @return [String] The route path used for the HTTP health check ping. If not set, the HTTP health check will be disabled and a TCP health check used instead.
+    attr_reader :http_path
+    # @return [Integer] The number of seconds to wait before beginning health checks.
+    attr_reader :initial_delay_seconds
+    # @return [Integer] The number of seconds to wait between health checks.
+    attr_reader :period_seconds
+    # @return [Integer] The number of successful health checks before considered healthy.
+    attr_reader :success_threshold
+    # @return [Integer] The number of seconds after which the check times out.
+    attr_reader :timeout_seconds
 
-# API model for AppServiceSpecTermination.
-# Typed representation of the `AppServiceSpecTermination` API schema.
-class AppServiceSpecTermination
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppServiceSpecTerminationMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppServiceSpecTerminationMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppServiceSpecTerminationMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Integer] The number of seconds to wait between selecting a container instance for termination and issuing the TERM signal. Selecting a container instance for termination begins an asynchronous drain of new requests on upstream load-balancers. (Default 15)
-  attr_reader :drain_seconds
-  # @return [Integer] The number of seconds to wait between sending a TERM signal to a container and issuing a KILL which causes immediate shutdown. (Default 120)
-  attr_reader :grace_period_seconds
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalAppServiceSpecTerminationMetadata
+    FIELDS = {
+      drain_seconds: 'drain_seconds',
+      grace_period_seconds: 'grace_period_seconds'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
-end
+
+  # API model for AppServiceSpecTermination.
+  # Typed representation of the `AppServiceSpecTermination` API schema.
+  class AppServiceSpecTermination
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppServiceSpecTerminationMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppServiceSpecTerminationMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppServiceSpecTerminationMetadata::DECODERS
+
+    # @return [Integer] The number of seconds to wait between selecting a container instance for termination and issuing the TERM signal. Selecting a container instance for termination begins an asynchronous drain of new requests on upstream load-balancers. (Default 15)
+    attr_reader :drain_seconds
+    # @return [Integer] The number of seconds to wait between sending a TERM signal to a container and issuing a KILL which causes immediate shutdown. (Default 120)
+    attr_reader :grace_period_seconds
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

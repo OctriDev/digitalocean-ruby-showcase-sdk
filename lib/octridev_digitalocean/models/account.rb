@@ -5,165 +5,162 @@
 
 # account domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAccountTeamMetadata
-  FIELDS = {
-    uuid: "uuid",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AccountTeam.
-# When authorized in a team context, includes information about the current team.
-class AccountTeam
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccountTeamMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccountTeamMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccountTeamMetadata::DECODERS
-
-  # @return [String] The unique universal identifier for the current team.
-  attr_reader :uuid
-  # @return [String] The name for the current team.
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAccountTeamMetadata
+    FIELDS = {
+      uuid: 'uuid',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AccountTeam.
+  # When authorized in a team context, includes information about the current team.
+  class AccountTeam
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccountTeamMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccountTeamMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccountTeamMetadata::DECODERS
+
+    # @return [String] The unique universal identifier for the current team.
+    attr_reader :uuid
+    # @return [String] The name for the current team.
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAccountMetadata
-  FIELDS = {
-    droplet_limit: "droplet_limit",
-    floating_ip_limit: "floating_ip_limit",
-    email: "email",
-    name: "name",
-    uuid: "uuid",
-    email_verified: "email_verified",
-    status: "status",
-    status_message: "status_message",
-    team: "team",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    droplet_limit
-    floating_ip_limit
-    email
-    uuid
-    email_verified
-    status
-    status_message
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::AccountStatus.from_value(value)
-    end,
-    team: lambda do |value|
-      ::OctridevDigitalocean::AccountTeam.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Account.
-# Typed representation of the `Account` API schema.
-class Account
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccountMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccountMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccountMetadata::DECODERS
-
-  # @return [Integer] The total number of Droplets current user or team may have active at one time. Requires `droplet:read` scope.
-  attr_reader :droplet_limit
-  # @return [Integer] The total number of Floating IPs the current user or team may have. Requires `reserved_ip:read` scope.
-  attr_reader :floating_ip_limit
-  # @return [String] The email address used by the current user to register for DigitalOcean.
-  attr_reader :email
-  # @return [String] The display name for the current user.
-  attr_reader :name
-  # @return [String] The unique universal identifier for the current user.
-  attr_reader :uuid
-  # @return [Boolean] If true, the user has verified their account via email. False otherwise.
-  attr_reader :email_verified
-  # @return [AccountStatus] This value is one of "active", "warning" or "locked".
-  attr_reader :status
-  # @return [String] A human-readable message giving more details about the status of the account.
-  attr_reader :status_message
-  # @return [AccountTeam] When authorized in a team context, includes information about the current team.
-  attr_reader :team
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAccountMetadata
+    FIELDS = {
+      droplet_limit: 'droplet_limit',
+      floating_ip_limit: 'floating_ip_limit',
+      email: 'email',
+      name: 'name',
+      uuid: 'uuid',
+      email_verified: 'email_verified',
+      status: 'status',
+      status_message: 'status_message',
+      team: 'team'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      droplet_limit
+      floating_ip_limit
+      email
+      uuid
+      email_verified
+      status
+      status_message
+    ].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::AccountStatus.from_value(value)
+      end,
+      team: lambda do |value|
+        ::OctridevDigitalocean::AccountTeam.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Account.
+  # Typed representation of the `Account` API schema.
+  class Account
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccountMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccountMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccountMetadata::DECODERS
+
+    # @return [Integer] The total number of Droplets current user or team may have active at one time. Requires `droplet:read` scope.
+    attr_reader :droplet_limit
+    # @return [Integer] The total number of Floating IPs the current user or team may have. Requires `reserved_ip:read` scope.
+    attr_reader :floating_ip_limit
+    # @return [String] The email address used by the current user to register for DigitalOcean.
+    attr_reader :email
+    # @return [String] The display name for the current user.
+    attr_reader :name
+    # @return [String] The unique universal identifier for the current user.
+    attr_reader :uuid
+    # @return [Boolean] If true, the user has verified their account via email. False otherwise.
+    attr_reader :email_verified
+    # @return [AccountStatus] This value is one of "active", "warning" or "locked".
+    attr_reader :status
+    # @return [String] A human-readable message giving more details about the status of the account.
+    attr_reader :status_message
+    # @return [AccountTeam] When authorized in a team context, includes information about the current team.
+    attr_reader :team
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AccountStatus SDK namespace.
-module AccountStatus
-  ACTIVE = 'active'
-  WARNING = 'warning'
-  LOCKED = 'locked'
-  VALUES = ['active', 'warning', 'locked'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAccountResponseMetadata
-  FIELDS = {
-    account: "account",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    account: lambda do |value|
-      ::OctridevDigitalocean::Account.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AccountResponse.
-# Typed representation of the `AccountResponse` API schema.
-class AccountResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccountResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccountResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccountResponseMetadata::DECODERS
-
-  # @return [Account] Optional object value serialized in the `account` wire field.
-  attr_reader :account
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AccountStatus SDK namespace.
+  module AccountStatus
+    ACTIVE = 'active'
+    WARNING = 'warning'
+    LOCKED = 'locked'
+    VALUES = %w[active warning locked].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAccountResponseMetadata
+    FIELDS = {
+      account: 'account'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      account: lambda do |value|
+        ::OctridevDigitalocean::Account.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for AccountResponse.
+  # Typed representation of the `AccountResponse` API schema.
+  class AccountResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccountResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccountResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccountResponseMetadata::DECODERS
+
+    # @return [Account] Optional object value serialized in the `account` wire field.
+    attr_reader :account
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

@@ -20,13 +20,12 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/nfs/",
+            '/v2/nfs/',
             SdkClient.encode_path_segment(nfs_id),
-            "/actions"
+            '/actions'
           ].join,
           config: config,
           body: body,
@@ -34,7 +33,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'nfs_create_action',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

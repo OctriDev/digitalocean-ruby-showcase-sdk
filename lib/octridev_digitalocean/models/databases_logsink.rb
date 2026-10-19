@@ -5,171 +5,171 @@
 
 # databases_logsink domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalLogsinkMetadata
-  FIELDS = {
-    sink: "sink",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    sink: lambda do |value|
-      ::OctridevDigitalocean::LogsinkSchema.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Logsink.
-# Typed representation of the `Logsink` API schema.
-class Logsink
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLogsinkMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLogsinkMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLogsinkMetadata::DECODERS
-
-  # @return [LogsinkSchema] Optional object value serialized in the `sink` wire field.
-  attr_reader :sink
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalLogsinkMetadata
+    FIELDS = {
+      sink: 'sink'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      sink: lambda do |value|
+        ::OctridevDigitalocean::LogsinkSchema.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for Logsink.
+  # Typed representation of the `Logsink` API schema.
+  class Logsink
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLogsinkMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLogsinkMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLogsinkMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+    # @return [LogsinkSchema] Optional object value serialized in the `sink` wire field.
+    attr_reader :sink
 
-# Internal model hydration metadata.
-class SdkInternalLogsinkSchemaMetadata
-  FIELDS = {
-    sink_id: "sink_id",
-    sink_name: "sink_name",
-    sink_type: "sink_type",
-    config: "config",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    sink_id
-    sink_name
-    sink_type
-    config
-  ].freeze
-  DECODERS = {
-    sink_type: lambda do |value|
-      ::OctridevDigitalocean::LogsinkSchemaSinkType.from_value(value)
-    end,
-    config: lambda do |value|
-      SdkModel.union_branch(value, [::OctridevDigitalocean::RsyslogLogsink, ::OctridevDigitalocean::ElasticsearchLogsink, ::OctridevDigitalocean::OpensearchLogsink, ::OctridevDigitalocean::DatadogLogsink])
-    end,
-  }.freeze
-end
-
-# API model for LogsinkSchema.
-# Typed representation of the `LogsinkSchema` API schema.
-class LogsinkSchema
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLogsinkSchemaMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLogsinkSchemaMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLogsinkSchemaMetadata::DECODERS
-
-  # @return [String] A unique identifier for Logsink
-  attr_reader :sink_id
-  # @return [String] The name of the Logsink
-  attr_reader :sink_name
-  # @return [LogsinkSchemaSinkType] Optional enumerated value serialized in the `sink_type` wire field.
-  attr_reader :sink_type
-  # @return [Object] Required API value serialized in the `config` wire field.
-  attr_reader :config
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the LogsinkSchemaSinkType SDK namespace.
-module LogsinkSchemaSinkType
-  RSYSLOG = 'rsyslog'
-  ELASTICSEARCH = 'elasticsearch'
-  OPENSEARCH = 'opensearch'
-  VALUES = ['rsyslog', 'elasticsearch', 'opensearch'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalLogsinkUpdateMetadata
-  FIELDS = {
-    config: "config",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    config
-  ].freeze
-  DECODERS = {
-    config: lambda do |value|
-      ::OctridevDigitalocean::LogsinkUpdateConfig.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for LogsinkUpdate.
-# Typed representation of the `LogsinkUpdate` API schema.
-class LogsinkUpdate
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalLogsinkUpdateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalLogsinkUpdateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalLogsinkUpdateMetadata::DECODERS
-
-  # @return [LogsinkUpdateConfig] Required API value serialized in the `config` wire field.
-  attr_reader :config
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the LogsinkUpdateConfig SDK namespace.
-module LogsinkUpdateConfig
-  def self.from_hash(hash)
-    shape_mapping = {
-      "server" => RsyslogLogsink,
-      "site" => DatadogLogsink,
-    }
-    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-    decoded = type&.from_hash(hash)
-    return decoded unless type.nil?
-    lossy = nil
-    [ElasticsearchLogsink, OpensearchLogsink].each do |type|
-      decoded = type.from_hash(hash)
-      return decoded if SdkModel.keeps_every_key?(hash, decoded)
-
-      lossy ||= decoded
-    rescue ::StandardError
-      next
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
     end
-    return lossy unless lossy.nil?
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalLogsinkSchemaMetadata
+    FIELDS = {
+      sink_id: 'sink_id',
+      sink_name: 'sink_name',
+      sink_type: 'sink_type',
+      config: 'config'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      sink_id
+      sink_name
+      sink_type
+      config
+    ].freeze
+    DECODERS = {
+      sink_type: lambda do |value|
+        ::OctridevDigitalocean::LogsinkSchemaSinkType.from_value(value)
+      end,
+      config: lambda do |value|
+        SdkModel.union_branch(value, [::OctridevDigitalocean::RsyslogLogsink, ::OctridevDigitalocean::ElasticsearchLogsink, ::OctridevDigitalocean::OpensearchLogsink, ::OctridevDigitalocean::DatadogLogsink])
+      end
+    }.freeze
+  end
+
+  # API model for LogsinkSchema.
+  # Typed representation of the `LogsinkSchema` API schema.
+  class LogsinkSchema
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLogsinkSchemaMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLogsinkSchemaMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLogsinkSchemaMetadata::DECODERS
+
+    # @return [String] A unique identifier for Logsink
+    attr_reader :sink_id
+    # @return [String] The name of the Logsink
+    attr_reader :sink_name
+    # @return [LogsinkSchemaSinkType] Optional enumerated value serialized in the `sink_type` wire field.
+    attr_reader :sink_type
+    # @return [Object] Required API value serialized in the `config` wire field.
+    attr_reader :config
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the LogsinkSchemaSinkType SDK namespace.
+  module LogsinkSchemaSinkType
+    RSYSLOG = 'rsyslog'
+    ELASTICSEARCH = 'elasticsearch'
+    OPENSEARCH = 'opensearch'
+    VALUES = %w[rsyslog elasticsearch opensearch].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalLogsinkUpdateMetadata
+    FIELDS = {
+      config: 'config'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      config
+    ].freeze
+    DECODERS = {
+      config: lambda do |value|
+        ::OctridevDigitalocean::LogsinkUpdateConfig.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for LogsinkUpdate.
+  # Typed representation of the `LogsinkUpdate` API schema.
+  class LogsinkUpdate
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalLogsinkUpdateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalLogsinkUpdateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalLogsinkUpdateMetadata::DECODERS
+
+    # @return [LogsinkUpdateConfig] Required API value serialized in the `config` wire field.
+    attr_reader :config
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the LogsinkUpdateConfig SDK namespace.
+  module LogsinkUpdateConfig
+    def self.from_hash(hash)
+      shape_mapping = {
+        'server' => RsyslogLogsink,
+        'site' => DatadogLogsink
+      }
+      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+      decoded = type&.from_hash(hash)
+      return decoded unless type.nil?
+
+      lossy = nil
+      [ElasticsearchLogsink, OpensearchLogsink].each do |type|
+        decoded = type.from_hash(hash)
+        return decoded if SdkModel.keeps_every_key?(hash, decoded)
+
+        lossy ||= decoded
+      rescue ::StandardError
+        next
+      end
+      lossy unless lossy.nil?
+    end
+  end
 end

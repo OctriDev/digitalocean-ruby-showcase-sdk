@@ -5,134 +5,134 @@
 
 # insights_list domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalListAlertInstancesResponseMetadata
-  FIELDS = {
-    alert_instances: "alert_instances",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    alert_instances: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AlertInstance.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ListAlertInstancesResponse.
-# Typed representation of the `ListAlertInstancesResponse` API schema.
-class ListAlertInstancesResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListAlertInstancesResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListAlertInstancesResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListAlertInstancesResponseMetadata::DECODERS
-
-  attr_reader :alert_instances
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListAlertInstancesResponseMetadata
+    FIELDS = {
+      alert_instances: 'alert_instances',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      alert_instances: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AlertInstance.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListAlertInstancesResponse.
+  # Typed representation of the `ListAlertInstancesResponse` API schema.
+  class ListAlertInstancesResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListAlertInstancesResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListAlertInstancesResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListAlertInstancesResponseMetadata::DECODERS
+
+    attr_reader :alert_instances
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListAlertRulesMetadata
-  FIELDS = {
-    alert_rules: "alert_rules",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    alert_rules
-  ].freeze
-  DECODERS = {
-    alert_rules: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AlertRule.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListAlertRules.
-# Typed representation of the `ListAlertRules` API schema.
-class ListAlertRules
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListAlertRulesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListAlertRulesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListAlertRulesMetadata::DECODERS
-
-  # @return [Array_of_AlertRule] Required array value serialized in the `alert_rules` wire field.
-  attr_reader :alert_rules
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListAlertRulesMetadata
+    FIELDS = {
+      alert_rules: 'alert_rules'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      alert_rules
+    ].freeze
+    DECODERS = {
+      alert_rules: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AlertRule.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListAlertRules.
+  # Typed representation of the `ListAlertRules` API schema.
+  class ListAlertRules
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListAlertRulesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListAlertRulesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListAlertRulesMetadata::DECODERS
+
+    # @return [Array_of_AlertRule] Required array value serialized in the `alert_rules` wire field.
+    attr_reader :alert_rules
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListNotificationChannelsMetadata
-  FIELDS = {
-    notification_channels: "notification_channels",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    notification_channels
-  ].freeze
-  DECODERS = {
-    notification_channels: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::NotificationChannel.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListNotificationChannels.
-# Typed representation of the `ListNotificationChannels` API schema.
-class ListNotificationChannels
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListNotificationChannelsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListNotificationChannelsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListNotificationChannelsMetadata::DECODERS
-
-  # @return [Array_of_NotificationChannel] Required array value serialized in the `notification_channels` wire field.
-  attr_reader :notification_channels
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListNotificationChannelsMetadata
+    FIELDS = {
+      notification_channels: 'notification_channels'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      notification_channels
+    ].freeze
+    DECODERS = {
+      notification_channels: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::NotificationChannel.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ListNotificationChannels.
+  # Typed representation of the `ListNotificationChannels` API schema.
+  class ListNotificationChannels
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListNotificationChannelsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListNotificationChannelsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListNotificationChannelsMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [Array_of_NotificationChannel] Required array value serialized in the `notification_channels` wire field.
+    attr_reader :notification_channels
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

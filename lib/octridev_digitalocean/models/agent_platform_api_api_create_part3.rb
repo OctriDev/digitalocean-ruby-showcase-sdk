@@ -5,377 +5,367 @@
 
 # agent_platform_api_api_create domain models (part 3)
 module OctridevDigitalocean
-# API model for ApiCreateScenarioSetInputPublic.
-# Public parameters for creating a scenario set.
-class ApiCreateScenarioSetInputPublic
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateScenarioSetInputPublicMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateScenarioSetInputPublicMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateScenarioSetInputPublicMetadata::DECODERS
+  # API model for ApiCreateScenarioSetInputPublic.
+  # Public parameters for creating a scenario set.
+  class ApiCreateScenarioSetInputPublic
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateScenarioSetInputPublicMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateScenarioSetInputPublicMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateScenarioSetInputPublicMetadata::DECODERS
 
-  # @return [ApiFileUploadDataSource] Uploaded scenario file to ingest. Provide this or `scenarios`, not both.
-  attr_reader :file_upload_scenario_set
-  # @return [String] The name of the scenario set.
-  attr_reader :name
-  # @return [Array_of_ApiScenario] Inline scenarios. Provide this or `file_upload_scenario_set`, not both.
-  attr_reader :scenarios
+    # @return [ApiFileUploadDataSource] Uploaded scenario file to ingest. Provide this or `scenarios`, not both.
+    attr_reader :file_upload_scenario_set
+    # @return [String] The name of the scenario set.
+    attr_reader :name
+    # @return [Array_of_ApiScenario] Inline scenarios. Provide this or `file_upload_scenario_set`, not both.
+    attr_reader :scenarios
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCreateScenarioSetOutputMetadata
+    FIELDS = {
+      scenario_set: 'scenario_set'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      scenario_set: lambda do |value|
+        ::OctridevDigitalocean::ApiScenarioSet.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiCreateScenarioSetOutput.
+  # Output for creating a scenario set.
+  class ApiCreateScenarioSetOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateScenarioSetOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateScenarioSetOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateScenarioSetOutputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiCreateScenarioSetOutputMetadata
-  FIELDS = {
-    scenario_set: "scenario_set",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    scenario_set: lambda do |value|
-      ::OctridevDigitalocean::ApiScenarioSet.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [ApiScenarioSet] A team-owned collection of scenarios.
+    attr_reader :scenario_set
 
-# API model for ApiCreateScenarioSetOutput.
-# Output for creating a scenario set.
-class ApiCreateScenarioSetOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateScenarioSetOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateScenarioSetOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateScenarioSetOutputMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ApiScenarioSet] A team-owned collection of scenarios.
-  attr_reader :scenario_set
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCreateScenarioSetUploadPresignedUrlsInputPublicMetadata
+    FIELDS = {
+      files: 'files'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      files: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiPresignedUrlFile.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiCreateScenarioSetUploadPresignedUrlsInputPublic.
+  # Public parameters for requesting scenario set upload presigned URLs.
+  class ApiCreateScenarioSetUploadPresignedUrlsInputPublic
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateScenarioSetUploadPresignedUrlsInputPublicMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateScenarioSetUploadPresignedUrlsInputPublicMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateScenarioSetUploadPresignedUrlsInputPublicMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiCreateScenarioSetUploadPresignedUrlsInputPublicMetadata
-  FIELDS = {
-    files: "files",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    files: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiPresignedUrlFile.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_ApiPresignedUrlFile] A list of files to generate presigned URLs for.
+    attr_reader :files
 
-# API model for ApiCreateScenarioSetUploadPresignedUrlsInputPublic.
-# Public parameters for requesting scenario set upload presigned URLs.
-class ApiCreateScenarioSetUploadPresignedUrlsInputPublic
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateScenarioSetUploadPresignedUrlsInputPublicMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateScenarioSetUploadPresignedUrlsInputPublicMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateScenarioSetUploadPresignedUrlsInputPublicMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_ApiPresignedUrlFile] A list of files to generate presigned URLs for.
-  attr_reader :files
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCreateScheduledIndexingInputPublicMetadata
+    FIELDS = {
+      days: 'days',
+      knowledge_base_uuid: 'knowledge_base_uuid',
+      time: 'time'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiCreateScheduledIndexingInputPublic.
+  # Typed representation of the `ApiCreateScheduledIndexingInputPublic` API schema.
+  class ApiCreateScheduledIndexingInputPublic
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateScheduledIndexingInputPublicMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateScheduledIndexingInputPublicMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateScheduledIndexingInputPublicMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiCreateScheduledIndexingInputPublicMetadata
-  FIELDS = {
-    days: "days",
-    knowledge_base_uuid: "knowledge_base_uuid",
-    time: "time",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [Array_of_Integer] Days for execution (day is represented same as in a cron expression, e.g. Monday begins with 1 )
+    attr_reader :days
+    # @return [String] Knowledge base uuid for which the schedule is created
+    attr_reader :knowledge_base_uuid
+    # @return [String] Time of execution (HH:MM) UTC
+    attr_reader :time
 
-# API model for ApiCreateScheduledIndexingInputPublic.
-# Typed representation of the `ApiCreateScheduledIndexingInputPublic` API schema.
-class ApiCreateScheduledIndexingInputPublic
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateScheduledIndexingInputPublicMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateScheduledIndexingInputPublicMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateScheduledIndexingInputPublicMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_Integer] Days for execution (day is represented same as in a cron expression, e.g. Monday begins with 1 )
-  attr_reader :days
-  # @return [String] Knowledge base uuid for which the schedule is created
-  attr_reader :knowledge_base_uuid
-  # @return [String] Time of execution (HH:MM) UTC
-  attr_reader :time
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCreateScheduledIndexingOutputMetadata
+    FIELDS = {
+      indexing_info: 'indexing_info'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      indexing_info: lambda do |value|
+        ::OctridevDigitalocean::ApiScheduledIndexingInfo.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiCreateScheduledIndexingOutput.
+  # Typed representation of the `ApiCreateScheduledIndexingOutput` API schema.
+  class ApiCreateScheduledIndexingOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateScheduledIndexingOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateScheduledIndexingOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateScheduledIndexingOutputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiCreateScheduledIndexingOutputMetadata
-  FIELDS = {
-    indexing_info: "indexing_info",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    indexing_info: lambda do |value|
-      ::OctridevDigitalocean::ApiScheduledIndexingInfo.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [ApiScheduledIndexingInfo] Metadata for scheduled indexing entries
+    attr_reader :indexing_info
 
-# API model for ApiCreateScheduledIndexingOutput.
-# Typed representation of the `ApiCreateScheduledIndexingOutput` API schema.
-class ApiCreateScheduledIndexingOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateScheduledIndexingOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateScheduledIndexingOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateScheduledIndexingOutputMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ApiScheduledIndexingInfo] Metadata for scheduled indexing entries
-  attr_reader :indexing_info
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCreateSimulationRunInputPublicMetadata
+    FIELDS = {
+      agent_config: 'agent_config',
+      evaluation_config: 'evaluation_config',
+      exploration_budget: 'exploration_budget',
+      judge_model_uuid: 'judge_model_uuid',
+      max_turns: 'max_turns',
+      name: 'name',
+      scenario_set_uuid: 'scenario_set_uuid',
+      user_simulator_config: 'user_simulator_config',
+      user_simulator_model_uuid: 'user_simulator_model_uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      agent_config: lambda do |value|
+        ::OctridevDigitalocean::ApiCandidateAgentConfig.from_hash(value)
+      end,
+      evaluation_config: lambda do |value|
+        ::OctridevDigitalocean::ApiSimulationEvaluationConfig.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiCreateSimulationRunInputPublic.
+  # Public parameters for creating a simulation run.
+  class ApiCreateSimulationRunInputPublic
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateSimulationRunInputPublicMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateSimulationRunInputPublicMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateSimulationRunInputPublicMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiCreateSimulationRunInputPublicMetadata
-  FIELDS = {
-    agent_config: "agent_config",
-    evaluation_config: "evaluation_config",
-    exploration_budget: "exploration_budget",
-    judge_model_uuid: "judge_model_uuid",
-    max_turns: "max_turns",
-    name: "name",
-    scenario_set_uuid: "scenario_set_uuid",
-    user_simulator_config: "user_simulator_config",
-    user_simulator_model_uuid: "user_simulator_model_uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    agent_config: lambda do |value|
-      ::OctridevDigitalocean::ApiCandidateAgentConfig.from_hash(value)
-    end,
-    evaluation_config: lambda do |value|
-      ::OctridevDigitalocean::ApiSimulationEvaluationConfig.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [ApiCandidateAgentConfig] Configuration of the candidate agent under test for a simulation run.
+    attr_reader :agent_config
+    # @return [ApiSimulationEvaluationConfig] Optional configuration that opts a simulation run into an evaluation. When included on the create-run request, the platform reserves a model_evaluation_run linked to this simulation run and dispatches the evaluation automatically after the simulation finishes. The evaluation reuses the simulation run's judge_model_uuid.
+    attr_reader :evaluation_config
+    # @return [Integer] Optional run-level episodes-per-scenario override. When set, overrides each scenario's exploration_budget.
+    attr_reader :exploration_budget
+    # @return [String] Optional model override for the judge. Platform default when unset.
+    attr_reader :judge_model_uuid
+    # @return [Integer] Optional run-level turn budget. When set, overrides each scenario's max_turns.
+    attr_reader :max_turns
+    # @return [String] Optional run name.
+    attr_reader :name
+    # @return [String] UUID of the existing scenario set to execute. The set must be ready.
+    attr_reader :scenario_set_uuid
+    # @return [Hash] Optional user simulator model settings such as temperature and max_tokens.
+    attr_reader :user_simulator_config
+    # @return [String] Optional model override for the user simulator. Platform default when unset.
+    attr_reader :user_simulator_model_uuid
 
-# API model for ApiCreateSimulationRunInputPublic.
-# Public parameters for creating a simulation run.
-class ApiCreateSimulationRunInputPublic
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateSimulationRunInputPublicMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateSimulationRunInputPublicMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateSimulationRunInputPublicMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ApiCandidateAgentConfig] Configuration of the candidate agent under test for a simulation run.
-  attr_reader :agent_config
-  # @return [ApiSimulationEvaluationConfig] Optional configuration that opts a simulation run into an evaluation. When included on the create-run request, the platform reserves a model_evaluation_run linked to this simulation run and dispatches the evaluation automatically after the simulation finishes. The evaluation reuses the simulation run's judge_model_uuid.
-  attr_reader :evaluation_config
-  # @return [Integer] Optional run-level episodes-per-scenario override. When set, overrides each scenario's exploration_budget.
-  attr_reader :exploration_budget
-  # @return [String] Optional model override for the judge. Platform default when unset.
-  attr_reader :judge_model_uuid
-  # @return [Integer] Optional run-level turn budget. When set, overrides each scenario's max_turns.
-  attr_reader :max_turns
-  # @return [String] Optional run name.
-  attr_reader :name
-  # @return [String] UUID of the existing scenario set to execute. The set must be ready.
-  attr_reader :scenario_set_uuid
-  # @return [Hash] Optional user simulator model settings such as temperature and max_tokens.
-  attr_reader :user_simulator_config
-  # @return [String] Optional model override for the user simulator. Platform default when unset.
-  attr_reader :user_simulator_model_uuid
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCreateSimulationRunOutputMetadata
+    FIELDS = {
+      simulation_run: 'simulation_run'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      simulation_run: lambda do |value|
+        ::OctridevDigitalocean::ApiSimulationRun.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiCreateSimulationRunOutput.
+  # Output for creating a simulation run.
+  class ApiCreateSimulationRunOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateSimulationRunOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateSimulationRunOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateSimulationRunOutputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiCreateSimulationRunOutputMetadata
-  FIELDS = {
-    simulation_run: "simulation_run",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    simulation_run: lambda do |value|
-      ::OctridevDigitalocean::ApiSimulationRun.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [ApiSimulationRun] One execution of a scenario set against a candidate agent.
+    attr_reader :simulation_run
 
-# API model for ApiCreateSimulationRunOutput.
-# Output for creating a simulation run.
-class ApiCreateSimulationRunOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateSimulationRunOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateSimulationRunOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateSimulationRunOutputMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ApiSimulationRun] One execution of a scenario set against a candidate agent.
-  attr_reader :simulation_run
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCreateWorkspaceInputPublicMetadata
+    FIELDS = {
+      agent_uuids: 'agent_uuids',
+      description: 'description',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiCreateWorkspaceInputPublic.
+  # Parameters for Workspace Creation
+  class ApiCreateWorkspaceInputPublic
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateWorkspaceInputPublicMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateWorkspaceInputPublicMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateWorkspaceInputPublicMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiCreateWorkspaceInputPublicMetadata
-  FIELDS = {
-    agent_uuids: "agent_uuids",
-    description: "description",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [Array_of_String] Ids of the agents(s) to attach to the workspace
+    attr_reader :agent_uuids
+    # @return [String] Description of the workspace
+    attr_reader :description
+    # @return [String] Name of the workspace
+    attr_reader :name
 
-# API model for ApiCreateWorkspaceInputPublic.
-# Parameters for Workspace Creation
-class ApiCreateWorkspaceInputPublic
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateWorkspaceInputPublicMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateWorkspaceInputPublicMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateWorkspaceInputPublicMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_String] Ids of the agents(s) to attach to the workspace
-  attr_reader :agent_uuids
-  # @return [String] Description of the workspace
-  attr_reader :description
-  # @return [String] Name of the workspace
-  attr_reader :name
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCreateWorkspaceOutputMetadata
+    FIELDS = {
+      workspace: 'workspace'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      workspace: lambda do |value|
+        ::OctridevDigitalocean::ApiWorkspace.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ApiCreateWorkspaceOutput.
+  # Typed representation of the `ApiCreateWorkspaceOutput` API schema.
+  class ApiCreateWorkspaceOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCreateWorkspaceOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCreateWorkspaceOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCreateWorkspaceOutputMetadata::DECODERS
+
+    # @return [ApiWorkspace] Optional object value serialized in the `workspace` wire field.
+    attr_reader :workspace
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiCreateWorkspaceOutputMetadata
-  FIELDS = {
-    workspace: "workspace",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    workspace: lambda do |value|
-      ::OctridevDigitalocean::ApiWorkspace.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiCreateWorkspaceOutput.
-# Typed representation of the `ApiCreateWorkspaceOutput` API schema.
-class ApiCreateWorkspaceOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCreateWorkspaceOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCreateWorkspaceOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCreateWorkspaceOutputMetadata::DECODERS
-
-  # @return [ApiWorkspace] Optional object value serialized in the `workspace` wire field.
-  attr_reader :workspace
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
 end

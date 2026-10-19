@@ -5,71 +5,70 @@
 
 # monitoring domain models (part 3)
 module OctridevDigitalocean
-# API model for SinksResponse.
-# Typed representation of the `SinksResponse` API schema.
-class SinksResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSinksResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSinksResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSinksResponseMetadata::DECODERS
+  # API model for SinksResponse.
+  # Typed representation of the `SinksResponse` API schema.
+  class SinksResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSinksResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSinksResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSinksResponseMetadata::DECODERS
 
-  # @return [Destination] Optional object value serialized in the `destination` wire field.
-  attr_reader :destination
-  # @return [Array_of_SinkResource] List of resources identified by their URNs.
-  attr_reader :resources
+    # @return [Destination] Optional object value serialized in the `destination` wire field.
+    attr_reader :destination
+    # @return [Array_of_SinkResource] List of resources identified by their URNs.
+    attr_reader :resources
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalSlackDetailsMetadata
+    FIELDS = {
+      channel: 'channel',
+      url: 'url'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      channel
+      url
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for SlackDetails.
+  # Typed representation of the `SlackDetails` API schema.
+  class SlackDetails
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSlackDetailsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSlackDetailsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSlackDetailsMetadata::DECODERS
+
+    # @return [String] Slack channel to notify of an alert trigger.
+    attr_reader :channel
+    # @return [String] Slack Webhook URL.
+    attr_reader :url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSlackDetailsMetadata
-  FIELDS = {
-    channel: "channel",
-    url: "url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    channel
-    url
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SlackDetails.
-# Typed representation of the `SlackDetails` API schema.
-class SlackDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSlackDetailsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSlackDetailsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSlackDetailsMetadata::DECODERS
-
-  # @return [String] Slack channel to notify of an alert trigger.
-  attr_reader :channel
-  # @return [String] Slack Webhook URL.
-  attr_reader :url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
 end

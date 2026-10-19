@@ -19,9 +19,9 @@ module OctridevDigitalocean
         EXPIRED = 'expired'
         CANCELLING = 'cancelling'
         CANCELLED = 'cancelled'
-        VALUES = [
-          'validating', 'in_progress', 'finalizing', 'completed', 'failed', 'expired', 'cancelling',
-          'cancelled'
+        VALUES = %w[
+          validating in_progress finalizing completed failed expired cancelling
+          cancelled
         ].freeze
         def self.from_value(value)
           value
@@ -38,22 +38,21 @@ module OctridevDigitalocean
         file_name:,
         request_options: nil
       )
-
         Validation.validate_length('file_name', file_name, min: 7)
         Validation.validate_pattern('file_name', file_name, '.+\\.[Jj][Ss][Oo][Nn][Ll]$')
 
         SdkClient.request(
           'POST',
-          "/v1/batches/files",
+          '/v1/batches/files',
           config: config,
           body: {
-            'file_name' => file_name,
+            'file_name' => file_name
           },
           return_type: ::OctridevDigitalocean::BatchFileCreateResponse,
           decoder: :json,
           operation_id: 'inference_create_batch_file',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -65,17 +64,16 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
-          "/<upload_url>",
+          '/<upload_url>',
           config: config,
           body: body,
           content_type: 'application/octet-stream',
           decoder: :empty,
           operation_id: 'inference_upload_batch_file',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -106,12 +104,11 @@ module OctridevDigitalocean
         metadata: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('file_id', file_id)
 
         SdkClient.request(
           'POST',
-          "/v1/batches",
+          '/v1/batches',
           config: config,
           body: {
             'file_id' => file_id,
@@ -119,13 +116,13 @@ module OctridevDigitalocean
             'completion_window' => completion_window,
             'request_id' => request_id,
             'endpoint' => endpoint,
-            'metadata' => metadata,
+            'metadata' => metadata
           },
           return_type: ::OctridevDigitalocean::Batch,
           decoder: :json,
           operation_id: 'inference_create_batch',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -143,29 +140,28 @@ module OctridevDigitalocean
         status: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(after) { Validation.validate_uuid('after', after) }
 
         Validation.if_given(limit) { Validation.validate_range('limit', limit, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/v1/batches",
+          '/v1/batches',
           config: config,
           query: {
             'after' => QueryValue.new(after, style: 'form', explode: true),
             'limit' => QueryValue.new(limit, style: 'form', explode: true),
-            'status' => QueryValue.new(status, style: 'form', explode: true),
+            'status' => QueryValue.new(status, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::BatchListResponse,
           decoder: :json,
           operation_id: 'inference_list_batches',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
-    InferenceListBatchesPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      InferenceListBatchesPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Returns a cursor-paginated list of batch jobs, ordered newest first. Use `limit` to control page size and `after` to page forward using the `last_id` from the previous response.
       #
@@ -193,10 +189,13 @@ module OctridevDigitalocean
             )
             items = page.data || []
             break if items.empty?
+
             items.each { |item| y << item }
             break unless page.has_more
+
             next_cursor = page.last_id
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -221,10 +220,12 @@ module OctridevDigitalocean
             )
             items = page.data || []
             break if items.empty?
+
             next_cursor = page.last_id
             has_more = page.has_more && !next_cursor.nil?
             y << InferenceListBatchesPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end
@@ -238,13 +239,12 @@ module OctridevDigitalocean
         batch_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('batch_id', batch_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v1/batches/",
+            '/v1/batches/',
             SdkClient.encode_path_segment(batch_id)
           ].join,
           config: config,
@@ -252,7 +252,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'inference_get_batch',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -264,22 +264,21 @@ module OctridevDigitalocean
         batch_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('batch_id', batch_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v1/batches/",
+            '/v1/batches/',
             SdkClient.encode_path_segment(batch_id),
-            "/results"
+            '/results'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::BatchResultsResponse,
           decoder: :json,
           operation_id: 'inference_get_batch_results',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -291,22 +290,21 @@ module OctridevDigitalocean
         batch_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('batch_id', batch_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v1/batches/",
+            '/v1/batches/',
             SdkClient.encode_path_segment(batch_id),
-            "/cancel"
+            '/cancel'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::Batch,
           decoder: :json,
           operation_id: 'inference_cancel_batch',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

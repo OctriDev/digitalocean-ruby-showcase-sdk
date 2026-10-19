@@ -5,93 +5,92 @@
 
 # kubernetes_all domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAllClustersMetadata
-  FIELDS = {
-    kubernetes_clusters: "kubernetes_clusters",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    kubernetes_clusters: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ClusterRead.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AllClusters.
-# Typed representation of the `AllClusters` API schema.
-class AllClusters
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAllClustersMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAllClustersMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAllClustersMetadata::DECODERS
-
-  attr_reader :kubernetes_clusters
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAllClustersMetadata
+    FIELDS = {
+      kubernetes_clusters: 'kubernetes_clusters',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      kubernetes_clusters: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ClusterRead.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AllClusters.
+  # Typed representation of the `AllClusters` API schema.
+  class AllClusters
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAllClustersMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAllClustersMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAllClustersMetadata::DECODERS
+
+    attr_reader :kubernetes_clusters
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAllNodePoolsMetadata
-  FIELDS = {
-    node_pools: "node_pools",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    node_pools: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::KubernetesNodePool.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AllNodePools.
-# Typed representation of the `AllNodePools` API schema.
-class AllNodePools
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAllNodePoolsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAllNodePoolsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAllNodePoolsMetadata::DECODERS
-
-  # @return [Array_of_KubernetesNodePool] Optional array value serialized in the `node_pools` wire field.
-  attr_reader :node_pools
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAllNodePoolsMetadata
+    FIELDS = {
+      node_pools: 'node_pools'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      node_pools: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::KubernetesNodePool.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for AllNodePools.
+  # Typed representation of the `AllNodePools` API schema.
+  class AllNodePools
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAllNodePoolsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAllNodePoolsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAllNodePoolsMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [Array_of_KubernetesNodePool] Optional array value serialized in the `node_pools` wire field.
+    attr_reader :node_pools
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

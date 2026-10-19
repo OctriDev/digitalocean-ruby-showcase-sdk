@@ -18,20 +18,19 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/vector-databases",
+          '/v2/vector-databases',
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::VectordbListVectorDBsResponse,
           decoder: :json,
           operation_id: 'vector_databases_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -54,23 +53,22 @@ module OctridevDigitalocean
         tags: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/vector-databases",
+          '/v2/vector-databases',
           config: config,
           body: {
             'name' => name,
             'project_id' => project_id,
             'region' => region,
             'size' => size,
-            'tags' => tags,
+            'tags' => tags
           },
           return_type: ::OctridevDigitalocean::VectordbCreateVectorDBResponse,
           decoder: :json,
           operation_id: 'vector_databases_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -82,11 +80,10 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -94,7 +91,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'vector_databases_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -114,24 +111,23 @@ module OctridevDigitalocean
         project_id: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           body: {
             'config' => request_config,
             'id' => id2,
-            'project_id' => project_id,
+            'project_id' => project_id
           },
           return_type: ::OctridevDigitalocean::VectordbUpdateVectorDBResponse,
           decoder: :json,
           operation_id: 'vector_databases_update',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -143,18 +139,17 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'vector_databases_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -166,20 +161,19 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id),
-            "/backups"
+            '/backups'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::VectordbListBackupsResponse,
           decoder: :json,
           operation_id: 'vector_databases_list_backups',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -193,22 +187,21 @@ module OctridevDigitalocean
         backup_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id),
-            "/backups/",
+            '/backups/',
             SdkClient.encode_path_segment(backup_id),
-            "/restore"
+            '/restore'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::VectordbGetRestoreStatusResponse,
           decoder: :json,
           operation_id: 'vector_databases_get_restore_status',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -226,26 +219,25 @@ module OctridevDigitalocean
         id2: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id),
-            "/backups/",
+            '/backups/',
             SdkClient.encode_path_segment(backup_id),
-            "/restore"
+            '/restore'
           ].join,
           config: config,
           body: {
             'backup_id' => backup_id2,
-            'id' => id2,
+            'id' => id2
           },
           return_type: ::OctridevDigitalocean::VectordbRestoreBackupResponse,
           decoder: :json,
           operation_id: 'vector_databases_post_restore_backup',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -257,20 +249,19 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id),
-            "/credentials"
+            '/credentials'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::VectordbGetVectorDBAdminCredentialsResponse,
           decoder: :json,
           operation_id: 'vector_databases_get_credentials',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -287,24 +278,23 @@ module OctridevDigitalocean
         size: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id),
-            "/resize"
+            '/resize'
           ].join,
           config: config,
           body: {
             'id' => id2,
-            'size' => size,
+            'size' => size
           },
           return_type: ::OctridevDigitalocean::VectordbResizeVectorDBResponse,
           decoder: :json,
           operation_id: 'vector_databases_post_resize',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -321,24 +311,23 @@ module OctridevDigitalocean
         tags: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/vector-databases/",
+            '/v2/vector-databases/',
             SdkClient.encode_path_segment(id),
-            "/tags"
+            '/tags'
           ].join,
           config: config,
           body: {
             'id' => id2,
-            'tags' => tags,
+            'tags' => tags
           },
           return_type: ::OctridevDigitalocean::VectordbUpdateVectorDBTagsResponse,
           decoder: :json,
           operation_id: 'vector_databases_update_tags',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end
