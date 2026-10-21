@@ -4487,12 +4487,12 @@ module OctridevDigitalocean
     end
 
     # To list information about the backup policies for all Droplets in the account, send a GET request to `/v2/droplets/backups/policies`.
-    def list_backup_policies(
+    def list_all_backup_policies(
       per_page: NOT_GIVEN,
       page: NOT_GIVEN,
       request_options: nil
     )
-      ::OctridevDigitalocean::Methods::Droplets.droplets_list_backup_policies(
+      ::OctridevDigitalocean::Methods::Droplets.list_all_backup_policies(
         config: @config,
         per_page: per_page,
         page: page,
