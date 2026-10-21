@@ -28,24 +28,25 @@ module OctridevDigitalocean
         instructions: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_length('input', input, min: 1)
 
         SdkClient.request(
           'POST',
-          '/v1/audio/speech',
+          "/v1/audio/speech",
           config: config,
           body: {
             'model' => model,
             'input' => input,
             'voice' => voice,
             'response_format' => response_format,
-            'instructions' => instructions
+            'instructions' => instructions,
           },
           return_type: ::OctridevDigitalocean::SpeechResponse,
           decoder: :json,
           operation_id: 'inference_create_speech',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

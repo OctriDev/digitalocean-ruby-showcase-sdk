@@ -25,24 +25,25 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/tools',
+          "/v2/action-gateway/tools",
           config: config,
           query: {
             'toolkit_id' => QueryValue.new(toolkit_id, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListToolsResponse,
           decoder: :json,
           operation_id: 'tools_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -67,25 +68,26 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/tools/health',
+          "/v2/action-gateway/tools/health",
           config: config,
           query: {
             'provider' => QueryValue.new(provider, style: 'form', explode: true),
             'window' => QueryValue.new(window, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListToolHealthResponse,
           decoder: :json,
           operation_id: 'tools_list_health',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -110,25 +112,26 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/tools/health/providers',
+          "/v2/action-gateway/tools/health/providers",
           config: config,
           query: {
             'provider' => QueryValue.new(provider, style: 'form', explode: true),
             'window' => QueryValue.new(window, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListProviderHealthResponse,
           decoder: :json,
           operation_id: 'tools_list_health_providers',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -151,22 +154,23 @@ module OctridevDigitalocean
         include_history: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/action-gateway/tools/health/tools/',
+            "/v2/action-gateway/tools/health/tools/",
             SdkClient.encode_path_segment(tool_slug)
           ].join,
           config: config,
           query: {
             'window' => QueryValue.new(window, style: 'form', explode: true),
-            'include_history' => QueryValue.new(include_history, style: 'form', explode: true)
+            'include_history' => QueryValue.new(include_history, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::GetToolHealthResponse,
           decoder: :json,
           operation_id: 'tools_get_health',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -175,15 +179,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/tools/providers',
+          "/v2/action-gateway/tools/providers",
           config: config,
           return_type: ::OctridevDigitalocean::ListProvidersResponse,
           decoder: :json,
           operation_id: 'tools_list_providers',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -204,26 +209,27 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/tools/providers/search',
+          "/v2/action-gateway/tools/providers/search",
           config: config,
           query: {
             'query' => QueryValue.new(query, style: 'form', explode: true),
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::SearchProvidersResponse,
           decoder: :json,
           operation_id: 'tools_list_search_providers',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
-      ToolsListSearchProvidersPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    ToolsListSearchProvidersPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
       #
@@ -254,11 +260,9 @@ module OctridevDigitalocean
             )
             items = page.providers || []
             break if items.empty?
-
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
-
             cursor = next_cursor
           end
         end
@@ -283,12 +287,10 @@ module OctridevDigitalocean
             )
             items = page.providers || []
             break if items.empty?
-
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << ToolsListSearchProvidersPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             cursor = next_cursor
           end
         end
@@ -322,28 +324,29 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/tools/search',
+          "/v2/action-gateway/tools/search",
           config: config,
           query: {
             'query' => QueryValue.new(query, style: 'form', explode: true),
             'provider' => QueryValue.new(provider, style: 'form', explode: true),
             'toolbelt' => QueryValue.new(toolbelt, style: 'form', explode: true),
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::SearchToolsResponse,
           decoder: :json,
           operation_id: 'tools_list_search',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
-      ToolsListSearchPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    ToolsListSearchPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Returns the tools your team can use that match query, optionally restricted to some providers or to the members of one of your toolbelts. Results are ranked across the whole result set: exact tool name matches first, then name or title prefixes, then name or title substrings, then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
       #
@@ -387,11 +390,9 @@ module OctridevDigitalocean
             )
             items = page.tools || []
             break if items.empty?
-
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
-
             cursor = next_cursor
           end
         end
@@ -420,12 +421,10 @@ module OctridevDigitalocean
             )
             items = page.tools || []
             break if items.empty?
-
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << ToolsListSearchPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             cursor = next_cursor
           end
         end
@@ -436,15 +435,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/tools/toolkits',
+          "/v2/action-gateway/tools/toolkits",
           config: config,
           return_type: ::OctridevDigitalocean::ListToolkitsResponse,
           decoder: :json,
           operation_id: 'tools_list_toolkits',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

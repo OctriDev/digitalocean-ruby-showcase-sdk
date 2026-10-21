@@ -35,9 +35,10 @@ module OctridevDigitalocean
         tags: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/gen-ai/custom_models/import',
+          "/v2/gen-ai/custom_models/import",
           config: config,
           body: {
             'accept_hf_token_storage' => accept_hf_token_storage,
@@ -47,13 +48,13 @@ module OctridevDigitalocean
             'preferred_gpu_region' => preferred_gpu_region,
             'source_ref' => source_ref,
             'source_type' => source_type,
-            'tags' => tags
+            'tags' => tags,
           },
           return_type: ::OctridevDigitalocean::ApiImportCustomModelOutputPublic,
           decoder: :json,
           operation_id: 'genai_import_custom_model',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

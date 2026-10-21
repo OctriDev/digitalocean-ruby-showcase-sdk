@@ -12,12 +12,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalHarnessCreateSessionWorkspaceTransferMetadata
         FIELDS = {
-          direction: 'direction',
-          path: 'path',
-          is_archive: 'is_archive',
-          as_archive: 'as_archive',
-          size_bytes: 'size_bytes',
-          sha256: 'sha256'
+          direction: "direction",
+          path: "path",
+          is_archive: "is_archive",
+          as_archive: "as_archive",
+          size_bytes: "size_bytes",
+          sha256: "sha256",
         }.freeze
         REQUIRED_FIELDS = %i[
           direction
@@ -26,7 +26,7 @@ module OctridevDigitalocean
         DECODERS = {
           direction: lambda do |value|
             ::OctridevDigitalocean::Methods::HarnessRuntime::HarnessCreateSessionWorkspaceTransferDirection.from_value(value)
-          end
+          end,
         }.freeze
       end
 
@@ -67,10 +67,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalHarnessCancelSessionWorkspaceTransferMetadata
         FIELDS = {
-          reason: 'reason'
+          reason: "reason",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for HarnessCancelSessionWorkspaceTransfer.
@@ -100,10 +102,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalHarnessCommitSessionWorkspaceTransferMetadata
         FIELDS = {
-          sha256: 'sha256'
+          sha256: "sha256",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
-        DECODERS = {}.freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for HarnessCommitSessionWorkspaceTransfer.
@@ -133,12 +137,13 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalHarnessCreateSessionWorkspacePartUploadUrlsMetadata
         FIELDS = {
-          part_numbers: 'part_numbers'
+          part_numbers: "part_numbers",
         }.freeze
         REQUIRED_FIELDS = %i[
           part_numbers
         ].freeze
-        DECODERS = {}.freeze
+        DECODERS = {
+        }.freeze
       end
 
       # API model for HarnessCreateSessionWorkspacePartUploadUrls.
@@ -169,7 +174,7 @@ module OctridevDigitalocean
       module HarnessCreateSessionWorkspaceTransferDirection
         UPLOAD = 'upload'
         DOWNLOAD = 'download'
-        VALUES = %w[upload download].freeze
+        VALUES = ['upload', 'download'].freeze
         def self.from_value(value)
           value
         end
@@ -186,10 +191,10 @@ module OctridevDigitalocean
         SESSION_STATUS_FAILED = 'SESSION_STATUS_FAILED'
         SESSION_STATUS_PAUSED = 'SESSION_STATUS_PAUSED'
         SESSION_STATUS_ALL = 'SESSION_STATUS_ALL'
-        VALUES = %w[
-          SESSION_STATUS_UNSPECIFIED SESSION_STATUS_PROVISIONING SESSION_STATUS_READY
-          SESSION_STATUS_DETACHED SESSION_STATUS_DESTROYING SESSION_STATUS_DESTROYED
-          SESSION_STATUS_FAILED SESSION_STATUS_PAUSED SESSION_STATUS_ALL
+        VALUES = [
+          'SESSION_STATUS_UNSPECIFIED', 'SESSION_STATUS_PROVISIONING', 'SESSION_STATUS_READY',
+          'SESSION_STATUS_DETACHED', 'SESSION_STATUS_DESTROYING', 'SESSION_STATUS_DESTROYED',
+          'SESSION_STATUS_FAILED', 'SESSION_STATUS_PAUSED', 'SESSION_STATUS_ALL'
         ].freeze
         def self.from_value(value)
           value

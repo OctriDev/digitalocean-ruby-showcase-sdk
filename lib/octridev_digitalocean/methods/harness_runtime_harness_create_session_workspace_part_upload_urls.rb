@@ -22,24 +22,25 @@ module OctridevDigitalocean
         part_numbers:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/agents/sessions/',
+            "/v2/agents/sessions/",
             SdkClient.encode_path_segment(session_id),
-            '/workspace/transfers/',
+            "/workspace/transfers/",
             SdkClient.encode_path_segment(transfer_id),
-            '/part-upload-urls'
+            "/part-upload-urls"
           ].join,
           config: config,
           body: {
-            'part_numbers' => part_numbers
+            'part_numbers' => part_numbers,
           },
           return_type: ::OctridevDigitalocean::WorkspacePartUploadUrls,
           decoder: :json,
           operation_id: 'harness_create_session_workspace_part_upload_urls',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

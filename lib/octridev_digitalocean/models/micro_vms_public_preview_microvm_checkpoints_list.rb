@@ -5,647 +5,657 @@
 
 # micro_vms_public_preview domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAllCheckpointsMetadata
-    FIELDS = {
-      checkpoints: 'checkpoints',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      checkpoints: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Checkpoint2.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAllCheckpointsMetadata
+  FIELDS = {
+    checkpoints: "checkpoints",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    checkpoints: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Checkpoint2.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AllCheckpoints.
+# Typed representation of the `AllCheckpoints` API schema.
+class AllCheckpoints
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAllCheckpointsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAllCheckpointsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAllCheckpointsMetadata::DECODERS
+
+  attr_reader :checkpoints
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AllCheckpoints.
-  # Typed representation of the `AllCheckpoints` API schema.
-  class AllCheckpoints
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAllCheckpointsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAllCheckpointsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAllCheckpointsMetadata::DECODERS
-
-    attr_reader :checkpoints
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAllMicrovmsMetadata
-    FIELDS = {
-      microvms: 'microvms',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      microvms: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Microvm.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAllMicrovmsMetadata
+  FIELDS = {
+    microvms: "microvms",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    microvms: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Microvm.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AllMicrovms.
+# Typed representation of the `AllMicrovms` API schema.
+class AllMicrovms
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAllMicrovmsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAllMicrovmsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAllMicrovmsMetadata::DECODERS
+
+  attr_reader :microvms
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AllMicrovms.
-  # Typed representation of the `AllMicrovms` API schema.
-  class AllMicrovms
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAllMicrovmsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAllMicrovmsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAllMicrovmsMetadata::DECODERS
-
-    attr_reader :microvms
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCheckpoint2Metadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      microvm_id: 'microvm_id',
-      microvm_name: 'microvm_name',
-      region: 'region',
-      size: 'size',
-      status: 'status',
-      memory_bytes: 'memory_bytes',
-      disk_bytes: 'disk_bytes',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      size: lambda do |value|
-        ::OctridevDigitalocean::MicrovmSize.from_hash(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::Checkpoint2Status.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCheckpoint2Metadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    microvm_id: "microvm_id",
+    microvm_name: "microvm_name",
+    region: "region",
+    size: "size",
+    status: "status",
+    memory_bytes: "memory_bytes",
+    disk_bytes: "disk_bytes",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    size: lambda do |value|
+      ::OctridevDigitalocean::MicrovmSize.from_hash(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::Checkpoint2Status.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for Checkpoint2.
+# A checkpoint of a MicroVM's memory and disk. New MicroVMs created from a checkpoint start from that state.
+class Checkpoint2
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCheckpoint2Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCheckpoint2Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCheckpoint2Metadata::DECODERS
+
+  # @return [String] The unique ID of the checkpoint.
+  attr_reader :id
+  # @return [String] The name of the checkpoint. If you do not set one, a name such as `checkpoint-20260929-143559` is generated.
+  attr_reader :name
+  # @return [String] The ID of the MicroVM the checkpoint was taken from.
+  attr_reader :microvm_id
+  # @return [String] The name of the MicroVM the checkpoint was taken from.
+  attr_reader :microvm_name
+  # @return [String] The slug of the checkpoint's region.
+  attr_reader :region
+  # @return [MicrovmSize] The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`, `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in responses.
+  attr_reader :size
+  # @return [Checkpoint2Status] The checkpoint's status. You can create MicroVMs from the checkpoint when it is `CHECKPOINT_AVAILABLE`.
+  attr_reader :status
+  # @return [Integer] The stored size of the checkpoint's memory, in bytes.
+  attr_reader :memory_bytes
+  # @return [Integer] The stored size of the checkpoint's disk, in bytes.
+  attr_reader :disk_bytes
+  # @return [String] When the checkpoint was created, in ISO 8601 format.
+  attr_reader :created_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Checkpoint2.
-  # A checkpoint of a MicroVM's memory and disk. New MicroVMs created from a checkpoint start from that state.
-  class Checkpoint2
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCheckpoint2Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCheckpoint2Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCheckpoint2Metadata::DECODERS
-
-    # @return [String] The unique ID of the checkpoint.
-    attr_reader :id
-    # @return [String] The name of the checkpoint. If you do not set one, a name such as `checkpoint-20260929-143559` is generated.
-    attr_reader :name
-    # @return [String] The ID of the MicroVM the checkpoint was taken from.
-    attr_reader :microvm_id
-    # @return [String] The name of the MicroVM the checkpoint was taken from.
-    attr_reader :microvm_name
-    # @return [String] The slug of the checkpoint's region.
-    attr_reader :region
-    # @return [MicrovmSize] The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`, `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in responses.
-    attr_reader :size
-    # @return [Checkpoint2Status] The checkpoint's status. You can create MicroVMs from the checkpoint when it is `CHECKPOINT_AVAILABLE`.
-    attr_reader :status
-    # @return [Integer] The stored size of the checkpoint's memory, in bytes.
-    attr_reader :memory_bytes
-    # @return [Integer] The stored size of the checkpoint's disk, in bytes.
-    attr_reader :disk_bytes
-    # @return [String] When the checkpoint was created, in ISO 8601 format.
-    attr_reader :created_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the Checkpoint2Status SDK namespace.
-  module Checkpoint2Status
-    CHECKPOINT_CREATING = 'CHECKPOINT_CREATING'
-    CHECKPOINT_AVAILABLE = 'CHECKPOINT_AVAILABLE'
-    CHECKPOINT_FAILED = 'CHECKPOINT_FAILED'
-    CHECKPOINT_DELETING = 'CHECKPOINT_DELETING'
-    CHECKPOINT_DELETED = 'CHECKPOINT_DELETED'
-    VALUES = %w[
-      CHECKPOINT_CREATING CHECKPOINT_AVAILABLE CHECKPOINT_FAILED CHECKPOINT_DELETING
-      CHECKPOINT_DELETED
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the Checkpoint2Status SDK namespace.
+module Checkpoint2Status
+  CHECKPOINT_CREATING = 'CHECKPOINT_CREATING'
+  CHECKPOINT_AVAILABLE = 'CHECKPOINT_AVAILABLE'
+  CHECKPOINT_FAILED = 'CHECKPOINT_FAILED'
+  CHECKPOINT_DELETING = 'CHECKPOINT_DELETING'
+  CHECKPOINT_DELETED = 'CHECKPOINT_DELETED'
+  VALUES = [
+    'CHECKPOINT_CREATING', 'CHECKPOINT_AVAILABLE', 'CHECKPOINT_FAILED', 'CHECKPOINT_DELETING',
+    'CHECKPOINT_DELETED'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCheckpointResponseMetadata
+  FIELDS = {
+    checkpoint: "checkpoint",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    checkpoint: lambda do |value|
+      ::OctridevDigitalocean::Checkpoint2.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for CheckpointResponse.
+# Typed representation of the `CheckpointResponse` API schema.
+class CheckpointResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCheckpointResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCheckpointResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCheckpointResponseMetadata::DECODERS
+
+  # @return [Checkpoint2] A checkpoint of a MicroVM's memory and disk. New MicroVMs created from a checkpoint start from that state.
+  attr_reader :checkpoint
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCheckpointResponseMetadata
-    FIELDS = {
-      checkpoint: 'checkpoint'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      checkpoint: lambda do |value|
-        ::OctridevDigitalocean::Checkpoint2.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for CheckpointResponse.
-  # Typed representation of the `CheckpointResponse` API schema.
-  class CheckpointResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCheckpointResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCheckpointResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCheckpointResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Checkpoint2] A checkpoint of a MicroVM's memory and disk. New MicroVMs created from a checkpoint start from that state.
-    attr_reader :checkpoint
+# Internal model hydration metadata.
+class SdkInternalExecRequestMetadata
+  FIELDS = {
+    argv: "argv",
+    cwd: "cwd",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    argv
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ExecRequest.
+# A command to run in the MicroVM's workload container. The command runs directly, not through a shell. To use pipes, redirects, or environment variables, run it with `sh -c`. The request body can be up to 1 MiB.
+class ExecRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExecRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExecRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExecRequestMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_String] The command and its arguments.
+  attr_reader :argv
+  # @return [String] The working directory to run the command in.
+  attr_reader :cwd
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExecRequestMetadata
-    FIELDS = {
-      argv: 'argv',
-      cwd: 'cwd'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      argv
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ExecRequest.
-  # A command to run in the MicroVM's workload container. The command runs directly, not through a shell. To use pipes, redirects, or environment variables, run it with `sh -c`. The request body can be up to 1 MiB.
-  class ExecRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExecRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExecRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExecRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_String] The command and its arguments.
-    attr_reader :argv
-    # @return [String] The working directory to run the command in.
-    attr_reader :cwd
+# Internal model hydration metadata.
+class SdkInternalExecResponseMetadata
+  FIELDS = {
+    stdout: "stdout",
+    stderr: "stderr",
+    exit_code: "exit_code",
+    truncated: "truncated",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ExecResponse.
+# The result of a command. The command has 60 seconds to finish. Combined `stdout` and `stderr` are limited to 4 MiB.
+class ExecResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExecResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExecResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExecResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The command's standard output. Bytes that are not valid UTF-8 are replaced.
+  attr_reader :stdout
+  # @return [String] The command's standard error. Bytes that are not valid UTF-8 are replaced.
+  attr_reader :stderr
+  # @return [Integer] The command's exit code.
+  attr_reader :exit_code
+  # @return [Boolean] Present and `true` when the output exceeded 4 MiB and was cut off.
+  attr_reader :truncated
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExecResponseMetadata
-    FIELDS = {
-      stdout: 'stdout',
-      stderr: 'stderr',
-      exit_code: 'exit_code',
-      truncated: 'truncated'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ExecResponse.
-  # The result of a command. The command has 60 seconds to finish. Combined `stdout` and `stderr` are limited to 4 MiB.
-  class ExecResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExecResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExecResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExecResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The command's standard output. Bytes that are not valid UTF-8 are replaced.
-    attr_reader :stdout
-    # @return [String] The command's standard error. Bytes that are not valid UTF-8 are replaced.
-    attr_reader :stderr
-    # @return [Integer] The command's exit code.
-    attr_reader :exit_code
-    # @return [Boolean] Present and `true` when the output exceeded 4 MiB and was cut off.
-    attr_reader :truncated
+# Internal model hydration metadata.
+class SdkInternalMicrovmMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    region: "region",
+    size: "size",
+    source: "source",
+    state: "state",
+    failure_reason: "failure_reason",
+    networking: "networking",
+    vpc_uuid: "vpc_uuid",
+    auto_pause: "auto_pause",
+    auto_resume: "auto_resume",
+    http_protocol: "http_protocol",
+    ports: "ports",
+    tags: "tags",
+    urls: "urls",
+    created_at: "created_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    size: lambda do |value|
+      ::OctridevDigitalocean::MicrovmSize.from_hash(value)
+    end,
+    source: lambda do |value|
+      ::OctridevDigitalocean::MicrovmSource.from_hash(value)
+    end,
+    state: lambda do |value|
+      ::OctridevDigitalocean::MicrovmState.from_value(value)
+    end,
+    networking: lambda do |value|
+      ::OctridevDigitalocean::MicrovmNetworking.from_value(value)
+    end,
+    auto_pause: lambda do |value|
+      ::OctridevDigitalocean::MicrovmAutoPause.from_hash(value)
+    end,
+    http_protocol: lambda do |value|
+      ::OctridevDigitalocean::MicrovmHttpProtocol.from_value(value)
+    end,
+    urls: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::MicrovmUrl.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for Microvm.
+# A MicroVM. All fields are set at creation. There is no update endpoint.
+class Microvm
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMicrovmMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMicrovmMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMicrovmMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The unique ID of the MicroVM.
+  attr_reader :id
+  # @return [String] The name of the MicroVM. Must be unique in the region and contain 1 to 63 lowercase letters, digits, and hyphens.
+  attr_reader :name
+  # @return [String] The slug of the region the MicroVM is in.
+  attr_reader :region
+  # @return [MicrovmSize] The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`, `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in responses.
+  attr_reader :size
+  # @return [MicrovmSource] What the MicroVM runs. Set exactly one of `oci_ref` or `checkpoint_id`.
+  attr_reader :source
+  # @return [MicrovmState] The MicroVM's current state.
+  attr_reader :state
+  # @return [String] Why the MicroVM failed. Present only when `state` is `failed`.
+  attr_reader :failure_reason
+  # @return [MicrovmNetworking] `public` sends outbound traffic through a shared NAT gateway. `vpc` places the MicroVM in the VPC network set by `vpc_uuid`.
+  attr_reader :networking
+  # @return [String] The ID of a VPC network in the same region that belongs to your team. Present only when `networking` is `vpc`.
+  attr_reader :vpc_uuid
+  # @return [MicrovmAutoPause] Automatic pause settings. A MicroVM always pauses after it is idle for `idle_timeout`. Sending `enabled` set to `false` is rejected.
+  attr_reader :auto_pause
+  # @return [Boolean] Whether an HTTP request, command, or console session resumes the MicroVM when it is paused.
+  attr_reader :auto_resume
+  # @return [MicrovmHttpProtocol] The protocol the MicroVM's HTTP port serves. `null` if the protocol was not set when the MicroVM was created.
+  attr_reader :http_protocol
+  # @return [Array_of_Integer] The guest ports declared on the MicroVM, including the HTTP port. During the public preview, only the HTTP port is reachable through the MicroVM's endpoint.
+  attr_reader :ports
+  # @return [Array_of_String] The tags applied to the MicroVM.
+  attr_reader :tags
+  # @return [Array_of_MicrovmUrl] The MicroVM's HTTPS endpoints. The entry with `default` set to `true` is the endpoint for the HTTP port.
+  attr_reader :urls
+  # @return [String] When the MicroVM was created, in ISO 8601 format.
+  attr_reader :created_at
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalMicrovmMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      region: 'region',
-      size: 'size',
-      source: 'source',
-      state: 'state',
-      failure_reason: 'failure_reason',
-      networking: 'networking',
-      vpc_uuid: 'vpc_uuid',
-      auto_pause: 'auto_pause',
-      auto_resume: 'auto_resume',
-      http_protocol: 'http_protocol',
-      ports: 'ports',
-      tags: 'tags',
-      urls: 'urls',
-      created_at: 'created_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      size: lambda do |value|
-        ::OctridevDigitalocean::MicrovmSize.from_hash(value)
-      end,
-      source: lambda do |value|
-        ::OctridevDigitalocean::MicrovmSource.from_hash(value)
-      end,
-      state: lambda do |value|
-        ::OctridevDigitalocean::MicrovmState.from_value(value)
-      end,
-      networking: lambda do |value|
-        ::OctridevDigitalocean::MicrovmNetworking.from_value(value)
-      end,
-      auto_pause: lambda do |value|
-        ::OctridevDigitalocean::MicrovmAutoPause.from_hash(value)
-      end,
-      http_protocol: lambda do |value|
-        ::OctridevDigitalocean::MicrovmHttpProtocol.from_value(value)
-      end,
-      urls: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::MicrovmUrl.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for Microvm.
-  # A MicroVM. All fields are set at creation. There is no update endpoint.
-  class Microvm
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMicrovmMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMicrovmMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMicrovmMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The unique ID of the MicroVM.
-    attr_reader :id
-    # @return [String] The name of the MicroVM. Must be unique in the region and contain 1 to 63 lowercase letters, digits, and hyphens.
-    attr_reader :name
-    # @return [String] The slug of the region the MicroVM is in.
-    attr_reader :region
-    # @return [MicrovmSize] The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`, `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in responses.
-    attr_reader :size
-    # @return [MicrovmSource] What the MicroVM runs. Set exactly one of `oci_ref` or `checkpoint_id`.
-    attr_reader :source
-    # @return [MicrovmState] The MicroVM's current state.
-    attr_reader :state
-    # @return [String] Why the MicroVM failed. Present only when `state` is `failed`.
-    attr_reader :failure_reason
-    # @return [MicrovmNetworking] `public` sends outbound traffic through a shared NAT gateway. `vpc` places the MicroVM in the VPC network set by `vpc_uuid`.
-    attr_reader :networking
-    # @return [String] The ID of a VPC network in the same region that belongs to your team. Present only when `networking` is `vpc`.
-    attr_reader :vpc_uuid
-    # @return [MicrovmAutoPause] Automatic pause settings. A MicroVM always pauses after it is idle for `idle_timeout`. Sending `enabled` set to `false` is rejected.
-    attr_reader :auto_pause
-    # @return [Boolean] Whether an HTTP request, command, or console session resumes the MicroVM when it is paused.
-    attr_reader :auto_resume
-    # @return [MicrovmHttpProtocol] The protocol the MicroVM's HTTP port serves. `null` if the protocol was not set when the MicroVM was created.
-    attr_reader :http_protocol
-    # @return [Array_of_Integer] The guest ports declared on the MicroVM, including the HTTP port. During the public preview, only the HTTP port is reachable through the MicroVM's endpoint.
-    attr_reader :ports
-    # @return [Array_of_String] The tags applied to the MicroVM.
-    attr_reader :tags
-    # @return [Array_of_MicrovmUrl] The MicroVM's HTTPS endpoints. The entry with `default` set to `true` is the endpoint for the HTTP port.
-    attr_reader :urls
-    # @return [String] When the MicroVM was created, in ISO 8601 format.
-    attr_reader :created_at
+# Defines the MicrovmHttpProtocol SDK namespace.
+module MicrovmHttpProtocol
+  HTTP = 'http'
+  HTTP2 = 'http2'
+  VALUES = ['http', 'http2'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Defines the MicrovmNetworking SDK namespace.
+module MicrovmNetworking
+  PUBLIC = 'public'
+  VPC = 'vpc'
+  VALUES = ['public', 'vpc'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Defines the MicrovmState SDK namespace.
+module MicrovmState
+  CREATING = 'creating'
+  RUNNING = 'running'
+  PAUSING = 'pausing'
+  PAUSED = 'paused'
+  RESUMING = 'resuming'
+  TERMINATING = 'terminating'
+  TERMINATED = 'terminated'
+  FAILED = 'failed'
+  UNKNOWN = 'unknown'
+  VALUES = [
+    'creating', 'running', 'pausing', 'paused', 'resuming', 'terminating', 'terminated', 'failed',
+    'unknown'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# Internal model hydration metadata.
+class SdkInternalMicrovmAutoPauseMetadata
+  FIELDS = {
+    enabled: "enabled",
+    idle_timeout: "idle_timeout",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for MicrovmAutoPause.
+# Automatic pause settings. A MicroVM always pauses after it is idle for `idle_timeout`. Sending `enabled` set to `false` is rejected.
+class MicrovmAutoPause
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMicrovmAutoPauseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMicrovmAutoPauseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMicrovmAutoPauseMetadata::DECODERS
+
+  # @return [Boolean] Whether auto-pause is on. Always `true`.
+  attr_reader :enabled
+  # @return [String] How long the MicroVM is idle before it pauses, as a duration such as `30s`, `5m`, or `1h`. Defaults to `5m`. The maximum is `4h`. Responses show the duration in the form `5m0s`.
+  attr_reader :idle_timeout
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the MicrovmHttpProtocol SDK namespace.
-  module MicrovmHttpProtocol
-    HTTP = 'http'
-    HTTP2 = 'http2'
-    VALUES = %w[http http2].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the MicrovmNetworking SDK namespace.
-  module MicrovmNetworking
-    PUBLIC = 'public'
-    VPC = 'vpc'
-    VALUES = %w[public vpc].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalMicrovmCreatedMetadata
+  FIELDS = {
+    microvm: "microvm",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    microvm: lambda do |value|
+      ::OctridevDigitalocean::Microvm.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for MicrovmCreated.
+# Typed representation of the `MicrovmCreated` API schema.
+class MicrovmCreated
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMicrovmCreatedMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMicrovmCreatedMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMicrovmCreatedMetadata::DECODERS
+
+  # @return [Microvm] A MicroVM. All fields are set at creation. There is no update endpoint.
+  attr_reader :microvm
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the MicrovmState SDK namespace.
-  module MicrovmState
-    CREATING = 'creating'
-    RUNNING = 'running'
-    PAUSING = 'pausing'
-    PAUSED = 'paused'
-    RESUMING = 'resuming'
-    TERMINATING = 'terminating'
-    TERMINATED = 'terminated'
-    FAILED = 'failed'
-    UNKNOWN = 'unknown'
-    VALUES = %w[
-      creating running pausing paused resuming terminating terminated failed
-      unknown
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalMicrovmAutoPauseMetadata
-    FIELDS = {
-      enabled: 'enabled',
-      idle_timeout: 'idle_timeout'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalMicrovmCreateRequestMetadata
+  FIELDS = {
+    name: "name",
+    source: "source",
+    region: "region",
+    size: "size",
+    networking: "networking",
+    vpc_uuid: "vpc_uuid",
+    auto_pause: "auto_pause",
+    auto_resume: "auto_resume",
+    http_port: "http_port",
+    http_protocol: "http_protocol",
+    ports: "ports",
+    environment: "environment",
+    tags: "tags",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    source
+  ].freeze
+  DECODERS = {
+    source: lambda do |value|
+      ::OctridevDigitalocean::MicrovmSource.from_hash(value)
+    end,
+    size: lambda do |value|
+      ::OctridevDigitalocean::MicrovmSizeRequest.from_hash(value)
+    end,
+    networking: lambda do |value|
+      ::OctridevDigitalocean::MicrovmCreateRequestNetworking.from_value(value)
+    end,
+    auto_pause: lambda do |value|
+      ::OctridevDigitalocean::MicrovmAutoPause.from_hash(value)
+    end,
+    http_protocol: lambda do |value|
+      ::OctridevDigitalocean::MicrovmCreateRequestHttpProtocol.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for MicrovmCreateRequest.
+# The request body for creating a MicroVM. With `source.oci_ref`, `region` and `size` are required. With `source.checkpoint_id`, the MicroVM inherits the checkpoint's region, size, container image, and environment variables, and a different `region` or `size`, or any `environment`, is rejected.
+class MicrovmCreateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMicrovmCreateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMicrovmCreateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMicrovmCreateRequestMetadata::DECODERS
+
+  # @return [String] The name of the MicroVM. Must be unique in the region and contain 1 to 63 lowercase letters, digits, and hyphens.
+  attr_reader :name
+  # @return [MicrovmSource] What the MicroVM runs. Set exactly one of `oci_ref` or `checkpoint_id`.
+  attr_reader :source
+  # @return [String] The slug of the region to create the MicroVM in. Required with `source.oci_ref`.
+  attr_reader :region
+  # @return [MicrovmSizeRequest] The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`, `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in responses.
+  attr_reader :size
+  # @return [MicrovmCreateRequestNetworking] `public` sends outbound traffic through a shared NAT gateway. `vpc` places the MicroVM in the VPC network set by `vpc_uuid`.
+  attr_reader :networking
+  # @return [String] The ID of a VPC network in the same region that belongs to your team. Required when `networking` is `vpc`.
+  attr_reader :vpc_uuid
+  # @return [MicrovmAutoPause] Automatic pause settings. A MicroVM always pauses after it is idle for `idle_timeout`. Sending `enabled` set to `false` is rejected.
+  attr_reader :auto_pause
+  # @return [Boolean] Whether an HTTP request, command, or console session resumes the MicroVM when it is paused. Set to `false` to require a manual resume.
+  attr_reader :auto_resume
+  # @return [Integer] The guest port the workload serves HTTP on. Defaults to `8080`. Not returned in responses. When creating from a checkpoint without `ports`, must be one of the checkpoint's ports.
+  attr_reader :http_port
+  # @return [MicrovmCreateRequestHttpProtocol] The protocol the HTTP port serves.
+  attr_reader :http_protocol
+  # @return [Array_of_Integer] The guest ports to declare, up to five. Must include `http_port`. Defaults to only the HTTP port. During the public preview, only the HTTP port is reachable through the MicroVM's endpoint.
+  attr_reader :ports
+  # @return [Hash] Environment variables passed into the MicroVM at boot, as key and value pairs. Not returned in responses.
+  attr_reader :environment
+  # @return [Array_of_String] Tags to apply to the MicroVM.
+  attr_reader :tags
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for MicrovmAutoPause.
-  # Automatic pause settings. A MicroVM always pauses after it is idle for `idle_timeout`. Sending `enabled` set to `false` is rejected.
-  class MicrovmAutoPause
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMicrovmAutoPauseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMicrovmAutoPauseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMicrovmAutoPauseMetadata::DECODERS
-
-    # @return [Boolean] Whether auto-pause is on. Always `true`.
-    attr_reader :enabled
-    # @return [String] How long the MicroVM is idle before it pauses, as a duration such as `30s`, `5m`, or `1h`. Defaults to `5m`. The maximum is `4h`. Responses show the duration in the form `5m0s`.
-    attr_reader :idle_timeout
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalMicrovmCreatedMetadata
-    FIELDS = {
-      microvm: 'microvm'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      microvm: lambda do |value|
-        ::OctridevDigitalocean::Microvm.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # API model for MicrovmCreated.
-  # Typed representation of the `MicrovmCreated` API schema.
-  class MicrovmCreated
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMicrovmCreatedMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMicrovmCreatedMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMicrovmCreatedMetadata::DECODERS
-
-    # @return [Microvm] A MicroVM. All fields are set at creation. There is no update endpoint.
-    attr_reader :microvm
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# Defines the MicrovmCreateRequestHttpProtocol SDK namespace.
+module MicrovmCreateRequestHttpProtocol
+  HTTP = 'http'
+  HTTP2 = 'http2'
+  VALUES = ['http', 'http2'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # Internal model hydration metadata.
-  class SdkInternalMicrovmCreateRequestMetadata
-    FIELDS = {
-      name: 'name',
-      source: 'source',
-      region: 'region',
-      size: 'size',
-      networking: 'networking',
-      vpc_uuid: 'vpc_uuid',
-      auto_pause: 'auto_pause',
-      auto_resume: 'auto_resume',
-      http_port: 'http_port',
-      http_protocol: 'http_protocol',
-      ports: 'ports',
-      environment: 'environment',
-      tags: 'tags'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      source
-    ].freeze
-    DECODERS = {
-      source: lambda do |value|
-        ::OctridevDigitalocean::MicrovmSource.from_hash(value)
-      end,
-      size: lambda do |value|
-        ::OctridevDigitalocean::MicrovmSizeRequest.from_hash(value)
-      end,
-      networking: lambda do |value|
-        ::OctridevDigitalocean::MicrovmCreateRequestNetworking.from_value(value)
-      end,
-      auto_pause: lambda do |value|
-        ::OctridevDigitalocean::MicrovmAutoPause.from_hash(value)
-      end,
-      http_protocol: lambda do |value|
-        ::OctridevDigitalocean::MicrovmCreateRequestHttpProtocol.from_value(value)
-      end
-    }.freeze
+# Defines the MicrovmCreateRequestNetworking SDK namespace.
+module MicrovmCreateRequestNetworking
+  PUBLIC = 'public'
+  VPC = 'vpc'
+  VALUES = ['public', 'vpc'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # API model for MicrovmCreateRequest.
-  # The request body for creating a MicroVM. With `source.oci_ref`, `region` and `size` are required. With `source.checkpoint_id`, the MicroVM inherits the checkpoint's region, size, container image, and environment variables, and a different `region` or `size`, or any `environment`, is rejected.
-  class MicrovmCreateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMicrovmCreateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMicrovmCreateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMicrovmCreateRequestMetadata::DECODERS
-
-    # @return [String] The name of the MicroVM. Must be unique in the region and contain 1 to 63 lowercase letters, digits, and hyphens.
-    attr_reader :name
-    # @return [MicrovmSource] What the MicroVM runs. Set exactly one of `oci_ref` or `checkpoint_id`.
-    attr_reader :source
-    # @return [String] The slug of the region to create the MicroVM in. Required with `source.oci_ref`.
-    attr_reader :region
-    # @return [MicrovmSizeRequest] The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`, `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in responses.
-    attr_reader :size
-    # @return [MicrovmCreateRequestNetworking] `public` sends outbound traffic through a shared NAT gateway. `vpc` places the MicroVM in the VPC network set by `vpc_uuid`.
-    attr_reader :networking
-    # @return [String] The ID of a VPC network in the same region that belongs to your team. Required when `networking` is `vpc`.
-    attr_reader :vpc_uuid
-    # @return [MicrovmAutoPause] Automatic pause settings. A MicroVM always pauses after it is idle for `idle_timeout`. Sending `enabled` set to `false` is rejected.
-    attr_reader :auto_pause
-    # @return [Boolean] Whether an HTTP request, command, or console session resumes the MicroVM when it is paused. Set to `false` to require a manual resume.
-    attr_reader :auto_resume
-    # @return [Integer] The guest port the workload serves HTTP on. Defaults to `8080`. Not returned in responses. When creating from a checkpoint without `ports`, must be one of the checkpoint's ports.
-    attr_reader :http_port
-    # @return [MicrovmCreateRequestHttpProtocol] The protocol the HTTP port serves.
-    attr_reader :http_protocol
-    # @return [Array_of_Integer] The guest ports to declare, up to five. Must include `http_port`. Defaults to only the HTTP port. During the public preview, only the HTTP port is reachable through the MicroVM's endpoint.
-    attr_reader :ports
-    # @return [Hash] Environment variables passed into the MicroVM at boot, as key and value pairs. Not returned in responses.
-    attr_reader :environment
-    # @return [Array_of_String] Tags to apply to the MicroVM.
-    attr_reader :tags
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the MicrovmCreateRequestHttpProtocol SDK namespace.
-  module MicrovmCreateRequestHttpProtocol
-    HTTP = 'http'
-    HTTP2 = 'http2'
-    VALUES = %w[http http2].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Defines the MicrovmCreateRequestNetworking SDK namespace.
-  module MicrovmCreateRequestNetworking
-    PUBLIC = 'public'
-    VPC = 'vpc'
-    VALUES = %w[public vpc].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalMicrovmErrorMetadata
-    FIELDS = {
-      code: 'code',
-      message: 'message'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      code
-      message
-    ].freeze
-    DECODERS = {}.freeze
-  end
+# Internal model hydration metadata.
+class SdkInternalMicrovmErrorMetadata
+  FIELDS = {
+    code: "code",
+    message: "message",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    code
+    message
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 end

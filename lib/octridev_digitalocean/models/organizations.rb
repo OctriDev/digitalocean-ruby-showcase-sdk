@@ -5,346 +5,349 @@
 
 # organizations domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalCreateTeamMetadata
-    FIELDS = {
-      uuid: 'uuid',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      uuid
-      name
-    ].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalCreateTeamMetadata
+  FIELDS = {
+    uuid: "uuid",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    uuid
+    name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for CreateTeam.
+# The team resource returned when a team is created in an organization.
+class CreateTeam
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateTeamMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateTeamMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateTeamMetadata::DECODERS
+
+  # @return [String] A unique universal identifier for the newly created team.
+  attr_reader :uuid
+  # @return [String] The human-readable name for the newly created team.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateTeam.
-  # The team resource returned when a team is created in an organization.
-  class CreateTeam
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateTeamMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateTeamMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateTeamMetadata::DECODERS
-
-    # @return [String] A unique universal identifier for the newly created team.
-    attr_reader :uuid
-    # @return [String] The human-readable name for the newly created team.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateTeamRequestMetadata
-    FIELDS = {
-      name: 'name',
-      invitations: 'invitations'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {
-      invitations: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::TeamInvitation.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateTeamRequestMetadata
+  FIELDS = {
+    name: "name",
+    invitations: "invitations",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+    invitations: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::TeamInvitation.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for CreateTeamRequest.
+# Typed representation of the `CreateTeamRequest` API schema.
+class CreateTeamRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateTeamRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateTeamRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateTeamRequestMetadata::DECODERS
+
+  # @return [String] The human-readable name for the team to create.
+  attr_reader :name
+  # @return [Array_of_TeamInvitation] Optional invitations to send when creating the team. Each invitation includes an email address and a role. The `owner` role cannot be assigned via invitation.
+  attr_reader :invitations
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateTeamRequest.
-  # Typed representation of the `CreateTeamRequest` API schema.
-  class CreateTeamRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateTeamRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateTeamRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateTeamRequestMetadata::DECODERS
-
-    # @return [String] The human-readable name for the team to create.
-    attr_reader :name
-    # @return [Array_of_TeamInvitation] Optional invitations to send when creating the team. Each invitation includes an email address and a role. The `owner` role cannot be assigned via invitation.
-    attr_reader :invitations
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalCreateTeamResponseMetadata
-    FIELDS = {
-      team: 'team',
-      invitations: 'invitations'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      team
-    ].freeze
-    DECODERS = {
-      team: lambda do |value|
-        ::OctridevDigitalocean::CreateTeam.from_hash(value)
-      end,
-      invitations: lambda do |value|
-        value&.transform_values { |item| ::OctridevDigitalocean::TeamInvitationStatus.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalCreateTeamResponseMetadata
+  FIELDS = {
+    team: "team",
+    invitations: "invitations",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    team
+  ].freeze
+  DECODERS = {
+    team: lambda do |value|
+      ::OctridevDigitalocean::CreateTeam.from_hash(value)
+    end,
+    invitations: lambda do |value|
+      value&.transform_values { |item| ::OctridevDigitalocean::TeamInvitationStatus.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for CreateTeamResponse.
+# Typed representation of the `CreateTeamResponse` API schema.
+class CreateTeamResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalCreateTeamResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalCreateTeamResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalCreateTeamResponseMetadata::DECODERS
+
+  # @return [CreateTeam] The team resource returned when a team is created in an organization.
+  attr_reader :team
+  # @return [Hash] A map of invitee email addresses to invitation status results.
+  attr_reader :invitations
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for CreateTeamResponse.
-  # Typed representation of the `CreateTeamResponse` API schema.
-  class CreateTeamResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalCreateTeamResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalCreateTeamResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalCreateTeamResponseMetadata::DECODERS
-
-    # @return [CreateTeam] The team resource returned when a team is created in an organization.
-    attr_reader :team
-    # @return [Hash] A map of invitee email addresses to invitation status results.
-    attr_reader :invitations
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalListTeamsMetadata
-    FIELDS = {
-      teams: 'teams'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      teams
-    ].freeze
-    DECODERS = {
-      teams: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::OrganizationTeam.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalListTeamsMetadata
+  FIELDS = {
+    teams: "teams",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    teams
+  ].freeze
+  DECODERS = {
+    teams: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::OrganizationTeam.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ListTeams.
+# Typed representation of the `ListTeams` API schema.
+class ListTeams
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalListTeamsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalListTeamsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalListTeamsMetadata::DECODERS
+
+  # @return [Array_of_OrganizationTeam] Required array value serialized in the `teams` wire field.
+  attr_reader :teams
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ListTeams.
-  # Typed representation of the `ListTeams` API schema.
-  class ListTeams
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalListTeamsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalListTeamsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalListTeamsMetadata::DECODERS
-
-    # @return [Array_of_OrganizationTeam] Required array value serialized in the `teams` wire field.
-    attr_reader :teams
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalOrganizationTeamMetadata
-    FIELDS = {
-      id: 'id',
-      uuid: 'uuid',
-      name: 'name',
-      email: 'email',
-      member_count: 'member_count',
-      status: 'status',
-      joined_organization_at: 'joined_organization_at',
-      company: 'company'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::OrganizationTeamStatus.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalOrganizationTeamMetadata
+  FIELDS = {
+    id: "id",
+    uuid: "uuid",
+    name: "name",
+    email: "email",
+    member_count: "member_count",
+    status: "status",
+    joined_organization_at: "joined_organization_at",
+    company: "company",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::OrganizationTeamStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for OrganizationTeam.
+# A team that belongs to an organization.
+class OrganizationTeam
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalOrganizationTeamMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalOrganizationTeamMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalOrganizationTeamMetadata::DECODERS
+
+  # @return [Integer] A unique identifier for the team.
+  attr_reader :id
+  # @return [String] A unique universal identifier for the team.
+  attr_reader :uuid
+  # @return [String] The human-readable name for the team.
+  attr_reader :name
+  # @return [String] The email address associated with the team.
+  attr_reader :email
+  # @return [Integer] The number of members on the team.
+  attr_reader :member_count
+  # @return [OrganizationTeamStatus] The team's membership status within the organization.
+  attr_reader :status
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the team joined the organization.
+  attr_reader :joined_organization_at
+  # @return [String] The company name associated with the team, if set.
+  attr_reader :company
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for OrganizationTeam.
-  # A team that belongs to an organization.
-  class OrganizationTeam
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalOrganizationTeamMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalOrganizationTeamMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalOrganizationTeamMetadata::DECODERS
-
-    # @return [Integer] A unique identifier for the team.
-    attr_reader :id
-    # @return [String] A unique universal identifier for the team.
-    attr_reader :uuid
-    # @return [String] The human-readable name for the team.
-    attr_reader :name
-    # @return [String] The email address associated with the team.
-    attr_reader :email
-    # @return [Integer] The number of members on the team.
-    attr_reader :member_count
-    # @return [OrganizationTeamStatus] The team's membership status within the organization.
-    attr_reader :status
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the team joined the organization.
-    attr_reader :joined_organization_at
-    # @return [String] The company name associated with the team, if set.
-    attr_reader :company
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the OrganizationTeamStatus SDK namespace.
-  module OrganizationTeamStatus
-    JOINED = 'joined'
-    PENDING = 'pending'
-    VALUES = %w[joined pending].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the OrganizationTeamStatus SDK namespace.
+module OrganizationTeamStatus
+  JOINED = 'joined'
+  PENDING = 'pending'
+  VALUES = ['joined', 'pending'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTeamInvitationMetadata
+  FIELDS = {
+    email: "email",
+    role: "role",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    email
+    role
+  ].freeze
+  DECODERS = {
+    role: lambda do |value|
+      ::OctridevDigitalocean::TeamInvitationRole.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for TeamInvitation.
+# An invitation to join a newly created team.
+class TeamInvitation
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTeamInvitationMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTeamInvitationMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTeamInvitationMetadata::DECODERS
+
+  # @return [String] The email address of the user to invite.
+  attr_reader :email
+  # @return [TeamInvitationRole] The role to assign to the invited user. The `owner` role cannot be assigned via invitation.
+  attr_reader :role
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTeamInvitationMetadata
-    FIELDS = {
-      email: 'email',
-      role: 'role'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      email
-      role
-    ].freeze
-    DECODERS = {
-      role: lambda do |value|
-        ::OctridevDigitalocean::TeamInvitationRole.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TeamInvitation.
-  # An invitation to join a newly created team.
-  class TeamInvitation
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTeamInvitationMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTeamInvitationMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTeamInvitationMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The email address of the user to invite.
-    attr_reader :email
-    # @return [TeamInvitationRole] The role to assign to the invited user. The `owner` role cannot be assigned via invitation.
-    attr_reader :role
+# Defines the TeamInvitationRole SDK namespace.
+module TeamInvitationRole
+  MEMBER = 'member'
+  BILLER = 'biller'
+  BILLING_VIEWER = 'billing viewer'
+  RESOURCE_VIEWER = 'resource viewer'
+  MODIFIER = 'modifier'
+  VALUES = ['member', 'biller', 'billing viewer', 'resource viewer', 'modifier'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalTeamInvitationStatusMetadata
+  FIELDS = {
+    status: "status",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::TeamInvitationStatusStatus.from_value(value)
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for TeamInvitationStatus.
+# The result of attempting to send a team invitation.
+class TeamInvitationStatus
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTeamInvitationStatusMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTeamInvitationStatusMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTeamInvitationStatusMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [TeamInvitationStatusStatus] The invitation delivery status for the email address.
+  attr_reader :status
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the TeamInvitationRole SDK namespace.
-  module TeamInvitationRole
-    MEMBER = 'member'
-    BILLER = 'biller'
-    BILLING_VIEWER = 'billing viewer'
-    RESOURCE_VIEWER = 'resource viewer'
-    MODIFIER = 'modifier'
-    VALUES = ['member', 'biller', 'billing viewer', 'resource viewer', 'modifier'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTeamInvitationStatusMetadata
-    FIELDS = {
-      status: 'status'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::TeamInvitationStatusStatus.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # API model for TeamInvitationStatus.
-  # The result of attempting to send a team invitation.
-  class TeamInvitationStatus
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTeamInvitationStatusMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTeamInvitationStatusMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTeamInvitationStatusMetadata::DECODERS
-
-    # @return [TeamInvitationStatusStatus] The invitation delivery status for the email address.
-    attr_reader :status
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# Defines the TeamInvitationStatusStatus SDK namespace.
+module TeamInvitationStatusStatus
+  OK = 'ok'
+  DAILY_INVITE_LIMIT_REACHED = 'daily_invite_limit_reached'
+  VALUES = ['ok', 'daily_invite_limit_reached'].freeze
+  def self.from_value(value)
+    value
   end
-
-  # Defines the TeamInvitationStatusStatus SDK namespace.
-  module TeamInvitationStatusStatus
-    OK = 'ok'
-    DAILY_INVITE_LIMIT_REACHED = 'daily_invite_limit_reached'
-    VALUES = %w[ok daily_invite_limit_reached].freeze
-    def self.from_value(value)
-      value
-    end
-  end
+end
 end

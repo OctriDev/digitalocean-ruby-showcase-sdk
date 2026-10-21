@@ -5,96 +5,98 @@
 
 # harness_runtime_exec domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalExecInSandboxRequestMetadata
-    FIELDS = {
-      argv: 'argv',
-      workdir: 'workdir',
-      stdin: 'stdin',
-      timeout_seconds: 'timeout_seconds'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      argv
-    ].freeze
-    DECODERS = {
-      stdin: lambda do |value|
-        Validation.validate_byte('stdin', value) if value.is_a?(String)
-        value
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalExecInSandboxRequestMetadata
+  FIELDS = {
+    argv: "argv",
+    workdir: "workdir",
+    stdin: "stdin",
+    timeout_seconds: "timeout_seconds",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    argv
+  ].freeze
+  DECODERS = {
+    stdin: lambda do |value|
+      Validation.validate_byte('stdin', value) if value.is_a?(String)
+      value
+    end,
+  }.freeze
+end
+
+# API model for ExecInSandboxRequest.
+# Typed representation of the `ExecInSandboxRequest` API schema.
+class ExecInSandboxRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExecInSandboxRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExecInSandboxRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExecInSandboxRequestMetadata::DECODERS
+
+  # @return [Array_of_String] Program and arguments. Required and non-empty; run directly, with no shell interpretation.
+  attr_reader :argv
+  # @return [String] Working directory inside the sandbox. Empty uses the sandbox default (/workspace); not restricted to the workspace root.
+  attr_reader :workdir
+  # @return [String] Optional base64 stdin payload, delivered in full and then closed so the process sees EOF. One-shot only — there is no streaming stdin on this endpoint.
+  attr_reader :stdin
+  # @return [Integer] Optional timeout. Clamped server-side (default 60, maximum 240) regardless of the value sent.
+  attr_reader :timeout_seconds
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ExecInSandboxRequest.
-  # Typed representation of the `ExecInSandboxRequest` API schema.
-  class ExecInSandboxRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExecInSandboxRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExecInSandboxRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExecInSandboxRequestMetadata::DECODERS
-
-    # @return [Array_of_String] Program and arguments. Required and non-empty; run directly, with no shell interpretation.
-    attr_reader :argv
-    # @return [String] Working directory inside the sandbox. Empty uses the sandbox default (/workspace); not restricted to the workspace root.
-    attr_reader :workdir
-    # @return [String] Optional base64 stdin payload, delivered in full and then closed so the process sees EOF. One-shot only — there is no streaming stdin on this endpoint.
-    attr_reader :stdin
-    # @return [Integer] Optional timeout. Clamped server-side (default 60, maximum 240) regardless of the value sent.
-    attr_reader :timeout_seconds
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExecInSandboxResponseMetadata
-    FIELDS = {
-      exit_code: 'exit_code',
-      stdout: 'stdout',
-      stderr: 'stderr',
-      duration_ms: 'duration_ms'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalExecInSandboxResponseMetadata
+  FIELDS = {
+    exit_code: "exit_code",
+    stdout: "stdout",
+    stderr: "stderr",
+    duration_ms: "duration_ms",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ExecInSandboxResponse.
+# Typed representation of the `ExecInSandboxResponse` API schema.
+class ExecInSandboxResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExecInSandboxResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExecInSandboxResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExecInSandboxResponseMetadata::DECODERS
+
+  # @return [Integer] The guest process's exit code. Non-zero is still a 200 response.
+  attr_reader :exit_code
+  # @return [String] Buffered stdout, capped at 1 MiB. Check X-Exec-Stdout-Truncated for drops.
+  attr_reader :stdout
+  # @return [String] Buffered stderr, capped at 1 MiB. Check X-Exec-Stderr-Truncated for drops.
+  attr_reader :stderr
+  # @return [Integer] Wall-clock duration the guest reported for the command.
+  attr_reader :duration_ms
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ExecInSandboxResponse.
-  # Typed representation of the `ExecInSandboxResponse` API schema.
-  class ExecInSandboxResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExecInSandboxResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExecInSandboxResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExecInSandboxResponseMetadata::DECODERS
-
-    # @return [Integer] The guest process's exit code. Non-zero is still a 200 response.
-    attr_reader :exit_code
-    # @return [String] Buffered stdout, capped at 1 MiB. Check X-Exec-Stdout-Truncated for drops.
-    attr_reader :stdout
-    # @return [String] Buffered stderr, capped at 1 MiB. Check X-Exec-Stderr-Truncated for drops.
-    attr_reader :stderr
-    # @return [Integer] Wall-clock duration the guest reported for the command.
-    attr_reader :duration_ms
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

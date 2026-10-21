@@ -43,12 +43,13 @@ module OctridevDigitalocean
         uuid2: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/v2/gen-ai/custom_models/',
+            "/v2/gen-ai/custom_models/",
             SdkClient.encode_path_segment(uuid),
-            '/metadata'
+            "/metadata"
           ].join,
           config: config,
           body: {
@@ -59,13 +60,13 @@ module OctridevDigitalocean
             'output_modalities' => output_modalities,
             'parameters' => parameters,
             'tags' => tags,
-            'uuid' => uuid2
+            'uuid' => uuid2,
           },
           return_type: ::OctridevDigitalocean::ApiUpdateCustomModelMetadataOutputPublic,
           decoder: :json,
           operation_id: 'genai_update_custom_model_metadata',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -21,22 +21,23 @@ module OctridevDigitalocean
         run_uuid2: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PATCH',
           [
-            '/v2/gen-ai/simulation_runs/',
+            "/v2/gen-ai/simulation_runs/",
             SdkClient.encode_path_segment(run_uuid),
-            '/cancel'
+            "/cancel"
           ].join,
           config: config,
           body: {
-            'run_uuid' => run_uuid2
+            'run_uuid' => run_uuid2,
           },
           return_type: ::OctridevDigitalocean::ApiCancelSimulationRunOutput,
           decoder: :json,
           operation_id: 'genai_patch_cancel_simulation_run',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

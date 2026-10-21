@@ -5,112 +5,117 @@
 
 # apps_apps_get domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAppsGetExecResponseMetadata
-    FIELDS = {
-      url: 'url'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalAppsGetExecResponseMetadata
+  FIELDS = {
+    url: "url",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AppsGetExecResponse.
+# Typed representation of the `AppsGetExecResponse` API schema.
+class AppsGetExecResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsGetExecResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsGetExecResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsGetExecResponseMetadata::DECODERS
+
+  # @return [String] A websocket URL that allows sending/receiving console input and receiving console output.
+  attr_reader :url
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsGetExecResponse.
-  # Typed representation of the `AppsGetExecResponse` API schema.
-  class AppsGetExecResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsGetExecResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsGetExecResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsGetExecResponseMetadata::DECODERS
-
-    # @return [String] A websocket URL that allows sending/receiving console input and receiving console output.
-    attr_reader :url
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppsGetInstanceSizeResponseMetadata
-    FIELDS = {
-      instance_size: 'instance_size'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      instance_size: lambda do |value|
-        ::OctridevDigitalocean::AppsInstanceSize.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppsGetInstanceSizeResponseMetadata
+  FIELDS = {
+    instance_size: "instance_size",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    instance_size: lambda do |value|
+      ::OctridevDigitalocean::AppsInstanceSize.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppsGetInstanceSizeResponse.
+# Typed representation of the `AppsGetInstanceSizeResponse` API schema.
+class AppsGetInstanceSizeResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsGetInstanceSizeResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsGetInstanceSizeResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsGetInstanceSizeResponseMetadata::DECODERS
+
+  # @return [AppsInstanceSize] Optional object value serialized in the `instance_size` wire field.
+  attr_reader :instance_size
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsGetInstanceSizeResponse.
-  # Typed representation of the `AppsGetInstanceSizeResponse` API schema.
-  class AppsGetInstanceSizeResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsGetInstanceSizeResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsGetInstanceSizeResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsGetInstanceSizeResponseMetadata::DECODERS
-
-    # @return [AppsInstanceSize] Optional object value serialized in the `instance_size` wire field.
-    attr_reader :instance_size
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppsGetLogsResponseMetadata
-    FIELDS = {
-      historic_urls: 'historic_urls',
-      live_url: 'live_url'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppsGetLogsResponseMetadata
+  FIELDS = {
+    historic_urls: "historic_urls",
+    live_url: "live_url",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AppsGetLogsResponse.
+# Typed representation of the `AppsGetLogsResponse` API schema.
+class AppsGetLogsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsGetLogsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsGetLogsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsGetLogsResponseMetadata::DECODERS
+
+  # @return [Array_of_String] Optional array value serialized in the `historic_urls` wire field.
+  attr_reader :historic_urls
+  # @return [String] A URL of the real-time live logs. This URL may use either the `` or `wss://` protocols and will keep pushing live logs as they become available.
+  attr_reader :live_url
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsGetLogsResponse.
-  # Typed representation of the `AppsGetLogsResponse` API schema.
-  class AppsGetLogsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsGetLogsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsGetLogsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsGetLogsResponseMetadata::DECODERS
-
-    # @return [Array_of_String] Optional array value serialized in the `historic_urls` wire field.
-    attr_reader :historic_urls
-    # @return [String] A URL of the real-time live logs. This URL may use either the `` or `wss://` protocols and will keep pushing live logs as they become available.
-    attr_reader :live_url
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

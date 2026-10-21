@@ -48,9 +48,10 @@ module OctridevDigitalocean
         vpc_uuid: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/gen-ai/knowledge_bases',
+          "/v2/gen-ai/knowledge_bases",
           config: config,
           body: {
             'database_id' => database_id,
@@ -62,13 +63,13 @@ module OctridevDigitalocean
             'reranking_config' => reranking_config,
             'size' => size,
             'tags' => tags,
-            'vpc_uuid' => vpc_uuid
+            'vpc_uuid' => vpc_uuid,
           },
           return_type: ::OctridevDigitalocean::ApiCreateKnowledgeBaseOutput,
           decoder: :json,
           operation_id: 'genai_create_knowledge_base',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

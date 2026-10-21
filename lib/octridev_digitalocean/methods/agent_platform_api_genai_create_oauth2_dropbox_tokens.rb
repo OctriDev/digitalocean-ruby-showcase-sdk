@@ -19,19 +19,20 @@ module OctridevDigitalocean
         redirect_url: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/gen-ai/oauth2/dropbox/tokens',
+          "/v2/gen-ai/oauth2/dropbox/tokens",
           config: config,
           body: {
             'code' => code,
-            'redirect_url' => redirect_url
+            'redirect_url' => redirect_url,
           },
           return_type: ::OctridevDigitalocean::ApiDropboxOauth2GetTokensOutput,
           decoder: :json,
           operation_id: 'genai_create_oauth2_dropbox_tokens',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

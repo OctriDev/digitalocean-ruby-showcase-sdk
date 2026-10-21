@@ -5,97 +5,98 @@
 
 # vpc_nat_gateways domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalVpcNatGatewayUpdateMetadata
-    FIELDS = {
-      name: 'name',
-      size: 'size',
-      vpcs: 'vpcs',
-      udp_timeout_seconds: 'udp_timeout_seconds',
-      icmp_timeout_seconds: 'icmp_timeout_seconds',
-      tcp_timeout_seconds: 'tcp_timeout_seconds'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      size
-    ].freeze
-    DECODERS = {
-      vpcs: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::VpcNatGatewayUpdateVpcsItem.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalVpcNatGatewayUpdateMetadata
+  FIELDS = {
+    name: "name",
+    size: "size",
+    vpcs: "vpcs",
+    udp_timeout_seconds: "udp_timeout_seconds",
+    icmp_timeout_seconds: "icmp_timeout_seconds",
+    tcp_timeout_seconds: "tcp_timeout_seconds",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    size
+  ].freeze
+  DECODERS = {
+    vpcs: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::VpcNatGatewayUpdateVpcsItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for VpcNatGatewayUpdate.
+# Typed representation of the `VpcNatGatewayUpdate` API schema.
+class VpcNatGatewayUpdate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcNatGatewayUpdateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcNatGatewayUpdateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcNatGatewayUpdateMetadata::DECODERS
+
+  # @return [String] The human-readable name of the VPC NAT gateway.
+  attr_reader :name
+  # @return [Integer] The size of the VPC NAT gateway.
+  attr_reader :size
+  # @return [Array_of_VpcNatGatewayUpdateVpcsItem] An array of VPCs associated with the VPC NAT gateway.
+  attr_reader :vpcs
+  # @return [Integer] The UDP timeout in seconds for the VPC NAT gateway.
+  attr_reader :udp_timeout_seconds
+  # @return [Integer] The ICMP timeout in seconds for the VPC NAT gateway.
+  attr_reader :icmp_timeout_seconds
+  # @return [Integer] The TCP timeout in seconds for the VPC NAT gateway.
+  attr_reader :tcp_timeout_seconds
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VpcNatGatewayUpdate.
-  # Typed representation of the `VpcNatGatewayUpdate` API schema.
-  class VpcNatGatewayUpdate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcNatGatewayUpdateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcNatGatewayUpdateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcNatGatewayUpdateMetadata::DECODERS
-
-    # @return [String] The human-readable name of the VPC NAT gateway.
-    attr_reader :name
-    # @return [Integer] The size of the VPC NAT gateway.
-    attr_reader :size
-    # @return [Array_of_VpcNatGatewayUpdateVpcsItem] An array of VPCs associated with the VPC NAT gateway.
-    attr_reader :vpcs
-    # @return [Integer] The UDP timeout in seconds for the VPC NAT gateway.
-    attr_reader :udp_timeout_seconds
-    # @return [Integer] The ICMP timeout in seconds for the VPC NAT gateway.
-    attr_reader :icmp_timeout_seconds
-    # @return [Integer] The TCP timeout in seconds for the VPC NAT gateway.
-    attr_reader :tcp_timeout_seconds
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcNatGatewayUpdateResponseMetadata
-    FIELDS = {
-      vpc_nat_gateway: 'vpc_nat_gateway'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      vpc_nat_gateway: lambda do |value|
-        ::OctridevDigitalocean::VpcNatGatewayUpdate.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalVpcNatGatewayUpdateResponseMetadata
+  FIELDS = {
+    vpc_nat_gateway: "vpc_nat_gateway",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    vpc_nat_gateway: lambda do |value|
+      ::OctridevDigitalocean::VpcNatGatewayUpdate.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for VpcNatGatewayUpdateResponse.
+# Typed representation of the `VpcNatGatewayUpdateResponse` API schema.
+class VpcNatGatewayUpdateResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcNatGatewayUpdateResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcNatGatewayUpdateResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcNatGatewayUpdateResponseMetadata::DECODERS
+
+  # @return [VpcNatGatewayUpdate] Optional object value serialized in the `vpc_nat_gateway` wire field.
+  attr_reader :vpc_nat_gateway
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VpcNatGatewayUpdateResponse.
-  # Typed representation of the `VpcNatGatewayUpdateResponse` API schema.
-  class VpcNatGatewayUpdateResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcNatGatewayUpdateResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcNatGatewayUpdateResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcNatGatewayUpdateResponseMetadata::DECODERS
-
-    # @return [VpcNatGatewayUpdate] Optional object value serialized in the `vpc_nat_gateway` wire field.
-    attr_reader :vpc_nat_gateway
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

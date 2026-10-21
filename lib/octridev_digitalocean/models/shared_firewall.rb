@@ -5,378 +5,383 @@
 
 # shared_firewall domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalFirewallVariant0PendingChangesItemMetadata
-    FIELDS = {
-      droplet_id: 'droplet_id',
-      removing: 'removing',
-      status: 'status'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalFirewallVariant0PendingChangesItemMetadata
+  FIELDS = {
+    droplet_id: "droplet_id",
+    removing: "removing",
+    status: "status",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for FirewallVariant0PendingChangesItem.
+# Required object value serialized in the `pending_changes[]` wire field.
+class FirewallVariant0PendingChangesItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalFirewallVariant0PendingChangesItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalFirewallVariant0PendingChangesItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalFirewallVariant0PendingChangesItemMetadata::DECODERS
+
+  # @return [Integer] Optional `integer` value serialized in the `droplet_id` wire field.
+  attr_reader :droplet_id
+  # @return [Boolean] Optional `boolean` value serialized in the `removing` wire field.
+  attr_reader :removing
+  # @return [String] Optional `string` value serialized in the `status` wire field.
+  attr_reader :status
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for FirewallVariant0PendingChangesItem.
-  # Required object value serialized in the `pending_changes[]` wire field.
-  class FirewallVariant0PendingChangesItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalFirewallVariant0PendingChangesItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalFirewallVariant0PendingChangesItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalFirewallVariant0PendingChangesItemMetadata::DECODERS
-
-    # @return [Integer] Optional `integer` value serialized in the `droplet_id` wire field.
-    attr_reader :droplet_id
-    # @return [Boolean] Optional `boolean` value serialized in the `removing` wire field.
-    attr_reader :removing
-    # @return [String] Optional `string` value serialized in the `status` wire field.
-    attr_reader :status
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalFirewallMetadata
-    FIELDS = {
-      id: 'id',
-      status: 'status',
-      created_at: 'created_at',
-      pending_changes: 'pending_changes',
-      name: 'name',
-      droplet_ids: 'droplet_ids',
-      tags: 'tags',
-      inbound_rules: 'inbound_rules',
-      outbound_rules: 'outbound_rules'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::FirewallVariant0Status.from_value(value)
-      end,
-      pending_changes: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::FirewallVariant0PendingChangesItem.from_hash(item) }
-      end,
-      tags: lambda do |value|
-        ::OctridevDigitalocean::ExistingTagsArray.from_hash(value)
-      end,
-      inbound_rules: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::FirewallRulesInboundRulesItem.from_hash(item) }
-      end,
-      outbound_rules: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::FirewallRulesOutboundRulesItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalFirewallMetadata
+  FIELDS = {
+    id: "id",
+    status: "status",
+    created_at: "created_at",
+    pending_changes: "pending_changes",
+    name: "name",
+    droplet_ids: "droplet_ids",
+    tags: "tags",
+    inbound_rules: "inbound_rules",
+    outbound_rules: "outbound_rules",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::FirewallVariant0Status.from_value(value)
+    end,
+    pending_changes: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::FirewallVariant0PendingChangesItem.from_hash(item) }
+    end,
+    tags: lambda do |value|
+      ::OctridevDigitalocean::ExistingTagsArray.from_hash(value)
+    end,
+    inbound_rules: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::FirewallRulesInboundRulesItem.from_hash(item) }
+    end,
+    outbound_rules: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::FirewallRulesOutboundRulesItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for Firewall.
+# Typed representation of the `Firewall` API schema.
+class Firewall
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalFirewallMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalFirewallMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalFirewallMetadata::DECODERS
+
+  # @return [String] A unique ID that can be used to identify and reference a firewall.
+  attr_reader :id
+  # @return [FirewallVariant0Status] A status string indicating the current state of the firewall. This can be "waiting", "succeeded", or "failed".
+  attr_reader :status
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the firewall was created.
+  attr_reader :created_at
+  # @return [Array_of_FirewallVariant0PendingChangesItem] An array of objects each containing the fields "droplet_id", "removing", and "status". It is provided to detail exactly which Droplets are having their security policies updated. When empty, all changes have been successfully applied.
+  attr_reader :pending_changes
+  # @return [String] A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-).
+  attr_reader :name
+  # @return [Array_of_Integer] An array containing the IDs of the Droplets assigned to the firewall. Requires `droplet:read` scope.
+  attr_reader :droplet_ids
+  # @return [ExistingTagsArray] Optional API value serialized in the `tags` wire field.
+  attr_reader :tags
+  # @return [Array_of_FirewallRulesInboundRulesItem] Optional array value serialized in the `inbound_rules` wire field.
+  attr_reader :inbound_rules
+  # @return [Array_of_FirewallRulesOutboundRulesItem] Optional array value serialized in the `outbound_rules` wire field.
+  attr_reader :outbound_rules
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Firewall.
-  # Typed representation of the `Firewall` API schema.
-  class Firewall
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalFirewallMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalFirewallMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalFirewallMetadata::DECODERS
-
-    # @return [String] A unique ID that can be used to identify and reference a firewall.
-    attr_reader :id
-    # @return [FirewallVariant0Status] A status string indicating the current state of the firewall. This can be "waiting", "succeeded", or "failed".
-    attr_reader :status
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the firewall was created.
-    attr_reader :created_at
-    # @return [Array_of_FirewallVariant0PendingChangesItem] An array of objects each containing the fields "droplet_id", "removing", and "status". It is provided to detail exactly which Droplets are having their security policies updated. When empty, all changes have been successfully applied.
-    attr_reader :pending_changes
-    # @return [String] A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-).
-    attr_reader :name
-    # @return [Array_of_Integer] An array containing the IDs of the Droplets assigned to the firewall. Requires `droplet:read` scope.
-    attr_reader :droplet_ids
-    # @return [ExistingTagsArray] Optional API value serialized in the `tags` wire field.
-    attr_reader :tags
-    # @return [Array_of_FirewallRulesInboundRulesItem] Optional array value serialized in the `inbound_rules` wire field.
-    attr_reader :inbound_rules
-    # @return [Array_of_FirewallRulesOutboundRulesItem] Optional array value serialized in the `outbound_rules` wire field.
-    attr_reader :outbound_rules
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the FirewallVariant0Status SDK namespace.
-  module FirewallVariant0Status
-    WAITING = 'waiting'
-    SUCCEEDED = 'succeeded'
-    FAILED = 'failed'
-    VALUES = %w[waiting succeeded failed].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the FirewallVariant0Status SDK namespace.
+module FirewallVariant0Status
+  WAITING = 'waiting'
+  SUCCEEDED = 'succeeded'
+  FAILED = 'failed'
+  VALUES = ['waiting', 'succeeded', 'failed'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalFirewallRulesInboundRulesItemMetadata
+  FIELDS = {
+    protocol: "protocol",
+    ports: "ports",
+    action: "action",
+    sources: "sources",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    protocol
+    ports
+    sources
+  ].freeze
+  DECODERS = {
+    protocol: lambda do |value|
+      ::OctridevDigitalocean::FirewallRulesInboundRulesItemProtocol.from_value(value)
+    end,
+    action: lambda do |value|
+      ::OctridevDigitalocean::FirewallRulesInboundRulesItemAction.from_value(value)
+    end,
+    sources: lambda do |value|
+      ::OctridevDigitalocean::FirewallRuleTarget.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for FirewallRulesInboundRulesItem.
+# Required object value serialized in the `inbound_rules[]` wire field.
+class FirewallRulesInboundRulesItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalFirewallRulesInboundRulesItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalFirewallRulesInboundRulesItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalFirewallRulesInboundRulesItemMetadata::DECODERS
+
+  # @return [FirewallRulesInboundRulesItemProtocol] The type of traffic to be allowed. This may be one of `tcp`, `udp`, or `icmp`.
+  attr_reader :protocol
+  # @return [String] The ports on which traffic will be allowed specified as a string containing a single port, a range (e.g. "8000-9000"), or "0" when all ports are open for a protocol. For ICMP rules this parameter will always return "0".
+  attr_reader :ports
+  # @return [FirewallRulesInboundRulesItemAction] The action to be taken when traffic matches the rule. This may be one of `allow` or `deny`. For backward compatibility, this field is optional. When not set, it defaults to `allow`.
+  attr_reader :action
+  # @return [FirewallRuleTarget] An object specifying locations from which inbound traffic will be accepted.
+  attr_reader :sources
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalFirewallRulesInboundRulesItemMetadata
-    FIELDS = {
-      protocol: 'protocol',
-      ports: 'ports',
-      action: 'action',
-      sources: 'sources'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      protocol
-      ports
-      sources
-    ].freeze
-    DECODERS = {
-      protocol: lambda do |value|
-        ::OctridevDigitalocean::FirewallRulesInboundRulesItemProtocol.from_value(value)
-      end,
-      action: lambda do |value|
-        ::OctridevDigitalocean::FirewallRulesInboundRulesItemAction.from_value(value)
-      end,
-      sources: lambda do |value|
-        ::OctridevDigitalocean::FirewallRuleTarget.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for FirewallRulesInboundRulesItem.
-  # Required object value serialized in the `inbound_rules[]` wire field.
-  class FirewallRulesInboundRulesItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalFirewallRulesInboundRulesItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalFirewallRulesInboundRulesItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalFirewallRulesInboundRulesItemMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [FirewallRulesInboundRulesItemProtocol] The type of traffic to be allowed. This may be one of `tcp`, `udp`, or `icmp`.
-    attr_reader :protocol
-    # @return [String] The ports on which traffic will be allowed specified as a string containing a single port, a range (e.g. "8000-9000"), or "0" when all ports are open for a protocol. For ICMP rules this parameter will always return "0".
-    attr_reader :ports
-    # @return [FirewallRulesInboundRulesItemAction] The action to be taken when traffic matches the rule. This may be one of `allow` or `deny`. For backward compatibility, this field is optional. When not set, it defaults to `allow`.
-    attr_reader :action
-    # @return [FirewallRuleTarget] An object specifying locations from which inbound traffic will be accepted.
-    attr_reader :sources
+# Internal model hydration metadata.
+class SdkInternalFirewallRulesOutboundRulesItemMetadata
+  FIELDS = {
+    protocol: "protocol",
+    ports: "ports",
+    action: "action",
+    destinations: "destinations",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    protocol
+    ports
+    destinations
+  ].freeze
+  DECODERS = {
+    protocol: lambda do |value|
+      ::OctridevDigitalocean::FirewallRulesOutboundRulesItemProtocol.from_value(value)
+    end,
+    action: lambda do |value|
+      ::OctridevDigitalocean::FirewallRulesOutboundRulesItemAction.from_value(value)
+    end,
+    destinations: lambda do |value|
+      ::OctridevDigitalocean::FirewallRuleTarget.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for FirewallRulesOutboundRulesItem.
+# Required object value serialized in the `outbound_rules[]` wire field.
+class FirewallRulesOutboundRulesItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalFirewallRulesOutboundRulesItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalFirewallRulesOutboundRulesItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalFirewallRulesOutboundRulesItemMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [FirewallRulesOutboundRulesItemProtocol] The type of traffic to be allowed. This may be one of `tcp`, `udp`, or `icmp`.
+  attr_reader :protocol
+  # @return [String] The ports on which traffic will be allowed specified as a string containing a single port, a range (e.g. "8000-9000"), or "0" when all ports are open for a protocol. For ICMP rules this parameter will always return "0".
+  attr_reader :ports
+  # @return [FirewallRulesOutboundRulesItemAction] The action to be taken when traffic matches the rule. This may be one of `allow` or `deny`. For backward compatibility, this field is optional. When not set, it defaults to `allow`.
+  attr_reader :action
+  # @return [FirewallRuleTarget] An object specifying locations to which outbound traffic that will be allowed.
+  attr_reader :destinations
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalFirewallRulesOutboundRulesItemMetadata
-    FIELDS = {
-      protocol: 'protocol',
-      ports: 'ports',
-      action: 'action',
-      destinations: 'destinations'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      protocol
-      ports
-      destinations
-    ].freeze
-    DECODERS = {
-      protocol: lambda do |value|
-        ::OctridevDigitalocean::FirewallRulesOutboundRulesItemProtocol.from_value(value)
-      end,
-      action: lambda do |value|
-        ::OctridevDigitalocean::FirewallRulesOutboundRulesItemAction.from_value(value)
-      end,
-      destinations: lambda do |value|
-        ::OctridevDigitalocean::FirewallRuleTarget.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for FirewallRulesOutboundRulesItem.
-  # Required object value serialized in the `outbound_rules[]` wire field.
-  class FirewallRulesOutboundRulesItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalFirewallRulesOutboundRulesItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalFirewallRulesOutboundRulesItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalFirewallRulesOutboundRulesItemMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [FirewallRulesOutboundRulesItemProtocol] The type of traffic to be allowed. This may be one of `tcp`, `udp`, or `icmp`.
-    attr_reader :protocol
-    # @return [String] The ports on which traffic will be allowed specified as a string containing a single port, a range (e.g. "8000-9000"), or "0" when all ports are open for a protocol. For ICMP rules this parameter will always return "0".
-    attr_reader :ports
-    # @return [FirewallRulesOutboundRulesItemAction] The action to be taken when traffic matches the rule. This may be one of `allow` or `deny`. For backward compatibility, this field is optional. When not set, it defaults to `allow`.
-    attr_reader :action
-    # @return [FirewallRuleTarget] An object specifying locations to which outbound traffic that will be allowed.
-    attr_reader :destinations
+# Internal model hydration metadata.
+class SdkInternalFirewallRulesMetadata
+  FIELDS = {
+    inbound_rules: "inbound_rules",
+    outbound_rules: "outbound_rules",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    inbound_rules: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::FirewallRulesInboundRulesItem.from_hash(item) }
+    end,
+    outbound_rules: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::FirewallRulesOutboundRulesItem.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for FirewallRules.
+# Typed representation of the `FirewallRules` API schema.
+class FirewallRules
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalFirewallRulesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalFirewallRulesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalFirewallRulesMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_FirewallRulesInboundRulesItem] Optional array value serialized in the `inbound_rules` wire field.
+  attr_reader :inbound_rules
+  # @return [Array_of_FirewallRulesOutboundRulesItem] Optional array value serialized in the `outbound_rules` wire field.
+  attr_reader :outbound_rules
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalFirewallRulesMetadata
-    FIELDS = {
-      inbound_rules: 'inbound_rules',
-      outbound_rules: 'outbound_rules'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      inbound_rules: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::FirewallRulesInboundRulesItem.from_hash(item) }
-      end,
-      outbound_rules: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::FirewallRulesOutboundRulesItem.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for FirewallRules.
-  # Typed representation of the `FirewallRules` API schema.
-  class FirewallRules
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalFirewallRulesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalFirewallRulesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalFirewallRulesMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Array_of_FirewallRulesInboundRulesItem] Optional array value serialized in the `inbound_rules` wire field.
-    attr_reader :inbound_rules
-    # @return [Array_of_FirewallRulesOutboundRulesItem] Optional array value serialized in the `outbound_rules` wire field.
-    attr_reader :outbound_rules
+# Defines the FirewallRulesInboundRulesItemAction SDK namespace.
+module FirewallRulesInboundRulesItemAction
+  ALLOW = 'allow'
+  DENY = 'deny'
+  VALUES = ['allow', 'deny'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Defines the FirewallRulesInboundRulesItemProtocol SDK namespace.
+module FirewallRulesInboundRulesItemProtocol
+  TCP = 'tcp'
+  UDP = 'udp'
+  ICMP = 'icmp'
+  VALUES = ['tcp', 'udp', 'icmp'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Defines the FirewallRulesOutboundRulesItemAction SDK namespace.
+module FirewallRulesOutboundRulesItemAction
+  ALLOW = 'allow'
+  DENY = 'deny'
+  VALUES = ['allow', 'deny'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# Defines the FirewallRulesOutboundRulesItemProtocol SDK namespace.
+module FirewallRulesOutboundRulesItemProtocol
+  TCP = 'tcp'
+  UDP = 'udp'
+  ICMP = 'icmp'
+  VALUES = ['tcp', 'udp', 'icmp'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalFirewallRuleTargetMetadata
+  FIELDS = {
+    addresses: "addresses",
+    droplet_ids: "droplet_ids",
+    load_balancer_uids: "load_balancer_uids",
+    kubernetes_ids: "kubernetes_ids",
+    tags: "tags",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tags: lambda do |value|
+      ::OctridevDigitalocean::ExistingTagsArray.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for FirewallRuleTarget.
+# Typed representation of the `FirewallRuleTarget` API schema.
+class FirewallRuleTarget
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalFirewallRuleTargetMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalFirewallRuleTargetMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalFirewallRuleTargetMetadata::DECODERS
+
+  # @return [Array_of_String] An array of strings containing the IPv4 addresses, IPv6 addresses, IPv4 CIDRs, and/or IPv6 CIDRs to which the firewall will allow traffic.
+  attr_reader :addresses
+  # @return [Array_of_Integer] An array containing the IDs of the Droplets to which the firewall will allow traffic.
+  attr_reader :droplet_ids
+  # @return [Array_of_String] An array containing the IDs of the load balancers to which the firewall will allow traffic.
+  attr_reader :load_balancer_uids
+  # @return [Array_of_String] An array containing the IDs of the Kubernetes clusters to which the firewall will allow traffic.
+  attr_reader :kubernetes_ids
+  # @return [ExistingTagsArray] Optional API value serialized in the `tags` wire field.
+  attr_reader :tags
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the FirewallRulesInboundRulesItemAction SDK namespace.
-  module FirewallRulesInboundRulesItemAction
-    ALLOW = 'allow'
-    DENY = 'deny'
-    VALUES = %w[allow deny].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the FirewallRulesInboundRulesItemProtocol SDK namespace.
-  module FirewallRulesInboundRulesItemProtocol
-    TCP = 'tcp'
-    UDP = 'udp'
-    ICMP = 'icmp'
-    VALUES = %w[tcp udp icmp].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # Defines the FirewallRulesOutboundRulesItemAction SDK namespace.
-  module FirewallRulesOutboundRulesItemAction
-    ALLOW = 'allow'
-    DENY = 'deny'
-    VALUES = %w[allow deny].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Defines the FirewallRulesOutboundRulesItemProtocol SDK namespace.
-  module FirewallRulesOutboundRulesItemProtocol
-    TCP = 'tcp'
-    UDP = 'udp'
-    ICMP = 'icmp'
-    VALUES = %w[tcp udp icmp].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalFirewallRuleTargetMetadata
-    FIELDS = {
-      addresses: 'addresses',
-      droplet_ids: 'droplet_ids',
-      load_balancer_uids: 'load_balancer_uids',
-      kubernetes_ids: 'kubernetes_ids',
-      tags: 'tags'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tags: lambda do |value|
-        ::OctridevDigitalocean::ExistingTagsArray.from_hash(value)
-      end
-    }.freeze
-  end
-
-  # API model for FirewallRuleTarget.
-  # Typed representation of the `FirewallRuleTarget` API schema.
-  class FirewallRuleTarget
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalFirewallRuleTargetMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalFirewallRuleTargetMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalFirewallRuleTargetMetadata::DECODERS
-
-    # @return [Array_of_String] An array of strings containing the IPv4 addresses, IPv6 addresses, IPv4 CIDRs, and/or IPv6 CIDRs to which the firewall will allow traffic.
-    attr_reader :addresses
-    # @return [Array_of_Integer] An array containing the IDs of the Droplets to which the firewall will allow traffic.
-    attr_reader :droplet_ids
-    # @return [Array_of_String] An array containing the IDs of the load balancers to which the firewall will allow traffic.
-    attr_reader :load_balancer_uids
-    # @return [Array_of_String] An array containing the IDs of the Kubernetes clusters to which the firewall will allow traffic.
-    attr_reader :kubernetes_ids
-    # @return [ExistingTagsArray] Optional API value serialized in the `tags` wire field.
-    attr_reader :tags
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

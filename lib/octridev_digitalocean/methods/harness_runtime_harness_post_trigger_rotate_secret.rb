@@ -24,6 +24,7 @@ module OctridevDigitalocean
         grace_period_seconds: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(grace_period_seconds) do
           Validation.validate_range('grace_period_seconds', grace_period_seconds, min: 0)
         end
@@ -31,19 +32,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            '/v2/agents/triggers/',
+            "/v2/agents/triggers/",
             SdkClient.encode_path_segment(trigger_id),
-            '/rotate-secret'
+            "/rotate-secret"
           ].join,
           config: config,
           query: {
-            'grace_period_seconds' => QueryValue.new(grace_period_seconds, style: 'form', explode: true)
+            'grace_period_seconds' => QueryValue.new(grace_period_seconds, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::RotateSecretResponse,
           decoder: :json,
           operation_id: 'harness_post_trigger_rotate_secret',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

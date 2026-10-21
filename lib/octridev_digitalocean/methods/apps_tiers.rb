@@ -14,15 +14,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/apps/tiers/instance_sizes',
+          "/v2/apps/tiers/instance_sizes",
           config: config,
           return_type: ::OctridevDigitalocean::AppsListInstanceSizesResponse,
           decoder: :json,
           operation_id: 'apps_list_instance_sizes',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -34,10 +35,11 @@ module OctridevDigitalocean
         slug:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/apps/tiers/instance_sizes/',
+            "/v2/apps/tiers/instance_sizes/",
             SdkClient.encode_path_segment(slug)
           ].join,
           config: config,
@@ -45,7 +47,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'apps_get_instance_size',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

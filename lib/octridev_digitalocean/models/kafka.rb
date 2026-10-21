@@ -5,110 +5,112 @@
 
 # kafka domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalKafkaSchemaVersionVerboseMetadata
-    FIELDS = {
-      schema_id: 'schema_id',
-      version: 'version',
-      subject_name: 'subject_name',
-      schema_type: 'schema_type',
-      schema: 'schema'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      schema_type: lambda do |value|
-        ::OctridevDigitalocean::KafkaSchemaVersionVerboseSchemaType.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalKafkaSchemaVersionVerboseMetadata
+  FIELDS = {
+    schema_id: "schema_id",
+    version: "version",
+    subject_name: "subject_name",
+    schema_type: "schema_type",
+    schema: "schema",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    schema_type: lambda do |value|
+      ::OctridevDigitalocean::KafkaSchemaVersionVerboseSchemaType.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for KafkaSchemaVersionVerbose.
+# Typed representation of the `KafkaSchemaVersionVerbose` API schema.
+class KafkaSchemaVersionVerbose
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalKafkaSchemaVersionVerboseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalKafkaSchemaVersionVerboseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalKafkaSchemaVersionVerboseMetadata::DECODERS
+
+  # @return [Integer] The id for schema.
+  attr_reader :schema_id
+  # @return [String] The version of the schema.
+  attr_reader :version
+  # @return [String] The name of the schema subject.
+  attr_reader :subject_name
+  # @return [KafkaSchemaVersionVerboseSchemaType] The type of the schema.
+  attr_reader :schema_type
+  # @return [String] The schema definition in the specified format.
+  attr_reader :schema
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for KafkaSchemaVersionVerbose.
-  # Typed representation of the `KafkaSchemaVersionVerbose` API schema.
-  class KafkaSchemaVersionVerbose
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalKafkaSchemaVersionVerboseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalKafkaSchemaVersionVerboseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalKafkaSchemaVersionVerboseMetadata::DECODERS
-
-    # @return [Integer] The id for schema.
-    attr_reader :schema_id
-    # @return [String] The version of the schema.
-    attr_reader :version
-    # @return [String] The name of the schema subject.
-    attr_reader :subject_name
-    # @return [KafkaSchemaVersionVerboseSchemaType] The type of the schema.
-    attr_reader :schema_type
-    # @return [String] The schema definition in the specified format.
-    attr_reader :schema
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the KafkaSchemaVersionVerboseSchemaType SDK namespace.
-  module KafkaSchemaVersionVerboseSchemaType
-    AVRO = 'AVRO'
-    JSON = 'JSON'
-    PROTOBUF = 'PROTOBUF'
-    VALUES = %w[AVRO JSON PROTOBUF].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the KafkaSchemaVersionVerboseSchemaType SDK namespace.
+module KafkaSchemaVersionVerboseSchemaType
+  AVRO = 'AVRO'
+  JSON = 'JSON'
+  PROTOBUF = 'PROTOBUF'
+  VALUES = ['AVRO', 'JSON', 'PROTOBUF'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalKafkaTopicCreateMetadata
+  FIELDS = {
+    name: "name",
+    replication_factor: "replication_factor",
+    partition_count: "partition_count",
+    config: "config",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    config: lambda do |value|
+      ::OctridevDigitalocean::KafkaTopicConfig.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for KafkaTopicCreate.
+# Typed representation of the `KafkaTopicCreate` API schema.
+class KafkaTopicCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalKafkaTopicCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalKafkaTopicCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalKafkaTopicCreateMetadata::DECODERS
+
+  attr_reader :config
+  # @return [String] The name of the Kafka topic.
+  attr_reader :name
+  # @return [Integer] The number of nodes to replicate data across the cluster.
+  attr_reader :replication_factor
+  # @return [Integer] The number of partitions available for the topic. On update, this value can only be increased.
+  attr_reader :partition_count
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalKafkaTopicCreateMetadata
-    FIELDS = {
-      name: 'name',
-      replication_factor: 'replication_factor',
-      partition_count: 'partition_count',
-      config: 'config'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      config: lambda do |value|
-        ::OctridevDigitalocean::KafkaTopicConfig.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for KafkaTopicCreate.
-  # Typed representation of the `KafkaTopicCreate` API schema.
-  class KafkaTopicCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalKafkaTopicCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalKafkaTopicCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalKafkaTopicCreateMetadata::DECODERS
-
-    attr_reader :config
-    # @return [String] The name of the Kafka topic.
-    attr_reader :name
-    # @return [Integer] The number of nodes to replicate data across the cluster.
-    attr_reader :replication_factor
-    # @return [Integer] The number of partitions available for the topic. On update, this value can only be increased.
-    attr_reader :partition_count
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

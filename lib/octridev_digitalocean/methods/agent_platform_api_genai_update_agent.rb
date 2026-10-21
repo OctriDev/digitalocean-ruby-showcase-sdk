@@ -107,21 +107,21 @@ module OctridevDigitalocean
         web_search_enabled: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/gen-ai/agents/',
+            "/v2/gen-ai/agents/",
             SdkClient.encode_path_segment(uuid)
           ].join,
           config: config,
           body: __sdk_body_genai_update_agent_part1(agent_log_insights_enabled: agent_log_insights_enabled, allowed_domains: allowed_domains, anthropic_key_uuid: anthropic_key_uuid, clear_mcp_servers: clear_mcp_servers, conversation_logs_enabled: conversation_logs_enabled, description: description, instruction: instruction, k_value: k_value, max_tokens: max_tokens, mcp_servers: mcp_servers, model_provider_key_uuid: model_provider_key_uuid, model_router_uuid: model_router_uuid, model_uuid: model_uuid, name: name, open_ai_key_uuid: open_ai_key_uuid, project_id: project_id, provide_citations: provide_citations, reasoning_effort: reasoning_effort).merge(
-            __sdk_body_genai_update_agent_part2(retrieval_method: retrieval_method, router_preset_slug: router_preset_slug, tags: tags, temperature: temperature, thinking_token_budget: thinking_token_budget, top_p: top_p, uuid2: uuid2, web_fetch_enabled: web_fetch_enabled, web_search_enabled: web_search_enabled)
-          ),
+            __sdk_body_genai_update_agent_part2(retrieval_method: retrieval_method, router_preset_slug: router_preset_slug, tags: tags, temperature: temperature, thinking_token_budget: thinking_token_budget, top_p: top_p, uuid2: uuid2, web_fetch_enabled: web_fetch_enabled, web_search_enabled: web_search_enabled)),
           return_type: ::OctridevDigitalocean::ApiUpdateAgentOutput,
           decoder: :json,
           operation_id: 'genai_update_agent',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -163,7 +163,7 @@ module OctridevDigitalocean
           'open_ai_key_uuid' => open_ai_key_uuid,
           'project_id' => project_id,
           'provide_citations' => provide_citations,
-          'reasoning_effort' => reasoning_effort
+          'reasoning_effort' => reasoning_effort,
         }
       end
       private_class_method :__sdk_body_genai_update_agent_part1
@@ -188,7 +188,7 @@ module OctridevDigitalocean
           'top_p' => top_p,
           'uuid' => uuid2,
           'web_fetch_enabled' => web_fetch_enabled,
-          'web_search_enabled' => web_search_enabled
+          'web_search_enabled' => web_search_enabled,
         }
       end
       private_class_method :__sdk_body_genai_update_agent_part2

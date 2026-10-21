@@ -27,6 +27,7 @@ module OctridevDigitalocean
         type: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.if_given(expiry_seconds) do
@@ -36,19 +37,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/kubeconfig'
+            "/kubeconfig"
           ].join,
           config: config,
           query: {
             'expiry_seconds' => QueryValue.new(expiry_seconds, style: 'form', explode: true),
-            'type' => QueryValue.new(type, style: 'form', explode: true)
+            'type' => QueryValue.new(type, style: 'form', explode: true),
           },
           decoder: :bytes,
           operation_id: 'kubernetes_get_kubeconfig',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

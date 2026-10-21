@@ -42,45 +42,42 @@ module OctridevDigitalocean
         request_options: nil,
         &block
       )
-        unless block
-          return enum_for(
-            __method__,
-            config: config,
-            session_id: session_id,
-            replay_only: replay_only,
-            replay_from: replay_from,
-            cursor: cursor,
-            device_id: device_id,
-            last_event_id: last_event_id,
-            x_device_uuid: x_device_uuid,
-            request_options: request_options
-          )
-        end
+    return enum_for(
+          __method__,
+          config: config,
+          session_id: session_id,
+          replay_only: replay_only,
+          replay_from: replay_from,
+          cursor: cursor,
+          device_id: device_id,
+          last_event_id: last_event_id,
+          x_device_uuid: x_device_uuid,
+          request_options: request_options,
+        ) unless block
         SdkClient.stream(
           'GET', [
-            '/v2/agents/sessions/',
+            "/v2/agents/sessions/",
             SdkClient.encode_path_segment(session_id),
-            '/events'
+            "/events"
           ].join,
           config: config,
           query: {
-            'replay_only' => QueryValue.new(replay_only, style: 'form', explode: true),
-            'replay_from' => QueryValue.new(replay_from, style: 'form', explode: true),
-            'cursor' => QueryValue.new(cursor, style: 'form', explode: true),
-            'device_id' => QueryValue.new(device_id, style: 'form', explode: true)
-          },
+          'replay_only' => QueryValue.new(replay_only, style: 'form', explode: true),
+          'replay_from' => QueryValue.new(replay_from, style: 'form', explode: true),
+          'cursor' => QueryValue.new(cursor, style: 'form', explode: true),
+          'device_id' => QueryValue.new(device_id, style: 'form', explode: true),
+        },
           operation_id: 'harness_get_session_events',
           stream_format: :sse,
-          stream_media_type: 'text/event-stream',
+          stream_media_type: "text/event-stream",
           extra_headers: SdkClient.serialize_headers({
-                                                       'Last-Event-ID' => SdkClient.header_value(last_event_id),
-                                                       'X-Device-UUID' => SdkClient.header_value(x_device_uuid)
-                                                     }),
+            'Last-Event-ID' => SdkClient.header_value(last_event_id),
+            'X-Device-UUID' => SdkClient.header_value(x_device_uuid),
+          }),
           request_options: request_options,
           errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2 }
         ).each do |ev|
           break if ev.data == '[DONE]'
-
           decoded = JSON.parse(ev.data)
           block.call(SdkClient.decode_event(decoded, ::OctridevDigitalocean::StreamEvent))
         end

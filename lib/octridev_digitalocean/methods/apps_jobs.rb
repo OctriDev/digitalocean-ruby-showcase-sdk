@@ -34,16 +34,17 @@ module OctridevDigitalocean
         tail_lines: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/apps/',
+            "/v2/apps/",
             SdkClient.encode_path_segment(app_id),
-            '/jobs/',
+            "/jobs/",
             SdkClient.encode_path_segment(job_name),
-            '/invocations/',
+            "/invocations/",
             SdkClient.encode_path_segment(job_invocation_id),
-            '/logs'
+            "/logs"
           ].join,
           config: config,
           query: {
@@ -51,13 +52,13 @@ module OctridevDigitalocean
             'deployment_id' => QueryValue.new(deployment_id, style: 'form', explode: true),
             'follow' => QueryValue.new(follow, style: 'form', explode: true),
             'pod_connection_timeout' => QueryValue.new(pod_connection_timeout, style: 'form', explode: true),
-            'tail_lines' => QueryValue.new(tail_lines, style: 'form', explode: true)
+            'tail_lines' => QueryValue.new(tail_lines, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::AppsGetLogsResponse,
           decoder: :json,
           operation_id: 'apps_get_job_invocation_logs',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

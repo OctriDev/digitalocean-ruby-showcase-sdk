@@ -17,21 +17,22 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
+
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/droplets/',
+            "/v2/droplets/",
             SdkClient.encode_path_segment(droplet_id),
-            '/destroy_with_associated_resources'
+            "/destroy_with_associated_resources"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AssociatedResourcesList,
           decoder: :json,
           operation_id: 'droplets_list_associated_resources',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -58,14 +59,15 @@ module OctridevDigitalocean
         volume_snapshots: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/droplets/',
+            "/v2/droplets/",
             SdkClient.encode_path_segment(droplet_id),
-            '/destroy_with_associated_resources/selective'
+            "/destroy_with_associated_resources/selective"
           ].join,
           config: config,
           body: {
@@ -73,12 +75,12 @@ module OctridevDigitalocean
             'reserved_ips' => reserved_ips,
             'snapshots' => snapshots,
             'volumes' => volumes,
-            'volume_snapshots' => volume_snapshots
+            'volume_snapshots' => volume_snapshots,
           },
           decoder: :empty,
           operation_id: 'droplets_destroy_with_associated_resources_selective',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -93,23 +95,24 @@ module OctridevDigitalocean
         x_dangerous:,
         request_options: nil
       )
+
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/droplets/',
+            "/v2/droplets/",
             SdkClient.encode_path_segment(droplet_id),
-            '/destroy_with_associated_resources/dangerous'
+            "/destroy_with_associated_resources/dangerous"
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'droplets_destroy_with_associated_resources_dangerous',
           extra_headers: SdkClient.serialize_headers({
-                                                       'X-Dangerous' => SdkClient.header_value(x_dangerous)
-                                                     }),
+            'X-Dangerous' => SdkClient.header_value(x_dangerous),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -121,21 +124,22 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
+
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/droplets/',
+            "/v2/droplets/",
             SdkClient.encode_path_segment(droplet_id),
-            '/destroy_with_associated_resources/status'
+            "/destroy_with_associated_resources/status"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AssociatedResourceStatus,
           decoder: :json,
           operation_id: 'droplets_get_destroy_associated_resources_status',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -147,20 +151,21 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
+
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/droplets/',
+            "/v2/droplets/",
             SdkClient.encode_path_segment(droplet_id),
-            '/destroy_with_associated_resources/retry'
+            "/destroy_with_associated_resources/retry"
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'droplets_destroy_retry_with_associated_resources',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

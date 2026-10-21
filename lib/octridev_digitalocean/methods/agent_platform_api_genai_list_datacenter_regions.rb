@@ -20,19 +20,20 @@ module OctridevDigitalocean
         serves_batch: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/gen-ai/regions',
+          "/v2/gen-ai/regions",
           config: config,
           query: {
             'serves_inference' => QueryValue.new(serves_inference, style: 'form', explode: true),
-            'serves_batch' => QueryValue.new(serves_batch, style: 'form', explode: true)
+            'serves_batch' => QueryValue.new(serves_batch, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ApiListRegionsOutput,
           decoder: :json,
           operation_id: 'genai_list_datacenter_regions',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -5,345 +5,352 @@
 
 # insights_webhook domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalWebhookBasicAuthRequestMetadata
-    FIELDS = {
-      username: 'username',
-      password: 'password'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      username
-    ].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalWebhookBasicAuthRequestMetadata
+  FIELDS = {
+    username: "username",
+    password: "password",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    username
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for WebhookBasicAuthRequest.
+# HTTP basic authentication credentials for a webhook create or update request. `password` is write-only: send the full value to set or rotate. Omit `password` on update to keep the existing password.
+class WebhookBasicAuthRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookBasicAuthRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookBasicAuthRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookBasicAuthRequestMetadata::DECODERS
+
+  # @return [String] Basic auth username.
+  attr_reader :username
+  # @return [String] Basic auth password. Write-only secret — send the full value on create or update. Omit on update to retain the existing value. Never returned in responses.
+  attr_reader :password
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookBasicAuthRequest.
-  # HTTP basic authentication credentials for a webhook create or update request. `password` is write-only: send the full value to set or rotate. Omit `password` on update to keep the existing password.
-  class WebhookBasicAuthRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookBasicAuthRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookBasicAuthRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookBasicAuthRequestMetadata::DECODERS
-
-    # @return [String] Basic auth username.
-    attr_reader :username
-    # @return [String] Basic auth password. Write-only secret — send the full value on create or update. Omit on update to retain the existing value. Never returned in responses.
-    attr_reader :password
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalWebhookBasicAuthResponseMetadata
-    FIELDS = {
-      username: 'username',
-      password_status: 'password_status'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      username
-    ].freeze
-    DECODERS = {
-      password_status: lambda do |value|
-        ::OctridevDigitalocean::SecretStatus.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalWebhookBasicAuthResponseMetadata
+  FIELDS = {
+    username: "username",
+    password_status: "password_status",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    username
+  ].freeze
+  DECODERS = {
+    password_status: lambda do |value|
+      ::OctridevDigitalocean::SecretStatus.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for WebhookBasicAuthResponse.
+# HTTP basic authentication as returned in API responses. The password is never returned; `password_status` indicates whether it is configured.
+class WebhookBasicAuthResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookBasicAuthResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookBasicAuthResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookBasicAuthResponseMetadata::DECODERS
+
+  # @return [String] Basic auth username.
+  attr_reader :username
+  # @return [SecretStatus] Present when a basic auth password is configured. Omitted when not configured.
+  attr_reader :password_status
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookBasicAuthResponse.
-  # HTTP basic authentication as returned in API responses. The password is never returned; `password_status` indicates whether it is configured.
-  class WebhookBasicAuthResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookBasicAuthResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookBasicAuthResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookBasicAuthResponseMetadata::DECODERS
-
-    # @return [String] Basic auth username.
-    attr_reader :username
-    # @return [SecretStatus] Present when a basic auth password is configured. Omitted when not configured.
-    attr_reader :password_status
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalWebhookBearerTokenRequestMetadata
-    FIELDS = {
-      token: 'token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalWebhookBearerTokenRequestMetadata
+  FIELDS = {
+    token: "token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for WebhookBearerTokenRequest.
+# Bearer token authentication for a webhook create or update request. `token` is write-only: send the full value to set or rotate. Omit `token` on update to keep the existing token.
+class WebhookBearerTokenRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookBearerTokenRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookBearerTokenRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookBearerTokenRequestMetadata::DECODERS
+
+  # @return [String] Bearer token value sent in the Authorization header. Write-only secret — send the full value on create or update. Omit on update to retain the existing value. Never returned in responses.
+  attr_reader :token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookBearerTokenRequest.
-  # Bearer token authentication for a webhook create or update request. `token` is write-only: send the full value to set or rotate. Omit `token` on update to keep the existing token.
-  class WebhookBearerTokenRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookBearerTokenRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookBearerTokenRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookBearerTokenRequestMetadata::DECODERS
-
-    # @return [String] Bearer token value sent in the Authorization header. Write-only secret — send the full value on create or update. Omit on update to retain the existing value. Never returned in responses.
-    attr_reader :token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalWebhookBearerTokenResponseMetadata
-    FIELDS = {
-      token_status: 'token_status'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      token_status: lambda do |value|
-        ::OctridevDigitalocean::SecretStatus.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalWebhookBearerTokenResponseMetadata
+  FIELDS = {
+    token_status: "token_status",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    token_status: lambda do |value|
+      ::OctridevDigitalocean::SecretStatus.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for WebhookBearerTokenResponse.
+# Bearer token authentication as returned in API responses. The token is never returned; `token_status` indicates whether it is configured.
+class WebhookBearerTokenResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookBearerTokenResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookBearerTokenResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookBearerTokenResponseMetadata::DECODERS
+
+  # @return [SecretStatus] Present when a bearer token is configured. Omitted when not configured.
+  attr_reader :token_status
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookBearerTokenResponse.
-  # Bearer token authentication as returned in API responses. The token is never returned; `token_status` indicates whether it is configured.
-  class WebhookBearerTokenResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookBearerTokenResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookBearerTokenResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookBearerTokenResponseMetadata::DECODERS
-
-    # @return [SecretStatus] Present when a bearer token is configured. Omitted when not configured.
-    attr_reader :token_status
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalWebhookNotificationConfigRequestMetadata
-    FIELDS = {
-      url: 'url',
-      basic_auth: 'basic_auth',
-      bearer_token: 'bearer_token',
-      headers: 'headers',
-      signature: 'signature'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      url
-    ].freeze
-    DECODERS = {
-      basic_auth: lambda do |value|
-        ::OctridevDigitalocean::WebhookBasicAuthRequest.from_hash(value)
-      end,
-      bearer_token: lambda do |value|
-        ::OctridevDigitalocean::WebhookBearerTokenRequest.from_hash(value)
-      end,
-      signature: lambda do |value|
-        ::OctridevDigitalocean::WebhookSignatureConfigRequest.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalWebhookNotificationConfigRequestMetadata
+  FIELDS = {
+    url: "url",
+    basic_auth: "basic_auth",
+    bearer_token: "bearer_token",
+    headers: "headers",
+    signature: "signature",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    url
+  ].freeze
+  DECODERS = {
+    basic_auth: lambda do |value|
+      ::OctridevDigitalocean::WebhookBasicAuthRequest.from_hash(value)
+    end,
+    bearer_token: lambda do |value|
+      ::OctridevDigitalocean::WebhookBearerTokenRequest.from_hash(value)
+    end,
+    signature: lambda do |value|
+      ::OctridevDigitalocean::WebhookSignatureConfigRequest.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for WebhookNotificationConfigRequest.
+# Generic HTTPS webhook notification channel configuration for create and update requests. The URL must use HTTPS and must not include userinfo. Optionally configure either `basic_auth` or `bearer_token` (not both), custom headers, and a signing secret. `url` is not a secret and is returned in full on read. Credential fields (`basic_auth.password`, `bearer_token.token`, `signature.secret`) are write-only: send the full value to set or rotate. Omit a secret field on update to…
+class WebhookNotificationConfigRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookNotificationConfigRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookNotificationConfigRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookNotificationConfigRequestMetadata::DECODERS
+
+  # @return [String] HTTPS URL that receives webhook deliveries. Returned in full on read.
+  attr_reader :url
+  # @return [WebhookBasicAuthRequest] HTTP basic authentication credentials for a webhook create or update request. `password` is write-only: send the full value to set or rotate. Omit `password` on update to keep the existing password.
+  attr_reader :basic_auth
+  # @return [WebhookBearerTokenRequest] Bearer token authentication for a webhook create or update request. `token` is write-only: send the full value to set or rotate. Omit `token` on update to keep the existing token.
+  attr_reader :bearer_token
+  # @return [Hash] Optional custom HTTP headers to include on webhook deliveries. At most 20 headers are allowed. Reserved header names such as `host`, `content-type`, and `proxy-*` are rejected.
+  attr_reader :headers
+  # @return [WebhookSignatureConfigRequest] Optional HMAC signature configuration for a webhook create or update request. `secret` is write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing secret.
+  attr_reader :signature
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookNotificationConfigRequest.
-  # Generic HTTPS webhook notification channel configuration for create and update requests. The URL must use HTTPS and must not include userinfo. Optionally configure either `basic_auth` or `bearer_token` (not both), custom headers, and a signing secret. `url` is not a secret and is returned in full on read. Credential fields (`basic_auth.password`, `bearer_token.token`, `signature.secret`) are write-only: send the full value to set or rotate. Omit a secret field on update to…
-  class WebhookNotificationConfigRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookNotificationConfigRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookNotificationConfigRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookNotificationConfigRequestMetadata::DECODERS
-
-    # @return [String] HTTPS URL that receives webhook deliveries. Returned in full on read.
-    attr_reader :url
-    # @return [WebhookBasicAuthRequest] HTTP basic authentication credentials for a webhook create or update request. `password` is write-only: send the full value to set or rotate. Omit `password` on update to keep the existing password.
-    attr_reader :basic_auth
-    # @return [WebhookBearerTokenRequest] Bearer token authentication for a webhook create or update request. `token` is write-only: send the full value to set or rotate. Omit `token` on update to keep the existing token.
-    attr_reader :bearer_token
-    # @return [Hash] Optional custom HTTP headers to include on webhook deliveries. At most 20 headers are allowed. Reserved header names such as `host`, `content-type`, and `proxy-*` are rejected.
-    attr_reader :headers
-    # @return [WebhookSignatureConfigRequest] Optional HMAC signature configuration for a webhook create or update request. `secret` is write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing secret.
-    attr_reader :signature
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalWebhookNotificationConfigResponseMetadata
-    FIELDS = {
-      url: 'url',
-      basic_auth: 'basic_auth',
-      bearer_token: 'bearer_token',
-      headers: 'headers',
-      signature: 'signature'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      url
-    ].freeze
-    DECODERS = {
-      basic_auth: lambda do |value|
-        ::OctridevDigitalocean::WebhookBasicAuthResponse.from_hash(value)
-      end,
-      bearer_token: lambda do |value|
-        ::OctridevDigitalocean::WebhookBearerTokenResponse.from_hash(value)
-      end,
-      signature: lambda do |value|
-        ::OctridevDigitalocean::WebhookSignatureConfigResponse.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalWebhookNotificationConfigResponseMetadata
+  FIELDS = {
+    url: "url",
+    basic_auth: "basic_auth",
+    bearer_token: "bearer_token",
+    headers: "headers",
+    signature: "signature",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    url
+  ].freeze
+  DECODERS = {
+    basic_auth: lambda do |value|
+      ::OctridevDigitalocean::WebhookBasicAuthResponse.from_hash(value)
+    end,
+    bearer_token: lambda do |value|
+      ::OctridevDigitalocean::WebhookBearerTokenResponse.from_hash(value)
+    end,
+    signature: lambda do |value|
+      ::OctridevDigitalocean::WebhookSignatureConfigResponse.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for WebhookNotificationConfigResponse.
+# Generic HTTPS webhook notification channel configuration as returned in API responses. The URL and headers are returned in full. Credential secrets are never returned; nested `*_status` objects indicate whether they are configured.
+class WebhookNotificationConfigResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookNotificationConfigResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookNotificationConfigResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookNotificationConfigResponseMetadata::DECODERS
+
+  # @return [String] HTTPS URL that receives webhook deliveries.
+  attr_reader :url
+  # @return [WebhookBasicAuthResponse] HTTP basic authentication as returned in API responses. The password is never returned; `password_status` indicates whether it is configured.
+  attr_reader :basic_auth
+  # @return [WebhookBearerTokenResponse] Bearer token authentication as returned in API responses. The token is never returned; `token_status` indicates whether it is configured.
+  attr_reader :bearer_token
+  # @return [Hash] Optional custom HTTP headers included on webhook deliveries. At most 20 headers are allowed.
+  attr_reader :headers
+  # @return [WebhookSignatureConfigResponse] HMAC signature configuration as returned in API responses. The signing secret is never returned; `secret_status` indicates whether it is configured.
+  attr_reader :signature
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookNotificationConfigResponse.
-  # Generic HTTPS webhook notification channel configuration as returned in API responses. The URL and headers are returned in full. Credential secrets are never returned; nested `*_status` objects indicate whether they are configured.
-  class WebhookNotificationConfigResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookNotificationConfigResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookNotificationConfigResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookNotificationConfigResponseMetadata::DECODERS
-
-    # @return [String] HTTPS URL that receives webhook deliveries.
-    attr_reader :url
-    # @return [WebhookBasicAuthResponse] HTTP basic authentication as returned in API responses. The password is never returned; `password_status` indicates whether it is configured.
-    attr_reader :basic_auth
-    # @return [WebhookBearerTokenResponse] Bearer token authentication as returned in API responses. The token is never returned; `token_status` indicates whether it is configured.
-    attr_reader :bearer_token
-    # @return [Hash] Optional custom HTTP headers included on webhook deliveries. At most 20 headers are allowed.
-    attr_reader :headers
-    # @return [WebhookSignatureConfigResponse] HMAC signature configuration as returned in API responses. The signing secret is never returned; `secret_status` indicates whether it is configured.
-    attr_reader :signature
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalWebhookSignatureConfigRequestMetadata
-    FIELDS = {
-      secret: 'secret'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalWebhookSignatureConfigRequestMetadata
+  FIELDS = {
+    secret: "secret",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for WebhookSignatureConfigRequest.
+# Optional HMAC signature configuration for a webhook create or update request. `secret` is write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing secret.
+class WebhookSignatureConfigRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookSignatureConfigRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookSignatureConfigRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookSignatureConfigRequestMetadata::DECODERS
+
+  # @return [String] Shared secret used to sign webhook payloads. Write-only secret — send the full value on create or update. Omit on update to retain the existing value. Never returned in responses.
+  attr_reader :secret
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookSignatureConfigRequest.
-  # Optional HMAC signature configuration for a webhook create or update request. `secret` is write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing secret.
-  class WebhookSignatureConfigRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookSignatureConfigRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookSignatureConfigRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookSignatureConfigRequestMetadata::DECODERS
-
-    # @return [String] Shared secret used to sign webhook payloads. Write-only secret — send the full value on create or update. Omit on update to retain the existing value. Never returned in responses.
-    attr_reader :secret
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalWebhookSignatureConfigResponseMetadata
-    FIELDS = {
-      secret_status: 'secret_status'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      secret_status: lambda do |value|
-        ::OctridevDigitalocean::SecretStatus.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalWebhookSignatureConfigResponseMetadata
+  FIELDS = {
+    secret_status: "secret_status",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    secret_status: lambda do |value|
+      ::OctridevDigitalocean::SecretStatus.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for WebhookSignatureConfigResponse.
+# HMAC signature configuration as returned in API responses. The signing secret is never returned; `secret_status` indicates whether it is configured.
+class WebhookSignatureConfigResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalWebhookSignatureConfigResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalWebhookSignatureConfigResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalWebhookSignatureConfigResponseMetadata::DECODERS
+
+  # @return [SecretStatus] Present when a signing secret is configured. Omitted when not configured.
+  attr_reader :secret_status
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for WebhookSignatureConfigResponse.
-  # HMAC signature configuration as returned in API responses. The signing secret is never returned; `secret_status` indicates whether it is configured.
-  class WebhookSignatureConfigResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalWebhookSignatureConfigResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalWebhookSignatureConfigResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalWebhookSignatureConfigResponseMetadata::DECODERS
-
-    # @return [SecretStatus] Present when a signing secret is configured. Omitted when not configured.
-    attr_reader :secret_status
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

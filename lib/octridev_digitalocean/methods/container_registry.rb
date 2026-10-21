@@ -16,15 +16,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/registry',
+          "/v2/registry",
           config: config,
           return_type: ::OctridevDigitalocean::RegistryInfo,
           decoder: :json,
           operation_id: 'registry_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -47,23 +48,24 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_length('name', name, max: 63)
         Validation.validate_pattern('name', name, '^[a-z0-9-]{1,63}$')
 
         SdkClient.request(
           'POST',
-          '/v2/registry',
+          "/v2/registry",
           config: config,
           body: {
             'name' => name,
             'subscription_tier_slug' => subscription_tier_slug,
-            'region' => region
+            'region' => region,
           },
           return_type: ::OctridevDigitalocean::RegistryInfo,
           decoder: :json,
           operation_id: 'registry_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -74,14 +76,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
-          '/v2/registry',
+          "/v2/registry",
           config: config,
           decoder: :empty,
           operation_id: 'registry_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

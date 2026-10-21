@@ -26,20 +26,21 @@ module OctridevDigitalocean
         source_oci_ref:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/agents/templates',
+          "/v2/agents/templates",
           config: config,
           body: {
             'name' => name,
             'base_template' => base_template,
-            'source_oci_ref' => source_oci_ref
+            'source_oci_ref' => source_oci_ref,
           },
           return_type: ::OctridevDigitalocean::CreateTemplateResponse,
           decoder: :json,
           operation_id: 'harness_create_template',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

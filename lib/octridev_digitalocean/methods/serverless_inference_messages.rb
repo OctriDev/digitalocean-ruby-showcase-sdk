@@ -59,6 +59,7 @@ module OctridevDigitalocean
         thinking: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_range('max_tokens', max_tokens, min: 1)
 
         Validation.validate_items('messages', messages, min: 1)
@@ -69,7 +70,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          '/v1/messages',
+          "/v1/messages",
           config: config,
           body: {
             'model' => model,
@@ -86,13 +87,13 @@ module OctridevDigitalocean
             'metadata' => metadata,
             'reasoning_effort' => reasoning_effort,
             'speed' => speed,
-            'thinking' => thinking
+            'thinking' => thinking,
           },
           return_type: ::OctridevDigitalocean::MessagesCreateResponse,
           decoder: :json,
           operation_id: 'inference_create_messages',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::MessagesCreateErrorResponse, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::MessagesCreateErrorResponse, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -147,30 +148,28 @@ module OctridevDigitalocean
         request_options: nil,
         &block
       )
-        unless block
-          return enum_for(
-            __method__,
-            config: config,
-            model: model,
-            max_tokens: max_tokens,
-            messages: messages,
-            stream: stream,
-            system: system,
-            stop_sequences: stop_sequences,
-            temperature: temperature,
-            top_p: top_p,
-            top_k: top_k,
-            tools: tools,
-            tool_choice: tool_choice,
-            metadata: metadata,
-            reasoning_effort: reasoning_effort,
-            speed: speed,
-            thinking: thinking,
-            request_options: request_options
-          )
-        end
+    return enum_for(
+          __method__,
+          config: config,
+          model: model,
+          max_tokens: max_tokens,
+          messages: messages,
+          stream: stream,
+          system: system,
+          stop_sequences: stop_sequences,
+          temperature: temperature,
+          top_p: top_p,
+          top_k: top_k,
+          tools: tools,
+          tool_choice: tool_choice,
+          metadata: metadata,
+          reasoning_effort: reasoning_effort,
+          speed: speed,
+          thinking: thinking,
+          request_options: request_options,
+        ) unless block
         SdkClient.stream(
-          'POST', '/v1/messages',
+          'POST', "/v1/messages",
           config: config,
           body: {
             'model' => model,
@@ -187,17 +186,16 @@ module OctridevDigitalocean
             'metadata' => metadata,
             'reasoning_effort' => reasoning_effort,
             'speed' => speed,
-            'thinking' => thinking
+            'thinking' => thinking,
           },
           content_type: 'application/json',
           operation_id: 'inference_create_messages_stream',
           stream_format: :sse,
-          stream_media_type: 'text/event-stream',
+          stream_media_type: "text/event-stream",
           request_options: request_options,
           errors: { '400' => ::OctridevDigitalocean::MessagesCreateErrorResponse, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
         ).each do |ev|
           break if ev.data == '[DONE]'
-
           decoded = JSON.parse(ev.data)
           block.call(SdkClient.decode_event(decoded, ::OctridevDigitalocean::MessagesStreamEvent))
         end

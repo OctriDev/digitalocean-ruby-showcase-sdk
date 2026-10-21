@@ -29,13 +29,14 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          '/v2/vpc_nat_gateways',
+          "/v2/vpc_nat_gateways",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
@@ -43,13 +44,13 @@ module OctridevDigitalocean
             'state' => QueryValue.new(state, style: 'form', explode: true),
             'region' => QueryValue.new(region, style: 'form', explode: true),
             'type' => QueryValue.new(type, style: 'form', explode: true),
-            'name' => QueryValue.new(name, style: 'form', explode: true)
+            'name' => QueryValue.new(name, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::VpcNatGateways,
           decoder: :json,
           operation_id: 'vpcnatgateways_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -85,9 +86,10 @@ module OctridevDigitalocean
         egresses: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/vpc_nat_gateways',
+          "/v2/vpc_nat_gateways",
           config: config,
           body: {
             'name' => name,
@@ -98,13 +100,13 @@ module OctridevDigitalocean
             'udp_timeout_seconds' => udp_timeout_seconds,
             'icmp_timeout_seconds' => icmp_timeout_seconds,
             'tcp_timeout_seconds' => tcp_timeout_seconds,
-            'egresses' => egresses
+            'egresses' => egresses,
           },
           return_type: ::OctridevDigitalocean::VpcNatGatewayCreateResponse,
           decoder: :json,
           operation_id: 'vpcnatgateways_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -116,10 +118,11 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/vpc_nat_gateways/',
+            "/v2/vpc_nat_gateways/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -127,7 +130,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'vpcnatgateways_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -155,10 +158,11 @@ module OctridevDigitalocean
         tcp_timeout_seconds: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/vpc_nat_gateways/',
+            "/v2/vpc_nat_gateways/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -168,13 +172,13 @@ module OctridevDigitalocean
             'vpcs' => vpcs,
             'udp_timeout_seconds' => udp_timeout_seconds,
             'icmp_timeout_seconds' => icmp_timeout_seconds,
-            'tcp_timeout_seconds' => tcp_timeout_seconds
+            'tcp_timeout_seconds' => tcp_timeout_seconds,
           },
           return_type: ::OctridevDigitalocean::VpcNatGatewayUpdateResponse,
           decoder: :json,
           operation_id: 'vpcnatgateways_update',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -186,17 +190,18 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/v2/vpc_nat_gateways/',
+            "/v2/vpc_nat_gateways/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'vpcnatgateways_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

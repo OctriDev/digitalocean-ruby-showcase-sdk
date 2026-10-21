@@ -5,65 +5,65 @@
 
 # action_gateway_limit domain models
 module OctridevDigitalocean
-  # Defines the LimitCategory SDK namespace.
-  module LimitCategory
-    LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE = 'LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE'
-    LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE = 'LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE'
-    LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE =
-      'LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE'
-    LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE =
-      'LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE'
-    VALUES = %w[
-      LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE
-      LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE
-      LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the LimitCategory SDK namespace.
+module LimitCategory
+  LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE = 'LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE'
+  LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE = 'LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE'
+  LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE =
+    'LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE'
+  LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE =
+    'LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE'
+  VALUES = [
+    'LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE', 'LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE',
+    'LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE',
+    'LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalLimitOverrideMetadata
+  FIELDS = {
+    category: "category",
+    requests_per_minute: "requests_per_minute",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    category
+    requests_per_minute
+  ].freeze
+  DECODERS = {
+    category: lambda do |value|
+      ::OctridevDigitalocean::LimitCategory.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for LimitOverride.
+# Actor's limit for one category.
+class LimitOverride
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalLimitOverrideMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalLimitOverrideMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalLimitOverrideMetadata::DECODERS
+
+  # @return [LimitCategory] The category the limit applies to.
+  attr_reader :category
+  # @return [String] Calls allowed per minute. 0 blocks every call in the category.
+  attr_reader :requests_per_minute
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalLimitOverrideMetadata
-    FIELDS = {
-      category: 'category',
-      requests_per_minute: 'requests_per_minute'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      category
-      requests_per_minute
-    ].freeze
-    DECODERS = {
-      category: lambda do |value|
-        ::OctridevDigitalocean::LimitCategory.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for LimitOverride.
-  # Actor's limit for one category.
-  class LimitOverride
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalLimitOverrideMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalLimitOverrideMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalLimitOverrideMetadata::DECODERS
-
-    # @return [LimitCategory] The category the limit applies to.
-    attr_reader :category
-    # @return [String] Calls allowed per minute. 0 blocks every call in the category.
-    attr_reader :requests_per_minute
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

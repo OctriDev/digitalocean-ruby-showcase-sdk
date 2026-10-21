@@ -27,25 +27,26 @@ module OctridevDigitalocean
         volume_snapshots: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/destroy_with_associated_resources/selective'
+            "/destroy_with_associated_resources/selective"
           ].join,
           config: config,
           body: {
             'load_balancers' => load_balancers,
             'volumes' => volumes,
-            'volume_snapshots' => volume_snapshots
+            'volume_snapshots' => volume_snapshots,
           },
           decoder: :empty,
           operation_id: 'kubernetes_destroy_associated_resources_selective',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -19,22 +19,23 @@ module OctridevDigitalocean
         evaluation_test_case_version: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/evaluation_test_cases/',
+            "/v2/gen-ai/evaluation_test_cases/",
             SdkClient.encode_path_segment(evaluation_test_case_uuid),
-            '/evaluation_runs'
+            "/evaluation_runs"
           ].join,
           config: config,
           query: {
-            'evaluation_test_case_version' => QueryValue.new(evaluation_test_case_version, style: 'form', explode: true)
+            'evaluation_test_case_version' => QueryValue.new(evaluation_test_case_version, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ApiListEvaluationRunsByTestCaseOutput,
           decoder: :json,
           operation_id: 'genai_list_evaluation_runs_by_test_case',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

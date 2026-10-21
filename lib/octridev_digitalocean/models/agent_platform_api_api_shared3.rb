@@ -5,616 +5,633 @@
 
 # agent_platform_api_api domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiRerankingConfigurationMetadata
-    FIELDS = {
-      enabled: 'enabled',
-      model: 'model'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalApiRerankingConfigurationMetadata
+  FIELDS = {
+    enabled: "enabled",
+    model: "model",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiRerankingConfiguration.
+# Configuration for cross-encoder reranking during retrieval.
+class ApiRerankingConfiguration
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiRerankingConfigurationMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiRerankingConfigurationMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiRerankingConfigurationMetadata::DECODERS
+
+  # @return [Boolean] Whether reranking is enabled for retrieval
+  attr_reader :enabled
+  # @return [String] Reranker model internal name
+  attr_reader :model
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiRerankingConfiguration.
-  # Configuration for cross-encoder reranking during retrieval.
-  class ApiRerankingConfiguration
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiRerankingConfigurationMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiRerankingConfigurationMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiRerankingConfigurationMetadata::DECODERS
-
-    # @return [Boolean] Whether reranking is enabled for retrieval
-    attr_reader :enabled
-    # @return [String] Reranker model internal name
-    attr_reader :model
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiResourceUsageMetadata
-    FIELDS = {
-      measurements: 'measurements',
-      resource_uuid: 'resource_uuid',
-      start: 'start',
-      stop: 'stop'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      measurements: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiUsageMeasurement.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiResourceUsageMetadata
+  FIELDS = {
+    measurements: "measurements",
+    resource_uuid: "resource_uuid",
+    start: "start",
+    stop: "stop",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    measurements: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiUsageMeasurement.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ApiResourceUsage.
+# Resource Usage Description
+class ApiResourceUsage
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiResourceUsageMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiResourceUsageMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiResourceUsageMetadata::DECODERS
+
+  # @return [Array_of_ApiUsageMeasurement] Optional array value serialized in the `measurements` wire field.
+  attr_reader :measurements
+  # @return [String] Optional `string` value serialized in the `resource_uuid` wire field.
+  attr_reader :resource_uuid
+  # @return [String] Optional `date-time`-formatted value serialized in the `start` wire field.
+  attr_reader :start
+  # @return [String] Optional `date-time`-formatted value serialized in the `stop` wire field.
+  attr_reader :stop
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiResourceUsage.
-  # Resource Usage Description
-  class ApiResourceUsage
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiResourceUsageMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiResourceUsageMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiResourceUsageMetadata::DECODERS
-
-    # @return [Array_of_ApiUsageMeasurement] Optional array value serialized in the `measurements` wire field.
-    attr_reader :measurements
-    # @return [String] Optional `string` value serialized in the `resource_uuid` wire field.
-    attr_reader :resource_uuid
-    # @return [String] Optional `date-time`-formatted value serialized in the `start` wire field.
-    attr_reader :start
-    # @return [String] Optional `date-time`-formatted value serialized in the `stop` wire field.
-    attr_reader :stop
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ApiRetrievalMethod SDK namespace.
-  module ApiRetrievalMethod
-    RETRIEVAL_METHOD_UNKNOWN = 'RETRIEVAL_METHOD_UNKNOWN'
-    RETRIEVAL_METHOD_REWRITE = 'RETRIEVAL_METHOD_REWRITE'
-    RETRIEVAL_METHOD_STEP_BACK = 'RETRIEVAL_METHOD_STEP_BACK'
-    RETRIEVAL_METHOD_SUB_QUERIES = 'RETRIEVAL_METHOD_SUB_QUERIES'
-    RETRIEVAL_METHOD_NONE = 'RETRIEVAL_METHOD_NONE'
-    VALUES = %w[
-      RETRIEVAL_METHOD_UNKNOWN RETRIEVAL_METHOD_REWRITE RETRIEVAL_METHOD_STEP_BACK
-      RETRIEVAL_METHOD_SUB_QUERIES RETRIEVAL_METHOD_NONE
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ApiRetrievalMethod SDK namespace.
+module ApiRetrievalMethod
+  RETRIEVAL_METHOD_UNKNOWN = 'RETRIEVAL_METHOD_UNKNOWN'
+  RETRIEVAL_METHOD_REWRITE = 'RETRIEVAL_METHOD_REWRITE'
+  RETRIEVAL_METHOD_STEP_BACK = 'RETRIEVAL_METHOD_STEP_BACK'
+  RETRIEVAL_METHOD_SUB_QUERIES = 'RETRIEVAL_METHOD_SUB_QUERIES'
+  RETRIEVAL_METHOD_NONE = 'RETRIEVAL_METHOD_NONE'
+  VALUES = [
+    'RETRIEVAL_METHOD_UNKNOWN', 'RETRIEVAL_METHOD_REWRITE', 'RETRIEVAL_METHOD_STEP_BACK',
+    'RETRIEVAL_METHOD_SUB_QUERIES', 'RETRIEVAL_METHOD_NONE'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiRetrieverSpanMetadata
+  FIELDS = {
+    common: "common",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    common: lambda do |value|
+      ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiRetrieverSpan.
+# Retriever span
+class ApiRetrieverSpan
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiRetrieverSpanMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiRetrieverSpanMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiRetrieverSpanMetadata::DECODERS
+
+  # @return [ApiSpanCommon] Common optional fields shared by all span types
+  attr_reader :common
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiRetrieverSpanMetadata
-    FIELDS = {
-      common: 'common'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      common: lambda do |value|
-        ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiRetrieverSpan.
-  # Retriever span
-  class ApiRetrieverSpan
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiRetrieverSpanMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiRetrieverSpanMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiRetrieverSpanMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiSpanCommon] Common optional fields shared by all span types
-    attr_reader :common
+# Internal model hydration metadata.
+class SdkInternalApiScheduledIndexingInfoMetadata
+  FIELDS = {
+    created_at: "created_at",
+    days: "days",
+    deleted_at: "deleted_at",
+    is_active: "is_active",
+    knowledge_base_uuid: "knowledge_base_uuid",
+    last_ran_at: "last_ran_at",
+    next_run_at: "next_run_at",
+    time: "time",
+    updated_at: "updated_at",
+    uuid: "uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiScheduledIndexingInfo.
+# Metadata for scheduled indexing entries
+class ApiScheduledIndexingInfo
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiScheduledIndexingInfoMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiScheduledIndexingInfoMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiScheduledIndexingInfoMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Created at timestamp
+  attr_reader :created_at
+  # @return [Array_of_Integer] Days for execution (day is represented same as in a cron expression, e.g. Monday begins with 1 )
+  attr_reader :days
+  # @return [String] Deleted at timestamp (if soft deleted)
+  attr_reader :deleted_at
+  # @return [Boolean] Whether the schedule is currently active
+  attr_reader :is_active
+  # @return [String] Knowledge base uuid associated with this schedule
+  attr_reader :knowledge_base_uuid
+  # @return [String] Last time the schedule was executed
+  attr_reader :last_ran_at
+  # @return [String] Next scheduled run
+  attr_reader :next_run_at
+  # @return [String] Scheduled time of execution (HH:MM:SS format)
+  attr_reader :time
+  # @return [String] Updated at timestamp
+  attr_reader :updated_at
+  # @return [String] Unique identifier for the scheduled indexing entry
+  attr_reader :uuid
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiScheduledIndexingInfoMetadata
-    FIELDS = {
-      created_at: 'created_at',
-      days: 'days',
-      deleted_at: 'deleted_at',
-      is_active: 'is_active',
-      knowledge_base_uuid: 'knowledge_base_uuid',
-      last_ran_at: 'last_ran_at',
-      next_run_at: 'next_run_at',
-      time: 'time',
-      updated_at: 'updated_at',
-      uuid: 'uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiScheduledIndexingInfo.
-  # Metadata for scheduled indexing entries
-  class ApiScheduledIndexingInfo
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiScheduledIndexingInfoMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiScheduledIndexingInfoMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiScheduledIndexingInfoMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Created at timestamp
-    attr_reader :created_at
-    # @return [Array_of_Integer] Days for execution (day is represented same as in a cron expression, e.g. Monday begins with 1 )
-    attr_reader :days
-    # @return [String] Deleted at timestamp (if soft deleted)
-    attr_reader :deleted_at
-    # @return [Boolean] Whether the schedule is currently active
-    attr_reader :is_active
-    # @return [String] Knowledge base uuid associated with this schedule
-    attr_reader :knowledge_base_uuid
-    # @return [String] Last time the schedule was executed
-    attr_reader :last_ran_at
-    # @return [String] Next scheduled run
-    attr_reader :next_run_at
-    # @return [String] Scheduled time of execution (HH:MM:SS format)
-    attr_reader :time
-    # @return [String] Updated at timestamp
-    attr_reader :updated_at
-    # @return [String] Unique identifier for the scheduled indexing entry
-    attr_reader :uuid
+# Defines the ApiSortDirection SDK namespace.
+module ApiSortDirection
+  SORT_DIRECTION_UNSPECIFIED = 'SORT_DIRECTION_UNSPECIFIED'
+  SORT_DIRECTION_ASC = 'SORT_DIRECTION_ASC'
+  SORT_DIRECTION_DESC = 'SORT_DIRECTION_DESC'
+  VALUES = ['SORT_DIRECTION_UNSPECIFIED', 'SORT_DIRECTION_ASC', 'SORT_DIRECTION_DESC'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalApiSpacesDataSourceMetadata
+  FIELDS = {
+    bucket_name: "bucket_name",
+    item_path: "item_path",
+    region: "region",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for ApiSpacesDataSource.
+# Spaces Bucket Data Source
+class ApiSpacesDataSource
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSpacesDataSourceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSpacesDataSourceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSpacesDataSourceMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [String] Spaces bucket name
+  attr_reader :bucket_name
+  # @return [String] Optional `string` value serialized in the `item_path` wire field.
+  attr_reader :item_path
+  # @return [String] Region of bucket
+  attr_reader :region
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ApiSortDirection SDK namespace.
-  module ApiSortDirection
-    SORT_DIRECTION_UNSPECIFIED = 'SORT_DIRECTION_UNSPECIFIED'
-    SORT_DIRECTION_ASC = 'SORT_DIRECTION_ASC'
-    SORT_DIRECTION_DESC = 'SORT_DIRECTION_DESC'
-    VALUES = %w[SORT_DIRECTION_UNSPECIFIED SORT_DIRECTION_ASC SORT_DIRECTION_DESC].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiSpacesDataSourceMetadata
-    FIELDS = {
-      bucket_name: 'bucket_name',
-      item_path: 'item_path',
-      region: 'region'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiSpanCommonMetadata
+  FIELDS = {
+    created_at: "created_at",
+    duration_ns: "duration_ns",
+    metadata: "metadata",
+    status_code: "status_code",
+    tags: "tags",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiSpanCommon.
+# Common optional fields shared by all span types
+class ApiSpanCommon
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiSpanCommonMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiSpanCommonMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiSpanCommonMetadata::DECODERS
+
+  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+  attr_reader :created_at
+  # @return [String] Optional `int64`-formatted value serialized in the `duration_ns` wire field.
+  attr_reader :duration_ns
+  # @return [Hash] Arbitrary structured metadata
+  attr_reader :metadata
+  # @return [Integer] Optional `int32`-formatted value serialized in the `status_code` wire field.
+  attr_reader :status_code
+  # @return [Array_of_String] Free-form tags for filtering/grouping
+  attr_reader :tags
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiSpacesDataSource.
-  # Spaces Bucket Data Source
-  class ApiSpacesDataSource
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSpacesDataSourceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSpacesDataSourceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSpacesDataSourceMetadata::DECODERS
-
-    # @return [String] Spaces bucket name
-    attr_reader :bucket_name
-    # @return [String] Optional `string` value serialized in the `item_path` wire field.
-    attr_reader :item_path
-    # @return [String] Region of bucket
-    attr_reader :region
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiSpanCommonMetadata
-    FIELDS = {
-      created_at: 'created_at',
-      duration_ns: 'duration_ns',
-      metadata: 'metadata',
-      status_code: 'status_code',
-      tags: 'tags'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiToolSpanMetadata
+  FIELDS = {
+    common: "common",
+    tool_call_id: "tool_call_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    common: lambda do |value|
+      ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiToolSpan.
+# Tool span
+class ApiToolSpan
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiToolSpanMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiToolSpanMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiToolSpanMetadata::DECODERS
+
+  # @return [ApiSpanCommon] Common optional fields shared by all span types
+  attr_reader :common
+  # @return [String] Optional `string` value serialized in the `tool_call_id` wire field.
+  attr_reader :tool_call_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiSpanCommon.
-  # Common optional fields shared by all span types
-  class ApiSpanCommon
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiSpanCommonMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiSpanCommonMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiSpanCommonMetadata::DECODERS
-
-    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-    attr_reader :created_at
-    # @return [String] Optional `int64`-formatted value serialized in the `duration_ns` wire field.
-    attr_reader :duration_ns
-    # @return [Hash] Arbitrary structured metadata
-    attr_reader :metadata
-    # @return [Integer] Optional `int32`-formatted value serialized in the `status_code` wire field.
-    attr_reader :status_code
-    # @return [Array_of_String] Free-form tags for filtering/grouping
-    attr_reader :tags
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiToolSpanMetadata
-    FIELDS = {
-      common: 'common',
-      tool_call_id: 'tool_call_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      common: lambda do |value|
-        ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiTraceSpanMetadata
+  FIELDS = {
+    agent: "agent",
+    created_at: "created_at",
+    input: "input",
+    llm: "llm",
+    name: "name",
+    output: "output",
+    retriever: "retriever",
+    tool: "tool",
+    type: "type",
+    workflow: "workflow",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    agent: lambda do |value|
+      ::OctridevDigitalocean::ApiAgentSpan.from_hash(value)
+    end,
+    llm: lambda do |value|
+      ::OctridevDigitalocean::ApiLLMSpan.from_hash(value)
+    end,
+    retriever: lambda do |value|
+      ::OctridevDigitalocean::ApiRetrieverSpan.from_hash(value)
+    end,
+    tool: lambda do |value|
+      ::OctridevDigitalocean::ApiToolSpan.from_hash(value)
+    end,
+    type: lambda do |value|
+      ::OctridevDigitalocean::ApiTraceSpanType.from_value(value)
+    end,
+    workflow: lambda do |value|
+      ::OctridevDigitalocean::ApiWorkflowSpan.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiTraceSpan.
+# Represents a span within a trace (e.g., LLM call, tool call, etc.)
+class ApiTraceSpan
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiTraceSpanMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiTraceSpanMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiTraceSpanMetadata::DECODERS
+
+  # @return [ApiAgentSpan] Optional object value serialized in the `agent` wire field.
+  attr_reader :agent
+  # @return [String] When the span was created
+  attr_reader :created_at
+  # @return [Hash] Input data for the span (flexible structure - can be messages array, string, etc.)
+  attr_reader :input
+  # @return [ApiLLMSpan] LLM span
+  attr_reader :llm
+  # @return [String] Name/identifier for the span
+  attr_reader :name
+  # @return [Hash] Output data from the span (flexible structure - can be message, string, etc.)
+  attr_reader :output
+  # @return [ApiRetrieverSpan] Retriever span
+  attr_reader :retriever
+  # @return [ApiToolSpan] Tool span
+  attr_reader :tool
+  # @return [ApiTraceSpanType] Types of spans in a trace
+  attr_reader :type
+  # @return [ApiWorkflowSpan] Workflow span - can contain child spans (agent, llm, tool, retriever)
+  attr_reader :workflow
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiToolSpan.
-  # Tool span
-  class ApiToolSpan
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiToolSpanMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiToolSpanMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiToolSpanMetadata::DECODERS
-
-    # @return [ApiSpanCommon] Common optional fields shared by all span types
-    attr_reader :common
-    # @return [String] Optional `string` value serialized in the `tool_call_id` wire field.
-    attr_reader :tool_call_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiTraceSpanMetadata
-    FIELDS = {
-      agent: 'agent',
-      created_at: 'created_at',
-      input: 'input',
-      llm: 'llm',
-      name: 'name',
-      output: 'output',
-      retriever: 'retriever',
-      tool: 'tool',
-      type: 'type',
-      workflow: 'workflow'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      agent: lambda do |value|
-        ::OctridevDigitalocean::ApiAgentSpan.from_hash(value)
-      end,
-      llm: lambda do |value|
-        ::OctridevDigitalocean::ApiLLMSpan.from_hash(value)
-      end,
-      retriever: lambda do |value|
-        ::OctridevDigitalocean::ApiRetrieverSpan.from_hash(value)
-      end,
-      tool: lambda do |value|
-        ::OctridevDigitalocean::ApiToolSpan.from_hash(value)
-      end,
-      type: lambda do |value|
-        ::OctridevDigitalocean::ApiTraceSpanType.from_value(value)
-      end,
-      workflow: lambda do |value|
-        ::OctridevDigitalocean::ApiWorkflowSpan.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiUsageMeasurementMetadata
+  FIELDS = {
+    tokens: "tokens",
+    usage_type: "usage_type",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiUsageMeasurement.
+# Usage Measurement Description
+class ApiUsageMeasurement
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUsageMeasurementMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUsageMeasurementMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUsageMeasurementMetadata::DECODERS
+
+  # @return [Integer] Optional `int64`-formatted value serialized in the `tokens` wire field.
+  attr_reader :tokens
+  # @return [String] Optional `string` value serialized in the `usage_type` wire field.
+  attr_reader :usage_type
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiTraceSpan.
-  # Represents a span within a trace (e.g., LLM call, tool call, etc.)
-  class ApiTraceSpan
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiTraceSpanMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiTraceSpanMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiTraceSpanMetadata::DECODERS
-
-    # @return [ApiAgentSpan] Optional object value serialized in the `agent` wire field.
-    attr_reader :agent
-    # @return [String] When the span was created
-    attr_reader :created_at
-    # @return [Hash] Input data for the span (flexible structure - can be messages array, string, etc.)
-    attr_reader :input
-    # @return [ApiLLMSpan] LLM span
-    attr_reader :llm
-    # @return [String] Name/identifier for the span
-    attr_reader :name
-    # @return [Hash] Output data from the span (flexible structure - can be message, string, etc.)
-    attr_reader :output
-    # @return [ApiRetrieverSpan] Retriever span
-    attr_reader :retriever
-    # @return [ApiToolSpan] Tool span
-    attr_reader :tool
-    # @return [ApiTraceSpanType] Types of spans in a trace
-    attr_reader :type
-    # @return [ApiWorkflowSpan] Workflow span - can contain child spans (agent, llm, tool, retriever)
-    attr_reader :workflow
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUsageMeasurementMetadata
-    FIELDS = {
-      tokens: 'tokens',
-      usage_type: 'usage_type'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiWebCrawlerDataSourceMetadata
+  FIELDS = {
+    base_url: "base_url",
+    crawling_option: "crawling_option",
+    embed_media: "embed_media",
+    exclude_tags: "exclude_tags",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    crawling_option: lambda do |value|
+      ::OctridevDigitalocean::ApiCrawlingOption.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiWebCrawlerDataSource.
+# WebCrawlerDataSource
+class ApiWebCrawlerDataSource
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiWebCrawlerDataSourceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiWebCrawlerDataSourceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiWebCrawlerDataSourceMetadata::DECODERS
+
+  # @return [String] The base url to crawl.
+  attr_reader :base_url
+  # @return [ApiCrawlingOption] Options for specifying how URLs found on pages should be handled. - UNKNOWN: Default unknown value - SCOPED: Only include the base URL. - PATH: Crawl the base URL and linked pages within the URL path. - DOMAIN: Crawl the base URL and linked pages within the same domain. - SUBDOMAINS: Crawl the base URL and linked pages for any subdomain. - SITEMAP: Crawl URLs discovered in the sitemap.
+  attr_reader :crawling_option
+  # @return [Boolean] Whether to ingest and index media (images, etc.) on web pages.
+  attr_reader :embed_media
+  # @return [Array_of_String] Declaring which tags to exclude in web pages while webcrawling
+  attr_reader :exclude_tags
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiUsageMeasurement.
-  # Usage Measurement Description
-  class ApiUsageMeasurement
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUsageMeasurementMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUsageMeasurementMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUsageMeasurementMetadata::DECODERS
-
-    # @return [Integer] Optional `int64`-formatted value serialized in the `tokens` wire field.
-    attr_reader :tokens
-    # @return [String] Optional `string` value serialized in the `usage_type` wire field.
-    attr_reader :usage_type
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiWebCrawlerDataSourceMetadata
-    FIELDS = {
-      base_url: 'base_url',
-      crawling_option: 'crawling_option',
-      embed_media: 'embed_media',
-      exclude_tags: 'exclude_tags'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      crawling_option: lambda do |value|
-        ::OctridevDigitalocean::ApiCrawlingOption.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiWorkflowSpanMetadata
+  FIELDS = {
+    common: "common",
+    spans: "spans",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    common: lambda do |value|
+      ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
+    end,
+    spans: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiTraceSpan.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ApiWorkflowSpan.
+# Workflow span - can contain child spans (agent, llm, tool, retriever)
+class ApiWorkflowSpan
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiWorkflowSpanMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiWorkflowSpanMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiWorkflowSpanMetadata::DECODERS
+
+  # @return [ApiSpanCommon] Common optional fields shared by all span types
+  attr_reader :common
+  # @return [Array_of_ApiTraceSpan] Child spans - must contain between 1 and 999 spans Allowed types: agent, llm, tool, retriever (not workflow)
+  attr_reader :spans
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiWebCrawlerDataSource.
-  # WebCrawlerDataSource
-  class ApiWebCrawlerDataSource
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiWebCrawlerDataSourceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiWebCrawlerDataSourceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiWebCrawlerDataSourceMetadata::DECODERS
-
-    # @return [String] The base url to crawl.
-    attr_reader :base_url
-    # @return [ApiCrawlingOption] Options for specifying how URLs found on pages should be handled. - UNKNOWN: Default unknown value - SCOPED: Only include the base URL. - PATH: Crawl the base URL and linked pages within the URL path. - DOMAIN: Crawl the base URL and linked pages within the same domain. - SUBDOMAINS: Crawl the base URL and linked pages for any subdomain. - SITEMAP: Crawl URLs discovered in the sitemap.
-    attr_reader :crawling_option
-    # @return [Boolean] Whether to ingest and index media (images, etc.) on web pages.
-    attr_reader :embed_media
-    # @return [Array_of_String] Declaring which tags to exclude in web pages while webcrawling
-    attr_reader :exclude_tags
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiWorkflowSpanMetadata
-    FIELDS = {
-      common: 'common',
-      spans: 'spans'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      common: lambda do |value|
-        ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
-      end,
-      spans: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiTraceSpan.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiWorkspaceMetadata
+  FIELDS = {
+    agents: "agents",
+    created_at: "created_at",
+    created_by: "created_by",
+    created_by_email: "created_by_email",
+    deleted_at: "deleted_at",
+    description: "description",
+    evaluation_test_cases: "evaluation_test_cases",
+    name: "name",
+    updated_at: "updated_at",
+    uuid: "uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    agents: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
+    end,
+    evaluation_test_cases: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationTestCase.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ApiWorkspace.
+# Typed representation of the `ApiWorkspace` API schema.
+class ApiWorkspace
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiWorkspaceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiWorkspaceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiWorkspaceMetadata::DECODERS
+
+  # @return [Array_of_ApiAgent] Agents
+  attr_reader :agents
+  # @return [String] Creation date
+  attr_reader :created_at
+  # @return [String] The id of user who created this workspace
+  attr_reader :created_by
+  # @return [String] The email of the user who created this workspace
+  attr_reader :created_by_email
+  # @return [String] Deleted date
+  attr_reader :deleted_at
+  # @return [String] Description of the workspace
+  attr_reader :description
+  # @return [Array_of_ApiEvaluationTestCase] Evaluations
+  attr_reader :evaluation_test_cases
+  # @return [String] Name of the workspace
+  attr_reader :name
+  # @return [String] Update date
+  attr_reader :updated_at
+  # @return [String] Unique id
+  attr_reader :uuid
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiWorkflowSpan.
-  # Workflow span - can contain child spans (agent, llm, tool, retriever)
-  class ApiWorkflowSpan
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiWorkflowSpanMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiWorkflowSpanMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiWorkflowSpanMetadata::DECODERS
-
-    # @return [ApiSpanCommon] Common optional fields shared by all span types
-    attr_reader :common
-    # @return [Array_of_ApiTraceSpan] Child spans - must contain between 1 and 999 spans Allowed types: agent, llm, tool, retriever (not workflow)
-    attr_reader :spans
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiWorkspaceMetadata
-    FIELDS = {
-      agents: 'agents',
-      created_at: 'created_at',
-      created_by: 'created_by',
-      created_by_email: 'created_by_email',
-      deleted_at: 'deleted_at',
-      description: 'description',
-      evaluation_test_cases: 'evaluation_test_cases',
-      name: 'name',
-      updated_at: 'updated_at',
-      uuid: 'uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      agents: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
-      end,
-      evaluation_test_cases: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationTestCase.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for ApiWorkspace.
-  # Typed representation of the `ApiWorkspace` API schema.
-  class ApiWorkspace
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiWorkspaceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiWorkspaceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiWorkspaceMetadata::DECODERS
-
-    # @return [Array_of_ApiAgent] Agents
-    attr_reader :agents
-    # @return [String] Creation date
-    attr_reader :created_at
-    # @return [String] The id of user who created this workspace
-    attr_reader :created_by
-    # @return [String] The email of the user who created this workspace
-    attr_reader :created_by_email
-    # @return [String] Deleted date
-    attr_reader :deleted_at
-    # @return [String] Description of the workspace
-    attr_reader :description
-    # @return [Array_of_ApiEvaluationTestCase] Evaluations
-    attr_reader :evaluation_test_cases
-    # @return [String] Name of the workspace
-    attr_reader :name
-    # @return [String] Update date
-    attr_reader :updated_at
-    # @return [String] Unique id
-    attr_reader :uuid
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

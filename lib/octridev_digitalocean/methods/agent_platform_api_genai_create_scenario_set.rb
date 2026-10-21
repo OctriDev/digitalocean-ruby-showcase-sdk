@@ -23,20 +23,21 @@ module OctridevDigitalocean
         scenarios: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/gen-ai/scenario_sets',
+          "/v2/gen-ai/scenario_sets",
           config: config,
           body: {
             'file_upload_scenario_set' => file_upload_scenario_set,
             'name' => name,
-            'scenarios' => scenarios
+            'scenarios' => scenarios,
           },
           return_type: ::OctridevDigitalocean::ApiCreateScenarioSetOutput,
           decoder: :json,
           operation_id: 'genai_create_scenario_set',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -5,148 +5,156 @@
 
 # agent_platform_api_api_dropbox domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiDropboxDataSourceMetadata
-    FIELDS = {
-      folder: 'folder',
-      refresh_token: 'refresh_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalApiDropboxDataSourceMetadata
+  FIELDS = {
+    folder: "folder",
+    refresh_token: "refresh_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiDropboxDataSource.
+# Dropbox Data Source
+class ApiDropboxDataSource
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiDropboxDataSourceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiDropboxDataSourceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiDropboxDataSourceMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `folder` wire field.
+  attr_reader :folder
+  # @return [String] Refresh token. you can obrain a refresh token by following the oauth2 flow. see /v2/gen-ai/oauth2/dropbox/tokens for reference.
+  attr_reader :refresh_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiDropboxDataSource.
-  # Dropbox Data Source
-  class ApiDropboxDataSource
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiDropboxDataSourceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiDropboxDataSourceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiDropboxDataSourceMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `folder` wire field.
-    attr_reader :folder
-    # @return [String] Refresh token. you can obrain a refresh token by following the oauth2 flow. see /v2/gen-ai/oauth2/dropbox/tokens for reference.
-    attr_reader :refresh_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiDropboxDataSourceDisplayMetadata
-    FIELDS = {
-      folder: 'folder'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiDropboxDataSourceDisplayMetadata
+  FIELDS = {
+    folder: "folder",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiDropboxDataSourceDisplay.
+# Dropbox Data Source for Display
+class ApiDropboxDataSourceDisplay
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiDropboxDataSourceDisplayMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiDropboxDataSourceDisplayMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiDropboxDataSourceDisplayMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `folder` wire field.
+  attr_reader :folder
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiDropboxDataSourceDisplay.
-  # Dropbox Data Source for Display
-  class ApiDropboxDataSourceDisplay
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiDropboxDataSourceDisplayMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiDropboxDataSourceDisplayMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiDropboxDataSourceDisplayMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `folder` wire field.
-    attr_reader :folder
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiDropboxOauth2GetTokensInputMetadata
-    FIELDS = {
-      code: 'code',
-      redirect_url: 'redirect_url'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiDropboxOauth2GetTokensInputMetadata
+  FIELDS = {
+    code: "code",
+    redirect_url: "redirect_url",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiDropboxOauth2GetTokensInput.
+# The oauth2 code from google
+class ApiDropboxOauth2GetTokensInput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiDropboxOauth2GetTokensInputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiDropboxOauth2GetTokensInputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiDropboxOauth2GetTokensInputMetadata::DECODERS
+
+  # @return [String] The oauth2 code from google
+  attr_reader :code
+  # @return [String] Redirect url
+  attr_reader :redirect_url
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiDropboxOauth2GetTokensInput.
-  # The oauth2 code from google
-  class ApiDropboxOauth2GetTokensInput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiDropboxOauth2GetTokensInputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiDropboxOauth2GetTokensInputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiDropboxOauth2GetTokensInputMetadata::DECODERS
-
-    # @return [String] The oauth2 code from google
-    attr_reader :code
-    # @return [String] Redirect url
-    attr_reader :redirect_url
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiDropboxOauth2GetTokensOutputMetadata
-    FIELDS = {
-      refresh_token: 'refresh_token',
-      token: 'token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiDropboxOauth2GetTokensOutputMetadata
+  FIELDS = {
+    refresh_token: "refresh_token",
+    token: "token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiDropboxOauth2GetTokensOutput.
+# The dropbox oauth2 token and refresh token
+class ApiDropboxOauth2GetTokensOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiDropboxOauth2GetTokensOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiDropboxOauth2GetTokensOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiDropboxOauth2GetTokensOutputMetadata::DECODERS
+
+  # @return [String] The refresh token
+  attr_reader :refresh_token
+  # @return [String] The access token
+  attr_reader :token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiDropboxOauth2GetTokensOutput.
-  # The dropbox oauth2 token and refresh token
-  class ApiDropboxOauth2GetTokensOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiDropboxOauth2GetTokensOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiDropboxOauth2GetTokensOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiDropboxOauth2GetTokensOutputMetadata::DECODERS
-
-    # @return [String] The refresh token
-    attr_reader :refresh_token
-    # @return [String] The access token
-    attr_reader :token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

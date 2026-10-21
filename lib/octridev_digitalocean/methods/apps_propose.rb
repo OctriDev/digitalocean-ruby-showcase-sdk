@@ -21,19 +21,20 @@ module OctridevDigitalocean
         app_id: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/apps/propose',
+          "/v2/apps/propose",
           config: config,
           body: {
             'spec' => spec,
-            'app_id' => app_id
+            'app_id' => app_id,
           },
           return_type: ::OctridevDigitalocean::AppProposeResponse,
           decoder: :json,
           operation_id: 'apps_validate_app_spec',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

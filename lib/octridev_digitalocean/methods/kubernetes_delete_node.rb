@@ -34,6 +34,7 @@ module OctridevDigitalocean
         replace: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.validate_uuid('node_pool_id', node_pool_id)
@@ -47,22 +48,22 @@ module OctridevDigitalocean
         SdkClient.request(
           'DELETE',
           [
-            '/v2/kubernetes/clusters/',
+            "/v2/kubernetes/clusters/",
             SdkClient.encode_path_segment(cluster_id),
-            '/node_pools/',
+            "/node_pools/",
             SdkClient.encode_path_segment(node_pool_id),
-            '/nodes/',
+            "/nodes/",
             SdkClient.encode_path_segment(node_id)
           ].join,
           config: config,
           query: {
             'skip_drain' => QueryValue.new(skip_drain, style: 'form', explode: true),
-            'replace' => QueryValue.new(replace, style: 'form', explode: true)
+            'replace' => QueryValue.new(replace, style: 'form', explode: true),
           },
           decoder: :empty,
           operation_id: 'kubernetes_delete_node',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -16,15 +16,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/registry/subscription',
+          "/v2/registry/subscription",
           config: config,
           return_type: ::OctridevDigitalocean::SubscriptionResponse,
           decoder: :json,
           operation_id: 'registry_get_subscription',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -39,18 +40,19 @@ module OctridevDigitalocean
         tier_slug: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/registry/subscription',
+          "/v2/registry/subscription",
           config: config,
           body: {
-            'tier_slug' => tier_slug
+            'tier_slug' => tier_slug,
           },
           return_type: ::OctridevDigitalocean::SubscriptionResponse,
           decoder: :json,
           operation_id: 'registry_update_subscription',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

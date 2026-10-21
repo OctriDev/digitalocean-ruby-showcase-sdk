@@ -12,13 +12,14 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalSshKeysUpdateMetadata
         FIELDS = {
-          name: 'name'
+          name: "name",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           name: lambda do |value|
             ::OctridevDigitalocean::SshKeyName.from_value(value)
-          end
+          end,
         }.freeze
       end
 
@@ -56,23 +57,24 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          '/v2/account/keys',
+          "/v2/account/keys",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::SshKeysAll,
           decoder: :json,
           operation_id: 'ssh_keys_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -89,19 +91,20 @@ module OctridevDigitalocean
         name:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/account/keys',
+          "/v2/account/keys",
           config: config,
           body: {
             'public_key' => public_key,
-            'name' => name
+            'name' => name,
           },
           return_type: ::OctridevDigitalocean::SshKeysNew,
           decoder: :json,
           operation_id: 'ssh_keys_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -114,10 +117,11 @@ module OctridevDigitalocean
         ssh_key_identifier:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/account/keys/',
+            "/v2/account/keys/",
             SdkClient.encode_path_segment(ssh_key_identifier)
           ].join,
           config: config,
@@ -125,7 +129,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'ssh_keys_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -141,21 +145,22 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/account/keys/',
+            "/v2/account/keys/",
             SdkClient.encode_path_segment(ssh_key_identifier)
           ].join,
           config: config,
           body: {
-            'name' => name
+            'name' => name,
           },
           return_type: ::OctridevDigitalocean::SshKeysExisting,
           decoder: :json,
           operation_id: 'ssh_keys_update',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -168,17 +173,18 @@ module OctridevDigitalocean
         ssh_key_identifier:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/v2/account/keys/',
+            "/v2/account/keys/",
             SdkClient.encode_path_segment(ssh_key_identifier)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'ssh_keys_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

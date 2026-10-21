@@ -5,519 +5,526 @@
 
 # batch_inference domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalBatchRequestCountsMetadata
-    FIELDS = {
-      total: 'total',
-      completed: 'completed',
-      failed: 'failed'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalBatchRequestCountsMetadata
+  FIELDS = {
+    total: "total",
+    completed: "completed",
+    failed: "failed",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BatchRequestCounts.
+# Aggregate request counts.
+class BatchRequestCounts
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchRequestCountsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchRequestCountsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchRequestCountsMetadata::DECODERS
+
+  # @return [Integer] Optional `integer` value serialized in the `total` wire field.
+  attr_reader :total
+  # @return [Integer] Optional `integer` value serialized in the `completed` wire field.
+  attr_reader :completed
+  # @return [Integer] Optional `integer` value serialized in the `failed` wire field.
+  attr_reader :failed
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchRequestCounts.
-  # Aggregate request counts.
-  class BatchRequestCounts
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchRequestCountsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchRequestCountsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchRequestCountsMetadata::DECODERS
-
-    # @return [Integer] Optional `integer` value serialized in the `total` wire field.
-    attr_reader :total
-    # @return [Integer] Optional `integer` value serialized in the `completed` wire field.
-    attr_reader :completed
-    # @return [Integer] Optional `integer` value serialized in the `failed` wire field.
-    attr_reader :failed
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchErrorsItemMetadata
-    FIELDS = {
-      code: 'code',
-      message: 'message',
-      line: 'line'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchErrorsItemMetadata
+  FIELDS = {
+    code: "code",
+    message: "message",
+    line: "line",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BatchErrorsItem.
+# Required object value serialized in the `errors[]` wire field.
+class BatchErrorsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchErrorsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchErrorsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchErrorsItemMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `code` wire field.
+  attr_reader :code
+  # @return [String] Optional `string` value serialized in the `message` wire field.
+  attr_reader :message
+  # @return [Integer] 1-based JSONL line number, if applicable.
+  attr_reader :line
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchErrorsItem.
-  # Required object value serialized in the `errors[]` wire field.
-  class BatchErrorsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchErrorsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchErrorsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchErrorsItemMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `code` wire field.
-    attr_reader :code
-    # @return [String] Optional `string` value serialized in the `message` wire field.
-    attr_reader :message
-    # @return [Integer] 1-based JSONL line number, if applicable.
-    attr_reader :line
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchMetadata
-    FIELDS = {
-      batch_id: 'batch_id',
-      status: 'status',
-      provider: 'provider',
-      endpoint: 'endpoint',
-      completion_window: 'completion_window',
-      input_file_id: 'input_file_id',
-      output_file_id: 'output_file_id',
-      error_file_id: 'error_file_id',
-      request_counts: 'request_counts',
-      request_id: 'request_id',
-      metadata: 'metadata',
-      errors: 'errors',
-      created_at: 'created_at',
-      in_progress_at: 'in_progress_at',
-      finalizing_at: 'finalizing_at',
-      completed_at: 'completed_at',
-      expires_at: 'expires_at',
-      cancelled_at: 'cancelled_at',
-      failed_at: 'failed_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      batch_id
-      status
-      provider
-      completion_window
-      input_file_id
-      created_at
-    ].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::BatchStatus.from_value(value)
-      end,
-      provider: lambda do |value|
-        ::OctridevDigitalocean::BatchProvider.from_value(value)
-      end,
-      completion_window: lambda do |value|
-        ::OctridevDigitalocean::BatchCompletionWindow.from_value(value)
-      end,
-      request_counts: lambda do |value|
-        ::OctridevDigitalocean::BatchRequestCounts.from_hash(value)
-      end,
-      errors: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::BatchErrorsItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchMetadata
+  FIELDS = {
+    batch_id: "batch_id",
+    status: "status",
+    provider: "provider",
+    endpoint: "endpoint",
+    completion_window: "completion_window",
+    input_file_id: "input_file_id",
+    output_file_id: "output_file_id",
+    error_file_id: "error_file_id",
+    request_counts: "request_counts",
+    request_id: "request_id",
+    metadata: "metadata",
+    errors: "errors",
+    created_at: "created_at",
+    in_progress_at: "in_progress_at",
+    finalizing_at: "finalizing_at",
+    completed_at: "completed_at",
+    expires_at: "expires_at",
+    cancelled_at: "cancelled_at",
+    failed_at: "failed_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    batch_id
+    status
+    provider
+    completion_window
+    input_file_id
+    created_at
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::BatchStatus.from_value(value)
+    end,
+    provider: lambda do |value|
+      ::OctridevDigitalocean::BatchProvider.from_value(value)
+    end,
+    completion_window: lambda do |value|
+      ::OctridevDigitalocean::BatchCompletionWindow.from_value(value)
+    end,
+    request_counts: lambda do |value|
+      ::OctridevDigitalocean::BatchRequestCounts.from_hash(value)
+    end,
+    errors: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::BatchErrorsItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for Batch.
+# A Batch Inference job.
+class Batch
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchMetadata::DECODERS
+
+  # @return [String] Unique identifier for the batch job.
+  attr_reader :batch_id
+  # @return [BatchStatus] Lifecycle status. Terminal states: `completed`, `failed`, `expired`, `cancelled`.
+  attr_reader :status
+  # @return [BatchProvider] Required enumerated value serialized in the `provider` wire field.
+  attr_reader :provider
+  # @return [String] Inference endpoint each request is dispatched to.
+  attr_reader :endpoint
+  # @return [BatchCompletionWindow] Required enumerated value serialized in the `completion_window` wire field.
+  attr_reader :completion_window
+  # @return [String] The uploaded JSONL input file.
+  attr_reader :input_file_id
+  # @return [String] Output JSONL file. Populated once the job completes.
+  attr_reader :output_file_id
+  # @return [String] Error sidecar file. Null when no errors were produced.
+  attr_reader :error_file_id
+  # @return [BatchRequestCounts] Aggregate request counts.
+  attr_reader :request_counts
+  # @return [String] The idempotency key supplied at creation.
+  attr_reader :request_id
+  # @return [Hash] Metadata attached at creation.
+  attr_reader :metadata
+  # @return [Array_of_BatchErrorsItem] Top-level errors that prevented the batch from completing.
+  attr_reader :errors
+  # @return [String] Required `date-time`-formatted value serialized in the `created_at` wire field.
+  attr_reader :created_at
+  # @return [String] Optional `date-time`-formatted value serialized in the `in_progress_at` wire field.
+  attr_reader :in_progress_at
+  # @return [String] Optional `date-time`-formatted value serialized in the `finalizing_at` wire field.
+  attr_reader :finalizing_at
+  # @return [String] Optional `date-time`-formatted value serialized in the `completed_at` wire field.
+  attr_reader :completed_at
+  # @return [String] Derived from `created_at` plus `completion_window`.
+  attr_reader :expires_at
+  # @return [String] Optional `date-time`-formatted value serialized in the `cancelled_at` wire field.
+  attr_reader :cancelled_at
+  # @return [String] Optional `date-time`-formatted value serialized in the `failed_at` wire field.
+  attr_reader :failed_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Batch.
-  # A Batch Inference job.
-  class Batch
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchMetadata::DECODERS
-
-    # @return [String] Unique identifier for the batch job.
-    attr_reader :batch_id
-    # @return [BatchStatus] Lifecycle status. Terminal states: `completed`, `failed`, `expired`, `cancelled`.
-    attr_reader :status
-    # @return [BatchProvider] Required enumerated value serialized in the `provider` wire field.
-    attr_reader :provider
-    # @return [String] Inference endpoint each request is dispatched to.
-    attr_reader :endpoint
-    # @return [BatchCompletionWindow] Required enumerated value serialized in the `completion_window` wire field.
-    attr_reader :completion_window
-    # @return [String] The uploaded JSONL input file.
-    attr_reader :input_file_id
-    # @return [String] Output JSONL file. Populated once the job completes.
-    attr_reader :output_file_id
-    # @return [String] Error sidecar file. Null when no errors were produced.
-    attr_reader :error_file_id
-    # @return [BatchRequestCounts] Aggregate request counts.
-    attr_reader :request_counts
-    # @return [String] The idempotency key supplied at creation.
-    attr_reader :request_id
-    # @return [Hash] Metadata attached at creation.
-    attr_reader :metadata
-    # @return [Array_of_BatchErrorsItem] Top-level errors that prevented the batch from completing.
-    attr_reader :errors
-    # @return [String] Required `date-time`-formatted value serialized in the `created_at` wire field.
-    attr_reader :created_at
-    # @return [String] Optional `date-time`-formatted value serialized in the `in_progress_at` wire field.
-    attr_reader :in_progress_at
-    # @return [String] Optional `date-time`-formatted value serialized in the `finalizing_at` wire field.
-    attr_reader :finalizing_at
-    # @return [String] Optional `date-time`-formatted value serialized in the `completed_at` wire field.
-    attr_reader :completed_at
-    # @return [String] Derived from `created_at` plus `completion_window`.
-    attr_reader :expires_at
-    # @return [String] Optional `date-time`-formatted value serialized in the `cancelled_at` wire field.
-    attr_reader :cancelled_at
-    # @return [String] Optional `date-time`-formatted value serialized in the `failed_at` wire field.
-    attr_reader :failed_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the BatchCompletionWindow SDK namespace.
-  module BatchCompletionWindow
-    V_24_H = '24h'
-    VALUES = ['24h'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the BatchCompletionWindow SDK namespace.
+module BatchCompletionWindow
+  V_24_H = '24h'
+  VALUES = ['24h'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the BatchProvider SDK namespace.
+module BatchProvider
+  OPENAI = 'openai'
+  ANTHROPIC = 'anthropic'
+  VALUES = ['openai', 'anthropic'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the BatchStatus SDK namespace.
+module BatchStatus
+  VALIDATING = 'validating'
+  IN_PROGRESS = 'in_progress'
+  FINALIZING = 'finalizing'
+  COMPLETED = 'completed'
+  FAILED = 'failed'
+  EXPIRED = 'expired'
+  CANCELLING = 'cancelling'
+  CANCELLED = 'cancelled'
+  VALUES = [
+    'validating', 'in_progress', 'finalizing', 'completed', 'failed', 'expired', 'cancelling',
+    'cancelled'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchCreateRequestMetadata
+  FIELDS = {
+    file_id: "file_id",
+    provider: "provider",
+    endpoint: "endpoint",
+    completion_window: "completion_window",
+    request_id: "request_id",
+    metadata: "metadata",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    file_id
+    provider
+    completion_window
+    request_id
+  ].freeze
+  DECODERS = {
+    provider: lambda do |value|
+      ::OctridevDigitalocean::BatchCreateRequestProvider.from_value(value)
+    end,
+    endpoint: lambda do |value|
+      ::OctridevDigitalocean::BatchCreateRequestEndpoint.from_value(value)
+    end,
+    completion_window: lambda do |value|
+      ::OctridevDigitalocean::BatchCreateRequestCompletionWindow.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for BatchCreateRequest.
+# Request body for creating a batch inference job. When `provider` is `openai`, `endpoint` is required and must be one of `/v1/responses` or `/v1/chat/completions`. When `provider` is `anthropic`, `endpoint` must be omitted — the Anthropic Message Batches API does not need a per-job endpoint.
+class BatchCreateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchCreateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchCreateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchCreateRequestMetadata::DECODERS
+
+  # @return [String] The `file_id` returned by `POST /v1/batches/files`.
+  attr_reader :file_id
+  # @return [BatchCreateRequestProvider] The inference provider whose JSONL schema the input file conforms to. `openai` follows the OpenAI Batch API input schema (`custom_id`, `method`, `url`, `body`); `anthropic` follows the Anthropic Message Batches JSONL conventions.
+  attr_reader :provider
+  # @return [BatchCreateRequestEndpoint] Inference endpoint each request is dispatched to. **Required when `provider` is `openai` and must match the `url` on every JSONL line. Must be omitted when `provider` is `anthropic`.**
+  attr_reader :endpoint
+  # @return [BatchCreateRequestCompletionWindow] Time window in which the job must complete. Jobs that do not finish in time transition to `expired`.
+  attr_reader :completion_window
+  # @return [String] Client-supplied idempotency key. Retries with the same value return the existing job instead of creating a duplicate.
+  attr_reader :request_id
+  # @return [Hash] Optional string-valued metadata to attach to the job.
+  attr_reader :metadata
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the BatchProvider SDK namespace.
-  module BatchProvider
-    OPENAI = 'openai'
-    ANTHROPIC = 'anthropic'
-    VALUES = %w[openai anthropic].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the BatchStatus SDK namespace.
-  module BatchStatus
-    VALIDATING = 'validating'
-    IN_PROGRESS = 'in_progress'
-    FINALIZING = 'finalizing'
-    COMPLETED = 'completed'
-    FAILED = 'failed'
-    EXPIRED = 'expired'
-    CANCELLING = 'cancelling'
-    CANCELLED = 'cancelled'
-    VALUES = %w[
-      validating in_progress finalizing completed failed expired cancelling
-      cancelled
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the BatchCreateRequestCompletionWindow SDK namespace.
+module BatchCreateRequestCompletionWindow
+  V_24_H = '24h'
+  VALUES = ['24h'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the BatchCreateRequestEndpoint SDK namespace.
+module BatchCreateRequestEndpoint
+  V1_RESPONSES = '/v1/responses'
+  V1_CHAT_COMPLETIONS = '/v1/chat/completions'
+  VALUES = ['/v1/responses', '/v1/chat/completions'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the BatchCreateRequestProvider SDK namespace.
+module BatchCreateRequestProvider
+  OPENAI = 'openai'
+  ANTHROPIC = 'anthropic'
+  VALUES = ['openai', 'anthropic'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchFileCreateRequestMetadata
+  FIELDS = {
+    file_name: "file_name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    file_name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BatchFileCreateRequest.
+# Request body for creating a batch input file intent.
+class BatchFileCreateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchFileCreateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchFileCreateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchFileCreateRequestMetadata::DECODERS
+
+  # @return [String] The file you plan to upload. Must end with `.jsonl` (case-insensitive) and contain one request per line in the schema expected by the target `provider`.
+  attr_reader :file_name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchCreateRequestMetadata
-    FIELDS = {
-      file_id: 'file_id',
-      provider: 'provider',
-      endpoint: 'endpoint',
-      completion_window: 'completion_window',
-      request_id: 'request_id',
-      metadata: 'metadata'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      file_id
-      provider
-      completion_window
-      request_id
-    ].freeze
-    DECODERS = {
-      provider: lambda do |value|
-        ::OctridevDigitalocean::BatchCreateRequestProvider.from_value(value)
-      end,
-      endpoint: lambda do |value|
-        ::OctridevDigitalocean::BatchCreateRequestEndpoint.from_value(value)
-      end,
-      completion_window: lambda do |value|
-        ::OctridevDigitalocean::BatchCreateRequestCompletionWindow.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for BatchCreateRequest.
-  # Request body for creating a batch inference job. When `provider` is `openai`, `endpoint` is required and must be one of `/v1/responses` or `/v1/chat/completions`. When `provider` is `anthropic`, `endpoint` must be omitted — the Anthropic Message Batches API does not need a per-job endpoint.
-  class BatchCreateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchCreateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchCreateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchCreateRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The `file_id` returned by `POST /v1/batches/files`.
-    attr_reader :file_id
-    # @return [BatchCreateRequestProvider] The inference provider whose JSONL schema the input file conforms to. `openai` follows the OpenAI Batch API input schema (`custom_id`, `method`, `url`, `body`); `anthropic` follows the Anthropic Message Batches JSONL conventions.
-    attr_reader :provider
-    # @return [BatchCreateRequestEndpoint] Inference endpoint each request is dispatched to. **Required when `provider` is `openai` and must match the `url` on every JSONL line. Must be omitted when `provider` is `anthropic`.**
-    attr_reader :endpoint
-    # @return [BatchCreateRequestCompletionWindow] Time window in which the job must complete. Jobs that do not finish in time transition to `expired`.
-    attr_reader :completion_window
-    # @return [String] Client-supplied idempotency key. Retries with the same value return the existing job instead of creating a duplicate.
-    attr_reader :request_id
-    # @return [Hash] Optional string-valued metadata to attach to the job.
-    attr_reader :metadata
+# Internal model hydration metadata.
+class SdkInternalBatchFileCreateResponseMetadata
+  FIELDS = {
+    file_id: "file_id",
+    upload_url: "upload_url",
+    expires_at: "expires_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    file_id
+    upload_url
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for BatchFileCreateResponse.
+# Presigned upload URL and `file_id` for a new batch input file.
+class BatchFileCreateResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchFileCreateResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchFileCreateResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchFileCreateResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Pass this value as `file_id` when creating a batch job.
+  attr_reader :file_id
+  # @return [String] Short-lived presigned `PUT` URL (typically valid for ~15 minutes). If it expires before upload, create a new file intent.
+  attr_reader :upload_url
+  # @return [String] When `upload_url` expires.
+  attr_reader :expires_at
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the BatchCreateRequestCompletionWindow SDK namespace.
-  module BatchCreateRequestCompletionWindow
-    V_24_H = '24h'
-    VALUES = ['24h'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the BatchCreateRequestEndpoint SDK namespace.
-  module BatchCreateRequestEndpoint
-    V1_RESPONSES = '/v1/responses'
-    V1_CHAT_COMPLETIONS = '/v1/chat/completions'
-    VALUES = ['/v1/responses', '/v1/chat/completions'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchListResponseMetadata
+  FIELDS = {
+    object: "object",
+    data: "data",
+    first_id: "first_id",
+    last_id: "last_id",
+    has_more: "has_more",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    object
+    data
+    has_more
+  ].freeze
+  DECODERS = {
+    object: lambda do |value|
+      ::OctridevDigitalocean::BatchListResponseObject.from_value(value)
+    end,
+    data: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Batch.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for BatchListResponse.
+# Cursor-paginated list of batch inference jobs.
+class BatchListResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchListResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchListResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchListResponseMetadata::DECODERS
+
+  # @return [BatchListResponseObject] The object type, always `list`.
+  attr_reader :object
+  # @return [Array_of_Batch] Batch jobs on this page, ordered newest first.
+  attr_reader :data
+  # @return [String] ID of the first batch on this page. Null when the page is empty.
+  attr_reader :first_id
+  # @return [String] ID of the last batch on this page. Pass as `after` to fetch the next page.
+  attr_reader :last_id
+  # @return [Boolean] Whether additional batches exist beyond this page.
+  attr_reader :has_more
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the BatchCreateRequestProvider SDK namespace.
-  module BatchCreateRequestProvider
-    OPENAI = 'openai'
-    ANTHROPIC = 'anthropic'
-    VALUES = %w[openai anthropic].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchFileCreateRequestMetadata
-    FIELDS = {
-      file_name: 'file_name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      file_name
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the BatchListResponseObject SDK namespace.
+module BatchListResponseObject
+  LIST = 'list'
+  VALUES = ['list'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalBatchResultsResponseMetadata
+  FIELDS = {
+    batch_id: "batch_id",
+    result_available: "result_available",
+    output_file_url: "output_file_url",
+    error_file_url: "error_file_url",
+    expires_at: "expires_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    batch_id
+    result_available
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for BatchResultsResponse.
+# Presigned download URLs for a batch job. URLs are short-lived — download the artifacts soon after fetching them.
+class BatchResultsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalBatchResultsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalBatchResultsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalBatchResultsResponseMetadata::DECODERS
+
+  # @return [String] Required `uuid`-formatted value serialized in the `batch_id` wire field.
+  attr_reader :batch_id
+  # @return [Boolean] When `false`, keep polling batch status and retry later.
+  attr_reader :result_available
+  # @return [String] Presigned URL for the main results JSONL.
+  attr_reader :output_file_url
+  # @return [String] Presigned URL for the error sidecar JSONL, if any.
+  attr_reader :error_file_url
+  # @return [String] When the presigned URLs expire.
+  attr_reader :expires_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for BatchFileCreateRequest.
-  # Request body for creating a batch input file intent.
-  class BatchFileCreateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchFileCreateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchFileCreateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchFileCreateRequestMetadata::DECODERS
-
-    # @return [String] The file you plan to upload. Must end with `.jsonl` (case-insensitive) and contain one request per line in the schema expected by the target `provider`.
-    attr_reader :file_name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalBatchFileCreateResponseMetadata
-    FIELDS = {
-      file_id: 'file_id',
-      upload_url: 'upload_url',
-      expires_at: 'expires_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      file_id
-      upload_url
-    ].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for BatchFileCreateResponse.
-  # Presigned upload URL and `file_id` for a new batch input file.
-  class BatchFileCreateResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchFileCreateResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchFileCreateResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchFileCreateResponseMetadata::DECODERS
-
-    # @return [String] Pass this value as `file_id` when creating a batch job.
-    attr_reader :file_id
-    # @return [String] Short-lived presigned `PUT` URL (typically valid for ~15 minutes). If it expires before upload, create a new file intent.
-    attr_reader :upload_url
-    # @return [String] When `upload_url` expires.
-    attr_reader :expires_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalBatchListResponseMetadata
-    FIELDS = {
-      object: 'object',
-      data: 'data',
-      first_id: 'first_id',
-      last_id: 'last_id',
-      has_more: 'has_more'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      object
-      data
-      has_more
-    ].freeze
-    DECODERS = {
-      object: lambda do |value|
-        ::OctridevDigitalocean::BatchListResponseObject.from_value(value)
-      end,
-      data: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Batch.from_hash(item) }
-      end
-    }.freeze
-  end
-
-  # API model for BatchListResponse.
-  # Cursor-paginated list of batch inference jobs.
-  class BatchListResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchListResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchListResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchListResponseMetadata::DECODERS
-
-    # @return [BatchListResponseObject] The object type, always `list`.
-    attr_reader :object
-    # @return [Array_of_Batch] Batch jobs on this page, ordered newest first.
-    attr_reader :data
-    # @return [String] ID of the first batch on this page. Null when the page is empty.
-    attr_reader :first_id
-    # @return [String] ID of the last batch on this page. Pass as `after` to fetch the next page.
-    attr_reader :last_id
-    # @return [Boolean] Whether additional batches exist beyond this page.
-    attr_reader :has_more
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the BatchListResponseObject SDK namespace.
-  module BatchListResponseObject
-    LIST = 'list'
-    VALUES = ['list'].freeze
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalBatchResultsResponseMetadata
-    FIELDS = {
-      batch_id: 'batch_id',
-      result_available: 'result_available',
-      output_file_url: 'output_file_url',
-      error_file_url: 'error_file_url',
-      expires_at: 'expires_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      batch_id
-      result_available
-    ].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for BatchResultsResponse.
-  # Presigned download URLs for a batch job. URLs are short-lived — download the artifacts soon after fetching them.
-  class BatchResultsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalBatchResultsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalBatchResultsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalBatchResultsResponseMetadata::DECODERS
-
-    # @return [String] Required `uuid`-formatted value serialized in the `batch_id` wire field.
-    attr_reader :batch_id
-    # @return [Boolean] When `false`, keep polling batch status and retry later.
-    attr_reader :result_available
-    # @return [String] Presigned URL for the main results JSONL.
-    attr_reader :output_file_url
-    # @return [String] Presigned URL for the error sidecar JSONL, if any.
-    attr_reader :error_file_url
-    # @return [String] When the presigned URLs expire.
-    attr_reader :expires_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

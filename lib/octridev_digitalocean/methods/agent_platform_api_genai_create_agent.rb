@@ -70,9 +70,10 @@ module OctridevDigitalocean
         workspace_uuid: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/gen-ai/agents',
+          "/v2/gen-ai/agents",
           config: config,
           body: {
             'anthropic_key_uuid' => anthropic_key_uuid,
@@ -93,13 +94,13 @@ module OctridevDigitalocean
             'thinking_token_budget' => thinking_token_budget,
             'web_fetch_enabled' => web_fetch_enabled,
             'web_search_enabled' => web_search_enabled,
-            'workspace_uuid' => workspace_uuid
+            'workspace_uuid' => workspace_uuid,
           },
           return_type: ::OctridevDigitalocean::ApiCreateAgentOutput,
           decoder: :json,
           operation_id: 'genai_create_agent',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

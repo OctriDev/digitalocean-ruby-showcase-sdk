@@ -30,12 +30,13 @@ module OctridevDigitalocean
         route_name: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/gen-ai/agents/',
+            "/v2/gen-ai/agents/",
             SdkClient.encode_path_segment(parent_agent_uuid),
-            '/child_agents/',
+            "/child_agents/",
             SdkClient.encode_path_segment(child_agent_uuid)
           ].join,
           config: config,
@@ -43,13 +44,13 @@ module OctridevDigitalocean
             'child_agent_uuid' => child_agent_uuid2,
             'if_case' => if_case,
             'parent_agent_uuid' => parent_agent_uuid2,
-            'route_name' => route_name
+            'route_name' => route_name,
           },
           return_type: ::OctridevDigitalocean::ApiLinkAgentOutput,
           decoder: :json,
           operation_id: 'genai_attach_agent',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

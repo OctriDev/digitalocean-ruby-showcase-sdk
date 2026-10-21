@@ -21,23 +21,24 @@ module OctridevDigitalocean
         workspace_uuid2: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/gen-ai/workspaces/',
+            "/v2/gen-ai/workspaces/",
             SdkClient.encode_path_segment(workspace_uuid),
-            '/agents'
+            "/agents"
           ].join,
           config: config,
           body: {
             'agent_uuids' => agent_uuids,
-            'workspace_uuid' => workspace_uuid2
+            'workspace_uuid' => workspace_uuid2,
           },
           return_type: ::OctridevDigitalocean::ApiMoveAgentsToWorkspaceOutput,
           decoder: :json,
           operation_id: 'genai_update_agents_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

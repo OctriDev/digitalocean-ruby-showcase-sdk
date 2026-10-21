@@ -5,100 +5,101 @@
 
 # agent_platform_api_api_deployment domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiDeploymentMetadata
-    FIELDS = {
-      created_at: 'created_at',
-      name: 'name',
-      status: 'status',
-      updated_at: 'updated_at',
-      url: 'url',
-      uuid: 'uuid',
-      visibility: 'visibility'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::ApiDeploymentStatus.from_value(value)
-      end,
-      visibility: lambda do |value|
-        ::OctridevDigitalocean::ApiDeploymentVisibility.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalApiDeploymentMetadata
+  FIELDS = {
+    created_at: "created_at",
+    name: "name",
+    status: "status",
+    updated_at: "updated_at",
+    url: "url",
+    uuid: "uuid",
+    visibility: "visibility",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::ApiDeploymentStatus.from_value(value)
+    end,
+    visibility: lambda do |value|
+      ::OctridevDigitalocean::ApiDeploymentVisibility.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiDeployment.
+# Description of deployment
+class ApiDeployment
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiDeploymentMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiDeploymentMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiDeploymentMetadata::DECODERS
+
+  # @return [String] Creation date / time
+  attr_reader :created_at
+  # @return [String] Name
+  attr_reader :name
+  # @return [ApiDeploymentStatus] Optional enumerated value serialized in the `status` wire field.
+  attr_reader :status
+  # @return [String] Last modified
+  attr_reader :updated_at
+  # @return [String] Access your deployed agent here
+  attr_reader :url
+  # @return [String] Unique id
+  attr_reader :uuid
+  # @return [ApiDeploymentVisibility] - VISIBILITY_UNKNOWN: The status of the deployment is unknown - VISIBILITY_DISABLED: The deployment is disabled and will no longer service requests - VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state - VISIBILITY_PUBLIC: The deployment is public and will service requests from the public internet - VISIBILITY_PRIVATE: The deployment is private and will only service requests from other agents, or through API keys
+  attr_reader :visibility
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiDeployment.
-  # Description of deployment
-  class ApiDeployment
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiDeploymentMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiDeploymentMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiDeploymentMetadata::DECODERS
-
-    # @return [String] Creation date / time
-    attr_reader :created_at
-    # @return [String] Name
-    attr_reader :name
-    # @return [ApiDeploymentStatus] Optional enumerated value serialized in the `status` wire field.
-    attr_reader :status
-    # @return [String] Last modified
-    attr_reader :updated_at
-    # @return [String] Access your deployed agent here
-    attr_reader :url
-    # @return [String] Unique id
-    attr_reader :uuid
-    # @return [ApiDeploymentVisibility] - VISIBILITY_UNKNOWN: The status of the deployment is unknown - VISIBILITY_DISABLED: The deployment is disabled and will no longer service requests - VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state - VISIBILITY_PUBLIC: The deployment is public and will service requests from the public internet - VISIBILITY_PRIVATE: The deployment is private and will only service requests from other agents, or through API keys
-    attr_reader :visibility
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ApiDeploymentStatus SDK namespace.
-  module ApiDeploymentStatus
-    STATUS_UNKNOWN = 'STATUS_UNKNOWN'
-    STATUS_WAITING_FOR_DEPLOYMENT = 'STATUS_WAITING_FOR_DEPLOYMENT'
-    STATUS_DEPLOYING = 'STATUS_DEPLOYING'
-    STATUS_RUNNING = 'STATUS_RUNNING'
-    STATUS_FAILED = 'STATUS_FAILED'
-    STATUS_WAITING_FOR_UNDEPLOYMENT = 'STATUS_WAITING_FOR_UNDEPLOYMENT'
-    STATUS_UNDEPLOYING = 'STATUS_UNDEPLOYING'
-    STATUS_UNDEPLOYMENT_FAILED = 'STATUS_UNDEPLOYMENT_FAILED'
-    STATUS_DELETED = 'STATUS_DELETED'
-    STATUS_BUILDING = 'STATUS_BUILDING'
-    VALUES = %w[
-      STATUS_UNKNOWN STATUS_WAITING_FOR_DEPLOYMENT STATUS_DEPLOYING STATUS_RUNNING
-      STATUS_FAILED STATUS_WAITING_FOR_UNDEPLOYMENT STATUS_UNDEPLOYING
-      STATUS_UNDEPLOYMENT_FAILED STATUS_DELETED STATUS_BUILDING
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the ApiDeploymentVisibility SDK namespace.
-  module ApiDeploymentVisibility
-    VISIBILITY_UNKNOWN = 'VISIBILITY_UNKNOWN'
-    VISIBILITY_DISABLED = 'VISIBILITY_DISABLED'
-    VISIBILITY_PLAYGROUND = 'VISIBILITY_PLAYGROUND'
-    VISIBILITY_PUBLIC = 'VISIBILITY_PUBLIC'
-    VISIBILITY_PRIVATE = 'VISIBILITY_PRIVATE'
-    VALUES = %w[
-      VISIBILITY_UNKNOWN VISIBILITY_DISABLED VISIBILITY_PLAYGROUND VISIBILITY_PUBLIC
-      VISIBILITY_PRIVATE
-    ].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the ApiDeploymentStatus SDK namespace.
+module ApiDeploymentStatus
+  STATUS_UNKNOWN = 'STATUS_UNKNOWN'
+  STATUS_WAITING_FOR_DEPLOYMENT = 'STATUS_WAITING_FOR_DEPLOYMENT'
+  STATUS_DEPLOYING = 'STATUS_DEPLOYING'
+  STATUS_RUNNING = 'STATUS_RUNNING'
+  STATUS_FAILED = 'STATUS_FAILED'
+  STATUS_WAITING_FOR_UNDEPLOYMENT = 'STATUS_WAITING_FOR_UNDEPLOYMENT'
+  STATUS_UNDEPLOYING = 'STATUS_UNDEPLOYING'
+  STATUS_UNDEPLOYMENT_FAILED = 'STATUS_UNDEPLOYMENT_FAILED'
+  STATUS_DELETED = 'STATUS_DELETED'
+  STATUS_BUILDING = 'STATUS_BUILDING'
+  VALUES = [
+    'STATUS_UNKNOWN', 'STATUS_WAITING_FOR_DEPLOYMENT', 'STATUS_DEPLOYING', 'STATUS_RUNNING',
+    'STATUS_FAILED', 'STATUS_WAITING_FOR_UNDEPLOYMENT', 'STATUS_UNDEPLOYING',
+    'STATUS_UNDEPLOYMENT_FAILED', 'STATUS_DELETED', 'STATUS_BUILDING'
+  ].freeze
+  def self.from_value(value)
+    value
   end
+end
+
+# Defines the ApiDeploymentVisibility SDK namespace.
+module ApiDeploymentVisibility
+  VISIBILITY_UNKNOWN = 'VISIBILITY_UNKNOWN'
+  VISIBILITY_DISABLED = 'VISIBILITY_DISABLED'
+  VISIBILITY_PLAYGROUND = 'VISIBILITY_PLAYGROUND'
+  VISIBILITY_PUBLIC = 'VISIBILITY_PUBLIC'
+  VISIBILITY_PRIVATE = 'VISIBILITY_PRIVATE'
+  VALUES = [
+    'VISIBILITY_UNKNOWN', 'VISIBILITY_DISABLED', 'VISIBILITY_PLAYGROUND', 'VISIBILITY_PUBLIC',
+    'VISIBILITY_PRIVATE'
+  ].freeze
+  def self.from_value(value)
+    value
+  end
+end
 end

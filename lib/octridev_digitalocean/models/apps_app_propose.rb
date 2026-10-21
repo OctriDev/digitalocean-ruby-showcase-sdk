@@ -5,102 +5,103 @@
 
 # apps_app_propose domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAppProposeRequestMetadata
-    FIELDS = {
-      spec: 'spec',
-      app_id: 'app_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      spec
-    ].freeze
-    DECODERS = {
-      spec: lambda do |value|
-        ::OctridevDigitalocean::AppSpecRequest.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAppProposeRequestMetadata
+  FIELDS = {
+    spec: "spec",
+    app_id: "app_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    spec
+  ].freeze
+  DECODERS = {
+    spec: lambda do |value|
+      ::OctridevDigitalocean::AppSpecRequest.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppProposeRequest.
+# Typed representation of the `AppProposeRequest` API schema.
+class AppProposeRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppProposeRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppProposeRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppProposeRequestMetadata::DECODERS
+
+  # @return [AppSpecRequest] The desired configuration of an application.
+  attr_reader :spec
+  # @return [String] An optional ID of an existing app. If set, the spec will be treated as a proposed update to the specified app. The existing app is not modified using this method.
+  attr_reader :app_id
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppProposeRequest.
-  # Typed representation of the `AppProposeRequest` API schema.
-  class AppProposeRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppProposeRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppProposeRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppProposeRequestMetadata::DECODERS
-
-    # @return [AppSpecRequest] The desired configuration of an application.
-    attr_reader :spec
-    # @return [String] An optional ID of an existing app. If set, the spec will be treated as a proposed update to the specified app. The existing app is not modified using this method.
-    attr_reader :app_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppProposeResponseMetadata
-    FIELDS = {
-      app_is_static: 'app_is_static',
-      app_name_available: 'app_name_available',
-      app_name_suggestion: 'app_name_suggestion',
-      existing_static_apps: 'existing_static_apps',
-      spec: 'spec',
-      app_cost: 'app_cost',
-      app_tier_downgrade_cost: 'app_tier_downgrade_cost'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      spec: lambda do |value|
-        ::OctridevDigitalocean::AppSpec.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppProposeResponseMetadata
+  FIELDS = {
+    app_is_static: "app_is_static",
+    app_name_available: "app_name_available",
+    app_name_suggestion: "app_name_suggestion",
+    existing_static_apps: "existing_static_apps",
+    spec: "spec",
+    app_cost: "app_cost",
+    app_tier_downgrade_cost: "app_tier_downgrade_cost",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    spec: lambda do |value|
+      ::OctridevDigitalocean::AppSpec.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AppProposeResponse.
+# Typed representation of the `AppProposeResponse` API schema.
+class AppProposeResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppProposeResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppProposeResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppProposeResponseMetadata::DECODERS
+
+  # @return [Boolean] Indicates whether the app is a static app.
+  attr_reader :app_is_static
+  # @return [Boolean] Indicates whether the app name is available.
+  attr_reader :app_name_available
+  # @return [String] The suggested name if the proposed app name is unavailable.
+  attr_reader :app_name_suggestion
+  # @return [String] The maximum number of free static apps the account can have. We will charge you for any additional static apps.
+  attr_reader :existing_static_apps
+  # @return [AppSpec] The desired configuration of an application.
+  attr_reader :spec
+  # @return [Integer] The monthly cost of the proposed app in USD.
+  attr_reader :app_cost
+  # @return [Integer] The monthly cost of the proposed app in USD using the previous pricing plan tier. For example, if you propose an app that uses the Professional tier, the `app_tier_downgrade_cost` field displays the monthly cost of the app if it were to use the Basic tier. If the proposed app already uses the lest expensive tier, the field is empty.
+  attr_reader :app_tier_downgrade_cost
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppProposeResponse.
-  # Typed representation of the `AppProposeResponse` API schema.
-  class AppProposeResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppProposeResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppProposeResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppProposeResponseMetadata::DECODERS
-
-    # @return [Boolean] Indicates whether the app is a static app.
-    attr_reader :app_is_static
-    # @return [Boolean] Indicates whether the app name is available.
-    attr_reader :app_name_available
-    # @return [String] The suggested name if the proposed app name is unavailable.
-    attr_reader :app_name_suggestion
-    # @return [String] The maximum number of free static apps the account can have. We will charge you for any additional static apps.
-    attr_reader :existing_static_apps
-    # @return [AppSpec] The desired configuration of an application.
-    attr_reader :spec
-    # @return [Integer] The monthly cost of the proposed app in USD.
-    attr_reader :app_cost
-    # @return [Integer] The monthly cost of the proposed app in USD using the previous pricing plan tier. For example, if you propose an app that uses the Professional tier, the `app_tier_downgrade_cost` field displays the monthly cost of the app if it were to use the Basic tier. If the proposed app already uses the lest expensive tier, the field is empty.
-    attr_reader :app_tier_downgrade_cost
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

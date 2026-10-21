@@ -22,22 +22,23 @@ module OctridevDigitalocean
         type: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/registry/',
+            "/v2/registry/",
             SdkClient.encode_path_segment(registry_name),
-            '/garbage-collection'
+            "/garbage-collection"
           ].join,
           config: config,
           body: {
-            'type' => type
+            'type' => type,
           },
           return_type: ::OctridevDigitalocean::GarbageCollectionResponse,
           decoder: :json,
           operation_id: 'registry_run_garbage_collection',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -51,19 +52,20 @@ module OctridevDigitalocean
         registry_name:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/registry/',
+            "/v2/registry/",
             SdkClient.encode_path_segment(registry_name),
-            '/garbage-collection'
+            "/garbage-collection"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::GarbageCollectionResponse,
           decoder: :json,
           operation_id: 'registry_get_garbage_collection',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -83,23 +85,24 @@ module OctridevDigitalocean
         cancel: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/registry/',
+            "/v2/registry/",
             SdkClient.encode_path_segment(registry_name),
-            '/garbage-collection/',
+            "/garbage-collection/",
             SdkClient.encode_path_segment(garbage_collection_uuid)
           ].join,
           config: config,
           body: {
-            'cancel' => cancel
+            'cancel' => cancel,
           },
           return_type: ::OctridevDigitalocean::GarbageCollectionResponse,
           decoder: :json,
           operation_id: 'registry_update_garbage_collection',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

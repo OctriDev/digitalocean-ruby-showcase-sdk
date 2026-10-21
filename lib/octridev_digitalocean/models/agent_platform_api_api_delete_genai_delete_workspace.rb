@@ -5,28 +5,28 @@
 
 # agent_platform_api_api_delete domain models
 module OctridevDigitalocean
-  # API model for ApiDeleteWorkspaceOutput.
-  # Typed representation of the `ApiDeleteWorkspaceOutput` API schema.
-  class ApiDeleteWorkspaceOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiDeleteWorkspaceOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiDeleteWorkspaceOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiDeleteWorkspaceOutputMetadata::DECODERS
+# API model for ApiDeleteWorkspaceOutput.
+# Typed representation of the `ApiDeleteWorkspaceOutput` API schema.
+class ApiDeleteWorkspaceOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiDeleteWorkspaceOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiDeleteWorkspaceOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiDeleteWorkspaceOutputMetadata::DECODERS
 
-    # @return [String] Workspace
-    attr_reader :workspace_uuid
+  # @return [String] Workspace
+  attr_reader :workspace_uuid
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
+
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

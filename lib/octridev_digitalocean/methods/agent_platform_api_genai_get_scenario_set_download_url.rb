@@ -17,19 +17,20 @@ module OctridevDigitalocean
         scenario_set_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/scenario_sets/',
+            "/v2/gen-ai/scenario_sets/",
             SdkClient.encode_path_segment(scenario_set_uuid),
-            '/download_url'
+            "/download_url"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiGetScenarioSetDownloadURLOutput,
           decoder: :json,
           operation_id: 'genai_get_scenario_set_download_url',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

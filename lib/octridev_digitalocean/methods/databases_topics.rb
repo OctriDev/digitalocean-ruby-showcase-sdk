@@ -18,21 +18,22 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/topics'
+            "/topics"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::KafkaTopics,
           decoder: :json,
           operation_id: 'databases_list_kafka_topics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -56,27 +57,28 @@ module OctridevDigitalocean
         request_config: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/topics'
+            "/topics"
           ].join,
           config: config,
           body: {
             'name' => name,
             'replication_factor' => replication_factor,
             'partition_count' => partition_count,
-            'config' => request_config
+            'config' => request_config,
           },
           return_type: ::OctridevDigitalocean::KafkaTopicResponse,
           decoder: :json,
           operation_id: 'databases_create_kafka_topic',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -91,14 +93,15 @@ module OctridevDigitalocean
         topic_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/topics/',
+            "/topics/",
             SdkClient.encode_path_segment(topic_name)
           ].join,
           config: config,
@@ -106,7 +109,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_get_kafka_topic',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -124,14 +127,15 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'PUT',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/topics/',
+            "/topics/",
             SdkClient.encode_path_segment(topic_name)
           ].join,
           config: config,
@@ -140,7 +144,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_update_kafka_topic',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -155,21 +159,22 @@ module OctridevDigitalocean
         topic_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/topics/',
+            "/topics/",
             SdkClient.encode_path_segment(topic_name)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'databases_delete_kafka_topic',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

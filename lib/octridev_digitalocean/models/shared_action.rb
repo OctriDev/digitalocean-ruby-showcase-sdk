@@ -5,157 +5,161 @@
 
 # shared_action domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalActionMetadata
-    FIELDS = {
-      id: 'id',
-      status: 'status',
-      type: 'type',
-      started_at: 'started_at',
-      completed_at: 'completed_at',
-      resource_id: 'resource_id',
-      resource_type: 'resource_type',
-      region: 'region',
-      region_slug: 'region_slug'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      status: lambda do |value|
-        ::OctridevDigitalocean::ActionStatus.from_value(value)
-      end,
-      region: lambda do |value|
-        ::OctridevDigitalocean::Region.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalActionMetadata
+  FIELDS = {
+    id: "id",
+    status: "status",
+    type: "type",
+    started_at: "started_at",
+    completed_at: "completed_at",
+    resource_id: "resource_id",
+    resource_type: "resource_type",
+    region: "region",
+    region_slug: "region_slug",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    status: lambda do |value|
+      ::OctridevDigitalocean::ActionStatus.from_value(value)
+    end,
+    region: lambda do |value|
+      ::OctridevDigitalocean::Region.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for Action.
+# Typed representation of the `Action` API schema.
+class Action
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalActionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalActionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalActionMetadata::DECODERS
+
+  # @return [Integer] A unique numeric ID that can be used to identify and reference an action.
+  attr_reader :id
+  # @return [ActionStatus] The current status of the action. This can be "in-progress", "completed", or "errored".
+  attr_reader :status
+  # @return [String] This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
+  attr_reader :type
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was initiated.
+  attr_reader :started_at
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was completed.
+  attr_reader :completed_at
+  # @return [Integer] A unique identifier for the resource that the action is associated with.
+  attr_reader :resource_id
+  # @return [String] The type of resource that the action is associated with.
+  attr_reader :resource_type
+  # @return [Region] Optional object value serialized in the `region` wire field.
+  attr_reader :region
+  # @return [String] A human-readable string that is used as a unique identifier for each region.
+  attr_reader :region_slug
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Action.
-  # Typed representation of the `Action` API schema.
-  class Action
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalActionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalActionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalActionMetadata::DECODERS
-
-    # @return [Integer] A unique numeric ID that can be used to identify and reference an action.
-    attr_reader :id
-    # @return [ActionStatus] The current status of the action. This can be "in-progress", "completed", or "errored".
-    attr_reader :status
-    # @return [String] This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
-    attr_reader :type
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was initiated.
-    attr_reader :started_at
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was completed.
-    attr_reader :completed_at
-    # @return [Integer] A unique identifier for the resource that the action is associated with.
-    attr_reader :resource_id
-    # @return [String] The type of resource that the action is associated with.
-    attr_reader :resource_type
-    # @return [Region] Optional object value serialized in the `region` wire field.
-    attr_reader :region
-    # @return [String] A human-readable string that is used as a unique identifier for each region.
-    attr_reader :region_slug
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ActionStatus SDK namespace.
-  module ActionStatus
-    IN_PROGRESS = 'in-progress'
-    COMPLETED = 'completed'
-    ERRORED = 'errored'
-    VALUES = %w[in-progress completed errored].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ActionStatus SDK namespace.
+module ActionStatus
+  IN_PROGRESS = 'in-progress'
+  COMPLETED = 'completed'
+  ERRORED = 'errored'
+  VALUES = ['in-progress', 'completed', 'errored'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalActionLinkMetadata
+  FIELDS = {
+    id: "id",
+    rel: "rel",
+    href: "href",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ActionLink.
+# The linked actions can be used to check the status of a Droplet's create event.
+class ActionLink
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalActionLinkMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalActionLinkMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalActionLinkMetadata::DECODERS
+
+  # @return [Integer] A unique numeric ID that can be used to identify and reference an action.
+  attr_reader :id
+  # @return [String] A string specifying the type of the related action.
+  attr_reader :rel
+  # @return [String] A URL that can be used to access the action.
+  attr_reader :href
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalActionLinkMetadata
-    FIELDS = {
-      id: 'id',
-      rel: 'rel',
-      href: 'href'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ActionLink.
-  # The linked actions can be used to check the status of a Droplet's create event.
-  class ActionLink
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalActionLinkMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalActionLinkMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalActionLinkMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] A unique numeric ID that can be used to identify and reference an action.
-    attr_reader :id
-    # @return [String] A string specifying the type of the related action.
-    attr_reader :rel
-    # @return [String] A URL that can be used to access the action.
-    attr_reader :href
+# Internal model hydration metadata.
+class SdkInternalActionResponseMetadata
+  FIELDS = {
+    action: "action",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    action: lambda do |value|
+      ::OctridevDigitalocean::Action.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ActionResponse.
+# Typed representation of the `ActionResponse` API schema.
+class ActionResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalActionResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalActionResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalActionResponseMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Action] Optional object value serialized in the `action` wire field.
+  attr_reader :action
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalActionResponseMetadata
-    FIELDS = {
-      action: 'action'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      action: lambda do |value|
-        ::OctridevDigitalocean::Action.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ActionResponse.
-  # Typed representation of the `ActionResponse` API schema.
-  class ActionResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalActionResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalActionResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalActionResponseMetadata::DECODERS
-
-    # @return [Action] Optional object value serialized in the `action` wire field.
-    attr_reader :action
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

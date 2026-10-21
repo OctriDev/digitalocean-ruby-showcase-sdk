@@ -5,668 +5,674 @@
 
 # insights_traces domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalTracesFieldRefMetadata
-    FIELDS = {
-      name: 'name',
-      scope: 'scope'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {
-      scope: lambda do |value|
-        ::OctridevDigitalocean::TracesFieldRefScope.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalTracesFieldRefMetadata
+  FIELDS = {
+    name: "name",
+    scope: "scope",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+    scope: lambda do |value|
+      ::OctridevDigitalocean::TracesFieldRefScope.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for TracesFieldRef.
+# A reference to a span field, used in filters and `orderBy`.
+class TracesFieldRef
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesFieldRefMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesFieldRefMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesFieldRefMetadata::DECODERS
+
+  # @return [String] The field name. Without `scope`, these names (case-insensitive) resolve to built-in span columns: `traceId` (`trace.id`, `trace_id`), `spanId` (`span.id`, `span_id`), `parentSpanId` (`parent.span.id`, `parent_span_id`), `startTime` (`start_time`, `timestamp`), `endTime` (`end_time`), `durationNs` (`duration`, in nanoseconds), `name` (`span.name`), `kind` (`span.kind`), `statusCode` (`status.code`, `status_code`), `statusMessage` (`status.message`, `status_message`), and…
+  attr_reader :name
+  # @return [TracesFieldRefScope] Restricts the lookup to one attribute map (case-insensitive). `resource` (or `resource.attributes`) reads resource attributes; `attribute` (or `attributes`, `span.attributes`) reads span attributes. Omit to use the built-in column mapping described for `name`. Ignored in traces `orderBy`.
+  attr_reader :scope
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TracesFieldRef.
-  # A reference to a span field, used in filters and `orderBy`.
-  class TracesFieldRef
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesFieldRefMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesFieldRefMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesFieldRefMetadata::DECODERS
-
-    # @return [String] The field name. Without `scope`, these names (case-insensitive) resolve to built-in span columns: `traceId` (`trace.id`, `trace_id`), `spanId` (`span.id`, `span_id`), `parentSpanId` (`parent.span.id`, `parent_span_id`), `startTime` (`start_time`, `timestamp`), `endTime` (`end_time`), `durationNs` (`duration`, in nanoseconds), `name` (`span.name`), `kind` (`span.kind`), `statusCode` (`status.code`, `status_code`), `statusMessage` (`status.message`, `status_message`), and…
-    attr_reader :name
-    # @return [TracesFieldRefScope] Restricts the lookup to one attribute map (case-insensitive). `resource` (or `resource.attributes`) reads resource attributes; `attribute` (or `attributes`, `span.attributes`) reads span attributes. Omit to use the built-in column mapping described for `name`. Ignored in traces `orderBy`.
-    attr_reader :scope
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the TracesFieldRefScope SDK namespace.
-  module TracesFieldRefScope
-    RESOURCE = 'resource'
-    RESOURCE_ATTRIBUTES = 'resource.attributes'
-    ATTRIBUTE = 'attribute'
-    ATTRIBUTES = 'attributes'
-    SPAN_ATTRIBUTES = 'span.attributes'
-    VALUES = ['resource', 'resource.attributes', 'attribute', 'attributes', 'span.attributes'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the TracesFieldRefScope SDK namespace.
+module TracesFieldRefScope
+  RESOURCE = 'resource'
+  RESOURCE_ATTRIBUTES = 'resource.attributes'
+  ATTRIBUTE = 'attribute'
+  ATTRIBUTES = 'attributes'
+  SPAN_ATTRIBUTES = 'span.attributes'
+  VALUES = ['resource', 'resource.attributes', 'attribute', 'attributes', 'span.attributes'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTracesFilterExpressionMetadata
+  FIELDS = {
+    type: "type",
+    expressions: "expressions",
+    field: "field",
+    operator: "operator",
+    value: "value",
+    query: "query",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::TracesFilterExpressionType.from_value(value)
+    end,
+    expressions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::TracesFilterExpression.from_hash(item) }
+    end,
+    field: lambda do |value|
+      ::OctridevDigitalocean::TracesFieldRef.from_hash(value)
+    end,
+    operator: lambda do |value|
+      ::OctridevDigitalocean::TracesFilterExpressionOperator.from_value(value)
+    end,
+    value: lambda do |value|
+      ::OctridevDigitalocean::TracesFilterValue.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for TracesFilterExpression.
+# A node in a traces filter tree. Every node is the same flat object; `type` selects which other properties apply: - `condition` (default when `type` is omitted): compares `field` to `value` using `operator`. - `and` / `or`: combines the nodes in `expressions` (1 to 32 children). - `not`: negates the single node in `expressions` (exactly one child). - `text_search`: case-insensitive substring match of `query` against the span name, service name, and span status message. A…
+class TracesFilterExpression
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesFilterExpressionMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesFilterExpressionMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesFilterExpressionMetadata::DECODERS
+
+  # @return [TracesFilterExpressionType] The node type. Matching is case-insensitive.
+  attr_reader :type
+  # @return [Array_of_TracesFilterExpression] Child nodes for `and`, `or`, and `not`. `and` and `or` accept 1 to 32 children; `not` requires exactly one.
+  attr_reader :expressions
+  # @return [TracesFieldRef] A reference to a span field, used in filters and `orderBy`.
+  attr_reader :field
+  # @return [TracesFilterExpressionOperator] The comparison operator for a `condition` node. Matching is case-insensitive, and the symbol forms `=`, `!=`, `>`, `>=`, `<`, and `<=` are accepted as aliases for `eq`, `neq`, `gt`, `gte`, `lt`, and `lte`. `exists` matches spans where the field is present and non-empty and ignores `value`. `in` requires an array `value` with 1 to 100 entries. `neq` on string fields also matches spans where the field is absent.
+  attr_reader :operator
+  # @return [TracesFilterValue] The comparison value for a filter `condition`. Pass either a bare JSON literal (string, number, boolean, or array for `in`) or a typed object `{"type": "...", "value": ...}`. String values are coerced to the field's type: numeric fields such as `durationNs` parse the string as a number, and time fields such as `startTime` accept the same absolute formats as `timeRange` (RFC3339 or Unix seconds/milliseconds/microseconds/nanoseconds).
+  attr_reader :value
+  # @return [String] The search string for a `text_search` node. Leading and trailing whitespace is trimmed; the trimmed string must be non-empty.
+  attr_reader :query
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTracesFilterExpressionMetadata
-    FIELDS = {
-      type: 'type',
-      expressions: 'expressions',
-      field: 'field',
-      operator: 'operator',
-      value: 'value',
-      query: 'query'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::TracesFilterExpressionType.from_value(value)
-      end,
-      expressions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::TracesFilterExpression.from_hash(item) }
-      end,
-      field: lambda do |value|
-        ::OctridevDigitalocean::TracesFieldRef.from_hash(value)
-      end,
-      operator: lambda do |value|
-        ::OctridevDigitalocean::TracesFilterExpressionOperator.from_value(value)
-      end,
-      value: lambda do |value|
-        ::OctridevDigitalocean::TracesFilterValue.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TracesFilterExpression.
-  # A node in a traces filter tree. Every node is the same flat object; `type` selects which other properties apply: - `condition` (default when `type` is omitted): compares `field` to `value` using `operator`. - `and` / `or`: combines the nodes in `expressions` (1 to 32 children). - `not`: negates the single node in `expressions` (exactly one child). - `text_search`: case-insensitive substring match of `query` against the span name, service name, and span status message. A…
-  class TracesFilterExpression
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesFilterExpressionMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesFilterExpressionMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesFilterExpressionMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [TracesFilterExpressionType] The node type. Matching is case-insensitive.
-    attr_reader :type
-    # @return [Array_of_TracesFilterExpression] Child nodes for `and`, `or`, and `not`. `and` and `or` accept 1 to 32 children; `not` requires exactly one.
-    attr_reader :expressions
-    # @return [TracesFieldRef] A reference to a span field, used in filters and `orderBy`.
-    attr_reader :field
-    # @return [TracesFilterExpressionOperator] The comparison operator for a `condition` node. Matching is case-insensitive, and the symbol forms `=`, `!=`, `>`, `>=`, `<`, and `<=` are accepted as aliases for `eq`, `neq`, `gt`, `gte`, `lt`, and `lte`. `exists` matches spans where the field is present and non-empty and ignores `value`. `in` requires an array `value` with 1 to 100 entries. `neq` on string fields also matches spans where the field is absent.
-    attr_reader :operator
-    # @return [TracesFilterValue] The comparison value for a filter `condition`. Pass either a bare JSON literal (string, number, boolean, or array for `in`) or a typed object `{"type": "...", "value": ...}`. String values are coerced to the field's type: numeric fields such as `durationNs` parse the string as a number, and time fields such as `startTime` accept the same absolute formats as `timeRange` (RFC3339 or Unix seconds/milliseconds/microseconds/nanoseconds).
-    attr_reader :value
-    # @return [String] The search string for a `text_search` node. Leading and trailing whitespace is trimmed; the trimmed string must be non-empty.
-    attr_reader :query
+# Defines the TracesFilterExpressionOperator SDK namespace.
+module TracesFilterExpressionOperator
+  EQ = 'eq'
+  NEQ = 'neq'
+  IN = 'in'
+  EXISTS = 'exists'
+  GT = 'gt'
+  GTE = 'gte'
+  LT = 'lt'
+  LTE = 'lte'
+  VALUES = ['eq', 'neq', 'in', 'exists', 'gt', 'gte', 'lt', 'lte'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Defines the TracesFilterExpressionType SDK namespace.
+module TracesFilterExpressionType
+  CONDITION = 'condition'
+  AND = 'and'
+  OR = 'or'
+  NOT = 'not'
+  TEXT_SEARCH = 'text_search'
+  VALUES = ['condition', 'and', 'or', 'not', 'text_search'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Internal model hydration metadata.
+class SdkInternalTracesFilterValueVariant4Metadata
+  FIELDS = {
+    type: "type",
+    value: "value",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    value
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::TracesFilterValueVariant4Type.from_value(value)
+    end,
+  }.freeze
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# API model for TracesFilterValueVariant4.
+class TracesFilterValueVariant4
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesFilterValueVariant4Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesFilterValueVariant4Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesFilterValueVariant4Metadata::DECODERS
+
+  # @return [TracesFilterValueVariant4Type] Required enumerated value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [Object] Required API value serialized in the `value` wire field.
+  attr_reader :value
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the TracesFilterExpressionOperator SDK namespace.
-  module TracesFilterExpressionOperator
-    EQ = 'eq'
-    NEQ = 'neq'
-    IN = 'in'
-    EXISTS = 'exists'
-    GT = 'gt'
-    GTE = 'gte'
-    LT = 'lt'
-    LTE = 'lte'
-    VALUES = %w[eq neq in exists gt gte lt lte].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the TracesFilterExpressionType SDK namespace.
-  module TracesFilterExpressionType
-    CONDITION = 'condition'
-    AND = 'and'
-    OR = 'or'
-    NOT = 'not'
-    TEXT_SEARCH = 'text_search'
-    VALUES = %w[condition and or not text_search].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTracesFilterValueVariant5Metadata
+  FIELDS = {
+    type: "type",
+    value: "value",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    type
+    value
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::TracesFilterValueVariant5Type.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for TracesFilterValueVariant5.
+class TracesFilterValueVariant5
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesFilterValueVariant5Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesFilterValueVariant5Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesFilterValueVariant5Metadata::DECODERS
+
+  # @return [TracesFilterValueVariant5Type] Required enumerated value serialized in the `type` wire field.
+  attr_reader :type
+  # @return [Array_of_String] Required array value serialized in the `value` wire field.
+  attr_reader :value
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTracesFilterValueVariant4Metadata
-    FIELDS = {
-      type: 'type',
-      value: 'value'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      value
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::TracesFilterValueVariant4Type.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TracesFilterValueVariant4.
-  class TracesFilterValueVariant4
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesFilterValueVariant4Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesFilterValueVariant4Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesFilterValueVariant4Metadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [TracesFilterValueVariant4Type] Required enumerated value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [Object] Required API value serialized in the `value` wire field.
-    attr_reader :value
+# Defines the TracesFilterValue SDK namespace.
+module TracesFilterValue
+  def self.from_hash(hash)
+    return hash if hash.is_a?(::String)
+    return hash if hash.is_a?(::Float)
+    return Boolean.from_value(hash) if [true, false].include?(hash)
+    return hash if hash.is_a?(::Array)
+    lossy = nil
+    [TracesFilterValueVariant4, TracesFilterValueVariant5].each do |type|
+      decoded = type.from_hash(hash)
+      return decoded if SdkModel.keeps_every_key?(hash, decoded)
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
+      lossy ||= decoded
+    rescue ::StandardError
+      next
     end
+    return lossy unless lossy.nil?
+  end
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# Defines the TracesFilterValueVariant4Type SDK namespace.
+module TracesFilterValueVariant4Type
+  STRING = 'string'
+  NUMBER = 'number'
+  BOOL = 'bool'
+  VALUES = ['string', 'number', 'bool'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+# Defines the TracesFilterValueVariant5Type SDK namespace.
+module TracesFilterValueVariant5Type
+  STRING_ARRAY = 'string_array'
+  VALUES = ['string_array'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTracesOrderByMetadata
+  FIELDS = {
+    field: "field",
+    direction: "direction",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    field
+  ].freeze
+  DECODERS = {
+    field: lambda do |value|
+      ::OctridevDigitalocean::TracesFieldRef.from_hash(value)
+    end,
+    direction: lambda do |value|
+      ::OctridevDigitalocean::TracesOrderByDirection.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for TracesOrderBy.
+# A sort clause for traces search results. Supported `field.name` values (case-insensitive) are `started` (aliases `startTime`, `start_time`, `timestamp`), `durationNs` (`duration`), `serviceName` (`service.name`, `service_name`), `traceId` (`trace.id`, `trace_id`), `errorCount` (`error_count`), `spanCount` (`span_count`), and `status`. Any other name returns `400`. Sorting by `started` is exact. For every other field, the server first selects the most recent matching traces…
+class TracesOrderBy
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesOrderByMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesOrderByMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesOrderByMetadata::DECODERS
+
+  # @return [TracesFieldRef] A reference to a span field, used in filters and `orderBy`.
+  attr_reader :field
+  # @return [TracesOrderByDirection] The sort direction (case-insensitive). Defaults to `desc`.
+  attr_reader :direction
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTracesFilterValueVariant5Metadata
-    FIELDS = {
-      type: 'type',
-      value: 'value'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      type
-      value
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::TracesFilterValueVariant5Type.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TracesFilterValueVariant5.
-  class TracesFilterValueVariant5
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesFilterValueVariant5Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesFilterValueVariant5Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesFilterValueVariant5Metadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [TracesFilterValueVariant5Type] Required enumerated value serialized in the `type` wire field.
-    attr_reader :type
-    # @return [Array_of_String] Required array value serialized in the `value` wire field.
-    attr_reader :value
+# Defines the TracesOrderByDirection SDK namespace.
+module TracesOrderByDirection
+  ASC = 'asc'
+  DESC = 'desc'
+  VALUES = ['asc', 'desc'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalTracesPaginationRequestMetadata
+  FIELDS = {
+    limit: "limit",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for TracesPaginationRequest.
+# Limits the size of a traces search result set. There is no cursor; use `pagination.hasMore` in the response to tell whether more traces matched, and narrow the time range or filter to see them.
+class TracesPaginationRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesPaginationRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesPaginationRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesPaginationRequestMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [Integer] Maximum number of traces to return. Omitted or `0` uses the default of 100. Negative values or values above 1000 return `400`; they are not clamped.
+  attr_reader :limit
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the TracesFilterValue SDK namespace.
-  module TracesFilterValue
-    def self.from_hash(hash)
-      return hash if hash.is_a?(::String)
-      return hash if hash.is_a?(::Float)
-      return Boolean.from_value(hash) if [true, false].include?(hash)
-      return hash if hash.is_a?(::Array)
-
-      lossy = nil
-      [TracesFilterValueVariant4, TracesFilterValueVariant5].each do |type|
-        decoded = type.from_hash(hash)
-        return decoded if SdkModel.keeps_every_key?(hash, decoded)
-
-        lossy ||= decoded
-      rescue ::StandardError
-        next
-      end
-      lossy unless lossy.nil?
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the TracesFilterValueVariant4Type SDK namespace.
-  module TracesFilterValueVariant4Type
-    STRING = 'string'
-    NUMBER = 'number'
-    BOOL = 'bool'
-    VALUES = %w[string number bool].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTracesPaginationResponseMetadata
+  FIELDS = {
+    has_more: "hasMore",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    has_more
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for TracesPaginationResponse.
+# Pagination response.
+class TracesPaginationResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesPaginationResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesPaginationResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesPaginationResponseMetadata::DECODERS
+
+  # @return [Boolean] Whether more results matched the query than were returned.
+  attr_reader :has_more
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the TracesFilterValueVariant5Type SDK namespace.
-  module TracesFilterValueVariant5Type
-    STRING_ARRAY = 'string_array'
-    VALUES = ['string_array'].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTracesOrderByMetadata
-    FIELDS = {
-      field: 'field',
-      direction: 'direction'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      field
-    ].freeze
-    DECODERS = {
-      field: lambda do |value|
-        ::OctridevDigitalocean::TracesFieldRef.from_hash(value)
-      end,
-      direction: lambda do |value|
-        ::OctridevDigitalocean::TracesOrderByDirection.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTracesSearchRequestMetadata
+  FIELDS = {
+    time_range: "timeRange",
+    filter: "filter",
+    order_by: "orderBy",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    time_range
+  ].freeze
+  DECODERS = {
+    time_range: lambda do |value|
+      ::OctridevDigitalocean::TracesTimeRange.from_hash(value)
+    end,
+    filter: lambda do |value|
+      ::OctridevDigitalocean::TracesFilterExpression.from_hash(value)
+    end,
+    order_by: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::TracesOrderBy.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::TracesPaginationRequest.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for TracesSearchRequest.
+# Request body for searching traces. Unknown properties are rejected.
+class TracesSearchRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesSearchRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesSearchRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesSearchRequestMetadata::DECODERS
+
+  # @return [TracesTimeRange] An inclusive query time window. Both bounds are required, `from` must not be after `to`, and the window must not exceed 7 days (`168h`).
+  attr_reader :time_range
+  # @return [TracesFilterExpression] A node in a traces filter tree. Every node is the same flat object; `type` selects which other properties apply: - `condition` (default when `type` is omitted): compares `field` to `value` using `operator`. - `and` / `or`: combines the nodes in `expressions` (1 to 32 children). - `not`: negates the single node in `expressions` (exactly one child). - `text_search`: case-insensitive substring match of `query` against the span name, service name, and span status message. A…
+  attr_reader :filter
+  # @return [Array_of_TracesOrderBy] Sort clauses applied in order. Defaults to `started` descending.
+  attr_reader :order_by
+  # @return [TracesPaginationRequest] Limits the size of a traces search result set. There is no cursor; use `pagination.hasMore` in the response to tell whether more traces matched, and narrow the time range or filter to see them.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TracesOrderBy.
-  # A sort clause for traces search results. Supported `field.name` values (case-insensitive) are `started` (aliases `startTime`, `start_time`, `timestamp`), `durationNs` (`duration`), `serviceName` (`service.name`, `service_name`), `traceId` (`trace.id`, `trace_id`), `errorCount` (`error_count`), `spanCount` (`span_count`), and `status`. Any other name returns `400`. Sorting by `started` is exact. For every other field, the server first selects the most recent matching traces…
-  class TracesOrderBy
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesOrderByMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesOrderByMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesOrderByMetadata::DECODERS
-
-    # @return [TracesFieldRef] A reference to a span field, used in filters and `orderBy`.
-    attr_reader :field
-    # @return [TracesOrderByDirection] The sort direction (case-insensitive). Defaults to `desc`.
-    attr_reader :direction
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the TracesOrderByDirection SDK namespace.
-  module TracesOrderByDirection
-    ASC = 'asc'
-    DESC = 'desc'
-    VALUES = %w[asc desc].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTracesSearchResponseMetadata
+  FIELDS = {
+    data: "data",
+    pagination: "pagination",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    data
+    pagination
+  ].freeze
+  DECODERS = {
+    data: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::TracesTraceSummary.from_hash(item) }
+    end,
+    pagination: lambda do |value|
+      ::OctridevDigitalocean::TracesPaginationResponse.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for TracesSearchResponse.
+# Response body for a traces search.
+class TracesSearchResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesSearchResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesSearchResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesSearchResponseMetadata::DECODERS
+
+  # @return [Array_of_TracesTraceSummary] Matching traces. Empty when no traces match.
+  attr_reader :data
+  # @return [TracesPaginationResponse] Pagination response.
+  attr_reader :pagination
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTracesPaginationRequestMetadata
-    FIELDS = {
-      limit: 'limit'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TracesPaginationRequest.
-  # Limits the size of a traces search result set. There is no cursor; use `pagination.hasMore` in the response to tell whether more traces matched, and narrow the time range or filter to see them.
-  class TracesPaginationRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesPaginationRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesPaginationRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesPaginationRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] Maximum number of traces to return. Omitted or `0` uses the default of 100. Negative values or values above 1000 return `400`; they are not clamped.
-    attr_reader :limit
+# Internal model hydration metadata.
+class SdkInternalTracesSpanRecordMetadata
+  FIELDS = {
+    trace_id: "traceId",
+    span_id: "spanId",
+    parent_span_id: "parentSpanId",
+    start_time: "startTime",
+    end_time: "endTime",
+    duration_ns: "durationNs",
+    name: "name",
+    kind: "kind",
+    status_code: "statusCode",
+    status_message: "statusMessage",
+    service_name: "serviceName",
+    resource: "resource",
+    attributes: "attributes",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    trace_id
+    span_id
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for TracesSpanRecord.
+# A single span belonging to a trace.
+class TracesSpanRecord
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesSpanRecordMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesSpanRecordMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesSpanRecordMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The trace this span belongs to.
+  attr_reader :trace_id
+  # @return [String] The span identifier.
+  attr_reader :span_id
+  # @return [String] The parent span identifier. Omitted for the root span.
+  attr_reader :parent_span_id
+  # @return [String] The span start time.
+  attr_reader :start_time
+  # @return [String] The span end time.
+  attr_reader :end_time
+  # @return [Integer] Span duration in nanoseconds.
+  attr_reader :duration_ns
+  # @return [String] The span name, typically the operation being performed.
+  attr_reader :name
+  # @return [String] The OpenTelemetry span kind as a string, for example `Server`, `Client`, or `Internal`.
+  attr_reader :kind
+  # @return [String] The OpenTelemetry span status code as a string: `Unset`, `Ok`, or `Error`.
+  attr_reader :status_code
+  # @return [String] The status description. Omitted when empty.
+  attr_reader :status_message
+  # @return [String] The service that emitted the span. Omitted when the span has no service.name resource attribute.
+  attr_reader :service_name
+  # @return [Hash] Resource attributes associated with the span.
+  attr_reader :resource
+  # @return [Hash] Span attributes. Omitted when empty.
+  attr_reader :attributes
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTracesPaginationResponseMetadata
-    FIELDS = {
-      has_more: 'hasMore'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      has_more
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TracesPaginationResponse.
-  # Pagination response.
-  class TracesPaginationResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesPaginationResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesPaginationResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesPaginationResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Boolean] Whether more results matched the query than were returned.
-    attr_reader :has_more
+# Internal model hydration metadata.
+class SdkInternalTracesTimeInstantMetadata
+  FIELDS = {
+    absolute: "absolute",
+    relative: "relative",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for TracesTimeInstant.
+# A single point in time. Set `absolute` or `relative`; if both are set, `absolute` is used.
+class TracesTimeInstant
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesTimeInstantMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesTimeInstantMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesTimeInstantMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] An absolute timestamp, either RFC3339 (with optional fractional seconds) or a Unix epoch integer as a decimal string. Epoch precision is inferred from magnitude: seconds, milliseconds, microseconds, or nanoseconds.
+  attr_reader :absolute
+  # @return [String] A time relative to now. Use `now` for the current time, a bare duration such as `15m` or `24h` to look back from now, or an offset such as `now-2h` or `now+30m`. Supported units are `s`, `m`, `h`, `d`, and `w`; decimal amounts such as `1.5h` are allowed.
+  attr_reader :relative
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTracesSearchRequestMetadata
-    FIELDS = {
-      time_range: 'timeRange',
-      filter: 'filter',
-      order_by: 'orderBy',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      time_range
-    ].freeze
-    DECODERS = {
-      time_range: lambda do |value|
-        ::OctridevDigitalocean::TracesTimeRange.from_hash(value)
-      end,
-      filter: lambda do |value|
-        ::OctridevDigitalocean::TracesFilterExpression.from_hash(value)
-      end,
-      order_by: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::TracesOrderBy.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::TracesPaginationRequest.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TracesSearchRequest.
-  # Request body for searching traces. Unknown properties are rejected.
-  class TracesSearchRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesSearchRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesSearchRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesSearchRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [TracesTimeRange] An inclusive query time window. Both bounds are required, `from` must not be after `to`, and the window must not exceed 7 days (`168h`).
-    attr_reader :time_range
-    # @return [TracesFilterExpression] A node in a traces filter tree. Every node is the same flat object; `type` selects which other properties apply: - `condition` (default when `type` is omitted): compares `field` to `value` using `operator`. - `and` / `or`: combines the nodes in `expressions` (1 to 32 children). - `not`: negates the single node in `expressions` (exactly one child). - `text_search`: case-insensitive substring match of `query` against the span name, service name, and span status message. A…
-    attr_reader :filter
-    # @return [Array_of_TracesOrderBy] Sort clauses applied in order. Defaults to `started` descending.
-    attr_reader :order_by
-    # @return [TracesPaginationRequest] Limits the size of a traces search result set. There is no cursor; use `pagination.hasMore` in the response to tell whether more traces matched, and narrow the time range or filter to see them.
-    attr_reader :pagination
+# Internal model hydration metadata.
+class SdkInternalTracesTimeRangeMetadata
+  FIELDS = {
+    from: "from",
+    to: "to",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    from
+    to
+  ].freeze
+  DECODERS = {
+    from: lambda do |value|
+      ::OctridevDigitalocean::TracesTimeInstant.from_hash(value)
+    end,
+    to: lambda do |value|
+      ::OctridevDigitalocean::TracesTimeInstant.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for TracesTimeRange.
+# An inclusive query time window. Both bounds are required, `from` must not be after `to`, and the window must not exceed 7 days (`168h`).
+class TracesTimeRange
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTracesTimeRangeMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTracesTimeRangeMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTracesTimeRangeMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [TracesTimeInstant] A single point in time. Set `absolute` or `relative`; if both are set, `absolute` is used.
+  attr_reader :from
+  # @return [TracesTimeInstant] A single point in time. Set `absolute` or `relative`; if both are set, `absolute` is used.
+  attr_reader :to
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTracesSearchResponseMetadata
-    FIELDS = {
-      data: 'data',
-      pagination: 'pagination'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      data
-      pagination
-    ].freeze
-    DECODERS = {
-      data: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::TracesTraceSummary.from_hash(item) }
-      end,
-      pagination: lambda do |value|
-        ::OctridevDigitalocean::TracesPaginationResponse.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for TracesSearchResponse.
-  # Response body for a traces search.
-  class TracesSearchResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesSearchResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesSearchResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesSearchResponseMetadata::DECODERS
-
-    # @return [Array_of_TracesTraceSummary] Matching traces. Empty when no traces match.
-    attr_reader :data
-    # @return [TracesPaginationResponse] Pagination response.
-    attr_reader :pagination
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # Internal model hydration metadata.
-  class SdkInternalTracesSpanRecordMetadata
-    FIELDS = {
-      trace_id: 'traceId',
-      span_id: 'spanId',
-      parent_span_id: 'parentSpanId',
-      start_time: 'startTime',
-      end_time: 'endTime',
-      duration_ns: 'durationNs',
-      name: 'name',
-      kind: 'kind',
-      status_code: 'statusCode',
-      status_message: 'statusMessage',
-      service_name: 'serviceName',
-      resource: 'resource',
-      attributes: 'attributes'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      trace_id
-      span_id
-    ].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for TracesSpanRecord.
-  # A single span belonging to a trace.
-  class TracesSpanRecord
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesSpanRecordMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesSpanRecordMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesSpanRecordMetadata::DECODERS
-
-    # @return [String] The trace this span belongs to.
-    attr_reader :trace_id
-    # @return [String] The span identifier.
-    attr_reader :span_id
-    # @return [String] The parent span identifier. Omitted for the root span.
-    attr_reader :parent_span_id
-    # @return [String] The span start time.
-    attr_reader :start_time
-    # @return [String] The span end time.
-    attr_reader :end_time
-    # @return [Integer] Span duration in nanoseconds.
-    attr_reader :duration_ns
-    # @return [String] The span name, typically the operation being performed.
-    attr_reader :name
-    # @return [String] The OpenTelemetry span kind as a string, for example `Server`, `Client`, or `Internal`.
-    attr_reader :kind
-    # @return [String] The OpenTelemetry span status code as a string: `Unset`, `Ok`, or `Error`.
-    attr_reader :status_code
-    # @return [String] The status description. Omitted when empty.
-    attr_reader :status_message
-    # @return [String] The service that emitted the span. Omitted when the span has no service.name resource attribute.
-    attr_reader :service_name
-    # @return [Hash] Resource attributes associated with the span.
-    attr_reader :resource
-    # @return [Hash] Span attributes. Omitted when empty.
-    attr_reader :attributes
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalTracesTimeInstantMetadata
-    FIELDS = {
-      absolute: 'absolute',
-      relative: 'relative'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for TracesTimeInstant.
-  # A single point in time. Set `absolute` or `relative`; if both are set, `absolute` is used.
-  class TracesTimeInstant
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesTimeInstantMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesTimeInstantMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesTimeInstantMetadata::DECODERS
-
-    # @return [String] An absolute timestamp, either RFC3339 (with optional fractional seconds) or a Unix epoch integer as a decimal string. Epoch precision is inferred from magnitude: seconds, milliseconds, microseconds, or nanoseconds.
-    attr_reader :absolute
-    # @return [String] A time relative to now. Use `now` for the current time, a bare duration such as `15m` or `24h` to look back from now, or an offset such as `now-2h` or `now+30m`. Supported units are `s`, `m`, `h`, `d`, and `w`; decimal amounts such as `1.5h` are allowed.
-    attr_reader :relative
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalTracesTimeRangeMetadata
-    FIELDS = {
-      from: 'from',
-      to: 'to'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      from
-      to
-    ].freeze
-    DECODERS = {
-      from: lambda do |value|
-        ::OctridevDigitalocean::TracesTimeInstant.from_hash(value)
-      end,
-      to: lambda do |value|
-        ::OctridevDigitalocean::TracesTimeInstant.from_hash(value)
-      end
-    }.freeze
-  end
-
-  # API model for TracesTimeRange.
-  # An inclusive query time window. Both bounds are required, `from` must not be after `to`, and the window must not exceed 7 days (`168h`).
-  class TracesTimeRange
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTracesTimeRangeMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTracesTimeRangeMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTracesTimeRangeMetadata::DECODERS
-
-    # @return [TracesTimeInstant] A single point in time. Set `absolute` or `relative`; if both are set, `absolute` is used.
-    attr_reader :from
-    # @return [TracesTimeInstant] A single point in time. Set `absolute` or `relative`; if both are set, `absolute` is used.
-    attr_reader :to
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

@@ -21,24 +21,25 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          '/v2/droplets/autoscale',
+          "/v2/droplets/autoscale",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'name' => QueryValue.new(name, style: 'form', explode: true)
+            'name' => QueryValue.new(name, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::AllAutoscalePools,
           decoder: :json,
           operation_id: 'autoscalepools_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -60,20 +61,21 @@ module OctridevDigitalocean
         droplet_template:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/droplets/autoscale',
+          "/v2/droplets/autoscale",
           config: config,
           body: {
             'name' => name,
             'config' => request_config,
-            'droplet_template' => droplet_template
+            'droplet_template' => droplet_template,
           },
           return_type: ::OctridevDigitalocean::AutoscalePoolCreateResponse,
           decoder: :json,
           operation_id: 'autoscalepools_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -85,10 +87,11 @@ module OctridevDigitalocean
         autoscale_pool_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/droplets/autoscale/',
+            "/v2/droplets/autoscale/",
             SdkClient.encode_path_segment(autoscale_pool_id)
           ].join,
           config: config,
@@ -96,7 +99,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'autoscalepools_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -120,23 +123,24 @@ module OctridevDigitalocean
         droplet_template:,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/droplets/autoscale/',
+            "/v2/droplets/autoscale/",
             SdkClient.encode_path_segment(autoscale_pool_id)
           ].join,
           config: config,
           body: {
             'name' => name,
             'config' => request_config,
-            'droplet_template' => droplet_template
+            'droplet_template' => droplet_template,
           },
           return_type: ::OctridevDigitalocean::AutoscalePoolCreateResponse,
           decoder: :json,
           operation_id: 'autoscalepools_update',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -148,17 +152,18 @@ module OctridevDigitalocean
         autoscale_pool_id:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/v2/droplets/autoscale/',
+            "/v2/droplets/autoscale/",
             SdkClient.encode_path_segment(autoscale_pool_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'autoscalepools_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -173,21 +178,22 @@ module OctridevDigitalocean
         x_dangerous:,
         request_options: nil
       )
+
         SdkClient.request(
           'DELETE',
           [
-            '/v2/droplets/autoscale/',
+            "/v2/droplets/autoscale/",
             SdkClient.encode_path_segment(autoscale_pool_id),
-            '/dangerous'
+            "/dangerous"
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'autoscalepools_delete_dangerous',
           extra_headers: SdkClient.serialize_headers({
-                                                       'X-Dangerous' => SdkClient.header_value(x_dangerous)
-                                                     }),
+            'X-Dangerous' => SdkClient.header_value(x_dangerous),
+          }),
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -203,6 +209,7 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
@@ -210,20 +217,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/droplets/autoscale/',
+            "/v2/droplets/autoscale/",
             SdkClient.encode_path_segment(autoscale_pool_id),
-            '/members'
+            "/members"
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::AllMembers,
           decoder: :json,
           operation_id: 'autoscalepools_list_members',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -239,6 +246,7 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
@@ -246,20 +254,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/droplets/autoscale/',
+            "/v2/droplets/autoscale/",
             SdkClient.encode_path_segment(autoscale_pool_id),
-            '/history'
+            "/history"
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::HistoryEvents,
           decoder: :json,
           operation_id: 'autoscalepools_list_history',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

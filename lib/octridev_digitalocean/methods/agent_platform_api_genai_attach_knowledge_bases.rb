@@ -17,19 +17,20 @@ module OctridevDigitalocean
         agent_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/gen-ai/agents/',
+            "/v2/gen-ai/agents/",
             SdkClient.encode_path_segment(agent_uuid),
-            '/knowledge_bases'
+            "/knowledge_bases"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiLinkKnowledgeBaseOutput,
           decoder: :json,
           operation_id: 'genai_attach_knowledge_bases',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

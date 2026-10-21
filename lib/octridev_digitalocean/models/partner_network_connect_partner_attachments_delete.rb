@@ -5,60 +5,62 @@
 
 # partner_network_connect domain models
 module OctridevDigitalocean
-  # API model for SinglePartnerAttachmentDeleting.
-  # Typed representation of the `SinglePartnerAttachmentDeleting` API schema.
-  class SinglePartnerAttachmentDeleting
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSinglePartnerAttachmentDeletingMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSinglePartnerAttachmentDeletingMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSinglePartnerAttachmentDeletingMetadata::DECODERS
+# API model for SinglePartnerAttachmentDeleting.
+# Typed representation of the `SinglePartnerAttachmentDeleting` API schema.
+class SinglePartnerAttachmentDeleting
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSinglePartnerAttachmentDeletingMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSinglePartnerAttachmentDeletingMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSinglePartnerAttachmentDeletingMetadata::DECODERS
 
-    attr_reader :partner_attachment
+  attr_reader :partner_attachment
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalSinglePartnerAttachmentServiceKeyMetadata
-    FIELDS = {
-      service_key: 'service_key'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for SinglePartnerAttachmentServiceKey.
-  # Typed representation of the `SinglePartnerAttachmentServiceKey` API schema.
-  class SinglePartnerAttachmentServiceKey
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSinglePartnerAttachmentServiceKeyMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSinglePartnerAttachmentServiceKeyMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSinglePartnerAttachmentServiceKeyMetadata::DECODERS
-
-    attr_reader :service_key
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
+
+# Internal model hydration metadata.
+class SdkInternalSinglePartnerAttachmentServiceKeyMetadata
+  FIELDS = {
+    service_key: "service_key",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for SinglePartnerAttachmentServiceKey.
+# Typed representation of the `SinglePartnerAttachmentServiceKey` API schema.
+class SinglePartnerAttachmentServiceKey
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSinglePartnerAttachmentServiceKeyMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSinglePartnerAttachmentServiceKeyMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSinglePartnerAttachmentServiceKeyMetadata::DECODERS
+
+  attr_reader :service_key
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
+  end
+
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

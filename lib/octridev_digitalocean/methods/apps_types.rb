@@ -18,9 +18,9 @@ module OctridevDigitalocean
         AUTO_ROLLBACK = 'AUTO_ROLLBACK'
         UPDATE_DATABASE_TRUSTED_SOURCES = 'UPDATE_DATABASE_TRUSTED_SOURCES'
         AUTOSCALED = 'AUTOSCALED'
-        VALUES = %w[
-          MANUAL DEPLOY_ON_PUSH MAINTENANCE MANUAL_ROLLBACK AUTO_ROLLBACK
-          UPDATE_DATABASE_TRUSTED_SOURCES AUTOSCALED
+        VALUES = [
+          'MANUAL', 'DEPLOY_ON_PUSH', 'MAINTENANCE', 'MANUAL_ROLLBACK', 'AUTO_ROLLBACK',
+          'UPDATE_DATABASE_TRUSTED_SOURCES', 'AUTOSCALED'
         ].freeze
         def self.from_value(value)
           value
@@ -32,7 +32,7 @@ module OctridevDigitalocean
         UNKNOWN = 'UNKNOWN'
         DEPLOYMENT = 'DEPLOYMENT'
         AUTOSCALING = 'AUTOSCALING'
-        VALUES = %w[UNKNOWN DEPLOYMENT AUTOSCALING].freeze
+        VALUES = ['UNKNOWN', 'DEPLOYMENT', 'AUTOSCALING'].freeze
         def self.from_value(value)
           value
         end

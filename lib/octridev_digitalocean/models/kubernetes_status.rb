@@ -5,78 +5,81 @@
 
 # kubernetes_status domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalStatusMessagesMetadata
-    FIELDS = {
-      message: 'message',
-      timestamp: 'timestamp'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalStatusMessagesMetadata
+  FIELDS = {
+    message: "message",
+    timestamp: "timestamp",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for StatusMessages.
+# Typed representation of the `StatusMessages` API schema.
+class StatusMessages
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalStatusMessagesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalStatusMessagesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalStatusMessagesMetadata::DECODERS
+
+  # @return [String] Status information about the cluster which impacts it's lifecycle.
+  attr_reader :message
+  # @return [String] A timestamp in ISO8601 format that represents when the status message was emitted.
+  attr_reader :timestamp
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for StatusMessages.
-  # Typed representation of the `StatusMessages` API schema.
-  class StatusMessages
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalStatusMessagesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalStatusMessagesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalStatusMessagesMetadata::DECODERS
-
-    # @return [String] Status information about the cluster which impacts it's lifecycle.
-    attr_reader :message
-    # @return [String] A timestamp in ISO8601 format that represents when the status message was emitted.
-    attr_reader :timestamp
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalStatusMessagesResponseMetadata
-    FIELDS = {
-      messages: 'messages'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      messages: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::StatusMessages.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalStatusMessagesResponseMetadata
+  FIELDS = {
+    messages: "messages",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    messages: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::StatusMessages.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for StatusMessagesResponse.
+# Typed representation of the `StatusMessagesResponse` API schema.
+class StatusMessagesResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalStatusMessagesResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalStatusMessagesResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalStatusMessagesResponseMetadata::DECODERS
+
+  # @return [Array_of_StatusMessages] Optional array value serialized in the `messages` wire field.
+  attr_reader :messages
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for StatusMessagesResponse.
-  # Typed representation of the `StatusMessagesResponse` API schema.
-  class StatusMessagesResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalStatusMessagesResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalStatusMessagesResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalStatusMessagesResponseMetadata::DECODERS
-
-    # @return [Array_of_StatusMessages] Optional array value serialized in the `messages` wire field.
-    attr_reader :messages
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

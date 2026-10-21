@@ -5,75 +5,78 @@
 
 # agent_platform_api_api_duplicate domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiDuplicateScenarioSetInputPublicMetadata
-    FIELDS = {
-      scenario_set_uuid: 'scenario_set_uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalApiDuplicateScenarioSetInputPublicMetadata
+  FIELDS = {
+    scenario_set_uuid: "scenario_set_uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiDuplicateScenarioSetInputPublic.
+# Public parameters for duplicating a scenario set.
+class ApiDuplicateScenarioSetInputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiDuplicateScenarioSetInputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiDuplicateScenarioSetInputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiDuplicateScenarioSetInputPublicMetadata::DECODERS
+
+  # @return [String] UUID of the scenario set to duplicate.
+  attr_reader :scenario_set_uuid
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiDuplicateScenarioSetInputPublic.
-  # Public parameters for duplicating a scenario set.
-  class ApiDuplicateScenarioSetInputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiDuplicateScenarioSetInputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiDuplicateScenarioSetInputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiDuplicateScenarioSetInputPublicMetadata::DECODERS
-
-    # @return [String] UUID of the scenario set to duplicate.
-    attr_reader :scenario_set_uuid
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiDuplicateScenarioSetOutputMetadata
-    FIELDS = {
-      scenario_set: 'scenario_set'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      scenario_set: lambda do |value|
-        ::OctridevDigitalocean::ApiScenarioSet.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiDuplicateScenarioSetOutputMetadata
+  FIELDS = {
+    scenario_set: "scenario_set",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    scenario_set: lambda do |value|
+      ::OctridevDigitalocean::ApiScenarioSet.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiDuplicateScenarioSetOutput.
+# Output for duplicating a scenario set.
+class ApiDuplicateScenarioSetOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiDuplicateScenarioSetOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiDuplicateScenarioSetOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiDuplicateScenarioSetOutputMetadata::DECODERS
+
+  # @return [ApiScenarioSet] A team-owned collection of scenarios.
+  attr_reader :scenario_set
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiDuplicateScenarioSetOutput.
-  # Output for duplicating a scenario set.
-  class ApiDuplicateScenarioSetOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiDuplicateScenarioSetOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiDuplicateScenarioSetOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiDuplicateScenarioSetOutputMetadata::DECODERS
-
-    # @return [ApiScenarioSet] A team-owned collection of scenarios.
-    attr_reader :scenario_set
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -5,377 +5,383 @@
 
 # vpc_subnets_public_preview domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAllVpcSubnetsMetadata
-    FIELDS = {
-      vpc_subnet: 'vpc_subnet',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      vpc_subnet: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::VpcSubnet.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAllVpcSubnetsMetadata
+  FIELDS = {
+    vpc_subnet: "vpc_subnet",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    vpc_subnet: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::VpcSubnet.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for AllVpcSubnets.
+# Typed representation of the `AllVpcSubnets` API schema.
+class AllVpcSubnets
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAllVpcSubnetsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAllVpcSubnetsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAllVpcSubnetsMetadata::DECODERS
+
+  attr_reader :vpc_subnet
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AllVpcSubnets.
-  # Typed representation of the `AllVpcSubnets` API schema.
-  class AllVpcSubnets
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAllVpcSubnetsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAllVpcSubnetsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAllVpcSubnetsMetadata::DECODERS
-
-    attr_reader :vpc_subnet
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalSingleVpcSubnetMetadata
-    FIELDS = {
-      vpc_subnet: 'vpc_subnet'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      vpc_subnet: lambda do |value|
-        ::OctridevDigitalocean::VpcSubnet.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalSingleVpcSubnetMetadata
+  FIELDS = {
+    vpc_subnet: "vpc_subnet",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    vpc_subnet: lambda do |value|
+      ::OctridevDigitalocean::VpcSubnet.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for SingleVpcSubnet.
+# Typed representation of the `SingleVpcSubnet` API schema.
+class SingleVpcSubnet
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSingleVpcSubnetMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSingleVpcSubnetMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSingleVpcSubnetMetadata::DECODERS
+
+  # @return [VpcSubnet] Optional object value serialized in the `vpc_subnet` wire field.
+  attr_reader :vpc_subnet
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for SingleVpcSubnet.
-  # Typed representation of the `SingleVpcSubnet` API schema.
-  class SingleVpcSubnet
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSingleVpcSubnetMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSingleVpcSubnetMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSingleVpcSubnetMetadata::DECODERS
-
-    # @return [VpcSubnet] Optional object value serialized in the `vpc_subnet` wire field.
-    attr_reader :vpc_subnet
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcSubnetMetadata
-    FIELDS = {
-      id: 'id',
-      urn: 'urn',
-      name: 'name',
-      ip_range: 'ip_range',
-      default: 'default',
-      type: 'type',
-      region: 'region',
-      created_at: 'created_at',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      urn
-      name
-      ip_range
-      type
-      region
-      created_at
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::VpcSubnetType.from_value(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::VpcSubnetMeta.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalVpcSubnetMetadata
+  FIELDS = {
+    id: "id",
+    urn: "urn",
+    name: "name",
+    ip_range: "ip_range",
+    default: "default",
+    type: "type",
+    region: "region",
+    created_at: "created_at",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    urn
+    name
+    ip_range
+    type
+    region
+    created_at
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::VpcSubnetType.from_value(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::VpcSubnetMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for VpcSubnet.
+# Typed representation of the `VpcSubnet` API schema.
+class VpcSubnet
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcSubnetMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcSubnetMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcSubnetMetadata::DECODERS
+
+  # @return [String] The unique identifier of the VPC subnet.
+  attr_reader :id
+  # @return [String] The uniform resource name of the VPC subnet.
+  attr_reader :urn
+  # @return [String] The human-readable name of the VPC subnet.
+  attr_reader :name
+  # @return [String] The IPv4 range assigned to the subnet in CIDR notation.
+  attr_reader :ip_range
+  # @return [Boolean] Whether this is the default subnet for the VPC.
+  attr_reader :default
+  # @return [VpcSubnetType] The type of the VPC subnet.
+  attr_reader :type
+  # @return [String] The slug of the region containing the VPC subnet.
+  attr_reader :region
+  # @return [String] The time when the VPC subnet was created.
+  attr_reader :created_at
+  # @return [VpcSubnetMeta] Additional information about the VPC subnet.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for VpcSubnet.
-  # Typed representation of the `VpcSubnet` API schema.
-  class VpcSubnet
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcSubnetMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcSubnetMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcSubnetMetadata::DECODERS
-
-    # @return [String] The unique identifier of the VPC subnet.
-    attr_reader :id
-    # @return [String] The uniform resource name of the VPC subnet.
-    attr_reader :urn
-    # @return [String] The human-readable name of the VPC subnet.
-    attr_reader :name
-    # @return [String] The IPv4 range assigned to the subnet in CIDR notation.
-    attr_reader :ip_range
-    # @return [Boolean] Whether this is the default subnet for the VPC.
-    attr_reader :default
-    # @return [VpcSubnetType] The type of the VPC subnet.
-    attr_reader :type
-    # @return [String] The slug of the region containing the VPC subnet.
-    attr_reader :region
-    # @return [String] The time when the VPC subnet was created.
-    attr_reader :created_at
-    # @return [VpcSubnetMeta] Additional information about the VPC subnet.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the VpcSubnetType SDK namespace.
-  module VpcSubnetType
-    REGULAR = 'REGULAR'
-    MANAGED = 'MANAGED'
-    OVERLAY = 'OVERLAY'
-    VALUES = %w[REGULAR MANAGED OVERLAY].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the VpcSubnetType SDK namespace.
+module VpcSubnetType
+  REGULAR = 'REGULAR'
+  MANAGED = 'MANAGED'
+  OVERLAY = 'OVERLAY'
+  VALUES = ['REGULAR', 'MANAGED', 'OVERLAY'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalVpcSubnetCreateMetadata
+  FIELDS = {
+    name: "name",
+    ip_range: "ip_range",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for VpcSubnetCreate.
+# Typed representation of the `VpcSubnetCreate` API schema.
+class VpcSubnetCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcSubnetCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcSubnetCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcSubnetCreateMetadata::DECODERS
+
+  # @return [String] The human-readable name of the VPC subnet.
+  attr_reader :name
+  # @return [String] An RFC1918 CIDR range between /16 and /24 that does not overlap another team or VPC network.
+  attr_reader :ip_range
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcSubnetCreateMetadata
-    FIELDS = {
-      name: 'name',
-      ip_range: 'ip_range'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for VpcSubnetCreate.
-  # Typed representation of the `VpcSubnetCreate` API schema.
-  class VpcSubnetCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcSubnetCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcSubnetCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcSubnetCreateMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The human-readable name of the VPC subnet.
-    attr_reader :name
-    # @return [String] An RFC1918 CIDR range between /16 and /24 that does not overlap another team or VPC network.
-    attr_reader :ip_range
+# Internal model hydration metadata.
+class SdkInternalVpcSubnetMembersMetadata
+  FIELDS = {
+    members: "members",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    members: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::VpcMember.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for VpcSubnetMembers.
+# Typed representation of the `VpcSubnetMembers` API schema.
+class VpcSubnetMembers
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcSubnetMembersMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcSubnetMembersMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcSubnetMembersMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  attr_reader :members
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcSubnetMembersMetadata
-    FIELDS = {
-      members: 'members',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      members: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::VpcMember.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for VpcSubnetMembers.
-  # Typed representation of the `VpcSubnetMembers` API schema.
-  class VpcSubnetMembers
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcSubnetMembersMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcSubnetMembersMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcSubnetMembersMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    attr_reader :members
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
+# Internal model hydration metadata.
+class SdkInternalVpcSubnetMetaMetadata
+  FIELDS = {
+    stats: "stats",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    stats: lambda do |value|
+      ::OctridevDigitalocean::VpcSubnetStatistics.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for VpcSubnetMeta.
+# Additional information about the VPC subnet.
+class VpcSubnetMeta
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcSubnetMetaMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcSubnetMetaMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcSubnetMetaMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [VpcSubnetStatistics] Member statistics, excluding resources the caller is not permitted to read.
+  attr_reader :stats
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcSubnetMetaMetadata
-    FIELDS = {
-      stats: 'stats'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      stats: lambda do |value|
-        ::OctridevDigitalocean::VpcSubnetStatistics.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for VpcSubnetMeta.
-  # Additional information about the VPC subnet.
-  class VpcSubnetMeta
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcSubnetMetaMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcSubnetMetaMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcSubnetMetaMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [VpcSubnetStatistics] Member statistics, excluding resources the caller is not permitted to read.
-    attr_reader :stats
+# Internal model hydration metadata.
+class SdkInternalVpcSubnetStatisticsMetadata
+  FIELDS = {
+    members: "members",
+    resources: "resources",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for VpcSubnetStatistics.
+# Member statistics, excluding resources the caller is not permitted to read.
+class VpcSubnetStatistics
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcSubnetStatisticsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcSubnetStatisticsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcSubnetStatisticsMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Integer] The number of members in the VPC subnet.
+  attr_reader :members
+  # @return [Hash] The number of members grouped by resource type.
+  attr_reader :resources
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcSubnetStatisticsMetadata
-    FIELDS = {
-      members: 'members',
-      resources: 'resources'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for VpcSubnetStatistics.
-  # Member statistics, excluding resources the caller is not permitted to read.
-  class VpcSubnetStatistics
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcSubnetStatisticsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcSubnetStatisticsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcSubnetStatisticsMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] The number of members in the VPC subnet.
-    attr_reader :members
-    # @return [Hash] The number of members grouped by resource type.
-    attr_reader :resources
+# Internal model hydration metadata.
+class SdkInternalVpcSubnetUpdateMetadata
+  FIELDS = {
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for VpcSubnetUpdate.
+# Typed representation of the `VpcSubnetUpdate` API schema.
+class VpcSubnetUpdate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalVpcSubnetUpdateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalVpcSubnetUpdateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalVpcSubnetUpdateMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The new human-readable name of the VPC subnet.
+  attr_reader :name
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalVpcSubnetUpdateMetadata
-    FIELDS = {
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for VpcSubnetUpdate.
-  # Typed representation of the `VpcSubnetUpdate` API schema.
-  class VpcSubnetUpdate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalVpcSubnetUpdateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalVpcSubnetUpdateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalVpcSubnetUpdateMetadata::DECODERS
-
-    # @return [String] The new human-readable name of the VPC subnet.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

@@ -12,13 +12,14 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalRegistryUpdateSubscriptionMetadata
         FIELDS = {
-          tier_slug: 'tier_slug'
+          tier_slug: "tier_slug",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           tier_slug: lambda do |value|
             ::OctridevDigitalocean::Methods::ContainerRegistry::RegistryUpdateSubscriptionTierSlug.from_value(value)
-          end
+          end,
         }.freeze
       end
 
@@ -51,7 +52,7 @@ module OctridevDigitalocean
         STARTER = 'starter'
         BASIC = 'basic'
         PROFESSIONAL = 'professional'
-        VALUES = %w[starter basic professional].freeze
+        VALUES = ['starter', 'basic', 'professional'].freeze
         def self.from_value(value)
           value
         end

@@ -12,14 +12,15 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalMonitoringCreateSinkMetadata
         FIELDS = {
-          destination_uuid: 'destination_uuid',
-          resources: 'resources'
+          destination_uuid: "destination_uuid",
+          resources: "resources",
         }.freeze
-        REQUIRED_FIELDS = %i[].freeze
+        REQUIRED_FIELDS = %i[
+        ].freeze
         DECODERS = {
           resources: lambda do |value|
             value&.map { |item| ::OctridevDigitalocean::SinkResource.from_hash(item) }
-          end
+          end,
         }.freeze
       end
 

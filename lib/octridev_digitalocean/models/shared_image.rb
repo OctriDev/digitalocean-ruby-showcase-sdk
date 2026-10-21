@@ -5,138 +5,139 @@
 
 # shared_image domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalImageMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      type: 'type',
-      distribution: 'distribution',
-      slug: 'slug',
-      public: 'public',
-      regions: 'regions',
-      created_at: 'created_at',
-      min_disk_size: 'min_disk_size',
-      size_gigabytes: 'size_gigabytes',
-      description: 'description',
-      tags: 'tags',
-      status: 'status',
-      error_message: 'error_message'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      name: lambda do |value|
-        ::OctridevDigitalocean::ImageName.from_value(value)
-      end,
-      type: lambda do |value|
-        ::OctridevDigitalocean::ImageType.from_value(value)
-      end,
-      distribution: lambda do |value|
-        ::OctridevDigitalocean::Distribution.from_value(value)
-      end,
-      regions: lambda do |value|
-        ::OctridevDigitalocean::RegionsArray.from_hash(value)
-      end,
-      description: lambda do |value|
-        ::OctridevDigitalocean::ImageDescription.from_value(value)
-      end,
-      tags: lambda do |value|
-        ::OctridevDigitalocean::TagsArray.from_hash(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::ImageStatus.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalImageMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    type: "type",
+    distribution: "distribution",
+    slug: "slug",
+    public: "public",
+    regions: "regions",
+    created_at: "created_at",
+    min_disk_size: "min_disk_size",
+    size_gigabytes: "size_gigabytes",
+    description: "description",
+    tags: "tags",
+    status: "status",
+    error_message: "error_message",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    name: lambda do |value|
+      ::OctridevDigitalocean::ImageName.from_value(value)
+    end,
+    type: lambda do |value|
+      ::OctridevDigitalocean::ImageType.from_value(value)
+    end,
+    distribution: lambda do |value|
+      ::OctridevDigitalocean::Distribution.from_value(value)
+    end,
+    regions: lambda do |value|
+      ::OctridevDigitalocean::RegionsArray.from_hash(value)
+    end,
+    description: lambda do |value|
+      ::OctridevDigitalocean::ImageDescription.from_value(value)
+    end,
+    tags: lambda do |value|
+      ::OctridevDigitalocean::TagsArray.from_hash(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::ImageStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for Image.
+# Typed representation of the `Image` API schema.
+class Image
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalImageMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalImageMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalImageMetadata::DECODERS
+
+  # @return [Integer] A unique number that can be used to identify and reference a specific image.
+  attr_reader :id
+  # @return [ImageName] The display name that has been given to an image. This is what is shown in the control panel and is generally a descriptive title for the image in question.
+  attr_reader :name
+  # @return [ImageType] Describes the kind of image. It may be one of `base`, `snapshot`, `backup`, `custom`, or `admin`. Respectively, this specifies whether an image is a DigitalOcean base OS image, user-generated Droplet snapshot, automatically created Droplet backup, user-provided virtual machine image, or an image used for DigitalOcean managed resources (e.g. DOKS worker nodes).
+  attr_reader :type
+  # @return [Distribution] The name of a custom image's distribution. Currently, the valid values are `Arch Linux`, `CentOS`, `CoreOS`, `Debian`, `Fedora`, `Fedora Atomic`, `FreeBSD`, `Gentoo`, `openSUSE`, `RancherOS`, `Rocky Linux`, `Ubuntu`, and `Unknown`. Any other value will be accepted but ignored, and `Unknown` will be used in its place.
+  attr_reader :distribution
+  # @return [String] A uniquely identifying string that is associated with each of the DigitalOcean-provided public images. These can be used to reference a public image as an alternative to the numeric id.
+  attr_reader :slug
+  # @return [Boolean] This is a boolean value that indicates whether the image in question is public or not. An image that is public is available to all accounts. A non-public image is only accessible from your account.
+  attr_reader :public
+  # @return [Array_of_RegionSlug] This attribute is an array of the regions that the image is available in. The regions are represented by their identifying slug values.
+  attr_reader :regions
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the image was created.
+  attr_reader :created_at
+  # @return [Integer] The minimum disk size in GB required for a Droplet to use this image.
+  attr_reader :min_disk_size
+  # @return [Float] The size of the image in gigabytes.
+  attr_reader :size_gigabytes
+  # @return [ImageDescription] An optional free-form text field to describe an image.
+  attr_reader :description
+  # @return [TagsArray] A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
+  attr_reader :tags
+  # @return [ImageStatus] A status string indicating the state of a custom image. This may be `NEW`, `available`, `pending`, `deleted`, or `retired`.
+  attr_reader :status
+  # @return [String] A string containing information about errors that may occur when importing a custom image.
+  attr_reader :error_message
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Image.
-  # Typed representation of the `Image` API schema.
-  class Image
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalImageMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalImageMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalImageMetadata::DECODERS
-
-    # @return [Integer] A unique number that can be used to identify and reference a specific image.
-    attr_reader :id
-    # @return [ImageName] The display name that has been given to an image. This is what is shown in the control panel and is generally a descriptive title for the image in question.
-    attr_reader :name
-    # @return [ImageType] Describes the kind of image. It may be one of `base`, `snapshot`, `backup`, `custom`, or `admin`. Respectively, this specifies whether an image is a DigitalOcean base OS image, user-generated Droplet snapshot, automatically created Droplet backup, user-provided virtual machine image, or an image used for DigitalOcean managed resources (e.g. DOKS worker nodes).
-    attr_reader :type
-    # @return [Distribution] The name of a custom image's distribution. Currently, the valid values are `Arch Linux`, `CentOS`, `CoreOS`, `Debian`, `Fedora`, `Fedora Atomic`, `FreeBSD`, `Gentoo`, `openSUSE`, `RancherOS`, `Rocky Linux`, `Ubuntu`, and `Unknown`. Any other value will be accepted but ignored, and `Unknown` will be used in its place.
-    attr_reader :distribution
-    # @return [String] A uniquely identifying string that is associated with each of the DigitalOcean-provided public images. These can be used to reference a public image as an alternative to the numeric id.
-    attr_reader :slug
-    # @return [Boolean] This is a boolean value that indicates whether the image in question is public or not. An image that is public is available to all accounts. A non-public image is only accessible from your account.
-    attr_reader :public
-    # @return [Array_of_RegionSlug] This attribute is an array of the regions that the image is available in. The regions are represented by their identifying slug values.
-    attr_reader :regions
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the image was created.
-    attr_reader :created_at
-    # @return [Integer] The minimum disk size in GB required for a Droplet to use this image.
-    attr_reader :min_disk_size
-    # @return [Float] The size of the image in gigabytes.
-    attr_reader :size_gigabytes
-    # @return [ImageDescription] An optional free-form text field to describe an image.
-    attr_reader :description
-    # @return [TagsArray] A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
-    attr_reader :tags
-    # @return [ImageStatus] A status string indicating the state of a custom image. This may be `NEW`, `available`, `pending`, `deleted`, or `retired`.
-    attr_reader :status
-    # @return [String] A string containing information about errors that may occur when importing a custom image.
-    attr_reader :error_message
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ImageStatus SDK namespace.
-  module ImageStatus
-    NEW = 'NEW'
-    AVAILABLE = 'available'
-    PENDING = 'pending'
-    DELETED = 'deleted'
-    RETIRED = 'retired'
-    VALUES = %w[NEW available pending deleted retired].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 
-  # Defines the ImageType SDK namespace.
-  module ImageType
-    BASE = 'base'
-    SNAPSHOT = 'snapshot'
-    BACKUP = 'backup'
-    CUSTOM = 'custom'
-    ADMIN = 'admin'
-    VALUES = %w[base snapshot backup custom admin].freeze
-    def self.from_value(value)
-      value
-    end
+# Defines the ImageStatus SDK namespace.
+module ImageStatus
+  NEW = 'NEW'
+  AVAILABLE = 'available'
+  PENDING = 'pending'
+  DELETED = 'deleted'
+  RETIRED = 'retired'
+  VALUES = ['NEW', 'available', 'pending', 'deleted', 'retired'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # Defines the ImageDescription SDK value decoder.
-  module ImageDescription
-    def self.from_value(value)
-      value
-    end
+# Defines the ImageType SDK namespace.
+module ImageType
+  BASE = 'base'
+  SNAPSHOT = 'snapshot'
+  BACKUP = 'backup'
+  CUSTOM = 'custom'
+  ADMIN = 'admin'
+  VALUES = ['base', 'snapshot', 'backup', 'custom', 'admin'].freeze
+  def self.from_value(value)
+    value
   end
+end
 
-  # Defines the ImageName SDK value decoder.
-  module ImageName
-    def self.from_value(value)
-      value
-    end
+# Defines the ImageDescription SDK value decoder.
+module ImageDescription
+  def self.from_value(value)
+    value
   end
+end
+
+# Defines the ImageName SDK value decoder.
+module ImageName
+  def self.from_value(value)
+    value
+  end
+end
 end

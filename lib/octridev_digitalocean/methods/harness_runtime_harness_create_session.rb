@@ -47,31 +47,32 @@ module OctridevDigitalocean
         resume_on_topoff2: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_length('name', name, min: 1, max: 64)
 
         Validation.validate_uuid('config_id', config_id)
 
         SdkClient.request(
           'POST',
-          '/v2/agents/sessions',
+          "/v2/agents/sessions",
           config: config,
           query: {
             'openai_session_id' => QueryValue.new(openai_session_id, style: 'form', explode: true),
-            'resume_on_topoff' => QueryValue.new(resume_on_topoff, style: 'form', explode: true)
+            'resume_on_topoff' => QueryValue.new(resume_on_topoff, style: 'form', explode: true),
           },
           body: {
             'name' => name,
             'config_id' => config_id,
-            'resume_on_topoff' => resume_on_topoff2
+            'resume_on_topoff' => resume_on_topoff2,
           },
           return_type: ::OctridevDigitalocean::DefinitionsCreateSessionResponse,
           decoder: :json,
           operation_id: 'harness_create_session',
           extra_headers: SdkClient.serialize_headers({
-                                                       'X-Device-UUID' => SdkClient.header_value(x_device_uuid)
-                                                     }),
+            'X-Device-UUID' => SdkClient.header_value(x_device_uuid),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '415' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '415' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

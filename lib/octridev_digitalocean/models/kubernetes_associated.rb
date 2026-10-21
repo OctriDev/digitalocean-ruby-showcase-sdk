@@ -5,90 +5,93 @@
 
 # kubernetes_associated domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAssociatedKubernetesResourceMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalAssociatedKubernetesResourceMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AssociatedKubernetesResource.
+# Typed representation of the `AssociatedKubernetesResource` API schema.
+class AssociatedKubernetesResource
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAssociatedKubernetesResourceMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAssociatedKubernetesResourceMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAssociatedKubernetesResourceMetadata::DECODERS
+
+  # @return [String] The ID of a resource associated with a Kubernetes cluster.
+  attr_reader :id
+  # @return [String] The name of a resource associated with a Kubernetes cluster.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AssociatedKubernetesResource.
-  # Typed representation of the `AssociatedKubernetesResource` API schema.
-  class AssociatedKubernetesResource
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAssociatedKubernetesResourceMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAssociatedKubernetesResourceMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAssociatedKubernetesResourceMetadata::DECODERS
-
-    # @return [String] The ID of a resource associated with a Kubernetes cluster.
-    attr_reader :id
-    # @return [String] The name of a resource associated with a Kubernetes cluster.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAssociatedKubernetesResourcesMetadata
-    FIELDS = {
-      load_balancers: 'load_balancers',
-      volumes: 'volumes',
-      volume_snapshots: 'volume_snapshots'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      load_balancers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AssociatedKubernetesResource.from_hash(item) }
-      end,
-      volumes: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AssociatedKubernetesResource.from_hash(item) }
-      end,
-      volume_snapshots: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AssociatedKubernetesResource.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAssociatedKubernetesResourcesMetadata
+  FIELDS = {
+    load_balancers: "load_balancers",
+    volumes: "volumes",
+    volume_snapshots: "volume_snapshots",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    load_balancers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AssociatedKubernetesResource.from_hash(item) }
+    end,
+    volumes: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AssociatedKubernetesResource.from_hash(item) }
+    end,
+    volume_snapshots: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AssociatedKubernetesResource.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AssociatedKubernetesResources.
+# An object containing the IDs of resources associated with a Kubernetes cluster.
+class AssociatedKubernetesResources
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAssociatedKubernetesResourcesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAssociatedKubernetesResourcesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAssociatedKubernetesResourcesMetadata::DECODERS
+
+  # @return [Array_of_AssociatedKubernetesResource] A list of names and IDs for associated load balancers that can be destroyed along with the cluster.
+  attr_reader :load_balancers
+  # @return [Array_of_AssociatedKubernetesResource] A list of names and IDs for associated volumes that can be destroyed along with the cluster.
+  attr_reader :volumes
+  # @return [Array_of_AssociatedKubernetesResource] A list of names and IDs for associated volume snapshots that can be destroyed along with the cluster.
+  attr_reader :volume_snapshots
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AssociatedKubernetesResources.
-  # An object containing the IDs of resources associated with a Kubernetes cluster.
-  class AssociatedKubernetesResources
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAssociatedKubernetesResourcesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAssociatedKubernetesResourcesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAssociatedKubernetesResourcesMetadata::DECODERS
-
-    # @return [Array_of_AssociatedKubernetesResource] A list of names and IDs for associated load balancers that can be destroyed along with the cluster.
-    attr_reader :load_balancers
-    # @return [Array_of_AssociatedKubernetesResource] A list of names and IDs for associated volumes that can be destroyed along with the cluster.
-    attr_reader :volumes
-    # @return [Array_of_AssociatedKubernetesResource] A list of names and IDs for associated volume snapshots that can be destroyed along with the cluster.
-    attr_reader :volume_snapshots
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

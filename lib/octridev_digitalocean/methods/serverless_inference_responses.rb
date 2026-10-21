@@ -55,6 +55,7 @@ module OctridevDigitalocean
         user: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(max_output_tokens) do
           Validation.validate_range('max_output_tokens', max_output_tokens, min: 1)
         end
@@ -65,7 +66,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          '/v1/responses',
+          "/v1/responses",
           config: config,
           body: {
             'model' => model,
@@ -80,13 +81,13 @@ module OctridevDigitalocean
             'tool_choice' => tool_choice,
             'stop' => stop,
             'metadata' => metadata,
-            'user' => user
+            'user' => user,
           },
           return_type: ::OctridevDigitalocean::CreateResponseResponse,
           decoder: :json,
           operation_id: 'inference_create_response',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -137,28 +138,26 @@ module OctridevDigitalocean
         request_options: nil,
         &block
       )
-        unless block
-          return enum_for(
-            __method__,
-            config: config,
-            model: model,
-            input: input,
-            stream: stream,
-            max_output_tokens: max_output_tokens,
-            temperature: temperature,
-            instructions: instructions,
-            top_p: top_p,
-            stream_options: stream_options,
-            tools: tools,
-            tool_choice: tool_choice,
-            stop: stop,
-            metadata: metadata,
-            user: user,
-            request_options: request_options
-          )
-        end
+    return enum_for(
+          __method__,
+          config: config,
+          model: model,
+          input: input,
+          stream: stream,
+          max_output_tokens: max_output_tokens,
+          temperature: temperature,
+          instructions: instructions,
+          top_p: top_p,
+          stream_options: stream_options,
+          tools: tools,
+          tool_choice: tool_choice,
+          stop: stop,
+          metadata: metadata,
+          user: user,
+          request_options: request_options,
+        ) unless block
         SdkClient.stream(
-          'POST', '/v1/responses',
+          'POST', "/v1/responses",
           config: config,
           body: {
             'model' => model,
@@ -173,17 +172,16 @@ module OctridevDigitalocean
             'tool_choice' => tool_choice,
             'stop' => stop,
             'metadata' => metadata,
-            'user' => user
+            'user' => user,
           },
           content_type: 'application/json',
           operation_id: 'inference_create_response_stream',
           stream_format: :sse,
-          stream_media_type: 'text/event-stream',
+          stream_media_type: "text/event-stream",
           request_options: request_options,
           errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
         ).each do |ev|
           break if ev.data == '[DONE]'
-
           decoded = JSON.parse(ev.data)
           block.call(SdkClient.decode_event(decoded, ::OctridevDigitalocean::CreateResponseStreamResponse))
         end

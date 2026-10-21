@@ -5,179 +5,183 @@
 
 # action_gateway_search domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalSearchProvidersResponseMetadata
-    FIELDS = {
-      providers: 'providers',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      providers: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ProviderSummary.from_hash(item) }
-      end,
-      next_page_token: lambda do |value|
-        ::OctridevDigitalocean::NextPageToken.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalSearchProvidersResponseMetadata
+  FIELDS = {
+    providers: "providers",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    providers: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ProviderSummary.from_hash(item) }
+    end,
+    next_page_token: lambda do |value|
+      ::OctridevDigitalocean::NextPageToken.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for SearchProvidersResponse.
+# One page of matching providers.
+class SearchProvidersResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSearchProvidersResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSearchProvidersResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSearchProvidersResponseMetadata::DECODERS
+
+  # @return [Array_of_ProviderSummary] Matching providers sorted by name.
+  attr_reader :providers
+  # @return [NextPageToken] Token for the next page; empty on the last page.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for SearchProvidersResponse.
-  # One page of matching providers.
-  class SearchProvidersResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSearchProvidersResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSearchProvidersResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSearchProvidersResponseMetadata::DECODERS
-
-    # @return [Array_of_ProviderSummary] Matching providers sorted by name.
-    attr_reader :providers
-    # @return [NextPageToken] Token for the next page; empty on the last page.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalSearchSessionsResponseMetadata
-    FIELDS = {
-      sessions: 'sessions',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      sessions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Session.from_hash(item) }
-      end,
-      next_page_token: lambda do |value|
-        ::OctridevDigitalocean::NextPageToken.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalSearchSessionsResponseMetadata
+  FIELDS = {
+    sessions: "sessions",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    sessions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Session.from_hash(item) }
+    end,
+    next_page_token: lambda do |value|
+      ::OctridevDigitalocean::NextPageToken.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for SearchSessionsResponse.
+# One page of matching sessions.
+class SearchSessionsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSearchSessionsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSearchSessionsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSearchSessionsResponseMetadata::DECODERS
+
+  # @return [Array_of_Session] Matching sessions in rank order.
+  attr_reader :sessions
+  # @return [NextPageToken] Token for the next page; empty on the last page.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for SearchSessionsResponse.
-  # One page of matching sessions.
-  class SearchSessionsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSearchSessionsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSearchSessionsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSearchSessionsResponseMetadata::DECODERS
-
-    # @return [Array_of_Session] Matching sessions in rank order.
-    attr_reader :sessions
-    # @return [NextPageToken] Token for the next page; empty on the last page.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalSearchToolbeltsResponseMetadata
-    FIELDS = {
-      toolbelts: 'toolbelts',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      toolbelts: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ToolbeltSummary.from_hash(item) }
-      end,
-      next_page_token: lambda do |value|
-        ::OctridevDigitalocean::NextPageToken.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalSearchToolbeltsResponseMetadata
+  FIELDS = {
+    toolbelts: "toolbelts",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    toolbelts: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ToolbeltSummary.from_hash(item) }
+    end,
+    next_page_token: lambda do |value|
+      ::OctridevDigitalocean::NextPageToken.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for SearchToolbeltsResponse.
+# One page of matching toolbelts.
+class SearchToolbeltsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSearchToolbeltsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSearchToolbeltsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSearchToolbeltsResponseMetadata::DECODERS
+
+  # @return [Array_of_ToolbeltSummary] Matching toolbelts sorted by name.
+  attr_reader :toolbelts
+  # @return [NextPageToken] Token for the next page; empty on the last page.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for SearchToolbeltsResponse.
-  # One page of matching toolbelts.
-  class SearchToolbeltsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSearchToolbeltsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSearchToolbeltsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSearchToolbeltsResponseMetadata::DECODERS
-
-    # @return [Array_of_ToolbeltSummary] Matching toolbelts sorted by name.
-    attr_reader :toolbelts
-    # @return [NextPageToken] Token for the next page; empty on the last page.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalSearchToolsResponseMetadata
-    FIELDS = {
-      tools: 'tools',
-      next_page_token: 'next_page_token'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      tools: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ToolSearchResult.from_hash(item) }
-      end,
-      next_page_token: lambda do |value|
-        ::OctridevDigitalocean::NextPageToken.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalSearchToolsResponseMetadata
+  FIELDS = {
+    tools: "tools",
+    next_page_token: "next_page_token",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    tools: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ToolSearchResult.from_hash(item) }
+    end,
+    next_page_token: lambda do |value|
+      ::OctridevDigitalocean::NextPageToken.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for SearchToolsResponse.
+# One page of matching tools.
+class SearchToolsResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSearchToolsResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSearchToolsResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSearchToolsResponseMetadata::DECODERS
+
+  # @return [Array_of_ToolSearchResult] Ordered by descending match quality, then by provider and name. The ordering is applied across the whole result set rather than within a page, so a client must not re-sort a page to rank it.
+  attr_reader :tools
+  # @return [NextPageToken] Token for the next page; empty on the last page.
+  attr_reader :next_page_token
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for SearchToolsResponse.
-  # One page of matching tools.
-  class SearchToolsResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSearchToolsResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSearchToolsResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSearchToolsResponseMetadata::DECODERS
-
-    # @return [Array_of_ToolSearchResult] Ordered by descending match quality, then by provider and name. The ordering is applied across the whole result set rather than within a page, so a client must not re-sort a page to rank it.
-    attr_reader :tools
-    # @return [NextPageToken] Token for the next page; empty on the last page.
-    attr_reader :next_page_token
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

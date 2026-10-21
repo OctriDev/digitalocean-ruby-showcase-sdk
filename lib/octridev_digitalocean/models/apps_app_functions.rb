@@ -5,231 +5,235 @@
 
 # apps_app_functions domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAppFunctionsComponentHealthFunctionsComponentHealthMetricsItemMetadata
-    FIELDS = {
-      metric_label: 'metric_label',
-      metric_value: 'metric_value',
-      time_window: 'time_window'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalAppFunctionsComponentHealthFunctionsComponentHealthMetricsItemMetadata
+  FIELDS = {
+    metric_label: "metric_label",
+    metric_value: "metric_value",
+    time_window: "time_window",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem.
+# Required object value serialized in the `functions_component_health_metrics[]` wire field.
+class AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppFunctionsComponentHealthFunctionsComponentHealthMetricsItemMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppFunctionsComponentHealthFunctionsComponentHealthMetricsItemMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppFunctionsComponentHealthFunctionsComponentHealthMetricsItemMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `metric_label` wire field.
+  attr_reader :metric_label
+  # @return [Float] Optional `double`-formatted value serialized in the `metric_value` wire field.
+  attr_reader :metric_value
+  # @return [String] Optional `string` value serialized in the `time_window` wire field.
+  attr_reader :time_window
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem.
-  # Required object value serialized in the `functions_component_health_metrics[]` wire field.
-  class AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppFunctionsComponentHealthFunctionsComponentHealthMetricsItemMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppFunctionsComponentHealthFunctionsComponentHealthMetricsItemMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppFunctionsComponentHealthFunctionsComponentHealthMetricsItemMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `metric_label` wire field.
-    attr_reader :metric_label
-    # @return [Float] Optional `double`-formatted value serialized in the `metric_value` wire field.
-    attr_reader :metric_value
-    # @return [String] Optional `string` value serialized in the `time_window` wire field.
-    attr_reader :time_window
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppFunctionsComponentHealthMetadata
-    FIELDS = {
-      name: 'name',
-      functions_component_health_metrics: 'functions_component_health_metrics'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      functions_component_health_metrics: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppFunctionsComponentHealthMetadata
+  FIELDS = {
+    name: "name",
+    functions_component_health_metrics: "functions_component_health_metrics",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    functions_component_health_metrics: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AppFunctionsComponentHealth.
+# Typed representation of the `AppFunctionsComponentHealth` API schema.
+class AppFunctionsComponentHealth
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppFunctionsComponentHealthMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppFunctionsComponentHealthMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppFunctionsComponentHealthMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `name` wire field.
+  attr_reader :name
+  # @return [Array_of_AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem] Optional array value serialized in the `functions_component_health_metrics` wire field.
+  attr_reader :functions_component_health_metrics
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppFunctionsComponentHealth.
-  # Typed representation of the `AppFunctionsComponentHealth` API schema.
-  class AppFunctionsComponentHealth
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppFunctionsComponentHealthMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppFunctionsComponentHealthMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppFunctionsComponentHealthMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `name` wire field.
-    attr_reader :name
-    # @return [Array_of_AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem] Optional array value serialized in the `functions_component_health_metrics` wire field.
-    attr_reader :functions_component_health_metrics
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppFunctionsSpecCorsMetadata
-    FIELDS = {
-      allow_origins: 'allow_origins',
-      allow_methods: 'allow_methods',
-      allow_headers: 'allow_headers',
-      expose_headers: 'expose_headers',
-      max_age: 'max_age',
-      allow_credentials: 'allow_credentials'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      allow_origins: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppsStringMatch.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppFunctionsSpecCorsMetadata
+  FIELDS = {
+    allow_origins: "allow_origins",
+    allow_methods: "allow_methods",
+    allow_headers: "allow_headers",
+    expose_headers: "expose_headers",
+    max_age: "max_age",
+    allow_credentials: "allow_credentials",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    allow_origins: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppsStringMatch.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AppFunctionsSpecCors.
+# Optional API value serialized in the `cors` wire field.
+class AppFunctionsSpecCors
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppFunctionsSpecCorsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppFunctionsSpecCorsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppFunctionsSpecCorsMetadata::DECODERS
+
+  # @return [Array_of_AppsStringMatch] The set of allowed CORS origins.
+  attr_reader :allow_origins
+  # @return [Array_of_String] The set of allowed HTTP methods. This configures the `Access-Control-Allow-Methods` header.
+  attr_reader :allow_methods
+  # @return [Array_of_String] The set of allowed HTTP request headers. This configures the `Access-Control-Allow-Headers` header.
+  attr_reader :allow_headers
+  # @return [Array_of_String] The set of HTTP response headers that browsers are allowed to access. This configures the `Access-Control-Expose-Headers` header.
+  attr_reader :expose_headers
+  # @return [String] An optional duration specifying how long browsers can cache the results of a preflight request. This configures the `Access-Control-Max-Age` header.
+  attr_reader :max_age
+  # @return [Boolean] Whether browsers should expose the response to the client-side JavaScript code when the request’s credentials mode is include. This configures the `Access-Control-Allow-Credentials` header.
+  attr_reader :allow_credentials
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppFunctionsSpecCors.
-  # Optional API value serialized in the `cors` wire field.
-  class AppFunctionsSpecCors
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppFunctionsSpecCorsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppFunctionsSpecCorsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppFunctionsSpecCorsMetadata::DECODERS
-
-    # @return [Array_of_AppsStringMatch] The set of allowed CORS origins.
-    attr_reader :allow_origins
-    # @return [Array_of_String] The set of allowed HTTP methods. This configures the `Access-Control-Allow-Methods` header.
-    attr_reader :allow_methods
-    # @return [Array_of_String] The set of allowed HTTP request headers. This configures the `Access-Control-Allow-Headers` header.
-    attr_reader :allow_headers
-    # @return [Array_of_String] The set of HTTP response headers that browsers are allowed to access. This configures the `Access-Control-Expose-Headers` header.
-    attr_reader :expose_headers
-    # @return [String] An optional duration specifying how long browsers can cache the results of a preflight request. This configures the `Access-Control-Max-Age` header.
-    attr_reader :max_age
-    # @return [Boolean] Whether browsers should expose the response to the client-side JavaScript code when the request’s credentials mode is include. This configures the `Access-Control-Allow-Credentials` header.
-    attr_reader :allow_credentials
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppFunctionsSpecMetadata
-    FIELDS = {
-      cors: 'cors',
-      routes: 'routes',
-      name: 'name',
-      source_dir: 'source_dir',
-      alerts: 'alerts',
-      envs: 'envs',
-      git: 'git',
-      github: 'github',
-      gitlab: 'gitlab',
-      bitbucket: 'bitbucket',
-      log_destinations: 'log_destinations'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {
-      cors: lambda do |value|
-        ::OctridevDigitalocean::AppFunctionsSpecCors.from_hash(value)
-      end,
-      routes: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppRouteSpec.from_hash(item) }
-      end,
-      alerts: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppAlertSpec.from_hash(item) }
-      end,
-      envs: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppVariableDefinition.from_hash(item) }
-      end,
-      git: lambda do |value|
-        ::OctridevDigitalocean::AppsGitSourceSpec.from_hash(value)
-      end,
-      github: lambda do |value|
-        ::OctridevDigitalocean::AppsGithubSourceSpec.from_hash(value)
-      end,
-      gitlab: lambda do |value|
-        ::OctridevDigitalocean::AppsGitlabSourceSpec.from_hash(value)
-      end,
-      bitbucket: lambda do |value|
-        ::OctridevDigitalocean::AppsBitbucketSourceSpec.from_hash(value)
-      end,
-      log_destinations: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppLogDestinationDefinition.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppFunctionsSpecMetadata
+  FIELDS = {
+    cors: "cors",
+    routes: "routes",
+    name: "name",
+    source_dir: "source_dir",
+    alerts: "alerts",
+    envs: "envs",
+    git: "git",
+    github: "github",
+    gitlab: "gitlab",
+    bitbucket: "bitbucket",
+    log_destinations: "log_destinations",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+    cors: lambda do |value|
+      ::OctridevDigitalocean::AppFunctionsSpecCors.from_hash(value)
+    end,
+    routes: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppRouteSpec.from_hash(item) }
+    end,
+    alerts: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppAlertSpec.from_hash(item) }
+    end,
+    envs: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppVariableDefinition.from_hash(item) }
+    end,
+    git: lambda do |value|
+      ::OctridevDigitalocean::AppsGitSourceSpec.from_hash(value)
+    end,
+    github: lambda do |value|
+      ::OctridevDigitalocean::AppsGithubSourceSpec.from_hash(value)
+    end,
+    gitlab: lambda do |value|
+      ::OctridevDigitalocean::AppsGitlabSourceSpec.from_hash(value)
+    end,
+    bitbucket: lambda do |value|
+      ::OctridevDigitalocean::AppsBitbucketSourceSpec.from_hash(value)
+    end,
+    log_destinations: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppLogDestinationDefinition.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AppFunctionsSpec.
+# Typed representation of the `AppFunctionsSpec` API schema.
+class AppFunctionsSpec
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppFunctionsSpecMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppFunctionsSpecMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppFunctionsSpecMetadata::DECODERS
+
+  # @return [AppFunctionsSpecCors] Optional API value serialized in the `cors` wire field.
+  attr_reader :cors
+  # @return [Array_of_AppRouteSpec] (Deprecated - Use Ingress Rules instead). A list of HTTP routes that should be routed to this component.
+  attr_reader :routes
+  # @return [String] The name. Must be unique across all components within the same app.
+  attr_reader :name
+  # @return [String] An optional path to the working directory to use for the build. For Dockerfile builds, this will be used as the build context. Must be relative to the root of the repo.
+  attr_reader :source_dir
+  # @return [Array_of_AppAlertSpec] Optional array value serialized in the `alerts` wire field.
+  attr_reader :alerts
+  # @return [Array_of_AppVariableDefinition] A list of environment variables made available to the component.
+  attr_reader :envs
+  # @return [AppsGitSourceSpec] Optional object value serialized in the `git` wire field.
+  attr_reader :git
+  # @return [AppsGithubSourceSpec] Optional object value serialized in the `github` wire field.
+  attr_reader :github
+  # @return [AppsGitlabSourceSpec] Optional object value serialized in the `gitlab` wire field.
+  attr_reader :gitlab
+  # @return [AppsBitbucketSourceSpec] Optional object value serialized in the `bitbucket` wire field.
+  attr_reader :bitbucket
+  # @return [Array_of_AppLogDestinationDefinition] A list of configured log forwarding destinations.
+  attr_reader :log_destinations
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppFunctionsSpec.
-  # Typed representation of the `AppFunctionsSpec` API schema.
-  class AppFunctionsSpec
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppFunctionsSpecMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppFunctionsSpecMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppFunctionsSpecMetadata::DECODERS
-
-    # @return [AppFunctionsSpecCors] Optional API value serialized in the `cors` wire field.
-    attr_reader :cors
-    # @return [Array_of_AppRouteSpec] (Deprecated - Use Ingress Rules instead). A list of HTTP routes that should be routed to this component.
-    attr_reader :routes
-    # @return [String] The name. Must be unique across all components within the same app.
-    attr_reader :name
-    # @return [String] An optional path to the working directory to use for the build. For Dockerfile builds, this will be used as the build context. Must be relative to the root of the repo.
-    attr_reader :source_dir
-    # @return [Array_of_AppAlertSpec] Optional array value serialized in the `alerts` wire field.
-    attr_reader :alerts
-    # @return [Array_of_AppVariableDefinition] A list of environment variables made available to the component.
-    attr_reader :envs
-    # @return [AppsGitSourceSpec] Optional object value serialized in the `git` wire field.
-    attr_reader :git
-    # @return [AppsGithubSourceSpec] Optional object value serialized in the `github` wire field.
-    attr_reader :github
-    # @return [AppsGitlabSourceSpec] Optional object value serialized in the `gitlab` wire field.
-    attr_reader :gitlab
-    # @return [AppsBitbucketSourceSpec] Optional object value serialized in the `bitbucket` wire field.
-    attr_reader :bitbucket
-    # @return [Array_of_AppLogDestinationDefinition] A list of configured log forwarding destinations.
-    attr_reader :log_destinations
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

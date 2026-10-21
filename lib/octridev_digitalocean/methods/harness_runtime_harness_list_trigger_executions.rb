@@ -25,30 +25,31 @@ module OctridevDigitalocean
         status: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1) }
 
         SdkClient.request(
           'GET',
           [
-            '/v2/agents/triggers/',
+            "/v2/agents/triggers/",
             SdkClient.encode_path_segment(trigger_id),
-            '/executions'
+            "/executions"
           ].join,
           config: config,
           query: {
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
             'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
-            'status' => QueryValue.new(status, style: 'form', explode: true)
+            'status' => QueryValue.new(status, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListTriggerExecutionsResponse,
           decoder: :json,
           operation_id: 'harness_list_trigger_executions',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
-      HarnessListTriggerExecutionsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    HarnessListTriggerExecutionsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Keyset-paginated. The large `payload` field is omitted from list items; fetch a single execution to read it.
       #
@@ -79,11 +80,9 @@ module OctridevDigitalocean
             )
             items = page.executions || []
             break if items.empty?
-
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
-
             cursor = next_cursor
           end
         end
@@ -110,12 +109,10 @@ module OctridevDigitalocean
             )
             items = page.executions || []
             break if items.empty?
-
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << HarnessListTriggerExecutionsPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             cursor = next_cursor
           end
         end

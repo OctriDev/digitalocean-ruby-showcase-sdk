@@ -30,25 +30,26 @@ module OctridevDigitalocean
         timeout_seconds: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/agents/sessions/',
+            "/v2/agents/sessions/",
             SdkClient.encode_path_segment(session_id),
-            '/sandbox/exec'
+            "/sandbox/exec"
           ].join,
           config: config,
           body: {
             'argv' => argv,
             'workdir' => workdir,
             'stdin' => stdin,
-            'timeout_seconds' => timeout_seconds
+            'timeout_seconds' => timeout_seconds,
           },
           return_type: ::OctridevDigitalocean::ExecInSandboxResponse,
           decoder: :json,
           operation_id: 'harness_post_session_sandbox_exec',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

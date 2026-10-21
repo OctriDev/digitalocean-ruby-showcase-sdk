@@ -17,19 +17,20 @@ module OctridevDigitalocean
         dataset_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/evaluation_datasets/',
+            "/v2/gen-ai/evaluation_datasets/",
             SdkClient.encode_path_segment(dataset_uuid),
-            '/download_url'
+            "/download_url"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiGetEvaluationDatasetDownloadURLOutput,
           decoder: :json,
           operation_id: 'genai_get_evaluation_dataset_download_url',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

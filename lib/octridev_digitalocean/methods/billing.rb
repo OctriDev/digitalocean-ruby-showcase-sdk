@@ -14,15 +14,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/customers/my/balance',
+          "/v2/customers/my/balance",
           config: config,
           return_type: ::OctridevDigitalocean::Balance,
           decoder: :json,
           operation_id: 'balance_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -31,15 +32,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/customers/my/prepayment_config',
+          "/v2/customers/my/prepayment_config",
           config: config,
           return_type: ::OctridevDigitalocean::PrepaymentConfigResponse,
           decoder: :json,
           operation_id: 'prepayment_config_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -48,15 +50,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/customers/my/prepayment_status',
+          "/v2/customers/my/prepayment_status",
           config: config,
           return_type: ::OctridevDigitalocean::PrepaymentStatusResponse,
           decoder: :json,
           operation_id: 'prepayment_status_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -65,15 +68,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/customers/my/billing_history',
+          "/v2/customers/my/billing_history",
           config: config,
           return_type: ::OctridevDigitalocean::BillingHistoryResponse,
           decoder: :json,
           operation_id: 'billing_history_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -87,23 +91,24 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          '/v2/customers/my/invoices',
+          "/v2/customers/my/invoices",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::Invoices,
           decoder: :json,
           operation_id: 'invoices_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -119,6 +124,7 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
@@ -126,19 +132,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/customers/my/invoices/',
+            "/v2/customers/my/invoices/",
             SdkClient.encode_path_segment(invoice_uuid)
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::Invoice,
           decoder: :json,
           operation_id: 'invoices_get_by_uuid',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -150,18 +156,19 @@ module OctridevDigitalocean
         invoice_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/customers/my/invoices/',
+            "/v2/customers/my/invoices/",
             SdkClient.encode_path_segment(invoice_uuid),
-            '/csv'
+            "/csv"
           ].join,
           config: config,
           decoder: :text,
           operation_id: 'invoices_get_csv_by_uuid',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -173,18 +180,19 @@ module OctridevDigitalocean
         invoice_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/customers/my/invoices/',
+            "/v2/customers/my/invoices/",
             SdkClient.encode_path_segment(invoice_uuid),
-            '/pdf'
+            "/pdf"
           ].join,
           config: config,
           decoder: :bytes,
           operation_id: 'invoices_get_pdf_by_uuid',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -196,19 +204,20 @@ module OctridevDigitalocean
         invoice_uuid:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/customers/my/invoices/',
+            "/v2/customers/my/invoices/",
             SdkClient.encode_path_segment(invoice_uuid),
-            '/summary'
+            "/summary"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::InvoiceSummary,
           decoder: :json,
           operation_id: 'invoices_get_summary_by_uuid',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -231,6 +240,7 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_date('start_date', start_date)
 
         Validation.validate_date('end_date', end_date)
@@ -242,27 +252,27 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/billing/',
+            "/v2/billing/",
             SdkClient.encode_path_segment(account_urn),
-            '/insights/',
+            "/insights/",
             SdkClient.encode_path_segment(start_date),
-            '/',
+            "/",
             SdkClient.encode_path_segment(end_date)
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true)
+            'page' => QueryValue.new(page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::BillingInsights,
           decoder: :json,
           operation_id: 'billing_insights_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
-      BillingInsightsListPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    BillingInsightsListPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice item estimates do not necessarily encompass all invoicing factors for the entire month.
       #
@@ -297,10 +307,8 @@ module OctridevDigitalocean
             )
             items = page.data_points || []
             break if items.empty?
-
             items.each { |item| y << item }
             break if page_number >= page.total_pages
-
             page_number += 1
           end
         end
@@ -329,12 +337,10 @@ module OctridevDigitalocean
             )
             items = page.data_points || []
             break if items.empty?
-
             next_page_number = page_number + 1
             has_more = !next_page_number.nil? && next_page_number != page_number && next_page_number <= page.total_pages
             y << BillingInsightsListPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             page_number = next_page_number
           end
         end

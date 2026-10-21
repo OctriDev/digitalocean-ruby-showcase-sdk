@@ -22,23 +22,24 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/gen-ai/scenario_library/',
+            "/v2/gen-ai/scenario_library/",
             SdkClient.encode_path_segment(library_scenario_uuid),
-            '/create_scenario_set'
+            "/create_scenario_set"
           ].join,
           config: config,
           body: {
             'library_scenario_uuid' => library_scenario_uuid2,
-            'name' => name
+            'name' => name,
           },
           return_type: ::OctridevDigitalocean::ApiCreateScenarioSetFromLibraryOutput,
           decoder: :json,
           operation_id: 'genai_create_scenario_set_from_library',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

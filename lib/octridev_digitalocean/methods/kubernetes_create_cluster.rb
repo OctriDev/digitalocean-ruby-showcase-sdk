@@ -126,20 +126,20 @@ module OctridevDigitalocean
         coredns_autoscaler: NOT_GIVEN,
         request_options: nil
       )
+
         __sdk_validate_kubernetes_create_cluster(vpc_uuid: vpc_uuid, worker_subnet_uuid: worker_subnet_uuid)
 
         SdkClient.request(
           'POST',
-          '/v2/kubernetes/clusters',
+          "/v2/kubernetes/clusters",
           config: config,
           body: __sdk_body_kubernetes_create_cluster_part1(name: name, region: region, version: version, node_pools: node_pools, cluster_subnet: cluster_subnet, service_subnet: service_subnet, vpc_uuid: vpc_uuid, worker_subnet_uuid: worker_subnet_uuid, tags: tags, maintenance_policy: maintenance_policy, auto_upgrade: auto_upgrade, isolated_workers: isolated_workers, gpu_operator_ready: gpu_operator_ready, surge_upgrade: surge_upgrade, ha: ha, control_plane_firewall: control_plane_firewall, cluster_autoscaler_configuration: cluster_autoscaler_configuration, sso: sso).merge(
-            __sdk_body_kubernetes_create_cluster_part2(routing_agent: routing_agent, p2p_oci_registry_plugin: p2p_oci_registry_plugin, nfs_csi_plugin: nfs_csi_plugin, amd_gpu_device_plugin: amd_gpu_device_plugin, amd_gpu_device_metrics_exporter_plugin: amd_gpu_device_metrics_exporter_plugin, nvidia_gpu_device_plugin: nvidia_gpu_device_plugin, nvidia_gpu_dra_driver: nvidia_gpu_dra_driver, amd_gpu_dra_driver: amd_gpu_dra_driver, rdma_shared_dev_plugin: rdma_shared_dev_plugin, coredns_autoscaler: coredns_autoscaler)
-          ),
+            __sdk_body_kubernetes_create_cluster_part2(routing_agent: routing_agent, p2p_oci_registry_plugin: p2p_oci_registry_plugin, nfs_csi_plugin: nfs_csi_plugin, amd_gpu_device_plugin: amd_gpu_device_plugin, amd_gpu_device_metrics_exporter_plugin: amd_gpu_device_metrics_exporter_plugin, nvidia_gpu_device_plugin: nvidia_gpu_device_plugin, nvidia_gpu_dra_driver: nvidia_gpu_dra_driver, amd_gpu_dra_driver: amd_gpu_dra_driver, rdma_shared_dev_plugin: rdma_shared_dev_plugin, coredns_autoscaler: coredns_autoscaler)),
           return_type: ::OctridevDigitalocean::ClusterCreate,
           decoder: :json,
           operation_id: 'kubernetes_create_cluster',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -193,7 +193,7 @@ module OctridevDigitalocean
           'ha' => ha,
           'control_plane_firewall' => control_plane_firewall,
           'cluster_autoscaler_configuration' => cluster_autoscaler_configuration,
-          'sso' => sso
+          'sso' => sso,
         }
       end
       private_class_method :__sdk_body_kubernetes_create_cluster_part1
@@ -220,7 +220,7 @@ module OctridevDigitalocean
           'nvidia_gpu_dra_driver' => nvidia_gpu_dra_driver,
           'amd_gpu_dra_driver' => amd_gpu_dra_driver,
           'rdma_shared_dev_plugin' => rdma_shared_dev_plugin,
-          'coredns_autoscaler' => coredns_autoscaler
+          'coredns_autoscaler' => coredns_autoscaler,
         }
       end
       private_class_method :__sdk_body_kubernetes_create_cluster_part2

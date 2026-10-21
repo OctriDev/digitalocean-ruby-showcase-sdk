@@ -56,6 +56,7 @@ module OctridevDigitalocean
         user: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_length('prompt', prompt, min: 1)
 
         Validation.validate_range('n', count, min: 1, max: 10)
@@ -72,7 +73,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          '/v1/images/generations',
+          "/v1/images/generations",
           config: config,
           body: {
             'prompt' => prompt,
@@ -86,13 +87,13 @@ module OctridevDigitalocean
             'size' => size,
             'stream' => stream,
             'partial_images' => partial_images,
-            'user' => user
+            'user' => user,
           },
           return_type: ::OctridevDigitalocean::ImagesResponse,
           decoder: :json,
           operation_id: 'inference_create_image',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -144,27 +145,25 @@ module OctridevDigitalocean
         request_options: nil,
         &block
       )
-        unless block
-          return enum_for(
-            __method__,
-            config: config,
-            prompt: prompt,
-            model: model,
-            count: count,
-            stream: stream,
-            moderation: moderation,
-            background: background,
-            output_format: output_format,
-            output_compression: output_compression,
-            quality: quality,
-            size: size,
-            partial_images: partial_images,
-            user: user,
-            request_options: request_options
-          )
-        end
+    return enum_for(
+          __method__,
+          config: config,
+          prompt: prompt,
+          model: model,
+          count: count,
+          stream: stream,
+          moderation: moderation,
+          background: background,
+          output_format: output_format,
+          output_compression: output_compression,
+          quality: quality,
+          size: size,
+          partial_images: partial_images,
+          user: user,
+          request_options: request_options,
+        ) unless block
         SdkClient.stream(
-          'POST', '/v1/images/generations',
+          'POST', "/v1/images/generations",
           config: config,
           body: {
             'prompt' => prompt,
@@ -178,17 +177,16 @@ module OctridevDigitalocean
             'quality' => quality,
             'size' => size,
             'partial_images' => partial_images,
-            'user' => user
+            'user' => user,
           },
           content_type: 'application/json',
           operation_id: 'inference_create_image_stream',
           stream_format: :sse,
-          stream_media_type: 'text/event-stream',
+          stream_media_type: "text/event-stream",
           request_options: request_options,
           errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
         ).each do |ev|
           break if ev.data == '[DONE]'
-
           decoded = JSON.parse(ev.data)
           block.call(SdkClient.decode_event(decoded, ::OctridevDigitalocean::ImageGenPartialImageEvent))
         end

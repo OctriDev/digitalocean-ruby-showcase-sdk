@@ -39,12 +39,13 @@ module OctridevDigitalocean
         output_schema: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
           [
-            '/v2/gen-ai/agents/',
+            "/v2/gen-ai/agents/",
             SdkClient.encode_path_segment(agent_uuid),
-            '/functions/',
+            "/functions/",
             SdkClient.encode_path_segment(function_uuid)
           ].join,
           config: config,
@@ -56,13 +57,13 @@ module OctridevDigitalocean
             'function_name' => function_name,
             'function_uuid' => function_uuid2,
             'input_schema' => input_schema,
-            'output_schema' => output_schema
+            'output_schema' => output_schema,
           },
           return_type: ::OctridevDigitalocean::ApiUpdateAgentFunctionOutput,
           decoder: :json,
           operation_id: 'genai_update_agent_function',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

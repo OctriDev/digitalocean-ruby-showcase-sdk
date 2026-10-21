@@ -61,9 +61,10 @@ module OctridevDigitalocean
         use_case: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/gen-ai/models/catalog',
+          "/v2/gen-ai/models/catalog",
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
@@ -76,13 +77,13 @@ module OctridevDigitalocean
             'sort_by' => QueryValue.new(sort_by, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
-            'use_case' => QueryValue.new(use_case, style: 'form', explode: true)
+            'use_case' => QueryValue.new(use_case, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ApiListModelCatalogOutput,
           decoder: :json,
           operation_id: 'genai_list_model_catalog',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

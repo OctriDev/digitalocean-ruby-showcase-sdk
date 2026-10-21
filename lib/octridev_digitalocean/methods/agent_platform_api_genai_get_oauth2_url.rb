@@ -19,19 +19,20 @@ module OctridevDigitalocean
         redirect_url: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/gen-ai/oauth2/url',
+          "/v2/gen-ai/oauth2/url",
           config: config,
           query: {
             'type' => QueryValue.new(type, style: 'form', explode: true),
-            'redirect_url' => QueryValue.new(redirect_url, style: 'form', explode: true)
+            'redirect_url' => QueryValue.new(redirect_url, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ApiGenerateOauth2URLOutput,
           decoder: :json,
           operation_id: 'genai_get_oauth2_url',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -5,676 +5,680 @@
 
 # droplets domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalDropletCreateMetadata
-    FIELDS = {
-      region: 'region',
-      size: 'size',
-      image: 'image',
-      ssh_keys: 'ssh_keys',
-      backups: 'backups',
-      backup_policy: 'backup_policy',
-      ipv6: 'ipv6',
-      monitoring: 'monitoring',
-      tags: 'tags',
-      user_data: 'user_data',
-      private_networking: 'private_networking',
-      volumes: 'volumes',
-      vpc_uuid: 'vpc_uuid',
-      subnet_uuid: 'subnet_uuid',
-      with_droplet_agent: 'with_droplet_agent',
-      public_networking: 'public_networking'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      size
-      image
-    ].freeze
-    DECODERS = {
-      backup_policy: lambda do |value|
-        ::OctridevDigitalocean::DropletBackupPolicy.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalDropletCreateMetadata
+  FIELDS = {
+    region: "region",
+    size: "size",
+    image: "image",
+    ssh_keys: "ssh_keys",
+    backups: "backups",
+    backup_policy: "backup_policy",
+    ipv6: "ipv6",
+    monitoring: "monitoring",
+    tags: "tags",
+    user_data: "user_data",
+    private_networking: "private_networking",
+    volumes: "volumes",
+    vpc_uuid: "vpc_uuid",
+    subnet_uuid: "subnet_uuid",
+    with_droplet_agent: "with_droplet_agent",
+    public_networking: "public_networking",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    size
+    image
+  ].freeze
+  DECODERS = {
+    backup_policy: lambda do |value|
+      ::OctridevDigitalocean::DropletBackupPolicy.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DropletCreate.
+# Typed representation of the `DropletCreate` API schema.
+class DropletCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletCreateMetadata::DECODERS
+
+  # @return [String] The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
+  attr_reader :region
+  # @return [String] The slug identifier for the size that you wish to select for this Droplet.
+  attr_reader :size
+  # @return [Object] The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
+  attr_reader :image
+  # @return [Array_of_Object] An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
+  attr_reader :ssh_keys
+  # @return [Boolean] A boolean indicating whether automated backups should be enabled for the Droplet.
+  attr_reader :backups
+  # @return [DropletBackupPolicy] An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
+  attr_reader :backup_policy
+  # @return [Boolean] A boolean indicating whether to enable IPv6 on the Droplet.
+  attr_reader :ipv6
+  # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent for monitoring.
+  attr_reader :monitoring
+  # @return [Array_of_String] A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+  attr_reader :tags
+  # @return [String] A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+  attr_reader :user_data
+  # @return [Boolean] This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
+  attr_reader :private_networking
+  # @return [Array_of_String] An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
+  attr_reader :volumes
+  # @return [String] A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+  attr_reader :vpc_uuid
+  # @return [String] An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
+  attr_reader :subnet_uuid
+  # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+  attr_reader :with_droplet_agent
+  # @return [Boolean] An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+  attr_reader :public_networking
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletCreate.
-  # Typed representation of the `DropletCreate` API schema.
-  class DropletCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletCreateMetadata::DECODERS
-
-    # @return [String] The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
-    attr_reader :region
-    # @return [String] The slug identifier for the size that you wish to select for this Droplet.
-    attr_reader :size
-    # @return [Object] The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
-    attr_reader :image
-    # @return [Array_of_Object] An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
-    attr_reader :ssh_keys
-    # @return [Boolean] A boolean indicating whether automated backups should be enabled for the Droplet.
-    attr_reader :backups
-    # @return [DropletBackupPolicy] An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
-    attr_reader :backup_policy
-    # @return [Boolean] A boolean indicating whether to enable IPv6 on the Droplet.
-    attr_reader :ipv6
-    # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent for monitoring.
-    attr_reader :monitoring
-    # @return [Array_of_String] A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
-    attr_reader :tags
-    # @return [String] A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
-    attr_reader :user_data
-    # @return [Boolean] This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
-    attr_reader :private_networking
-    # @return [Array_of_String] An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
-    attr_reader :volumes
-    # @return [String] A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
-    attr_reader :vpc_uuid
-    # @return [String] An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
-    attr_reader :subnet_uuid
-    # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
-    attr_reader :with_droplet_agent
-    # @return [Boolean] An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
-    attr_reader :public_networking
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletCreateRequestMetadata
-    FIELDS = {
-      region: 'region',
-      size: 'size',
-      image: 'image',
-      ssh_keys: 'ssh_keys',
-      backups: 'backups',
-      backup_policy: 'backup_policy',
-      ipv6: 'ipv6',
-      monitoring: 'monitoring',
-      tags: 'tags',
-      user_data: 'user_data',
-      private_networking: 'private_networking',
-      volumes: 'volumes',
-      vpc_uuid: 'vpc_uuid',
-      subnet_uuid: 'subnet_uuid',
-      with_droplet_agent: 'with_droplet_agent',
-      public_networking: 'public_networking'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      size
-      image
-    ].freeze
-    DECODERS = {
-      backup_policy: lambda do |value|
-        ::OctridevDigitalocean::DropletBackupPolicyRequest.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletCreateRequestMetadata
+  FIELDS = {
+    region: "region",
+    size: "size",
+    image: "image",
+    ssh_keys: "ssh_keys",
+    backups: "backups",
+    backup_policy: "backup_policy",
+    ipv6: "ipv6",
+    monitoring: "monitoring",
+    tags: "tags",
+    user_data: "user_data",
+    private_networking: "private_networking",
+    volumes: "volumes",
+    vpc_uuid: "vpc_uuid",
+    subnet_uuid: "subnet_uuid",
+    with_droplet_agent: "with_droplet_agent",
+    public_networking: "public_networking",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    size
+    image
+  ].freeze
+  DECODERS = {
+    backup_policy: lambda do |value|
+      ::OctridevDigitalocean::DropletBackupPolicyRequest.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DropletCreateRequest.
+# Typed representation of the `DropletCreateRequest` API schema.
+class DropletCreateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletCreateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletCreateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletCreateRequestMetadata::DECODERS
+
+  # @return [String] The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
+  attr_reader :region
+  # @return [String] The slug identifier for the size that you wish to select for this Droplet.
+  attr_reader :size
+  # @return [Object] The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
+  attr_reader :image
+  # @return [Array_of_Object] An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
+  attr_reader :ssh_keys
+  # @return [Boolean] A boolean indicating whether automated backups should be enabled for the Droplet.
+  attr_reader :backups
+  # @return [DropletBackupPolicyRequest] An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
+  attr_reader :backup_policy
+  # @return [Boolean] A boolean indicating whether to enable IPv6 on the Droplet.
+  attr_reader :ipv6
+  # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent for monitoring.
+  attr_reader :monitoring
+  # @return [Array_of_String] A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+  attr_reader :tags
+  # @return [String] A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+  attr_reader :user_data
+  # @return [Boolean] This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
+  attr_reader :private_networking
+  # @return [Array_of_String] An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
+  attr_reader :volumes
+  # @return [String] A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+  attr_reader :vpc_uuid
+  # @return [String] An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
+  attr_reader :subnet_uuid
+  # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+  attr_reader :with_droplet_agent
+  # @return [Boolean] An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+  attr_reader :public_networking
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletCreateRequest.
-  # Typed representation of the `DropletCreateRequest` API schema.
-  class DropletCreateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletCreateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletCreateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletCreateRequestMetadata::DECODERS
-
-    # @return [String] The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
-    attr_reader :region
-    # @return [String] The slug identifier for the size that you wish to select for this Droplet.
-    attr_reader :size
-    # @return [Object] The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
-    attr_reader :image
-    # @return [Array_of_Object] An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
-    attr_reader :ssh_keys
-    # @return [Boolean] A boolean indicating whether automated backups should be enabled for the Droplet.
-    attr_reader :backups
-    # @return [DropletBackupPolicyRequest] An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
-    attr_reader :backup_policy
-    # @return [Boolean] A boolean indicating whether to enable IPv6 on the Droplet.
-    attr_reader :ipv6
-    # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent for monitoring.
-    attr_reader :monitoring
-    # @return [Array_of_String] A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
-    attr_reader :tags
-    # @return [String] A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
-    attr_reader :user_data
-    # @return [Boolean] This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
-    attr_reader :private_networking
-    # @return [Array_of_String] An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
-    attr_reader :volumes
-    # @return [String] A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
-    attr_reader :vpc_uuid
-    # @return [String] An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
-    attr_reader :subnet_uuid
-    # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
-    attr_reader :with_droplet_agent
-    # @return [Boolean] An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
-    attr_reader :public_networking
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletMultiCreateMetadata
-    FIELDS = {
-      names: 'names',
-      region: 'region',
-      size: 'size',
-      image: 'image',
-      ssh_keys: 'ssh_keys',
-      backups: 'backups',
-      backup_policy: 'backup_policy',
-      ipv6: 'ipv6',
-      monitoring: 'monitoring',
-      tags: 'tags',
-      user_data: 'user_data',
-      private_networking: 'private_networking',
-      volumes: 'volumes',
-      vpc_uuid: 'vpc_uuid',
-      subnet_uuid: 'subnet_uuid',
-      with_droplet_agent: 'with_droplet_agent',
-      public_networking: 'public_networking'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      names
-      size
-      image
-    ].freeze
-    DECODERS = {
-      backup_policy: lambda do |value|
-        ::OctridevDigitalocean::DropletBackupPolicy.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletMultiCreateMetadata
+  FIELDS = {
+    names: "names",
+    region: "region",
+    size: "size",
+    image: "image",
+    ssh_keys: "ssh_keys",
+    backups: "backups",
+    backup_policy: "backup_policy",
+    ipv6: "ipv6",
+    monitoring: "monitoring",
+    tags: "tags",
+    user_data: "user_data",
+    private_networking: "private_networking",
+    volumes: "volumes",
+    vpc_uuid: "vpc_uuid",
+    subnet_uuid: "subnet_uuid",
+    with_droplet_agent: "with_droplet_agent",
+    public_networking: "public_networking",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    names
+    size
+    image
+  ].freeze
+  DECODERS = {
+    backup_policy: lambda do |value|
+      ::OctridevDigitalocean::DropletBackupPolicy.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DropletMultiCreate.
+# Typed representation of the `DropletMultiCreate` API schema.
+class DropletMultiCreate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletMultiCreateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletMultiCreateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletMultiCreateMetadata::DECODERS
+
+  # @return [Array_of_String] An array of human human-readable strings you wish to use when displaying the Droplet name. Each name, if set to a domain name managed in the DigitalOcean DNS management system, will configure a PTR record for the Droplet. Each name set during creation will also determine the hostname for the Droplet in its internal configuration.
+  attr_reader :names
+  # @return [String] The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
+  attr_reader :region
+  # @return [String] The slug identifier for the size that you wish to select for this Droplet.
+  attr_reader :size
+  # @return [Object] The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
+  attr_reader :image
+  # @return [Array_of_Object] An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
+  attr_reader :ssh_keys
+  # @return [Boolean] A boolean indicating whether automated backups should be enabled for the Droplet.
+  attr_reader :backups
+  # @return [DropletBackupPolicy] An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
+  attr_reader :backup_policy
+  # @return [Boolean] A boolean indicating whether to enable IPv6 on the Droplet.
+  attr_reader :ipv6
+  # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent for monitoring.
+  attr_reader :monitoring
+  # @return [Array_of_String] A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+  attr_reader :tags
+  # @return [String] A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+  attr_reader :user_data
+  # @return [Boolean] This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
+  attr_reader :private_networking
+  # @return [Array_of_String] An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
+  attr_reader :volumes
+  # @return [String] A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+  attr_reader :vpc_uuid
+  # @return [String] An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
+  attr_reader :subnet_uuid
+  # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+  attr_reader :with_droplet_agent
+  # @return [Boolean] An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+  attr_reader :public_networking
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletMultiCreate.
-  # Typed representation of the `DropletMultiCreate` API schema.
-  class DropletMultiCreate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletMultiCreateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletMultiCreateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletMultiCreateMetadata::DECODERS
-
-    # @return [Array_of_String] An array of human human-readable strings you wish to use when displaying the Droplet name. Each name, if set to a domain name managed in the DigitalOcean DNS management system, will configure a PTR record for the Droplet. Each name set during creation will also determine the hostname for the Droplet in its internal configuration.
-    attr_reader :names
-    # @return [String] The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
-    attr_reader :region
-    # @return [String] The slug identifier for the size that you wish to select for this Droplet.
-    attr_reader :size
-    # @return [Object] The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
-    attr_reader :image
-    # @return [Array_of_Object] An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
-    attr_reader :ssh_keys
-    # @return [Boolean] A boolean indicating whether automated backups should be enabled for the Droplet.
-    attr_reader :backups
-    # @return [DropletBackupPolicy] An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
-    attr_reader :backup_policy
-    # @return [Boolean] A boolean indicating whether to enable IPv6 on the Droplet.
-    attr_reader :ipv6
-    # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent for monitoring.
-    attr_reader :monitoring
-    # @return [Array_of_String] A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
-    attr_reader :tags
-    # @return [String] A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
-    attr_reader :user_data
-    # @return [Boolean] This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
-    attr_reader :private_networking
-    # @return [Array_of_String] An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
-    attr_reader :volumes
-    # @return [String] A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
-    attr_reader :vpc_uuid
-    # @return [String] An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
-    attr_reader :subnet_uuid
-    # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
-    attr_reader :with_droplet_agent
-    # @return [Boolean] An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
-    attr_reader :public_networking
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletsCreateResponseVariant0LinksMetadata
-    FIELDS = {
-      actions: 'actions'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      actions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ActionLink.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletsCreateResponseVariant0LinksMetadata
+  FIELDS = {
+    actions: "actions",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    actions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ActionLink.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for DropletsCreateResponseVariant0Links.
+class DropletsCreateResponseVariant0Links
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletsCreateResponseVariant0LinksMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletsCreateResponseVariant0LinksMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletsCreateResponseVariant0LinksMetadata::DECODERS
+
+  attr_reader :actions
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletsCreateResponseVariant0Links.
-  class DropletsCreateResponseVariant0Links
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletsCreateResponseVariant0LinksMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletsCreateResponseVariant0LinksMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletsCreateResponseVariant0LinksMetadata::DECODERS
-
-    attr_reader :actions
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletsCreateResponseVariant0Metadata
-    FIELDS = {
-      droplet: 'droplet',
-      links: 'links'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      droplet
-      links
-    ].freeze
-    DECODERS = {
-      droplet: lambda do |value|
-        ::OctridevDigitalocean::Droplet.from_hash(value)
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::DropletsCreateResponseVariant0Links.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletsCreateResponseVariant0Metadata
+  FIELDS = {
+    droplet: "droplet",
+    links: "links",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    droplet
+    links
+  ].freeze
+  DECODERS = {
+    droplet: lambda do |value|
+      ::OctridevDigitalocean::Droplet.from_hash(value)
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::DropletsCreateResponseVariant0Links.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DropletsCreateResponseVariant0.
+class DropletsCreateResponseVariant0
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletsCreateResponseVariant0Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletsCreateResponseVariant0Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletsCreateResponseVariant0Metadata::DECODERS
+
+  attr_reader :droplet, :links
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletsCreateResponseVariant0.
-  class DropletsCreateResponseVariant0
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletsCreateResponseVariant0Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletsCreateResponseVariant0Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletsCreateResponseVariant0Metadata::DECODERS
-
-    attr_reader :droplet, :links
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletsCreateResponseVariant1LinksMetadata
-    FIELDS = {
-      actions: 'actions'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      actions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ActionLink.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletsCreateResponseVariant1LinksMetadata
+  FIELDS = {
+    actions: "actions",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    actions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ActionLink.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for DropletsCreateResponseVariant1Links.
+class DropletsCreateResponseVariant1Links
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletsCreateResponseVariant1LinksMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletsCreateResponseVariant1LinksMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletsCreateResponseVariant1LinksMetadata::DECODERS
+
+  attr_reader :actions
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletsCreateResponseVariant1Links.
-  class DropletsCreateResponseVariant1Links
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletsCreateResponseVariant1LinksMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletsCreateResponseVariant1LinksMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletsCreateResponseVariant1LinksMetadata::DECODERS
-
-    attr_reader :actions
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletsCreateResponseVariant1Metadata
-    FIELDS = {
-      droplets: 'droplets',
-      links: 'links'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      droplets
-      links
-    ].freeze
-    DECODERS = {
-      droplets: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Droplet.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::DropletsCreateResponseVariant1Links.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletsCreateResponseVariant1Metadata
+  FIELDS = {
+    droplets: "droplets",
+    links: "links",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    droplets
+    links
+  ].freeze
+  DECODERS = {
+    droplets: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Droplet.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::DropletsCreateResponseVariant1Links.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DropletsCreateResponseVariant1.
+class DropletsCreateResponseVariant1
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletsCreateResponseVariant1Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletsCreateResponseVariant1Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletsCreateResponseVariant1Metadata::DECODERS
+
+  attr_reader :droplets, :links
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletsCreateResponseVariant1.
-  class DropletsCreateResponseVariant1
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletsCreateResponseVariant1Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletsCreateResponseVariant1Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletsCreateResponseVariant1Metadata::DECODERS
-
-    attr_reader :droplets, :links
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the DropletsCreateResponse SDK namespace.
-  module DropletsCreateResponse
-    def self.from_hash(hash)
-      shape_mapping = {
-        'droplet' => DropletsCreateResponseVariant0,
-        'droplets' => DropletsCreateResponseVariant1
-      }
-      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-      decoded = type&.from_hash(hash)
-      decoded unless type.nil?
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the DropletsCreateResponse SDK namespace.
+module DropletsCreateResponse
+  def self.from_hash(hash)
+    shape_mapping = {
+      "droplet" => DropletsCreateResponseVariant0,
+      "droplets" => DropletsCreateResponseVariant1,
+    }
+    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+    decoded = type&.from_hash(hash)
+    return decoded unless type.nil?
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalDropletSingleCreateRequestMetadata
+  FIELDS = {
+    name: "name",
+    region: "region",
+    size: "size",
+    image: "image",
+    ssh_keys: "ssh_keys",
+    backups: "backups",
+    backup_policy: "backup_policy",
+    ipv6: "ipv6",
+    monitoring: "monitoring",
+    tags: "tags",
+    user_data: "user_data",
+    private_networking: "private_networking",
+    volumes: "volumes",
+    vpc_uuid: "vpc_uuid",
+    subnet_uuid: "subnet_uuid",
+    with_droplet_agent: "with_droplet_agent",
+    public_networking: "public_networking",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+    size
+    image
+  ].freeze
+  DECODERS = {
+    backup_policy: lambda do |value|
+      ::OctridevDigitalocean::DropletBackupPolicyRequest.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DropletSingleCreateRequest.
+# Typed representation of the `DropletSingleCreateRequest` API schema.
+class DropletSingleCreateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletSingleCreateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletSingleCreateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletSingleCreateRequestMetadata::DECODERS
+
+  # @return [String] The human-readable string you wish to use when displaying the Droplet name. The name, if set to a domain name managed in the DigitalOcean DNS management system, will configure a PTR record for the Droplet. The name set during creation will also determine the hostname for the Droplet in its internal configuration.
+  attr_reader :name
+  # @return [String] The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
+  attr_reader :region
+  # @return [String] The slug identifier for the size that you wish to select for this Droplet.
+  attr_reader :size
+  # @return [Object] The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
+  attr_reader :image
+  # @return [Array_of_Object] An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
+  attr_reader :ssh_keys
+  # @return [Boolean] A boolean indicating whether automated backups should be enabled for the Droplet.
+  attr_reader :backups
+  # @return [DropletBackupPolicyRequest] An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
+  attr_reader :backup_policy
+  # @return [Boolean] A boolean indicating whether to enable IPv6 on the Droplet.
+  attr_reader :ipv6
+  # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent for monitoring.
+  attr_reader :monitoring
+  # @return [Array_of_String] A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+  attr_reader :tags
+  # @return [String] A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+  attr_reader :user_data
+  # @return [Boolean] This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
+  attr_reader :private_networking
+  # @return [Array_of_String] An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
+  attr_reader :volumes
+  # @return [String] A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+  attr_reader :vpc_uuid
+  # @return [String] An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
+  attr_reader :subnet_uuid
+  # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+  attr_reader :with_droplet_agent
+  # @return [Boolean] An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+  attr_reader :public_networking
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletSingleCreateRequestMetadata
-    FIELDS = {
-      name: 'name',
-      region: 'region',
-      size: 'size',
-      image: 'image',
-      ssh_keys: 'ssh_keys',
-      backups: 'backups',
-      backup_policy: 'backup_policy',
-      ipv6: 'ipv6',
-      monitoring: 'monitoring',
-      tags: 'tags',
-      user_data: 'user_data',
-      private_networking: 'private_networking',
-      volumes: 'volumes',
-      vpc_uuid: 'vpc_uuid',
-      subnet_uuid: 'subnet_uuid',
-      with_droplet_agent: 'with_droplet_agent',
-      public_networking: 'public_networking'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-      size
-      image
-    ].freeze
-    DECODERS = {
-      backup_policy: lambda do |value|
-        ::OctridevDigitalocean::DropletBackupPolicyRequest.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletSingleCreateRequest.
-  # Typed representation of the `DropletSingleCreateRequest` API schema.
-  class DropletSingleCreateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletSingleCreateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletSingleCreateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletSingleCreateRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The human-readable string you wish to use when displaying the Droplet name. The name, if set to a domain name managed in the DigitalOcean DNS management system, will configure a PTR record for the Droplet. The name set during creation will also determine the hostname for the Droplet in its internal configuration.
-    attr_reader :name
-    # @return [String] The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
-    attr_reader :region
-    # @return [String] The slug identifier for the size that you wish to select for this Droplet.
-    attr_reader :size
-    # @return [Object] The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
-    attr_reader :image
-    # @return [Array_of_Object] An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
-    attr_reader :ssh_keys
-    # @return [Boolean] A boolean indicating whether automated backups should be enabled for the Droplet.
-    attr_reader :backups
-    # @return [DropletBackupPolicyRequest] An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
-    attr_reader :backup_policy
-    # @return [Boolean] A boolean indicating whether to enable IPv6 on the Droplet.
-    attr_reader :ipv6
-    # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent for monitoring.
-    attr_reader :monitoring
-    # @return [Array_of_String] A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
-    attr_reader :tags
-    # @return [String] A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
-    attr_reader :user_data
-    # @return [Boolean] This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
-    attr_reader :private_networking
-    # @return [Array_of_String] An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
-    attr_reader :volumes
-    # @return [String] A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
-    attr_reader :vpc_uuid
-    # @return [String] An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
-    attr_reader :subnet_uuid
-    # @return [Boolean] A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
-    attr_reader :with_droplet_agent
-    # @return [Boolean] An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
-    attr_reader :public_networking
+# Internal model hydration metadata.
+class SdkInternalDropletSnapshotMetadata
+  FIELDS = {
+    id: "id",
+    name: "name",
+    created_at: "created_at",
+    regions: "regions",
+    min_disk_size: "min_disk_size",
+    size_gigabytes: "size_gigabytes",
+    type: "type",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    id
+    name
+    created_at
+    regions
+    min_disk_size
+    size_gigabytes
+    type
+  ].freeze
+  DECODERS = {
+    type: lambda do |value|
+      ::OctridevDigitalocean::DropletSnapshotVariant2Type.from_value(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for DropletSnapshot.
+# Typed representation of the `DropletSnapshot` API schema.
+class DropletSnapshot
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletSnapshotMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletSnapshotMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletSnapshotMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Integer] The unique identifier for the snapshot or backup.
+  attr_reader :id
+  # @return [String] A human-readable name for the snapshot.
+  attr_reader :name
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the snapshot was created.
+  attr_reader :created_at
+  # @return [Array_of_String] An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.
+  attr_reader :regions
+  # @return [Integer] The minimum size in GB required for a volume or Droplet to use this snapshot.
+  attr_reader :min_disk_size
+  # @return [Float] The billable size of the snapshot in gigabytes.
+  attr_reader :size_gigabytes
+  # @return [DropletSnapshotVariant2Type] Describes the kind of image. It may be one of `snapshot` or `backup`. This specifies whether an image is a user-generated Droplet snapshot or automatically created Droplet backup.
+  attr_reader :type
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletSnapshotMetadata
-    FIELDS = {
-      id: 'id',
-      name: 'name',
-      created_at: 'created_at',
-      regions: 'regions',
-      min_disk_size: 'min_disk_size',
-      size_gigabytes: 'size_gigabytes',
-      type: 'type'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      id
-      name
-      created_at
-      regions
-      min_disk_size
-      size_gigabytes
-      type
-    ].freeze
-    DECODERS = {
-      type: lambda do |value|
-        ::OctridevDigitalocean::DropletSnapshotVariant2Type.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for DropletSnapshot.
-  # Typed representation of the `DropletSnapshot` API schema.
-  class DropletSnapshot
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletSnapshotMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletSnapshotMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletSnapshotMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [Integer] The unique identifier for the snapshot or backup.
-    attr_reader :id
-    # @return [String] A human-readable name for the snapshot.
-    attr_reader :name
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the snapshot was created.
-    attr_reader :created_at
-    # @return [Array_of_String] An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.
-    attr_reader :regions
-    # @return [Integer] The minimum size in GB required for a volume or Droplet to use this snapshot.
-    attr_reader :min_disk_size
-    # @return [Float] The billable size of the snapshot in gigabytes.
-    attr_reader :size_gigabytes
-    # @return [DropletSnapshotVariant2Type] Describes the kind of image. It may be one of `snapshot` or `backup`. This specifies whether an image is a user-generated Droplet snapshot or automatically created Droplet backup.
-    attr_reader :type
+# Defines the DropletSnapshotVariant2Type SDK namespace.
+module DropletSnapshotVariant2Type
+  SNAPSHOT = 'snapshot'
+  BACKUP = 'backup'
+  VALUES = ['snapshot', 'backup'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalDropletsSupportedBackupPoliciesMetadata
+  FIELDS = {
+    supported_policies: "supported_policies",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    supported_policies: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::SupportedDropletBackupPolicy.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for DropletsSupportedBackupPolicies.
+# Typed representation of the `DropletsSupportedBackupPolicies` API schema.
+class DropletsSupportedBackupPolicies
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDropletsSupportedBackupPoliciesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDropletsSupportedBackupPoliciesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDropletsSupportedBackupPoliciesMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [Array_of_SupportedDropletBackupPolicy] Optional array value serialized in the `supported_policies` wire field.
+  attr_reader :supported_policies
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the DropletSnapshotVariant2Type SDK namespace.
-  module DropletSnapshotVariant2Type
-    SNAPSHOT = 'snapshot'
-    BACKUP = 'backup'
-    VALUES = %w[snapshot backup].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalDropletsSupportedBackupPoliciesMetadata
-    FIELDS = {
-      supported_policies: 'supported_policies'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      supported_policies: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::SupportedDropletBackupPolicy.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalExistingDropletMetadata
+  FIELDS = {
+    droplet: "droplet",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    droplet: lambda do |value|
+      ::OctridevDigitalocean::Droplet.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ExistingDroplet.
+# Typed representation of the `ExistingDroplet` API schema.
+class ExistingDroplet
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExistingDropletMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExistingDropletMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExistingDropletMetadata::DECODERS
+
+  # @return [Droplet] Optional object value serialized in the `droplet` wire field.
+  attr_reader :droplet
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DropletsSupportedBackupPolicies.
-  # Typed representation of the `DropletsSupportedBackupPolicies` API schema.
-  class DropletsSupportedBackupPolicies
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDropletsSupportedBackupPoliciesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDropletsSupportedBackupPoliciesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDropletsSupportedBackupPoliciesMetadata::DECODERS
-
-    # @return [Array_of_SupportedDropletBackupPolicy] Optional array value serialized in the `supported_policies` wire field.
-    attr_reader :supported_policies
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExistingDropletMetadata
-    FIELDS = {
-      droplet: 'droplet'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      droplet: lambda do |value|
-        ::OctridevDigitalocean::Droplet.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for ExistingDroplet.
-  # Typed representation of the `ExistingDroplet` API schema.
-  class ExistingDroplet
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExistingDropletMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExistingDropletMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExistingDropletMetadata::DECODERS
-
-    # @return [Droplet] Optional object value serialized in the `droplet` wire field.
-    attr_reader :droplet
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

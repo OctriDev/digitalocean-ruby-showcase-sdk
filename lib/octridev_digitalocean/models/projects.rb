@@ -5,376 +5,382 @@
 
 # projects domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalDefaultProjectMetadata
-    FIELDS = {
-      project: 'project'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      project: lambda do |value|
-        ::OctridevDigitalocean::Project.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalDefaultProjectMetadata
+  FIELDS = {
+    project: "project",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    project: lambda do |value|
+      ::OctridevDigitalocean::Project.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for DefaultProject.
+# Typed representation of the `DefaultProject` API schema.
+class DefaultProject
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalDefaultProjectMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalDefaultProjectMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalDefaultProjectMetadata::DECODERS
+
+  # @return [Project] Optional API value serialized in the `project` wire field.
+  attr_reader :project
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for DefaultProject.
-  # Typed representation of the `DefaultProject` API schema.
-  class DefaultProject
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalDefaultProjectMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalDefaultProjectMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalDefaultProjectMetadata::DECODERS
-
-    # @return [Project] Optional API value serialized in the `project` wire field.
-    attr_reader :project
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalExistingProjectMetadata
-    FIELDS = {
-      project: 'project'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      project: lambda do |value|
-        ::OctridevDigitalocean::Project.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalExistingProjectMetadata
+  FIELDS = {
+    project: "project",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    project: lambda do |value|
+      ::OctridevDigitalocean::Project.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ExistingProject.
+# Typed representation of the `ExistingProject` API schema.
+class ExistingProject
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalExistingProjectMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalExistingProjectMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalExistingProjectMetadata::DECODERS
+
+  # @return [Project] Optional API value serialized in the `project` wire field.
+  attr_reader :project
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ExistingProject.
-  # Typed representation of the `ExistingProject` API schema.
-  class ExistingProject
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalExistingProjectMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalExistingProjectMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalExistingProjectMetadata::DECODERS
-
-    # @return [Project] Optional API value serialized in the `project` wire field.
-    attr_reader :project
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalProjectMetadata
-    FIELDS = {
-      id: 'id',
-      owner_uuid: 'owner_uuid',
-      owner_id: 'owner_id',
-      name: 'name',
-      description: 'description',
-      purpose: 'purpose',
-      environment: 'environment',
-      created_at: 'created_at',
-      updated_at: 'updated_at',
-      is_default: 'is_default'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      environment: lambda do |value|
-        ::OctridevDigitalocean::ProjectBaseEnvironment.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalProjectMetadata
+  FIELDS = {
+    id: "id",
+    owner_uuid: "owner_uuid",
+    owner_id: "owner_id",
+    name: "name",
+    description: "description",
+    purpose: "purpose",
+    environment: "environment",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    is_default: "is_default",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    environment: lambda do |value|
+      ::OctridevDigitalocean::ProjectBaseEnvironment.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for Project.
+# Typed representation of the `Project` API schema.
+class Project
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalProjectMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalProjectMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalProjectMetadata::DECODERS
+
+  # @return [String] The unique universal identifier of this project.
+  attr_reader :id
+  # @return [String] The unique universal identifier of the project owner.
+  attr_reader :owner_uuid
+  # @return [Integer] The integer id of the project owner.
+  attr_reader :owner_id
+  # @return [String] The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
+  attr_reader :name
+  # @return [String] The description of the project. The maximum length is 255 characters.
+  attr_reader :description
+  # @return [String] The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
+  attr_reader :purpose
+  # @return [ProjectBaseEnvironment] The environment of the project's resources.
+  attr_reader :environment
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the project was created.
+  attr_reader :created_at
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the project was updated.
+  attr_reader :updated_at
+  # @return [Boolean] If true, all resources will be added to this project if no project is specified.
+  attr_reader :is_default
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Project.
-  # Typed representation of the `Project` API schema.
-  class Project
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalProjectMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalProjectMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalProjectMetadata::DECODERS
-
-    # @return [String] The unique universal identifier of this project.
-    attr_reader :id
-    # @return [String] The unique universal identifier of the project owner.
-    attr_reader :owner_uuid
-    # @return [Integer] The integer id of the project owner.
-    attr_reader :owner_id
-    # @return [String] The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
-    attr_reader :name
-    # @return [String] The description of the project. The maximum length is 255 characters.
-    attr_reader :description
-    # @return [String] The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
-    attr_reader :purpose
-    # @return [ProjectBaseEnvironment] The environment of the project's resources.
-    attr_reader :environment
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the project was created.
-    attr_reader :created_at
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the project was updated.
-    attr_reader :updated_at
-    # @return [Boolean] If true, all resources will be added to this project if no project is specified.
-    attr_reader :is_default
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalProjectBaseMetadata
-    FIELDS = {
-      id: 'id',
-      owner_uuid: 'owner_uuid',
-      owner_id: 'owner_id',
-      name: 'name',
-      description: 'description',
-      purpose: 'purpose',
-      environment: 'environment',
-      created_at: 'created_at',
-      updated_at: 'updated_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      environment: lambda do |value|
-        ::OctridevDigitalocean::ProjectBaseEnvironment.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalProjectBaseMetadata
+  FIELDS = {
+    id: "id",
+    owner_uuid: "owner_uuid",
+    owner_id: "owner_id",
+    name: "name",
+    description: "description",
+    purpose: "purpose",
+    environment: "environment",
+    created_at: "created_at",
+    updated_at: "updated_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    environment: lambda do |value|
+      ::OctridevDigitalocean::ProjectBaseEnvironment.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ProjectBase.
+# Typed representation of the `ProjectBase` API schema.
+class ProjectBase
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalProjectBaseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalProjectBaseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalProjectBaseMetadata::DECODERS
+
+  # @return [String] The unique universal identifier of this project.
+  attr_reader :id
+  # @return [String] The unique universal identifier of the project owner.
+  attr_reader :owner_uuid
+  # @return [Integer] The integer id of the project owner.
+  attr_reader :owner_id
+  # @return [String] The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
+  attr_reader :name
+  # @return [String] The description of the project. The maximum length is 255 characters.
+  attr_reader :description
+  # @return [String] The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
+  attr_reader :purpose
+  # @return [ProjectBaseEnvironment] The environment of the project's resources.
+  attr_reader :environment
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the project was created.
+  attr_reader :created_at
+  # @return [String] A time value given in ISO8601 combined date and time format that represents when the project was updated.
+  attr_reader :updated_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ProjectBase.
-  # Typed representation of the `ProjectBase` API schema.
-  class ProjectBase
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalProjectBaseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalProjectBaseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalProjectBaseMetadata::DECODERS
-
-    # @return [String] The unique universal identifier of this project.
-    attr_reader :id
-    # @return [String] The unique universal identifier of the project owner.
-    attr_reader :owner_uuid
-    # @return [Integer] The integer id of the project owner.
-    attr_reader :owner_id
-    # @return [String] The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
-    attr_reader :name
-    # @return [String] The description of the project. The maximum length is 255 characters.
-    attr_reader :description
-    # @return [String] The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
-    attr_reader :purpose
-    # @return [ProjectBaseEnvironment] The environment of the project's resources.
-    attr_reader :environment
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the project was created.
-    attr_reader :created_at
-    # @return [String] A time value given in ISO8601 combined date and time format that represents when the project was updated.
-    attr_reader :updated_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the ProjectBaseEnvironment SDK namespace.
-  module ProjectBaseEnvironment
-    DEVELOPMENT = 'Development'
-    STAGING = 'Staging'
-    PRODUCTION = 'Production'
-    VALUES = %w[Development Staging Production].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the ProjectBaseEnvironment SDK namespace.
+module ProjectBaseEnvironment
+  DEVELOPMENT = 'Development'
+  STAGING = 'Staging'
+  PRODUCTION = 'Production'
+  VALUES = ['Development', 'Staging', 'Production'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalProjectBaseRequestMetadata
+  FIELDS = {
+    name: "name",
+    description: "description",
+    purpose: "purpose",
+    environment: "environment",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    environment: lambda do |value|
+      ::OctridevDigitalocean::ProjectBaseRequestEnvironment.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for ProjectBaseRequest.
+# Typed representation of the `ProjectBaseRequest` API schema.
+class ProjectBaseRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalProjectBaseRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalProjectBaseRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalProjectBaseRequestMetadata::DECODERS
+
+  # @return [String] The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
+  attr_reader :name
+  # @return [String] The description of the project. The maximum length is 255 characters.
+  attr_reader :description
+  # @return [String] The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
+  attr_reader :purpose
+  # @return [ProjectBaseRequestEnvironment] The environment of the project's resources.
+  attr_reader :environment
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalProjectBaseRequestMetadata
-    FIELDS = {
-      name: 'name',
-      description: 'description',
-      purpose: 'purpose',
-      environment: 'environment'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      environment: lambda do |value|
-        ::OctridevDigitalocean::ProjectBaseRequestEnvironment.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ProjectBaseRequest.
-  # Typed representation of the `ProjectBaseRequest` API schema.
-  class ProjectBaseRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalProjectBaseRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalProjectBaseRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalProjectBaseRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
-    attr_reader :name
-    # @return [String] The description of the project. The maximum length is 255 characters.
-    attr_reader :description
-    # @return [String] The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
-    attr_reader :purpose
-    # @return [ProjectBaseRequestEnvironment] The environment of the project's resources.
-    attr_reader :environment
+# Defines the ProjectBaseRequestEnvironment SDK namespace.
+module ProjectBaseRequestEnvironment
+  DEVELOPMENT = 'Development'
+  STAGING = 'Staging'
+  PRODUCTION = 'Production'
+  VALUES = ['Development', 'Staging', 'Production'].freeze
+  def self.from_value(value)
+    value
+  end
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# Internal model hydration metadata.
+class SdkInternalProjectRequestMetadata
+  FIELDS = {
+    name: "name",
+    description: "description",
+    purpose: "purpose",
+    environment: "environment",
+    is_default: "is_default",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    environment: lambda do |value|
+      ::OctridevDigitalocean::ProjectBaseRequestEnvironment.from_value(value)
+    end,
+  }.freeze
+end
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+# API model for ProjectRequest.
+# Typed representation of the `ProjectRequest` API schema.
+class ProjectRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalProjectRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalProjectRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalProjectRequestMetadata::DECODERS
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  # @return [String] The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
+  attr_reader :name
+  # @return [String] The description of the project. The maximum length is 255 characters.
+  attr_reader :description
+  # @return [String] The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
+  attr_reader :purpose
+  # @return [ProjectBaseRequestEnvironment] The environment of the project's resources.
+  attr_reader :environment
+  # @return [Boolean] If true, all resources will be added to this project if no project is specified.
+  attr_reader :is_default
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the ProjectBaseRequestEnvironment SDK namespace.
-  module ProjectBaseRequestEnvironment
-    DEVELOPMENT = 'Development'
-    STAGING = 'Staging'
-    PRODUCTION = 'Production'
-    VALUES = %w[Development Staging Production].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalProjectRequestMetadata
-    FIELDS = {
-      name: 'name',
-      description: 'description',
-      purpose: 'purpose',
-      environment: 'environment',
-      is_default: 'is_default'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      environment: lambda do |value|
-        ::OctridevDigitalocean::ProjectBaseRequestEnvironment.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalProjectsListMetadata
+  FIELDS = {
+    projects: "projects",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    projects: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Project.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ProjectsList.
+# Typed representation of the `ProjectsList` API schema.
+class ProjectsList
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalProjectsListMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalProjectsListMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalProjectsListMetadata::DECODERS
+
+  attr_reader :projects
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ProjectRequest.
-  # Typed representation of the `ProjectRequest` API schema.
-  class ProjectRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalProjectRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalProjectRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalProjectRequestMetadata::DECODERS
-
-    # @return [String] The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
-    attr_reader :name
-    # @return [String] The description of the project. The maximum length is 255 characters.
-    attr_reader :description
-    # @return [String] The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
-    attr_reader :purpose
-    # @return [ProjectBaseRequestEnvironment] The environment of the project's resources.
-    attr_reader :environment
-    # @return [Boolean] If true, all resources will be added to this project if no project is specified.
-    attr_reader :is_default
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalProjectsListMetadata
-    FIELDS = {
-      projects: 'projects',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      projects: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Project.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for ProjectsList.
-  # Typed representation of the `ProjectsList` API schema.
-  class ProjectsList
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalProjectsListMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalProjectsListMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalProjectsListMetadata::DECODERS
-
-    attr_reader :projects
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

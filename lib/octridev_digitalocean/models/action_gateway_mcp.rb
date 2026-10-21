@@ -5,418 +5,427 @@
 
 # action_gateway_mcp domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalMcpServerMetadata
-    FIELDS = {
-      server_ref: 'serverRef',
-      endpoint: 'endpoint',
-      transport: 'transport',
-      credential_ref_source: 'credentialRefSource',
-      credential_ref: 'credentialRef',
-      sync_status: 'syncStatus',
-      sync_error: 'syncError',
-      last_synced_at: 'lastSyncedAt',
-      protocol_version: 'protocolVersion',
-      tool_count: 'toolCount',
-      created_at: 'createdAt',
-      updated_at: 'updatedAt',
-      description: 'description',
-      oauth_authorize_url: 'oauth_authorize_url',
-      oauth_scopes: 'oauth_scopes',
-      oauth_authorization_ttl_seconds: 'oauth_authorization_ttl_seconds'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      transport: lambda do |value|
-        ::OctridevDigitalocean::McpServerTransport.from_value(value)
-      end,
-      credential_ref_source: lambda do |value|
-        ::OctridevDigitalocean::McpServerCredentialRefSource.from_value(value)
-      end,
-      sync_status: lambda do |value|
-        ::OctridevDigitalocean::McpServerSyncStatus.from_value(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalMcpServerMetadata
+  FIELDS = {
+    server_ref: "serverRef",
+    endpoint: "endpoint",
+    transport: "transport",
+    credential_ref_source: "credentialRefSource",
+    credential_ref: "credentialRef",
+    sync_status: "syncStatus",
+    sync_error: "syncError",
+    last_synced_at: "lastSyncedAt",
+    protocol_version: "protocolVersion",
+    tool_count: "toolCount",
+    created_at: "createdAt",
+    updated_at: "updatedAt",
+    description: "description",
+    oauth_authorize_url: "oauth_authorize_url",
+    oauth_scopes: "oauth_scopes",
+    oauth_authorization_ttl_seconds: "oauth_authorization_ttl_seconds",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    transport: lambda do |value|
+      ::OctridevDigitalocean::McpServerTransport.from_value(value)
+    end,
+    credential_ref_source: lambda do |value|
+      ::OctridevDigitalocean::McpServerCredentialRefSource.from_value(value)
+    end,
+    sync_status: lambda do |value|
+      ::OctridevDigitalocean::McpServerSyncStatus.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for McpServer.
+# MCP server registered by your team. It never contains secret material.
+class McpServer
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMcpServerMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMcpServerMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMcpServerMetadata::DECODERS
+
+  # @return [String] Server identifier, unique within your team. The server's tool slugs are `<server_ref>_<name>`.
+  attr_reader :server_ref
+  # @return [String] HTTPS URL of the server's MCP endpoint.
+  attr_reader :endpoint
+  # @return [McpServerTransport] Always `streamable_http`.
+  attr_reader :transport
+  # @return [McpServerCredentialRefSource] How requests to the server authenticate: none, secret (a key or token sent in the Authorization header), or connection (each user's own OAuth authorization).
+  attr_reader :credential_ref_source
+  # @return [String] The secret reference supplied at registration when source=secret, or the team's OAuth credential ID when source=connection. Empty when the server was registered with an `api_key`, whose storage DigitalOcean manages.
+  attr_reader :credential_ref
+  # @return [McpServerSyncStatus] Outcome of the latest discovery: pending (no discovery has finished yet), ok, failed, or `unsupported_protocol`. It is not reset while a resync runs.
+  attr_reader :sync_status
+  # @return [String] Why the latest discovery failed; empty after a successful one.
+  attr_reader :sync_error
+  # @return [String] When discovery last succeeded, in RFC 3339 format; empty until the first success.
+  attr_reader :last_synced_at
+  # @return [String] MCP protocol revision negotiated with the server.
+  attr_reader :protocol_version
+  # @return [Integer] Number of tools discovered on the server, whether enabled or not.
+  attr_reader :tool_count
+  # @return [String] When the server was registered, in RFC 3339 format.
+  attr_reader :created_at
+  # @return [String] When the server was last modified, in RFC 3339 format.
+  attr_reader :updated_at
+  # @return [String] Team-authored description, shown on the server's catalog card. A resync does not replace it.
+  attr_reader :description
+  # @return [String] OAuth authorization endpoint. Set only when `credentialRefSource` is connection; the client secret is never returned.
+  attr_reader :oauth_authorize_url
+  # @return [Array_of_String] OAuth scopes requested from each user. Set only when `credentialRefSource` is connection.
+  attr_reader :oauth_scopes
+  # @return [String] How long a user's authorization is reused before re-consent. Echoed so a team can read the window without re-registering to discover it.
+  attr_reader :oauth_authorization_ttl_seconds
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for McpServer.
-  # MCP server registered by your team. It never contains secret material.
-  class McpServer
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMcpServerMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMcpServerMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMcpServerMetadata::DECODERS
-
-    # @return [String] Server identifier, unique within your team. The server's tool slugs are `<server_ref>_<name>`.
-    attr_reader :server_ref
-    # @return [String] HTTPS URL of the server's MCP endpoint.
-    attr_reader :endpoint
-    # @return [McpServerTransport] Always `streamable_http`.
-    attr_reader :transport
-    # @return [McpServerCredentialRefSource] How requests to the server authenticate: none, secret (a key or token sent in the Authorization header), or connection (each user's own OAuth authorization).
-    attr_reader :credential_ref_source
-    # @return [String] The secret reference supplied at registration when source=secret, or the team's OAuth credential ID when source=connection. Empty when the server was registered with an `api_key`, whose storage DigitalOcean manages.
-    attr_reader :credential_ref
-    # @return [McpServerSyncStatus] Outcome of the latest discovery: pending (no discovery has finished yet), ok, failed, or `unsupported_protocol`. It is not reset while a resync runs.
-    attr_reader :sync_status
-    # @return [String] Why the latest discovery failed; empty after a successful one.
-    attr_reader :sync_error
-    # @return [String] When discovery last succeeded, in RFC 3339 format; empty until the first success.
-    attr_reader :last_synced_at
-    # @return [String] MCP protocol revision negotiated with the server.
-    attr_reader :protocol_version
-    # @return [Integer] Number of tools discovered on the server, whether enabled or not.
-    attr_reader :tool_count
-    # @return [String] When the server was registered, in RFC 3339 format.
-    attr_reader :created_at
-    # @return [String] When the server was last modified, in RFC 3339 format.
-    attr_reader :updated_at
-    # @return [String] Team-authored description, shown on the server's catalog card. A resync does not replace it.
-    attr_reader :description
-    # @return [String] OAuth authorization endpoint. Set only when `credentialRefSource` is connection; the client secret is never returned.
-    attr_reader :oauth_authorize_url
-    # @return [Array_of_String] OAuth scopes requested from each user. Set only when `credentialRefSource` is connection.
-    attr_reader :oauth_scopes
-    # @return [String] How long a user's authorization is reused before re-consent. Echoed so a team can read the window without re-registering to discover it.
-    attr_reader :oauth_authorization_ttl_seconds
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the McpServerCredentialRefSource SDK namespace.
-  module McpServerCredentialRefSource
-    NONE = 'none'
-    SECRET = 'secret'
-    CONNECTION = 'connection'
-    VALUES = %w[none secret connection].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the McpServerCredentialRefSource SDK namespace.
+module McpServerCredentialRefSource
+  NONE = 'none'
+  SECRET = 'secret'
+  CONNECTION = 'connection'
+  VALUES = ['none', 'secret', 'connection'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the McpServerSyncStatus SDK namespace.
+module McpServerSyncStatus
+  PENDING = 'pending'
+  OK = 'ok'
+  FAILED = 'failed'
+  UNSUPPORTED_PROTOCOL = 'unsupported_protocol'
+  VALUES = ['pending', 'ok', 'failed', 'unsupported_protocol'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the McpServerTransport SDK namespace.
+module McpServerTransport
+  STREAMABLE_HTTP = 'streamable_http'
+  VALUES = ['streamable_http'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalMcpServerCreateRequestMetadata
+  FIELDS = {
+    server_ref: "serverRef",
+    endpoint: "endpoint",
+    transport: "transport",
+    credential_ref_source: "credentialRefSource",
+    description: "description",
+    credential_ref: "credentialRef",
+    api_key: "api_key",
+    oauth_client_id: "oauth_client_id",
+    oauth_client_secret: "oauth_client_secret",
+    oauth_authorize_url: "oauth_authorize_url",
+    oauth_token_url: "oauth_token_url",
+    oauth_scopes: "oauth_scopes",
+    oauth_authorization_ttl_seconds: "oauth_authorization_ttl_seconds",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    server_ref
+    endpoint
+  ].freeze
+  DECODERS = {
+    transport: lambda do |value|
+      ::OctridevDigitalocean::McpServerCreateRequestTransport.from_value(value)
+    end,
+    credential_ref_source: lambda do |value|
+      ::OctridevDigitalocean::McpServerCreateRequestCredentialRefSource.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for McpServerCreateRequest.
+# Describes an MCP server to register.
+class McpServerCreateRequest
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMcpServerCreateRequestMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMcpServerCreateRequestMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMcpServerCreateRequestMetadata::DECODERS
+
+  # @return [String] Identifier for the server, unique within your team. Must match `^`[a-z]``[a-z0-9-]`{0,63}$`.
+  attr_reader :server_ref
+  # @return [String] HTTPS URL of the server's MCP endpoint. Its host must resolve only to public IP addresses. Required.
+  attr_reader :endpoint
+  # @return [McpServerCreateRequestTransport] Optional. `streamable_http`, the default and only accepted value.
+  attr_reader :transport
+  # @return [McpServerCreateRequestCredentialRefSource] How requests to the server authenticate: none (the default), secret, or connection. With secret, the value from `credentialRef` or `api_key` is sent in the Authorization header, prefixed with "Bearer " unless it already contains a space.
+  attr_reader :credential_ref_source
+  # @return [String] Optional description shown on the server's catalog card. At most 1024 characters.
+  attr_reader :description
+  # @return [String] For `credentialRefSource` secret: a reference to a secret your team stores with DigitalOcean. Must match `^`[A-Za-z0-9]``[A-Za-z0-9:/_.-]`{0,254}$`. Set exactly one of `credentialRef` and `api_key`.
+  attr_reader :credential_ref
+  # @return [String] For `credentialRefSource` secret: the key or token itself. DigitalOcean stores it; it is write-only and no response returns it. Set exactly one of `credentialRef` and `api_key`.
+  attr_reader :api_key
+  # @return [String] Required for `credentialRefSource` connection: the client ID of your team's OAuth client for the server. Each user of the server then authorizes individually.
+  attr_reader :oauth_client_id
+  # @return [String] Required for `credentialRefSource` connection. Write-only; no response returns it.
+  attr_reader :oauth_client_secret
+  # @return [String] Required for `credentialRefSource` connection: the OAuth authorization endpoint. It must use the endpoint's scheme and port, on the endpoint's host or another host under the same registrable domain.
+  attr_reader :oauth_authorize_url
+  # @return [String] Required for `credentialRefSource` connection: the OAuth token endpoint, under the same rules as `oauth_authorize_url`.
+  attr_reader :oauth_token_url
+  # @return [Array_of_String] Required for `credentialRefSource` connection: the scopes to request from each user, 1 to 64 of them.
+  attr_reader :oauth_scopes
+  # @return [String] How long, in seconds, a user's authorization may be reused before they must consent again. Optional; 0 means 30 days, and the maximum is 100 years. Authorizations are not refreshed automatically, so this window, not the provider's token lifetime, decides how often a user is sent back through consent. Set it no longer than the provider's own token lifetime, so the prompt arrives before a tool call fails against an expired token.
+  attr_reader :oauth_authorization_ttl_seconds
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the McpServerSyncStatus SDK namespace.
-  module McpServerSyncStatus
-    PENDING = 'pending'
-    OK = 'ok'
-    FAILED = 'failed'
-    UNSUPPORTED_PROTOCOL = 'unsupported_protocol'
-    VALUES = %w[pending ok failed unsupported_protocol].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the McpServerTransport SDK namespace.
-  module McpServerTransport
-    STREAMABLE_HTTP = 'streamable_http'
-    VALUES = ['streamable_http'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the McpServerCreateRequestCredentialRefSource SDK namespace.
+module McpServerCreateRequestCredentialRefSource
+  NONE = 'none'
+  SECRET = 'secret'
+  CONNECTION = 'connection'
+  VALUES = ['none', 'secret', 'connection'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the McpServerCreateRequestTransport SDK namespace.
+module McpServerCreateRequestTransport
+  STREAMABLE_HTTP = 'streamable_http'
+  VALUES = ['streamable_http'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalMcpServerResponseMetadata
+  FIELDS = {
+    mcp_server: "mcpServer",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    mcp_server: lambda do |value|
+      ::OctridevDigitalocean::McpServer.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for McpServerResponse.
+# Returns one MCP server.
+class McpServerResponse
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMcpServerResponseMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMcpServerResponseMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMcpServerResponseMetadata::DECODERS
+
+  # @return [McpServer] The MCP server.
+  attr_reader :mcp_server
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalMcpServerCreateRequestMetadata
-    FIELDS = {
-      server_ref: 'serverRef',
-      endpoint: 'endpoint',
-      transport: 'transport',
-      credential_ref_source: 'credentialRefSource',
-      description: 'description',
-      credential_ref: 'credentialRef',
-      api_key: 'api_key',
-      oauth_client_id: 'oauth_client_id',
-      oauth_client_secret: 'oauth_client_secret',
-      oauth_authorize_url: 'oauth_authorize_url',
-      oauth_token_url: 'oauth_token_url',
-      oauth_scopes: 'oauth_scopes',
-      oauth_authorization_ttl_seconds: 'oauth_authorization_ttl_seconds'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      server_ref
-      endpoint
-    ].freeze
-    DECODERS = {
-      transport: lambda do |value|
-        ::OctridevDigitalocean::McpServerCreateRequestTransport.from_value(value)
-      end,
-      credential_ref_source: lambda do |value|
-        ::OctridevDigitalocean::McpServerCreateRequestCredentialRefSource.from_value(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for McpServerCreateRequest.
-  # Describes an MCP server to register.
-  class McpServerCreateRequest
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMcpServerCreateRequestMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMcpServerCreateRequestMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMcpServerCreateRequestMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Identifier for the server, unique within your team. Must match `^`[a-z]``[a-z0-9-]`{0,63}$`.
-    attr_reader :server_ref
-    # @return [String] HTTPS URL of the server's MCP endpoint. Its host must resolve only to public IP addresses. Required.
-    attr_reader :endpoint
-    # @return [McpServerCreateRequestTransport] Optional. `streamable_http`, the default and only accepted value.
-    attr_reader :transport
-    # @return [McpServerCreateRequestCredentialRefSource] How requests to the server authenticate: none (the default), secret, or connection. With secret, the value from `credentialRef` or `api_key` is sent in the Authorization header, prefixed with "Bearer " unless it already contains a space.
-    attr_reader :credential_ref_source
-    # @return [String] Optional description shown on the server's catalog card. At most 1024 characters.
-    attr_reader :description
-    # @return [String] For `credentialRefSource` secret: a reference to a secret your team stores with DigitalOcean. Must match `^`[A-Za-z0-9]``[A-Za-z0-9:/_.-]`{0,254}$`. Set exactly one of `credentialRef` and `api_key`.
-    attr_reader :credential_ref
-    # @return [String] For `credentialRefSource` secret: the key or token itself. DigitalOcean stores it; it is write-only and no response returns it. Set exactly one of `credentialRef` and `api_key`.
-    attr_reader :api_key
-    # @return [String] Required for `credentialRefSource` connection: the client ID of your team's OAuth client for the server. Each user of the server then authorizes individually.
-    attr_reader :oauth_client_id
-    # @return [String] Required for `credentialRefSource` connection. Write-only; no response returns it.
-    attr_reader :oauth_client_secret
-    # @return [String] Required for `credentialRefSource` connection: the OAuth authorization endpoint. It must use the endpoint's scheme and port, on the endpoint's host or another host under the same registrable domain.
-    attr_reader :oauth_authorize_url
-    # @return [String] Required for `credentialRefSource` connection: the OAuth token endpoint, under the same rules as `oauth_authorize_url`.
-    attr_reader :oauth_token_url
-    # @return [Array_of_String] Required for `credentialRefSource` connection: the scopes to request from each user, 1 to 64 of them.
-    attr_reader :oauth_scopes
-    # @return [String] How long, in seconds, a user's authorization may be reused before they must consent again. Optional; 0 means 30 days, and the maximum is 100 years. Authorizations are not refreshed automatically, so this window, not the provider's token lifetime, decides how often a user is sent back through consent. Set it no longer than the provider's own token lifetime, so the prompt arrives before a tool call fails against an expired token.
-    attr_reader :oauth_authorization_ttl_seconds
+# Internal model hydration metadata.
+class SdkInternalMcpServerResyncMetadata
+  FIELDS = {
+    user_id: "user_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for McpServerResync.
+# Selects the server to discover.
+class McpServerResync
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMcpServerResyncMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMcpServerResyncMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMcpServerResyncMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Required for a server registered with `credentialRefSource` connection: discovery reaches the server as this user, through their connection, because such a server has no team-wide credential. Ignored otherwise.
+  attr_reader :user_id
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the McpServerCreateRequestCredentialRefSource SDK namespace.
-  module McpServerCreateRequestCredentialRefSource
-    NONE = 'none'
-    SECRET = 'secret'
-    CONNECTION = 'connection'
-    VALUES = %w[none secret connection].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the McpServerCreateRequestTransport SDK namespace.
-  module McpServerCreateRequestTransport
-    STREAMABLE_HTTP = 'streamable_http'
-    VALUES = ['streamable_http'].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalMcpServerToolMetadata
+  FIELDS = {
+    name: "name",
+    tool_slug: "toolSlug",
+    description: "description",
+    enabled: "enabled",
+    quarantined: "quarantined",
+    quarantine_reason: "quarantineReason",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for McpServerTool.
+# One tool discovered on an MCP server.
+class McpServerTool
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMcpServerToolMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMcpServerToolMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMcpServerToolMetadata::DECODERS
+
+  # @return [String] Tool name as the server reports it, normalized to the catalog's naming rules.
+  attr_reader :name
+  # @return [String] `<server_ref>_<name>`: the tool's catalog slug, and the value to list in `enabledToolSlugs`.
+  attr_reader :tool_slug
+  # @return [String] Tool description as the server reports it.
+  attr_reader :description
+  # @return [Boolean] Whether the tool is enabled in your team's catalog.
+  attr_reader :enabled
+  # @return [Boolean] True when the enabled tool was suspended because it disappeared from the server or its input schema changed incompatibly. Calls to it fail until it is enabled again.
+  attr_reader :quarantined
+  # @return [String] Why the tool was quarantined; empty otherwise.
+  attr_reader :quarantine_reason
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalMcpServerResponseMetadata
-    FIELDS = {
-      mcp_server: 'mcpServer'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      mcp_server: lambda do |value|
-        ::OctridevDigitalocean::McpServer.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for McpServerResponse.
-  # Returns one MCP server.
-  class McpServerResponse
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMcpServerResponseMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMcpServerResponseMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMcpServerResponseMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [McpServer] The MCP server.
-    attr_reader :mcp_server
+# Internal model hydration metadata.
+class SdkInternalMcpServerToolsUpdateMetadata
+  FIELDS = {
+    enabled_tool_slugs: "enabledToolSlugs",
+    user_id: "user_id",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    enabled_tool_slugs
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for McpServerToolsUpdate.
+# Complete set of a server's tools to enable.
+class McpServerToolsUpdate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMcpServerToolsUpdateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMcpServerToolsUpdateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMcpServerToolsUpdateMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Array_of_String] The complete set of tool slugs (`<server_ref>_<name>`) to enable; every other tool of the server is disabled. Empty disables every tool.
+  attr_reader :enabled_tool_slugs
+  # @return [String] Required for a server registered with `credentialRefSource` connection when a tool needs verification against the live server, which can only be reached as a user who has authorized it. Ignored otherwise.
+  attr_reader :user_id
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalMcpServerResyncMetadata
-    FIELDS = {
-      user_id: 'user_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for McpServerResync.
-  # Selects the server to discover.
-  class McpServerResync
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMcpServerResyncMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMcpServerResyncMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMcpServerResyncMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Required for a server registered with `credentialRefSource` connection: discovery reaches the server as this user, through their connection, because such a server has no team-wide credential. Ignored otherwise.
-    attr_reader :user_id
+# Internal model hydration metadata.
+class SdkInternalMcpServerUpdateMetadata
+  FIELDS = {
+    description: "description",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for McpServerUpdate.
+# Carries the editable fields of a registered server.
+class McpServerUpdate
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalMcpServerUpdateMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalMcpServerUpdateMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalMcpServerUpdateMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Replaces the stored description; empty clears it. At most 1024 characters.
+  attr_reader :description
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalMcpServerToolMetadata
-    FIELDS = {
-      name: 'name',
-      tool_slug: 'toolSlug',
-      description: 'description',
-      enabled: 'enabled',
-      quarantined: 'quarantined',
-      quarantine_reason: 'quarantineReason'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for McpServerTool.
-  # One tool discovered on an MCP server.
-  class McpServerTool
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMcpServerToolMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMcpServerToolMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMcpServerToolMetadata::DECODERS
-
-    # @return [String] Tool name as the server reports it, normalized to the catalog's naming rules.
-    attr_reader :name
-    # @return [String] `<server_ref>_<name>`: the tool's catalog slug, and the value to list in `enabledToolSlugs`.
-    attr_reader :tool_slug
-    # @return [String] Tool description as the server reports it.
-    attr_reader :description
-    # @return [Boolean] Whether the tool is enabled in your team's catalog.
-    attr_reader :enabled
-    # @return [Boolean] True when the enabled tool was suspended because it disappeared from the server or its input schema changed incompatibly. Calls to it fail until it is enabled again.
-    attr_reader :quarantined
-    # @return [String] Why the tool was quarantined; empty otherwise.
-    attr_reader :quarantine_reason
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # Internal model hydration metadata.
-  class SdkInternalMcpServerToolsUpdateMetadata
-    FIELDS = {
-      enabled_tool_slugs: 'enabledToolSlugs',
-      user_id: 'user_id'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      enabled_tool_slugs
-    ].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for McpServerToolsUpdate.
-  # Complete set of a server's tools to enable.
-  class McpServerToolsUpdate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMcpServerToolsUpdateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMcpServerToolsUpdateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMcpServerToolsUpdateMetadata::DECODERS
-
-    # @return [Array_of_String] The complete set of tool slugs (`<server_ref>_<name>`) to enable; every other tool of the server is disabled. Empty disables every tool.
-    attr_reader :enabled_tool_slugs
-    # @return [String] Required for a server registered with `credentialRefSource` connection when a tool needs verification against the live server, which can only be reached as a user who has authorized it. Ignored otherwise.
-    attr_reader :user_id
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalMcpServerUpdateMetadata
-    FIELDS = {
-      description: 'description'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for McpServerUpdate.
-  # Carries the editable fields of a registered server.
-  class McpServerUpdate
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalMcpServerUpdateMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalMcpServerUpdateMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalMcpServerUpdateMetadata::DECODERS
-
-    # @return [String] Replaces the stored description; empty clears it. At most 1024 characters.
-    attr_reader :description
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

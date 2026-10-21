@@ -34,12 +34,13 @@ module OctridevDigitalocean
         sort_direction: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
           [
-            '/v2/gen-ai/scenario_library/',
+            "/v2/gen-ai/scenario_library/",
             SdkClient.encode_path_segment(library_scenario_uuid),
-            '/scenarios'
+            "/scenarios"
           ].join,
           config: config,
           query: {
@@ -47,13 +48,13 @@ module OctridevDigitalocean
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'search' => QueryValue.new(search, style: 'form', explode: true),
             'sort_by' => QueryValue.new(sort_by, style: 'form', explode: true),
-            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true)
+            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ApiListScenariosOutput,
           decoder: :json,
           operation_id: 'genai_list_scenario_library_scenarios',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

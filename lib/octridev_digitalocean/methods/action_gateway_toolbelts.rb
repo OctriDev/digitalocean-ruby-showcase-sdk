@@ -33,6 +33,7 @@ module OctridevDigitalocean
         tools: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         Validation.if_given(version) { Validation.validate_pattern('version', version, '^[0-9]+$') }
@@ -45,20 +46,20 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          '/v2/action-gateway/toolbelts',
+          "/v2/action-gateway/toolbelts",
           config: config,
           body: {
             'name' => name,
             'version' => version,
             'display_name' => display_name,
             'description' => description,
-            'tools' => tools
+            'tools' => tools,
           },
           return_type: ::OctridevDigitalocean::ToolbeltResponse,
           decoder: :json,
           operation_id: 'toolbelts_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -76,24 +77,25 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/toolbelts',
+          "/v2/action-gateway/toolbelts",
           config: config,
           query: {
             'status' => QueryValue.new(status, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ToolbeltsResponse,
           decoder: :json,
           operation_id: 'toolbelts_list',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -116,27 +118,28 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          '/v2/action-gateway/toolbelts/search',
+          "/v2/action-gateway/toolbelts/search",
           config: config,
           query: {
             'query' => QueryValue.new(query, style: 'form', explode: true),
             'status' => QueryValue.new(status, style: 'form', explode: true),
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::SearchToolbeltsResponse,
           decoder: :json,
           operation_id: 'toolbelts_list_search',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
-      ToolbeltsListSearchPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    ToolbeltsListSearchPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Returns your team's toolbelts whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
       #
@@ -170,11 +173,9 @@ module OctridevDigitalocean
             )
             items = page.toolbelts || []
             break if items.empty?
-
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
-
             cursor = next_cursor
           end
         end
@@ -201,12 +202,10 @@ module OctridevDigitalocean
             )
             items = page.toolbelts || []
             break if items.empty?
-
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << ToolbeltsListSearchPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             cursor = next_cursor
           end
         end
@@ -236,6 +235,7 @@ module OctridevDigitalocean
         search: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         Validation.if_given(version) { Validation.validate_pattern('version', version, '^[0-9]+$') }
@@ -245,7 +245,7 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/action-gateway/toolbelts/',
+            "/v2/action-gateway/toolbelts/",
             SdkClient.encode_path_segment(name)
           ].join,
           config: config,
@@ -253,17 +253,17 @@ module OctridevDigitalocean
             'version' => QueryValue.new(version, style: 'form', explode: true),
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
             'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
-            'search' => QueryValue.new(search, style: 'form', explode: true)
+            'search' => QueryValue.new(search, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::GetToolbeltResponse,
           decoder: :json,
           operation_id: 'toolbelts_get',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
-      ToolbeltsGetPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+    ToolbeltsGetPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Returns the latest version of the named toolbelt, or the version requested, with catalog metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless a version is requested.
       #
@@ -303,11 +303,9 @@ module OctridevDigitalocean
             )
             items = page.tool_details || []
             break if items.empty?
-
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
-
             cursor = next_cursor
           end
         end
@@ -336,12 +334,10 @@ module OctridevDigitalocean
             )
             items = page.tool_details || []
             break if items.empty?
-
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << ToolbeltsGetPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
-
             cursor = next_cursor
           end
         end
@@ -355,12 +351,13 @@ module OctridevDigitalocean
         name:,
         request_options: nil
       )
+
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/action-gateway/toolbelts/',
+            "/v2/action-gateway/toolbelts/",
             SdkClient.encode_path_segment(name)
           ].join,
           config: config,
@@ -368,7 +365,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'toolbelts_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -391,6 +388,7 @@ module OctridevDigitalocean
         search: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         Validation.if_given(version) { Validation.validate_pattern('version', version, '^[0-9]+$') }
@@ -402,22 +400,22 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/action-gateway/toolbelts/',
+            "/v2/action-gateway/toolbelts/",
             SdkClient.encode_path_segment(name),
-            '/providers'
+            "/providers"
           ].join,
           config: config,
           query: {
             'version' => QueryValue.new(version, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'search' => QueryValue.new(search, style: 'form', explode: true)
+            'search' => QueryValue.new(search, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListToolbeltProvidersResponse,
           decoder: :json,
           operation_id: 'toolbelts_list_providers',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -444,6 +442,7 @@ module OctridevDigitalocean
         search: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         Validation.if_given(version) { Validation.validate_pattern('version', version, '^[0-9]+$') }
@@ -455,24 +454,24 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            '/v2/action-gateway/toolbelts/',
+            "/v2/action-gateway/toolbelts/",
             SdkClient.encode_path_segment(name),
-            '/providers/',
+            "/providers/",
             SdkClient.encode_path_segment(provider),
-            '/tools'
+            "/tools"
           ].join,
           config: config,
           query: {
             'version' => QueryValue.new(version, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'search' => QueryValue.new(search, style: 'form', explode: true)
+            'search' => QueryValue.new(search, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListToolbeltProviderToolsResponse,
           decoder: :json,
           operation_id: 'toolbelts_list_provider_tools',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -488,6 +487,7 @@ module OctridevDigitalocean
         tools:,
         request_options: nil
       )
+
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         Validation.validate_items('tools', tools, min: 1, max: 500)
@@ -495,19 +495,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            '/v2/action-gateway/toolbelts/',
+            "/v2/action-gateway/toolbelts/",
             SdkClient.encode_path_segment(name),
-            '/tools/add'
+            "/tools/add"
           ].join,
           config: config,
           body: {
-            'tools' => tools
+            'tools' => tools,
           },
           return_type: ::OctridevDigitalocean::ToolbeltUpdateResponse,
           decoder: :json,
           operation_id: 'toolbelts_add_tools',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -523,6 +523,7 @@ module OctridevDigitalocean
         tools:,
         request_options: nil
       )
+
         Validation.validate_pattern('name', name, '^[a-z][a-z0-9_-]{0,63}$')
 
         Validation.validate_items('tools', tools, min: 1, max: 500)
@@ -530,19 +531,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            '/v2/action-gateway/toolbelts/',
+            "/v2/action-gateway/toolbelts/",
             SdkClient.encode_path_segment(name),
-            '/tools/remove'
+            "/tools/remove"
           ].join,
           config: config,
           body: {
-            'tools' => tools
+            'tools' => tools,
           },
           return_type: ::OctridevDigitalocean::ToolbeltUpdateResponse,
           decoder: :json,
           operation_id: 'toolbelts_delete_tools',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

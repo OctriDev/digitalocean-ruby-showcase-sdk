@@ -14,15 +14,16 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
+
         SdkClient.request(
           'GET',
-          '/v2/databases/metrics/credentials',
+          "/v2/databases/metrics/credentials",
           config: config,
           return_type: ::OctridevDigitalocean::DatabaseMetricsAuth,
           decoder: :json,
           operation_id: 'databases_get_cluster_metrics_credentials',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -34,15 +35,16 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'PUT',
-          '/v2/databases/metrics/credentials',
+          "/v2/databases/metrics/credentials",
           config: config,
           body: body,
           decoder: :empty,
           operation_id: 'databases_update_cluster_metrics_credentials',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

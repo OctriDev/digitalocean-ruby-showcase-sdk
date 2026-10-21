@@ -21,23 +21,24 @@ module OctridevDigitalocean
         version: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'PUT',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/upgrade'
+            "/upgrade"
           ].join,
           config: config,
           body: {
-            'version' => version
+            'version' => version,
           },
           decoder: :empty,
           operation_id: 'databases_update_major_version',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -28,6 +28,7 @@ module OctridevDigitalocean
         resource_urn: NOT_GIVEN,
         request_options: nil
       )
+
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
@@ -36,20 +37,20 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'GET',
-          '/v2/insights/alert-instances',
+          "/v2/insights/alert-instances",
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'status' => QueryValue.new(status, style: 'form', explode: true),
             'rule_id' => QueryValue.new(rule_id, style: 'form', explode: true),
-            'resource_urn' => QueryValue.new(resource_urn, style: 'form', explode: true)
+            'resource_urn' => QueryValue.new(resource_urn, style: 'form', explode: true),
           },
           return_type: ::OctridevDigitalocean::ListAlertInstancesResponse,
           decoder: :json,
           operation_id: 'insights_list_alert_instances',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -61,12 +62,13 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
+
         Validation.validate_uuid('id', id)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/insights/alert-instances/',
+            "/v2/insights/alert-instances/",
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -74,7 +76,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'insights_get_alert_instance',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -5,87 +5,90 @@
 
 # security domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalSuppressedResourceRootMetadata
-    FIELDS = {
-      resources: 'resources',
-      meta: 'meta',
-      links: 'links'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      resources: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::SuppressedResource.from_hash(item) }
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::SuppressedResourceRootMeta.from_hash(value)
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::SuppressedResourceRootLinks.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalSuppressedResourceRootMetadata
+  FIELDS = {
+    resources: "resources",
+    meta: "meta",
+    links: "links",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    resources: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::SuppressedResource.from_hash(item) }
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::SuppressedResourceRootMeta.from_hash(value)
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::SuppressedResourceRootLinks.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for SuppressedResourceRoot.
+# Typed representation of the `SuppressedResourceRoot` API schema.
+class SuppressedResourceRoot
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSuppressedResourceRootMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSuppressedResourceRootMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSuppressedResourceRootMetadata::DECODERS
+
+  # @return [Array_of_SuppressedResource] Optional array value serialized in the `resources` wire field.
+  attr_reader :resources
+  # @return [SuppressedResourceRootMeta] Optional object value serialized in the `meta` wire field.
+  attr_reader :meta
+  # @return [SuppressedResourceRootLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for SuppressedResourceRoot.
-  # Typed representation of the `SuppressedResourceRoot` API schema.
-  class SuppressedResourceRoot
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSuppressedResourceRootMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSuppressedResourceRootMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSuppressedResourceRootMetadata::DECODERS
-
-    # @return [Array_of_SuppressedResource] Optional array value serialized in the `resources` wire field.
-    attr_reader :resources
-    # @return [SuppressedResourceRootMeta] Optional object value serialized in the `meta` wire field.
-    attr_reader :meta
-    # @return [SuppressedResourceRootLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalTierCoverageMetadata
-    FIELDS = {
-      tier_coverage: 'tier_coverage'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalTierCoverageMetadata
+  FIELDS = {
+    tier_coverage: "tier_coverage",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for TierCoverage.
+# Typed representation of the `TierCoverage` API schema.
+class TierCoverage
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalTierCoverageMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalTierCoverageMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalTierCoverageMetadata::DECODERS
+
+  # @return [Hash] Optional object value serialized in the `tier_coverage` wire field.
+  attr_reader :tier_coverage
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for TierCoverage.
-  # Typed representation of the `TierCoverage` API schema.
-  class TierCoverage
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalTierCoverageMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalTierCoverageMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalTierCoverageMetadata::DECODERS
-
-    # @return [Hash] Optional object value serialized in the `tier_coverage` wire field.
-    attr_reader :tier_coverage
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -5,219 +5,225 @@
 
 # agent_platform_api_api_per domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalApiPerEpochResultSummaryMetadata
-    FIELDS = {
-      epoch: 'epoch',
-      overall_score_percent: 'overall_score_percent',
-      rows_scored: 'rows_scored'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+# Internal model hydration metadata.
+class SdkInternalApiPerEpochResultSummaryMetadata
+  FIELDS = {
+    epoch: "epoch",
+    overall_score_percent: "overall_score_percent",
+    rows_scored: "rows_scored",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ApiPerEpochResultSummary.
+# One epoch's standalone score, computed the same way overall_score_percent is computed today (flat pass rate over that epoch's rows).
+class ApiPerEpochResultSummary
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiPerEpochResultSummaryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiPerEpochResultSummaryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiPerEpochResultSummaryMetadata::DECODERS
+
+  # @return [Integer] 1-indexed epoch number (1 = first pass).
+  attr_reader :epoch
+  # @return [Float] Optional `double`-formatted value serialized in the `overall_score_percent` wire field.
+  attr_reader :overall_score_percent
+  # @return [Integer] Optional `int64`-formatted value serialized in the `rows_scored` wire field.
+  attr_reader :rows_scored
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiPerEpochResultSummary.
-  # One epoch's standalone score, computed the same way overall_score_percent is computed today (flat pass rate over that epoch's rows).
-  class ApiPerEpochResultSummary
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiPerEpochResultSummaryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiPerEpochResultSummaryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiPerEpochResultSummaryMetadata::DECODERS
-
-    # @return [Integer] 1-indexed epoch number (1 = first pass).
-    attr_reader :epoch
-    # @return [Float] Optional `double`-formatted value serialized in the `overall_score_percent` wire field.
-    attr_reader :overall_score_percent
-    # @return [Integer] Optional `int64`-formatted value serialized in the `rows_scored` wire field.
-    attr_reader :rows_scored
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiPerModelResultSummariesMetadata
-    FIELDS = {
-      summaries: 'summaries'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      summaries: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiPerModelResultSummary.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiPerModelResultSummariesMetadata
+  FIELDS = {
+    summaries: "summaries",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    summaries: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiPerModelResultSummary.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ApiPerModelResultSummaries.
+# Per-model breakdown of an evaluation run. Set on router evaluations to show how each underlying model performed across the prompts that were routed to it.
+class ApiPerModelResultSummaries
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiPerModelResultSummariesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiPerModelResultSummariesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiPerModelResultSummariesMetadata::DECODERS
+
+  # @return [Array_of_ApiPerModelResultSummary] One entry per underlying model that received at least one prompt during the evaluation run.
+  attr_reader :summaries
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiPerModelResultSummaries.
-  # Per-model breakdown of an evaluation run. Set on router evaluations to show how each underlying model performed across the prompts that were routed to it.
-  class ApiPerModelResultSummaries
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiPerModelResultSummariesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiPerModelResultSummariesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiPerModelResultSummariesMetadata::DECODERS
-
-    # @return [Array_of_ApiPerModelResultSummary] One entry per underlying model that received at least one prompt during the evaluation run.
-    attr_reader :summaries
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiPerModelResultSummaryMetadata
-    FIELDS = {
-      metric_summaries: 'metric_summaries',
-      model_name: 'model_name',
-      performance_metrics: 'performance_metrics',
-      prompt_count: 'prompt_count'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      metric_summaries: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiMetricResultSummary.from_hash(item) }
-      end,
-      performance_metrics: lambda do |value|
-        ::OctridevDigitalocean::ApiPerformanceMetrics.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiPerModelResultSummaryMetadata
+  FIELDS = {
+    metric_summaries: "metric_summaries",
+    model_name: "model_name",
+    performance_metrics: "performance_metrics",
+    prompt_count: "prompt_count",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    metric_summaries: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiMetricResultSummary.from_hash(item) }
+    end,
+    performance_metrics: lambda do |value|
+      ::OctridevDigitalocean::ApiPerformanceMetrics.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiPerModelResultSummary.
+# Aggregated evaluation results for a single underlying model in a router evaluation run.
+class ApiPerModelResultSummary
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiPerModelResultSummaryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiPerModelResultSummaryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiPerModelResultSummaryMetadata::DECODERS
+
+  # @return [Array_of_ApiMetricResultSummary] Pass/fail rate for each metric, computed over only the prompts routed to this model.
+  attr_reader :metric_summaries
+  # @return [String] The underlying model these results are for, such as `Llama 3.3 Instruct (70B)`.
+  attr_reader :model_name
+  # @return [ApiPerformanceMetrics] All performance metrics are for the candidate model unless noted otherwise.
+  attr_reader :performance_metrics
+  # @return [Integer] Number of prompts in the run that were routed to this model.
+  attr_reader :prompt_count
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiPerModelResultSummary.
-  # Aggregated evaluation results for a single underlying model in a router evaluation run.
-  class ApiPerModelResultSummary
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiPerModelResultSummaryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiPerModelResultSummaryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiPerModelResultSummaryMetadata::DECODERS
-
-    # @return [Array_of_ApiMetricResultSummary] Pass/fail rate for each metric, computed over only the prompts routed to this model.
-    attr_reader :metric_summaries
-    # @return [String] The underlying model these results are for, such as `Llama 3.3 Instruct (70B)`.
-    attr_reader :model_name
-    # @return [ApiPerformanceMetrics] All performance metrics are for the candidate model unless noted otherwise.
-    attr_reader :performance_metrics
-    # @return [Integer] Number of prompts in the run that were routed to this model.
-    attr_reader :prompt_count
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiPerTaskResultSummariesMetadata
-    FIELDS = {
-      summaries: 'summaries'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      summaries: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiPerTaskResultSummary.from_hash(item) }
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiPerTaskResultSummariesMetadata
+  FIELDS = {
+    summaries: "summaries",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    summaries: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiPerTaskResultSummary.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for ApiPerTaskResultSummaries.
+# Per-task breakdown of an evaluation run. Set on router evaluations to show how each routing task category performed across the prompts that were classified into it.
+class ApiPerTaskResultSummaries
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiPerTaskResultSummariesMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiPerTaskResultSummariesMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiPerTaskResultSummariesMetadata::DECODERS
+
+  # @return [Array_of_ApiPerTaskResultSummary] One entry per routing task category that received at least one prompt during the evaluation run.
+  attr_reader :summaries
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiPerTaskResultSummaries.
-  # Per-task breakdown of an evaluation run. Set on router evaluations to show how each routing task category performed across the prompts that were classified into it.
-  class ApiPerTaskResultSummaries
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiPerTaskResultSummariesMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiPerTaskResultSummariesMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiPerTaskResultSummariesMetadata::DECODERS
-
-    # @return [Array_of_ApiPerTaskResultSummary] One entry per routing task category that received at least one prompt during the evaluation run.
-    attr_reader :summaries
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiPerTaskResultSummaryMetadata
-    FIELDS = {
-      metric_summaries: 'metric_summaries',
-      performance_metrics: 'performance_metrics',
-      prompt_count: 'prompt_count',
-      task_name: 'task_name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      metric_summaries: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiMetricResultSummary.from_hash(item) }
-      end,
-      performance_metrics: lambda do |value|
-        ::OctridevDigitalocean::ApiPerformanceMetrics.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiPerTaskResultSummaryMetadata
+  FIELDS = {
+    metric_summaries: "metric_summaries",
+    performance_metrics: "performance_metrics",
+    prompt_count: "prompt_count",
+    task_name: "task_name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    metric_summaries: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiMetricResultSummary.from_hash(item) }
+    end,
+    performance_metrics: lambda do |value|
+      ::OctridevDigitalocean::ApiPerformanceMetrics.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for ApiPerTaskResultSummary.
+# Aggregated evaluation results for a single routing task category in a router evaluation run.
+class ApiPerTaskResultSummary
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiPerTaskResultSummaryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiPerTaskResultSummaryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiPerTaskResultSummaryMetadata::DECODERS
+
+  # @return [Array_of_ApiMetricResultSummary] Pass/fail rate for each metric, computed over only the prompts in this task category.
+  attr_reader :metric_summaries
+  # @return [ApiPerformanceMetrics] All performance metrics are for the candidate model unless noted otherwise.
+  attr_reader :performance_metrics
+  # @return [Integer] Number of prompts in the run that were classified into this task category.
+  attr_reader :prompt_count
+  # @return [String] The routing task category these results are for, such as `Coding & brainstorming` or `Summarization`.
+  attr_reader :task_name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ApiPerTaskResultSummary.
-  # Aggregated evaluation results for a single routing task category in a router evaluation run.
-  class ApiPerTaskResultSummary
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiPerTaskResultSummaryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiPerTaskResultSummaryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiPerTaskResultSummaryMetadata::DECODERS
-
-    # @return [Array_of_ApiMetricResultSummary] Pass/fail rate for each metric, computed over only the prompts in this task category.
-    attr_reader :metric_summaries
-    # @return [ApiPerformanceMetrics] All performance metrics are for the candidate model unless noted otherwise.
-    attr_reader :performance_metrics
-    # @return [Integer] Number of prompts in the run that were classified into this task category.
-    attr_reader :prompt_count
-    # @return [String] The routing task category these results are for, such as `Coding & brainstorming` or `Summarization`.
-    attr_reader :task_name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -18,21 +18,22 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry'
+            "/schema-registry"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::KafkaSchemas,
           decoder: :json,
           operation_id: 'databases_list_kafka_schemas',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -52,26 +53,27 @@ module OctridevDigitalocean
         schema:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'POST',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry'
+            "/schema-registry"
           ].join,
           config: config,
           body: {
             'subject_name' => subject_name,
             'schema_type' => schema_type,
-            'schema' => schema
+            'schema' => schema,
           },
           return_type: ::OctridevDigitalocean::KafkaSchema,
           decoder: :json,
           operation_id: 'databases_create_kafka_schema',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -86,14 +88,15 @@ module OctridevDigitalocean
         subject_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry/',
+            "/schema-registry/",
             SdkClient.encode_path_segment(subject_name)
           ].join,
           config: config,
@@ -101,7 +104,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_get_kafka_schema',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -116,21 +119,22 @@ module OctridevDigitalocean
         subject_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'DELETE',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry/',
+            "/schema-registry/",
             SdkClient.encode_path_segment(subject_name)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'databases_delete_kafka_schema',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -147,16 +151,17 @@ module OctridevDigitalocean
         version:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry/',
+            "/schema-registry/",
             SdkClient.encode_path_segment(subject_name),
-            '/versions/',
+            "/versions/",
             SdkClient.encode_path_segment(version)
           ].join,
           config: config,
@@ -164,7 +169,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_get_kafka_schema_version',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -177,21 +182,22 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry/config'
+            "/schema-registry/config"
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::DatabaseSchemaRegistryConfig,
           decoder: :json,
           operation_id: 'databases_get_kafka_schema_config',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -208,24 +214,25 @@ module OctridevDigitalocean
         compatibility_level:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'PUT',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry/config'
+            "/schema-registry/config"
           ].join,
           config: config,
           body: {
-            'compatibility_level' => compatibility_level
+            'compatibility_level' => compatibility_level,
           },
           return_type: ::OctridevDigitalocean::DatabaseSchemaRegistryConfig,
           decoder: :json,
           operation_id: 'databases_update_kafka_schema_config',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -240,14 +247,15 @@ module OctridevDigitalocean
         subject_name:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry/config/',
+            "/schema-registry/config/",
             SdkClient.encode_path_segment(subject_name)
           ].join,
           config: config,
@@ -255,7 +263,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'databases_get_kafka_schema_subject_config',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
 
@@ -274,25 +282,26 @@ module OctridevDigitalocean
         compatibility_level:,
         request_options: nil
       )
+
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'PUT',
           [
-            '/v2/databases/',
+            "/v2/databases/",
             SdkClient.encode_path_segment(database_cluster_uuid),
-            '/schema-registry/config/',
+            "/schema-registry/config/",
             SdkClient.encode_path_segment(subject_name)
           ].join,
           config: config,
           body: {
-            'compatibility_level' => compatibility_level
+            'compatibility_level' => compatibility_level,
           },
           return_type: ::OctridevDigitalocean::DatabaseSchemaRegistrySubjectConfig,
           decoder: :json,
           operation_id: 'databases_update_kafka_schema_subject_config',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

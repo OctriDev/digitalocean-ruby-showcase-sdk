@@ -5,54 +5,54 @@
 
 # actions domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalActionsMetadata
-    FIELDS = {
-      actions: 'actions',
-      links: 'links',
-      meta: 'meta'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      meta
-    ].freeze
-    DECODERS = {
-      actions: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
-      end,
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end,
-      meta: lambda do |value|
-        ::OctridevDigitalocean::MetaMeta.from_hash(value)
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalActionsMetadata
+  FIELDS = {
+    actions: "actions",
+    links: "links",
+    meta: "meta",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    meta
+  ].freeze
+  DECODERS = {
+    actions: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::Action.from_hash(item) }
+    end,
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+    meta: lambda do |value|
+      ::OctridevDigitalocean::MetaMeta.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for Actions.
+# Typed representation of the `Actions` API schema.
+class Actions
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalActionsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalActionsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalActionsMetadata::DECODERS
+
+  attr_reader :actions
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+  attr_reader :meta
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for Actions.
-  # Typed representation of the `Actions` API schema.
-  class Actions
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalActionsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalActionsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalActionsMetadata::DECODERS
-
-    attr_reader :actions
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-    attr_reader :meta
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 end

@@ -35,9 +35,10 @@ module OctridevDigitalocean
         workspace_uuid: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
-          '/v2/gen-ai/evaluation_test_cases',
+          "/v2/gen-ai/evaluation_test_cases",
           config: config,
           body: {
             'agent_workspace_name' => agent_workspace_name,
@@ -46,13 +47,13 @@ module OctridevDigitalocean
             'metrics' => metrics,
             'name' => name,
             'star_metric' => star_metric,
-            'workspace_uuid' => workspace_uuid
+            'workspace_uuid' => workspace_uuid,
           },
           return_type: ::OctridevDigitalocean::ApiCreateEvaluationTestCaseOutput,
           decoder: :json,
           operation_id: 'genai_create_evaluation_test_case',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

@@ -5,115 +5,118 @@
 
 # apps_apps_domain domain models
 module OctridevDigitalocean
-  # Internal model hydration metadata.
-  class SdkInternalAppsDomainMetadata
-    FIELDS = {
-      id: 'id',
-      phase: 'phase',
-      progress: 'progress',
-      spec: 'spec',
-      validations: 'validations',
-      rotate_validation_records: 'rotate_validation_records',
-      certificate_expires_at: 'certificate_expires_at'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      phase: lambda do |value|
-        ::OctridevDigitalocean::AppsDomainPhase.from_value(value)
-      end,
-      progress: lambda do |value|
-        ::OctridevDigitalocean::AppsDomainProgress.from_hash(value)
-      end,
-      spec: lambda do |value|
-        ::OctridevDigitalocean::AppDomainSpec.from_hash(value)
-      end,
-      validations: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::AppDomainValidation.from_hash(item) }
-      end
-    }.freeze
+# Internal model hydration metadata.
+class SdkInternalAppsDomainMetadata
+  FIELDS = {
+    id: "id",
+    phase: "phase",
+    progress: "progress",
+    spec: "spec",
+    validations: "validations",
+    rotate_validation_records: "rotate_validation_records",
+    certificate_expires_at: "certificate_expires_at",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    phase: lambda do |value|
+      ::OctridevDigitalocean::AppsDomainPhase.from_value(value)
+    end,
+    progress: lambda do |value|
+      ::OctridevDigitalocean::AppsDomainProgress.from_hash(value)
+    end,
+    spec: lambda do |value|
+      ::OctridevDigitalocean::AppDomainSpec.from_hash(value)
+    end,
+    validations: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::AppDomainValidation.from_hash(item) }
+    end,
+  }.freeze
+end
+
+# API model for AppsDomain.
+# Typed representation of the `AppsDomain` API schema.
+class AppsDomain
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsDomainMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsDomainMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsDomainMetadata::DECODERS
+
+  # @return [String] Optional `string` value serialized in the `id` wire field.
+  attr_reader :id
+  # @return [AppsDomainPhase] Optional enumerated value serialized in the `phase` wire field.
+  attr_reader :phase
+  # @return [AppsDomainProgress] Optional object value serialized in the `progress` wire field.
+  attr_reader :progress
+  # @return [AppDomainSpec] Optional object value serialized in the `spec` wire field.
+  attr_reader :spec
+  # @return [Array_of_AppDomainValidation] Optional array value serialized in the `validations` wire field.
+  attr_reader :validations
+  # @return [Boolean] Optional `boolean` value serialized in the `rotate_validation_records` wire field.
+  attr_reader :rotate_validation_records
+  # @return [String] Optional `date-time`-formatted value serialized in the `certificate_expires_at` wire field.
+  attr_reader :certificate_expires_at
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for AppsDomain.
-  # Typed representation of the `AppsDomain` API schema.
-  class AppsDomain
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsDomainMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsDomainMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsDomainMetadata::DECODERS
-
-    # @return [String] Optional `string` value serialized in the `id` wire field.
-    attr_reader :id
-    # @return [AppsDomainPhase] Optional enumerated value serialized in the `phase` wire field.
-    attr_reader :phase
-    # @return [AppsDomainProgress] Optional object value serialized in the `progress` wire field.
-    attr_reader :progress
-    # @return [AppDomainSpec] Optional object value serialized in the `spec` wire field.
-    attr_reader :spec
-    # @return [Array_of_AppDomainValidation] Optional array value serialized in the `validations` wire field.
-    attr_reader :validations
-    # @return [Boolean] Optional `boolean` value serialized in the `rotate_validation_records` wire field.
-    attr_reader :rotate_validation_records
-    # @return [String] Optional `date-time`-formatted value serialized in the `certificate_expires_at` wire field.
-    attr_reader :certificate_expires_at
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the AppsDomainPhase SDK namespace.
-  module AppsDomainPhase
-    UNKNOWN = 'UNKNOWN'
-    PENDING = 'PENDING'
-    CONFIGURING = 'CONFIGURING'
-    ACTIVE = 'ACTIVE'
-    ERROR = 'ERROR'
-    VALUES = %w[UNKNOWN PENDING CONFIGURING ACTIVE ERROR].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the AppsDomainPhase SDK namespace.
+module AppsDomainPhase
+  UNKNOWN = 'UNKNOWN'
+  PENDING = 'PENDING'
+  CONFIGURING = 'CONFIGURING'
+  ACTIVE = 'ACTIVE'
+  ERROR = 'ERROR'
+  VALUES = ['UNKNOWN', 'PENDING', 'CONFIGURING', 'ACTIVE', 'ERROR'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalAppsDomainProgressMetadata
+  FIELDS = {
+    steps: "steps",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for AppsDomainProgress.
+# Typed representation of the `AppsDomainProgress` API schema.
+class AppsDomainProgress
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalAppsDomainProgressMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalAppsDomainProgressMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalAppsDomainProgressMetadata::DECODERS
+
+  # @return [Array_of_Hash] Optional array value serialized in the `steps` wire field.
+  attr_reader :steps
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalAppsDomainProgressMetadata
-    FIELDS = {
-      steps: 'steps'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for AppsDomainProgress.
-  # Typed representation of the `AppsDomainProgress` API schema.
-  class AppsDomainProgress
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalAppsDomainProgressMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalAppsDomainProgressMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalAppsDomainProgressMetadata::DECODERS
-
-    # @return [Array_of_Hash] Optional array value serialized in the `steps` wire field.
-    attr_reader :steps
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
+end
 end

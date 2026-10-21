@@ -31,27 +31,28 @@ module OctridevDigitalocean
         source: NOT_GIVEN,
         request_options: nil
       )
+
         SdkClient.request(
           'POST',
           [
-            '/v2/agents/sessions/',
+            "/v2/agents/sessions/",
             SdkClient.encode_path_segment(session_id),
-            '/hitl/',
+            "/hitl/",
             SdkClient.encode_path_segment(request_id)
           ].join,
           config: config,
           body: {
             'outcome' => outcome,
             'reason' => reason,
-            'source' => source
+            'source' => source,
           },
           decoder: :empty,
           operation_id: 'harness_post_session_hitl',
           extra_headers: SdkClient.serialize_headers({
-                                                       'X-Device-UUID' => SdkClient.header_value(x_device_uuid)
-                                                     }),
+            'X-Device-UUID' => SdkClient.header_value(x_device_uuid),
+          }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
         ).data
       end
     end

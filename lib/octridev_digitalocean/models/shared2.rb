@@ -5,424 +5,430 @@
 
 # shared domain models
 module OctridevDigitalocean
-  # API model for Kernel.
-  # **Note**: All Droplets created after March 2017 use internal kernels by default. These Droplets will have this attribute set to `null`. The current kernel for Droplets with externally managed kernels. This will initially be set to the kernel of the base image when the Droplet is created.
-  class Kernel
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalKernelMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalKernelMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalKernelMetadata::DECODERS
+# API model for Kernel.
+# **Note**: All Droplets created after March 2017 use internal kernels by default. These Droplets will have this attribute set to `null`. The current kernel for Droplets with externally managed kernels. This will initially be set to the kernel of the base image when the Droplet is created.
+class Kernel
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalKernelMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalKernelMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalKernelMetadata::DECODERS
 
-    # @return [Integer] A unique number used to identify and reference a specific kernel.
-    attr_reader :id
-    # @return [String] The display name of the kernel. This is shown in the web UI and is generally a descriptive title for the kernel in question.
-    attr_reader :name
-    # @return [String] A standard kernel version string representing the version, patch, and release information.
-    attr_reader :version
+  # @return [Integer] A unique number used to identify and reference a specific kernel.
+  attr_reader :id
+  # @return [String] The display name of the kernel. This is shown in the web UI and is generally a descriptive title for the kernel in question.
+  attr_reader :name
+  # @return [String] A standard kernel version string representing the version, patch, and release information.
+  attr_reader :version
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the NextPageToken SDK value decoder.
-  module NextPageToken
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalNfsAction2Metadata
-    FIELDS = {
-      id: 'id',
-      region_slug: 'region_slug',
-      resource_id: 'resource_id',
-      resource_type: 'resource_type',
-      started_at: 'started_at',
-      status: 'status',
-      type: 'type'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      region_slug
-      resource_id
-      resource_type
-      started_at
-      status
-      type
-    ].freeze
-    DECODERS = {
-      resource_type: lambda do |value|
-        ::OctridevDigitalocean::NfsAction2ResourceType.from_value(value)
-      end,
-      status: lambda do |value|
-        ::OctridevDigitalocean::NfsAction2Status.from_value(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the NextPageToken SDK value decoder.
+module NextPageToken
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalNfsAction2Metadata
+  FIELDS = {
+    id: "id",
+    region_slug: "region_slug",
+    resource_id: "resource_id",
+    resource_type: "resource_type",
+    started_at: "started_at",
+    status: "status",
+    type: "type",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    region_slug
+    resource_id
+    resource_type
+    started_at
+    status
+    type
+  ].freeze
+  DECODERS = {
+    resource_type: lambda do |value|
+      ::OctridevDigitalocean::NfsAction2ResourceType.from_value(value)
+    end,
+    status: lambda do |value|
+      ::OctridevDigitalocean::NfsAction2Status.from_value(value)
+    end,
+  }.freeze
+end
+
+# API model for NfsAction2.
+# The action that was submitted.
+class NfsAction2
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalNfsAction2Metadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalNfsAction2Metadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalNfsAction2Metadata::DECODERS
+
+  # @return [String] The unique identifier of the action.
+  attr_reader :id
+  # @return [String] The DigitalOcean region slug where the resource is located.
+  attr_reader :region_slug
+  # @return [String] The unique identifier of the resource on which the action is being performed.
+  attr_reader :resource_id
+  # @return [NfsAction2ResourceType] The type of resource on which the action is being performed. Access point mutations return `SHARE` with `resource_id` set to the access point UUID.
+  attr_reader :resource_type
+  # @return [String] The timestamp when the action was started.
+  attr_reader :started_at
+  # @return [NfsAction2Status] The current status of the action.
+  attr_reader :status
+  # @return [String] The type of action being performed. Share actions use values such as `RESIZE_SHARE` and `CREATE_SHARE`. Access point mutations use `CREATE_ACCESS_POINT` and `DELETE_ACCESS_POINT`.
+  attr_reader :type
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for NfsAction2.
-  # The action that was submitted.
-  class NfsAction2
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalNfsAction2Metadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalNfsAction2Metadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalNfsAction2Metadata::DECODERS
-
-    # @return [String] The unique identifier of the action.
-    attr_reader :id
-    # @return [String] The DigitalOcean region slug where the resource is located.
-    attr_reader :region_slug
-    # @return [String] The unique identifier of the resource on which the action is being performed.
-    attr_reader :resource_id
-    # @return [NfsAction2ResourceType] The type of resource on which the action is being performed. Access point mutations return `SHARE` with `resource_id` set to the access point UUID.
-    attr_reader :resource_type
-    # @return [String] The timestamp when the action was started.
-    attr_reader :started_at
-    # @return [NfsAction2Status] The current status of the action.
-    attr_reader :status
-    # @return [String] The type of action being performed. Share actions use values such as `RESIZE_SHARE` and `CREATE_SHARE`. Access point mutations use `CREATE_ACCESS_POINT` and `DELETE_ACCESS_POINT`.
-    attr_reader :type
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the NfsAction2ResourceType SDK namespace.
-  module NfsAction2ResourceType
-    SHARE = 'SHARE'
-    SNAPSHOT = 'SNAPSHOT'
-    VALUES = %w[SHARE SNAPSHOT].freeze
-    def self.from_value(value)
-      value
-    end
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the NfsAction2ResourceType SDK namespace.
+module NfsAction2ResourceType
+  SHARE = 'SHARE'
+  SNAPSHOT = 'SNAPSHOT'
+  VALUES = ['SHARE', 'SNAPSHOT'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Defines the NfsAction2Status SDK namespace.
+module NfsAction2Status
+  IN_PROGRESS = 'IN_PROGRESS'
+  COMPLETED = 'COMPLETED'
+  ACTION_FAILED = 'ACTION_FAILED'
+  VALUES = ['IN_PROGRESS', 'COMPLETED', 'ACTION_FAILED'].freeze
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalPageLinksMetadata
+  FIELDS = {
+    pages: "pages",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for PageLinks.
+# Typed representation of the `PageLinks` API schema.
+class PageLinks
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalPageLinksMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalPageLinksMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalPageLinksMetadata::DECODERS
+
+  # @return [Object] Optional API value serialized in the `pages` wire field.
+  attr_reader :pages
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the NfsAction2Status SDK namespace.
-  module NfsAction2Status
-    IN_PROGRESS = 'IN_PROGRESS'
-    COMPLETED = 'COMPLETED'
-    ACTION_FAILED = 'ACTION_FAILED'
-    VALUES = %w[IN_PROGRESS COMPLETED ACTION_FAILED].freeze
-    def self.from_value(value)
-      value
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalPageLinksMetadata
-    FIELDS = {
-      pages: 'pages'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalPagesPaginationMetadata
+  FIELDS = {
+    links: "links",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    links: lambda do |value|
+      ::OctridevDigitalocean::PageLinks.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for PagesPagination.
+# Typed representation of the `PagesPagination` API schema.
+class PagesPagination
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalPagesPaginationMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalPagesPaginationMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalPagesPaginationMetadata::DECODERS
+
+  # @return [PageLinks] Optional object value serialized in the `links` wire field.
+  attr_reader :links
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for PageLinks.
-  # Typed representation of the `PageLinks` API schema.
-  class PageLinks
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalPageLinksMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalPageLinksMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalPageLinksMetadata::DECODERS
-
-    # @return [Object] Optional API value serialized in the `pages` wire field.
-    attr_reader :pages
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalPagesPaginationMetadata
-    FIELDS = {
-      links: 'links'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      links: lambda do |value|
-        ::OctridevDigitalocean::PageLinks.from_hash(value)
-      end
-    }.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the RegionsArray SDK value decoder.
+module RegionsArray
+  def self.from_hash(value)
+    return nil if value.nil?
+    value&.map { |item| ::OctridevDigitalocean::RegionSlug.from_value(item) }
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalSizeMetadata
+  FIELDS = {
+    slug: "slug",
+    memory: "memory",
+    vcpus: "vcpus",
+    disk: "disk",
+    transfer: "transfer",
+    price_monthly: "price_monthly",
+    price_hourly: "price_hourly",
+    regions: "regions",
+    available: "available",
+    description: "description",
+    disk_info: "disk_info",
+    gpu_info: "gpu_info",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    slug
+    memory
+    vcpus
+    disk
+    transfer
+    price_monthly
+    price_hourly
+    regions
+    available
+    description
+  ].freeze
+  DECODERS = {
+    disk_info: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::DiskInfo.from_hash(item) }
+    end,
+    gpu_info: lambda do |value|
+      ::OctridevDigitalocean::GpuInfo.from_hash(value)
+    end,
+  }.freeze
+end
+
+# API model for Size.
+# Typed representation of the `Size` API schema.
+class Size
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalSizeMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalSizeMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalSizeMetadata::DECODERS
+
+  # @return [String] A human-readable string that is used to uniquely identify each size.
+  attr_reader :slug
+  # @return [Integer] The amount of RAM allocated to Droplets created of this size. The value is represented in megabytes.
+  attr_reader :memory
+  # @return [Integer] The number of CPUs allocated to Droplets of this size.
+  attr_reader :vcpus
+  # @return [Integer] The amount of disk space set aside for Droplets of this size. The value is represented in gigabytes.
+  attr_reader :disk
+  # @return [Float] The amount of transfer bandwidth that is available for Droplets created in this size. This only counts traffic on the public interface. The value is given in terabytes.
+  attr_reader :transfer
+  # @return [Float] This attribute describes the monthly cost of this Droplet size if the Droplet is kept for an entire month. The value is measured in US dollars.
+  attr_reader :price_monthly
+  # @return [Float] This describes the price of the Droplet size as measured hourly. The value is measured in US dollars.
+  attr_reader :price_hourly
+  # @return [Array_of_String] An array containing the region slugs where this size is available for Droplet creates.
+  attr_reader :regions
+  # @return [Boolean] This is a boolean value that represents whether new Droplets can be created with this size.
+  attr_reader :available
+  # @return [String] A string describing the class of Droplets created from this size. For example: Basic, General Purpose, CPU-Optimized, Memory-Optimized, or Storage-Optimized.
+  attr_reader :description
+  # @return [Array_of_DiskInfo] An array of objects containing information about the disks available to Droplets created with this size.
+  attr_reader :disk_info
+  # @return [GpuInfo] An object containing information about the GPU capabilities of Droplets created with this size.
+  attr_reader :gpu_info
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for PagesPagination.
-  # Typed representation of the `PagesPagination` API schema.
-  class PagesPagination
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalPagesPaginationMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalPagesPaginationMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalPagesPaginationMetadata::DECODERS
-
-    # @return [PageLinks] Optional object value serialized in the `links` wire field.
-    attr_reader :links
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Defines the RegionsArray SDK value decoder.
-  module RegionsArray
-    def self.from_hash(value)
-      return nil if value.nil?
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-      value&.map { |item| ::OctridevDigitalocean::RegionSlug.from_value(item) }
-    end
+# Defines the TagsArray SDK value decoder.
+module TagsArray
+  def self.from_hash(value)
+    return nil if value.nil?
+    value&.map { |item| item }
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalToolAnnotationsMetadata
+  FIELDS = {
+    title: "title",
+    read_only_hint: "readOnlyHint",
+    idempotent_hint: "idempotentHint",
+    open_world_hint: "openWorldHint",
+    destructive_hint: "destructiveHint",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ToolAnnotations.
+# Advisory hints about a tool's behavior, with the meaning of MCP tool annotations. Do not rely on them for security decisions.
+class ToolAnnotations
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalToolAnnotationsMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalToolAnnotationsMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalToolAnnotationsMetadata::DECODERS
+
+  # @return [String] Human-readable tool title.
+  attr_reader :title
+  # @return [Boolean] The tool does not modify anything.
+  attr_reader :read_only_hint
+  # @return [Boolean] Repeating a call with the same arguments has no additional effect.
+  attr_reader :idempotent_hint
+  # @return [Boolean] The tool interacts with external systems beyond the provider's own data.
+  attr_reader :open_world_hint
+  # @return [Boolean] The tool may perform destructive updates.
+  attr_reader :destructive_hint
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalSizeMetadata
-    FIELDS = {
-      slug: 'slug',
-      memory: 'memory',
-      vcpus: 'vcpus',
-      disk: 'disk',
-      transfer: 'transfer',
-      price_monthly: 'price_monthly',
-      price_hourly: 'price_hourly',
-      regions: 'regions',
-      available: 'available',
-      description: 'description',
-      disk_info: 'disk_info',
-      gpu_info: 'gpu_info'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      slug
-      memory
-      vcpus
-      disk
-      transfer
-      price_monthly
-      price_hourly
-      regions
-      available
-      description
-    ].freeze
-    DECODERS = {
-      disk_info: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::DiskInfo.from_hash(item) }
-      end,
-      gpu_info: lambda do |value|
-        ::OctridevDigitalocean::GpuInfo.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for Size.
-  # Typed representation of the `Size` API schema.
-  class Size
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalSizeMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalSizeMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalSizeMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] A human-readable string that is used to uniquely identify each size.
-    attr_reader :slug
-    # @return [Integer] The amount of RAM allocated to Droplets created of this size. The value is represented in megabytes.
-    attr_reader :memory
-    # @return [Integer] The number of CPUs allocated to Droplets of this size.
-    attr_reader :vcpus
-    # @return [Integer] The amount of disk space set aside for Droplets of this size. The value is represented in gigabytes.
-    attr_reader :disk
-    # @return [Float] The amount of transfer bandwidth that is available for Droplets created in this size. This only counts traffic on the public interface. The value is given in terabytes.
-    attr_reader :transfer
-    # @return [Float] This attribute describes the monthly cost of this Droplet size if the Droplet is kept for an entire month. The value is measured in US dollars.
-    attr_reader :price_monthly
-    # @return [Float] This describes the price of the Droplet size as measured hourly. The value is measured in US dollars.
-    attr_reader :price_hourly
-    # @return [Array_of_String] An array containing the region slugs where this size is available for Droplet creates.
-    attr_reader :regions
-    # @return [Boolean] This is a boolean value that represents whether new Droplets can be created with this size.
-    attr_reader :available
-    # @return [String] A string describing the class of Droplets created from this size. For example: Basic, General Purpose, CPU-Optimized, Memory-Optimized, or Storage-Optimized.
-    attr_reader :description
-    # @return [Array_of_DiskInfo] An array of objects containing information about the disks available to Droplets created with this size.
-    attr_reader :disk_info
-    # @return [GpuInfo] An object containing information about the GPU capabilities of Droplets created with this size.
-    attr_reader :gpu_info
+# Internal model hydration metadata.
+class SdkInternalUpdateRegistryMetadata
+  FIELDS = {
+    cancel: "cancel",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for UpdateRegistry.
+# Typed representation of the `UpdateRegistry` API schema.
+class UpdateRegistry
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalUpdateRegistryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalUpdateRegistryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalUpdateRegistryMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [Boolean] A boolean value indicating that the garbage collection should be cancelled.
+  attr_reader :cancel
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Defines the TagsArray SDK value decoder.
-  module TagsArray
-    def self.from_hash(value)
-      return nil if value.nil?
-
-      value&.map { |item| item }
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalToolAnnotationsMetadata
-    FIELDS = {
-      title: 'title',
-      read_only_hint: 'readOnlyHint',
-      idempotent_hint: 'idempotentHint',
-      open_world_hint: 'openWorldHint',
-      destructive_hint: 'destructiveHint'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Defines the Urn SDK value decoder.
+module Urn
+  def self.from_value(value)
+    value
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalValidateRegistryMetadata
+  FIELDS = {
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+    name
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
+
+# API model for ValidateRegistry.
+# Typed representation of the `ValidateRegistry` API schema.
+class ValidateRegistry
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalValidateRegistryMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalValidateRegistryMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalValidateRegistryMetadata::DECODERS
+
+  # @return [String] A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters.
+  attr_reader :name
+
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # API model for ToolAnnotations.
-  # Advisory hints about a tool's behavior, with the meaning of MCP tool annotations. Do not rely on them for security decisions.
-  class ToolAnnotations
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalToolAnnotationsMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalToolAnnotationsMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalToolAnnotationsMetadata::DECODERS
-
-    # @return [String] Human-readable tool title.
-    attr_reader :title
-    # @return [Boolean] The tool does not modify anything.
-    attr_reader :read_only_hint
-    # @return [Boolean] Repeating a call with the same arguments has no additional effect.
-    attr_reader :idempotent_hint
-    # @return [Boolean] The tool interacts with external systems beyond the provider's own data.
-    attr_reader :open_world_hint
-    # @return [Boolean] The tool may perform destructive updates.
-    attr_reader :destructive_hint
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalUpdateRegistryMetadata
-    FIELDS = {
-      cancel: 'cancel'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def to_h
+    SdkModel.to_h(self, FIELDS)
   end
-
-  # API model for UpdateRegistry.
-  # Typed representation of the `UpdateRegistry` API schema.
-  class UpdateRegistry
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalUpdateRegistryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalUpdateRegistryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalUpdateRegistryMetadata::DECODERS
-
-    # @return [Boolean] A boolean value indicating that the garbage collection should be cancelled.
-    attr_reader :cancel
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
-
-  # Defines the Urn SDK value decoder.
-  module Urn
-    def self.from_value(value)
-      value
-    end
-  end
-
-  # Internal model hydration metadata.
-  class SdkInternalValidateRegistryMetadata
-    FIELDS = {
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[
-      name
-    ].freeze
-    DECODERS = {}.freeze
-  end
-
-  # API model for ValidateRegistry.
-  # Typed representation of the `ValidateRegistry` API schema.
-  class ValidateRegistry
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalValidateRegistryMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalValidateRegistryMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalValidateRegistryMetadata::DECODERS
-
-    # @return [String] A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters.
-    attr_reader :name
-
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
-  end
+end
 end

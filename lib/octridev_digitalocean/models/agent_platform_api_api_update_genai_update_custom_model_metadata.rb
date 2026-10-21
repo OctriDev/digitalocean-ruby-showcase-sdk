@@ -5,641 +5,662 @@
 
 # agent_platform_api_api_update domain models
 module OctridevDigitalocean
-  # API model for ApiUpdateCustomModelMetadataOutputPublic.
-  # Response containing the updated custom model (public)
-  class ApiUpdateCustomModelMetadataOutputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateCustomModelMetadataOutputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateCustomModelMetadataOutputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateCustomModelMetadataOutputPublicMetadata::DECODERS
+# API model for ApiUpdateCustomModelMetadataOutputPublic.
+# Response containing the updated custom model (public)
+class ApiUpdateCustomModelMetadataOutputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateCustomModelMetadataOutputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateCustomModelMetadataOutputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateCustomModelMetadataOutputPublicMetadata::DECODERS
 
-    # @return [ApiCustomModel] Custom model - user-imported model from HuggingFace, Spaces, etc.
-    attr_reader :model
+  # @return [ApiCustomModel] Custom model - user-imported model from HuggingFace, Spaces, etc.
+  attr_reader :model
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
-
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
-
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateEvaluationTestCaseInputPublicMetadata
-    FIELDS = {
-      dataset_uuid: 'dataset_uuid',
-      description: 'description',
-      metrics: 'metrics',
-      name: 'name',
-      star_metric: 'star_metric',
-      test_case_uuid: 'test_case_uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      metrics: lambda do |value|
-        ::OctridevDigitalocean::ApiEvaluationTestCaseMetricList.from_hash(value)
-      end,
-      star_metric: lambda do |value|
-        ::OctridevDigitalocean::ApiStarMetric.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateEvaluationTestCaseInputPublic.
-  # Typed representation of the `ApiUpdateEvaluationTestCaseInputPublic` API schema.
-  class ApiUpdateEvaluationTestCaseInputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateEvaluationTestCaseInputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateEvaluationTestCaseInputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateEvaluationTestCaseInputPublicMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Dataset against which the test‑case is executed.
-    attr_reader :dataset_uuid
-    # @return [String] Description of the test case.
-    attr_reader :description
-    # @return [ApiEvaluationTestCaseMetricList] Optional object value serialized in the `metrics` wire field.
-    attr_reader :metrics
-    # @return [String] Name of the test case.
-    attr_reader :name
-    # @return [ApiStarMetric] Optional object value serialized in the `star_metric` wire field.
-    attr_reader :star_metric
-    # @return [String] Test-case UUID to update
-    attr_reader :test_case_uuid
+# Internal model hydration metadata.
+class SdkInternalApiUpdateEvaluationTestCaseInputPublicMetadata
+  FIELDS = {
+    dataset_uuid: "dataset_uuid",
+    description: "description",
+    metrics: "metrics",
+    name: "name",
+    star_metric: "star_metric",
+    test_case_uuid: "test_case_uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    metrics: lambda do |value|
+      ::OctridevDigitalocean::ApiEvaluationTestCaseMetricList.from_hash(value)
+    end,
+    star_metric: lambda do |value|
+      ::OctridevDigitalocean::ApiStarMetric.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateEvaluationTestCaseInputPublic.
+# Typed representation of the `ApiUpdateEvaluationTestCaseInputPublic` API schema.
+class ApiUpdateEvaluationTestCaseInputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateEvaluationTestCaseInputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateEvaluationTestCaseInputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateEvaluationTestCaseInputPublicMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Dataset against which the test‑case is executed.
+  attr_reader :dataset_uuid
+  # @return [String] Description of the test case.
+  attr_reader :description
+  # @return [ApiEvaluationTestCaseMetricList] Optional object value serialized in the `metrics` wire field.
+  attr_reader :metrics
+  # @return [String] Name of the test case.
+  attr_reader :name
+  # @return [ApiStarMetric] Optional object value serialized in the `star_metric` wire field.
+  attr_reader :star_metric
+  # @return [String] Test-case UUID to update
+  attr_reader :test_case_uuid
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateEvaluationTestCaseOutputMetadata
-    FIELDS = {
-      test_case_uuid: 'test_case_uuid',
-      version: 'version'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateEvaluationTestCaseOutput.
-  # Typed representation of the `ApiUpdateEvaluationTestCaseOutput` API schema.
-  class ApiUpdateEvaluationTestCaseOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateEvaluationTestCaseOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateEvaluationTestCaseOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateEvaluationTestCaseOutputMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Optional `string` value serialized in the `test_case_uuid` wire field.
-    attr_reader :test_case_uuid
-    # @return [Integer] The new verson of the test case.
-    attr_reader :version
+# Internal model hydration metadata.
+class SdkInternalApiUpdateEvaluationTestCaseOutputMetadata
+  FIELDS = {
+    test_case_uuid: "test_case_uuid",
+    version: "version",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateEvaluationTestCaseOutput.
+# Typed representation of the `ApiUpdateEvaluationTestCaseOutput` API schema.
+class ApiUpdateEvaluationTestCaseOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateEvaluationTestCaseOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateEvaluationTestCaseOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateEvaluationTestCaseOutputMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Optional `string` value serialized in the `test_case_uuid` wire field.
+  attr_reader :test_case_uuid
+  # @return [Integer] The new verson of the test case.
+  attr_reader :version
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateKnowledgeBaseDataSourceInputPublicMetadata
-    FIELDS = {
-      chunking_algorithm: 'chunking_algorithm',
-      chunking_options: 'chunking_options',
-      data_source_uuid: 'data_source_uuid',
-      knowledge_base_uuid: 'knowledge_base_uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      chunking_algorithm: lambda do |value|
-        ::OctridevDigitalocean::ApiChunkingAlgorithm.from_value(value)
-      end,
-      chunking_options: lambda do |value|
-        ::OctridevDigitalocean::ApiChunkingOptions.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateKnowledgeBaseDataSourceInputPublic.
-  # Update a data source of a knowledge base with change in chunking algorithm/options
-  class ApiUpdateKnowledgeBaseDataSourceInputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateKnowledgeBaseDataSourceInputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateKnowledgeBaseDataSourceInputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateKnowledgeBaseDataSourceInputPublicMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiChunkingAlgorithm] Optional enumerated value serialized in the `chunking_algorithm` wire field.
-    attr_reader :chunking_algorithm
-    # @return [ApiChunkingOptions] Optional object value serialized in the `chunking_options` wire field.
-    attr_reader :chunking_options
-    # @return [String] Data Source ID (Path Parameter)
-    attr_reader :data_source_uuid
-    # @return [String] Knowledge Base ID (Path Parameter)
-    attr_reader :knowledge_base_uuid
+# Internal model hydration metadata.
+class SdkInternalApiUpdateKnowledgeBaseDataSourceInputPublicMetadata
+  FIELDS = {
+    chunking_algorithm: "chunking_algorithm",
+    chunking_options: "chunking_options",
+    data_source_uuid: "data_source_uuid",
+    knowledge_base_uuid: "knowledge_base_uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    chunking_algorithm: lambda do |value|
+      ::OctridevDigitalocean::ApiChunkingAlgorithm.from_value(value)
+    end,
+    chunking_options: lambda do |value|
+      ::OctridevDigitalocean::ApiChunkingOptions.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateKnowledgeBaseDataSourceInputPublic.
+# Update a data source of a knowledge base with change in chunking algorithm/options
+class ApiUpdateKnowledgeBaseDataSourceInputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateKnowledgeBaseDataSourceInputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateKnowledgeBaseDataSourceInputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateKnowledgeBaseDataSourceInputPublicMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ApiChunkingAlgorithm] Optional enumerated value serialized in the `chunking_algorithm` wire field.
+  attr_reader :chunking_algorithm
+  # @return [ApiChunkingOptions] Optional object value serialized in the `chunking_options` wire field.
+  attr_reader :chunking_options
+  # @return [String] Data Source ID (Path Parameter)
+  attr_reader :data_source_uuid
+  # @return [String] Knowledge Base ID (Path Parameter)
+  attr_reader :knowledge_base_uuid
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateKnowledgeBaseDataSourceOutputMetadata
-    FIELDS = {
-      knowledge_base_data_source: 'knowledge_base_data_source'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      knowledge_base_data_source: lambda do |value|
-        ::OctridevDigitalocean::ApiKnowledgeBaseDataSource.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateKnowledgeBaseDataSourceOutput.
-  # Update a data source of a knowledge base with change in chunking algorithm/options
-  class ApiUpdateKnowledgeBaseDataSourceOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateKnowledgeBaseDataSourceOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateKnowledgeBaseDataSourceOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateKnowledgeBaseDataSourceOutputMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiKnowledgeBaseDataSource] Data Source configuration for Knowledge Bases
-    attr_reader :knowledge_base_data_source
+# Internal model hydration metadata.
+class SdkInternalApiUpdateKnowledgeBaseDataSourceOutputMetadata
+  FIELDS = {
+    knowledge_base_data_source: "knowledge_base_data_source",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    knowledge_base_data_source: lambda do |value|
+      ::OctridevDigitalocean::ApiKnowledgeBaseDataSource.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateKnowledgeBaseDataSourceOutput.
+# Update a data source of a knowledge base with change in chunking algorithm/options
+class ApiUpdateKnowledgeBaseDataSourceOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateKnowledgeBaseDataSourceOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateKnowledgeBaseDataSourceOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateKnowledgeBaseDataSourceOutputMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ApiKnowledgeBaseDataSource] Data Source configuration for Knowledge Bases
+  attr_reader :knowledge_base_data_source
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateKnowledgeBaseInputPublicMetadata
-    FIELDS = {
-      database_id: 'database_id',
-      name: 'name',
-      project_id: 'project_id',
-      reranking_config: 'reranking_config',
-      tags: 'tags',
-      uuid: 'uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      reranking_config: lambda do |value|
-        ::OctridevDigitalocean::ApiRerankingConfiguration.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateKnowledgeBaseInputPublic.
-  # Information about updating a knowledge base
-  class ApiUpdateKnowledgeBaseInputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateKnowledgeBaseInputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateKnowledgeBaseInputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateKnowledgeBaseInputPublicMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] The id of the DigitalOcean database this knowledge base will use, optional.
-    attr_reader :database_id
-    # @return [String] Knowledge base name
-    attr_reader :name
-    # @return [String] The id of the DigitalOcean project this knowledge base will belong to
-    attr_reader :project_id
-    # @return [ApiRerankingConfiguration] Configuration for cross-encoder reranking during retrieval.
-    attr_reader :reranking_config
-    # @return [Array_of_String] Tags to organize your knowledge base.
-    attr_reader :tags
-    # @return [String] Knowledge base id
-    attr_reader :uuid
+# Internal model hydration metadata.
+class SdkInternalApiUpdateKnowledgeBaseInputPublicMetadata
+  FIELDS = {
+    database_id: "database_id",
+    name: "name",
+    project_id: "project_id",
+    reranking_config: "reranking_config",
+    tags: "tags",
+    uuid: "uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    reranking_config: lambda do |value|
+      ::OctridevDigitalocean::ApiRerankingConfiguration.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateKnowledgeBaseInputPublic.
+# Information about updating a knowledge base
+class ApiUpdateKnowledgeBaseInputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateKnowledgeBaseInputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateKnowledgeBaseInputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateKnowledgeBaseInputPublicMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] The id of the DigitalOcean database this knowledge base will use, optional.
+  attr_reader :database_id
+  # @return [String] Knowledge base name
+  attr_reader :name
+  # @return [String] The id of the DigitalOcean project this knowledge base will belong to
+  attr_reader :project_id
+  # @return [ApiRerankingConfiguration] Configuration for cross-encoder reranking during retrieval.
+  attr_reader :reranking_config
+  # @return [Array_of_String] Tags to organize your knowledge base.
+  attr_reader :tags
+  # @return [String] Knowledge base id
+  attr_reader :uuid
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateKnowledgeBaseOutputMetadata
-    FIELDS = {
-      knowledge_base: 'knowledge_base'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      knowledge_base: lambda do |value|
-        ::OctridevDigitalocean::ApiKnowledgeBase.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateKnowledgeBaseOutput.
-  # Information about an updated knowledge base
-  class ApiUpdateKnowledgeBaseOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateKnowledgeBaseOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateKnowledgeBaseOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateKnowledgeBaseOutputMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiKnowledgeBase] Knowledgebase Description
-    attr_reader :knowledge_base
+# Internal model hydration metadata.
+class SdkInternalApiUpdateKnowledgeBaseOutputMetadata
+  FIELDS = {
+    knowledge_base: "knowledge_base",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    knowledge_base: lambda do |value|
+      ::OctridevDigitalocean::ApiKnowledgeBase.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateKnowledgeBaseOutput.
+# Information about an updated knowledge base
+class ApiUpdateKnowledgeBaseOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateKnowledgeBaseOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateKnowledgeBaseOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateKnowledgeBaseOutputMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ApiKnowledgeBase] Knowledgebase Description
+  attr_reader :knowledge_base
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateLinkedAgentInputPublicMetadata
-    FIELDS = {
-      child_agent_uuid: 'child_agent_uuid',
-      if_case: 'if_case',
-      parent_agent_uuid: 'parent_agent_uuid',
-      route_name: 'route_name',
-      uuid: 'uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateLinkedAgentInputPublic.
-  # Information about updating the linkage of an agent
-  class ApiUpdateLinkedAgentInputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateLinkedAgentInputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateLinkedAgentInputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateLinkedAgentInputPublicMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Routed agent id
-    attr_reader :child_agent_uuid
-    # @return [String] Describes the case in which the child agent should be used
-    attr_reader :if_case
-    # @return [String] A unique identifier for the parent agent.
-    attr_reader :parent_agent_uuid
-    # @return [String] Route name
-    attr_reader :route_name
-    # @return [String] Unique id of linkage
-    attr_reader :uuid
+# Internal model hydration metadata.
+class SdkInternalApiUpdateLinkedAgentInputPublicMetadata
+  FIELDS = {
+    child_agent_uuid: "child_agent_uuid",
+    if_case: "if_case",
+    parent_agent_uuid: "parent_agent_uuid",
+    route_name: "route_name",
+    uuid: "uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateLinkedAgentInputPublic.
+# Information about updating the linkage of an agent
+class ApiUpdateLinkedAgentInputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateLinkedAgentInputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateLinkedAgentInputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateLinkedAgentInputPublicMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Routed agent id
+  attr_reader :child_agent_uuid
+  # @return [String] Describes the case in which the child agent should be used
+  attr_reader :if_case
+  # @return [String] A unique identifier for the parent agent.
+  attr_reader :parent_agent_uuid
+  # @return [String] Route name
+  attr_reader :route_name
+  # @return [String] Unique id of linkage
+  attr_reader :uuid
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateLinkedAgentOutputMetadata
-    FIELDS = {
-      child_agent_uuid: 'child_agent_uuid',
-      parent_agent_uuid: 'parent_agent_uuid',
-      rollback: 'rollback',
-      uuid: 'uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateLinkedAgentOutput.
-  # Information about an updated linkage
-  class ApiUpdateLinkedAgentOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateLinkedAgentOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateLinkedAgentOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateLinkedAgentOutputMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Routed agent id
-    attr_reader :child_agent_uuid
-    # @return [String] A unique identifier for the parent agent.
-    attr_reader :parent_agent_uuid
-    # @return [Boolean] Optional `boolean` value serialized in the `rollback` wire field.
-    attr_reader :rollback
-    # @return [String] Unique id of linkage
-    attr_reader :uuid
+# Internal model hydration metadata.
+class SdkInternalApiUpdateLinkedAgentOutputMetadata
+  FIELDS = {
+    child_agent_uuid: "child_agent_uuid",
+    parent_agent_uuid: "parent_agent_uuid",
+    rollback: "rollback",
+    uuid: "uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateLinkedAgentOutput.
+# Information about an updated linkage
+class ApiUpdateLinkedAgentOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateLinkedAgentOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateLinkedAgentOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateLinkedAgentOutputMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Routed agent id
+  attr_reader :child_agent_uuid
+  # @return [String] A unique identifier for the parent agent.
+  attr_reader :parent_agent_uuid
+  # @return [Boolean] Optional `boolean` value serialized in the `rollback` wire field.
+  attr_reader :rollback
+  # @return [String] Unique id of linkage
+  attr_reader :uuid
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateModelAPIKeyInputPublicMetadata
-    FIELDS = {
-      api_key_uuid: 'api_key_uuid',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateModelAPIKeyInputPublic.
-  # Typed representation of the `ApiUpdateModelAPIKeyInputPublic` API schema.
-  class ApiUpdateModelAPIKeyInputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateModelAPIKeyInputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateModelAPIKeyInputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateModelAPIKeyInputPublicMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] API key ID
-    attr_reader :api_key_uuid
-    # @return [String] Name
-    attr_reader :name
+# Internal model hydration metadata.
+class SdkInternalApiUpdateModelAPIKeyInputPublicMetadata
+  FIELDS = {
+    api_key_uuid: "api_key_uuid",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateModelAPIKeyInputPublic.
+# Typed representation of the `ApiUpdateModelAPIKeyInputPublic` API schema.
+class ApiUpdateModelAPIKeyInputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateModelAPIKeyInputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateModelAPIKeyInputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateModelAPIKeyInputPublicMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] API key ID
+  attr_reader :api_key_uuid
+  # @return [String] Name
+  attr_reader :name
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateModelAPIKeyOutputMetadata
-    FIELDS = {
-      api_key_info: 'api_key_info'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      api_key_info: lambda do |value|
-        ::OctridevDigitalocean::ApiModelAPIKeyInfo.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateModelAPIKeyOutput.
-  # Typed representation of the `ApiUpdateModelAPIKeyOutput` API schema.
-  class ApiUpdateModelAPIKeyOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateModelAPIKeyOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateModelAPIKeyOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateModelAPIKeyOutputMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiModelAPIKeyInfo] Model API Key Info
-    attr_reader :api_key_info
+# Internal model hydration metadata.
+class SdkInternalApiUpdateModelAPIKeyOutputMetadata
+  FIELDS = {
+    api_key_info: "api_key_info",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    api_key_info: lambda do |value|
+      ::OctridevDigitalocean::ApiModelAPIKeyInfo.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateModelAPIKeyOutput.
+# Typed representation of the `ApiUpdateModelAPIKeyOutput` API schema.
+class ApiUpdateModelAPIKeyOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateModelAPIKeyOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateModelAPIKeyOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateModelAPIKeyOutputMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ApiModelAPIKeyInfo] Model API Key Info
+  attr_reader :api_key_info
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateModelEvaluationRunInputPublicMetadata
-    FIELDS = {
-      eval_run_uuid: 'eval_run_uuid',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateModelEvaluationRunInputPublic.
-  # Typed representation of the `ApiUpdateModelEvaluationRunInputPublic` API schema.
-  class ApiUpdateModelEvaluationRunInputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateModelEvaluationRunInputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateModelEvaluationRunInputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateModelEvaluationRunInputPublicMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] UUID of the model evaluation run to update. Returned by `CreateModelEvaluationRun` and listed via `ListModelEvaluationRuns`.
-    attr_reader :eval_run_uuid
-    # @return [String] Optional new display name for the evaluation run (max 255 characters).
-    attr_reader :name
+# Internal model hydration metadata.
+class SdkInternalApiUpdateModelEvaluationRunInputPublicMetadata
+  FIELDS = {
+    eval_run_uuid: "eval_run_uuid",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateModelEvaluationRunInputPublic.
+# Typed representation of the `ApiUpdateModelEvaluationRunInputPublic` API schema.
+class ApiUpdateModelEvaluationRunInputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateModelEvaluationRunInputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateModelEvaluationRunInputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateModelEvaluationRunInputPublicMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] UUID of the model evaluation run to update. Returned by `CreateModelEvaluationRun` and listed via `ListModelEvaluationRuns`.
+  attr_reader :eval_run_uuid
+  # @return [String] Optional new display name for the evaluation run (max 255 characters).
+  attr_reader :name
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateModelEvaluationRunOutputMetadata
-    FIELDS = {
-      run: 'run'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      run: lambda do |value|
-        ::OctridevDigitalocean::ApiModelEvaluationRunSummary.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateModelEvaluationRunOutput.
-  # Typed representation of the `ApiUpdateModelEvaluationRunOutput` API schema.
-  class ApiUpdateModelEvaluationRunOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateModelEvaluationRunOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateModelEvaluationRunOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateModelEvaluationRunOutputMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiModelEvaluationRunSummary] Model Evaluation Run Summary - lightweight view used in run history list.
-    attr_reader :run
+# Internal model hydration metadata.
+class SdkInternalApiUpdateModelEvaluationRunOutputMetadata
+  FIELDS = {
+    run: "run",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    run: lambda do |value|
+      ::OctridevDigitalocean::ApiModelEvaluationRunSummary.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateModelEvaluationRunOutput.
+# Typed representation of the `ApiUpdateModelEvaluationRunOutput` API schema.
+class ApiUpdateModelEvaluationRunOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateModelEvaluationRunOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateModelEvaluationRunOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateModelEvaluationRunOutputMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ApiModelEvaluationRunSummary] Model Evaluation Run Summary - lightweight view used in run history list.
+  attr_reader :run
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateModelRouterInputPublicMetadata
-    FIELDS = {
-      description: 'description',
-      fallback_models: 'fallback_models',
-      name: 'name',
-      policies: 'policies',
-      regions: 'regions',
-      uuid: 'uuid'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      policies: lambda do |value|
-        value&.map { |item| ::OctridevDigitalocean::ApiModelRouterTaskPolicy.from_hash(item) }
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateModelRouterInputPublic.
-  # Information about updating a model router
-  class ApiUpdateModelRouterInputPublic
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateModelRouterInputPublicMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateModelRouterInputPublicMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateModelRouterInputPublicMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [String] Model router description
-    attr_reader :description
-    # @return [Array_of_Hash] Optional array value serialized in the `fallback_models` wire field.
-    attr_reader :fallback_models
-    # @return [String] Model router name: lowercase, at most 255 characters, only a-z, 0-9, and hyphens
-    attr_reader :name
-    # @return [Array_of_ApiModelRouterTaskPolicy] Router policies
-    attr_reader :policies
-    # @return [Array_of_String] DEPRECATED: this field does not affect deployment and model routers are always deployed to all regions. Must be omitted or set to ["all"].
-    attr_reader :regions
-    # @return [String] Model router id
-    attr_reader :uuid
+# Internal model hydration metadata.
+class SdkInternalApiUpdateModelRouterInputPublicMetadata
+  FIELDS = {
+    description: "description",
+    fallback_models: "fallback_models",
+    name: "name",
+    policies: "policies",
+    regions: "regions",
+    uuid: "uuid",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    policies: lambda do |value|
+      value&.map { |item| ::OctridevDigitalocean::ApiModelRouterTaskPolicy.from_hash(item) }
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateModelRouterInputPublic.
+# Information about updating a model router
+class ApiUpdateModelRouterInputPublic
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateModelRouterInputPublicMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateModelRouterInputPublicMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateModelRouterInputPublicMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [String] Model router description
+  attr_reader :description
+  # @return [Array_of_Hash] Optional array value serialized in the `fallback_models` wire field.
+  attr_reader :fallback_models
+  # @return [String] Model router name: lowercase, at most 255 characters, only a-z, 0-9, and hyphens
+  attr_reader :name
+  # @return [Array_of_ApiModelRouterTaskPolicy] Router policies
+  attr_reader :policies
+  # @return [Array_of_String] DEPRECATED: this field does not affect deployment and model routers are always deployed to all regions. Must be omitted or set to ["all"].
+  attr_reader :regions
+  # @return [String] Model router id
+  attr_reader :uuid
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateModelRouterOutputMetadata
-    FIELDS = {
-      model_router: 'model_router'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {
-      model_router: lambda do |value|
-        ::OctridevDigitalocean::ApiModelRouter.from_hash(value)
-      end
-    }.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
 
-  # API model for ApiUpdateModelRouterOutput.
-  # Information about an updated model router
-  class ApiUpdateModelRouterOutput
-    CONSTRUCTION_SURFACE = :named
-    FIELDS = SdkInternalApiUpdateModelRouterOutputMetadata::FIELDS
-    REQUIRED_FIELDS = SdkInternalApiUpdateModelRouterOutputMetadata::REQUIRED_FIELDS
-    DECODERS = SdkInternalApiUpdateModelRouterOutputMetadata::DECODERS
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
 
-    # @return [ApiModelRouter] Model router
-    attr_reader :model_router
+# Internal model hydration metadata.
+class SdkInternalApiUpdateModelRouterOutputMetadata
+  FIELDS = {
+    model_router: "model_router",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+    model_router: lambda do |value|
+      ::OctridevDigitalocean::ApiModelRouter.from_hash(value)
+    end,
+  }.freeze
+end
 
-    def initialize(**attributes)
-      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-      freeze
-    end
+# API model for ApiUpdateModelRouterOutput.
+# Information about an updated model router
+class ApiUpdateModelRouterOutput
+  CONSTRUCTION_SURFACE = :named
+  FIELDS = SdkInternalApiUpdateModelRouterOutputMetadata::FIELDS
+  REQUIRED_FIELDS = SdkInternalApiUpdateModelRouterOutputMetadata::REQUIRED_FIELDS
+  DECODERS = SdkInternalApiUpdateModelRouterOutputMetadata::DECODERS
 
-    def self.from_hash(data)
-      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-    end
+  # @return [ApiModelRouter] Model router
+  attr_reader :model_router
 
-    def to_h
-      SdkModel.to_h(self, FIELDS)
-    end
+  def initialize(**attributes)
+    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+    freeze
   end
 
-  # Internal model hydration metadata.
-  class SdkInternalApiUpdateOpenAIAPIKeyInputPublicMetadata
-    FIELDS = {
-      api_key: 'api_key',
-      api_key_uuid: 'api_key_uuid',
-      name: 'name'
-    }.freeze
-    REQUIRED_FIELDS = %i[].freeze
-    DECODERS = {}.freeze
+  def self.from_hash(data)
+    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
   end
+
+  def to_h
+    SdkModel.to_h(self, FIELDS)
+  end
+end
+
+# Internal model hydration metadata.
+class SdkInternalApiUpdateOpenAIAPIKeyInputPublicMetadata
+  FIELDS = {
+    api_key: "api_key",
+    api_key_uuid: "api_key_uuid",
+    name: "name",
+  }.freeze
+  REQUIRED_FIELDS = %i[
+  ].freeze
+  DECODERS = {
+  }.freeze
+end
 end
