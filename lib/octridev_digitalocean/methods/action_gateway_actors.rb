@@ -18,22 +18,21 @@ module OctridevDigitalocean
         actor_id:,
         request_options: nil
       )
-
         Validation.validate_pattern('actor_id', actor_id, '^[A-Za-z0-9._-]{1,64}$')
 
         SdkClient.request(
           'GET',
           [
-            "/v2/action-gateway/actors/",
+            '/v2/action-gateway/actors/',
             SdkClient.encode_path_segment(actor_id),
-            "/limits"
+            '/limits'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::GetActorLimitsResponse,
           decoder: :json,
           operation_id: 'actor_limits_get',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -49,7 +48,6 @@ module OctridevDigitalocean
         categories:,
         request_options: nil
       )
-
         Validation.validate_pattern('actor_id', actor_id, '^[A-Za-z0-9._-]{1,64}$')
 
         Validation.validate_items('categories', categories, min: 1)
@@ -57,19 +55,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/v2/action-gateway/actors/",
+            '/v2/action-gateway/actors/',
             SdkClient.encode_path_segment(actor_id),
-            "/limits:clear"
+            '/limits:clear'
           ].join,
           config: config,
           body: {
-            'categories' => categories,
+            'categories' => categories
           },
           return_type: ::OctridevDigitalocean::EmptyResponse,
           decoder: :json,
           operation_id: 'actor_limits_delete',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -85,7 +83,6 @@ module OctridevDigitalocean
         overrides:,
         request_options: nil
       )
-
         Validation.validate_pattern('actor_id', actor_id, '^[A-Za-z0-9._-]{1,64}$')
 
         Validation.validate_items('overrides', overrides, min: 1)
@@ -93,19 +90,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/v2/action-gateway/actors/",
+            '/v2/action-gateway/actors/',
             SdkClient.encode_path_segment(actor_id),
-            "/limits:set"
+            '/limits:set'
           ].join,
           config: config,
           body: {
-            'overrides' => overrides,
+            'overrides' => overrides
           },
           return_type: ::OctridevDigitalocean::EmptyResponse,
           decoder: :json,
           operation_id: 'actor_limits_update',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

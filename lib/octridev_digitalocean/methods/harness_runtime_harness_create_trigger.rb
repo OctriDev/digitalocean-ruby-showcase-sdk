@@ -46,7 +46,6 @@ module OctridevDigitalocean
         cron: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_length('name', name, min: 1, max: 64)
         Validation.validate_pattern('name', name, '^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$')
 
@@ -54,7 +53,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          "/v2/agents/triggers",
+          '/v2/agents/triggers',
           config: config,
           body: {
             'kind' => kind,
@@ -65,13 +64,13 @@ module OctridevDigitalocean
             'session_template' => session_template,
             'bound_session_id' => bound_session_id,
             'webhook' => webhook,
-            'cron' => cron,
+            'cron' => cron
           },
           return_type: ::OctridevDigitalocean::CreateTriggerResponse,
           decoder: :json,
           operation_id: 'harness_create_trigger',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

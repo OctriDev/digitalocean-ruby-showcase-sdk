@@ -31,27 +31,26 @@ module OctridevDigitalocean
         pod_connection_timeout: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/apps/",
+            '/v2/apps/',
             SdkClient.encode_path_segment(app_id),
-            "/components/",
+            '/components/',
             SdkClient.encode_path_segment(component_name),
-            "/logs"
+            '/logs'
           ].join,
           config: config,
           query: {
             'type' => QueryValue.new(type, style: 'form', explode: true),
             'follow' => QueryValue.new(follow, style: 'form', explode: true),
-            'pod_connection_timeout' => QueryValue.new(pod_connection_timeout, style: 'form', explode: true),
+            'pod_connection_timeout' => QueryValue.new(pod_connection_timeout, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AppsGetLogsResponse,
           decoder: :json,
           operation_id: 'apps_get_logs_active_deployment',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -69,25 +68,24 @@ module OctridevDigitalocean
         instance_name: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/apps/",
+            '/v2/apps/',
             SdkClient.encode_path_segment(app_id),
-            "/components/",
+            '/components/',
             SdkClient.encode_path_segment(component_name),
-            "/exec"
+            '/exec'
           ].join,
           config: config,
           query: {
-            'instance_name' => QueryValue.new(instance_name, style: 'form', explode: true),
+            'instance_name' => QueryValue.new(instance_name, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AppsGetExecResponse,
           decoder: :json,
           operation_id: 'apps_get_exec_active_deployment',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

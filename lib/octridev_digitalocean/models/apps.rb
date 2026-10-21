@@ -5,99 +5,97 @@
 
 # apps domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalCancelEventMetadata
-  FIELDS = {
-    event: "event",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    event: lambda do |value|
-      ::OctridevDigitalocean::AppEvent.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for CancelEvent.
-# Typed representation of the `CancelEvent` API schema.
-class CancelEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCancelEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCancelEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCancelEventMetadata::DECODERS
-
-  # @return [AppEvent] Optional object value serialized in the `event` wire field.
-  attr_reader :event
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCancelEventMetadata
+    FIELDS = {
+      event: 'event'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      event: lambda do |value|
+        ::OctridevDigitalocean::AppEvent.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CancelEvent.
+  # Typed representation of the `CancelEvent` API schema.
+  class CancelEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCancelEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCancelEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCancelEventMetadata::DECODERS
+
+    # @return [AppEvent] Optional object value serialized in the `event` wire field.
+    attr_reader :event
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalGetEventMetadata
-  FIELDS = {
-    event: "event",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    event: lambda do |value|
-      ::OctridevDigitalocean::AppEvent.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for GetEvent.
-# Typed representation of the `GetEvent` API schema.
-class GetEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalGetEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalGetEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalGetEventMetadata::DECODERS
-
-  # @return [AppEvent] Optional object value serialized in the `event` wire field.
-  attr_reader :event
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalGetEventMetadata
+    FIELDS = {
+      event: 'event'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      event: lambda do |value|
+        ::OctridevDigitalocean::AppEvent.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for GetEvent.
+  # Typed representation of the `GetEvent` API schema.
+  class GetEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalGetEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalGetEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalGetEventMetadata::DECODERS
+
+    # @return [AppEvent] Optional object value serialized in the `event` wire field.
+    attr_reader :event
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the InstanceSizeCpuType SDK namespace.
+  module InstanceSizeCpuType
+    UNSPECIFIED = 'UNSPECIFIED'
+    SHARED = 'SHARED'
+    DEDICATED = 'DEDICATED'
+    VALUES = %w[UNSPECIFIED SHARED DEDICATED].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the InstanceSizeCpuType SDK namespace.
-module InstanceSizeCpuType
-  UNSPECIFIED = 'UNSPECIFIED'
-  SHARED = 'SHARED'
-  DEDICATED = 'DEDICATED'
-  VALUES = ['UNSPECIFIED', 'SHARED', 'DEDICATED'].freeze
-  def self.from_value(value)
-    value
+  # Defines the Schema SDK value decoder.
+  module Schema
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the Schema SDK value decoder.
-module Schema
-  def self.from_value(value)
-    value
-  end
-end
 end

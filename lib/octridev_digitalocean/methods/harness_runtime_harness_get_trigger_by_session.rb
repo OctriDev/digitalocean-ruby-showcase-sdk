@@ -17,11 +17,10 @@ module OctridevDigitalocean
         session_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/triggers/by-session/",
+            '/v2/agents/triggers/by-session/',
             SdkClient.encode_path_segment(session_id)
           ].join,
           config: config,
@@ -29,7 +28,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_get_trigger_by_session',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

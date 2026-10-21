@@ -20,13 +20,12 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/triggers/",
+            '/v2/agents/triggers/',
             SdkClient.encode_path_segment(trigger_id),
-            "/webhook"
+            '/webhook'
           ].join,
           config: config,
           body: body,
@@ -35,7 +34,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_post_trigger_webhook',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

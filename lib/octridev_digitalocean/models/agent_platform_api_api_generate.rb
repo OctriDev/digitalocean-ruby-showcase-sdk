@@ -5,123 +5,118 @@
 
 # agent_platform_api_api_generate domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiGenerateOauth2URLOutputMetadata
-  FIELDS = {
-    url: "url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiGenerateOauth2URLOutput.
-# The url for the oauth2 flow
-class ApiGenerateOauth2URLOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiGenerateOauth2URLOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiGenerateOauth2URLOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiGenerateOauth2URLOutputMetadata::DECODERS
-
-  # @return [String] The oauth2 url
-  attr_reader :url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiGenerateOauth2URLOutputMetadata
+    FIELDS = {
+      url: 'url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiGenerateOauth2URLOutput.
+  # The url for the oauth2 flow
+  class ApiGenerateOauth2URLOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiGenerateOauth2URLOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiGenerateOauth2URLOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiGenerateOauth2URLOutputMetadata::DECODERS
+
+    # @return [String] The oauth2 url
+    attr_reader :url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiGenerateScenarioSetInputPublicMetadata
-  FIELDS = {
-    generator_model_uuid: "generator_model_uuid",
-    goal_description: "goal_description",
-    name: "name",
-    num_scenarios: "num_scenarios",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiGenerateScenarioSetInputPublic.
-# Public parameters for dispatching goal-driven scenario generation.
-class ApiGenerateScenarioSetInputPublic
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiGenerateScenarioSetInputPublicMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiGenerateScenarioSetInputPublicMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiGenerateScenarioSetInputPublicMetadata::DECODERS
-
-  # @return [String] Optional model to use for generation. Platform default when unset.
-  attr_reader :generator_model_uuid
-  # @return [String] The goal that drives scenario generation.
-  attr_reader :goal_description
-  # @return [String] The name of the scenario set to create.
-  attr_reader :name
-  # @return [Integer] Number of scenarios to generate. Defaults to 1 if unset.
-  attr_reader :num_scenarios
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiGenerateScenarioSetInputPublicMetadata
+    FIELDS = {
+      generator_model_uuid: 'generator_model_uuid',
+      goal_description: 'goal_description',
+      name: 'name',
+      num_scenarios: 'num_scenarios'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiGenerateScenarioSetInputPublic.
+  # Public parameters for dispatching goal-driven scenario generation.
+  class ApiGenerateScenarioSetInputPublic
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiGenerateScenarioSetInputPublicMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiGenerateScenarioSetInputPublicMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiGenerateScenarioSetInputPublicMetadata::DECODERS
+
+    # @return [String] Optional model to use for generation. Platform default when unset.
+    attr_reader :generator_model_uuid
+    # @return [String] The goal that drives scenario generation.
+    attr_reader :goal_description
+    # @return [String] The name of the scenario set to create.
+    attr_reader :name
+    # @return [Integer] Number of scenarios to generate. Defaults to 1 if unset.
+    attr_reader :num_scenarios
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiGenerateScenarioSetOutputMetadata
-  FIELDS = {
-    scenario_set: "scenario_set",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    scenario_set: lambda do |value|
-      ::OctridevDigitalocean::ApiScenarioSet.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiGenerateScenarioSetOutput.
-# Output for dispatching goal-driven scenario generation.
-class ApiGenerateScenarioSetOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiGenerateScenarioSetOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiGenerateScenarioSetOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiGenerateScenarioSetOutputMetadata::DECODERS
-
-  # @return [ApiScenarioSet] A team-owned collection of scenarios.
-  attr_reader :scenario_set
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiGenerateScenarioSetOutputMetadata
+    FIELDS = {
+      scenario_set: 'scenario_set'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      scenario_set: lambda do |value|
+        ::OctridevDigitalocean::ApiScenarioSet.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ApiGenerateScenarioSetOutput.
+  # Output for dispatching goal-driven scenario generation.
+  class ApiGenerateScenarioSetOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiGenerateScenarioSetOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiGenerateScenarioSetOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiGenerateScenarioSetOutputMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [ApiScenarioSet] A team-owned collection of scenarios.
+    attr_reader :scenario_set
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

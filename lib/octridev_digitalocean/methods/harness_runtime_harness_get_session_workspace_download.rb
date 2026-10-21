@@ -24,23 +24,22 @@ module OctridevDigitalocean
         as_archive: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/download"
+            '/workspace/download'
           ].join,
           config: config,
           query: {
             'path' => QueryValue.new(path, style: 'form', explode: true),
-            'as_archive' => QueryValue.new(as_archive, style: 'form', explode: true),
+            'as_archive' => QueryValue.new(as_archive, style: 'form', explode: true)
           },
           decoder: :bytes,
           operation_id: 'harness_get_session_workspace_download',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -5,251 +5,248 @@
 
 # apps_app_component domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAppComponentBaseMetadata
-  FIELDS = {
-    name: "name",
-    git: "git",
-    github: "github",
-    gitlab: "gitlab",
-    bitbucket: "bitbucket",
-    image: "image",
-    dockerfile_path: "dockerfile_path",
-    build_command: "build_command",
-    run_command: "run_command",
-    source_dir: "source_dir",
-    envs: "envs",
-    environment_slug: "environment_slug",
-    log_destinations: "log_destinations",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    git: lambda do |value|
-      ::OctridevDigitalocean::AppsGitSourceSpec.from_hash(value)
-    end,
-    github: lambda do |value|
-      ::OctridevDigitalocean::AppsGithubSourceSpec.from_hash(value)
-    end,
-    gitlab: lambda do |value|
-      ::OctridevDigitalocean::AppsGitlabSourceSpec.from_hash(value)
-    end,
-    bitbucket: lambda do |value|
-      ::OctridevDigitalocean::AppsBitbucketSourceSpec.from_hash(value)
-    end,
-    image: lambda do |value|
-      ::OctridevDigitalocean::AppsImageSourceSpec.from_hash(value)
-    end,
-    envs: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppVariableDefinition.from_hash(item) }
-    end,
-    log_destinations: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppLogDestinationDefinition.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AppComponentBase.
-# Typed representation of the `AppComponentBase` API schema.
-class AppComponentBase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppComponentBaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppComponentBaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppComponentBaseMetadata::DECODERS
-
-  # @return [String] The name. Must be unique across all components within the same app.
-  attr_reader :name
-  # @return [AppsGitSourceSpec] Optional object value serialized in the `git` wire field.
-  attr_reader :git
-  # @return [AppsGithubSourceSpec] Optional object value serialized in the `github` wire field.
-  attr_reader :github
-  # @return [AppsGitlabSourceSpec] Optional object value serialized in the `gitlab` wire field.
-  attr_reader :gitlab
-  # @return [AppsBitbucketSourceSpec] Optional object value serialized in the `bitbucket` wire field.
-  attr_reader :bitbucket
-  # @return [AppsImageSourceSpec] Optional object value serialized in the `image` wire field.
-  attr_reader :image
-  # @return [String] The path to the Dockerfile relative to the root of the repo. If set, it will be used to build this component. Otherwise, App Platform will attempt to build it using buildpacks.
-  attr_reader :dockerfile_path
-  # @return [String] An optional build command to run while building this component from source.
-  attr_reader :build_command
-  # @return [String] An optional run command to override the component's default.
-  attr_reader :run_command
-  # @return [String] An optional path to the working directory to use for the build. For Dockerfile builds, this will be used as the build context. Must be relative to the root of the repo.
-  attr_reader :source_dir
-  # @return [Array_of_AppVariableDefinition] A list of environment variables made available to the component.
-  attr_reader :envs
-  # @return [String] An environment slug describing the type of this app. For a full list, please refer to the product documentation.
-  attr_reader :environment_slug
-  # @return [Array_of_AppLogDestinationDefinition] A list of configured log forwarding destinations.
-  attr_reader :log_destinations
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppComponentBaseMetadata
+    FIELDS = {
+      name: 'name',
+      git: 'git',
+      github: 'github',
+      gitlab: 'gitlab',
+      bitbucket: 'bitbucket',
+      image: 'image',
+      dockerfile_path: 'dockerfile_path',
+      build_command: 'build_command',
+      run_command: 'run_command',
+      source_dir: 'source_dir',
+      envs: 'envs',
+      environment_slug: 'environment_slug',
+      log_destinations: 'log_destinations'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      git: lambda do |value|
+        ::OctridevDigitalocean::AppsGitSourceSpec.from_hash(value)
+      end,
+      github: lambda do |value|
+        ::OctridevDigitalocean::AppsGithubSourceSpec.from_hash(value)
+      end,
+      gitlab: lambda do |value|
+        ::OctridevDigitalocean::AppsGitlabSourceSpec.from_hash(value)
+      end,
+      bitbucket: lambda do |value|
+        ::OctridevDigitalocean::AppsBitbucketSourceSpec.from_hash(value)
+      end,
+      image: lambda do |value|
+        ::OctridevDigitalocean::AppsImageSourceSpec.from_hash(value)
+      end,
+      envs: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppVariableDefinition.from_hash(item) }
+      end,
+      log_destinations: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppLogDestinationDefinition.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppComponentBase.
+  # Typed representation of the `AppComponentBase` API schema.
+  class AppComponentBase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppComponentBaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppComponentBaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppComponentBaseMetadata::DECODERS
+
+    # @return [String] The name. Must be unique across all components within the same app.
+    attr_reader :name
+    # @return [AppsGitSourceSpec] Optional object value serialized in the `git` wire field.
+    attr_reader :git
+    # @return [AppsGithubSourceSpec] Optional object value serialized in the `github` wire field.
+    attr_reader :github
+    # @return [AppsGitlabSourceSpec] Optional object value serialized in the `gitlab` wire field.
+    attr_reader :gitlab
+    # @return [AppsBitbucketSourceSpec] Optional object value serialized in the `bitbucket` wire field.
+    attr_reader :bitbucket
+    # @return [AppsImageSourceSpec] Optional object value serialized in the `image` wire field.
+    attr_reader :image
+    # @return [String] The path to the Dockerfile relative to the root of the repo. If set, it will be used to build this component. Otherwise, App Platform will attempt to build it using buildpacks.
+    attr_reader :dockerfile_path
+    # @return [String] An optional build command to run while building this component from source.
+    attr_reader :build_command
+    # @return [String] An optional run command to override the component's default.
+    attr_reader :run_command
+    # @return [String] An optional path to the working directory to use for the build. For Dockerfile builds, this will be used as the build context. Must be relative to the root of the repo.
+    attr_reader :source_dir
+    # @return [Array_of_AppVariableDefinition] A list of environment variables made available to the component.
+    attr_reader :envs
+    # @return [String] An environment slug describing the type of this app. For a full list, please refer to the product documentation.
+    attr_reader :environment_slug
+    # @return [Array_of_AppLogDestinationDefinition] A list of configured log forwarding destinations.
+    attr_reader :log_destinations
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppComponentHealthMetadata
-  FIELDS = {
-    name: "name",
-    cpu_usage_percent: "cpu_usage_percent",
-    memory_usage_percent: "memory_usage_percent",
-    replicas_desired: "replicas_desired",
-    replicas_ready: "replicas_ready",
-    state: "state",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    state: lambda do |value|
-      ::OctridevDigitalocean::AppComponentHealthState.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AppComponentHealth.
-# Typed representation of the `AppComponentHealth` API schema.
-class AppComponentHealth
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppComponentHealthMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppComponentHealthMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppComponentHealthMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [Float] Optional `double`-formatted value serialized in the `cpu_usage_percent` wire field.
-  attr_reader :cpu_usage_percent
-  # @return [Float] Optional `double`-formatted value serialized in the `memory_usage_percent` wire field.
-  attr_reader :memory_usage_percent
-  # @return [Integer] Optional `int64`-formatted value serialized in the `replicas_desired` wire field.
-  attr_reader :replicas_desired
-  # @return [Integer] Optional `int64`-formatted value serialized in the `replicas_ready` wire field.
-  attr_reader :replicas_ready
-  # @return [AppComponentHealthState] Optional enumerated value serialized in the `state` wire field.
-  attr_reader :state
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppComponentHealthMetadata
+    FIELDS = {
+      name: 'name',
+      cpu_usage_percent: 'cpu_usage_percent',
+      memory_usage_percent: 'memory_usage_percent',
+      replicas_desired: 'replicas_desired',
+      replicas_ready: 'replicas_ready',
+      state: 'state'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      state: lambda do |value|
+        ::OctridevDigitalocean::AppComponentHealthState.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppComponentHealth.
+  # Typed representation of the `AppComponentHealth` API schema.
+  class AppComponentHealth
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppComponentHealthMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppComponentHealthMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppComponentHealthMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [Float] Optional `double`-formatted value serialized in the `cpu_usage_percent` wire field.
+    attr_reader :cpu_usage_percent
+    # @return [Float] Optional `double`-formatted value serialized in the `memory_usage_percent` wire field.
+    attr_reader :memory_usage_percent
+    # @return [Integer] Optional `int64`-formatted value serialized in the `replicas_desired` wire field.
+    attr_reader :replicas_desired
+    # @return [Integer] Optional `int64`-formatted value serialized in the `replicas_ready` wire field.
+    attr_reader :replicas_ready
+    # @return [AppComponentHealthState] Optional enumerated value serialized in the `state` wire field.
+    attr_reader :state
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AppComponentHealthState SDK namespace.
-module AppComponentHealthState
-  UNKNOWN = 'UNKNOWN'
-  HEALTHY = 'HEALTHY'
-  UNHEALTHY = 'UNHEALTHY'
-  VALUES = ['UNKNOWN', 'HEALTHY', 'UNHEALTHY'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the AppComponentInstanceBaseInstanceSizeSlugVariant0 SDK namespace.
-module AppComponentInstanceBaseInstanceSizeSlugVariant0
-  APPS_S_1_VCPU_0_5_GB = 'apps-s-1vcpu-0.5gb'
-  APPS_S_1_VCPU_1_GB_FIXED = 'apps-s-1vcpu-1gb-fixed'
-  APPS_S_1_VCPU_1_GB = 'apps-s-1vcpu-1gb'
-  APPS_S_1_VCPU_2_GB = 'apps-s-1vcpu-2gb'
-  APPS_S_2_VCPU_4_GB = 'apps-s-2vcpu-4gb'
-  APPS_D_1_VCPU_0_5_GB = 'apps-d-1vcpu-0.5gb'
-  APPS_D_1_VCPU_1_GB = 'apps-d-1vcpu-1gb'
-  APPS_D_1_VCPU_2_GB = 'apps-d-1vcpu-2gb'
-  APPS_D_1_VCPU_4_GB = 'apps-d-1vcpu-4gb'
-  APPS_D_2_VCPU_4_GB = 'apps-d-2vcpu-4gb'
-  APPS_D_2_VCPU_8_GB = 'apps-d-2vcpu-8gb'
-  APPS_D_4_VCPU_8_GB = 'apps-d-4vcpu-8gb'
-  APPS_D_4_VCPU_16_GB = 'apps-d-4vcpu-16gb'
-  APPS_D_8_VCPU_32_GB = 'apps-d-8vcpu-32gb'
-  VALUES = [
-    'apps-s-1vcpu-0.5gb', 'apps-s-1vcpu-1gb-fixed', 'apps-s-1vcpu-1gb', 'apps-s-1vcpu-2gb',
-    'apps-s-2vcpu-4gb', 'apps-d-1vcpu-0.5gb', 'apps-d-1vcpu-1gb', 'apps-d-1vcpu-2gb',
-    'apps-d-1vcpu-4gb', 'apps-d-2vcpu-4gb', 'apps-d-2vcpu-8gb', 'apps-d-4vcpu-8gb',
-    'apps-d-4vcpu-16gb', 'apps-d-8vcpu-32gb'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppComponentInstanceBaseMetadata
-  FIELDS = {
-    instance_count: "instance_count",
-    instance_size_slug: "instance_size_slug",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    instance_size_slug: lambda do |value|
-      ::OctridevDigitalocean::AppComponentInstanceBaseInstanceSizeSlugVariant0.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AppComponentInstanceBase.
-# Typed representation of the `AppComponentInstanceBase` API schema.
-class AppComponentInstanceBase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppComponentInstanceBaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppComponentInstanceBaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppComponentInstanceBaseMetadata::DECODERS
-
-  # @return [Integer] The amount of instances that this component should be scaled to. Default: 1. Must not be set if autoscaling is used.
-  attr_reader :instance_count
-  # @return [AppComponentInstanceBaseInstanceSizeSlugVariant0] The instance size to use for this component. Default: `apps-s-1vcpu-0.5gb`
-  attr_reader :instance_size_slug
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AppComponentHealthState SDK namespace.
+  module AppComponentHealthState
+    UNKNOWN = 'UNKNOWN'
+    HEALTHY = 'HEALTHY'
+    UNHEALTHY = 'UNHEALTHY'
+    VALUES = %w[UNKNOWN HEALTHY UNHEALTHY].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AppComponentInstanceBaseInstanceSizeSlugVariant0 SDK namespace.
+  module AppComponentInstanceBaseInstanceSizeSlugVariant0
+    APPS_S_1_VCPU_0_5_GB = 'apps-s-1vcpu-0.5gb'
+    APPS_S_1_VCPU_1_GB_FIXED = 'apps-s-1vcpu-1gb-fixed'
+    APPS_S_1_VCPU_1_GB = 'apps-s-1vcpu-1gb'
+    APPS_S_1_VCPU_2_GB = 'apps-s-1vcpu-2gb'
+    APPS_S_2_VCPU_4_GB = 'apps-s-2vcpu-4gb'
+    APPS_D_1_VCPU_0_5_GB = 'apps-d-1vcpu-0.5gb'
+    APPS_D_1_VCPU_1_GB = 'apps-d-1vcpu-1gb'
+    APPS_D_1_VCPU_2_GB = 'apps-d-1vcpu-2gb'
+    APPS_D_1_VCPU_4_GB = 'apps-d-1vcpu-4gb'
+    APPS_D_2_VCPU_4_GB = 'apps-d-2vcpu-4gb'
+    APPS_D_2_VCPU_8_GB = 'apps-d-2vcpu-8gb'
+    APPS_D_4_VCPU_8_GB = 'apps-d-4vcpu-8gb'
+    APPS_D_4_VCPU_16_GB = 'apps-d-4vcpu-16gb'
+    APPS_D_8_VCPU_32_GB = 'apps-d-8vcpu-32gb'
+    VALUES = [
+      'apps-s-1vcpu-0.5gb', 'apps-s-1vcpu-1gb-fixed', 'apps-s-1vcpu-1gb', 'apps-s-1vcpu-2gb',
+      'apps-s-2vcpu-4gb', 'apps-d-1vcpu-0.5gb', 'apps-d-1vcpu-1gb', 'apps-d-1vcpu-2gb',
+      'apps-d-1vcpu-4gb', 'apps-d-2vcpu-4gb', 'apps-d-2vcpu-8gb', 'apps-d-4vcpu-8gb',
+      'apps-d-4vcpu-16gb', 'apps-d-8vcpu-32gb'
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalAppComponentInstanceBaseMetadata
+    FIELDS = {
+      instance_count: 'instance_count',
+      instance_size_slug: 'instance_size_slug'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      instance_size_slug: lambda do |value|
+        ::OctridevDigitalocean::AppComponentInstanceBaseInstanceSizeSlugVariant0.from_value(value)
+      end
+    }.freeze
   end
-end
 
-# Defines the AppComponentInstanceBaseInstanceSizeSlugVariant1 SDK namespace.
-module AppComponentInstanceBaseInstanceSizeSlugVariant1
-  BASIC_XXS = 'basic-xxs'
-  BASIC_XS = 'basic-xs'
-  BASIC_S = 'basic-s'
-  BASIC_M = 'basic-m'
-  PROFESSIONAL_XS = 'professional-xs'
-  PROFESSIONAL_S = 'professional-s'
-  PROFESSIONAL_M = 'professional-m'
-  PROFESSIONAL_1_L = 'professional-1l'
-  PROFESSIONAL_L = 'professional-l'
-  PROFESSIONAL_XL = 'professional-xl'
-  VALUES = [
-    'basic-xxs', 'basic-xs', 'basic-s', 'basic-m', 'professional-xs', 'professional-s',
-    'professional-m', 'professional-1l', 'professional-l', 'professional-xl'
-  ].freeze
-  def self.from_value(value)
-    value
+  # API model for AppComponentInstanceBase.
+  # Typed representation of the `AppComponentInstanceBase` API schema.
+  class AppComponentInstanceBase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppComponentInstanceBaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppComponentInstanceBaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppComponentInstanceBaseMetadata::DECODERS
+
+    # @return [Integer] The amount of instances that this component should be scaled to. Default: 1. Must not be set if autoscaling is used.
+    attr_reader :instance_count
+    # @return [AppComponentInstanceBaseInstanceSizeSlugVariant0] The instance size to use for this component. Default: `apps-s-1vcpu-0.5gb`
+    attr_reader :instance_size_slug
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the AppComponentInstanceBaseInstanceSizeSlugVariant1 SDK namespace.
+  module AppComponentInstanceBaseInstanceSizeSlugVariant1
+    BASIC_XXS = 'basic-xxs'
+    BASIC_XS = 'basic-xs'
+    BASIC_S = 'basic-s'
+    BASIC_M = 'basic-m'
+    PROFESSIONAL_XS = 'professional-xs'
+    PROFESSIONAL_S = 'professional-s'
+    PROFESSIONAL_M = 'professional-m'
+    PROFESSIONAL_1_L = 'professional-1l'
+    PROFESSIONAL_L = 'professional-l'
+    PROFESSIONAL_XL = 'professional-xl'
+    VALUES = %w[
+      basic-xxs basic-xs basic-s basic-m professional-xs professional-s
+      professional-m professional-1l professional-l professional-xl
+    ].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

@@ -5,415 +5,409 @@
 
 # agent_platform_api_api_list domain models
 module OctridevDigitalocean
-# API model for ApiListRegionsOutput.
-# Region Codes
-class ApiListRegionsOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiListRegionsOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiListRegionsOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiListRegionsOutputMetadata::DECODERS
+  # API model for ApiListRegionsOutput.
+  # Region Codes
+  class ApiListRegionsOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiListRegionsOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiListRegionsOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiListRegionsOutputMetadata::DECODERS
 
-  # @return [Array_of_GenaiapiRegion] Region code
-  attr_reader :regions
+    # @return [Array_of_GenaiapiRegion] Region code
+    attr_reader :regions
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiListScenarioLibraryOutputMetadata
+    FIELDS = {
+      available_categories: 'available_categories',
+      available_sort_by: 'available_sort_by',
+      available_sort_directions: 'available_sort_directions',
+      links: 'links',
+      meta: 'meta',
+      scenarios: 'scenarios'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      available_sort_by: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiScenarioLibrarySortField.from_value(item) }
+      end,
+      available_sort_directions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::ApiLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::ApiMeta.from_hash(value)
+      end,
+      scenarios: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiScenarioLibraryEntry.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiListScenarioLibraryOutput.
+  # Output for listing the Common Scenario & Goal Library.
+  class ApiListScenarioLibraryOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiListScenarioLibraryOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiListScenarioLibraryOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiListScenarioLibraryOutputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiListScenarioLibraryOutputMetadata
-  FIELDS = {
-    available_categories: "available_categories",
-    available_sort_by: "available_sort_by",
-    available_sort_directions: "available_sort_directions",
-    links: "links",
-    meta: "meta",
-    scenarios: "scenarios",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    available_sort_by: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiScenarioLibrarySortField.from_value(item) }
-    end,
-    available_sort_directions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::ApiLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::ApiMeta.from_hash(value)
-    end,
-    scenarios: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiScenarioLibraryEntry.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_String] Categories currently in use, for filtering library results.
+    attr_reader :available_categories
+    # @return [Array_of_ApiScenarioLibrarySortField] Sort-by values available for this list request.
+    attr_reader :available_sort_by
+    # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
+    attr_reader :available_sort_directions
+    # @return [ApiLinks] Links to other pages
+    attr_reader :links
+    # @return [ApiMeta] Meta information about the data set
+    attr_reader :meta
+    # @return [Array_of_ApiScenarioLibraryEntry] The library entries for the current page.
+    attr_reader :scenarios
 
-# API model for ApiListScenarioLibraryOutput.
-# Output for listing the Common Scenario & Goal Library.
-class ApiListScenarioLibraryOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiListScenarioLibraryOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiListScenarioLibraryOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiListScenarioLibraryOutputMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_String] Categories currently in use, for filtering library results.
-  attr_reader :available_categories
-  # @return [Array_of_ApiScenarioLibrarySortField] Sort-by values available for this list request.
-  attr_reader :available_sort_by
-  # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
-  attr_reader :available_sort_directions
-  # @return [ApiLinks] Links to other pages
-  attr_reader :links
-  # @return [ApiMeta] Meta information about the data set
-  attr_reader :meta
-  # @return [Array_of_ApiScenarioLibraryEntry] The library entries for the current page.
-  attr_reader :scenarios
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiListScenarioSetsOutputMetadata
+    FIELDS = {
+      available_sort_by: 'available_sort_by',
+      available_sort_directions: 'available_sort_directions',
+      available_source_kinds: 'available_source_kinds',
+      available_statuses: 'available_statuses',
+      links: 'links',
+      meta: 'meta',
+      scenario_sets: 'scenario_sets'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      available_sort_by: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiScenarioSetSortField.from_value(item) }
+      end,
+      available_sort_directions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
+      end,
+      available_source_kinds: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiScenarioSetSourceKind.from_value(item) }
+      end,
+      available_statuses: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiScenarioSetStatus.from_value(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::ApiLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::ApiMeta.from_hash(value)
+      end,
+      scenario_sets: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiScenarioSet.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiListScenarioSetsOutput.
+  # Output for listing scenario sets.
+  class ApiListScenarioSetsOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiListScenarioSetsOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiListScenarioSetsOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiListScenarioSetsOutputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiListScenarioSetsOutputMetadata
-  FIELDS = {
-    available_sort_by: "available_sort_by",
-    available_sort_directions: "available_sort_directions",
-    available_source_kinds: "available_source_kinds",
-    available_statuses: "available_statuses",
-    links: "links",
-    meta: "meta",
-    scenario_sets: "scenario_sets",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    available_sort_by: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiScenarioSetSortField.from_value(item) }
-    end,
-    available_sort_directions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
-    end,
-    available_source_kinds: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiScenarioSetSourceKind.from_value(item) }
-    end,
-    available_statuses: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiScenarioSetStatus.from_value(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::ApiLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::ApiMeta.from_hash(value)
-    end,
-    scenario_sets: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiScenarioSet.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_ApiScenarioSetSortField] Sort-by values available for this list request.
+    attr_reader :available_sort_by
+    # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
+    attr_reader :available_sort_directions
+    # @return [Array_of_ApiScenarioSetSourceKind] Source kinds available for filtering this list request.
+    attr_reader :available_source_kinds
+    # @return [Array_of_ApiScenarioSetStatus] Statuses available for filtering this list request.
+    attr_reader :available_statuses
+    # @return [ApiLinks] Links to other pages
+    attr_reader :links
+    # @return [ApiMeta] Meta information about the data set
+    attr_reader :meta
+    # @return [Array_of_ApiScenarioSet] The scenario sets for the current page.
+    attr_reader :scenario_sets
 
-# API model for ApiListScenarioSetsOutput.
-# Output for listing scenario sets.
-class ApiListScenarioSetsOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiListScenarioSetsOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiListScenarioSetsOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiListScenarioSetsOutputMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_ApiScenarioSetSortField] Sort-by values available for this list request.
-  attr_reader :available_sort_by
-  # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
-  attr_reader :available_sort_directions
-  # @return [Array_of_ApiScenarioSetSourceKind] Source kinds available for filtering this list request.
-  attr_reader :available_source_kinds
-  # @return [Array_of_ApiScenarioSetStatus] Statuses available for filtering this list request.
-  attr_reader :available_statuses
-  # @return [ApiLinks] Links to other pages
-  attr_reader :links
-  # @return [ApiMeta] Meta information about the data set
-  attr_reader :meta
-  # @return [Array_of_ApiScenarioSet] The scenario sets for the current page.
-  attr_reader :scenario_sets
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiListScenariosOutputMetadata
+    FIELDS = {
+      available_sort_by: 'available_sort_by',
+      available_sort_directions: 'available_sort_directions',
+      links: 'links',
+      meta: 'meta',
+      scenarios: 'scenarios'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      available_sort_by: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiScenarioSortField.from_value(item) }
+      end,
+      available_sort_directions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::ApiLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::ApiMeta.from_hash(value)
+      end,
+      scenarios: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiScenario.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiListScenariosOutput.
+  # Output for listing the scenarios in a scenario set.
+  class ApiListScenariosOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiListScenariosOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiListScenariosOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiListScenariosOutputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiListScenariosOutputMetadata
-  FIELDS = {
-    available_sort_by: "available_sort_by",
-    available_sort_directions: "available_sort_directions",
-    links: "links",
-    meta: "meta",
-    scenarios: "scenarios",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    available_sort_by: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiScenarioSortField.from_value(item) }
-    end,
-    available_sort_directions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::ApiLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::ApiMeta.from_hash(value)
-    end,
-    scenarios: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiScenario.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_ApiScenarioSortField] Sort-by values available for this list request.
+    attr_reader :available_sort_by
+    # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
+    attr_reader :available_sort_directions
+    # @return [ApiLinks] Links to other pages
+    attr_reader :links
+    # @return [ApiMeta] Meta information about the data set
+    attr_reader :meta
+    # @return [Array_of_ApiScenario] The scenarios for the current page.
+    attr_reader :scenarios
 
-# API model for ApiListScenariosOutput.
-# Output for listing the scenarios in a scenario set.
-class ApiListScenariosOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiListScenariosOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiListScenariosOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiListScenariosOutputMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_ApiScenarioSortField] Sort-by values available for this list request.
-  attr_reader :available_sort_by
-  # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
-  attr_reader :available_sort_directions
-  # @return [ApiLinks] Links to other pages
-  attr_reader :links
-  # @return [ApiMeta] Meta information about the data set
-  attr_reader :meta
-  # @return [Array_of_ApiScenario] The scenarios for the current page.
-  attr_reader :scenarios
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiListSimulationEpisodesOutputMetadata
+    FIELDS = {
+      available_sort_by: 'available_sort_by',
+      available_sort_directions: 'available_sort_directions',
+      available_statuses: 'available_statuses',
+      available_verdicts: 'available_verdicts',
+      episodes: 'episodes',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      available_sort_by: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationEpisodeSortField.from_value(item) }
+      end,
+      available_sort_directions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
+      end,
+      available_statuses: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationEpisodeStatus.from_value(item) }
+      end,
+      available_verdicts: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationEpisodeVerdict.from_value(item) }
+      end,
+      episodes: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationEpisode.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::ApiLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::ApiMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiListSimulationEpisodesOutput.
+  # Output for listing the episodes within a simulation run.
+  class ApiListSimulationEpisodesOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiListSimulationEpisodesOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiListSimulationEpisodesOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiListSimulationEpisodesOutputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiListSimulationEpisodesOutputMetadata
-  FIELDS = {
-    available_sort_by: "available_sort_by",
-    available_sort_directions: "available_sort_directions",
-    available_statuses: "available_statuses",
-    available_verdicts: "available_verdicts",
-    episodes: "episodes",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    available_sort_by: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationEpisodeSortField.from_value(item) }
-    end,
-    available_sort_directions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
-    end,
-    available_statuses: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationEpisodeStatus.from_value(item) }
-    end,
-    available_verdicts: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationEpisodeVerdict.from_value(item) }
-    end,
-    episodes: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationEpisode.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::ApiLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::ApiMeta.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [Array_of_ApiSimulationEpisodeSortField] Sort-by values available for this list request.
+    attr_reader :available_sort_by
+    # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
+    attr_reader :available_sort_directions
+    # @return [Array_of_ApiSimulationEpisodeStatus] Statuses available for filtering this list request.
+    attr_reader :available_statuses
+    # @return [Array_of_ApiSimulationEpisodeVerdict] Verdicts available for filtering this list request.
+    attr_reader :available_verdicts
+    # @return [Array_of_ApiSimulationEpisode] The episodes for the current page.
+    attr_reader :episodes
+    # @return [ApiLinks] Links to other pages
+    attr_reader :links
+    # @return [ApiMeta] Meta information about the data set
+    attr_reader :meta
 
-# API model for ApiListSimulationEpisodesOutput.
-# Output for listing the episodes within a simulation run.
-class ApiListSimulationEpisodesOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiListSimulationEpisodesOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiListSimulationEpisodesOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiListSimulationEpisodesOutputMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_ApiSimulationEpisodeSortField] Sort-by values available for this list request.
-  attr_reader :available_sort_by
-  # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
-  attr_reader :available_sort_directions
-  # @return [Array_of_ApiSimulationEpisodeStatus] Statuses available for filtering this list request.
-  attr_reader :available_statuses
-  # @return [Array_of_ApiSimulationEpisodeVerdict] Verdicts available for filtering this list request.
-  attr_reader :available_verdicts
-  # @return [Array_of_ApiSimulationEpisode] The episodes for the current page.
-  attr_reader :episodes
-  # @return [ApiLinks] Links to other pages
-  attr_reader :links
-  # @return [ApiMeta] Meta information about the data set
-  attr_reader :meta
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiListSimulationRunsOutputMetadata
+    FIELDS = {
+      available_sort_by: 'available_sort_by',
+      available_sort_directions: 'available_sort_directions',
+      available_statuses: 'available_statuses',
+      links: 'links',
+      meta: 'meta',
+      simulation_runs: 'simulation_runs'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      available_sort_by: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationRunSortField.from_value(item) }
+      end,
+      available_sort_directions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
+      end,
+      available_statuses: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationRunStatus.from_value(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::ApiLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::ApiMeta.from_hash(value)
+      end,
+      simulation_runs: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationRun.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiListSimulationRunsOutput.
+  # Output for listing simulation runs.
+  class ApiListSimulationRunsOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiListSimulationRunsOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiListSimulationRunsOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiListSimulationRunsOutputMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiListSimulationRunsOutputMetadata
-  FIELDS = {
-    available_sort_by: "available_sort_by",
-    available_sort_directions: "available_sort_directions",
-    available_statuses: "available_statuses",
-    links: "links",
-    meta: "meta",
-    simulation_runs: "simulation_runs",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    available_sort_by: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationRunSortField.from_value(item) }
-    end,
-    available_sort_directions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSortDirection.from_value(item) }
-    end,
-    available_statuses: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationRunStatus.from_value(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::ApiLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::ApiMeta.from_hash(value)
-    end,
-    simulation_runs: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationRun.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_ApiSimulationRunSortField] Sort-by values available for this list request.
+    attr_reader :available_sort_by
+    # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
+    attr_reader :available_sort_directions
+    # @return [Array_of_ApiSimulationRunStatus] Statuses available for filtering this list request.
+    attr_reader :available_statuses
+    # @return [ApiLinks] Links to other pages
+    attr_reader :links
+    # @return [ApiMeta] Meta information about the data set
+    attr_reader :meta
+    # @return [Array_of_ApiSimulationRun] The simulation runs for the current page.
+    attr_reader :simulation_runs
 
-# API model for ApiListSimulationRunsOutput.
-# Output for listing simulation runs.
-class ApiListSimulationRunsOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiListSimulationRunsOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiListSimulationRunsOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiListSimulationRunsOutputMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_ApiSimulationRunSortField] Sort-by values available for this list request.
-  attr_reader :available_sort_by
-  # @return [Array_of_ApiSortDirection] Sort-direction values available for this list request.
-  attr_reader :available_sort_directions
-  # @return [Array_of_ApiSimulationRunStatus] Statuses available for filtering this list request.
-  attr_reader :available_statuses
-  # @return [ApiLinks] Links to other pages
-  attr_reader :links
-  # @return [ApiMeta] Meta information about the data set
-  attr_reader :meta
-  # @return [Array_of_ApiSimulationRun] The simulation runs for the current page.
-  attr_reader :simulation_runs
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiListWorkspacesOutputMetadata
+    FIELDS = {
+      workspaces: 'workspaces'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      workspaces: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiWorkspace.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ApiListWorkspacesOutput.
+  # Typed representation of the `ApiListWorkspacesOutput` API schema.
+  class ApiListWorkspacesOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiListWorkspacesOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiListWorkspacesOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiListWorkspacesOutputMetadata::DECODERS
+
+    # @return [Array_of_ApiWorkspace] Workspaces
+    attr_reader :workspaces
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiListWorkspacesOutputMetadata
-  FIELDS = {
-    workspaces: "workspaces",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    workspaces: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiWorkspace.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ApiListWorkspacesOutput.
-# Typed representation of the `ApiListWorkspacesOutput` API schema.
-class ApiListWorkspacesOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiListWorkspacesOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiListWorkspacesOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiListWorkspacesOutputMetadata::DECODERS
-
-  # @return [Array_of_ApiWorkspace] Workspaces
-  attr_reader :workspaces
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
 end

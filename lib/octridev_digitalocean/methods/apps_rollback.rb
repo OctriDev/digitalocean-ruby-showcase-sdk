@@ -26,24 +26,23 @@ module OctridevDigitalocean
         skip_pin: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/apps/",
+            '/v2/apps/',
             SdkClient.encode_path_segment(app_id),
-            "/rollback"
+            '/rollback'
           ].join,
           config: config,
           body: {
             'deployment_id' => deployment_id,
-            'skip_pin' => skip_pin,
+            'skip_pin' => skip_pin
           },
           return_type: ::OctridevDigitalocean::AppsDeploymentResponse,
           decoder: :json,
           operation_id: 'apps_create_rollback',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -64,24 +63,23 @@ module OctridevDigitalocean
         skip_pin: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/apps/",
+            '/v2/apps/',
             SdkClient.encode_path_segment(app_id),
-            "/rollback/validate"
+            '/rollback/validate'
           ].join,
           config: config,
           body: {
             'deployment_id' => deployment_id,
-            'skip_pin' => skip_pin,
+            'skip_pin' => skip_pin
           },
           return_type: ::OctridevDigitalocean::AppsValidateRollback,
           decoder: :json,
           operation_id: 'apps_validate_rollback',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -93,19 +91,18 @@ module OctridevDigitalocean
         app_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/apps/",
+            '/v2/apps/',
             SdkClient.encode_path_segment(app_id),
-            "/rollback/commit"
+            '/rollback/commit'
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'apps_commit_rollback',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -117,20 +114,19 @@ module OctridevDigitalocean
         app_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/apps/",
+            '/v2/apps/',
             SdkClient.encode_path_segment(app_id),
-            "/rollback/revert"
+            '/rollback/revert'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AppsDeploymentResponse,
           decoder: :json,
           operation_id: 'apps_revert_rollback',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

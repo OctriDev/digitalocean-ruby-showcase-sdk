@@ -18,19 +18,18 @@ module OctridevDigitalocean
         files: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/model_evaluation/datasets/file_upload_presigned_urls",
+          '/v2/gen-ai/model_evaluation/datasets/file_upload_presigned_urls',
           config: config,
           body: {
-            'files' => files,
+            'files' => files
           },
           return_type: ::OctridevDigitalocean::ApiCreateDataSourceFileUploadPresignedUrlsOutput,
           decoder: :json,
           operation_id: 'genai_create_model_eval_dataset_upload_presigned_urls',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

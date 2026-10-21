@@ -19,21 +19,20 @@ module OctridevDigitalocean
         name:,
         request_options: nil
       )
-
         Validation.validate_length('name', name, max: 63)
         Validation.validate_pattern('name', name, '^[a-z0-9-]{1,63}$')
 
         SdkClient.request(
           'POST',
-          "/v2/registries/validate-name",
+          '/v2/registries/validate-name',
           config: config,
           body: {
-            'name' => name,
+            'name' => name
           },
           decoder: :empty,
           operation_id: 'registries_validate_name',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

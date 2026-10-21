@@ -5,81 +5,78 @@
 
 # agent_platform_api_api_move domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiMoveAgentsToWorkspaceInputPublicMetadata
-  FIELDS = {
-    agent_uuids: "agent_uuids",
-    workspace_uuid: "workspace_uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiMoveAgentsToWorkspaceInputPublic.
-# Parameters for Moving agents to a Workspace
-class ApiMoveAgentsToWorkspaceInputPublic
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiMoveAgentsToWorkspaceInputPublicMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiMoveAgentsToWorkspaceInputPublicMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiMoveAgentsToWorkspaceInputPublicMetadata::DECODERS
-
-  # @return [Array_of_String] Agent uuids
-  attr_reader :agent_uuids
-  # @return [String] Workspace uuid to move agents to
-  attr_reader :workspace_uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiMoveAgentsToWorkspaceInputPublicMetadata
+    FIELDS = {
+      agent_uuids: 'agent_uuids',
+      workspace_uuid: 'workspace_uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiMoveAgentsToWorkspaceInputPublic.
+  # Parameters for Moving agents to a Workspace
+  class ApiMoveAgentsToWorkspaceInputPublic
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiMoveAgentsToWorkspaceInputPublicMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiMoveAgentsToWorkspaceInputPublicMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiMoveAgentsToWorkspaceInputPublicMetadata::DECODERS
+
+    # @return [Array_of_String] Agent uuids
+    attr_reader :agent_uuids
+    # @return [String] Workspace uuid to move agents to
+    attr_reader :workspace_uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiMoveAgentsToWorkspaceOutputMetadata
-  FIELDS = {
-    workspace: "workspace",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    workspace: lambda do |value|
-      ::OctridevDigitalocean::ApiWorkspace.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiMoveAgentsToWorkspaceOutput.
-# Typed representation of the `ApiMoveAgentsToWorkspaceOutput` API schema.
-class ApiMoveAgentsToWorkspaceOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiMoveAgentsToWorkspaceOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiMoveAgentsToWorkspaceOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiMoveAgentsToWorkspaceOutputMetadata::DECODERS
-
-  # @return [ApiWorkspace] Optional object value serialized in the `workspace` wire field.
-  attr_reader :workspace
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiMoveAgentsToWorkspaceOutputMetadata
+    FIELDS = {
+      workspace: 'workspace'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      workspace: lambda do |value|
+        ::OctridevDigitalocean::ApiWorkspace.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ApiMoveAgentsToWorkspaceOutput.
+  # Typed representation of the `ApiMoveAgentsToWorkspaceOutput` API schema.
+  class ApiMoveAgentsToWorkspaceOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiMoveAgentsToWorkspaceOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiMoveAgentsToWorkspaceOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiMoveAgentsToWorkspaceOutputMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [ApiWorkspace] Optional object value serialized in the `workspace` wire field.
+    attr_reader :workspace
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

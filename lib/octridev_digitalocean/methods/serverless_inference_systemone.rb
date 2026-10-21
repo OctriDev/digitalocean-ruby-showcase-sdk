@@ -23,21 +23,20 @@ module OctridevDigitalocean
         questions:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v1/systemone",
+          '/v1/systemone',
           config: config,
           body: {
             'state' => state,
             'model' => model,
-            'questions' => questions,
+            'questions' => questions
           },
           return_type: ::OctridevDigitalocean::SystemoneResponse,
           decoder: :json,
           operation_id: 'inference_create_systemone',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '424' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '424' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

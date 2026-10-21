@@ -19,13 +19,12 @@ module OctridevDigitalocean
         prompt_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/evaluation_runs/",
+            '/v2/gen-ai/evaluation_runs/',
             SdkClient.encode_path_segment(evaluation_run_uuid),
-            "/results/",
+            '/results/',
             SdkClient.encode_path_segment(prompt_id)
           ].join,
           config: config,
@@ -33,7 +32,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'genai_get_evaluation_run_prompt_results',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

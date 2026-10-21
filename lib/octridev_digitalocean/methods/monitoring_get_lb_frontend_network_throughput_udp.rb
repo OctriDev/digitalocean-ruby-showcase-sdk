@@ -21,21 +21,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp",
+          '/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_network_throughput_udp',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

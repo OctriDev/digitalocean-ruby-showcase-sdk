@@ -18,22 +18,21 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
-
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/databases/",
+            '/v2/databases/',
             SdkClient.encode_path_segment(database_cluster_uuid),
-            "/indexes"
+            '/indexes'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::OpensearchIndexes,
           decoder: :json,
           operation_id: 'databases_list_opeasearch_indexes',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -48,22 +47,21 @@ module OctridevDigitalocean
         index_name:,
         request_options: nil
       )
-
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/databases/",
+            '/v2/databases/',
             SdkClient.encode_path_segment(database_cluster_uuid),
-            "/indexes/",
+            '/indexes/',
             SdkClient.encode_path_segment(index_name)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'databases_delete_opensearch_index',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -5,81 +5,79 @@
 
 # kubernetes_existing domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalExistingClusterMetadata
-  FIELDS = {
-    kubernetes_cluster: "kubernetes_cluster",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    kubernetes_cluster: lambda do |value|
-      ::OctridevDigitalocean::ClusterRead.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ExistingCluster.
-# Typed representation of the `ExistingCluster` API schema.
-class ExistingCluster
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalExistingClusterMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalExistingClusterMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalExistingClusterMetadata::DECODERS
-
-  # @return [ClusterRead] Optional object value serialized in the `kubernetes_cluster` wire field.
-  attr_reader :kubernetes_cluster
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalExistingClusterMetadata
+    FIELDS = {
+      kubernetes_cluster: 'kubernetes_cluster'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      kubernetes_cluster: lambda do |value|
+        ::OctridevDigitalocean::ClusterRead.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ExistingCluster.
+  # Typed representation of the `ExistingCluster` API schema.
+  class ExistingCluster
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalExistingClusterMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalExistingClusterMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalExistingClusterMetadata::DECODERS
+
+    # @return [ClusterRead] Optional object value serialized in the `kubernetes_cluster` wire field.
+    attr_reader :kubernetes_cluster
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalExistingNodePoolMetadata
-  FIELDS = {
-    node_pool: "node_pool",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    node_pool: lambda do |value|
-      ::OctridevDigitalocean::KubernetesNodePool.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ExistingNodePool.
-# Typed representation of the `ExistingNodePool` API schema.
-class ExistingNodePool
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalExistingNodePoolMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalExistingNodePoolMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalExistingNodePoolMetadata::DECODERS
-
-  # @return [KubernetesNodePool] Optional object value serialized in the `node_pool` wire field.
-  attr_reader :node_pool
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalExistingNodePoolMetadata
+    FIELDS = {
+      node_pool: 'node_pool'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      node_pool: lambda do |value|
+        ::OctridevDigitalocean::KubernetesNodePool.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ExistingNodePool.
+  # Typed representation of the `ExistingNodePool` API schema.
+  class ExistingNodePool
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalExistingNodePoolMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalExistingNodePoolMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalExistingNodePoolMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [KubernetesNodePool] Optional object value serialized in the `node_pool` wire field.
+    attr_reader :node_pool
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

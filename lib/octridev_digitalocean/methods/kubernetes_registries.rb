@@ -20,19 +20,18 @@ module OctridevDigitalocean
         registries: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/kubernetes/registries",
+          '/v2/kubernetes/registries',
           config: config,
           body: {
             'cluster_uuids' => cluster_uuids,
-            'registries' => registries,
+            'registries' => registries
           },
           decoder: :empty,
           operation_id: 'kubernetes_add_registries',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -47,19 +46,18 @@ module OctridevDigitalocean
         registries: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
-          "/v2/kubernetes/registries",
+          '/v2/kubernetes/registries',
           config: config,
           body: {
             'cluster_uuids' => cluster_uuids,
-            'registries' => registries,
+            'registries' => registries
           },
           decoder: :empty,
           operation_id: 'kubernetes_remove_registries',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

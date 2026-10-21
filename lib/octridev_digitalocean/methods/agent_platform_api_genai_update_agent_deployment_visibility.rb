@@ -27,24 +27,23 @@ module OctridevDigitalocean
         visibility: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/agents/",
+            '/v2/gen-ai/agents/',
             SdkClient.encode_path_segment(uuid),
-            "/deployment_visibility"
+            '/deployment_visibility'
           ].join,
           config: config,
           body: {
             'uuid' => uuid2,
-            'visibility' => visibility,
+            'visibility' => visibility
           },
           return_type: ::OctridevDigitalocean::ApiUpdateAgentDeploymentVisbilityOutput,
           decoder: :json,
           operation_id: 'genai_update_agent_deployment_visibility',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

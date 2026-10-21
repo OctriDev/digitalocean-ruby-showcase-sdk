@@ -5,333 +5,324 @@
 
 # action_gateway_tool domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalToolMetadata
-  FIELDS = {
-    name: "name",
-    toolkit_id: "toolkitId",
-    tool_slug: "toolSlug",
-    title: "title",
-    description: "description",
-    version: "version",
-    input_schema: "inputSchema",
-    output_schema: "outputSchema",
-    annotations: "annotations",
-    parallelizable: "parallelizable",
-    streaming_safe: "streamingSafe",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    annotations: lambda do |value|
-      ::OctridevDigitalocean::ToolAnnotations.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Tool.
-# Summarizes a released tool.
-class Tool
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalToolMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalToolMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalToolMetadata::DECODERS
-
-  # @return [String] Tool name, without the provider prefix.
-  attr_reader :name
-  # @return [String] ID of the provider that offers the tool. For a tool from one of your team's MCP servers it is that server's `serverRef`.
-  attr_reader :toolkit_id
-  # @return [String] The provider-qualified, stable tool identifier `<toolkit_id>_<name>`. Pass this value back verbatim to the toolbelt add/remove endpoints; clients should treat it as opaque rather than reconstructing it from `toolkitId` and name.
-  attr_reader :tool_slug
-  # @return [String] Human-readable tool title.
-  attr_reader :title
-  # @return [String] What the tool does.
-  attr_reader :description
-  # @return [String] Released version, for example `v3`.
-  attr_reader :version
-  # @return [Hash] JSON Schema the tool's arguments must satisfy.
-  attr_reader :input_schema
-  # @return [Hash] JSON Schema of the tool's result, when declared.
-  attr_reader :output_schema
-  # @return [ToolAnnotations] Advisory behavior hints for the tool.
-  attr_reader :annotations
-  # @return [Boolean] Catalog hint that calls to the tool may run in parallel.
-  attr_reader :parallelizable
-  # @return [Boolean] Catalog hint that the tool's result can be streamed.
-  attr_reader :streaming_safe
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalToolMetadata
+    FIELDS = {
+      name: 'name',
+      toolkit_id: 'toolkitId',
+      tool_slug: 'toolSlug',
+      title: 'title',
+      description: 'description',
+      version: 'version',
+      input_schema: 'inputSchema',
+      output_schema: 'outputSchema',
+      annotations: 'annotations',
+      parallelizable: 'parallelizable',
+      streaming_safe: 'streamingSafe'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      annotations: lambda do |value|
+        ::OctridevDigitalocean::ToolAnnotations.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Tool.
+  # Summarizes a released tool.
+  class Tool
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalToolMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalToolMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalToolMetadata::DECODERS
+
+    # @return [String] Tool name, without the provider prefix.
+    attr_reader :name
+    # @return [String] ID of the provider that offers the tool. For a tool from one of your team's MCP servers it is that server's `serverRef`.
+    attr_reader :toolkit_id
+    # @return [String] The provider-qualified, stable tool identifier `<toolkit_id>_<name>`. Pass this value back verbatim to the toolbelt add/remove endpoints; clients should treat it as opaque rather than reconstructing it from `toolkitId` and name.
+    attr_reader :tool_slug
+    # @return [String] Human-readable tool title.
+    attr_reader :title
+    # @return [String] What the tool does.
+    attr_reader :description
+    # @return [String] Released version, for example `v3`.
+    attr_reader :version
+    # @return [Hash] JSON Schema the tool's arguments must satisfy.
+    attr_reader :input_schema
+    # @return [Hash] JSON Schema of the tool's result, when declared.
+    attr_reader :output_schema
+    # @return [ToolAnnotations] Advisory behavior hints for the tool.
+    attr_reader :annotations
+    # @return [Boolean] Catalog hint that calls to the tool may run in parallel.
+    attr_reader :parallelizable
+    # @return [Boolean] Catalog hint that the tool's result can be streamed.
+    attr_reader :streaming_safe
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalToolDefinitionAuthMetadata
-  FIELDS = {
-    modes: "modes",
-    provider: "provider",
-    scopes: "scopes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ToolDefinitionAuth.
-# Names the provider account the tool acts through and the scopes it requests.
-class ToolDefinitionAuth
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalToolDefinitionAuthMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalToolDefinitionAuthMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalToolDefinitionAuthMetadata::DECODERS
-
-  # @return [Array_of_String] Lists how the tool authenticates: oauth (a user connection), `user_token` (a key your team supplies), `shared_key` (a key DigitalOcean supplies), or none.
-  attr_reader :modes
-  # @return [String] The provider slug a connection is created for. Empty when the tool needs no provider account.
-  attr_reader :provider
-  # @return [Array_of_String] The provider permissions the tool requests.
-  attr_reader :scopes
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalToolDefinitionAuthMetadata
+    FIELDS = {
+      modes: 'modes',
+      provider: 'provider',
+      scopes: 'scopes'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ToolDefinitionAuth.
+  # Names the provider account the tool acts through and the scopes it requests.
+  class ToolDefinitionAuth
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalToolDefinitionAuthMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalToolDefinitionAuthMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalToolDefinitionAuthMetadata::DECODERS
+
+    # @return [Array_of_String] Lists how the tool authenticates: oauth (a user connection), `user_token` (a key your team supplies), `shared_key` (a key DigitalOcean supplies), or none.
+    attr_reader :modes
+    # @return [String] The provider slug a connection is created for. Empty when the tool needs no provider account.
+    attr_reader :provider
+    # @return [Array_of_String] The provider permissions the tool requests.
+    attr_reader :scopes
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalToolDefinitionMetadata
-  FIELDS = {
-    tool_id: "toolId",
-    name: "name",
-    toolkit_id: "toolkitId",
-    tool_slug: "toolSlug",
-    title: "title",
-    description: "description",
-    input_schema: "inputSchema",
-    output_schema: "outputSchema",
-    annotations: "annotations",
-    version: "version",
-    auth: "auth",
-    provider_kind: "providerKind",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    annotations: lambda do |value|
-      ::OctridevDigitalocean::ToolAnnotations.from_hash(value)
-    end,
-    auth: lambda do |value|
-      ::OctridevDigitalocean::ToolDefinitionAuth.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ToolDefinition.
-# Describes a tool you can call.
-class ToolDefinition
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalToolDefinitionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalToolDefinitionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalToolDefinitionMetadata::DECODERS
-
-  # @return [String] The opaque identity of this released tool version.
-  attr_reader :tool_id
-  # @return [String] The tool name without the provider prefix.
-  attr_reader :name
-  # @return [String] The ID of the provider that offers the tool. For a tool from one of your team's MCP servers it is that server's `serverRef`.
-  attr_reader :toolkit_id
-  # @return [String] The provider-qualified tool identifier `<toolkit_id>_<name>`. Treat it as opaque and pass it back verbatim.
-  attr_reader :tool_slug
-  # @return [String] Human-readable tool title.
-  attr_reader :title
-  # @return [String] What the tool does.
-  attr_reader :description
-  # @return [Hash] The JSON Schema the tool's arguments must satisfy.
-  attr_reader :input_schema
-  # @return [Hash] The JSON Schema of the tool's result, when declared.
-  attr_reader :output_schema
-  # @return [ToolAnnotations] Advisory behavior hints for the tool.
-  attr_reader :annotations
-  # @return [String] The released version, for example `v3`.
-  attr_reader :version
-  # @return [ToolDefinitionAuth] Names the provider account the tool acts through and the scopes it requests.
-  attr_reader :auth
-  # @return [String] Classifies the provider: native, `managed_api`, `customer_mcp`, sandbox, or `byo_mcp` (one of your team's MCP servers).
-  attr_reader :provider_kind
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalToolDefinitionMetadata
+    FIELDS = {
+      tool_id: 'toolId',
+      name: 'name',
+      toolkit_id: 'toolkitId',
+      tool_slug: 'toolSlug',
+      title: 'title',
+      description: 'description',
+      input_schema: 'inputSchema',
+      output_schema: 'outputSchema',
+      annotations: 'annotations',
+      version: 'version',
+      auth: 'auth',
+      provider_kind: 'providerKind'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      annotations: lambda do |value|
+        ::OctridevDigitalocean::ToolAnnotations.from_hash(value)
+      end,
+      auth: lambda do |value|
+        ::OctridevDigitalocean::ToolDefinitionAuth.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ToolDefinition.
+  # Describes a tool you can call.
+  class ToolDefinition
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalToolDefinitionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalToolDefinitionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalToolDefinitionMetadata::DECODERS
+
+    # @return [String] The opaque identity of this released tool version.
+    attr_reader :tool_id
+    # @return [String] The tool name without the provider prefix.
+    attr_reader :name
+    # @return [String] The ID of the provider that offers the tool. For a tool from one of your team's MCP servers it is that server's `serverRef`.
+    attr_reader :toolkit_id
+    # @return [String] The provider-qualified tool identifier `<toolkit_id>_<name>`. Treat it as opaque and pass it back verbatim.
+    attr_reader :tool_slug
+    # @return [String] Human-readable tool title.
+    attr_reader :title
+    # @return [String] What the tool does.
+    attr_reader :description
+    # @return [Hash] The JSON Schema the tool's arguments must satisfy.
+    attr_reader :input_schema
+    # @return [Hash] The JSON Schema of the tool's result, when declared.
+    attr_reader :output_schema
+    # @return [ToolAnnotations] Advisory behavior hints for the tool.
+    attr_reader :annotations
+    # @return [String] The released version, for example `v3`.
+    attr_reader :version
+    # @return [ToolDefinitionAuth] Names the provider account the tool acts through and the scopes it requests.
+    attr_reader :auth
+    # @return [String] Classifies the provider: native, `managed_api`, `customer_mcp`, sandbox, or `byo_mcp` (one of your team's MCP servers).
+    attr_reader :provider_kind
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalToolHealthMetadata
-  FIELDS = {
-    tool_slug: "tool_slug",
-    provider: "provider",
-    health: "health",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    health: lambda do |value|
-      ::OctridevDigitalocean::HealthMetrics.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ToolHealth.
-# Health of one tool.
-class ToolHealth
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalToolHealthMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalToolHealthMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalToolHealthMetadata::DECODERS
-
-  # @return [String] Catalog tool slug.
-  attr_reader :tool_slug
-  # @return [String] ID of the provider that offers the tool.
-  attr_reader :provider
-  # @return [HealthMetrics] Metrics over the window.
-  attr_reader :health
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalToolHealthMetadata
+    FIELDS = {
+      tool_slug: 'tool_slug',
+      provider: 'provider',
+      health: 'health'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      health: lambda do |value|
+        ::OctridevDigitalocean::HealthMetrics.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ToolHealth.
+  # Health of one tool.
+  class ToolHealth
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalToolHealthMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalToolHealthMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalToolHealthMetadata::DECODERS
+
+    # @return [String] Catalog tool slug.
+    attr_reader :tool_slug
+    # @return [String] ID of the provider that offers the tool.
+    attr_reader :provider
+    # @return [HealthMetrics] Metrics over the window.
+    attr_reader :health
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalToolQuotasMetadata
-  FIELDS = {
-    web_search_requests_per_minute: "web_search_requests_per_minute",
-    web_fetch_requests_per_minute: "web_fetch_requests_per_minute",
-    native_tool_calls_requests_per_minute: "native_tool_calls_requests_per_minute",
-    non_native_tool_calls_requests_per_minute: "non_native_tool_calls_requests_per_minute",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ToolQuotas.
-# Per-minute call limits by category.
-class ToolQuotas
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalToolQuotasMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalToolQuotasMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalToolQuotasMetadata::DECODERS
-
-  # @return [String] Calls per minute to the `exa_web_search` tool.
-  attr_reader :web_search_requests_per_minute
-  # @return [String] Calls per minute to the `exa_web_fetch` tool.
-  attr_reader :web_fetch_requests_per_minute
-  # @return [String] Calls per minute to DigitalOcean tools.
-  attr_reader :native_tool_calls_requests_per_minute
-  # @return [String] Calls per minute to all other tools.
-  attr_reader :non_native_tool_calls_requests_per_minute
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalToolQuotasMetadata
+    FIELDS = {
+      web_search_requests_per_minute: 'web_search_requests_per_minute',
+      web_fetch_requests_per_minute: 'web_fetch_requests_per_minute',
+      native_tool_calls_requests_per_minute: 'native_tool_calls_requests_per_minute',
+      non_native_tool_calls_requests_per_minute: 'non_native_tool_calls_requests_per_minute'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ToolQuotas.
+  # Per-minute call limits by category.
+  class ToolQuotas
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalToolQuotasMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalToolQuotasMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalToolQuotasMetadata::DECODERS
+
+    # @return [String] Calls per minute to the `exa_web_search` tool.
+    attr_reader :web_search_requests_per_minute
+    # @return [String] Calls per minute to the `exa_web_fetch` tool.
+    attr_reader :web_fetch_requests_per_minute
+    # @return [String] Calls per minute to DigitalOcean tools.
+    attr_reader :native_tool_calls_requests_per_minute
+    # @return [String] Calls per minute to all other tools.
+    attr_reader :non_native_tool_calls_requests_per_minute
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalToolSearchResultMetadata
-  FIELDS = {
-    tool_slug: "tool_slug",
-    name: "name",
-    title: "title",
-    description: "description",
-    provider: "provider",
-    category: "category",
-    version: "version",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ToolSearchResult.
-# Summarizes one matching tool. Input and output schemas are omitted; the tool catalog (`GET /v2/action-gateway/tools`) carries them.
-class ToolSearchResult
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalToolSearchResultMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalToolSearchResultMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalToolSearchResultMetadata::DECODERS
-
-  # @return [String] The provider-qualified, stable tool identifier (`<provider>_<name>`). Treat it as opaque and pass it back verbatim.
-  attr_reader :tool_slug
-  # @return [String] The unqualified tool name, without the provider prefix.
-  attr_reader :name
-  # @return [String] Human-readable tool title.
-  attr_reader :title
-  # @return [String] What the tool does.
-  attr_reader :description
-  # @return [String] The owning toolkit ID, broken out so a client never has to split `tool_slug`. It is what a client groups results by.
-  attr_reader :provider
-  # @return [String] Best-effort catalog metadata and is empty for a large share of the catalog. Do not rely on it being present.
-  attr_reader :category
-  # @return [Integer] The released version number of the tool, for example 3.
-  attr_reader :version
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalToolSearchResultMetadata
+    FIELDS = {
+      tool_slug: 'tool_slug',
+      name: 'name',
+      title: 'title',
+      description: 'description',
+      provider: 'provider',
+      category: 'category',
+      version: 'version'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ToolSearchResult.
+  # Summarizes one matching tool. Input and output schemas are omitted; the tool catalog (`GET /v2/action-gateway/tools`) carries them.
+  class ToolSearchResult
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalToolSearchResultMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalToolSearchResultMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalToolSearchResultMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] The provider-qualified, stable tool identifier (`<provider>_<name>`). Treat it as opaque and pass it back verbatim.
+    attr_reader :tool_slug
+    # @return [String] The unqualified tool name, without the provider prefix.
+    attr_reader :name
+    # @return [String] Human-readable tool title.
+    attr_reader :title
+    # @return [String] What the tool does.
+    attr_reader :description
+    # @return [String] The owning toolkit ID, broken out so a client never has to split `tool_slug`. It is what a client groups results by.
+    attr_reader :provider
+    # @return [String] Best-effort catalog metadata and is empty for a large share of the catalog. Do not rely on it being present.
+    attr_reader :category
+    # @return [Integer] The released version number of the tool, for example 3.
+    attr_reader :version
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

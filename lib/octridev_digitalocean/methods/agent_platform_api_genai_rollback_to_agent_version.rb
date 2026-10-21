@@ -21,24 +21,23 @@ module OctridevDigitalocean
         version_hash: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/agents/",
+            '/v2/gen-ai/agents/',
             SdkClient.encode_path_segment(uuid),
-            "/versions"
+            '/versions'
           ].join,
           config: config,
           body: {
             'uuid' => uuid2,
-            'version_hash' => version_hash,
+            'version_hash' => version_hash
           },
           return_type: ::OctridevDigitalocean::ApiRollbackToAgentVersionOutput,
           decoder: :json,
           operation_id: 'genai_rollback_to_agent_version',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

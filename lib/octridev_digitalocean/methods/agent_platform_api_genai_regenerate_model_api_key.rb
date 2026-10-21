@@ -17,20 +17,19 @@ module OctridevDigitalocean
         api_key_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/models/api_keys/",
+            '/v2/gen-ai/models/api_keys/',
             SdkClient.encode_path_segment(api_key_uuid),
-            "/regenerate"
+            '/regenerate'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiRegenerateModelAPIKeyOutput,
           decoder: :json,
           operation_id: 'genai_regenerate_model_api_key',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

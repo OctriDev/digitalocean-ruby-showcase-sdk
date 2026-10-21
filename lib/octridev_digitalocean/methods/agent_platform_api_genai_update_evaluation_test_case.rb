@@ -34,11 +34,10 @@ module OctridevDigitalocean
         test_case_uuid2: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/evaluation_test_cases/",
+            '/v2/gen-ai/evaluation_test_cases/',
             SdkClient.encode_path_segment(test_case_uuid)
           ].join,
           config: config,
@@ -48,13 +47,13 @@ module OctridevDigitalocean
             'metrics' => metrics,
             'name' => name,
             'star_metric' => star_metric,
-            'test_case_uuid' => test_case_uuid2,
+            'test_case_uuid' => test_case_uuid2
           },
           return_type: ::OctridevDigitalocean::ApiUpdateEvaluationTestCaseOutput,
           decoder: :json,
           operation_id: 'genai_update_evaluation_test_case',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

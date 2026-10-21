@@ -18,22 +18,21 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
-
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/databases/",
+            '/v2/databases/',
             SdkClient.encode_path_segment(database_cluster_uuid),
-            "/events"
+            '/events'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::EventsLogsResponse,
           decoder: :json,
           operation_id: 'databases_list_events_logs',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -5,462 +5,450 @@
 
 # byoip_prefixes domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixValidationsItemMetadata
-  FIELDS = {
-    name: "name",
-    status: "status",
-    note: "note",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ByoipPrefixValidationsItem.
-# Required object value serialized in the `validations[]` wire field.
-class ByoipPrefixValidationsItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixValidationsItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixValidationsItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixValidationsItemMetadata::DECODERS
-
-  # @return [String] Name of the validation
-  attr_reader :name
-  # @return [String] Status of the validation
-  attr_reader :status
-  # @return [String] Additional notes or details about the validation
-  attr_reader :note
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixValidationsItemMetadata
+    FIELDS = {
+      name: 'name',
+      status: 'status',
+      note: 'note'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefixValidationsItem.
+  # Required object value serialized in the `validations[]` wire field.
+  class ByoipPrefixValidationsItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixValidationsItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixValidationsItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixValidationsItemMetadata::DECODERS
+
+    # @return [String] Name of the validation
+    attr_reader :name
+    # @return [String] Status of the validation
+    attr_reader :status
+    # @return [String] Additional notes or details about the validation
+    attr_reader :note
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixMetadata
-  FIELDS = {
-    uuid: "uuid",
-    name: "name",
-    prefix: "prefix",
-    status: "status",
-    region: "region",
-    validations: "validations",
-    failure_reason: "failure_reason",
-    locked: "locked",
-    advertised: "advertised",
-    project_id: "project_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    validations: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ByoipPrefixValidationsItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ByoipPrefix.
-# Typed representation of the `ByoipPrefix` API schema.
-class ByoipPrefix
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixMetadata::DECODERS
-
-  # @return [String] Unique identifier for the BYOIP prefix
-  attr_reader :uuid
-  # @return [String] Name of the BYOIP prefix
-  attr_reader :name
-  # @return [String] The IP prefix in CIDR notation
-  attr_reader :prefix
-  # @return [String] Status of the BYOIP prefix
-  attr_reader :status
-  # @return [String] Region where the BYOIP prefix is located
-  attr_reader :region
-  # @return [Array_of_ByoipPrefixValidationsItem] List of validation statuses for the BYOIP prefix
-  attr_reader :validations
-  # @return [String] Reason for failure, if applicable
-  attr_reader :failure_reason
-  # @return [Boolean] Whether the BYOIP prefix is locked
-  attr_reader :locked
-  # @return [Boolean] Whether the BYOIP prefix is being advertised
-  attr_reader :advertised
-  # @return [String] The ID of the project associated with the BYOIP prefix
-  attr_reader :project_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixMetadata
+    FIELDS = {
+      uuid: 'uuid',
+      name: 'name',
+      prefix: 'prefix',
+      status: 'status',
+      region: 'region',
+      validations: 'validations',
+      failure_reason: 'failure_reason',
+      locked: 'locked',
+      advertised: 'advertised',
+      project_id: 'project_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      validations: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ByoipPrefixValidationsItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefix.
+  # Typed representation of the `ByoipPrefix` API schema.
+  class ByoipPrefix
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixMetadata::DECODERS
+
+    # @return [String] Unique identifier for the BYOIP prefix
+    attr_reader :uuid
+    # @return [String] Name of the BYOIP prefix
+    attr_reader :name
+    # @return [String] The IP prefix in CIDR notation
+    attr_reader :prefix
+    # @return [String] Status of the BYOIP prefix
+    attr_reader :status
+    # @return [String] Region where the BYOIP prefix is located
+    attr_reader :region
+    # @return [Array_of_ByoipPrefixValidationsItem] List of validation statuses for the BYOIP prefix
+    attr_reader :validations
+    # @return [String] Reason for failure, if applicable
+    attr_reader :failure_reason
+    # @return [Boolean] Whether the BYOIP prefix is locked
+    attr_reader :locked
+    # @return [Boolean] Whether the BYOIP prefix is being advertised
+    attr_reader :advertised
+    # @return [String] The ID of the project associated with the BYOIP prefix
+    attr_reader :project_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixCreateMetadata
-  FIELDS = {
-    prefix: "prefix",
-    region: "region",
-    signature: "signature",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    prefix
-    region
-    signature
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ByoipPrefixCreate.
-# Typed representation of the `ByoipPrefixCreate` API schema.
-class ByoipPrefixCreate
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixCreateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixCreateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixCreateMetadata::DECODERS
-
-  # @return [String] The IP prefix in CIDR notation to bring
-  attr_reader :prefix
-  # @return [String] The region where the prefix will be created
-  attr_reader :region
-  # @return [String] The signature hash for the prefix creation request
-  attr_reader :signature
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixCreateMetadata
+    FIELDS = {
+      prefix: 'prefix',
+      region: 'region',
+      signature: 'signature'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      prefix
+      region
+      signature
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefixCreate.
+  # Typed representation of the `ByoipPrefixCreate` API schema.
+  class ByoipPrefixCreate
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixCreateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixCreateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixCreateMetadata::DECODERS
+
+    # @return [String] The IP prefix in CIDR notation to bring
+    attr_reader :prefix
+    # @return [String] The region where the prefix will be created
+    attr_reader :region
+    # @return [String] The signature hash for the prefix creation request
+    attr_reader :signature
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixCreateResponseMetadata
-  FIELDS = {
-    uuid: "uuid",
-    region: "region",
-    status: "status",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ByoipPrefixCreateResponse.
-# Typed representation of the `ByoipPrefixCreateResponse` API schema.
-class ByoipPrefixCreateResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixCreateResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixCreateResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixCreateResponseMetadata::DECODERS
-
-  # @return [String] The unique identifier for the BYOIP prefix
-  attr_reader :uuid
-  # @return [String] The region where the prefix is created
-  attr_reader :region
-  # @return [String] The status of the BYOIP prefix
-  attr_reader :status
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixCreateResponseMetadata
+    FIELDS = {
+      uuid: 'uuid',
+      region: 'region',
+      status: 'status'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefixCreateResponse.
+  # Typed representation of the `ByoipPrefixCreateResponse` API schema.
+  class ByoipPrefixCreateResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixCreateResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixCreateResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixCreateResponseMetadata::DECODERS
+
+    # @return [String] The unique identifier for the BYOIP prefix
+    attr_reader :uuid
+    # @return [String] The region where the prefix is created
+    attr_reader :region
+    # @return [String] The status of the BYOIP prefix
+    attr_reader :status
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixGetMetadata
-  FIELDS = {
-    byoip_prefix: "byoip_prefix",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    byoip_prefix: lambda do |value|
-      ::OctridevDigitalocean::ByoipPrefix.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ByoipPrefixGet.
-# Typed representation of the `ByoipPrefixGet` API schema.
-class ByoipPrefixGet
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixGetMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixGetMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixGetMetadata::DECODERS
-
-  # @return [ByoipPrefix] Optional object value serialized in the `byoip_prefix` wire field.
-  attr_reader :byoip_prefix
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixGetMetadata
+    FIELDS = {
+      byoip_prefix: 'byoip_prefix'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      byoip_prefix: lambda do |value|
+        ::OctridevDigitalocean::ByoipPrefix.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefixGet.
+  # Typed representation of the `ByoipPrefixGet` API schema.
+  class ByoipPrefixGet
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixGetMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixGetMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixGetMetadata::DECODERS
+
+    # @return [ByoipPrefix] Optional object value serialized in the `byoip_prefix` wire field.
+    attr_reader :byoip_prefix
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixListMetadata
-  FIELDS = {
-    byoip_prefixes: "byoip_prefixes",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    byoip_prefixes: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ByoipPrefix.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ByoipPrefixList.
-# Typed representation of the `ByoipPrefixList` API schema.
-class ByoipPrefixList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixListMetadata::DECODERS
-
-  attr_reader :byoip_prefixes
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixListMetadata
+    FIELDS = {
+      byoip_prefixes: 'byoip_prefixes',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      byoip_prefixes: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ByoipPrefix.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefixList.
+  # Typed representation of the `ByoipPrefixList` API schema.
+  class ByoipPrefixList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixListMetadata::DECODERS
+
+    attr_reader :byoip_prefixes
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixListResourcesMetadata
-  FIELDS = {
-    ips: "ips",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    ips: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ByoipPrefixResource.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ByoipPrefixListResources.
-# Typed representation of the `ByoipPrefixListResources` API schema.
-class ByoipPrefixListResources
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixListResourcesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixListResourcesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixListResourcesMetadata::DECODERS
-
-  attr_reader :ips
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixListResourcesMetadata
+    FIELDS = {
+      ips: 'ips',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      ips: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ByoipPrefixResource.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefixListResources.
+  # Typed representation of the `ByoipPrefixListResources` API schema.
+  class ByoipPrefixListResources
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixListResourcesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixListResourcesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixListResourcesMetadata::DECODERS
+
+    attr_reader :ips
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixResourceMetadata
-  FIELDS = {
-    id: "id",
-    byoip: "byoip",
-    region: "region",
-    resource: "resource",
-    assigned_at: "assigned_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ByoipPrefixResource.
-# Typed representation of the `ByoipPrefixResource` API schema.
-class ByoipPrefixResource
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixResourceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixResourceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixResourceMetadata::DECODERS
-
-  # @return [Integer] Unique identifier for the allocation
-  attr_reader :id
-  # @return [String] The BYOIP prefix UUID
-  attr_reader :byoip
-  # @return [String] Region where the allocation is made
-  attr_reader :region
-  # @return [String] The resource associated with the allocation
-  attr_reader :resource
-  # @return [String] Time when the allocation was assigned
-  attr_reader :assigned_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixResourceMetadata
+    FIELDS = {
+      id: 'id',
+      byoip: 'byoip',
+      region: 'region',
+      resource: 'resource',
+      assigned_at: 'assigned_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefixResource.
+  # Typed representation of the `ByoipPrefixResource` API schema.
+  class ByoipPrefixResource
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixResourceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixResourceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixResourceMetadata::DECODERS
+
+    # @return [Integer] Unique identifier for the allocation
+    attr_reader :id
+    # @return [String] The BYOIP prefix UUID
+    attr_reader :byoip
+    # @return [String] Region where the allocation is made
+    attr_reader :region
+    # @return [String] The resource associated with the allocation
+    attr_reader :resource
+    # @return [String] Time when the allocation was assigned
+    attr_reader :assigned_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixUpdateMetadata
-  FIELDS = {
-    advertise: "advertise",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ByoipPrefixUpdate.
-# Typed representation of the `ByoipPrefixUpdate` API schema.
-class ByoipPrefixUpdate
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixUpdateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixUpdateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixUpdateMetadata::DECODERS
-
-  # @return [Boolean] Whether the BYOIP prefix should be advertised
-  attr_reader :advertise
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixUpdateMetadata
+    FIELDS = {
+      advertise: 'advertise'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ByoipPrefixUpdate.
+  # Typed representation of the `ByoipPrefixUpdate` API schema.
+  class ByoipPrefixUpdate
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixUpdateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixUpdateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixUpdateMetadata::DECODERS
+
+    # @return [Boolean] Whether the BYOIP prefix should be advertised
+    attr_reader :advertise
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalByoipPrefixUpdateResponseMetadata
-  FIELDS = {
-    byoip_prefix: "byoip_prefix",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    byoip_prefix: lambda do |value|
-      ::OctridevDigitalocean::ByoipPrefix.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ByoipPrefixUpdateResponse.
-# Typed representation of the `ByoipPrefixUpdateResponse` API schema.
-class ByoipPrefixUpdateResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalByoipPrefixUpdateResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalByoipPrefixUpdateResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalByoipPrefixUpdateResponseMetadata::DECODERS
-
-  # @return [ByoipPrefix] Optional object value serialized in the `byoip_prefix` wire field.
-  attr_reader :byoip_prefix
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalByoipPrefixUpdateResponseMetadata
+    FIELDS = {
+      byoip_prefix: 'byoip_prefix'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      byoip_prefix: lambda do |value|
+        ::OctridevDigitalocean::ByoipPrefix.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ByoipPrefixUpdateResponse.
+  # Typed representation of the `ByoipPrefixUpdateResponse` API schema.
+  class ByoipPrefixUpdateResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalByoipPrefixUpdateResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalByoipPrefixUpdateResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalByoipPrefixUpdateResponseMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [ByoipPrefix] Optional object value serialized in the `byoip_prefix` wire field.
+    attr_reader :byoip_prefix
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

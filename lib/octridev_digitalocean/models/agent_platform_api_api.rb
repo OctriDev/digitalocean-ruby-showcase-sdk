@@ -5,681 +5,666 @@
 
 # agent_platform_api_api domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiAgentMetadata
-  FIELDS = {
-    anthropic_api_key: "anthropic_api_key",
-    api_key_infos: "api_key_infos",
-    api_keys: "api_keys",
-    chatbot: "chatbot",
-    chatbot_identifiers: "chatbot_identifiers",
-    child_agents: "child_agents",
-    conversation_logs_enabled: "conversation_logs_enabled",
-    created_at: "created_at",
-    deployment: "deployment",
-    description: "description",
-    functions: "functions",
-    guardrails: "guardrails",
-    if_case: "if_case",
-    instruction: "instruction",
-    k_value: "k",
-    knowledge_bases: "knowledge_bases",
-    logging_config: "logging_config",
-    max_tokens: "max_tokens",
-    mcp_servers: "mcp_servers",
-    model: "model",
-    model_provider_key: "model_provider_key",
-    model_router: "model_router",
-    name: "name",
-    openai_api_key: "openai_api_key",
-    parent_agents: "parent_agents",
-    project_id: "project_id",
-    provide_citations: "provide_citations",
-    reasoning_effort: "reasoning_effort",
-    region: "region",
-    retrieval_method: "retrieval_method",
-    route_created_at: "route_created_at",
-    route_created_by: "route_created_by",
-    route_name: "route_name",
-    route_uuid: "route_uuid",
-    tags: "tags",
-    temperature: "temperature",
-    template: "template",
-    thinking_token_budget: "thinking_token_budget",
-    top_p: "top_p",
-    updated_at: "updated_at",
-    url: "url",
-    user_id: "user_id",
-    uuid: "uuid",
-    version_hash: "version_hash",
-    vpc_egress_ips: "vpc_egress_ips",
-    vpc_uuid: "vpc_uuid",
-    web_fetch_enabled: "web_fetch_enabled",
-    web_search_enabled: "web_search_enabled",
-    workspace: "workspace",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    anthropic_api_key: lambda do |value|
-      ::OctridevDigitalocean::ApiAnthropicAPIKeyInfo.from_hash(value)
-    end,
-    api_key_infos: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAgentAPIKeyInfo.from_hash(item) }
-    end,
-    api_keys: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAgentAPIKey.from_hash(item) }
-    end,
-    chatbot: lambda do |value|
-      ::OctridevDigitalocean::ApiChatbot.from_hash(value)
-    end,
-    chatbot_identifiers: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAgentChatbotIdentifier.from_hash(item) }
-    end,
-    child_agents: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
-    end,
-    deployment: lambda do |value|
-      ::OctridevDigitalocean::ApiDeployment.from_hash(value)
-    end,
-    functions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAgentFunction.from_hash(item) }
-    end,
-    guardrails: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAgentGuardrail.from_hash(item) }
-    end,
-    knowledge_bases: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiKnowledgeBase.from_hash(item) }
-    end,
-    logging_config: lambda do |value|
-      ::OctridevDigitalocean::ApiAgentLoggingConfig.from_hash(value)
-    end,
-    mcp_servers: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiMcpServer.from_hash(item) }
-    end,
-    model: lambda do |value|
-      ::OctridevDigitalocean::ApiModel.from_hash(value)
-    end,
-    model_provider_key: lambda do |value|
-      ::OctridevDigitalocean::ApiModelProviderKeyInfo.from_hash(value)
-    end,
-    model_router: lambda do |value|
-      ::OctridevDigitalocean::ApiModelRouter.from_hash(value)
-    end,
-    openai_api_key: lambda do |value|
-      ::OctridevDigitalocean::ApiOpenAIAPIKeyInfo.from_hash(value)
-    end,
-    parent_agents: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
-    end,
-    retrieval_method: lambda do |value|
-      ::OctridevDigitalocean::ApiRetrievalMethod.from_value(value)
-    end,
-    template: lambda do |value|
-      ::OctridevDigitalocean::ApiAgentTemplate.from_hash(value)
-    end,
-    workspace: lambda do |value|
-      ::OctridevDigitalocean::ApiWorkspace.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiAgent.
-# An Agent
-class ApiAgent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiAgentMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiAgentMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiAgentMetadata::DECODERS
-
-  # @return [ApiAnthropicAPIKeyInfo] Anthropic API Key Info
-  attr_reader :anthropic_api_key
-  # @return [Array_of_ApiAgentAPIKeyInfo] Api key infos
-  attr_reader :api_key_infos
-  # @return [Array_of_ApiAgentAPIKey] Api keys
-  attr_reader :api_keys
-  # @return [ApiChatbot] A Chatbot
-  attr_reader :chatbot
-  # @return [Array_of_ApiAgentChatbotIdentifier] Chatbot identifiers
-  attr_reader :chatbot_identifiers
-  # @return [Array_of_ApiAgent] Child agents
-  attr_reader :child_agents
-  # @return [Boolean] Whether conversation logs are enabled for the agent
-  attr_reader :conversation_logs_enabled
-  # @return [String] Creation date / time
-  attr_reader :created_at
-  # @return [ApiDeployment] Description of deployment
-  attr_reader :deployment
-  # @return [String] Description of agent
-  attr_reader :description
-  # @return [Array_of_ApiAgentFunction] Optional array value serialized in the `functions` wire field.
-  attr_reader :functions
-  # @return [Array_of_ApiAgentGuardrail] The guardrails the agent is attached to
-  attr_reader :guardrails
-  # @return [String] Optional `string` value serialized in the `if_case` wire field.
-  attr_reader :if_case
-  # @return [String] Agent instruction. Instructions help your agent to perform its job effectively. See Write Effective Agent Instructions for best practices.
-  attr_reader :instruction
-  # @return [Integer] Optional `int64`-formatted value serialized in the `k` wire field.
-  attr_reader :k_value
-  # @return [Array_of_ApiKnowledgeBase] Knowledge bases
-  attr_reader :knowledge_bases
-  # @return [ApiAgentLoggingConfig] Optional object value serialized in the `logging_config` wire field.
-  attr_reader :logging_config
-  # @return [Integer] Optional `int64`-formatted value serialized in the `max_tokens` wire field.
-  attr_reader :max_tokens
-  # @return [Array_of_ApiMcpServer] MCP (Model Context Protocol) servers attached to this agent
-  attr_reader :mcp_servers
-  # @return [ApiModel] Description of a Model
-  attr_reader :model
-  # @return [ApiModelProviderKeyInfo] Optional object value serialized in the `model_provider_key` wire field.
-  attr_reader :model_provider_key
-  # @return [ApiModelRouter] Model router
-  attr_reader :model_router
-  # @return [String] Agent name
-  attr_reader :name
-  # @return [ApiOpenAIAPIKeyInfo] OpenAI API Key Info
-  attr_reader :openai_api_key
-  # @return [Array_of_ApiAgent] Parent agents
-  attr_reader :parent_agents
-  # @return [String] Optional `string` value serialized in the `project_id` wire field.
-  attr_reader :project_id
-  # @return [Boolean] Whether the agent should provide in-response citations
-  attr_reader :provide_citations
-  # @return [String] The reasoning effort for the agent
-  attr_reader :reasoning_effort
-  # @return [String] Region code
-  attr_reader :region
-  # @return [ApiRetrievalMethod] - RETRIEVAL_METHOD_UNKNOWN: The retrieval method is unknown - RETRIEVAL_METHOD_REWRITE: The retrieval method is rewrite - RETRIEVAL_METHOD_STEP_BACK: The retrieval method is step back - RETRIEVAL_METHOD_SUB_QUERIES: The retrieval method is sub queries - RETRIEVAL_METHOD_NONE: The retrieval method is none
-  attr_reader :retrieval_method
-  # @return [String] Creation of route date / time
-  attr_reader :route_created_at
-  # @return [String] Optional `uint64`-formatted value serialized in the `route_created_by` wire field.
-  attr_reader :route_created_by
-  # @return [String] Route name
-  attr_reader :route_name
-  # @return [String] Optional `string` value serialized in the `route_uuid` wire field.
-  attr_reader :route_uuid
-  # @return [Array_of_String] Agent tag to organize related resources
-  attr_reader :tags
-  # @return [Float] Optional `float`-formatted value serialized in the `temperature` wire field.
-  attr_reader :temperature
-  # @return [ApiAgentTemplate] Represents an AgentTemplate entity
-  attr_reader :template
-  # @return [Integer] The thinking token budget for Anthropic extended thinking (0 = disabled)
-  attr_reader :thinking_token_budget
-  # @return [Float] Optional `float`-formatted value serialized in the `top_p` wire field.
-  attr_reader :top_p
-  # @return [String] Last modified
-  attr_reader :updated_at
-  # @return [String] Access your agent under this url
-  attr_reader :url
-  # @return [String] Id of user that created the agent
-  attr_reader :user_id
-  # @return [String] Unique agent id
-  attr_reader :uuid
-  # @return [String] The latest version of the agent
-  attr_reader :version_hash
-  # @return [Array_of_String] VPC Egress IPs
-  attr_reader :vpc_egress_ips
-  # @return [String] Optional `string` value serialized in the `vpc_uuid` wire field.
-  attr_reader :vpc_uuid
-  # @return [Boolean] Whether this agent can use the built-in web_fetch tool.
-  attr_reader :web_fetch_enabled
-  # @return [Boolean] Whether this agent can use the built-in web_search tool.
-  attr_reader :web_search_enabled
-  # @return [ApiWorkspace] Optional object value serialized in the `workspace` wire field.
-  attr_reader :workspace
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiAgentMetadata
+    FIELDS = {
+      anthropic_api_key: 'anthropic_api_key',
+      api_key_infos: 'api_key_infos',
+      api_keys: 'api_keys',
+      chatbot: 'chatbot',
+      chatbot_identifiers: 'chatbot_identifiers',
+      child_agents: 'child_agents',
+      conversation_logs_enabled: 'conversation_logs_enabled',
+      created_at: 'created_at',
+      deployment: 'deployment',
+      description: 'description',
+      functions: 'functions',
+      guardrails: 'guardrails',
+      if_case: 'if_case',
+      instruction: 'instruction',
+      k_value: 'k',
+      knowledge_bases: 'knowledge_bases',
+      logging_config: 'logging_config',
+      max_tokens: 'max_tokens',
+      mcp_servers: 'mcp_servers',
+      model: 'model',
+      model_provider_key: 'model_provider_key',
+      model_router: 'model_router',
+      name: 'name',
+      openai_api_key: 'openai_api_key',
+      parent_agents: 'parent_agents',
+      project_id: 'project_id',
+      provide_citations: 'provide_citations',
+      reasoning_effort: 'reasoning_effort',
+      region: 'region',
+      retrieval_method: 'retrieval_method',
+      route_created_at: 'route_created_at',
+      route_created_by: 'route_created_by',
+      route_name: 'route_name',
+      route_uuid: 'route_uuid',
+      tags: 'tags',
+      temperature: 'temperature',
+      template: 'template',
+      thinking_token_budget: 'thinking_token_budget',
+      top_p: 'top_p',
+      updated_at: 'updated_at',
+      url: 'url',
+      user_id: 'user_id',
+      uuid: 'uuid',
+      version_hash: 'version_hash',
+      vpc_egress_ips: 'vpc_egress_ips',
+      vpc_uuid: 'vpc_uuid',
+      web_fetch_enabled: 'web_fetch_enabled',
+      web_search_enabled: 'web_search_enabled',
+      workspace: 'workspace'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      anthropic_api_key: lambda do |value|
+        ::OctridevDigitalocean::ApiAnthropicAPIKeyInfo.from_hash(value)
+      end,
+      api_key_infos: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAgentAPIKeyInfo.from_hash(item) }
+      end,
+      api_keys: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAgentAPIKey.from_hash(item) }
+      end,
+      chatbot: lambda do |value|
+        ::OctridevDigitalocean::ApiChatbot.from_hash(value)
+      end,
+      chatbot_identifiers: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAgentChatbotIdentifier.from_hash(item) }
+      end,
+      child_agents: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
+      end,
+      deployment: lambda do |value|
+        ::OctridevDigitalocean::ApiDeployment.from_hash(value)
+      end,
+      functions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAgentFunction.from_hash(item) }
+      end,
+      guardrails: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAgentGuardrail.from_hash(item) }
+      end,
+      knowledge_bases: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiKnowledgeBase.from_hash(item) }
+      end,
+      logging_config: lambda do |value|
+        ::OctridevDigitalocean::ApiAgentLoggingConfig.from_hash(value)
+      end,
+      mcp_servers: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiMcpServer.from_hash(item) }
+      end,
+      model: lambda do |value|
+        ::OctridevDigitalocean::ApiModel.from_hash(value)
+      end,
+      model_provider_key: lambda do |value|
+        ::OctridevDigitalocean::ApiModelProviderKeyInfo.from_hash(value)
+      end,
+      model_router: lambda do |value|
+        ::OctridevDigitalocean::ApiModelRouter.from_hash(value)
+      end,
+      openai_api_key: lambda do |value|
+        ::OctridevDigitalocean::ApiOpenAIAPIKeyInfo.from_hash(value)
+      end,
+      parent_agents: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
+      end,
+      retrieval_method: lambda do |value|
+        ::OctridevDigitalocean::ApiRetrievalMethod.from_value(value)
+      end,
+      template: lambda do |value|
+        ::OctridevDigitalocean::ApiAgentTemplate.from_hash(value)
+      end,
+      workspace: lambda do |value|
+        ::OctridevDigitalocean::ApiWorkspace.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiAgent.
+  # An Agent
+  class ApiAgent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiAgentMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiAgentMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiAgentMetadata::DECODERS
+
+    # @return [ApiAnthropicAPIKeyInfo] Anthropic API Key Info
+    attr_reader :anthropic_api_key
+    # @return [Array_of_ApiAgentAPIKeyInfo] Api key infos
+    attr_reader :api_key_infos
+    # @return [Array_of_ApiAgentAPIKey] Api keys
+    attr_reader :api_keys
+    # @return [ApiChatbot] A Chatbot
+    attr_reader :chatbot
+    # @return [Array_of_ApiAgentChatbotIdentifier] Chatbot identifiers
+    attr_reader :chatbot_identifiers
+    # @return [Array_of_ApiAgent] Child agents
+    attr_reader :child_agents
+    # @return [Boolean] Whether conversation logs are enabled for the agent
+    attr_reader :conversation_logs_enabled
+    # @return [String] Creation date / time
+    attr_reader :created_at
+    # @return [ApiDeployment] Description of deployment
+    attr_reader :deployment
+    # @return [String] Description of agent
+    attr_reader :description
+    # @return [Array_of_ApiAgentFunction] Optional array value serialized in the `functions` wire field.
+    attr_reader :functions
+    # @return [Array_of_ApiAgentGuardrail] The guardrails the agent is attached to
+    attr_reader :guardrails
+    # @return [String] Optional `string` value serialized in the `if_case` wire field.
+    attr_reader :if_case
+    # @return [String] Agent instruction. Instructions help your agent to perform its job effectively. See Write Effective Agent Instructions for best practices.
+    attr_reader :instruction
+    # @return [Integer] Optional `int64`-formatted value serialized in the `k` wire field.
+    attr_reader :k_value
+    # @return [Array_of_ApiKnowledgeBase] Knowledge bases
+    attr_reader :knowledge_bases
+    # @return [ApiAgentLoggingConfig] Optional object value serialized in the `logging_config` wire field.
+    attr_reader :logging_config
+    # @return [Integer] Optional `int64`-formatted value serialized in the `max_tokens` wire field.
+    attr_reader :max_tokens
+    # @return [Array_of_ApiMcpServer] MCP (Model Context Protocol) servers attached to this agent
+    attr_reader :mcp_servers
+    # @return [ApiModel] Description of a Model
+    attr_reader :model
+    # @return [ApiModelProviderKeyInfo] Optional object value serialized in the `model_provider_key` wire field.
+    attr_reader :model_provider_key
+    # @return [ApiModelRouter] Model router
+    attr_reader :model_router
+    # @return [String] Agent name
+    attr_reader :name
+    # @return [ApiOpenAIAPIKeyInfo] OpenAI API Key Info
+    attr_reader :openai_api_key
+    # @return [Array_of_ApiAgent] Parent agents
+    attr_reader :parent_agents
+    # @return [String] Optional `string` value serialized in the `project_id` wire field.
+    attr_reader :project_id
+    # @return [Boolean] Whether the agent should provide in-response citations
+    attr_reader :provide_citations
+    # @return [String] The reasoning effort for the agent
+    attr_reader :reasoning_effort
+    # @return [String] Region code
+    attr_reader :region
+    # @return [ApiRetrievalMethod] - RETRIEVAL_METHOD_UNKNOWN: The retrieval method is unknown - RETRIEVAL_METHOD_REWRITE: The retrieval method is rewrite - RETRIEVAL_METHOD_STEP_BACK: The retrieval method is step back - RETRIEVAL_METHOD_SUB_QUERIES: The retrieval method is sub queries - RETRIEVAL_METHOD_NONE: The retrieval method is none
+    attr_reader :retrieval_method
+    # @return [String] Creation of route date / time
+    attr_reader :route_created_at
+    # @return [String] Optional `uint64`-formatted value serialized in the `route_created_by` wire field.
+    attr_reader :route_created_by
+    # @return [String] Route name
+    attr_reader :route_name
+    # @return [String] Optional `string` value serialized in the `route_uuid` wire field.
+    attr_reader :route_uuid
+    # @return [Array_of_String] Agent tag to organize related resources
+    attr_reader :tags
+    # @return [Float] Optional `float`-formatted value serialized in the `temperature` wire field.
+    attr_reader :temperature
+    # @return [ApiAgentTemplate] Represents an AgentTemplate entity
+    attr_reader :template
+    # @return [Integer] The thinking token budget for Anthropic extended thinking (0 = disabled)
+    attr_reader :thinking_token_budget
+    # @return [Float] Optional `float`-formatted value serialized in the `top_p` wire field.
+    attr_reader :top_p
+    # @return [String] Last modified
+    attr_reader :updated_at
+    # @return [String] Access your agent under this url
+    attr_reader :url
+    # @return [String] Id of user that created the agent
+    attr_reader :user_id
+    # @return [String] Unique agent id
+    attr_reader :uuid
+    # @return [String] The latest version of the agent
+    attr_reader :version_hash
+    # @return [Array_of_String] VPC Egress IPs
+    attr_reader :vpc_egress_ips
+    # @return [String] Optional `string` value serialized in the `vpc_uuid` wire field.
+    attr_reader :vpc_uuid
+    # @return [Boolean] Whether this agent can use the built-in web_fetch tool.
+    attr_reader :web_fetch_enabled
+    # @return [Boolean] Whether this agent can use the built-in web_search tool.
+    attr_reader :web_search_enabled
+    # @return [ApiWorkspace] Optional object value serialized in the `workspace` wire field.
+    attr_reader :workspace
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiAgentSpanMetadata
-  FIELDS = {
-    agent_type: "agent_type",
-    common: "common",
-    redacted_input: "redacted_input",
-    redacted_output: "redacted_output",
-    spans: "spans",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    agent_type: lambda do |value|
-      ::OctridevDigitalocean::ApiAgentType.from_value(value)
-    end,
-    common: lambda do |value|
-      ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
-    end,
-    spans: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiTraceSpan.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ApiAgentSpan.
-# Typed representation of the `ApiAgentSpan` API schema.
-class ApiAgentSpan
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiAgentSpanMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiAgentSpanMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiAgentSpanMetadata::DECODERS
-
-  # @return [ApiAgentType] Agent span
-  attr_reader :agent_type
-  # @return [ApiSpanCommon] Common optional fields shared by all span types
-  attr_reader :common
-  # @return [String] Optional `string` value serialized in the `redacted_input` wire field.
-  attr_reader :redacted_input
-  # @return [String] Optional `string` value serialized in the `redacted_output` wire field.
-  attr_reader :redacted_output
-  # @return [Array_of_ApiTraceSpan] Child spans - must contain between 1 and 999 spans Allowed types: llm, tool, retriever
-  attr_reader :spans
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiAgentSpanMetadata
+    FIELDS = {
+      agent_type: 'agent_type',
+      common: 'common',
+      redacted_input: 'redacted_input',
+      redacted_output: 'redacted_output',
+      spans: 'spans'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      agent_type: lambda do |value|
+        ::OctridevDigitalocean::ApiAgentType.from_value(value)
+      end,
+      common: lambda do |value|
+        ::OctridevDigitalocean::ApiSpanCommon.from_hash(value)
+      end,
+      spans: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiTraceSpan.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiAgentSpan.
+  # Typed representation of the `ApiAgentSpan` API schema.
+  class ApiAgentSpan
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiAgentSpanMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiAgentSpanMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiAgentSpanMetadata::DECODERS
+
+    # @return [ApiAgentType] Agent span
+    attr_reader :agent_type
+    # @return [ApiSpanCommon] Common optional fields shared by all span types
+    attr_reader :common
+    # @return [String] Optional `string` value serialized in the `redacted_input` wire field.
+    attr_reader :redacted_input
+    # @return [String] Optional `string` value serialized in the `redacted_output` wire field.
+    attr_reader :redacted_output
+    # @return [Array_of_ApiTraceSpan] Child spans - must contain between 1 and 999 spans Allowed types: llm, tool, retriever
+    attr_reader :spans
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiAgreementMetadata
-  FIELDS = {
-    description: "description",
-    name: "name",
-    url: "url",
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiAgreement.
-# Agreement Description
-class ApiAgreement
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiAgreementMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiAgreementMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiAgreementMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `description` wire field.
-  attr_reader :description
-  # @return [String] Optional `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [String] Optional `string` value serialized in the `url` wire field.
-  attr_reader :url
-  # @return [String] Optional `string` value serialized in the `uuid` wire field.
-  attr_reader :uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiAgreementMetadata
+    FIELDS = {
+      description: 'description',
+      name: 'name',
+      url: 'url',
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiAgreement.
+  # Agreement Description
+  class ApiAgreement
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiAgreementMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiAgreementMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiAgreementMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `description` wire field.
+    attr_reader :description
+    # @return [String] Optional `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [String] Optional `string` value serialized in the `url` wire field.
+    attr_reader :url
+    # @return [String] Optional `string` value serialized in the `uuid` wire field.
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiAnthropicAPIKeyInfoMetadata
-  FIELDS = {
-    created_at: "created_at",
-    created_by: "created_by",
-    deleted_at: "deleted_at",
-    name: "name",
-    updated_at: "updated_at",
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiAnthropicAPIKeyInfo.
-# Anthropic API Key Info
-class ApiAnthropicAPIKeyInfo
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiAnthropicAPIKeyInfoMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiAnthropicAPIKeyInfoMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiAnthropicAPIKeyInfoMetadata::DECODERS
-
-  # @return [String] Key creation date
-  attr_reader :created_at
-  # @return [String] Created by user id from DO
-  attr_reader :created_by
-  # @return [String] Key deleted date
-  attr_reader :deleted_at
-  # @return [String] Name
-  attr_reader :name
-  # @return [String] Key last updated date
-  attr_reader :updated_at
-  # @return [String] Uuid
-  attr_reader :uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiAnthropicAPIKeyInfoMetadata
+    FIELDS = {
+      created_at: 'created_at',
+      created_by: 'created_by',
+      deleted_at: 'deleted_at',
+      name: 'name',
+      updated_at: 'updated_at',
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiAnthropicAPIKeyInfo.
+  # Anthropic API Key Info
+  class ApiAnthropicAPIKeyInfo
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiAnthropicAPIKeyInfoMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiAnthropicAPIKeyInfoMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiAnthropicAPIKeyInfoMetadata::DECODERS
+
+    # @return [String] Key creation date
+    attr_reader :created_at
+    # @return [String] Created by user id from DO
+    attr_reader :created_by
+    # @return [String] Key deleted date
+    attr_reader :deleted_at
+    # @return [String] Name
+    attr_reader :name
+    # @return [String] Key last updated date
+    attr_reader :updated_at
+    # @return [String] Uuid
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiAssociatedModelEvaluationPresetMetadata
-  FIELDS = {
-    eval_preset_uuid: "eval_preset_uuid",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiAssociatedModelEvaluationPreset.
-# AssociatedModelEvaluationPreset identifies a saved model evaluation preset that references a metric. Returned alongside custom metrics so the dashboard can warn that deleting the metric will also delete these presets.
-class ApiAssociatedModelEvaluationPreset
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiAssociatedModelEvaluationPresetMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiAssociatedModelEvaluationPresetMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiAssociatedModelEvaluationPresetMetadata::DECODERS
-
-  # @return [String] Unique identifier of the saved model evaluation preset that references the metric.
-  attr_reader :eval_preset_uuid
-  # @return [String] Display name of the saved model evaluation preset.
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiAssociatedModelEvaluationPresetMetadata
+    FIELDS = {
+      eval_preset_uuid: 'eval_preset_uuid',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiAssociatedModelEvaluationPreset.
+  # AssociatedModelEvaluationPreset identifies a saved model evaluation preset that references a metric. Returned alongside custom metrics so the dashboard can warn that deleting the metric will also delete these presets.
+  class ApiAssociatedModelEvaluationPreset
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiAssociatedModelEvaluationPresetMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiAssociatedModelEvaluationPresetMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiAssociatedModelEvaluationPresetMetadata::DECODERS
+
+    # @return [String] Unique identifier of the saved model evaluation preset that references the metric.
+    attr_reader :eval_preset_uuid
+    # @return [String] Display name of the saved model evaluation preset.
+    attr_reader :name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiAuditHeaderMetadata
-  FIELDS = {
-    actor_id: "actor_id",
-    actor_ip: "actor_ip",
-    actor_uuid: "actor_uuid",
-    context_urn: "context_urn",
-    origin_application: "origin_application",
-    user_id: "user_id",
-    user_uuid: "user_uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiAuditHeader.
-# An alternative way to provide auth information. for internal use only.
-class ApiAuditHeader
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiAuditHeaderMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiAuditHeaderMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiAuditHeaderMetadata::DECODERS
-
-  # @return [String] Optional `uint64`-formatted value serialized in the `actor_id` wire field.
-  attr_reader :actor_id
-  # @return [String] Optional `string` value serialized in the `actor_ip` wire field.
-  attr_reader :actor_ip
-  # @return [String] Optional `string` value serialized in the `actor_uuid` wire field.
-  attr_reader :actor_uuid
-  # @return [String] Optional `string` value serialized in the `context_urn` wire field.
-  attr_reader :context_urn
-  # @return [String] Optional `string` value serialized in the `origin_application` wire field.
-  attr_reader :origin_application
-  # @return [String] Optional `uint64`-formatted value serialized in the `user_id` wire field.
-  attr_reader :user_id
-  # @return [String] Optional `string` value serialized in the `user_uuid` wire field.
-  attr_reader :user_uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiAuditHeaderMetadata
+    FIELDS = {
+      actor_id: 'actor_id',
+      actor_ip: 'actor_ip',
+      actor_uuid: 'actor_uuid',
+      context_urn: 'context_urn',
+      origin_application: 'origin_application',
+      user_id: 'user_id',
+      user_uuid: 'user_uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiAuditHeader.
+  # An alternative way to provide auth information. for internal use only.
+  class ApiAuditHeader
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiAuditHeaderMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiAuditHeaderMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiAuditHeaderMetadata::DECODERS
+
+    # @return [String] Optional `uint64`-formatted value serialized in the `actor_id` wire field.
+    attr_reader :actor_id
+    # @return [String] Optional `string` value serialized in the `actor_ip` wire field.
+    attr_reader :actor_ip
+    # @return [String] Optional `string` value serialized in the `actor_uuid` wire field.
+    attr_reader :actor_uuid
+    # @return [String] Optional `string` value serialized in the `context_urn` wire field.
+    attr_reader :context_urn
+    # @return [String] Optional `string` value serialized in the `origin_application` wire field.
+    attr_reader :origin_application
+    # @return [String] Optional `uint64`-formatted value serialized in the `user_id` wire field.
+    attr_reader :user_id
+    # @return [String] Optional `string` value serialized in the `user_uuid` wire field.
+    attr_reader :user_uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ApiBatchJobPhase SDK namespace.
-module ApiBatchJobPhase
-  BATCH_JOB_PHASE_UNKNOWN = 'BATCH_JOB_PHASE_UNKNOWN'
-  BATCH_JOB_PHASE_PENDING = 'BATCH_JOB_PHASE_PENDING'
-  BATCH_JOB_PHASE_RUNNING = 'BATCH_JOB_PHASE_RUNNING'
-  BATCH_JOB_PHASE_SUCCEEDED = 'BATCH_JOB_PHASE_SUCCEEDED'
-  BATCH_JOB_PHASE_FAILED = 'BATCH_JOB_PHASE_FAILED'
-  BATCH_JOB_PHASE_ERROR = 'BATCH_JOB_PHASE_ERROR'
-  BATCH_JOB_PHASE_CANCELLED = 'BATCH_JOB_PHASE_CANCELLED'
-  VALUES = [
-    'BATCH_JOB_PHASE_UNKNOWN', 'BATCH_JOB_PHASE_PENDING', 'BATCH_JOB_PHASE_RUNNING',
-    'BATCH_JOB_PHASE_SUCCEEDED', 'BATCH_JOB_PHASE_FAILED', 'BATCH_JOB_PHASE_ERROR',
-    'BATCH_JOB_PHASE_CANCELLED'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiChatbotMetadata
-  FIELDS = {
-    allowed_domains: "allowed_domains",
-    button_background_color: "button_background_color",
-    logo: "logo",
-    name: "name",
-    primary_color: "primary_color",
-    secondary_color: "secondary_color",
-    starting_message: "starting_message",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiChatbot.
-# A Chatbot
-class ApiChatbot
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiChatbotMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiChatbotMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiChatbotMetadata::DECODERS
-
-  # @return [Array_of_String] Optional array value serialized in the `allowed_domains` wire field.
-  attr_reader :allowed_domains
-  # @return [String] Optional `string` value serialized in the `button_background_color` wire field.
-  attr_reader :button_background_color
-  # @return [String] Optional `string` value serialized in the `logo` wire field.
-  attr_reader :logo
-  # @return [String] Name of chatbot
-  attr_reader :name
-  # @return [String] Optional `string` value serialized in the `primary_color` wire field.
-  attr_reader :primary_color
-  # @return [String] Optional `string` value serialized in the `secondary_color` wire field.
-  attr_reader :secondary_color
-  # @return [String] Optional `string` value serialized in the `starting_message` wire field.
-  attr_reader :starting_message
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ApiBatchJobPhase SDK namespace.
+  module ApiBatchJobPhase
+    BATCH_JOB_PHASE_UNKNOWN = 'BATCH_JOB_PHASE_UNKNOWN'
+    BATCH_JOB_PHASE_PENDING = 'BATCH_JOB_PHASE_PENDING'
+    BATCH_JOB_PHASE_RUNNING = 'BATCH_JOB_PHASE_RUNNING'
+    BATCH_JOB_PHASE_SUCCEEDED = 'BATCH_JOB_PHASE_SUCCEEDED'
+    BATCH_JOB_PHASE_FAILED = 'BATCH_JOB_PHASE_FAILED'
+    BATCH_JOB_PHASE_ERROR = 'BATCH_JOB_PHASE_ERROR'
+    BATCH_JOB_PHASE_CANCELLED = 'BATCH_JOB_PHASE_CANCELLED'
+    VALUES = %w[
+      BATCH_JOB_PHASE_UNKNOWN BATCH_JOB_PHASE_PENDING BATCH_JOB_PHASE_RUNNING
+      BATCH_JOB_PHASE_SUCCEEDED BATCH_JOB_PHASE_FAILED BATCH_JOB_PHASE_ERROR
+      BATCH_JOB_PHASE_CANCELLED
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiChatbotMetadata
+    FIELDS = {
+      allowed_domains: 'allowed_domains',
+      button_background_color: 'button_background_color',
+      logo: 'logo',
+      name: 'name',
+      primary_color: 'primary_color',
+      secondary_color: 'secondary_color',
+      starting_message: 'starting_message'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiChatbot.
+  # A Chatbot
+  class ApiChatbot
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiChatbotMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiChatbotMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiChatbotMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiCodeSnippetsMetadata
-  FIELDS = {
-    curl: "curl",
-    javascript: "javascript",
-    python: "python",
-    sdk: "sdk",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [Array_of_String] Optional array value serialized in the `allowed_domains` wire field.
+    attr_reader :allowed_domains
+    # @return [String] Optional `string` value serialized in the `button_background_color` wire field.
+    attr_reader :button_background_color
+    # @return [String] Optional `string` value serialized in the `logo` wire field.
+    attr_reader :logo
+    # @return [String] Name of chatbot
+    attr_reader :name
+    # @return [String] Optional `string` value serialized in the `primary_color` wire field.
+    attr_reader :primary_color
+    # @return [String] Optional `string` value serialized in the `secondary_color` wire field.
+    attr_reader :secondary_color
+    # @return [String] Optional `string` value serialized in the `starting_message` wire field.
+    attr_reader :starting_message
 
-# API model for ApiCodeSnippets.
-# Code examples for using the model
-class ApiCodeSnippets
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiCodeSnippetsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiCodeSnippetsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiCodeSnippetsMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Optional `string` value serialized in the `curl` wire field.
-  attr_reader :curl
-  # @return [String] Optional `string` value serialized in the `javascript` wire field.
-  attr_reader :javascript
-  # @return [String] Optional `string` value serialized in the `python` wire field.
-  attr_reader :python
-  # @return [String] Optional `string` value serialized in the `sdk` wire field.
-  attr_reader :sdk
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiCodeSnippetsMetadata
+    FIELDS = {
+      curl: 'curl',
+      javascript: 'javascript',
+      python: 'python',
+      sdk: 'sdk'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiCodeSnippets.
+  # Code examples for using the model
+  class ApiCodeSnippets
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiCodeSnippetsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiCodeSnippetsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiCodeSnippetsMetadata::DECODERS
 
-# Defines the ApiCrawlingOption SDK namespace.
-module ApiCrawlingOption
-  UNKNOWN = 'UNKNOWN'
-  SCOPED = 'SCOPED'
-  PATH = 'PATH'
-  DOMAIN = 'DOMAIN'
-  SUBDOMAINS = 'SUBDOMAINS'
-  SITEMAP = 'SITEMAP'
-  VALUES = ['UNKNOWN', 'SCOPED', 'PATH', 'DOMAIN', 'SUBDOMAINS', 'SITEMAP'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Optional `string` value serialized in the `curl` wire field.
+    attr_reader :curl
+    # @return [String] Optional `string` value serialized in the `javascript` wire field.
+    attr_reader :javascript
+    # @return [String] Optional `string` value serialized in the `python` wire field.
+    attr_reader :python
+    # @return [String] Optional `string` value serialized in the `sdk` wire field.
+    attr_reader :sdk
 
-# Internal model hydration metadata.
-class SdkInternalApiEpochResultSummaryMetadata
-  FIELDS = {
-    avg_at_k_percent: "avg_at_k_percent",
-    cons_at_k_percent: "cons_at_k_percent",
-    epochs: "epochs",
-    pass_at_k_percent: "pass_at_k_percent",
-    per_epoch: "per_epoch",
-    rows_excluded: "rows_excluded",
-    rows_scored: "rows_scored",
-    score_stddev_percent: "score_stddev_percent",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    per_epoch: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiPerEpochResultSummary.from_hash(item) }
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for ApiEpochResultSummary.
-# Aggregation across epochs when a run repeats each dataset row k times. Only populated when epochs > 1; at epochs == 1 every number here would equal overall_score_percent, so it is omitted rather than duplicated.
-class ApiEpochResultSummary
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiEpochResultSummaryMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiEpochResultSummaryMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiEpochResultSummaryMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [Float] Mean over rows of (passing epochs / scored epochs) for the star metric. Equals overall_score_percent; this is the primary result for a multi-epoch run ("how often does it work").
-  attr_reader :avg_at_k_percent
-  # @return [Float] Fraction of rows where a strict majority of scored epochs passed ("what does the model typically answer"). An even-k tie counts as fail.
-  attr_reader :cons_at_k_percent
-  # @return [Integer] Number of passes per dataset row (k).
-  attr_reader :epochs
-  # @return [Float] Unbiased estimate of the probability that at least one of k epochs passes ("can it work at all, given retries"). Always the most generous of the three.
-  attr_reader :pass_at_k_percent
-  # @return [Array_of_ApiPerEpochResultSummary] Each epoch's own standalone score, persisted next to the aggregate.
-  attr_reader :per_epoch
-  # @return [Integer] Rows where every epoch failed or was skipped, so the row contributes to no score. Not a random sample of difficulty — surface this explicitly.
-  attr_reader :rows_excluded
-  # @return [Integer] Rows with at least one scored epoch. The effective N behind every percentage above; always display alongside them.
-  attr_reader :rows_scored
-  # @return [Float] Population standard deviation of the k per-epoch scores below — the signal for whether a difference between runs is real or noise.
-  attr_reader :score_stddev_percent
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ApiCrawlingOption SDK namespace.
+  module ApiCrawlingOption
+    UNKNOWN = 'UNKNOWN'
+    SCOPED = 'SCOPED'
+    PATH = 'PATH'
+    DOMAIN = 'DOMAIN'
+    SUBDOMAINS = 'SUBDOMAINS'
+    SITEMAP = 'SITEMAP'
+    VALUES = %w[UNKNOWN SCOPED PATH DOMAIN SUBDOMAINS SITEMAP].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalApiEpochResultSummaryMetadata
+    FIELDS = {
+      avg_at_k_percent: 'avg_at_k_percent',
+      cons_at_k_percent: 'cons_at_k_percent',
+      epochs: 'epochs',
+      pass_at_k_percent: 'pass_at_k_percent',
+      per_epoch: 'per_epoch',
+      rows_excluded: 'rows_excluded',
+      rows_scored: 'rows_scored',
+      score_stddev_percent: 'score_stddev_percent'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      per_epoch: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiPerEpochResultSummary.from_hash(item) }
+      end
+    }.freeze
   end
-end
+
+  # API model for ApiEpochResultSummary.
+  # Aggregation across epochs when a run repeats each dataset row k times. Only populated when epochs > 1; at epochs == 1 every number here would equal overall_score_percent, so it is omitted rather than duplicated.
+  class ApiEpochResultSummary
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiEpochResultSummaryMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiEpochResultSummaryMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiEpochResultSummaryMetadata::DECODERS
+
+    # @return [Float] Mean over rows of (passing epochs / scored epochs) for the star metric. Equals overall_score_percent; this is the primary result for a multi-epoch run ("how often does it work").
+    attr_reader :avg_at_k_percent
+    # @return [Float] Fraction of rows where a strict majority of scored epochs passed ("what does the model typically answer"). An even-k tie counts as fail.
+    attr_reader :cons_at_k_percent
+    # @return [Integer] Number of passes per dataset row (k).
+    attr_reader :epochs
+    # @return [Float] Unbiased estimate of the probability that at least one of k epochs passes ("can it work at all, given retries"). Always the most generous of the three.
+    attr_reader :pass_at_k_percent
+    # @return [Array_of_ApiPerEpochResultSummary] Each epoch's own standalone score, persisted next to the aggregate.
+    attr_reader :per_epoch
+    # @return [Integer] Rows where every epoch failed or was skipped, so the row contributes to no score. Not a random sample of difficulty — surface this explicitly.
+    attr_reader :rows_excluded
+    # @return [Integer] Rows with at least one scored epoch. The effective N behind every percentage above; always display alongside them.
+    attr_reader :rows_scored
+    # @return [Float] Population standard deviation of the k per-epoch scores below — the signal for whether a difference between runs is real or noise.
+    attr_reader :score_stddev_percent
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

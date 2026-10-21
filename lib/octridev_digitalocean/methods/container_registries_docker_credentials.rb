@@ -17,20 +17,19 @@ module OctridevDigitalocean
         registry_name:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/registries/",
+            '/v2/registries/',
             SdkClient.encode_path_segment(registry_name),
-            "/docker-credentials"
+            '/docker-credentials'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::DockerCredentials,
           decoder: :json,
           operation_id: 'registries_get_docker_credentials',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

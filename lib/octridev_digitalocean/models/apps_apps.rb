@@ -5,658 +5,639 @@
 
 # apps_apps domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAppsAlertResponseMetadata
-  FIELDS = {
-    alert: "alert",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    alert: lambda do |value|
-      ::OctridevDigitalocean::AppAlert.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppsAlertResponse.
-# Typed representation of the `AppsAlertResponse` API schema.
-class AppsAlertResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsAlertResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsAlertResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsAlertResponseMetadata::DECODERS
-
-  # @return [AppAlert] Optional object value serialized in the `alert` wire field.
-  attr_reader :alert
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsAlertResponseMetadata
+    FIELDS = {
+      alert: 'alert'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      alert: lambda do |value|
+        ::OctridevDigitalocean::AppAlert.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsAlertResponse.
+  # Typed representation of the `AppsAlertResponse` API schema.
+  class AppsAlertResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsAlertResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsAlertResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsAlertResponseMetadata::DECODERS
+
+    # @return [AppAlert] Optional object value serialized in the `alert` wire field.
+    attr_reader :alert
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsAssignAppAlertDestinationsRequestMetadata
-  FIELDS = {
-    emails: "emails",
-    slack_webhooks: "slack_webhooks",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    emails: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppAlertEmail.from_value(item) }
-    end,
-    slack_webhooks: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppAlertSlackWebhook.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AppsAssignAppAlertDestinationsRequest.
-# Typed representation of the `AppsAssignAppAlertDestinationsRequest` API schema.
-class AppsAssignAppAlertDestinationsRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsAssignAppAlertDestinationsRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsAssignAppAlertDestinationsRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsAssignAppAlertDestinationsRequestMetadata::DECODERS
-
-  # @return [Array_of_AppAlertEmail] Optional array value serialized in the `emails` wire field.
-  attr_reader :emails
-  # @return [Array_of_AppAlertSlackWebhook] Optional array value serialized in the `slack_webhooks` wire field.
-  attr_reader :slack_webhooks
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsAssignAppAlertDestinationsRequestMetadata
+    FIELDS = {
+      emails: 'emails',
+      slack_webhooks: 'slack_webhooks'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      emails: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppAlertEmail.from_value(item) }
+      end,
+      slack_webhooks: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppAlertSlackWebhook.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsAssignAppAlertDestinationsRequest.
+  # Typed representation of the `AppsAssignAppAlertDestinationsRequest` API schema.
+  class AppsAssignAppAlertDestinationsRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsAssignAppAlertDestinationsRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsAssignAppAlertDestinationsRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsAssignAppAlertDestinationsRequestMetadata::DECODERS
+
+    # @return [Array_of_AppAlertEmail] Optional array value serialized in the `emails` wire field.
+    attr_reader :emails
+    # @return [Array_of_AppAlertSlackWebhook] Optional array value serialized in the `slack_webhooks` wire field.
+    attr_reader :slack_webhooks
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsBitbucketSourceSpecMetadata
-  FIELDS = {
-    branch: "branch",
-    deploy_on_push: "deploy_on_push",
-    repo: "repo",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppsBitbucketSourceSpec.
-# Typed representation of the `AppsBitbucketSourceSpec` API schema.
-class AppsBitbucketSourceSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsBitbucketSourceSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsBitbucketSourceSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsBitbucketSourceSpecMetadata::DECODERS
-
-  # @return [String] The name of the branch to use
-  attr_reader :branch
-  # @return [Boolean] Whether to automatically deploy new commits made to the repo
-  attr_reader :deploy_on_push
-  # @return [String] The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`
-  attr_reader :repo
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsBitbucketSourceSpecMetadata
+    FIELDS = {
+      branch: 'branch',
+      deploy_on_push: 'deploy_on_push',
+      repo: 'repo'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsBitbucketSourceSpec.
+  # Typed representation of the `AppsBitbucketSourceSpec` API schema.
+  class AppsBitbucketSourceSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsBitbucketSourceSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsBitbucketSourceSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsBitbucketSourceSpecMetadata::DECODERS
+
+    # @return [String] The name of the branch to use
+    attr_reader :branch
+    # @return [Boolean] Whether to automatically deploy new commits made to the repo
+    attr_reader :deploy_on_push
+    # @return [String] The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`
+    attr_reader :repo
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsCorsPolicyMetadata
-  FIELDS = {
-    allow_origins: "allow_origins",
-    allow_methods: "allow_methods",
-    allow_headers: "allow_headers",
-    expose_headers: "expose_headers",
-    max_age: "max_age",
-    allow_credentials: "allow_credentials",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    allow_origins: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppsStringMatch.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AppsCorsPolicy.
-# Typed representation of the `AppsCorsPolicy` API schema.
-class AppsCorsPolicy
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsCorsPolicyMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsCorsPolicyMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsCorsPolicyMetadata::DECODERS
-
-  # @return [Array_of_AppsStringMatch] The set of allowed CORS origins.
-  attr_reader :allow_origins
-  # @return [Array_of_String] The set of allowed HTTP methods. This configures the `Access-Control-Allow-Methods` header.
-  attr_reader :allow_methods
-  # @return [Array_of_String] The set of allowed HTTP request headers. This configures the `Access-Control-Allow-Headers` header.
-  attr_reader :allow_headers
-  # @return [Array_of_String] The set of HTTP response headers that browsers are allowed to access. This configures the `Access-Control-Expose-Headers` header.
-  attr_reader :expose_headers
-  # @return [String] An optional duration specifying how long browsers can cache the results of a preflight request. This configures the `Access-Control-Max-Age` header.
-  attr_reader :max_age
-  # @return [Boolean] Whether browsers should expose the response to the client-side JavaScript code when the request’s credentials mode is include. This configures the `Access-Control-Allow-Credentials` header.
-  attr_reader :allow_credentials
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsCorsPolicyMetadata
+    FIELDS = {
+      allow_origins: 'allow_origins',
+      allow_methods: 'allow_methods',
+      allow_headers: 'allow_headers',
+      expose_headers: 'expose_headers',
+      max_age: 'max_age',
+      allow_credentials: 'allow_credentials'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      allow_origins: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppsStringMatch.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsCorsPolicy.
+  # Typed representation of the `AppsCorsPolicy` API schema.
+  class AppsCorsPolicy
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsCorsPolicyMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsCorsPolicyMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsCorsPolicyMetadata::DECODERS
+
+    # @return [Array_of_AppsStringMatch] The set of allowed CORS origins.
+    attr_reader :allow_origins
+    # @return [Array_of_String] The set of allowed HTTP methods. This configures the `Access-Control-Allow-Methods` header.
+    attr_reader :allow_methods
+    # @return [Array_of_String] The set of allowed HTTP request headers. This configures the `Access-Control-Allow-Headers` header.
+    attr_reader :allow_headers
+    # @return [Array_of_String] The set of HTTP response headers that browsers are allowed to access. This configures the `Access-Control-Expose-Headers` header.
+    attr_reader :expose_headers
+    # @return [String] An optional duration specifying how long browsers can cache the results of a preflight request. This configures the `Access-Control-Max-Age` header.
+    attr_reader :max_age
+    # @return [Boolean] Whether browsers should expose the response to the client-side JavaScript code when the request’s credentials mode is include. This configures the `Access-Control-Allow-Credentials` header.
+    attr_reader :allow_credentials
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsDeleteAppResponseMetadata
-  FIELDS = {
-    id: "id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppsDeleteAppResponse.
-# Typed representation of the `AppsDeleteAppResponse` API schema.
-class AppsDeleteAppResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsDeleteAppResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsDeleteAppResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsDeleteAppResponseMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `id` wire field.
-  attr_reader :id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsDeleteAppResponseMetadata
+    FIELDS = {
+      id: 'id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsDeleteAppResponse.
+  # Typed representation of the `AppsDeleteAppResponse` API schema.
+  class AppsDeleteAppResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsDeleteAppResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsDeleteAppResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsDeleteAppResponseMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `id` wire field.
+    attr_reader :id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsDeploymentsResponseMetadata
-  FIELDS = {
-    deployments: "deployments",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    deployments: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppsDeployment.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppsDeploymentsResponse.
-# Typed representation of the `AppsDeploymentsResponse` API schema.
-class AppsDeploymentsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsDeploymentsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsDeploymentsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsDeploymentsResponseMetadata::DECODERS
-
-  attr_reader :deployments
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsDeploymentsResponseMetadata
+    FIELDS = {
+      deployments: 'deployments',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      deployments: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppsDeployment.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsDeploymentsResponse.
+  # Typed representation of the `AppsDeploymentsResponse` API schema.
+  class AppsDeploymentsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsDeploymentsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsDeploymentsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsDeploymentsResponseMetadata::DECODERS
+
+    attr_reader :deployments
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsGithubSourceSpecMetadata
-  FIELDS = {
-    branch: "branch",
-    deploy_on_push: "deploy_on_push",
-    repo: "repo",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppsGithubSourceSpec.
-# Typed representation of the `AppsGithubSourceSpec` API schema.
-class AppsGithubSourceSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsGithubSourceSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsGithubSourceSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsGithubSourceSpecMetadata::DECODERS
-
-  # @return [String] The name of the branch to use
-  attr_reader :branch
-  # @return [Boolean] Whether to automatically deploy new commits made to the repo
-  attr_reader :deploy_on_push
-  # @return [String] The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`
-  attr_reader :repo
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsGithubSourceSpecMetadata
+    FIELDS = {
+      branch: 'branch',
+      deploy_on_push: 'deploy_on_push',
+      repo: 'repo'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsGithubSourceSpec.
+  # Typed representation of the `AppsGithubSourceSpec` API schema.
+  class AppsGithubSourceSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsGithubSourceSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsGithubSourceSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsGithubSourceSpecMetadata::DECODERS
+
+    # @return [String] The name of the branch to use
+    attr_reader :branch
+    # @return [Boolean] Whether to automatically deploy new commits made to the repo
+    attr_reader :deploy_on_push
+    # @return [String] The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`
+    attr_reader :repo
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsGitlabSourceSpecMetadata
-  FIELDS = {
-    branch: "branch",
-    deploy_on_push: "deploy_on_push",
-    repo: "repo",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppsGitlabSourceSpec.
-# Typed representation of the `AppsGitlabSourceSpec` API schema.
-class AppsGitlabSourceSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsGitlabSourceSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsGitlabSourceSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsGitlabSourceSpecMetadata::DECODERS
-
-  # @return [String] The name of the branch to use
-  attr_reader :branch
-  # @return [Boolean] Whether to automatically deploy new commits made to the repo
-  attr_reader :deploy_on_push
-  # @return [String] The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`
-  attr_reader :repo
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsGitlabSourceSpecMetadata
+    FIELDS = {
+      branch: 'branch',
+      deploy_on_push: 'deploy_on_push',
+      repo: 'repo'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsGitlabSourceSpec.
+  # Typed representation of the `AppsGitlabSourceSpec` API schema.
+  class AppsGitlabSourceSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsGitlabSourceSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsGitlabSourceSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsGitlabSourceSpecMetadata::DECODERS
+
+    # @return [String] The name of the branch to use
+    attr_reader :branch
+    # @return [Boolean] Whether to automatically deploy new commits made to the repo
+    attr_reader :deploy_on_push
+    # @return [String] The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`
+    attr_reader :repo
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsGitSourceSpecMetadata
-  FIELDS = {
-    branch: "branch",
-    repo_clone_url: "repo_clone_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppsGitSourceSpec.
-# Typed representation of the `AppsGitSourceSpec` API schema.
-class AppsGitSourceSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsGitSourceSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsGitSourceSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsGitSourceSpecMetadata::DECODERS
-
-  # @return [String] The name of the branch to use
-  attr_reader :branch
-  # @return [String] The clone URL of the repo. Example: `github.com
-  attr_reader :repo_clone_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsGitSourceSpecMetadata
+    FIELDS = {
+      branch: 'branch',
+      repo_clone_url: 'repo_clone_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsGitSourceSpec.
+  # Typed representation of the `AppsGitSourceSpec` API schema.
+  class AppsGitSourceSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsGitSourceSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsGitSourceSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsGitSourceSpecMetadata::DECODERS
+
+    # @return [String] The name of the branch to use
+    attr_reader :branch
+    # @return [String] The clone URL of the repo. Example: `github.com
+    attr_reader :repo_clone_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsImageSourceSpecDeployOnPushMetadata
-  FIELDS = {
-    enabled: "enabled",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppsImageSourceSpecDeployOnPush.
-# Optional object value serialized in the `deploy_on_push` wire field.
-class AppsImageSourceSpecDeployOnPush
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsImageSourceSpecDeployOnPushMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsImageSourceSpecDeployOnPushMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsImageSourceSpecDeployOnPushMetadata::DECODERS
-
-  # @return [Boolean] Whether to automatically deploy new images. Can only be used for images hosted in DOCR and can only be used with an image tag, not a specific digest.
-  attr_reader :enabled
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsImageSourceSpecDeployOnPushMetadata
+    FIELDS = {
+      enabled: 'enabled'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsImageSourceSpecDeployOnPush.
+  # Optional object value serialized in the `deploy_on_push` wire field.
+  class AppsImageSourceSpecDeployOnPush
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsImageSourceSpecDeployOnPushMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsImageSourceSpecDeployOnPushMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsImageSourceSpecDeployOnPushMetadata::DECODERS
+
+    # @return [Boolean] Whether to automatically deploy new images. Can only be used for images hosted in DOCR and can only be used with an image tag, not a specific digest.
+    attr_reader :enabled
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsImageSourceSpecMetadata
-  FIELDS = {
-    registry: "registry",
-    registry_type: "registry_type",
-    registry_credentials: "registry_credentials",
-    repository: "repository",
-    tag: "tag",
-    digest: "digest",
-    deploy_on_push: "deploy_on_push",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    registry_type: lambda do |value|
-      ::OctridevDigitalocean::AppsImageSourceSpecRegistryType.from_value(value)
-    end,
-    deploy_on_push: lambda do |value|
-      ::OctridevDigitalocean::AppsImageSourceSpecDeployOnPush.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppsImageSourceSpec.
-# Typed representation of the `AppsImageSourceSpec` API schema.
-class AppsImageSourceSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsImageSourceSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsImageSourceSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsImageSourceSpecMetadata::DECODERS
-
-  # @return [String] The registry name. Must be left empty for the `DOCR` registry type.
-  attr_reader :registry
-  # @return [AppsImageSourceSpecRegistryType] - DOCKER_HUB: The DockerHub container registry type. - DOCR: The DigitalOcean container registry type. - GHCR: The Github container registry type.
-  attr_reader :registry_type
-  # @return [String] The credentials to be able to pull the image. The value will be encrypted on first submission. On following submissions, the encrypted value should be used. - "$username:$access_token" for registries of type `DOCKER_HUB`. - "$username:$access_token" for registries of type `GHCR`.
-  attr_reader :registry_credentials
-  # @return [String] The repository name.
-  attr_reader :repository
-  # @return [String] The repository tag. Defaults to `latest` if not provided and no digest is provided. Cannot be specified if digest is provided.
-  attr_reader :tag
-  # @return [String] The image digest. Cannot be specified if tag is provided.
-  attr_reader :digest
-  # @return [AppsImageSourceSpecDeployOnPush] Optional object value serialized in the `deploy_on_push` wire field.
-  attr_reader :deploy_on_push
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsImageSourceSpecMetadata
+    FIELDS = {
+      registry: 'registry',
+      registry_type: 'registry_type',
+      registry_credentials: 'registry_credentials',
+      repository: 'repository',
+      tag: 'tag',
+      digest: 'digest',
+      deploy_on_push: 'deploy_on_push'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      registry_type: lambda do |value|
+        ::OctridevDigitalocean::AppsImageSourceSpecRegistryType.from_value(value)
+      end,
+      deploy_on_push: lambda do |value|
+        ::OctridevDigitalocean::AppsImageSourceSpecDeployOnPush.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsImageSourceSpec.
+  # Typed representation of the `AppsImageSourceSpec` API schema.
+  class AppsImageSourceSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsImageSourceSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsImageSourceSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsImageSourceSpecMetadata::DECODERS
+
+    # @return [String] The registry name. Must be left empty for the `DOCR` registry type.
+    attr_reader :registry
+    # @return [AppsImageSourceSpecRegistryType] - DOCKER_HUB: The DockerHub container registry type. - DOCR: The DigitalOcean container registry type. - GHCR: The Github container registry type.
+    attr_reader :registry_type
+    # @return [String] The credentials to be able to pull the image. The value will be encrypted on first submission. On following submissions, the encrypted value should be used. - "$username:$access_token" for registries of type `DOCKER_HUB`. - "$username:$access_token" for registries of type `GHCR`.
+    attr_reader :registry_credentials
+    # @return [String] The repository name.
+    attr_reader :repository
+    # @return [String] The repository tag. Defaults to `latest` if not provided and no digest is provided. Cannot be specified if digest is provided.
+    attr_reader :tag
+    # @return [String] The image digest. Cannot be specified if tag is provided.
+    attr_reader :digest
+    # @return [AppsImageSourceSpecDeployOnPush] Optional object value serialized in the `deploy_on_push` wire field.
+    attr_reader :deploy_on_push
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AppsImageSourceSpecRegistryType SDK namespace.
-module AppsImageSourceSpecRegistryType
-  DOCKER_HUB = 'DOCKER_HUB'
-  DOCR = 'DOCR'
-  GHCR = 'GHCR'
-  VALUES = ['DOCKER_HUB', 'DOCR', 'GHCR'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsInstanceSizeMetadata
-  FIELDS = {
-    bandwidth_allowance_gib: "bandwidth_allowance_gib",
-    cpu_type: "cpu_type",
-    cpus: "cpus",
-    deprecation_intent: "deprecation_intent",
-    memory_bytes: "memory_bytes",
-    name: "name",
-    scalable: "scalable",
-    single_instance_only: "single_instance_only",
-    slug: "slug",
-    tier_downgrade_to: "tier_downgrade_to",
-    tier_slug: "tier_slug",
-    tier_upgrade_to: "tier_upgrade_to",
-    usd_per_month: "usd_per_month",
-    usd_per_second: "usd_per_second",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    cpu_type: lambda do |value|
-      ::OctridevDigitalocean::InstanceSizeCpuType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AppsInstanceSize.
-# Typed representation of the `AppsInstanceSize` API schema.
-class AppsInstanceSize
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsInstanceSizeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsInstanceSizeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsInstanceSizeMetadata::DECODERS
-
-  # @return [String] Optional `int64`-formatted value serialized in the `bandwidth_allowance_gib` wire field.
-  attr_reader :bandwidth_allowance_gib
-  # @return [InstanceSizeCpuType] Optional enumerated value serialized in the `cpu_type` wire field.
-  attr_reader :cpu_type
-  # @return [String] Optional `int64`-formatted value serialized in the `cpus` wire field.
-  attr_reader :cpus
-  # @return [Boolean] Optional `boolean` value serialized in the `deprecation_intent` wire field.
-  attr_reader :deprecation_intent
-  # @return [String] Optional `int64`-formatted value serialized in the `memory_bytes` wire field.
-  attr_reader :memory_bytes
-  # @return [String] Optional `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [Boolean] Optional `boolean` value serialized in the `scalable` wire field.
-  attr_reader :scalable
-  # @return [Boolean] Optional `boolean` value serialized in the `single_instance_only` wire field.
-  attr_reader :single_instance_only
-  # @return [String] Optional `string` value serialized in the `slug` wire field.
-  attr_reader :slug
-  # @return [String] Optional `string` value serialized in the `tier_downgrade_to` wire field.
-  attr_reader :tier_downgrade_to
-  # @return [String] Optional `string` value serialized in the `tier_slug` wire field.
-  attr_reader :tier_slug
-  # @return [String] Optional `string` value serialized in the `tier_upgrade_to` wire field.
-  attr_reader :tier_upgrade_to
-  # @return [String] Optional `string` value serialized in the `usd_per_month` wire field.
-  attr_reader :usd_per_month
-  # @return [String] Optional `string` value serialized in the `usd_per_second` wire field.
-  attr_reader :usd_per_second
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AppsImageSourceSpecRegistryType SDK namespace.
+  module AppsImageSourceSpecRegistryType
+    DOCKER_HUB = 'DOCKER_HUB'
+    DOCR = 'DOCR'
+    GHCR = 'GHCR'
+    VALUES = %w[DOCKER_HUB DOCR GHCR].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppsInstanceSizeMetadata
+    FIELDS = {
+      bandwidth_allowance_gib: 'bandwidth_allowance_gib',
+      cpu_type: 'cpu_type',
+      cpus: 'cpus',
+      deprecation_intent: 'deprecation_intent',
+      memory_bytes: 'memory_bytes',
+      name: 'name',
+      scalable: 'scalable',
+      single_instance_only: 'single_instance_only',
+      slug: 'slug',
+      tier_downgrade_to: 'tier_downgrade_to',
+      tier_slug: 'tier_slug',
+      tier_upgrade_to: 'tier_upgrade_to',
+      usd_per_month: 'usd_per_month',
+      usd_per_second: 'usd_per_second'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      cpu_type: lambda do |value|
+        ::OctridevDigitalocean::InstanceSizeCpuType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AppsInstanceSize.
+  # Typed representation of the `AppsInstanceSize` API schema.
+  class AppsInstanceSize
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsInstanceSizeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsInstanceSizeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsInstanceSizeMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAppsRegionMetadata
-  FIELDS = {
-    continent: "continent",
-    data_centers: "data_centers",
-    default: "default",
-    disabled: "disabled",
-    flag: "flag",
-    label: "label",
-    reason: "reason",
-    slug: "slug",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] Optional `int64`-formatted value serialized in the `bandwidth_allowance_gib` wire field.
+    attr_reader :bandwidth_allowance_gib
+    # @return [InstanceSizeCpuType] Optional enumerated value serialized in the `cpu_type` wire field.
+    attr_reader :cpu_type
+    # @return [String] Optional `int64`-formatted value serialized in the `cpus` wire field.
+    attr_reader :cpus
+    # @return [Boolean] Optional `boolean` value serialized in the `deprecation_intent` wire field.
+    attr_reader :deprecation_intent
+    # @return [String] Optional `int64`-formatted value serialized in the `memory_bytes` wire field.
+    attr_reader :memory_bytes
+    # @return [String] Optional `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [Boolean] Optional `boolean` value serialized in the `scalable` wire field.
+    attr_reader :scalable
+    # @return [Boolean] Optional `boolean` value serialized in the `single_instance_only` wire field.
+    attr_reader :single_instance_only
+    # @return [String] Optional `string` value serialized in the `slug` wire field.
+    attr_reader :slug
+    # @return [String] Optional `string` value serialized in the `tier_downgrade_to` wire field.
+    attr_reader :tier_downgrade_to
+    # @return [String] Optional `string` value serialized in the `tier_slug` wire field.
+    attr_reader :tier_slug
+    # @return [String] Optional `string` value serialized in the `tier_upgrade_to` wire field.
+    attr_reader :tier_upgrade_to
+    # @return [String] Optional `string` value serialized in the `usd_per_month` wire field.
+    attr_reader :usd_per_month
+    # @return [String] Optional `string` value serialized in the `usd_per_second` wire field.
+    attr_reader :usd_per_second
 
-# API model for AppsRegion.
-# Typed representation of the `AppsRegion` API schema.
-class AppsRegion
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsRegionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsRegionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsRegionMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Optional `string` value serialized in the `continent` wire field.
-  attr_reader :continent
-  # @return [Array_of_String] Optional array value serialized in the `data_centers` wire field.
-  attr_reader :data_centers
-  # @return [Boolean] Whether or not the region is presented as the default.
-  attr_reader :default
-  # @return [Boolean] Optional `boolean` value serialized in the `disabled` wire field.
-  attr_reader :disabled
-  # @return [String] Optional `string` value serialized in the `flag` wire field.
-  attr_reader :flag
-  # @return [String] Optional `string` value serialized in the `label` wire field.
-  attr_reader :label
-  # @return [String] Optional `string` value serialized in the `reason` wire field.
-  attr_reader :reason
-  # @return [String] Optional `string` value serialized in the `slug` wire field.
-  attr_reader :slug
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppsRegionMetadata
+    FIELDS = {
+      continent: 'continent',
+      data_centers: 'data_centers',
+      default: 'default',
+      disabled: 'disabled',
+      flag: 'flag',
+      label: 'label',
+      reason: 'reason',
+      slug: 'slug'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AppsRegion.
+  # Typed representation of the `AppsRegion` API schema.
+  class AppsRegion
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsRegionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsRegionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsRegionMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAppsResponseMetadata
-  FIELDS = {
-    apps: "apps",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    apps: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::App.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] Optional `string` value serialized in the `continent` wire field.
+    attr_reader :continent
+    # @return [Array_of_String] Optional array value serialized in the `data_centers` wire field.
+    attr_reader :data_centers
+    # @return [Boolean] Whether or not the region is presented as the default.
+    attr_reader :default
+    # @return [Boolean] Optional `boolean` value serialized in the `disabled` wire field.
+    attr_reader :disabled
+    # @return [String] Optional `string` value serialized in the `flag` wire field.
+    attr_reader :flag
+    # @return [String] Optional `string` value serialized in the `label` wire field.
+    attr_reader :label
+    # @return [String] Optional `string` value serialized in the `reason` wire field.
+    attr_reader :reason
+    # @return [String] Optional `string` value serialized in the `slug` wire field.
+    attr_reader :slug
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalAppsResponseMetadata
+    FIELDS = {
+      apps: 'apps',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      apps: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::App.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
+  end
 end

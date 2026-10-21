@@ -12,12 +12,10 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalSecurityCreateScanRuleMetadata
         FIELDS = {
-          resource: "resource",
+          resource: 'resource'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for SecurityCreateScanRule.
@@ -47,12 +45,10 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalSecurityUpdateSettingsPlanMetadata
         FIELDS = {
-          tier_coverage: "tier_coverage",
+          tier_coverage: 'tier_coverage'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for SecurityUpdateSettingsPlan.
@@ -82,13 +78,11 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalSecurityCreateSuppressionMetadata
         FIELDS = {
-          rule_uuid: "rule_uuid",
-          resources: "resources",
+          rule_uuid: 'rule_uuid',
+          resources: 'resources'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for SecurityCreateSuppression.
@@ -127,24 +121,23 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/security/scans",
+          '/v2/security/scans',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Scans,
           decoder: :json,
           operation_id: 'security_list_scans',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -153,16 +146,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/security/scans",
+          '/v2/security/scans',
           config: config,
           return_type: ::OctridevDigitalocean::ScanResponse,
           decoder: :json,
           operation_id: 'security_create_scan',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -183,7 +175,6 @@ module OctridevDigitalocean
         type: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('scan_id', scan_id)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -193,7 +184,7 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/security/scans/",
+            '/v2/security/scans/',
             SdkClient.encode_path_segment(scan_id)
           ].join,
           config: config,
@@ -201,13 +192,13 @@ module OctridevDigitalocean
             'severity' => QueryValue.new(severity, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'type' => QueryValue.new(type, style: 'form', explode: true),
+            'type' => QueryValue.new(type, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ScanResponse,
           decoder: :json,
           operation_id: 'security_get_scan',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -226,26 +217,25 @@ module OctridevDigitalocean
         type: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/security/scans/latest",
+          '/v2/security/scans/latest',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'severity' => QueryValue.new(severity, style: 'form', explode: true),
-            'type' => QueryValue.new(type, style: 'form', explode: true),
+            'type' => QueryValue.new(type, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ScanResponse,
           decoder: :json,
           operation_id: 'security_get_latest_scan',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -257,18 +247,17 @@ module OctridevDigitalocean
         resource: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/security/scans/rules",
+          '/v2/security/scans/rules',
           config: config,
           body: {
-            'resource' => resource,
+            'resource' => resource
           },
           decoder: :empty,
           operation_id: 'security_create_scan_rule',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -286,7 +275,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('scan_id', scan_id)
 
         Validation.validate_uuid('finding_uuid', finding_uuid)
@@ -298,22 +286,22 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/security/scans/",
+            '/v2/security/scans/',
             SdkClient.encode_path_segment(scan_id),
-            "/findings/",
+            '/findings/',
             SdkClient.encode_path_segment(finding_uuid),
-            "/affected_resources"
+            '/affected_resources'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AffectedResources,
           decoder: :json,
           operation_id: 'security_list_scan_finding_affected_resources',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -327,24 +315,23 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/security/settings",
+          '/v2/security/settings',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Settings,
           decoder: :json,
           operation_id: 'security_list_settings',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -356,19 +343,18 @@ module OctridevDigitalocean
         tier_coverage: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
-          "/v2/security/settings/plan",
+          '/v2/security/settings/plan',
           config: config,
           body: {
-            'tier_coverage' => tier_coverage,
+            'tier_coverage' => tier_coverage
           },
           return_type: ::OctridevDigitalocean::TierCoverage,
           decoder: :json,
           operation_id: 'security_update_settings_plan',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -384,20 +370,19 @@ module OctridevDigitalocean
         resources: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/security/settings/suppressions",
+          '/v2/security/settings/suppressions',
           config: config,
           body: {
             'rule_uuid' => rule_uuid,
-            'resources' => resources,
+            'resources' => resources
           },
           return_type: ::OctridevDigitalocean::SuppressedResourceRoot,
           decoder: :json,
           operation_id: 'security_create_suppression',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -409,20 +394,19 @@ module OctridevDigitalocean
         suppression_uuid:,
         request_options: nil
       )
-
         Validation.validate_uuid('suppression_uuid', suppression_uuid)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/security/settings/suppressions/",
+            '/v2/security/settings/suppressions/',
             SdkClient.encode_path_segment(suppression_uuid)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'security_delete_suppression',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

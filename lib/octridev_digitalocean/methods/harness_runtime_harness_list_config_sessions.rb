@@ -28,7 +28,6 @@ module OctridevDigitalocean
         status: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('config_id', config_id)
 
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1, max: 200) }
@@ -36,25 +35,25 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/configs/",
+            '/v2/agents/configs/',
             SdkClient.encode_path_segment(config_id),
-            "/sessions"
+            '/sessions'
           ].join,
           config: config,
           query: {
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
             'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
-            'status' => QueryValue.new(status, style: 'form', explode: true),
+            'status' => QueryValue.new(status, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::DefinitionsListSessionsResponse,
           decoder: :json,
           operation_id: 'harness_list_config_sessions',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
-    HarnessListConfigSessionsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      HarnessListConfigSessionsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Enumerates the caller's team sessions whose session was created from this durable Environment Config. Keyset-paginated on an opaque cursor, newest first, same shape and status semantics as GET /v2/agents/sessions.
       #
@@ -88,9 +87,11 @@ module OctridevDigitalocean
             )
             items = page.sessions || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -117,10 +118,12 @@ module OctridevDigitalocean
             )
             items = page.sessions || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << HarnessListConfigSessionsPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end

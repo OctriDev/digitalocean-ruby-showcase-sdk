@@ -29,32 +29,31 @@ module OctridevDigitalocean
         if_none_match: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('X-Session-Id', x_session_id)
 
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1, max: 100) }
 
         SdkClient.request(
           'GET',
-          "/tools",
+          '/tools',
           config: config,
           query: {
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListSessionToolsResponse,
           decoder: :json,
           operation_id: 'gateway_tools_list',
           extra_headers: SdkClient.serialize_headers({
-            'X-Session-Id' => SdkClient.header_value(x_session_id),
-            'If-None-Match' => SdkClient.header_value(if_none_match),
-          }),
+                                                       'X-Session-Id' => SdkClient.header_value(x_session_id),
+                                                       'If-None-Match' => SdkClient.header_value(if_none_match)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '412' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError },
+          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '412' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError }
         ).data
       end
 
-    GatewayToolsListPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      GatewayToolsListPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Lists the catalog tools that a session can call, ordered by name. The list applies the session's `tools` selection and omits tools that its policy always denies. Each page includes an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is unchanged.
       #
@@ -89,9 +88,11 @@ module OctridevDigitalocean
             )
             items = page.tools || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -118,10 +119,12 @@ module OctridevDigitalocean
             )
             items = page.tools || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << GatewayToolsListPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end
@@ -149,7 +152,6 @@ module OctridevDigitalocean
         limit: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('X-Session-Id', x_session_id)
 
         Validation.validate_items('queries', queries, min: 1, max: 5)
@@ -158,22 +160,22 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          "/tools/search",
+          '/tools/search',
           config: config,
           body: {
             'queries' => queries,
             'providers' => providers,
             'tags' => tags,
-            'limit' => limit,
+            'limit' => limit
           },
           return_type: ::OctridevDigitalocean::DataPlaneSearchToolsResponse,
           decoder: :json,
           operation_id: 'gateway_tools_list_search',
           extra_headers: SdkClient.serialize_headers({
-            'X-Session-Id' => SdkClient.header_value(x_session_id),
-          }),
+                                                       'X-Session-Id' => SdkClient.header_value(x_session_id)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '412' => ::OctridevDigitalocean::ToolResultError, '413' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError },
+          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '412' => ::OctridevDigitalocean::ToolResultError, '413' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError }
         ).data
       end
 
@@ -192,27 +194,26 @@ module OctridevDigitalocean
         rationale: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('X-Session-Id', x_session_id)
 
         Validation.validate_items('tools', tools, min: 1, max: 10)
 
         SdkClient.request(
           'POST',
-          "/tools/invoke",
+          '/tools/invoke',
           config: config,
           body: {
             'tools' => tools,
-            'rationale' => rationale,
+            'rationale' => rationale
           },
           return_type: ::OctridevDigitalocean::InvokeToolsResponse,
           decoder: :json,
           operation_id: 'gateway_tools_run',
           extra_headers: SdkClient.serialize_headers({
-            'X-Session-Id' => SdkClient.header_value(x_session_id),
-          }),
+                                                       'X-Session-Id' => SdkClient.header_value(x_session_id)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::ToolResultError, '403' => ::OctridevDigitalocean::Forbidden, '412' => ::OctridevDigitalocean::ToolResultError, '413' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError },
+          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::ToolResultError, '403' => ::OctridevDigitalocean::Forbidden, '412' => ::OctridevDigitalocean::ToolResultError, '413' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError }
         ).data
       end
 
@@ -230,24 +231,23 @@ module OctridevDigitalocean
         code:,
         request_options: nil
       )
-
         Validation.validate_uuid('X-Session-Id', x_session_id)
 
         SdkClient.request(
           'POST',
-          "/code/execute",
+          '/code/execute',
           config: config,
           body: {
-            'code' => code,
+            'code' => code
           },
           return_type: ::OctridevDigitalocean::ExecuteCodeResponse,
           decoder: :json,
           operation_id: 'gateway_code_run',
           extra_headers: SdkClient.serialize_headers({
-            'X-Session-Id' => SdkClient.header_value(x_session_id),
-          }),
+                                                       'X-Session-Id' => SdkClient.header_value(x_session_id)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '412' => ::OctridevDigitalocean::ToolResultError, '413' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError, '504' => ::OctridevDigitalocean::ToolResultError },
+          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '412' => ::OctridevDigitalocean::ToolResultError, '413' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError, '504' => ::OctridevDigitalocean::ToolResultError }
         ).data
       end
 
@@ -267,7 +267,6 @@ module OctridevDigitalocean
         decision:,
         request_options: nil
       )
-
         Validation.validate_uuid('session_id', session_id)
 
         Validation.validate_uuid('approval_id', approval_id)
@@ -275,20 +274,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/approvals/session/",
+            '/approvals/session/',
             SdkClient.encode_path_segment(session_id),
-            "/",
+            '/',
             SdkClient.encode_path_segment(approval_id)
           ].join,
           config: config,
           body: {
-            'decision' => decision,
+            'decision' => decision
           },
           return_type: ::OctridevDigitalocean::ApprovalDecisionResponse,
           decoder: :json,
           operation_id: 'gateway_session_approvals_update',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '404' => ::OctridevDigitalocean::ToolResultError, '409' => ::OctridevDigitalocean::ToolResultError, '412' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError },
+          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '404' => ::OctridevDigitalocean::ToolResultError, '409' => ::OctridevDigitalocean::ToolResultError, '412' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError }
         ).data
       end
 
@@ -308,7 +307,6 @@ module OctridevDigitalocean
         decision:,
         request_options: nil
       )
-
         Validation.validate_uuid('approval_id', approval_id)
 
         Validation.validate_uuid('X-Session-Id', x_session_id)
@@ -316,21 +314,21 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/approvals/",
+            '/approvals/',
             SdkClient.encode_path_segment(approval_id)
           ].join,
           config: config,
           body: {
-            'decision' => decision,
+            'decision' => decision
           },
           return_type: ::OctridevDigitalocean::ApprovalDecisionResponse,
           decoder: :json,
           operation_id: 'gateway_approvals_update',
           extra_headers: SdkClient.serialize_headers({
-            'X-Session-Id' => SdkClient.header_value(x_session_id),
-          }),
+                                                       'X-Session-Id' => SdkClient.header_value(x_session_id)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '404' => ::OctridevDigitalocean::ToolResultError, '409' => ::OctridevDigitalocean::ToolResultError, '412' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError },
+          errors: { '400' => ::OctridevDigitalocean::ToolResultError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Forbidden, '404' => ::OctridevDigitalocean::ToolResultError, '409' => ::OctridevDigitalocean::ToolResultError, '412' => ::OctridevDigitalocean::ToolResultError, '429' => ::OctridevDigitalocean::ToolResultError, '500' => ::OctridevDigitalocean::ToolResultError, '503' => ::OctridevDigitalocean::ToolResultError }
         ).data
       end
     end

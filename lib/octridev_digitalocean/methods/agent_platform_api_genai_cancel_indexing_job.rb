@@ -19,23 +19,22 @@ module OctridevDigitalocean
         uuid2: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/indexing_jobs/",
+            '/v2/gen-ai/indexing_jobs/',
             SdkClient.encode_path_segment(uuid),
-            "/cancel"
+            '/cancel'
           ].join,
           config: config,
           body: {
-            'uuid' => uuid2,
+            'uuid' => uuid2
           },
           return_type: ::OctridevDigitalocean::ApiCancelKnowledgeBaseIndexingJobOutput,
           decoder: :json,
           operation_id: 'genai_cancel_indexing_job',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

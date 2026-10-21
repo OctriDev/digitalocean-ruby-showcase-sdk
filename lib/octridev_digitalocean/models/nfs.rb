@@ -5,669 +5,663 @@
 
 # nfs domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAccessPointActionResponseMetadata
-  FIELDS = {
-    access_point: "access_point",
-    action: "action",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    access_point
-    action
-  ].freeze
-  DECODERS = {
-    access_point: lambda do |value|
-      ::OctridevDigitalocean::AccessPointResponse.from_hash(value)
-    end,
-    action: lambda do |value|
-      ::OctridevDigitalocean::NfsAction2.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AccessPointActionResponse.
-# Response returned after starting an access point mutation.
-class AccessPointActionResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccessPointActionResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccessPointActionResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccessPointActionResponseMetadata::DECODERS
-
-  # @return [AccessPointResponse] Represents an NFS access point resource.
-  attr_reader :access_point
-  # @return [NfsAction2] The action that was submitted.
-  attr_reader :action
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAccessPointActionResponseMetadata
+    FIELDS = {
+      access_point: 'access_point',
+      action: 'action'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      access_point
+      action
+    ].freeze
+    DECODERS = {
+      access_point: lambda do |value|
+        ::OctridevDigitalocean::AccessPointResponse.from_hash(value)
+      end,
+      action: lambda do |value|
+        ::OctridevDigitalocean::NfsAction2.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AccessPointActionResponse.
+  # Response returned after starting an access point mutation.
+  class AccessPointActionResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccessPointActionResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccessPointActionResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccessPointActionResponseMetadata::DECODERS
+
+    # @return [AccessPointResponse] Represents an NFS access point resource.
+    attr_reader :access_point
+    # @return [NfsAction2] The action that was submitted.
+    attr_reader :action
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAccessPointGetResponseMetadata
-  FIELDS = {
-    access_point: "access_point",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    access_point
-  ].freeze
-  DECODERS = {
-    access_point: lambda do |value|
-      ::OctridevDigitalocean::AccessPointResponse.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AccessPointGetResponse.
-# Response containing a single access point.
-class AccessPointGetResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccessPointGetResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccessPointGetResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccessPointGetResponseMetadata::DECODERS
-
-  # @return [AccessPointResponse] Represents an NFS access point resource.
-  attr_reader :access_point
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAccessPointGetResponseMetadata
+    FIELDS = {
+      access_point: 'access_point'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      access_point
+    ].freeze
+    DECODERS = {
+      access_point: lambda do |value|
+        ::OctridevDigitalocean::AccessPointResponse.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AccessPointGetResponse.
+  # Response containing a single access point.
+  class AccessPointGetResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccessPointGetResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccessPointGetResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccessPointGetResponseMetadata::DECODERS
+
+    # @return [AccessPointResponse] Represents an NFS access point resource.
+    attr_reader :access_point
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAccessPointListResponseMetadata
-  FIELDS = {
-    access_points: "access_points",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    access_points
-  ].freeze
-  DECODERS = {
-    access_points: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AccessPointResponse.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AccessPointListResponse.
-# Response containing a list of access points.
-class AccessPointListResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccessPointListResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccessPointListResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccessPointListResponseMetadata::DECODERS
-
-  # @return [Array_of_AccessPointResponse] Array of access point objects.
-  attr_reader :access_points
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAccessPointListResponseMetadata
+    FIELDS = {
+      access_points: 'access_points'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      access_points
+    ].freeze
+    DECODERS = {
+      access_points: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AccessPointResponse.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AccessPointListResponse.
+  # Response containing a list of access points.
+  class AccessPointListResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccessPointListResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccessPointListResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccessPointListResponseMetadata::DECODERS
+
+    # @return [Array_of_AccessPointResponse] Array of access point objects.
+    attr_reader :access_points
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAccessPointRequestMetadata
-  FIELDS = {
-    name: "name",
-    path: "path",
-    access_policy: "access_policy",
-    vpc_id: "vpc_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    path
-    access_policy
-    vpc_id
-  ].freeze
-  DECODERS = {
-    access_policy: lambda do |value|
-      ::OctridevDigitalocean::AccessPolicy.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AccessPointRequest.
-# Payload for creating a new access point on a share.
-class AccessPointRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccessPointRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccessPointRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccessPointRequestMetadata::DECODERS
-
-  # @return [String] The name for the access point. Must be unique per share. Must be 2–63 characters and match `^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$`. The name `default` is reserved (case-insensitive) for the implicit default access point created with each share.
-  attr_reader :name
-  # @return [String] The export sub-path. Must start with `/`, must not be exactly `/` (reserved for the default access point), must be at most 1024 characters, may contain only alphanumerics, `-`, `_`, `.`, and `/`, and must not contain `..` path segments.
-  attr_reader :path
-  # @return [AccessPolicy] Provider-agnostic NFS access policy for an access point. Network CIDRs are managed by attach, detach, and managed-access workflows and are not part of this policy.
-  attr_reader :access_policy
-  # @return [String] Required. The VPC this access point will be pinned to. A storage gateway is provisioned (or reused) in this VPC, and the access point becomes mountable from this VPC regardless of whether the parent share is currently attached to it.
-  attr_reader :vpc_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAccessPointRequestMetadata
+    FIELDS = {
+      name: 'name',
+      path: 'path',
+      access_policy: 'access_policy',
+      vpc_id: 'vpc_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      path
+      access_policy
+      vpc_id
+    ].freeze
+    DECODERS = {
+      access_policy: lambda do |value|
+        ::OctridevDigitalocean::AccessPolicy.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AccessPointRequest.
+  # Payload for creating a new access point on a share.
+  class AccessPointRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccessPointRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccessPointRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccessPointRequestMetadata::DECODERS
+
+    # @return [String] The name for the access point. Must be unique per share. Must be 2–63 characters and match `^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$`. The name `default` is reserved (case-insensitive) for the implicit default access point created with each share.
+    attr_reader :name
+    # @return [String] The export sub-path. Must start with `/`, must not be exactly `/` (reserved for the default access point), must be at most 1024 characters, may contain only alphanumerics, `-`, `_`, `.`, and `/`, and must not contain `..` path segments.
+    attr_reader :path
+    # @return [AccessPolicy] Provider-agnostic NFS access policy for an access point. Network CIDRs are managed by attach, detach, and managed-access workflows and are not part of this policy.
+    attr_reader :access_policy
+    # @return [String] Required. The VPC this access point will be pinned to. A storage gateway is provisioned (or reused) in this VPC, and the access point becomes mountable from this VPC regardless of whether the parent share is currently attached to it.
+    attr_reader :vpc_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAccessPointResponseMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    share_id: "share_id",
-    path: "path",
-    status: "status",
-    access_policy: "access_policy",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    is_default: "is_default",
-    vpc_id: "vpc_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    name
-    share_id
-    path
-    status
-    access_policy
-    created_at
-    updated_at
-    is_default
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::AccessPointResponseStatus.from_value(value)
-    end,
-    access_policy: lambda do |value|
-      ::OctridevDigitalocean::AccessPolicy.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AccessPointResponse.
-# Represents an NFS access point resource.
-class AccessPointResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccessPointResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccessPointResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccessPointResponseMetadata::DECODERS
-
-  # @return [String] The unique identifier of the access point.
-  attr_reader :id
-  # @return [String] The human-readable name of the access point. Must be unique per share.
-  attr_reader :name
-  # @return [String] The unique identifier of the share this access point belongs to.
-  attr_reader :share_id
-  # @return [String] The export sub-path for this access point (always starts with `/`).
-  attr_reader :path
-  # @return [AccessPointResponseStatus] The current lifecycle status of an access point. There is no ACCESS_POINT_DELETING state: DELETE soft-deletes the access point synchronously (mirroring share deletion); the response of a delete request returns the access point already in ACCESS_POINT_DELETED.
-  attr_reader :status
-  # @return [AccessPolicy] Provider-agnostic NFS access policy for an access point. Network CIDRs are managed by attach, detach, and managed-access workflows and are not part of this policy.
-  attr_reader :access_policy
-  # @return [String] The timestamp when the access point was created.
-  attr_reader :created_at
-  # @return [String] The timestamp when the access point was last updated. May be empty while the access point is still being created.
-  attr_reader :updated_at
-  # @return [Boolean] Whether this is the share's default access point.
-  attr_reader :is_default
-  # @return [String] The VPC this access point is pinned to. Omitted on the default access point. Every non-default access point owns its own storage gateway in this VPC and is independent of the parent share's VPC lifecycle.
-  attr_reader :vpc_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAccessPointResponseMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      share_id: 'share_id',
+      path: 'path',
+      status: 'status',
+      access_policy: 'access_policy',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      is_default: 'is_default',
+      vpc_id: 'vpc_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      name
+      share_id
+      path
+      status
+      access_policy
+      created_at
+      updated_at
+      is_default
+    ].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::AccessPointResponseStatus.from_value(value)
+      end,
+      access_policy: lambda do |value|
+        ::OctridevDigitalocean::AccessPolicy.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AccessPointResponse.
+  # Represents an NFS access point resource.
+  class AccessPointResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccessPointResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccessPointResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccessPointResponseMetadata::DECODERS
+
+    # @return [String] The unique identifier of the access point.
+    attr_reader :id
+    # @return [String] The human-readable name of the access point. Must be unique per share.
+    attr_reader :name
+    # @return [String] The unique identifier of the share this access point belongs to.
+    attr_reader :share_id
+    # @return [String] The export sub-path for this access point (always starts with `/`).
+    attr_reader :path
+    # @return [AccessPointResponseStatus] The current lifecycle status of an access point. There is no ACCESS_POINT_DELETING state: DELETE soft-deletes the access point synchronously (mirroring share deletion); the response of a delete request returns the access point already in ACCESS_POINT_DELETED.
+    attr_reader :status
+    # @return [AccessPolicy] Provider-agnostic NFS access policy for an access point. Network CIDRs are managed by attach, detach, and managed-access workflows and are not part of this policy.
+    attr_reader :access_policy
+    # @return [String] The timestamp when the access point was created.
+    attr_reader :created_at
+    # @return [String] The timestamp when the access point was last updated. May be empty while the access point is still being created.
+    attr_reader :updated_at
+    # @return [Boolean] Whether this is the share's default access point.
+    attr_reader :is_default
+    # @return [String] The VPC this access point is pinned to. Omitted on the default access point. Every non-default access point owns its own storage gateway in this VPC and is independent of the parent share's VPC lifecycle.
+    attr_reader :vpc_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the AccessPointResponseStatus SDK namespace.
-module AccessPointResponseStatus
-  ACCESS_POINT_CREATING = 'ACCESS_POINT_CREATING'
-  ACCESS_POINT_ACTIVE = 'ACCESS_POINT_ACTIVE'
-  ACCESS_POINT_FAILED = 'ACCESS_POINT_FAILED'
-  ACCESS_POINT_DELETED = 'ACCESS_POINT_DELETED'
-  VALUES = [
-    'ACCESS_POINT_CREATING', 'ACCESS_POINT_ACTIVE', 'ACCESS_POINT_FAILED', 'ACCESS_POINT_DELETED'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAccessPolicyMetadata
-  FIELDS = {
-    anonuid: "anonuid",
-    anongid: "anongid",
-    protocols: "protocols",
-    squash_config: "squash_config",
-    identity_enforcement_enabled: "identity_enforcement_enabled",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    anonuid
-    anongid
-    protocols
-    squash_config
-    identity_enforcement_enabled
-  ].freeze
-  DECODERS = {
-    protocols: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AccessPolicyProtocolsItem.from_value(item) }
-    end,
-    squash_config: lambda do |value|
-      ::OctridevDigitalocean::AccessPolicySquashConfig.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AccessPolicy.
-# Provider-agnostic NFS access policy for an access point. Network CIDRs are managed by attach, detach, and managed-access workflows and are not part of this policy.
-class AccessPolicy
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAccessPolicyMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAccessPolicyMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAccessPolicyMetadata::DECODERS
-
-  # @return [Integer] UID used for squashed users. Currently only 65534 is supported.
-  attr_reader :anonuid
-  # @return [Integer] GID used for squashed users. Currently only 65534 is supported.
-  attr_reader :anongid
-  # @return [Array_of_AccessPolicyProtocolsItem] Allowed NFS protocols for this export.
-  attr_reader :protocols
-  # @return [AccessPolicySquashConfig] The squash mode applied to the access point export.
-  attr_reader :squash_config
-  # @return [Boolean] Whether identity enforcement is enabled for this export.
-  attr_reader :identity_enforcement_enabled
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AccessPointResponseStatus SDK namespace.
+  module AccessPointResponseStatus
+    ACCESS_POINT_CREATING = 'ACCESS_POINT_CREATING'
+    ACCESS_POINT_ACTIVE = 'ACCESS_POINT_ACTIVE'
+    ACCESS_POINT_FAILED = 'ACCESS_POINT_FAILED'
+    ACCESS_POINT_DELETED = 'ACCESS_POINT_DELETED'
+    VALUES = %w[
+      ACCESS_POINT_CREATING ACCESS_POINT_ACTIVE ACCESS_POINT_FAILED ACCESS_POINT_DELETED
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAccessPolicyMetadata
+    FIELDS = {
+      anonuid: 'anonuid',
+      anongid: 'anongid',
+      protocols: 'protocols',
+      squash_config: 'squash_config',
+      identity_enforcement_enabled: 'identity_enforcement_enabled'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      anonuid
+      anongid
+      protocols
+      squash_config
+      identity_enforcement_enabled
+    ].freeze
+    DECODERS = {
+      protocols: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AccessPolicyProtocolsItem.from_value(item) }
+      end,
+      squash_config: lambda do |value|
+        ::OctridevDigitalocean::AccessPolicySquashConfig.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for AccessPolicy.
+  # Provider-agnostic NFS access policy for an access point. Network CIDRs are managed by attach, detach, and managed-access workflows and are not part of this policy.
+  class AccessPolicy
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAccessPolicyMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAccessPolicyMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAccessPolicyMetadata::DECODERS
 
-# Defines the AccessPolicyProtocolsItem SDK namespace.
-module AccessPolicyProtocolsItem
-  NFS4 = 'NFS4'
-  NFS = 'NFS'
-  VALUES = ['NFS4', 'NFS'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [Integer] UID used for squashed users. Currently only 65534 is supported.
+    attr_reader :anonuid
+    # @return [Integer] GID used for squashed users. Currently only 65534 is supported.
+    attr_reader :anongid
+    # @return [Array_of_AccessPolicyProtocolsItem] Allowed NFS protocols for this export.
+    attr_reader :protocols
+    # @return [AccessPolicySquashConfig] The squash mode applied to the access point export.
+    attr_reader :squash_config
+    # @return [Boolean] Whether identity enforcement is enabled for this export.
+    attr_reader :identity_enforcement_enabled
 
-# Defines the AccessPolicySquashConfig SDK namespace.
-module AccessPolicySquashConfig
-  NO_SQUASH = 'NO_SQUASH'
-  ROOT_SQUASH = 'ROOT_SQUASH'
-  ALL_SQUASH = 'ALL_SQUASH'
-  VALUES = ['NO_SQUASH', 'ROOT_SQUASH', 'ALL_SQUASH'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalNfsApiErrorMetadata
-  FIELDS = {
-    code: "code",
-    message: "message",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    code
-    message
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for NfsApiError.
-# A standard NFS API error response object.
-class NfsApiError
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNfsApiErrorMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNfsApiErrorMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNfsApiErrorMetadata::DECODERS
-
-  # @return [String] A service-defined error code.
-  attr_reader :code
-  # @return [String] A human-readable description of the error.
-  attr_reader :message
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AccessPolicyProtocolsItem SDK namespace.
+  module AccessPolicyProtocolsItem
+    NFS4 = 'NFS4'
+    NFS = 'NFS'
+    VALUES = %w[NFS4 NFS].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalNfsCreateResponseMetadata
-  FIELDS = {
-    share: "share",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    share: lambda do |value|
-      ::OctridevDigitalocean::NfsResponse.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for NfsCreateResponse.
-# Typed representation of the `NfsCreateResponse` API schema.
-class NfsCreateResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNfsCreateResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNfsCreateResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNfsCreateResponseMetadata::DECODERS
-
-  # @return [NfsResponse] Optional object value serialized in the `share` wire field.
-  attr_reader :share
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the AccessPolicySquashConfig SDK namespace.
+  module AccessPolicySquashConfig
+    NO_SQUASH = 'NO_SQUASH'
+    ROOT_SQUASH = 'ROOT_SQUASH'
+    ALL_SQUASH = 'ALL_SQUASH'
+    VALUES = %w[NO_SQUASH ROOT_SQUASH ALL_SQUASH].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalNfsApiErrorMetadata
+    FIELDS = {
+      code: 'code',
+      message: 'message'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      code
+      message
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for NfsApiError.
+  # A standard NFS API error response object.
+  class NfsApiError
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNfsApiErrorMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNfsApiErrorMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNfsApiErrorMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalNfsGetResponseMetadata
-  FIELDS = {
-    share: "share",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    share: lambda do |value|
-      ::OctridevDigitalocean::NfsResponse.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] A service-defined error code.
+    attr_reader :code
+    # @return [String] A human-readable description of the error.
+    attr_reader :message
 
-# API model for NfsGetResponse.
-# Typed representation of the `NfsGetResponse` API schema.
-class NfsGetResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNfsGetResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNfsGetResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNfsGetResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [NfsResponse] Optional object value serialized in the `share` wire field.
-  attr_reader :share
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalNfsCreateResponseMetadata
+    FIELDS = {
+      share: 'share'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      share: lambda do |value|
+        ::OctridevDigitalocean::NfsResponse.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for NfsCreateResponse.
+  # Typed representation of the `NfsCreateResponse` API schema.
+  class NfsCreateResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNfsCreateResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNfsCreateResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNfsCreateResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalNfsListResponseMetadata
-  FIELDS = {
-    shares: "shares",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    shares: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::NfsResponse.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [NfsResponse] Optional object value serialized in the `share` wire field.
+    attr_reader :share
 
-# API model for NfsListResponse.
-# Typed representation of the `NfsListResponse` API schema.
-class NfsListResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNfsListResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNfsListResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNfsListResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_NfsResponse] Optional array value serialized in the `shares` wire field.
-  attr_reader :shares
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalNfsGetResponseMetadata
+    FIELDS = {
+      share: 'share'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      share: lambda do |value|
+        ::OctridevDigitalocean::NfsResponse.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for NfsGetResponse.
+  # Typed representation of the `NfsGetResponse` API schema.
+  class NfsGetResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNfsGetResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNfsGetResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNfsGetResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalNfsRequestMetadata
-  FIELDS = {
-    name: "name",
-    size_gib: "size_gib",
-    region: "region",
-    vpc_ids: "vpc_ids",
-    performance_tier: "performance_tier",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    size_gib
-    region
-    vpc_ids
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [NfsResponse] Optional object value serialized in the `share` wire field.
+    attr_reader :share
 
-# API model for NfsRequest.
-# Typed representation of the `NfsRequest` API schema.
-class NfsRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNfsRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNfsRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNfsRequestMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The human-readable name of the share.
-  attr_reader :name
-  # @return [Integer] The desired/provisioned size of the share in GiB (Gibibytes). Must be >= 50.
-  attr_reader :size_gib
-  # @return [String] The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
-  attr_reader :region
-  # @return [Array_of_String] List of VPC IDs that should be able to access the share.
-  attr_reader :vpc_ids
-  # @return [String] The performance tier of the share.
-  attr_reader :performance_tier
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalNfsListResponseMetadata
+    FIELDS = {
+      shares: 'shares'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      shares: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::NfsResponse.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for NfsListResponse.
+  # Typed representation of the `NfsListResponse` API schema.
+  class NfsListResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNfsListResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNfsListResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNfsListResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalNfsResponseMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    size_gib: "size_gib",
-    region: "region",
-    status: "status",
-    created_at: "created_at",
-    vpc_ids: "vpc_ids",
-    performance_tier: "performance_tier",
-    mount_path: "mount_path",
-    host: "host",
-    access_points: "access_points",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    name
-    size_gib
-    region
-    status
-    created_at
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::NfsResponseStatus.from_value(value)
-    end,
-    access_points: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AccessPointResponse.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_NfsResponse] Optional array value serialized in the `shares` wire field.
+    attr_reader :shares
 
-# API model for NfsResponse.
-# Typed representation of the `NfsResponse` API schema.
-class NfsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNfsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNfsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNfsResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The unique identifier of the NFS share.
-  attr_reader :id
-  # @return [String] The human-readable name of the share.
-  attr_reader :name
-  # @return [Integer] The desired/provisioned size of the share in GiB (Gibibytes). Must be >= 50.
-  attr_reader :size_gib
-  # @return [String] The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
-  attr_reader :region
-  # @return [NfsResponseStatus] The current status of the share. `INACTIVE` means the share exists but is not attached to any VPC.
-  attr_reader :status
-  # @return [String] Timestamp for when the NFS share was created.
-  attr_reader :created_at
-  # @return [Array_of_String] List of VPC IDs that should be able to access the share.
-  attr_reader :vpc_ids
-  # @return [String] The performance tier of the share.
-  attr_reader :performance_tier
-  # @return [String] Path at which the share will be available, to be mounted at a target of the user's choice within the client
-  attr_reader :mount_path
-  # @return [String] The host IP of the NFS server that will be accessible from the associated VPC
-  attr_reader :host
-  # @return [Array_of_AccessPointResponse] Access points configured on this share. The default access point is returned first.
-  attr_reader :access_points
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalNfsRequestMetadata
+    FIELDS = {
+      name: 'name',
+      size_gib: 'size_gib',
+      region: 'region',
+      vpc_ids: 'vpc_ids',
+      performance_tier: 'performance_tier'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      size_gib
+      region
+      vpc_ids
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for NfsRequest.
+  # Typed representation of the `NfsRequest` API schema.
+  class NfsRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNfsRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNfsRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNfsRequestMetadata::DECODERS
 
-# Defines the NfsResponseStatus SDK namespace.
-module NfsResponseStatus
-  CREATING = 'CREATING'
-  ACTIVE = 'ACTIVE'
-  INACTIVE = 'INACTIVE'
-  FAILED = 'FAILED'
-  DELETED = 'DELETED'
-  VALUES = ['CREATING', 'ACTIVE', 'INACTIVE', 'FAILED', 'DELETED'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] The human-readable name of the share.
+    attr_reader :name
+    # @return [Integer] The desired/provisioned size of the share in GiB (Gibibytes). Must be >= 50.
+    attr_reader :size_gib
+    # @return [String] The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
+    attr_reader :region
+    # @return [Array_of_String] List of VPC IDs that should be able to access the share.
+    attr_reader :vpc_ids
+    # @return [String] The performance tier of the share.
+    attr_reader :performance_tier
 
-# Internal model hydration metadata.
-class SdkInternalNfsSnapshotGetResponseMetadata
-  FIELDS = {
-    snapshot: "snapshot",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    snapshot: lambda do |value|
-      ::OctridevDigitalocean::NfsSnapshotResponse.from_hash(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalNfsResponseMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      size_gib: 'size_gib',
+      region: 'region',
+      status: 'status',
+      created_at: 'created_at',
+      vpc_ids: 'vpc_ids',
+      performance_tier: 'performance_tier',
+      mount_path: 'mount_path',
+      host: 'host',
+      access_points: 'access_points'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      name
+      size_gib
+      region
+      status
+      created_at
+    ].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::NfsResponseStatus.from_value(value)
+      end,
+      access_points: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AccessPointResponse.from_hash(item) }
+      end
+    }.freeze
+  end
+
+  # API model for NfsResponse.
+  # Typed representation of the `NfsResponse` API schema.
+  class NfsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNfsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNfsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNfsResponseMetadata::DECODERS
+
+    # @return [String] The unique identifier of the NFS share.
+    attr_reader :id
+    # @return [String] The human-readable name of the share.
+    attr_reader :name
+    # @return [Integer] The desired/provisioned size of the share in GiB (Gibibytes). Must be >= 50.
+    attr_reader :size_gib
+    # @return [String] The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
+    attr_reader :region
+    # @return [NfsResponseStatus] The current status of the share. `INACTIVE` means the share exists but is not attached to any VPC.
+    attr_reader :status
+    # @return [String] Timestamp for when the NFS share was created.
+    attr_reader :created_at
+    # @return [Array_of_String] List of VPC IDs that should be able to access the share.
+    attr_reader :vpc_ids
+    # @return [String] The performance tier of the share.
+    attr_reader :performance_tier
+    # @return [String] Path at which the share will be available, to be mounted at a target of the user's choice within the client
+    attr_reader :mount_path
+    # @return [String] The host IP of the NFS server that will be accessible from the associated VPC
+    attr_reader :host
+    # @return [Array_of_AccessPointResponse] Access points configured on this share. The default access point is returned first.
+    attr_reader :access_points
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the NfsResponseStatus SDK namespace.
+  module NfsResponseStatus
+    CREATING = 'CREATING'
+    ACTIVE = 'ACTIVE'
+    INACTIVE = 'INACTIVE'
+    FAILED = 'FAILED'
+    DELETED = 'DELETED'
+    VALUES = %w[CREATING ACTIVE INACTIVE FAILED DELETED].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalNfsSnapshotGetResponseMetadata
+    FIELDS = {
+      snapshot: 'snapshot'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      snapshot: lambda do |value|
+        ::OctridevDigitalocean::NfsSnapshotResponse.from_hash(value)
+      end
+    }.freeze
+  end
 end

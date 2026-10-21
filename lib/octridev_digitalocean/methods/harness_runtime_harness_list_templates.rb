@@ -21,24 +21,23 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/agents/templates",
+          '/v2/agents/templates',
           config: config,
           query: {
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListTemplatesResponse,
           decoder: :json,
           operation_id: 'harness_list_templates',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
-    HarnessListTemplatesPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      HarnessListTemplatesPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # team_id is stamped from the authenticated principal; never accepted from the client.
       #
@@ -63,9 +62,11 @@ module OctridevDigitalocean
             )
             items = page.templates || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -88,10 +89,12 @@ module OctridevDigitalocean
             )
             items = page.templates || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << HarnessListTemplatesPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end

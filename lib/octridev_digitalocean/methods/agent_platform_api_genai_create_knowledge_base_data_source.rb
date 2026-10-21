@@ -34,13 +34,12 @@ module OctridevDigitalocean
         web_crawler_data_source: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/gen-ai/knowledge_bases/",
+            '/v2/gen-ai/knowledge_bases/',
             SdkClient.encode_path_segment(knowledge_base_uuid),
-            "/data_sources"
+            '/data_sources'
           ].join,
           config: config,
           body: {
@@ -49,13 +48,13 @@ module OctridevDigitalocean
             'chunking_options' => chunking_options,
             'knowledge_base_uuid' => knowledge_base_uuid2,
             'spaces_data_source' => spaces_data_source,
-            'web_crawler_data_source' => web_crawler_data_source,
+            'web_crawler_data_source' => web_crawler_data_source
           },
           return_type: ::OctridevDigitalocean::ApiCreateKnowledgeBaseDataSourceOutput,
           decoder: :json,
           operation_id: 'genai_create_knowledge_base_data_source',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

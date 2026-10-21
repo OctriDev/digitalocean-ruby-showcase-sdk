@@ -73,10 +73,9 @@ module OctridevDigitalocean
         star_metric: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/model_evaluation_runs",
+          '/v2/gen-ai/model_evaluation_runs',
           config: config,
           body: {
             'candidate_inference_config' => candidate_inference_config,
@@ -93,13 +92,13 @@ module OctridevDigitalocean
             'preset_save_sections' => preset_save_sections,
             'save_as_preset' => save_as_preset,
             'source' => source,
-            'star_metric' => star_metric,
+            'star_metric' => star_metric
           },
           return_type: ::OctridevDigitalocean::ApiCreateModelEvaluationRunOutput,
           decoder: :json,
           operation_id: 'genai_create_model_evaluation_run',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

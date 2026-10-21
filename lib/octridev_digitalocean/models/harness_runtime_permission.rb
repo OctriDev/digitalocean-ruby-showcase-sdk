@@ -5,181 +5,179 @@
 
 # harness_runtime_permission domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalPermissionFilesystemMetadata
-  FIELDS = {
-    mode: "mode",
-    allow_write: "allowWrite",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    mode: lambda do |value|
-      ::OctridevDigitalocean::PermissionFilesystemMode.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for PermissionFilesystem.
-# Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots) for every agent.
-class PermissionFilesystem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPermissionFilesystemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPermissionFilesystemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPermissionFilesystemMetadata::DECODERS
-
-  # @return [PermissionFilesystemMode] Optional enumerated value serialized in the `mode` wire field.
-  attr_reader :mode
-  # @return [Array_of_String] Additional writable paths beyond the workspace. Values must not contain shell-style ${VAR}/$VAR expansions.
-  attr_reader :allow_write
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalPermissionFilesystemMetadata
+    FIELDS = {
+      mode: 'mode',
+      allow_write: 'allowWrite'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      mode: lambda do |value|
+        ::OctridevDigitalocean::PermissionFilesystemMode.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for PermissionFilesystem.
+  # Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots) for every agent.
+  class PermissionFilesystem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPermissionFilesystemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPermissionFilesystemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPermissionFilesystemMetadata::DECODERS
+
+    # @return [PermissionFilesystemMode] Optional enumerated value serialized in the `mode` wire field.
+    attr_reader :mode
+    # @return [Array_of_String] Additional writable paths beyond the workspace. Values must not contain shell-style ${VAR}/$VAR expansions.
+    attr_reader :allow_write
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the PermissionFilesystemMode SDK namespace.
-module PermissionFilesystemMode
-  READ_ONLY = 'read-only'
-  WORKSPACE_WRITE = 'workspace-write'
-  VALUES = ['read-only', 'workspace-write'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalPermissionNetworkMetadata
-  FIELDS = {
-    default: "default",
-    allow: "allow",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    default: lambda do |value|
-      ::OctridevDigitalocean::PermissionNetworkDefault.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for PermissionNetwork.
-# Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses stay blocked by the broader egress policy.
-class PermissionNetwork
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPermissionNetworkMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPermissionNetworkMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPermissionNetworkMetadata::DECODERS
-
-  # @return [PermissionNetworkDefault] Optional enumerated value serialized in the `default` wire field.
-  attr_reader :default
-  # @return [Array_of_String] Optional array value serialized in the `allow` wire field.
-  attr_reader :allow
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the PermissionFilesystemMode SDK namespace.
+  module PermissionFilesystemMode
+    READ_ONLY = 'read-only'
+    WORKSPACE_WRITE = 'workspace-write'
+    VALUES = %w[read-only workspace-write].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalPermissionNetworkMetadata
+    FIELDS = {
+      default: 'default',
+      allow: 'allow'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      default: lambda do |value|
+        ::OctridevDigitalocean::PermissionNetworkDefault.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for PermissionNetwork.
+  # Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses stay blocked by the broader egress policy.
+  class PermissionNetwork
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPermissionNetworkMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPermissionNetworkMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPermissionNetworkMetadata::DECODERS
 
-# Defines the PermissionNetworkDefault SDK namespace.
-module PermissionNetworkDefault
-  ALLOW = 'allow'
-  DENY = 'deny'
-  VALUES = ['allow', 'deny'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [PermissionNetworkDefault] Optional enumerated value serialized in the `default` wire field.
+    attr_reader :default
+    # @return [Array_of_String] Optional array value serialized in the `allow` wire field.
+    attr_reader :allow
 
-# Internal model hydration metadata.
-class SdkInternalPermissionRuleMetadata
-  FIELDS = {
-    tool: "tool",
-    match: "match",
-    action: "action",
-    enforcement: "enforcement",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    tool
-    action
-  ].freeze
-  DECODERS = {
-    action: lambda do |value|
-      ::OctridevDigitalocean::PermissionRuleAction.from_value(value)
-    end,
-    enforcement: lambda do |value|
-      ::OctridevDigitalocean::PermissionRuleEnforcement.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for PermissionRule.
-# Typed representation of the `PermissionRule` API schema.
-class PermissionRule
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPermissionRuleMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPermissionRuleMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPermissionRuleMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] Tool taxonomy this rule matches (e.g. bash, file.read, file.write, web.fetch, git.*, mcp).
-  attr_reader :tool
-  # @return [Hash] Optional keys narrowing the rule (e.g. {"command": "npm run deploy"} for bash). Values are globs and must not contain shell-style ${VAR}/$VAR expansions.
-  attr_reader :match
-  # @return [PermissionRuleAction] Required enumerated value serialized in the `action` wire field.
-  attr_reader :action
-  # @return [PermissionRuleEnforcement] What happens when the agent cannot enforce the rule exactly. "strict" rejects the session; "best-effort" degrades to the closest more-restrictive form and warns (never widens). Defaults to strict for deny rules, best-effort otherwise.
-  attr_reader :enforcement
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the PermissionNetworkDefault SDK namespace.
+  module PermissionNetworkDefault
+    ALLOW = 'allow'
+    DENY = 'deny'
+    VALUES = %w[allow deny].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalPermissionRuleMetadata
+    FIELDS = {
+      tool: 'tool',
+      match: 'match',
+      action: 'action',
+      enforcement: 'enforcement'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      tool
+      action
+    ].freeze
+    DECODERS = {
+      action: lambda do |value|
+        ::OctridevDigitalocean::PermissionRuleAction.from_value(value)
+      end,
+      enforcement: lambda do |value|
+        ::OctridevDigitalocean::PermissionRuleEnforcement.from_value(value)
+      end
+    }.freeze
   end
-end
 
-# Defines the PermissionRuleAction SDK namespace.
-module PermissionRuleAction
-  ALLOW = 'allow'
-  ASK = 'ask'
-  DENY = 'deny'
-  VALUES = ['allow', 'ask', 'deny'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+  # API model for PermissionRule.
+  # Typed representation of the `PermissionRule` API schema.
+  class PermissionRule
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPermissionRuleMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPermissionRuleMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPermissionRuleMetadata::DECODERS
 
-# Defines the PermissionRuleEnforcement SDK namespace.
-module PermissionRuleEnforcement
-  STRICT = 'strict'
-  BEST_EFFORT = 'best-effort'
-  VALUES = ['strict', 'best-effort'].freeze
-  def self.from_value(value)
-    value
+    # @return [String] Tool taxonomy this rule matches (e.g. bash, file.read, file.write, web.fetch, git.*, mcp).
+    attr_reader :tool
+    # @return [Hash] Optional keys narrowing the rule (e.g. {"command": "npm run deploy"} for bash). Values are globs and must not contain shell-style ${VAR}/$VAR expansions.
+    attr_reader :match
+    # @return [PermissionRuleAction] Required enumerated value serialized in the `action` wire field.
+    attr_reader :action
+    # @return [PermissionRuleEnforcement] What happens when the agent cannot enforce the rule exactly. "strict" rejects the session; "best-effort" degrades to the closest more-restrictive form and warns (never widens). Defaults to strict for deny rules, best-effort otherwise.
+    attr_reader :enforcement
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the PermissionRuleAction SDK namespace.
+  module PermissionRuleAction
+    ALLOW = 'allow'
+    ASK = 'ask'
+    DENY = 'deny'
+    VALUES = %w[allow ask deny].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the PermissionRuleEnforcement SDK namespace.
+  module PermissionRuleEnforcement
+    STRICT = 'strict'
+    BEST_EFFORT = 'best-effort'
+    VALUES = %w[strict best-effort].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

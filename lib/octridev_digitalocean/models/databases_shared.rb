@@ -5,632 +5,626 @@
 
 # databases domain models
 module OctridevDigitalocean
-# Defines the PostgresAdvancedConfigLogLinePrefix SDK namespace.
-module PostgresAdvancedConfigLogLinePrefix
-  PID_P_USER_U_DB_D_APP_A_CLIENT_H = 'pid=%p,user=%u,db=%d,app=%a,client=%h'
-  M_P_Q_USER_U_DB_D_APP_A = '%m [%p] %q[user=%u,db=%d,app=%a]'
-  T_P_L_1_USER_U_DB_D_APP_A_CLIENT_H = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h'
-  VALUES = [
-    'pid=%p,user=%u,db=%d,app=%a,client=%h', '%m [%p] %q[user=%u,db=%d,app=%a]',
-    '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the PostgresAdvancedConfigPgStatStatementsTrack SDK namespace.
-module PostgresAdvancedConfigPgStatStatementsTrack
-  ALL = 'all'
-  TOP = 'top'
-  NONE = 'none'
-  VALUES = ['all', 'top', 'none'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the PostgresAdvancedConfigPgauditLogItem SDK namespace.
-module PostgresAdvancedConfigPgauditLogItem
-  READ = 'read'
-  WRITE = 'write'
-  FUNCTION = 'function'
-  ROLE = 'role'
-  DDL = 'ddl'
-  MISC = 'misc'
-  MISC_SET = 'misc_set'
-  ALL = 'all'
-  VALUES = ['read', 'write', 'function', 'role', 'ddl', 'misc', 'misc_set', 'all'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the PostgresAdvancedConfigSynchronousReplication SDK namespace.
-module PostgresAdvancedConfigSynchronousReplication
-  OFF = 'off'
-  QUORUM = 'quorum'
-  VALUES = ['off', 'quorum'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the PostgresAdvancedConfigTrackCommitTimestamp SDK namespace.
-module PostgresAdvancedConfigTrackCommitTimestamp
-  OFF = 'off'
-  ON = 'on'
-  VALUES = ['off', 'on'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the PostgresAdvancedConfigTrackFunctions SDK namespace.
-module PostgresAdvancedConfigTrackFunctions
-  ALL = 'all'
-  PL = 'pl'
-  NONE = 'none'
-  VALUES = ['all', 'pl', 'none'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the PostgresAdvancedConfigTrackIoTiming SDK namespace.
-module PostgresAdvancedConfigTrackIoTiming
-  OFF = 'off'
-  ON = 'on'
-  VALUES = ['off', 'on'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRedisAdvancedConfigMetadata
-  FIELDS = {
-    redis_maxmemory_policy: "redis_maxmemory_policy",
-    redis_pubsub_client_output_buffer_limit: "redis_pubsub_client_output_buffer_limit",
-    redis_number_of_databases: "redis_number_of_databases",
-    redis_io_threads: "redis_io_threads",
-    redis_lfu_log_factor: "redis_lfu_log_factor",
-    redis_lfu_decay_time: "redis_lfu_decay_time",
-    redis_ssl: "redis_ssl",
-    redis_timeout: "redis_timeout",
-    redis_notify_keyspace_events: "redis_notify_keyspace_events",
-    redis_persistence: "redis_persistence",
-    redis_acl_channels_default: "redis_acl_channels_default",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    redis_maxmemory_policy: lambda do |value|
-      ::OctridevDigitalocean::RedisAdvancedConfigRedisMaxmemoryPolicy.from_value(value)
-    end,
-    redis_persistence: lambda do |value|
-      ::OctridevDigitalocean::RedisAdvancedConfigRedisPersistence.from_value(value)
-    end,
-    redis_acl_channels_default: lambda do |value|
-      ::OctridevDigitalocean::RedisAdvancedConfigRedisAclChannelsDefault.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for RedisAdvancedConfig.
-# Typed representation of the `RedisAdvancedConfig` API schema.
-class RedisAdvancedConfig
-  include DatabaseConfigConfig
-  include DatabaseConfigResponseConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRedisAdvancedConfigMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRedisAdvancedConfigMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRedisAdvancedConfigMetadata::DECODERS
-
-  # @return [RedisAdvancedConfigRedisMaxmemoryPolicy] A string specifying the desired eviction policy for the Caching cluster. - `noeviction`: Don't evict any data, returns error when memory limit is reached. - `allkeys-lru:` Evict any key, least recently used (LRU) first. - `allkeys-random`: Evict keys in a random order. - `volatile-lru`: Evict keys with expiration only, least recently used (LRU) first. - `volatile-random`: Evict keys with expiration only in a random order. - `volatile-ttl`: Evict keys with expiration only,…
-  attr_reader :redis_maxmemory_policy
-  # @return [Integer] Set output buffer limit for pub / sub clients in MB. The value is the hard limit, the soft limit is 1/4 of the hard limit. When setting the limit, be mindful of the available memory in the selected service plan.
-  attr_reader :redis_pubsub_client_output_buffer_limit
-  # @return [Integer] Set number of redis databases. Changing this will cause a restart of redis service.
-  attr_reader :redis_number_of_databases
-  # @return [Integer] Caching IO thread count
-  attr_reader :redis_io_threads
-  # @return [Integer] Counter logarithm factor for volatile-lfu and allkeys-lfu maxmemory-policies
-  attr_reader :redis_lfu_log_factor
-  # @return [Integer] LFU maxmemory-policy counter decay time in minutes
-  attr_reader :redis_lfu_decay_time
-  # @return [Boolean] Require SSL to access Caching. - When enabled, Caching accepts only SSL connections on port `25061`. - When disabled, port `25060` is opened for non-SSL connections, while port `25061` remains available for SSL connections.
-  attr_reader :redis_ssl
-  # @return [Integer] Caching idle connection timeout in seconds
-  attr_reader :redis_timeout
-  # @return [String] Set notify-keyspace-events option. Requires at least `K` or `E` and accepts any combination of the following options. Setting the parameter to `""` disables notifications. - `K` &mdash; Keyspace events - `E` &mdash; Keyevent events - `g` &mdash; Generic commands (e.g. `DEL`, `EXPIRE`, `RENAME`, ...) - `$` &mdash; String commands - `l` &mdash; List commands - `s` &mdash; Set commands - `h` &mdash; Hash commands - `z` &mdash; Sorted set commands - `t` &mdash; Stream commands -…
-  attr_reader :redis_notify_keyspace_events
-  # @return [RedisAdvancedConfigRedisPersistence] Creates an RDB dump of the database every 10 minutes that can be used to recover data after a node crash. The database does not create the dump if no keys have changed since the last dump. When set to `off`, the database cannot fork services, and data can be lost if a service is restarted or powered off. DigitalOcean Managed Caching databases do not support the Append Only File (AOF) persistence method.
-  attr_reader :redis_persistence
-  # @return [RedisAdvancedConfigRedisAclChannelsDefault] Determines default pub/sub channels' ACL for new users if ACL is not supplied. When this option is not defined, all_channels is assumed to keep backward compatibility. This option doesn't affect Caching configuration acl-pubsub-default.
-  attr_reader :redis_acl_channels_default
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the PostgresAdvancedConfigLogLinePrefix SDK namespace.
+  module PostgresAdvancedConfigLogLinePrefix
+    PID_P_USER_U_DB_D_APP_A_CLIENT_H = 'pid=%p,user=%u,db=%d,app=%a,client=%h'
+    M_P_Q_USER_U_DB_D_APP_A = '%m [%p] %q[user=%u,db=%d,app=%a]'
+    T_P_L_1_USER_U_DB_D_APP_A_CLIENT_H = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h'
+    VALUES = [
+      'pid=%p,user=%u,db=%d,app=%a,client=%h', '%m [%p] %q[user=%u,db=%d,app=%a]',
+      '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h'
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the PostgresAdvancedConfigPgStatStatementsTrack SDK namespace.
+  module PostgresAdvancedConfigPgStatStatementsTrack
+    ALL = 'all'
+    TOP = 'top'
+    NONE = 'none'
+    VALUES = %w[all top none].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the RedisAdvancedConfigRedisAclChannelsDefault SDK namespace.
-module RedisAdvancedConfigRedisAclChannelsDefault
-  ALLCHANNELS = 'allchannels'
-  RESETCHANNELS = 'resetchannels'
-  VALUES = ['allchannels', 'resetchannels'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the RedisAdvancedConfigRedisMaxmemoryPolicy SDK namespace.
-module RedisAdvancedConfigRedisMaxmemoryPolicy
-  NOEVICTION = 'noeviction'
-  ALLKEYS_LRU = 'allkeys-lru'
-  ALLKEYS_RANDOM = 'allkeys-random'
-  VOLATILE_LRU = 'volatile-lru'
-  VOLATILE_RANDOM = 'volatile-random'
-  VOLATILE_TTL = 'volatile-ttl'
-  VALUES = [
-    'noeviction', 'allkeys-lru', 'allkeys-random', 'volatile-lru', 'volatile-random', 'volatile-ttl'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the RedisAdvancedConfigRedisPersistence SDK namespace.
-module RedisAdvancedConfigRedisPersistence
-  OFF = 'off'
-  RDB = 'rdb'
-  VALUES = ['off', 'rdb'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRsyslogLogsinkMetadata
-  FIELDS = {
-    server: "server",
-    port: "port",
-    tls: "tls",
-    format: "format",
-    logline: "logline",
-    sd: "sd",
-    ca: "ca",
-    key: "key",
-    cert: "cert",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    server
-    port
-    tls
-    format
-  ].freeze
-  DECODERS = {
-    format: lambda do |value|
-      ::OctridevDigitalocean::RsyslogLogsinkFormat.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for RsyslogLogsink.
-# Typed representation of the `RsyslogLogsink` API schema.
-class RsyslogLogsink
-  include LogsinkUpdateConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRsyslogLogsinkMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRsyslogLogsinkMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRsyslogLogsinkMetadata::DECODERS
-
-  # @return [String] DNS name or IPv4 address of the rsyslog server
-  attr_reader :server
-  # @return [Integer] The internal port on which the rsyslog server is listening
-  attr_reader :port
-  # @return [Boolean] Use TLS (as the messages are not filtered and may contain sensitive information, it is highly recommended to set this to true if the remote server supports it)
-  attr_reader :tls
-  # @return [RsyslogLogsinkFormat] Message format used by the server, this can be either rfc3164 (the old BSD style message format), `rfc5424` (current syslog message format) or custom
-  attr_reader :format
-  # @return [String] Conditional (required if `format` == `custom`). Syslog log line template for a custom format, supporting limited rsyslog style templating (using `%tag%`). Supported tags are: `HOSTNAME`, `app-name`, `msg`, `msgid`, `pri`, `procid`, `structured-data`, `timestamp` and `timestamp:::date-rfc3339`. --- **Datadog Integration Example for Non-Mongo clusters**: ``` DD_KEY <%pri%>1 %timestamp:::date-rfc3339% %HOSTNAME%.DB_NAME %app-name% - - - %msg% ``` - Replace `DD_KEY` with your…
-  attr_reader :logline
-  # @return [String] content of the structured data block of rfc5424 message
-  attr_reader :sd
-  # @return [String] PEM encoded CA certificate
-  attr_reader :ca
-  # @return [String] (PEM format) client key if the server requires client authentication
-  attr_reader :key
-  # @return [String] (PEM format) client cert to use
-  attr_reader :cert
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the PostgresAdvancedConfigPgauditLogItem SDK namespace.
+  module PostgresAdvancedConfigPgauditLogItem
+    READ = 'read'
+    WRITE = 'write'
+    FUNCTION = 'function'
+    ROLE = 'role'
+    DDL = 'ddl'
+    MISC = 'misc'
+    MISC_SET = 'misc_set'
+    ALL = 'all'
+    VALUES = %w[read write function role ddl misc misc_set all].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the PostgresAdvancedConfigSynchronousReplication SDK namespace.
+  module PostgresAdvancedConfigSynchronousReplication
+    OFF = 'off'
+    QUORUM = 'quorum'
+    VALUES = %w[off quorum].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the RsyslogLogsinkFormat SDK namespace.
-module RsyslogLogsinkFormat
-  RFC5424 = 'rfc5424'
-  RFC3164 = 'rfc3164'
-  CUSTOM = 'custom'
-  VALUES = ['rfc5424', 'rfc3164', 'custom'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSourceDatabaseSourceMetadata
-  FIELDS = {
-    host: "host",
-    port: "port",
-    dbname: "dbname",
-    username: "username",
-    password: "password",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SourceDatabaseSource.
-# Required object value serialized in the `source` wire field.
-class SourceDatabaseSource
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSourceDatabaseSourceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSourceDatabaseSourceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSourceDatabaseSourceMetadata::DECODERS
-
-  # @return [String] The FQDN pointing to the database cluster's current primary node.
-  attr_reader :host
-  # @return [Integer] The port on which the database cluster is listening.
-  attr_reader :port
-  # @return [String] The name of the default database.
-  attr_reader :dbname
-  # @return [String] The default user for the database.
-  attr_reader :username
-  # @return [String] The randomly generated password for the default user.
-  attr_reader :password
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the PostgresAdvancedConfigTrackCommitTimestamp SDK namespace.
+  module PostgresAdvancedConfigTrackCommitTimestamp
+    OFF = 'off'
+    ON = 'on'
+    VALUES = %w[off on].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the PostgresAdvancedConfigTrackFunctions SDK namespace.
+  module PostgresAdvancedConfigTrackFunctions
+    ALL = 'all'
+    PL = 'pl'
+    NONE = 'none'
+    VALUES = %w[all pl none].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSourceDatabaseMetadata
-  FIELDS = {
-    source: "source",
-    disable_ssl: "disable_ssl",
-    ignore_dbs: "ignore_dbs",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    source
-  ].freeze
-  DECODERS = {
-    source: lambda do |value|
-      ::OctridevDigitalocean::SourceDatabaseSource.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for SourceDatabase.
-# Typed representation of the `SourceDatabase` API schema.
-class SourceDatabase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSourceDatabaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSourceDatabaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSourceDatabaseMetadata::DECODERS
-
-  # @return [SourceDatabaseSource] Required object value serialized in the `source` wire field.
-  attr_reader :source
-  # @return [Boolean] Enables SSL encryption when connecting to the source database.
-  attr_reader :disable_ssl
-  # @return [Array_of_String] List of databases that should be ignored during migration.
-  attr_reader :ignore_dbs
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the PostgresAdvancedConfigTrackIoTiming SDK namespace.
+  module PostgresAdvancedConfigTrackIoTiming
+    OFF = 'off'
+    ON = 'on'
+    VALUES = %w[off on].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalRedisAdvancedConfigMetadata
+    FIELDS = {
+      redis_maxmemory_policy: 'redis_maxmemory_policy',
+      redis_pubsub_client_output_buffer_limit: 'redis_pubsub_client_output_buffer_limit',
+      redis_number_of_databases: 'redis_number_of_databases',
+      redis_io_threads: 'redis_io_threads',
+      redis_lfu_log_factor: 'redis_lfu_log_factor',
+      redis_lfu_decay_time: 'redis_lfu_decay_time',
+      redis_ssl: 'redis_ssl',
+      redis_timeout: 'redis_timeout',
+      redis_notify_keyspace_events: 'redis_notify_keyspace_events',
+      redis_persistence: 'redis_persistence',
+      redis_acl_channels_default: 'redis_acl_channels_default'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      redis_maxmemory_policy: lambda do |value|
+        ::OctridevDigitalocean::RedisAdvancedConfigRedisMaxmemoryPolicy.from_value(value)
+      end,
+      redis_persistence: lambda do |value|
+        ::OctridevDigitalocean::RedisAdvancedConfigRedisPersistence.from_value(value)
+      end,
+      redis_acl_channels_default: lambda do |value|
+        ::OctridevDigitalocean::RedisAdvancedConfigRedisAclChannelsDefault.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for RedisAdvancedConfig.
+  # Typed representation of the `RedisAdvancedConfig` API schema.
+  class RedisAdvancedConfig
+    include DatabaseConfigConfig
+    include DatabaseConfigResponseConfig
 
-# Internal model hydration metadata.
-class SdkInternalSqlModeMetadata
-  FIELDS = {
-    sql_mode: "sql_mode",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    sql_mode
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRedisAdvancedConfigMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRedisAdvancedConfigMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRedisAdvancedConfigMetadata::DECODERS
 
-# API model for SqlMode.
-# Typed representation of the `SqlMode` API schema.
-class SqlMode
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSqlModeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSqlModeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSqlModeMetadata::DECODERS
+    # @return [RedisAdvancedConfigRedisMaxmemoryPolicy] A string specifying the desired eviction policy for the Caching cluster. - `noeviction`: Don't evict any data, returns error when memory limit is reached. - `allkeys-lru:` Evict any key, least recently used (LRU) first. - `allkeys-random`: Evict keys in a random order. - `volatile-lru`: Evict keys with expiration only, least recently used (LRU) first. - `volatile-random`: Evict keys with expiration only in a random order. - `volatile-ttl`: Evict keys with expiration only,…
+    attr_reader :redis_maxmemory_policy
+    # @return [Integer] Set output buffer limit for pub / sub clients in MB. The value is the hard limit, the soft limit is 1/4 of the hard limit. When setting the limit, be mindful of the available memory in the selected service plan.
+    attr_reader :redis_pubsub_client_output_buffer_limit
+    # @return [Integer] Set number of redis databases. Changing this will cause a restart of redis service.
+    attr_reader :redis_number_of_databases
+    # @return [Integer] Caching IO thread count
+    attr_reader :redis_io_threads
+    # @return [Integer] Counter logarithm factor for volatile-lfu and allkeys-lfu maxmemory-policies
+    attr_reader :redis_lfu_log_factor
+    # @return [Integer] LFU maxmemory-policy counter decay time in minutes
+    attr_reader :redis_lfu_decay_time
+    # @return [Boolean] Require SSL to access Caching. - When enabled, Caching accepts only SSL connections on port `25061`. - When disabled, port `25060` is opened for non-SSL connections, while port `25061` remains available for SSL connections.
+    attr_reader :redis_ssl
+    # @return [Integer] Caching idle connection timeout in seconds
+    attr_reader :redis_timeout
+    # @return [String] Set notify-keyspace-events option. Requires at least `K` or `E` and accepts any combination of the following options. Setting the parameter to `""` disables notifications. - `K` &mdash; Keyspace events - `E` &mdash; Keyevent events - `g` &mdash; Generic commands (e.g. `DEL`, `EXPIRE`, `RENAME`, ...) - `$` &mdash; String commands - `l` &mdash; List commands - `s` &mdash; Set commands - `h` &mdash; Hash commands - `z` &mdash; Sorted set commands - `t` &mdash; Stream commands -…
+    attr_reader :redis_notify_keyspace_events
+    # @return [RedisAdvancedConfigRedisPersistence] Creates an RDB dump of the database every 10 minutes that can be used to recover data after a node crash. The database does not create the dump if no keys have changed since the last dump. When set to `off`, the database cannot fork services, and data can be lost if a service is restarted or powered off. DigitalOcean Managed Caching databases do not support the Append Only File (AOF) persistence method.
+    attr_reader :redis_persistence
+    # @return [RedisAdvancedConfigRedisAclChannelsDefault] Determines default pub/sub channels' ACL for new users if ACL is not supplied. When this option is not defined, all_channels is assumed to keep backward compatibility. This option doesn't affect Caching configuration acl-pubsub-default.
+    attr_reader :redis_acl_channels_default
 
-  # @return [String] A string specifying the configured SQL modes for the MySQL cluster.
-  attr_reader :sql_mode
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalTimescaledbAdvancedConfigMetadata
-  FIELDS = {
-    max_background_workers: "max_background_workers",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for TimescaledbAdvancedConfig.
-# TimescaleDB extension configuration values
-class TimescaledbAdvancedConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalTimescaledbAdvancedConfigMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalTimescaledbAdvancedConfigMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalTimescaledbAdvancedConfigMetadata::DECODERS
-
-  # @return [Integer] The number of background workers for timescaledb operations. Set to the sum of your number of databases and the total number of concurrent background workers you want running at any given point in time.
-  attr_reader :max_background_workers
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the RedisAdvancedConfigRedisAclChannelsDefault SDK namespace.
+  module RedisAdvancedConfigRedisAclChannelsDefault
+    ALLCHANNELS = 'allchannels'
+    RESETCHANNELS = 'resetchannels'
+    VALUES = %w[allchannels resetchannels].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalUsersMetadata
-  FIELDS = {
-    users: "users",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    users: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::DatabaseUser.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for Users.
-# Typed representation of the `Users` API schema.
-class Users
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalUsersMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalUsersMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalUsersMetadata::DECODERS
-
-  # @return [Array_of_DatabaseUser] Optional array value serialized in the `users` wire field.
-  attr_reader :users
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the RedisAdvancedConfigRedisMaxmemoryPolicy SDK namespace.
+  module RedisAdvancedConfigRedisMaxmemoryPolicy
+    NOEVICTION = 'noeviction'
+    ALLKEYS_LRU = 'allkeys-lru'
+    ALLKEYS_RANDOM = 'allkeys-random'
+    VOLATILE_LRU = 'volatile-lru'
+    VOLATILE_RANDOM = 'volatile-random'
+    VOLATILE_TTL = 'volatile-ttl'
+    VALUES = %w[
+      noeviction allkeys-lru allkeys-random volatile-lru volatile-random volatile-ttl
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the RedisAdvancedConfigRedisPersistence SDK namespace.
+  module RedisAdvancedConfigRedisPersistence
+    OFF = 'off'
+    RDB = 'rdb'
+    VALUES = %w[off rdb].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalValkeyAdvancedConfigMetadata
-  FIELDS = {
-    valkey_maxmemory_policy: "valkey_maxmemory_policy",
-    valkey_pubsub_client_output_buffer_limit: "valkey_pubsub_client_output_buffer_limit",
-    valkey_number_of_databases: "valkey_number_of_databases",
-    valkey_io_threads: "valkey_io_threads",
-    valkey_lfu_log_factor: "valkey_lfu_log_factor",
-    valkey_lfu_decay_time: "valkey_lfu_decay_time",
-    valkey_ssl: "valkey_ssl",
-    valkey_timeout: "valkey_timeout",
-    valkey_notify_keyspace_events: "valkey_notify_keyspace_events",
-    valkey_persistence: "valkey_persistence",
-    valkey_acl_channels_default: "valkey_acl_channels_default",
-    frequent_snapshots: "frequent_snapshots",
-    valkey_active_expire_effort: "valkey_active_expire_effort",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    valkey_maxmemory_policy: lambda do |value|
-      ::OctridevDigitalocean::EvictionPolicyModel.from_value(value)
-    end,
-    valkey_persistence: lambda do |value|
-      ::OctridevDigitalocean::ValkeyAdvancedConfigValkeyPersistence.from_value(value)
-    end,
-    valkey_acl_channels_default: lambda do |value|
-      ::OctridevDigitalocean::ValkeyAdvancedConfigValkeyAclChannelsDefault.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ValkeyAdvancedConfig.
-# Typed representation of the `ValkeyAdvancedConfig` API schema.
-class ValkeyAdvancedConfig
-  include DatabaseConfigConfig
-  include DatabaseConfigResponseConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalValkeyAdvancedConfigMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalValkeyAdvancedConfigMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalValkeyAdvancedConfigMetadata::DECODERS
-
-  # @return [EvictionPolicyModel] A string specifying the desired eviction policy for a Caching or Valkey cluster. - `noeviction`: Don't evict any data, returns error when memory limit is reached. - `allkeys_lru:` Evict any key, least recently used (LRU) first. - `allkeys_random`: Evict keys in a random order. - `volatile_lru`: Evict keys with expiration only, least recently used (LRU) first. - `volatile_random`: Evict keys with expiration only in a random order. - `volatile_ttl`: Evict keys with expiration…
-  attr_reader :valkey_maxmemory_policy
-  # @return [Integer] Set output buffer limit for pub / sub clients in MB. The value is the hard limit, the soft limit is 1/4 of the hard limit. When setting the limit, be mindful of the available memory in the selected service plan.
-  attr_reader :valkey_pubsub_client_output_buffer_limit
-  # @return [Integer] Set number of valkey databases. Changing this will cause a restart of valkey service.
-  attr_reader :valkey_number_of_databases
-  # @return [Integer] Valkey IO thread count
-  attr_reader :valkey_io_threads
-  # @return [Integer] Counter logarithm factor for volatile-lfu and allkeys-lfu maxmemory-policies
-  attr_reader :valkey_lfu_log_factor
-  # @return [Integer] LFU maxmemory-policy counter decay time in minutes
-  attr_reader :valkey_lfu_decay_time
-  # @return [Boolean] Require SSL to access Valkey
-  attr_reader :valkey_ssl
-  # @return [Integer] Valkey idle connection timeout in seconds
-  attr_reader :valkey_timeout
-  # @return [String] Set notify-keyspace-events option. Requires at least `K` or `E` and accepts any combination of the following options. Setting the parameter to `""` disables notifications. - `K` &mdash; Keyspace events - `E` &mdash; Keyevent events - `g` &mdash; Generic commands (e.g. `DEL`, `EXPIRE`, `RENAME`, ...) - `$` &mdash; String commands - `l` &mdash; List commands - `s` &mdash; Set commands - `h` &mdash; Hash commands - `z` &mdash; Sorted set commands - `t` &mdash; Stream commands -…
-  attr_reader :valkey_notify_keyspace_events
-  # @return [ValkeyAdvancedConfigValkeyPersistence] When persistence is 'rdb', Valkey does RDB dumps each 10 minutes if any key is changed. Also RDB dumps are done according to backup schedule for backup purposes. When persistence is 'off', no RDB dumps and backups are done, so data can be lost at any moment if service is restarted for any reason, or if service is powered off. Also service can't be forked.
-  attr_reader :valkey_persistence
-  # @return [ValkeyAdvancedConfigValkeyAclChannelsDefault] Determines default pub/sub channels' ACL for new users if ACL is not supplied. When this option is not defined, all_channels is assumed to keep backward compatibility. This option doesn't affect Valkey configuration acl-pubsub-default.
-  attr_reader :valkey_acl_channels_default
-  # @return [Boolean] Frequent RDB snapshots When enabled, Valkey will create frequent local RDB snapshots. When disabled, Valkey will only take RDB snapshots when a backup is created, based on the backup schedule. This setting is ignored when valkey_persistence is set to off.
-  attr_reader :frequent_snapshots
-  # @return [Integer] Active expire effort Valkey reclaims expired keys both when accessed and in the background. The background process scans for expired keys to free memory. Increasing the active-expire-effort setting (default 1, max 10) uses more CPU to reclaim expired keys faster, reducing memory usage but potentially increasing latency.
-  attr_reader :valkey_active_expire_effort
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRsyslogLogsinkMetadata
+    FIELDS = {
+      server: 'server',
+      port: 'port',
+      tls: 'tls',
+      format: 'format',
+      logline: 'logline',
+      sd: 'sd',
+      ca: 'ca',
+      key: 'key',
+      cert: 'cert'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      server
+      port
+      tls
+      format
+    ].freeze
+    DECODERS = {
+      format: lambda do |value|
+        ::OctridevDigitalocean::RsyslogLogsinkFormat.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for RsyslogLogsink.
+  # Typed representation of the `RsyslogLogsink` API schema.
+  class RsyslogLogsink
+    include LogsinkUpdateConfig
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRsyslogLogsinkMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRsyslogLogsinkMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRsyslogLogsinkMetadata::DECODERS
+
+    # @return [String] DNS name or IPv4 address of the rsyslog server
+    attr_reader :server
+    # @return [Integer] The internal port on which the rsyslog server is listening
+    attr_reader :port
+    # @return [Boolean] Use TLS (as the messages are not filtered and may contain sensitive information, it is highly recommended to set this to true if the remote server supports it)
+    attr_reader :tls
+    # @return [RsyslogLogsinkFormat] Message format used by the server, this can be either rfc3164 (the old BSD style message format), `rfc5424` (current syslog message format) or custom
+    attr_reader :format
+    # @return [String] Conditional (required if `format` == `custom`). Syslog log line template for a custom format, supporting limited rsyslog style templating (using `%tag%`). Supported tags are: `HOSTNAME`, `app-name`, `msg`, `msgid`, `pri`, `procid`, `structured-data`, `timestamp` and `timestamp:::date-rfc3339`. --- **Datadog Integration Example for Non-Mongo clusters**: ``` DD_KEY <%pri%>1 %timestamp:::date-rfc3339% %HOSTNAME%.DB_NAME %app-name% - - - %msg% ``` - Replace `DD_KEY` with your…
+    attr_reader :logline
+    # @return [String] content of the structured data block of rfc5424 message
+    attr_reader :sd
+    # @return [String] PEM encoded CA certificate
+    attr_reader :ca
+    # @return [String] (PEM format) client key if the server requires client authentication
+    attr_reader :key
+    # @return [String] (PEM format) client cert to use
+    attr_reader :cert
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ValkeyAdvancedConfigValkeyAclChannelsDefault SDK namespace.
-module ValkeyAdvancedConfigValkeyAclChannelsDefault
-  ALLCHANNELS = 'allchannels'
-  RESETCHANNELS = 'resetchannels'
-  VALUES = ['allchannels', 'resetchannels'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ValkeyAdvancedConfigValkeyPersistence SDK namespace.
-module ValkeyAdvancedConfigValkeyPersistence
-  OFF = 'off'
-  RDB = 'rdb'
-  VALUES = ['off', 'rdb'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the Version SDK value decoder.
-module Version
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVersion2Metadata
-  FIELDS = {
-    version: "version",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    version: lambda do |value|
-      ::OctridevDigitalocean::Version.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for Version2.
-# Typed representation of the `Version2` API schema.
-class Version2
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVersion2Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVersion2Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVersion2Metadata::DECODERS
-
-  # @return [Version] A string representing the version of the database engine in use for the cluster.
-  attr_reader :version
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the RsyslogLogsinkFormat SDK namespace.
+  module RsyslogLogsinkFormat
+    RFC5424 = 'rfc5424'
+    RFC3164 = 'rfc3164'
+    CUSTOM = 'custom'
+    VALUES = %w[rfc5424 rfc3164 custom].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalSourceDatabaseSourceMetadata
+    FIELDS = {
+      host: 'host',
+      port: 'port',
+      dbname: 'dbname',
+      username: 'username',
+      password: 'password'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for SourceDatabaseSource.
+  # Required object value serialized in the `source` wire field.
+  class SourceDatabaseSource
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSourceDatabaseSourceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSourceDatabaseSourceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSourceDatabaseSourceMetadata::DECODERS
+
+    # @return [String] The FQDN pointing to the database cluster's current primary node.
+    attr_reader :host
+    # @return [Integer] The port on which the database cluster is listening.
+    attr_reader :port
+    # @return [String] The name of the default database.
+    attr_reader :dbname
+    # @return [String] The default user for the database.
+    attr_reader :username
+    # @return [String] The randomly generated password for the default user.
+    attr_reader :password
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Internal model hydration metadata.
+  class SdkInternalSourceDatabaseMetadata
+    FIELDS = {
+      source: 'source',
+      disable_ssl: 'disable_ssl',
+      ignore_dbs: 'ignore_dbs'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      source
+    ].freeze
+    DECODERS = {
+      source: lambda do |value|
+        ::OctridevDigitalocean::SourceDatabaseSource.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for SourceDatabase.
+  # Typed representation of the `SourceDatabase` API schema.
+  class SourceDatabase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSourceDatabaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSourceDatabaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSourceDatabaseMetadata::DECODERS
+
+    # @return [SourceDatabaseSource] Required object value serialized in the `source` wire field.
+    attr_reader :source
+    # @return [Boolean] Enables SSL encryption when connecting to the source database.
+    attr_reader :disable_ssl
+    # @return [Array_of_String] List of databases that should be ignored during migration.
+    attr_reader :ignore_dbs
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalSqlModeMetadata
+    FIELDS = {
+      sql_mode: 'sql_mode'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      sql_mode
+    ].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for SqlMode.
+  # Typed representation of the `SqlMode` API schema.
+  class SqlMode
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSqlModeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSqlModeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSqlModeMetadata::DECODERS
+
+    # @return [String] A string specifying the configured SQL modes for the MySQL cluster.
+    attr_reader :sql_mode
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalTimescaledbAdvancedConfigMetadata
+    FIELDS = {
+      max_background_workers: 'max_background_workers'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for TimescaledbAdvancedConfig.
+  # TimescaleDB extension configuration values
+  class TimescaledbAdvancedConfig
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalTimescaledbAdvancedConfigMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalTimescaledbAdvancedConfigMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalTimescaledbAdvancedConfigMetadata::DECODERS
+
+    # @return [Integer] The number of background workers for timescaledb operations. Set to the sum of your number of databases and the total number of concurrent background workers you want running at any given point in time.
+    attr_reader :max_background_workers
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalUsersMetadata
+    FIELDS = {
+      users: 'users'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      users: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::DatabaseUser.from_hash(item) }
+      end
+    }.freeze
+  end
+
+  # API model for Users.
+  # Typed representation of the `Users` API schema.
+  class Users
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalUsersMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalUsersMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalUsersMetadata::DECODERS
+
+    # @return [Array_of_DatabaseUser] Optional array value serialized in the `users` wire field.
+    attr_reader :users
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalValkeyAdvancedConfigMetadata
+    FIELDS = {
+      valkey_maxmemory_policy: 'valkey_maxmemory_policy',
+      valkey_pubsub_client_output_buffer_limit: 'valkey_pubsub_client_output_buffer_limit',
+      valkey_number_of_databases: 'valkey_number_of_databases',
+      valkey_io_threads: 'valkey_io_threads',
+      valkey_lfu_log_factor: 'valkey_lfu_log_factor',
+      valkey_lfu_decay_time: 'valkey_lfu_decay_time',
+      valkey_ssl: 'valkey_ssl',
+      valkey_timeout: 'valkey_timeout',
+      valkey_notify_keyspace_events: 'valkey_notify_keyspace_events',
+      valkey_persistence: 'valkey_persistence',
+      valkey_acl_channels_default: 'valkey_acl_channels_default',
+      frequent_snapshots: 'frequent_snapshots',
+      valkey_active_expire_effort: 'valkey_active_expire_effort'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      valkey_maxmemory_policy: lambda do |value|
+        ::OctridevDigitalocean::EvictionPolicyModel.from_value(value)
+      end,
+      valkey_persistence: lambda do |value|
+        ::OctridevDigitalocean::ValkeyAdvancedConfigValkeyPersistence.from_value(value)
+      end,
+      valkey_acl_channels_default: lambda do |value|
+        ::OctridevDigitalocean::ValkeyAdvancedConfigValkeyAclChannelsDefault.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for ValkeyAdvancedConfig.
+  # Typed representation of the `ValkeyAdvancedConfig` API schema.
+  class ValkeyAdvancedConfig
+    include DatabaseConfigConfig
+    include DatabaseConfigResponseConfig
+
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalValkeyAdvancedConfigMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalValkeyAdvancedConfigMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalValkeyAdvancedConfigMetadata::DECODERS
+
+    # @return [EvictionPolicyModel] A string specifying the desired eviction policy for a Caching or Valkey cluster. - `noeviction`: Don't evict any data, returns error when memory limit is reached. - `allkeys_lru:` Evict any key, least recently used (LRU) first. - `allkeys_random`: Evict keys in a random order. - `volatile_lru`: Evict keys with expiration only, least recently used (LRU) first. - `volatile_random`: Evict keys with expiration only in a random order. - `volatile_ttl`: Evict keys with expiration…
+    attr_reader :valkey_maxmemory_policy
+    # @return [Integer] Set output buffer limit for pub / sub clients in MB. The value is the hard limit, the soft limit is 1/4 of the hard limit. When setting the limit, be mindful of the available memory in the selected service plan.
+    attr_reader :valkey_pubsub_client_output_buffer_limit
+    # @return [Integer] Set number of valkey databases. Changing this will cause a restart of valkey service.
+    attr_reader :valkey_number_of_databases
+    # @return [Integer] Valkey IO thread count
+    attr_reader :valkey_io_threads
+    # @return [Integer] Counter logarithm factor for volatile-lfu and allkeys-lfu maxmemory-policies
+    attr_reader :valkey_lfu_log_factor
+    # @return [Integer] LFU maxmemory-policy counter decay time in minutes
+    attr_reader :valkey_lfu_decay_time
+    # @return [Boolean] Require SSL to access Valkey
+    attr_reader :valkey_ssl
+    # @return [Integer] Valkey idle connection timeout in seconds
+    attr_reader :valkey_timeout
+    # @return [String] Set notify-keyspace-events option. Requires at least `K` or `E` and accepts any combination of the following options. Setting the parameter to `""` disables notifications. - `K` &mdash; Keyspace events - `E` &mdash; Keyevent events - `g` &mdash; Generic commands (e.g. `DEL`, `EXPIRE`, `RENAME`, ...) - `$` &mdash; String commands - `l` &mdash; List commands - `s` &mdash; Set commands - `h` &mdash; Hash commands - `z` &mdash; Sorted set commands - `t` &mdash; Stream commands -…
+    attr_reader :valkey_notify_keyspace_events
+    # @return [ValkeyAdvancedConfigValkeyPersistence] When persistence is 'rdb', Valkey does RDB dumps each 10 minutes if any key is changed. Also RDB dumps are done according to backup schedule for backup purposes. When persistence is 'off', no RDB dumps and backups are done, so data can be lost at any moment if service is restarted for any reason, or if service is powered off. Also service can't be forked.
+    attr_reader :valkey_persistence
+    # @return [ValkeyAdvancedConfigValkeyAclChannelsDefault] Determines default pub/sub channels' ACL for new users if ACL is not supplied. When this option is not defined, all_channels is assumed to keep backward compatibility. This option doesn't affect Valkey configuration acl-pubsub-default.
+    attr_reader :valkey_acl_channels_default
+    # @return [Boolean] Frequent RDB snapshots When enabled, Valkey will create frequent local RDB snapshots. When disabled, Valkey will only take RDB snapshots when a backup is created, based on the backup schedule. This setting is ignored when valkey_persistence is set to off.
+    attr_reader :frequent_snapshots
+    # @return [Integer] Active expire effort Valkey reclaims expired keys both when accessed and in the background. The background process scans for expired keys to free memory. Increasing the active-expire-effort setting (default 1, max 10) uses more CPU to reclaim expired keys faster, reducing memory usage but potentially increasing latency.
+    attr_reader :valkey_active_expire_effort
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the ValkeyAdvancedConfigValkeyAclChannelsDefault SDK namespace.
+  module ValkeyAdvancedConfigValkeyAclChannelsDefault
+    ALLCHANNELS = 'allchannels'
+    RESETCHANNELS = 'resetchannels'
+    VALUES = %w[allchannels resetchannels].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the ValkeyAdvancedConfigValkeyPersistence SDK namespace.
+  module ValkeyAdvancedConfigValkeyPersistence
+    OFF = 'off'
+    RDB = 'rdb'
+    VALUES = %w[off rdb].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the Version SDK value decoder.
+  module Version
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalVersion2Metadata
+    FIELDS = {
+      version: 'version'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      version: lambda do |value|
+        ::OctridevDigitalocean::Version.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for Version2.
+  # Typed representation of the `Version2` API schema.
+  class Version2
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVersion2Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVersion2Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVersion2Metadata::DECODERS
+
+    # @return [Version] A string representing the version of the database engine in use for the cluster.
+    attr_reader :version
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

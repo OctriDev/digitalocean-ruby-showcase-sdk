@@ -5,674 +5,666 @@
 
 # kubernetes_cluster domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalClusterStatusMetadata
-  FIELDS = {
-    state: "state",
-    message: "message",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    state: lambda do |value|
-      ::OctridevDigitalocean::ClusterStatusState.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ClusterStatus.
-# An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.
-class ClusterStatus
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalClusterStatusMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalClusterStatusMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalClusterStatusMetadata::DECODERS
-
-  # @return [ClusterStatusState] A string indicating the current status of the cluster.
-  attr_reader :state
-  # @return [String] An optional message providing additional information about the current cluster state.
-  attr_reader :message
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalClusterStatusMetadata
+    FIELDS = {
+      state: 'state',
+      message: 'message'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      state: lambda do |value|
+        ::OctridevDigitalocean::ClusterStatusState.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ClusterStatus.
+  # An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.
+  class ClusterStatus
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalClusterStatusMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalClusterStatusMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalClusterStatusMetadata::DECODERS
+
+    # @return [ClusterStatusState] A string indicating the current status of the cluster.
+    attr_reader :state
+    # @return [String] An optional message providing additional information about the current cluster state.
+    attr_reader :message
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalClusterMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    region: "region",
-    version: "version",
-    cluster_subnet: "cluster_subnet",
-    service_subnet: "service_subnet",
-    vpc_uuid: "vpc_uuid",
-    worker_subnet_uuid: "worker_subnet_uuid",
-    ipv4: "ipv4",
-    endpoint: "endpoint",
-    tags: "tags",
-    node_pools: "node_pools",
-    maintenance_policy: "maintenance_policy",
-    auto_upgrade: "auto_upgrade",
-    isolated_workers: "isolated_workers",
-    gpu_operator_ready: "gpu_operator_ready",
-    status: "status",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    surge_upgrade: "surge_upgrade",
-    ha: "ha",
-    registry_enabled: "registry_enabled",
-    control_plane_firewall: "control_plane_firewall",
-    cluster_autoscaler_configuration: "cluster_autoscaler_configuration",
-    sso: "sso",
-    routing_agent: "routing_agent",
-    p2p_oci_registry_plugin: "p2p_oci_registry_plugin",
-    nfs_csi_plugin: "nfs_csi_plugin",
-    amd_gpu_device_plugin: "amd_gpu_device_plugin",
-    amd_gpu_device_metrics_exporter_plugin: "amd_gpu_device_metrics_exporter_plugin",
-    nvidia_gpu_device_plugin: "nvidia_gpu_device_plugin",
-    nvidia_gpu_dra_driver: "nvidia_gpu_dra_driver",
-    amd_gpu_dra_driver: "amd_gpu_dra_driver",
-    rdma_shared_dev_plugin: "rdma_shared_dev_plugin",
-    coredns_autoscaler: "coredns_autoscaler",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    region
-    version
-    node_pools
-  ].freeze
-  DECODERS = {
-    node_pools: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::KubernetesNodePool.from_hash(item) }
-    end,
-    maintenance_policy: lambda do |value|
-      ::OctridevDigitalocean::MaintenancePolicy.from_hash(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::ClusterStatus.from_hash(value)
-    end,
-    control_plane_firewall: lambda do |value|
-      ::OctridevDigitalocean::ControlPlaneFirewall.from_hash(value)
-    end,
-    cluster_autoscaler_configuration: lambda do |value|
-      ::OctridevDigitalocean::ClusterAutoscalerConfiguration.from_hash(value)
-    end,
-    sso: lambda do |value|
-      ::OctridevDigitalocean::Sso.from_hash(value)
-    end,
-    routing_agent: lambda do |value|
-      ::OctridevDigitalocean::RoutingAgent.from_hash(value)
-    end,
-    p2p_oci_registry_plugin: lambda do |value|
-      ::OctridevDigitalocean::P2pOciRegistryPlugin.from_hash(value)
-    end,
-    nfs_csi_plugin: lambda do |value|
-      ::OctridevDigitalocean::NfsCsiPlugin.from_hash(value)
-    end,
-    amd_gpu_device_plugin: lambda do |value|
-      ::OctridevDigitalocean::AmdGpuDevicePlugin.from_hash(value)
-    end,
-    amd_gpu_device_metrics_exporter_plugin: lambda do |value|
-      ::OctridevDigitalocean::AmdGpuDeviceMetricsExporterPlugin.from_hash(value)
-    end,
-    nvidia_gpu_device_plugin: lambda do |value|
-      ::OctridevDigitalocean::NvidiaGpuDevicePlugin.from_hash(value)
-    end,
-    nvidia_gpu_dra_driver: lambda do |value|
-      ::OctridevDigitalocean::NvidiaGpuDraDriver.from_hash(value)
-    end,
-    amd_gpu_dra_driver: lambda do |value|
-      ::OctridevDigitalocean::AmdGpuDraDriver.from_hash(value)
-    end,
-    rdma_shared_dev_plugin: lambda do |value|
-      ::OctridevDigitalocean::RdmaSharedDevPlugin.from_hash(value)
-    end,
-    coredns_autoscaler: lambda do |value|
-      ::OctridevDigitalocean::CorednsAutoscaler.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Cluster.
-# Typed representation of the `Cluster` API schema.
-class Cluster
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalClusterMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalClusterMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalClusterMetadata::DECODERS
-
-  # @return [String] A unique ID that can be used to identify and reference a Kubernetes cluster.
-  attr_reader :id
-  # @return [String] A human-readable name for a Kubernetes cluster.
-  attr_reader :name
-  # @return [String] The slug identifier for the region where the Kubernetes cluster is located.
-  attr_reader :region
-  # @return [String] The slug identifier for the version of Kubernetes used for the cluster. If set to a minor version (e.g. "1.14"), the latest version within it will be used (e.g. "1.14.6-do.1"); if set to "latest", the latest published version will be used. See the `/v2/kubernetes/options` endpoint to find all currently available versions.
-  attr_reader :version
-  # @return [String] The range of IP addresses for the overlay network of the Kubernetes cluster in CIDR notation.
-  attr_reader :cluster_subnet
-  # @return [String] The range of assignable IP addresses for services running in the Kubernetes cluster in CIDR notation.
-  attr_reader :service_subnet
-  # @return [String] A string specifying the UUID of the VPC to which the Kubernetes cluster is assigned. Requires `vpc:read` scope.
-  attr_reader :vpc_uuid
-  # @return [String] The UUID of the VPC subnet to attach worker nodes to. When omitted on create, the default subnet for the VPC is used. This value cannot be changed after the cluster is created. `vpc_uuid` must also be set. Requires `vpc:read` scope.
-  attr_reader :worker_subnet_uuid
-  # @return [String] The public IPv4 address of the Kubernetes master node. This will not be set if high availability is configured on the cluster (v1.21+)
-  attr_reader :ipv4
-  # @return [String] The base URL of the API server on the Kubernetes master node.
-  attr_reader :endpoint
-  # @return [Array_of_String] An array of tags to apply to the Kubernetes cluster. All clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`. Requires `tag:read` and `tag:create` scope, as well as `tag:delete` if existing tags are getting removed.
-  attr_reader :tags
-  # @return [Array_of_KubernetesNodePool] An object specifying the details of the worker nodes available to the Kubernetes cluster.
-  attr_reader :node_pools
-  # @return [MaintenancePolicy] An object specifying the maintenance window policy for the Kubernetes cluster.
-  attr_reader :maintenance_policy
-  # @return [Boolean] A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window.
-  attr_reader :auto_upgrade
-  # @return [Boolean] A boolean value indicating whether worker nodes in the cluster are not assigned public IP addresses. When omitted on create, the default value is false. When enabled, a NAT gateway must exist in the VPC where the cluster is created.
-  attr_reader :isolated_workers
-  # @return [Boolean] A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the default value is false.
-  attr_reader :gpu_operator_ready
-  # @return [ClusterStatus] An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.
-  attr_reader :status
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was created.
-  attr_reader :created_at
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was last updated.
-  attr_reader :updated_at
-  # @return [Boolean] A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes.
-  attr_reader :surge_upgrade
-  # @return [Boolean] A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime. The property cannot be disabled. When omitted on create, the default is version-dependent; for DOKS 1.36.0 and later, the default is true; for earlier versions, the default is false.
-  attr_reader :ha
-  # @return [Boolean] A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the default value is false.
-  attr_reader :registry_enabled
-  # @return [ControlPlaneFirewall] An object specifying the control plane firewall for the Kubernetes cluster. Control plane firewall is in early availability (invite only).
-  attr_reader :control_plane_firewall
-  # @return [ClusterAutoscalerConfiguration] An object specifying custom cluster autoscaler configuration.
-  attr_reader :cluster_autoscaler_configuration
-  # @return [Sso] An object specifying Single Sign-On (SSO) configuration for the Kubernetes cluster.
-  attr_reader :sso
-  # @return [RoutingAgent] An object specifying whether the routing-agent component should be enabled for the Kubernetes cluster.
-  attr_reader :routing_agent
-  # @return [P2pOciRegistryPlugin] An object specifying whether the Peer-to-peer OCI registry component should be enabled for the Kubernetes cluster.
-  attr_reader :p2p_oci_registry_plugin
-  # @return [NfsCsiPlugin] An object specifying whether the NFS CSI plugin should be enabled for the Kubernetes cluster.
-  attr_reader :nfs_csi_plugin
-  # @return [AmdGpuDevicePlugin] An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.
-  attr_reader :amd_gpu_device_plugin
-  # @return [AmdGpuDeviceMetricsExporterPlugin] An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.
-  attr_reader :amd_gpu_device_metrics_exporter_plugin
-  # @return [NvidiaGpuDevicePlugin] An object specifying whether the Nvidia GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an Nvidia GPU node pool.
-  attr_reader :nvidia_gpu_device_plugin
-  # @return [NvidiaGpuDraDriver] An object specifying whether the NVIDIA GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
-  attr_reader :nvidia_gpu_dra_driver
-  # @return [AmdGpuDraDriver] An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
-  attr_reader :amd_gpu_dra_driver
-  # @return [RdmaSharedDevPlugin] An object specifying whether the RDMA shared device plugin should be enabled in the Kubernetes cluster.
-  attr_reader :rdma_shared_dev_plugin
-  # @return [CorednsAutoscaler] An object specifying whether the Cluster Proportional Autoscaler (CPA) add-on for CoreDNS should be enabled for the Kubernetes cluster.
-  attr_reader :coredns_autoscaler
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalClusterMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      region: 'region',
+      version: 'version',
+      cluster_subnet: 'cluster_subnet',
+      service_subnet: 'service_subnet',
+      vpc_uuid: 'vpc_uuid',
+      worker_subnet_uuid: 'worker_subnet_uuid',
+      ipv4: 'ipv4',
+      endpoint: 'endpoint',
+      tags: 'tags',
+      node_pools: 'node_pools',
+      maintenance_policy: 'maintenance_policy',
+      auto_upgrade: 'auto_upgrade',
+      isolated_workers: 'isolated_workers',
+      gpu_operator_ready: 'gpu_operator_ready',
+      status: 'status',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      surge_upgrade: 'surge_upgrade',
+      ha: 'ha',
+      registry_enabled: 'registry_enabled',
+      control_plane_firewall: 'control_plane_firewall',
+      cluster_autoscaler_configuration: 'cluster_autoscaler_configuration',
+      sso: 'sso',
+      routing_agent: 'routing_agent',
+      p2p_oci_registry_plugin: 'p2p_oci_registry_plugin',
+      nfs_csi_plugin: 'nfs_csi_plugin',
+      amd_gpu_device_plugin: 'amd_gpu_device_plugin',
+      amd_gpu_device_metrics_exporter_plugin: 'amd_gpu_device_metrics_exporter_plugin',
+      nvidia_gpu_device_plugin: 'nvidia_gpu_device_plugin',
+      nvidia_gpu_dra_driver: 'nvidia_gpu_dra_driver',
+      amd_gpu_dra_driver: 'amd_gpu_dra_driver',
+      rdma_shared_dev_plugin: 'rdma_shared_dev_plugin',
+      coredns_autoscaler: 'coredns_autoscaler'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      region
+      version
+      node_pools
+    ].freeze
+    DECODERS = {
+      node_pools: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::KubernetesNodePool.from_hash(item) }
+      end,
+      maintenance_policy: lambda do |value|
+        ::OctridevDigitalocean::MaintenancePolicy.from_hash(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::ClusterStatus.from_hash(value)
+      end,
+      control_plane_firewall: lambda do |value|
+        ::OctridevDigitalocean::ControlPlaneFirewall.from_hash(value)
+      end,
+      cluster_autoscaler_configuration: lambda do |value|
+        ::OctridevDigitalocean::ClusterAutoscalerConfiguration.from_hash(value)
+      end,
+      sso: lambda do |value|
+        ::OctridevDigitalocean::Sso.from_hash(value)
+      end,
+      routing_agent: lambda do |value|
+        ::OctridevDigitalocean::RoutingAgent.from_hash(value)
+      end,
+      p2p_oci_registry_plugin: lambda do |value|
+        ::OctridevDigitalocean::P2pOciRegistryPlugin.from_hash(value)
+      end,
+      nfs_csi_plugin: lambda do |value|
+        ::OctridevDigitalocean::NfsCsiPlugin.from_hash(value)
+      end,
+      amd_gpu_device_plugin: lambda do |value|
+        ::OctridevDigitalocean::AmdGpuDevicePlugin.from_hash(value)
+      end,
+      amd_gpu_device_metrics_exporter_plugin: lambda do |value|
+        ::OctridevDigitalocean::AmdGpuDeviceMetricsExporterPlugin.from_hash(value)
+      end,
+      nvidia_gpu_device_plugin: lambda do |value|
+        ::OctridevDigitalocean::NvidiaGpuDevicePlugin.from_hash(value)
+      end,
+      nvidia_gpu_dra_driver: lambda do |value|
+        ::OctridevDigitalocean::NvidiaGpuDraDriver.from_hash(value)
+      end,
+      amd_gpu_dra_driver: lambda do |value|
+        ::OctridevDigitalocean::AmdGpuDraDriver.from_hash(value)
+      end,
+      rdma_shared_dev_plugin: lambda do |value|
+        ::OctridevDigitalocean::RdmaSharedDevPlugin.from_hash(value)
+      end,
+      coredns_autoscaler: lambda do |value|
+        ::OctridevDigitalocean::CorednsAutoscaler.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Cluster.
+  # Typed representation of the `Cluster` API schema.
+  class Cluster
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalClusterMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalClusterMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalClusterMetadata::DECODERS
+
+    # @return [String] A unique ID that can be used to identify and reference a Kubernetes cluster.
+    attr_reader :id
+    # @return [String] A human-readable name for a Kubernetes cluster.
+    attr_reader :name
+    # @return [String] The slug identifier for the region where the Kubernetes cluster is located.
+    attr_reader :region
+    # @return [String] The slug identifier for the version of Kubernetes used for the cluster. If set to a minor version (e.g. "1.14"), the latest version within it will be used (e.g. "1.14.6-do.1"); if set to "latest", the latest published version will be used. See the `/v2/kubernetes/options` endpoint to find all currently available versions.
+    attr_reader :version
+    # @return [String] The range of IP addresses for the overlay network of the Kubernetes cluster in CIDR notation.
+    attr_reader :cluster_subnet
+    # @return [String] The range of assignable IP addresses for services running in the Kubernetes cluster in CIDR notation.
+    attr_reader :service_subnet
+    # @return [String] A string specifying the UUID of the VPC to which the Kubernetes cluster is assigned. Requires `vpc:read` scope.
+    attr_reader :vpc_uuid
+    # @return [String] The UUID of the VPC subnet to attach worker nodes to. When omitted on create, the default subnet for the VPC is used. This value cannot be changed after the cluster is created. `vpc_uuid` must also be set. Requires `vpc:read` scope.
+    attr_reader :worker_subnet_uuid
+    # @return [String] The public IPv4 address of the Kubernetes master node. This will not be set if high availability is configured on the cluster (v1.21+)
+    attr_reader :ipv4
+    # @return [String] The base URL of the API server on the Kubernetes master node.
+    attr_reader :endpoint
+    # @return [Array_of_String] An array of tags to apply to the Kubernetes cluster. All clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`. Requires `tag:read` and `tag:create` scope, as well as `tag:delete` if existing tags are getting removed.
+    attr_reader :tags
+    # @return [Array_of_KubernetesNodePool] An object specifying the details of the worker nodes available to the Kubernetes cluster.
+    attr_reader :node_pools
+    # @return [MaintenancePolicy] An object specifying the maintenance window policy for the Kubernetes cluster.
+    attr_reader :maintenance_policy
+    # @return [Boolean] A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window.
+    attr_reader :auto_upgrade
+    # @return [Boolean] A boolean value indicating whether worker nodes in the cluster are not assigned public IP addresses. When omitted on create, the default value is false. When enabled, a NAT gateway must exist in the VPC where the cluster is created.
+    attr_reader :isolated_workers
+    # @return [Boolean] A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the default value is false.
+    attr_reader :gpu_operator_ready
+    # @return [ClusterStatus] An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.
+    attr_reader :status
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was created.
+    attr_reader :created_at
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was last updated.
+    attr_reader :updated_at
+    # @return [Boolean] A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes.
+    attr_reader :surge_upgrade
+    # @return [Boolean] A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime. The property cannot be disabled. When omitted on create, the default is version-dependent; for DOKS 1.36.0 and later, the default is true; for earlier versions, the default is false.
+    attr_reader :ha
+    # @return [Boolean] A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the default value is false.
+    attr_reader :registry_enabled
+    # @return [ControlPlaneFirewall] An object specifying the control plane firewall for the Kubernetes cluster. Control plane firewall is in early availability (invite only).
+    attr_reader :control_plane_firewall
+    # @return [ClusterAutoscalerConfiguration] An object specifying custom cluster autoscaler configuration.
+    attr_reader :cluster_autoscaler_configuration
+    # @return [Sso] An object specifying Single Sign-On (SSO) configuration for the Kubernetes cluster.
+    attr_reader :sso
+    # @return [RoutingAgent] An object specifying whether the routing-agent component should be enabled for the Kubernetes cluster.
+    attr_reader :routing_agent
+    # @return [P2pOciRegistryPlugin] An object specifying whether the Peer-to-peer OCI registry component should be enabled for the Kubernetes cluster.
+    attr_reader :p2p_oci_registry_plugin
+    # @return [NfsCsiPlugin] An object specifying whether the NFS CSI plugin should be enabled for the Kubernetes cluster.
+    attr_reader :nfs_csi_plugin
+    # @return [AmdGpuDevicePlugin] An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.
+    attr_reader :amd_gpu_device_plugin
+    # @return [AmdGpuDeviceMetricsExporterPlugin] An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.
+    attr_reader :amd_gpu_device_metrics_exporter_plugin
+    # @return [NvidiaGpuDevicePlugin] An object specifying whether the Nvidia GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an Nvidia GPU node pool.
+    attr_reader :nvidia_gpu_device_plugin
+    # @return [NvidiaGpuDraDriver] An object specifying whether the NVIDIA GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
+    attr_reader :nvidia_gpu_dra_driver
+    # @return [AmdGpuDraDriver] An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
+    attr_reader :amd_gpu_dra_driver
+    # @return [RdmaSharedDevPlugin] An object specifying whether the RDMA shared device plugin should be enabled in the Kubernetes cluster.
+    attr_reader :rdma_shared_dev_plugin
+    # @return [CorednsAutoscaler] An object specifying whether the Cluster Proportional Autoscaler (CPA) add-on for CoreDNS should be enabled for the Kubernetes cluster.
+    attr_reader :coredns_autoscaler
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ClusterStatusState SDK namespace.
-module ClusterStatusState
-  RUNNING = 'running'
-  PROVISIONING = 'provisioning'
-  DEGRADED = 'degraded'
-  ERROR = 'error'
-  DELETED = 'deleted'
-  UPGRADING = 'upgrading'
-  DELETING = 'deleting'
-  VALUES = [
-    'running', 'provisioning', 'degraded', 'error', 'deleted', 'upgrading', 'deleting'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalClusterAutoscalerConfigurationMetadata
-  FIELDS = {
-    scale_down_utilization_threshold: "scale_down_utilization_threshold",
-    scale_down_unneeded_time: "scale_down_unneeded_time",
-    expanders: "expanders",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    expanders: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ClusterAutoscalerConfigurationExpandersItem.from_value(item) }
-    end,
-  }.freeze
-end
-
-# API model for ClusterAutoscalerConfiguration.
-# An object specifying custom cluster autoscaler configuration.
-class ClusterAutoscalerConfiguration
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalClusterAutoscalerConfigurationMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalClusterAutoscalerConfigurationMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalClusterAutoscalerConfigurationMetadata::DECODERS
-
-  # @return [Float] Used to customize when cluster autoscaler scales down non-empty nodes by setting the node utilization threshold.
-  attr_reader :scale_down_utilization_threshold
-  # @return [String] Used to customize how long a node is unneeded before being scaled down.
-  attr_reader :scale_down_unneeded_time
-  # @return [Array_of_ClusterAutoscalerConfigurationExpandersItem] Customizes expanders used by cluster-autoscaler. The autoscaler will apply each expander from the provided list to narrow down the selection of node types created to scale up, until either a single node type is left, or the list of expanders is exhausted. If this flag is unset, autoscaler will use its default expander `random`. Passing an empty list (_not_ `null`) will unset any previous expander customizations. Available expanders: - `random`: Randomly selects a node group…
-  attr_reader :expanders
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ClusterStatusState SDK namespace.
+  module ClusterStatusState
+    RUNNING = 'running'
+    PROVISIONING = 'provisioning'
+    DEGRADED = 'degraded'
+    ERROR = 'error'
+    DELETED = 'deleted'
+    UPGRADING = 'upgrading'
+    DELETING = 'deleting'
+    VALUES = %w[
+      running provisioning degraded error deleted upgrading deleting
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalClusterAutoscalerConfigurationMetadata
+    FIELDS = {
+      scale_down_utilization_threshold: 'scale_down_utilization_threshold',
+      scale_down_unneeded_time: 'scale_down_unneeded_time',
+      expanders: 'expanders'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      expanders: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ClusterAutoscalerConfigurationExpandersItem.from_value(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ClusterAutoscalerConfiguration.
+  # An object specifying custom cluster autoscaler configuration.
+  class ClusterAutoscalerConfiguration
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalClusterAutoscalerConfigurationMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalClusterAutoscalerConfigurationMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalClusterAutoscalerConfigurationMetadata::DECODERS
 
-# Defines the ClusterAutoscalerConfigurationExpandersItem SDK namespace.
-module ClusterAutoscalerConfigurationExpandersItem
-  RANDOM = 'random'
-  PRIORITY = 'priority'
-  LEAST_WASTE = 'least_waste'
-  VALUES = ['random', 'priority', 'least_waste'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [Float] Used to customize when cluster autoscaler scales down non-empty nodes by setting the node utilization threshold.
+    attr_reader :scale_down_utilization_threshold
+    # @return [String] Used to customize how long a node is unneeded before being scaled down.
+    attr_reader :scale_down_unneeded_time
+    # @return [Array_of_ClusterAutoscalerConfigurationExpandersItem] Customizes expanders used by cluster-autoscaler. The autoscaler will apply each expander from the provided list to narrow down the selection of node types created to scale up, until either a single node type is left, or the list of expanders is exhausted. If this flag is unset, autoscaler will use its default expander `random`. Passing an empty list (_not_ `null`) will unset any previous expander customizations. Available expanders: - `random`: Randomly selects a node group…
+    attr_reader :expanders
 
-# Internal model hydration metadata.
-class SdkInternalClusterCreateMetadata
-  FIELDS = {
-    kubernetes_cluster: "kubernetes_cluster",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    kubernetes_cluster: lambda do |value|
-      ::OctridevDigitalocean::Cluster.from_hash(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for ClusterCreate.
-# Typed representation of the `ClusterCreate` API schema.
-class ClusterCreate
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalClusterCreateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalClusterCreateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalClusterCreateMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [Cluster] Optional object value serialized in the `kubernetes_cluster` wire field.
-  attr_reader :kubernetes_cluster
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ClusterAutoscalerConfigurationExpandersItem SDK namespace.
+  module ClusterAutoscalerConfigurationExpandersItem
+    RANDOM = 'random'
+    PRIORITY = 'priority'
+    LEAST_WASTE = 'least_waste'
+    VALUES = %w[random priority least_waste].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalClusterReadStatusMetadata
-  FIELDS = {
-    state: "state",
-    message: "message",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    state: lambda do |value|
-      ::OctridevDigitalocean::ClusterReadStatusState.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ClusterReadStatus.
-# An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.
-class ClusterReadStatus
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalClusterReadStatusMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalClusterReadStatusMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalClusterReadStatusMetadata::DECODERS
-
-  # @return [ClusterReadStatusState] A string indicating the current status of the cluster.
-  attr_reader :state
-  # @return [String] An optional message providing additional information about the current cluster state.
-  attr_reader :message
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalClusterCreateMetadata
+    FIELDS = {
+      kubernetes_cluster: 'kubernetes_cluster'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      kubernetes_cluster: lambda do |value|
+        ::OctridevDigitalocean::Cluster.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ClusterCreate.
+  # Typed representation of the `ClusterCreate` API schema.
+  class ClusterCreate
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalClusterCreateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalClusterCreateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalClusterCreateMetadata::DECODERS
+
+    # @return [Cluster] Optional object value serialized in the `kubernetes_cluster` wire field.
+    attr_reader :kubernetes_cluster
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalClusterReadMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    region: "region",
-    version: "version",
-    cluster_subnet: "cluster_subnet",
-    service_subnet: "service_subnet",
-    vpc_uuid: "vpc_uuid",
-    worker_subnet_uuid: "worker_subnet_uuid",
-    ipv4: "ipv4",
-    endpoint: "endpoint",
-    tags: "tags",
-    node_pools: "node_pools",
-    maintenance_policy: "maintenance_policy",
-    auto_upgrade: "auto_upgrade",
-    isolated_workers: "isolated_workers",
-    gpu_operator_ready: "gpu_operator_ready",
-    status: "status",
-    created_at: "created_at",
-    updated_at: "updated_at",
-    surge_upgrade: "surge_upgrade",
-    ha: "ha",
-    registry_enabled: "registry_enabled",
-    registries: "registries",
-    control_plane_firewall: "control_plane_firewall",
-    cluster_autoscaler_configuration: "cluster_autoscaler_configuration",
-    sso: "sso",
-    routing_agent: "routing_agent",
-    amd_gpu_device_plugin: "amd_gpu_device_plugin",
-    amd_gpu_device_metrics_exporter_plugin: "amd_gpu_device_metrics_exporter_plugin",
-    nvidia_gpu_device_plugin: "nvidia_gpu_device_plugin",
-    nvidia_gpu_dra_driver: "nvidia_gpu_dra_driver",
-    amd_gpu_dra_driver: "amd_gpu_dra_driver",
-    rdma_shared_dev_plugin: "rdma_shared_dev_plugin",
-    coredns_autoscaler: "coredns_autoscaler",
-    p2p_oci_registry_plugin: "p2p_oci_registry_plugin",
-    nfs_csi_plugin: "nfs_csi_plugin",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    region
-    version
-    node_pools
-  ].freeze
-  DECODERS = {
-    node_pools: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::KubernetesNodePool.from_hash(item) }
-    end,
-    maintenance_policy: lambda do |value|
-      ::OctridevDigitalocean::MaintenancePolicy.from_hash(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::ClusterReadStatus.from_hash(value)
-    end,
-    control_plane_firewall: lambda do |value|
-      ::OctridevDigitalocean::ControlPlaneFirewall.from_hash(value)
-    end,
-    cluster_autoscaler_configuration: lambda do |value|
-      ::OctridevDigitalocean::ClusterAutoscalerConfiguration.from_hash(value)
-    end,
-    sso: lambda do |value|
-      ::OctridevDigitalocean::Sso.from_hash(value)
-    end,
-    routing_agent: lambda do |value|
-      ::OctridevDigitalocean::RoutingAgent.from_hash(value)
-    end,
-    amd_gpu_device_plugin: lambda do |value|
-      ::OctridevDigitalocean::AmdGpuDevicePlugin.from_hash(value)
-    end,
-    amd_gpu_device_metrics_exporter_plugin: lambda do |value|
-      ::OctridevDigitalocean::AmdGpuDeviceMetricsExporterPlugin.from_hash(value)
-    end,
-    nvidia_gpu_device_plugin: lambda do |value|
-      ::OctridevDigitalocean::NvidiaGpuDevicePlugin.from_hash(value)
-    end,
-    nvidia_gpu_dra_driver: lambda do |value|
-      ::OctridevDigitalocean::NvidiaGpuDraDriver.from_hash(value)
-    end,
-    amd_gpu_dra_driver: lambda do |value|
-      ::OctridevDigitalocean::AmdGpuDraDriver.from_hash(value)
-    end,
-    rdma_shared_dev_plugin: lambda do |value|
-      ::OctridevDigitalocean::RdmaSharedDevPlugin.from_hash(value)
-    end,
-    coredns_autoscaler: lambda do |value|
-      ::OctridevDigitalocean::CorednsAutoscaler.from_hash(value)
-    end,
-    p2p_oci_registry_plugin: lambda do |value|
-      ::OctridevDigitalocean::P2pOciRegistryPlugin.from_hash(value)
-    end,
-    nfs_csi_plugin: lambda do |value|
-      ::OctridevDigitalocean::NfsCsiPlugin.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ClusterRead.
-# Typed representation of the `ClusterRead` API schema.
-class ClusterRead
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalClusterReadMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalClusterReadMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalClusterReadMetadata::DECODERS
-
-  # @return [String] A unique ID that can be used to identify and reference a Kubernetes cluster.
-  attr_reader :id
-  # @return [String] A human-readable name for a Kubernetes cluster.
-  attr_reader :name
-  # @return [String] The slug identifier for the region where the Kubernetes cluster is located.
-  attr_reader :region
-  # @return [String] The slug identifier for the version of Kubernetes used for the cluster. If set to a minor version (e.g. "1.14"), the latest version within it will be used (e.g. "1.14.6-do.1"); if set to "latest", the latest published version will be used. See the `/v2/kubernetes/options` endpoint to find all currently available versions.
-  attr_reader :version
-  # @return [String] The range of IP addresses for the overlay network of the Kubernetes cluster in CIDR notation.
-  attr_reader :cluster_subnet
-  # @return [String] The range of assignable IP addresses for services running in the Kubernetes cluster in CIDR notation.
-  attr_reader :service_subnet
-  # @return [String] A string specifying the UUID of the VPC to which the Kubernetes cluster is assigned. Requires `vpc:read` scope.
-  attr_reader :vpc_uuid
-  # @return [String] The UUID of the VPC subnet worker nodes are attached to. When unset, the default subnet for the VPC is used. Requires `vpc:read` scope.
-  attr_reader :worker_subnet_uuid
-  # @return [String] The public IPv4 address of the Kubernetes master node. This will not be set if high availability is configured on the cluster (v1.21+)
-  attr_reader :ipv4
-  # @return [String] The base URL of the API server on the Kubernetes master node.
-  attr_reader :endpoint
-  # @return [Array_of_String] An array of tags applied to the Kubernetes cluster. All clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`. Requires `tag:read` scope.
-  attr_reader :tags
-  # @return [Array_of_KubernetesNodePool] An object specifying the details of the worker nodes available to the Kubernetes cluster.
-  attr_reader :node_pools
-  # @return [MaintenancePolicy] An object specifying the maintenance window policy for the Kubernetes cluster.
-  attr_reader :maintenance_policy
-  # @return [Boolean] A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window.
-  attr_reader :auto_upgrade
-  # @return [Boolean] A boolean value indicating whether worker nodes in the cluster are not assigned public IP addresses. When omitted on create, the default value is false. When enabled, a NAT gateway must exist in the VPC where the cluster is created.
-  attr_reader :isolated_workers
-  # @return [Boolean] A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the default value is false.
-  attr_reader :gpu_operator_ready
-  # @return [ClusterReadStatus] An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.
-  attr_reader :status
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was created.
-  attr_reader :created_at
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was last updated.
-  attr_reader :updated_at
-  # @return [Boolean] A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes.
-  attr_reader :surge_upgrade
-  # @return [Boolean] A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime. The property cannot be disabled. When omitted on create, the default is version-dependent; for DOKS 1.36.0 and later, the default is true; for earlier versions, the default is false.
-  attr_reader :ha
-  # @return [Boolean] A read-only boolean value indicating if a container registry is integrated with the cluster.
-  attr_reader :registry_enabled
-  # @return [Array_of_String] A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the default value is false.
-  attr_reader :registries
-  # @return [ControlPlaneFirewall] An object specifying the control plane firewall for the Kubernetes cluster. Control plane firewall is in early availability (invite only).
-  attr_reader :control_plane_firewall
-  # @return [ClusterAutoscalerConfiguration] An object specifying custom cluster autoscaler configuration.
-  attr_reader :cluster_autoscaler_configuration
-  # @return [Sso] An object specifying Single Sign-On (SSO) configuration for the Kubernetes cluster.
-  attr_reader :sso
-  # @return [RoutingAgent] An object specifying whether the routing-agent component should be enabled for the Kubernetes cluster.
-  attr_reader :routing_agent
-  # @return [AmdGpuDevicePlugin] An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.
-  attr_reader :amd_gpu_device_plugin
-  # @return [AmdGpuDeviceMetricsExporterPlugin] An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.
-  attr_reader :amd_gpu_device_metrics_exporter_plugin
-  # @return [NvidiaGpuDevicePlugin] An object specifying whether the Nvidia GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an Nvidia GPU node pool.
-  attr_reader :nvidia_gpu_device_plugin
-  # @return [NvidiaGpuDraDriver] An object specifying whether the NVIDIA GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
-  attr_reader :nvidia_gpu_dra_driver
-  # @return [AmdGpuDraDriver] An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
-  attr_reader :amd_gpu_dra_driver
-  # @return [RdmaSharedDevPlugin] An object specifying whether the RDMA shared device plugin should be enabled in the Kubernetes cluster.
-  attr_reader :rdma_shared_dev_plugin
-  # @return [CorednsAutoscaler] An object specifying whether the Cluster Proportional Autoscaler (CPA) add-on for CoreDNS should be enabled for the Kubernetes cluster.
-  attr_reader :coredns_autoscaler
-  # @return [P2pOciRegistryPlugin] An object specifying whether the Peer-to-peer OCI registry component should be enabled for the Kubernetes cluster.
-  attr_reader :p2p_oci_registry_plugin
-  # @return [NfsCsiPlugin] An object specifying whether the NFS CSI plugin should be enabled for the Kubernetes cluster.
-  attr_reader :nfs_csi_plugin
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalClusterReadStatusMetadata
+    FIELDS = {
+      state: 'state',
+      message: 'message'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      state: lambda do |value|
+        ::OctridevDigitalocean::ClusterReadStatusState.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ClusterReadStatus.
+  # An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.
+  class ClusterReadStatus
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalClusterReadStatusMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalClusterReadStatusMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalClusterReadStatusMetadata::DECODERS
+
+    # @return [ClusterReadStatusState] A string indicating the current status of the cluster.
+    attr_reader :state
+    # @return [String] An optional message providing additional information about the current cluster state.
+    attr_reader :message
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalClusterReadMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      region: 'region',
+      version: 'version',
+      cluster_subnet: 'cluster_subnet',
+      service_subnet: 'service_subnet',
+      vpc_uuid: 'vpc_uuid',
+      worker_subnet_uuid: 'worker_subnet_uuid',
+      ipv4: 'ipv4',
+      endpoint: 'endpoint',
+      tags: 'tags',
+      node_pools: 'node_pools',
+      maintenance_policy: 'maintenance_policy',
+      auto_upgrade: 'auto_upgrade',
+      isolated_workers: 'isolated_workers',
+      gpu_operator_ready: 'gpu_operator_ready',
+      status: 'status',
+      created_at: 'created_at',
+      updated_at: 'updated_at',
+      surge_upgrade: 'surge_upgrade',
+      ha: 'ha',
+      registry_enabled: 'registry_enabled',
+      registries: 'registries',
+      control_plane_firewall: 'control_plane_firewall',
+      cluster_autoscaler_configuration: 'cluster_autoscaler_configuration',
+      sso: 'sso',
+      routing_agent: 'routing_agent',
+      amd_gpu_device_plugin: 'amd_gpu_device_plugin',
+      amd_gpu_device_metrics_exporter_plugin: 'amd_gpu_device_metrics_exporter_plugin',
+      nvidia_gpu_device_plugin: 'nvidia_gpu_device_plugin',
+      nvidia_gpu_dra_driver: 'nvidia_gpu_dra_driver',
+      amd_gpu_dra_driver: 'amd_gpu_dra_driver',
+      rdma_shared_dev_plugin: 'rdma_shared_dev_plugin',
+      coredns_autoscaler: 'coredns_autoscaler',
+      p2p_oci_registry_plugin: 'p2p_oci_registry_plugin',
+      nfs_csi_plugin: 'nfs_csi_plugin'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      region
+      version
+      node_pools
+    ].freeze
+    DECODERS = {
+      node_pools: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::KubernetesNodePool.from_hash(item) }
+      end,
+      maintenance_policy: lambda do |value|
+        ::OctridevDigitalocean::MaintenancePolicy.from_hash(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::ClusterReadStatus.from_hash(value)
+      end,
+      control_plane_firewall: lambda do |value|
+        ::OctridevDigitalocean::ControlPlaneFirewall.from_hash(value)
+      end,
+      cluster_autoscaler_configuration: lambda do |value|
+        ::OctridevDigitalocean::ClusterAutoscalerConfiguration.from_hash(value)
+      end,
+      sso: lambda do |value|
+        ::OctridevDigitalocean::Sso.from_hash(value)
+      end,
+      routing_agent: lambda do |value|
+        ::OctridevDigitalocean::RoutingAgent.from_hash(value)
+      end,
+      amd_gpu_device_plugin: lambda do |value|
+        ::OctridevDigitalocean::AmdGpuDevicePlugin.from_hash(value)
+      end,
+      amd_gpu_device_metrics_exporter_plugin: lambda do |value|
+        ::OctridevDigitalocean::AmdGpuDeviceMetricsExporterPlugin.from_hash(value)
+      end,
+      nvidia_gpu_device_plugin: lambda do |value|
+        ::OctridevDigitalocean::NvidiaGpuDevicePlugin.from_hash(value)
+      end,
+      nvidia_gpu_dra_driver: lambda do |value|
+        ::OctridevDigitalocean::NvidiaGpuDraDriver.from_hash(value)
+      end,
+      amd_gpu_dra_driver: lambda do |value|
+        ::OctridevDigitalocean::AmdGpuDraDriver.from_hash(value)
+      end,
+      rdma_shared_dev_plugin: lambda do |value|
+        ::OctridevDigitalocean::RdmaSharedDevPlugin.from_hash(value)
+      end,
+      coredns_autoscaler: lambda do |value|
+        ::OctridevDigitalocean::CorednsAutoscaler.from_hash(value)
+      end,
+      p2p_oci_registry_plugin: lambda do |value|
+        ::OctridevDigitalocean::P2pOciRegistryPlugin.from_hash(value)
+      end,
+      nfs_csi_plugin: lambda do |value|
+        ::OctridevDigitalocean::NfsCsiPlugin.from_hash(value)
+      end
+    }.freeze
   end
-end
 
-# Defines the ClusterReadStatusState SDK namespace.
-module ClusterReadStatusState
-  RUNNING = 'running'
-  PROVISIONING = 'provisioning'
-  DEGRADED = 'degraded'
-  ERROR = 'error'
-  DELETED = 'deleted'
-  UPGRADING = 'upgrading'
-  DELETING = 'deleting'
-  VALUES = [
-    'running', 'provisioning', 'degraded', 'error', 'deleted', 'upgrading', 'deleting'
-  ].freeze
-  def self.from_value(value)
-    value
+  # API model for ClusterRead.
+  # Typed representation of the `ClusterRead` API schema.
+  class ClusterRead
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalClusterReadMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalClusterReadMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalClusterReadMetadata::DECODERS
+
+    # @return [String] A unique ID that can be used to identify and reference a Kubernetes cluster.
+    attr_reader :id
+    # @return [String] A human-readable name for a Kubernetes cluster.
+    attr_reader :name
+    # @return [String] The slug identifier for the region where the Kubernetes cluster is located.
+    attr_reader :region
+    # @return [String] The slug identifier for the version of Kubernetes used for the cluster. If set to a minor version (e.g. "1.14"), the latest version within it will be used (e.g. "1.14.6-do.1"); if set to "latest", the latest published version will be used. See the `/v2/kubernetes/options` endpoint to find all currently available versions.
+    attr_reader :version
+    # @return [String] The range of IP addresses for the overlay network of the Kubernetes cluster in CIDR notation.
+    attr_reader :cluster_subnet
+    # @return [String] The range of assignable IP addresses for services running in the Kubernetes cluster in CIDR notation.
+    attr_reader :service_subnet
+    # @return [String] A string specifying the UUID of the VPC to which the Kubernetes cluster is assigned. Requires `vpc:read` scope.
+    attr_reader :vpc_uuid
+    # @return [String] The UUID of the VPC subnet worker nodes are attached to. When unset, the default subnet for the VPC is used. Requires `vpc:read` scope.
+    attr_reader :worker_subnet_uuid
+    # @return [String] The public IPv4 address of the Kubernetes master node. This will not be set if high availability is configured on the cluster (v1.21+)
+    attr_reader :ipv4
+    # @return [String] The base URL of the API server on the Kubernetes master node.
+    attr_reader :endpoint
+    # @return [Array_of_String] An array of tags applied to the Kubernetes cluster. All clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`. Requires `tag:read` scope.
+    attr_reader :tags
+    # @return [Array_of_KubernetesNodePool] An object specifying the details of the worker nodes available to the Kubernetes cluster.
+    attr_reader :node_pools
+    # @return [MaintenancePolicy] An object specifying the maintenance window policy for the Kubernetes cluster.
+    attr_reader :maintenance_policy
+    # @return [Boolean] A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window.
+    attr_reader :auto_upgrade
+    # @return [Boolean] A boolean value indicating whether worker nodes in the cluster are not assigned public IP addresses. When omitted on create, the default value is false. When enabled, a NAT gateway must exist in the VPC where the cluster is created.
+    attr_reader :isolated_workers
+    # @return [Boolean] A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the default value is false.
+    attr_reader :gpu_operator_ready
+    # @return [ClusterReadStatus] An object containing a `state` attribute whose value is set to a string indicating the current status of the cluster.
+    attr_reader :status
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was created.
+    attr_reader :created_at
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the Kubernetes cluster was last updated.
+    attr_reader :updated_at
+    # @return [Boolean] A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes.
+    attr_reader :surge_upgrade
+    # @return [Boolean] A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime. The property cannot be disabled. When omitted on create, the default is version-dependent; for DOKS 1.36.0 and later, the default is true; for earlier versions, the default is false.
+    attr_reader :ha
+    # @return [Boolean] A read-only boolean value indicating if a container registry is integrated with the cluster.
+    attr_reader :registry_enabled
+    # @return [Array_of_String] A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the default value is false.
+    attr_reader :registries
+    # @return [ControlPlaneFirewall] An object specifying the control plane firewall for the Kubernetes cluster. Control plane firewall is in early availability (invite only).
+    attr_reader :control_plane_firewall
+    # @return [ClusterAutoscalerConfiguration] An object specifying custom cluster autoscaler configuration.
+    attr_reader :cluster_autoscaler_configuration
+    # @return [Sso] An object specifying Single Sign-On (SSO) configuration for the Kubernetes cluster.
+    attr_reader :sso
+    # @return [RoutingAgent] An object specifying whether the routing-agent component should be enabled for the Kubernetes cluster.
+    attr_reader :routing_agent
+    # @return [AmdGpuDevicePlugin] An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.
+    attr_reader :amd_gpu_device_plugin
+    # @return [AmdGpuDeviceMetricsExporterPlugin] An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.
+    attr_reader :amd_gpu_device_metrics_exporter_plugin
+    # @return [NvidiaGpuDevicePlugin] An object specifying whether the Nvidia GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an Nvidia GPU node pool.
+    attr_reader :nvidia_gpu_device_plugin
+    # @return [NvidiaGpuDraDriver] An object specifying whether the NVIDIA GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
+    attr_reader :nvidia_gpu_dra_driver
+    # @return [AmdGpuDraDriver] An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
+    attr_reader :amd_gpu_dra_driver
+    # @return [RdmaSharedDevPlugin] An object specifying whether the RDMA shared device plugin should be enabled in the Kubernetes cluster.
+    attr_reader :rdma_shared_dev_plugin
+    # @return [CorednsAutoscaler] An object specifying whether the Cluster Proportional Autoscaler (CPA) add-on for CoreDNS should be enabled for the Kubernetes cluster.
+    attr_reader :coredns_autoscaler
+    # @return [P2pOciRegistryPlugin] An object specifying whether the Peer-to-peer OCI registry component should be enabled for the Kubernetes cluster.
+    attr_reader :p2p_oci_registry_plugin
+    # @return [NfsCsiPlugin] An object specifying whether the NFS CSI plugin should be enabled for the Kubernetes cluster.
+    attr_reader :nfs_csi_plugin
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 
-# Internal model hydration metadata.
-class SdkInternalClusterRegistriesMetadata
-  FIELDS = {
-    cluster_uuids: "cluster_uuids",
-    registries: "registries",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ClusterRegistries.
-# Typed representation of the `ClusterRegistries` API schema.
-class ClusterRegistries
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalClusterRegistriesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalClusterRegistriesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalClusterRegistriesMetadata::DECODERS
-
-  # @return [Array_of_String] An array containing the UUIDs of Kubernetes clusters.
-  attr_reader :cluster_uuids
-  # @return [Array_of_String] An array containing the registry names.
-  attr_reader :registries
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ClusterReadStatusState SDK namespace.
+  module ClusterReadStatusState
+    RUNNING = 'running'
+    PROVISIONING = 'provisioning'
+    DEGRADED = 'degraded'
+    ERROR = 'error'
+    DELETED = 'deleted'
+    UPGRADING = 'upgrading'
+    DELETING = 'deleting'
+    VALUES = %w[
+      running provisioning degraded error deleted upgrading deleting
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalClusterRegistriesMetadata
+    FIELDS = {
+      cluster_uuids: 'cluster_uuids',
+      registries: 'registries'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ClusterRegistries.
+  # Typed representation of the `ClusterRegistries` API schema.
+  class ClusterRegistries
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalClusterRegistriesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalClusterRegistriesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalClusterRegistriesMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalClusterRegistryMetadata
-  FIELDS = {
-    cluster_uuids: "cluster_uuids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [Array_of_String] An array containing the UUIDs of Kubernetes clusters.
+    attr_reader :cluster_uuids
+    # @return [Array_of_String] An array containing the registry names.
+    attr_reader :registries
 
-# API model for ClusterRegistry.
-# Typed representation of the `ClusterRegistry` API schema.
-class ClusterRegistry
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalClusterRegistryMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalClusterRegistryMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalClusterRegistryMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_String] An array containing the UUIDs of Kubernetes clusters.
-  attr_reader :cluster_uuids
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalClusterRegistryMetadata
+    FIELDS = {
+      cluster_uuids: 'cluster_uuids'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ClusterRegistry.
+  # Typed representation of the `ClusterRegistry` API schema.
+  class ClusterRegistry
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalClusterRegistryMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalClusterRegistryMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalClusterRegistryMetadata::DECODERS
+
+    # @return [Array_of_String] An array containing the UUIDs of Kubernetes clusters.
+    attr_reader :cluster_uuids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

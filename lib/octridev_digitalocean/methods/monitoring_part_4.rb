@@ -21,21 +21,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization",
+          '/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization',
           config: config,
           query: {
             'autoscale_pool_id' => QueryValue.new(autoscale_pool_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_autoscale_target_memory_utilization',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -54,24 +53,23 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/cpu_usage",
+          '/v2/monitoring/metrics/database/mysql/cpu_usage',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'aggregate' => QueryValue.new(aggregate, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_cpu_usage',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -94,25 +92,24 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/load",
+          '/v2/monitoring/metrics/database/mysql/load',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'metric' => QueryValue.new(metric, style: 'form', explode: true),
             'aggregate' => QueryValue.new(aggregate, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_load',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -131,24 +128,23 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/memory_usage",
+          '/v2/monitoring/metrics/database/mysql/memory_usage',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'aggregate' => QueryValue.new(aggregate, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_memory_usage',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -167,24 +163,23 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/disk_usage",
+          '/v2/monitoring/metrics/database/mysql/disk_usage',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'aggregate' => QueryValue.new(aggregate, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_disk_usage',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -200,23 +195,22 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/threads_connected",
+          '/v2/monitoring/metrics/database/mysql/threads_connected',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_threads_connected',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -232,23 +226,22 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/threads_created_rate",
+          '/v2/monitoring/metrics/database/mysql/threads_created_rate',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_threads_created_rate',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -264,23 +257,22 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/threads_active",
+          '/v2/monitoring/metrics/database/mysql/threads_active',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_threads_active',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -296,23 +288,22 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/index_vs_sequential_reads",
+          '/v2/monitoring/metrics/database/mysql/index_vs_sequential_reads',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_index_vs_sequential_reads',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -331,24 +322,23 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/op_rates",
+          '/v2/monitoring/metrics/database/mysql/op_rates',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'metric' => QueryValue.new(metric, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_op_rates',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -369,25 +359,24 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/schema_throughput",
+          '/v2/monitoring/metrics/database/mysql/schema_throughput',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'schema' => QueryValue.new(schema, style: 'form', explode: true),
             'metric' => QueryValue.new(metric, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_schema_throughput',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -408,25 +397,24 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/schema_latency",
+          '/v2/monitoring/metrics/database/mysql/schema_latency',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'schema' => QueryValue.new(schema, style: 'form', explode: true),
             'metric' => QueryValue.new(metric, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_schema_latency',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -447,21 +435,20 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/monitoring/sinks/destinations",
+          '/v2/monitoring/sinks/destinations',
           config: config,
           body: {
             'type' => type,
             'config' => request_config,
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::DestinationResponse,
           decoder: :json,
           operation_id: 'monitoring_create_destination',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -470,16 +457,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/sinks/destinations",
+          '/v2/monitoring/sinks/destinations',
           config: config,
           return_type: ::OctridevDigitalocean::MonitoringListDestinations,
           decoder: :json,
           operation_id: 'monitoring_list_destinations',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -491,11 +477,10 @@ module OctridevDigitalocean
         destination_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/monitoring/sinks/destinations/",
+            '/v2/monitoring/sinks/destinations/',
             SdkClient.encode_path_segment(destination_uuid)
           ].join,
           config: config,
@@ -503,7 +488,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'monitoring_get_destination',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -526,23 +511,22 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/monitoring/sinks/destinations/",
+            '/v2/monitoring/sinks/destinations/',
             SdkClient.encode_path_segment(destination_uuid)
           ].join,
           config: config,
           body: {
             'type' => type,
             'config' => request_config,
-            'name' => name,
+            'name' => name
           },
           decoder: :empty,
           operation_id: 'monitoring_update_destination',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -554,18 +538,17 @@ module OctridevDigitalocean
         destination_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/monitoring/sinks/destinations/",
+            '/v2/monitoring/sinks/destinations/',
             SdkClient.encode_path_segment(destination_uuid)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'monitoring_delete_destination',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

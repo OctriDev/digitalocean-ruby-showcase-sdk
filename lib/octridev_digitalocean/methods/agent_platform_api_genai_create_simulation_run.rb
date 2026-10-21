@@ -46,10 +46,9 @@ module OctridevDigitalocean
         user_simulator_model_uuid: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/simulation_runs",
+          '/v2/gen-ai/simulation_runs',
           config: config,
           body: {
             'agent_config' => agent_config,
@@ -60,13 +59,13 @@ module OctridevDigitalocean
             'name' => name,
             'scenario_set_uuid' => scenario_set_uuid,
             'user_simulator_config' => user_simulator_config,
-            'user_simulator_model_uuid' => user_simulator_model_uuid,
+            'user_simulator_model_uuid' => user_simulator_model_uuid
           },
           return_type: ::OctridevDigitalocean::ApiCreateSimulationRunOutput,
           decoder: :json,
           operation_id: 'genai_create_simulation_run',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

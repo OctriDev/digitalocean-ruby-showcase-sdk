@@ -27,21 +27,20 @@ module OctridevDigitalocean
         metric_name: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/custom_evaluation_metrics",
+          '/v2/gen-ai/custom_evaluation_metrics',
           config: config,
           body: {
             'config' => request_config,
             'description' => description,
-            'metric_name' => metric_name,
+            'metric_name' => metric_name
           },
           return_type: ::OctridevDigitalocean::ApiCreateCustomEvaluationMetricOutput,
           decoder: :json,
           operation_id: 'genai_create_custom_evaluation_metric',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -5,123 +5,120 @@
 
 # agent_platform_api_api_prompt domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiPromptMetadata
-  FIELDS = {
-    evaluation_trace_spans: "evaluation_trace_spans",
-    ground_truth: "ground_truth",
-    input: "input",
-    input_tokens: "input_tokens",
-    output: "output",
-    output_tokens: "output_tokens",
-    prompt_chunks: "prompt_chunks",
-    prompt_id: "prompt_id",
-    prompt_level_metric_results: "prompt_level_metric_results",
-    trace_id: "trace_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    evaluation_trace_spans: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationTraceSpan.from_hash(item) }
-    end,
-    prompt_chunks: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiPromptChunk.from_hash(item) }
-    end,
-    prompt_level_metric_results: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ApiPrompt.
-# Typed representation of the `ApiPrompt` API schema.
-class ApiPrompt
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiPromptMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiPromptMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiPromptMetadata::DECODERS
-
-  # @return [Array_of_ApiEvaluationTraceSpan] The evaluated trace spans.
-  attr_reader :evaluation_trace_spans
-  # @return [String] The ground truth for the prompt.
-  attr_reader :ground_truth
-  # @return [String] Optional `string` value serialized in the `input` wire field.
-  attr_reader :input
-  # @return [String] The number of input tokens used in the prompt.
-  attr_reader :input_tokens
-  # @return [String] Optional `string` value serialized in the `output` wire field.
-  attr_reader :output
-  # @return [String] The number of output tokens used in the prompt.
-  attr_reader :output_tokens
-  # @return [Array_of_ApiPromptChunk] The list of prompt chunks.
-  attr_reader :prompt_chunks
-  # @return [Integer] Prompt ID
-  attr_reader :prompt_id
-  # @return [Array_of_ApiEvaluationMetricResult] The metric results for the prompt.
-  attr_reader :prompt_level_metric_results
-  # @return [String] The trace id for the prompt.
-  attr_reader :trace_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiPromptMetadata
+    FIELDS = {
+      evaluation_trace_spans: 'evaluation_trace_spans',
+      ground_truth: 'ground_truth',
+      input: 'input',
+      input_tokens: 'input_tokens',
+      output: 'output',
+      output_tokens: 'output_tokens',
+      prompt_chunks: 'prompt_chunks',
+      prompt_id: 'prompt_id',
+      prompt_level_metric_results: 'prompt_level_metric_results',
+      trace_id: 'trace_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      evaluation_trace_spans: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationTraceSpan.from_hash(item) }
+      end,
+      prompt_chunks: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiPromptChunk.from_hash(item) }
+      end,
+      prompt_level_metric_results: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiPrompt.
+  # Typed representation of the `ApiPrompt` API schema.
+  class ApiPrompt
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiPromptMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiPromptMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiPromptMetadata::DECODERS
+
+    # @return [Array_of_ApiEvaluationTraceSpan] The evaluated trace spans.
+    attr_reader :evaluation_trace_spans
+    # @return [String] The ground truth for the prompt.
+    attr_reader :ground_truth
+    # @return [String] Optional `string` value serialized in the `input` wire field.
+    attr_reader :input
+    # @return [String] The number of input tokens used in the prompt.
+    attr_reader :input_tokens
+    # @return [String] Optional `string` value serialized in the `output` wire field.
+    attr_reader :output
+    # @return [String] The number of output tokens used in the prompt.
+    attr_reader :output_tokens
+    # @return [Array_of_ApiPromptChunk] The list of prompt chunks.
+    attr_reader :prompt_chunks
+    # @return [Integer] Prompt ID
+    attr_reader :prompt_id
+    # @return [Array_of_ApiEvaluationMetricResult] The metric results for the prompt.
+    attr_reader :prompt_level_metric_results
+    # @return [String] The trace id for the prompt.
+    attr_reader :trace_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiPromptChunkMetadata
-  FIELDS = {
-    chunk_usage_pct: "chunk_usage_pct",
-    chunk_used: "chunk_used",
-    index_uuid: "index_uuid",
-    source_name: "source_name",
-    text: "text",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiPromptChunk.
-# Typed representation of the `ApiPromptChunk` API schema.
-class ApiPromptChunk
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiPromptChunkMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiPromptChunkMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiPromptChunkMetadata::DECODERS
-
-  # @return [Float] The usage percentage of the chunk.
-  attr_reader :chunk_usage_pct
-  # @return [Boolean] Indicates if the chunk was used in the prompt.
-  attr_reader :chunk_used
-  # @return [String] The index uuid (Knowledge Base) of the chunk.
-  attr_reader :index_uuid
-  # @return [String] The source name for the chunk, e.g., the file name or document title.
-  attr_reader :source_name
-  # @return [String] Text content of the chunk.
-  attr_reader :text
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiPromptChunkMetadata
+    FIELDS = {
+      chunk_usage_pct: 'chunk_usage_pct',
+      chunk_used: 'chunk_used',
+      index_uuid: 'index_uuid',
+      source_name: 'source_name',
+      text: 'text'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ApiPromptChunk.
+  # Typed representation of the `ApiPromptChunk` API schema.
+  class ApiPromptChunk
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiPromptChunkMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiPromptChunkMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiPromptChunkMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [Float] The usage percentage of the chunk.
+    attr_reader :chunk_usage_pct
+    # @return [Boolean] Indicates if the chunk was used in the prompt.
+    attr_reader :chunk_used
+    # @return [String] The index uuid (Knowledge Base) of the chunk.
+    attr_reader :index_uuid
+    # @return [String] The source name for the chunk, e.g., the file name or document title.
+    attr_reader :source_name
+    # @return [String] Text content of the chunk.
+    attr_reader :text
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

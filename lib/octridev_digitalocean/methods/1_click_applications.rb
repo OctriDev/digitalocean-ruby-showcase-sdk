@@ -18,19 +18,18 @@ module OctridevDigitalocean
         type: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/1-clicks",
+          '/v2/1-clicks',
           config: config,
           query: {
-            'type' => QueryValue.new(type, style: 'form', explode: true),
+            'type' => QueryValue.new(type, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::OneClicksAll,
           decoder: :json,
           operation_id: 'one_clicks_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -46,20 +45,19 @@ module OctridevDigitalocean
         cluster_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/1-clicks/kubernetes",
+          '/v2/1-clicks/kubernetes',
           config: config,
           body: {
             'addon_slugs' => addon_slugs,
-            'cluster_uuid' => cluster_uuid,
+            'cluster_uuid' => cluster_uuid
           },
           return_type: ::OctridevDigitalocean::OneClicksCreateResponse,
           decoder: :json,
           operation_id: 'one_clicks_install_kubernetes',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

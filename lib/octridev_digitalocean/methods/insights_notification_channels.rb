@@ -19,24 +19,23 @@ module OctridevDigitalocean
         per_page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         SdkClient.request(
           'GET',
-          "/v2/insights/notification-channels",
+          '/v2/insights/notification-channels',
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
+            'per_page' => QueryValue.new(per_page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::InsightsListNotificationChannelsResponse,
           decoder: :json,
           operation_id: 'insights_list_notification_channels',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -65,22 +64,21 @@ module OctridevDigitalocean
         webhook: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/insights/notification-channels",
+          '/v2/insights/notification-channels',
           config: config,
           body: {
             'name' => name,
             'email' => email,
             'slack' => slack,
-            'webhook' => webhook,
+            'webhook' => webhook
           },
           return_type: ::OctridevDigitalocean::NotificationChannelResponse,
           decoder: :json,
           operation_id: 'insights_create_notification_channel',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -92,13 +90,12 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
-
         Validation.validate_uuid('id', id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/insights/notification-channels/",
+            '/v2/insights/notification-channels/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -106,7 +103,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'insights_get_notification_channel',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -137,13 +134,12 @@ module OctridevDigitalocean
         webhook: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('id', id)
 
         SdkClient.request(
           'PUT',
           [
-            "/v2/insights/notification-channels/",
+            '/v2/insights/notification-channels/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
@@ -151,13 +147,13 @@ module OctridevDigitalocean
             'name' => name,
             'email' => email,
             'slack' => slack,
-            'webhook' => webhook,
+            'webhook' => webhook
           },
           return_type: ::OctridevDigitalocean::NotificationChannelResponse,
           decoder: :json,
           operation_id: 'insights_update_notification_channel',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -169,20 +165,19 @@ module OctridevDigitalocean
         id:,
         request_options: nil
       )
-
         Validation.validate_uuid('id', id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/insights/notification-channels/",
+            '/v2/insights/notification-channels/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'insights_delete_notification_channel',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

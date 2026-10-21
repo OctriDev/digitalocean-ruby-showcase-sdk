@@ -5,393 +5,384 @@
 
 # reserved_ips domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalReservedIpRegionMetadata
-  FIELDS = {
-    name: "name",
-    slug: "slug",
-    features: "features",
-    available: "available",
-    sizes: "sizes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    slug
-    features
-    available
-    sizes
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ReservedIpRegion.
-# Optional API value serialized in the `region` wire field.
-class ReservedIpRegion
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpRegionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpRegionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpRegionMetadata::DECODERS
-
-  # @return [String] The display name of the region. This will be a full name that is used in the control panel and other interfaces.
-  attr_reader :name
-  # @return [String] A human-readable string that is used as a unique identifier for each region.
-  attr_reader :slug
-  # @return [Array_of_String] This attribute is set to an array which contains features available in this region
-  attr_reader :features
-  # @return [Boolean] This is a boolean value that represents whether new Droplets can be created in this region.
-  attr_reader :available
-  # @return [Array_of_String] This attribute is set to an array which contains the identifying slugs for the sizes available in this region. sizes:read is required to view.
-  attr_reader :sizes
-  # @return [Hash{String => Object}] Keys the schema admits beside the declared fields.
-  attr_reader :additional_properties
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS, extras: true)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpRegionMetadata
+    FIELDS = {
+      name: 'name',
+      slug: 'slug',
+      features: 'features',
+      available: 'available',
+      sizes: 'sizes'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      slug
+      features
+      available
+      sizes
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, extras: true)
+  # API model for ReservedIpRegion.
+  # Optional API value serialized in the `region` wire field.
+  class ReservedIpRegion
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpRegionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpRegionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpRegionMetadata::DECODERS
+
+    # @return [String] The display name of the region. This will be a full name that is used in the control panel and other interfaces.
+    attr_reader :name
+    # @return [String] A human-readable string that is used as a unique identifier for each region.
+    attr_reader :slug
+    # @return [Array_of_String] This attribute is set to an array which contains features available in this region
+    attr_reader :features
+    # @return [Boolean] This is a boolean value that represents whether new Droplets can be created in this region.
+    attr_reader :available
+    # @return [Array_of_String] This attribute is set to an array which contains the identifying slugs for the sizes available in this region. sizes:read is required to view.
+    attr_reader :sizes
+    # @return [Hash{String => Object}] Keys the schema admits beside the declared fields.
+    attr_reader :additional_properties
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS, extras: true)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, extras: true)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS, extras: true)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS, extras: true)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReservedIpMetadata
-  FIELDS = {
-    ip: "ip",
-    region: "region",
-    droplet: "droplet",
-    locked: "locked",
-    project_id: "project_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    region: lambda do |value|
-      ::OctridevDigitalocean::ReservedIpRegion.from_hash(value)
-    end,
-    droplet: lambda do |value|
-      ::OctridevDigitalocean::ReservedIpDroplet.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ReservedIp.
-# Typed representation of the `ReservedIp` API schema.
-class ReservedIp
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpMetadata::DECODERS
-
-  # @return [String] The public IP address of the reserved IP. It also serves as its identifier.
-  attr_reader :ip
-  # @return [ReservedIpRegion] Optional API value serialized in the `region` wire field.
-  attr_reader :region
-  # @return [ReservedIpDroplet] The Droplet that the reserved IP has been assigned to. When you query a reserved IP, if it is assigned to a Droplet, the entire Droplet object will be returned. If it is not assigned, the value will be null. Requires `droplet:read` scope.
-  attr_reader :droplet
-  # @return [Boolean] A boolean value indicating whether or not the reserved IP has pending actions preventing new ones from being submitted.
-  attr_reader :locked
-  # @return [String] The UUID of the project to which the reserved IP currently belongs. Requires `project:read` scope.
-  attr_reader :project_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpMetadata
+    FIELDS = {
+      ip: 'ip',
+      region: 'region',
+      droplet: 'droplet',
+      locked: 'locked',
+      project_id: 'project_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      region: lambda do |value|
+        ::OctridevDigitalocean::ReservedIpRegion.from_hash(value)
+      end,
+      droplet: lambda do |value|
+        ::OctridevDigitalocean::ReservedIpDroplet.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ReservedIp.
+  # Typed representation of the `ReservedIp` API schema.
+  class ReservedIp
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpMetadata::DECODERS
+
+    # @return [String] The public IP address of the reserved IP. It also serves as its identifier.
+    attr_reader :ip
+    # @return [ReservedIpRegion] Optional API value serialized in the `region` wire field.
+    attr_reader :region
+    # @return [ReservedIpDroplet] The Droplet that the reserved IP has been assigned to. When you query a reserved IP, if it is assigned to a Droplet, the entire Droplet object will be returned. If it is not assigned, the value will be null. Requires `droplet:read` scope.
+    attr_reader :droplet
+    # @return [Boolean] A boolean value indicating whether or not the reserved IP has pending actions preventing new ones from being submitted.
+    attr_reader :locked
+    # @return [String] The UUID of the project to which the reserved IP currently belongs. Requires `project:read` scope.
+    attr_reader :project_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReservedIpCreateVariant0Metadata
-  FIELDS = {
-    droplet_id: "droplet_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    droplet_id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ReservedIpCreateVariant0.
-class ReservedIpCreateVariant0
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpCreateVariant0Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpCreateVariant0Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpCreateVariant0Metadata::DECODERS
-
-  # @return [Integer] The ID of the Droplet that the reserved IP will be assigned to.
-  attr_reader :droplet_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpCreateVariant0Metadata
+    FIELDS = {
+      droplet_id: 'droplet_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      droplet_id
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ReservedIpCreateVariant0.
+  class ReservedIpCreateVariant0
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpCreateVariant0Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpCreateVariant0Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpCreateVariant0Metadata::DECODERS
+
+    # @return [Integer] The ID of the Droplet that the reserved IP will be assigned to.
+    attr_reader :droplet_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReservedIpCreateVariant1Metadata
-  FIELDS = {
-    region: "region",
-    project_id: "project_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    region
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ReservedIpCreateVariant1.
-class ReservedIpCreateVariant1
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpCreateVariant1Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpCreateVariant1Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpCreateVariant1Metadata::DECODERS
-
-  # @return [String] The slug identifier for the region the reserved IP will be reserved to.
-  attr_reader :region
-  # @return [String] The UUID of the project to which the reserved IP will be assigned.
-  attr_reader :project_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpCreateVariant1Metadata
+    FIELDS = {
+      region: 'region',
+      project_id: 'project_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      region
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ReservedIpCreateVariant1.
+  class ReservedIpCreateVariant1
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpCreateVariant1Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpCreateVariant1Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpCreateVariant1Metadata::DECODERS
+
+    # @return [String] The slug identifier for the region the reserved IP will be reserved to.
+    attr_reader :region
+    # @return [String] The UUID of the project to which the reserved IP will be assigned.
+    attr_reader :project_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ReservedIpCreate SDK namespace.
-module ReservedIpCreate
-  def self.from_hash(hash)
-    shape_mapping = {
-      "droplet_id" => ReservedIpCreateVariant0,
-      "region" => ReservedIpCreateVariant1,
-    }
-    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-    decoded = type&.from_hash(hash)
-    return decoded unless type.nil?
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReservedIpCreatedLinksMetadata
-  FIELDS = {
-    droplets: "droplets",
-    actions: "actions",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    droplets: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ActionLink.from_hash(item) }
-    end,
-    actions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ActionLink.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ReservedIpCreatedLinks.
-# Optional object value serialized in the `links` wire field.
-class ReservedIpCreatedLinks
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpCreatedLinksMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpCreatedLinksMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpCreatedLinksMetadata::DECODERS
-
-  # @return [Array_of_ActionLink] Optional array value serialized in the `droplets` wire field.
-  attr_reader :droplets
-  # @return [Array_of_ActionLink] Optional array value serialized in the `actions` wire field.
-  attr_reader :actions
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ReservedIpCreate SDK namespace.
+  module ReservedIpCreate
+    def self.from_hash(hash)
+      shape_mapping = {
+        'droplet_id' => ReservedIpCreateVariant0,
+        'region' => ReservedIpCreateVariant1
+      }
+      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+      decoded = type&.from_hash(hash)
+      decoded unless type.nil?
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpCreatedLinksMetadata
+    FIELDS = {
+      droplets: 'droplets',
+      actions: 'actions'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      droplets: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ActionLink.from_hash(item) }
+      end,
+      actions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ActionLink.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ReservedIpCreatedLinks.
+  # Optional object value serialized in the `links` wire field.
+  class ReservedIpCreatedLinks
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpCreatedLinksMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpCreatedLinksMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpCreatedLinksMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalReservedIpCreatedMetadata
-  FIELDS = {
-    reserved_ip: "reserved_ip",
-    links: "links",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    reserved_ip: lambda do |value|
-      ::OctridevDigitalocean::ReservedIp.from_hash(value)
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::ReservedIpCreatedLinks.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [Array_of_ActionLink] Optional array value serialized in the `droplets` wire field.
+    attr_reader :droplets
+    # @return [Array_of_ActionLink] Optional array value serialized in the `actions` wire field.
+    attr_reader :actions
 
-# API model for ReservedIpCreated.
-# Typed representation of the `ReservedIpCreated` API schema.
-class ReservedIpCreated
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpCreatedMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpCreatedMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpCreatedMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ReservedIp] Optional object value serialized in the `reserved_ip` wire field.
-  attr_reader :reserved_ip
-  # @return [ReservedIpCreatedLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpCreatedMetadata
+    FIELDS = {
+      reserved_ip: 'reserved_ip',
+      links: 'links'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      reserved_ip: lambda do |value|
+        ::OctridevDigitalocean::ReservedIp.from_hash(value)
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::ReservedIpCreatedLinks.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ReservedIpCreated.
+  # Typed representation of the `ReservedIpCreated` API schema.
+  class ReservedIpCreated
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpCreatedMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpCreatedMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpCreatedMetadata::DECODERS
 
-# Defines the ReservedIpDroplet SDK namespace.
-module ReservedIpDroplet
-  def self.from_hash(hash)
-    begin
-      return Droplet.from_hash(hash)
+    # @return [ReservedIp] Optional object value serialized in the `reserved_ip` wire field.
+    attr_reader :reserved_ip
+    # @return [ReservedIpCreatedLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the ReservedIpDroplet SDK namespace.
+  module ReservedIpDroplet
+    def self.from_hash(hash)
+      Droplet.from_hash(hash)
     rescue ::StandardError
       return hash if hash.is_a?(::Hash)
 
       raise
     end
   end
-end
 
-# Internal model hydration metadata.
-class SdkInternalReservedIpListMetadata
-  FIELDS = {
-    reserved_ips: "reserved_ips",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    reserved_ips: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ReservedIp.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ReservedIpList.
-# Typed representation of the `ReservedIpList` API schema.
-class ReservedIpList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpListMetadata::DECODERS
-
-  attr_reader :reserved_ips
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpListMetadata
+    FIELDS = {
+      reserved_ips: 'reserved_ips',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      reserved_ips: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ReservedIp.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ReservedIpList.
+  # Typed representation of the `ReservedIpList` API schema.
+  class ReservedIpList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpListMetadata::DECODERS
+
+    attr_reader :reserved_ips
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReservedIpResponseMetadata
-  FIELDS = {
-    reserved_ip: "reserved_ip",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    reserved_ip: lambda do |value|
-      ::OctridevDigitalocean::ReservedIp.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ReservedIpResponse.
-# Typed representation of the `ReservedIpResponse` API schema.
-class ReservedIpResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReservedIpResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReservedIpResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReservedIpResponseMetadata::DECODERS
-
-  # @return [ReservedIp] Optional object value serialized in the `reserved_ip` wire field.
-  attr_reader :reserved_ip
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReservedIpResponseMetadata
+    FIELDS = {
+      reserved_ip: 'reserved_ip'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      reserved_ip: lambda do |value|
+        ::OctridevDigitalocean::ReservedIp.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ReservedIpResponse.
+  # Typed representation of the `ReservedIpResponse` API schema.
+  class ReservedIpResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReservedIpResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReservedIpResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReservedIpResponseMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [ReservedIp] Optional object value serialized in the `reserved_ip` wire field.
+    attr_reader :reserved_ip
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

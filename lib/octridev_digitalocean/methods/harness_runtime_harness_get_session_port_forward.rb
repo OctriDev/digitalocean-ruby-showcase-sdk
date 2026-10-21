@@ -20,15 +20,14 @@ module OctridevDigitalocean
         port:,
         request_options: nil
       )
-
-        Validation.validate_range('port', port, min: 1024, max: 65535)
+        Validation.validate_range('port', port, min: 1024, max: 65_535)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/port-forward/",
+            '/port-forward/',
             SdkClient.encode_path_segment(port)
           ].join,
           config: config,
@@ -36,7 +35,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_get_session_port_forward',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

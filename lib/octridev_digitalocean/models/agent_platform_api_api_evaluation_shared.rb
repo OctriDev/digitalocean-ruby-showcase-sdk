@@ -5,690 +5,681 @@
 
 # agent_platform_api_api_evaluation domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiEvaluationDatasetMetadata
-  FIELDS = {
-    created_at: "created_at",
-    dataset_name: "dataset_name",
-    dataset_paradigm: "dataset_paradigm",
-    dataset_type: "dataset_type",
-    dataset_uuid: "dataset_uuid",
-    file_size: "file_size",
-    has_ground_truth: "has_ground_truth",
-    row_count: "row_count",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    dataset_paradigm: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationDatasetParadigm.from_value(value)
-    end,
-    dataset_type: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationDatasetType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiEvaluationDataset.
-# Typed representation of the `ApiEvaluationDataset` API schema.
-class ApiEvaluationDataset
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiEvaluationDatasetMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiEvaluationDatasetMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiEvaluationDatasetMetadata::DECODERS
-
-  # @return [String] Time created at.
-  attr_reader :created_at
-  # @return [String] Name of the dataset.
-  attr_reader :dataset_name
-  # @return [ApiEvaluationDatasetParadigm] EvaluationDatasetParadigm is the row/content shape of a dataset, orthogonal to the surface in EvaluationDatasetType (e.g. a model dataset can be single- or multi-turn).
-  attr_reader :dataset_paradigm
-  # @return [ApiEvaluationDatasetType] Optional enumerated value serialized in the `dataset_type` wire field.
-  attr_reader :dataset_type
-  # @return [String] UUID of the dataset.
-  attr_reader :dataset_uuid
-  # @return [String] The size of the dataset uploaded file in bytes.
-  attr_reader :file_size
-  # @return [Boolean] Does the dataset have a ground truth column?
-  attr_reader :has_ground_truth
-  # @return [Integer] Number of rows in the dataset.
-  attr_reader :row_count
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiEvaluationDatasetMetadata
+    FIELDS = {
+      created_at: 'created_at',
+      dataset_name: 'dataset_name',
+      dataset_paradigm: 'dataset_paradigm',
+      dataset_type: 'dataset_type',
+      dataset_uuid: 'dataset_uuid',
+      file_size: 'file_size',
+      has_ground_truth: 'has_ground_truth',
+      row_count: 'row_count'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      dataset_paradigm: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationDatasetParadigm.from_value(value)
+      end,
+      dataset_type: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationDatasetType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiEvaluationDataset.
+  # Typed representation of the `ApiEvaluationDataset` API schema.
+  class ApiEvaluationDataset
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiEvaluationDatasetMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiEvaluationDatasetMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiEvaluationDatasetMetadata::DECODERS
+
+    # @return [String] Time created at.
+    attr_reader :created_at
+    # @return [String] Name of the dataset.
+    attr_reader :dataset_name
+    # @return [ApiEvaluationDatasetParadigm] EvaluationDatasetParadigm is the row/content shape of a dataset, orthogonal to the surface in EvaluationDatasetType (e.g. a model dataset can be single- or multi-turn).
+    attr_reader :dataset_paradigm
+    # @return [ApiEvaluationDatasetType] Optional enumerated value serialized in the `dataset_type` wire field.
+    attr_reader :dataset_type
+    # @return [String] UUID of the dataset.
+    attr_reader :dataset_uuid
+    # @return [String] The size of the dataset uploaded file in bytes.
+    attr_reader :file_size
+    # @return [Boolean] Does the dataset have a ground truth column?
+    attr_reader :has_ground_truth
+    # @return [Integer] Number of rows in the dataset.
+    attr_reader :row_count
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ApiEvaluationDatasetParadigm SDK namespace.
-module ApiEvaluationDatasetParadigm
-  EVALUATION_DATASET_PARADIGM_SINGLE_TURN = 'EVALUATION_DATASET_PARADIGM_SINGLE_TURN'
-  EVALUATION_DATASET_PARADIGM_MULTI_TURN = 'EVALUATION_DATASET_PARADIGM_MULTI_TURN'
-  EVALUATION_DATASET_PARADIGM_CODING = 'EVALUATION_DATASET_PARADIGM_CODING'
-  EVALUATION_DATASET_PARADIGM_N_PLUS_1 = 'EVALUATION_DATASET_PARADIGM_N_PLUS_1'
-  VALUES = [
-    'EVALUATION_DATASET_PARADIGM_SINGLE_TURN', 'EVALUATION_DATASET_PARADIGM_MULTI_TURN',
-    'EVALUATION_DATASET_PARADIGM_CODING', 'EVALUATION_DATASET_PARADIGM_N_PLUS_1'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ApiEvaluationDatasetType SDK namespace.
-module ApiEvaluationDatasetType
-  EVALUATION_DATASET_TYPE_UNKNOWN = 'EVALUATION_DATASET_TYPE_UNKNOWN'
-  EVALUATION_DATASET_TYPE_MODEL = 'EVALUATION_DATASET_TYPE_MODEL'
-  VALUES = ['EVALUATION_DATASET_TYPE_UNKNOWN', 'EVALUATION_DATASET_TYPE_MODEL'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiEvaluationMetricMetadata
-  FIELDS = {
-    associated_presets: "associated_presets",
-    category: "category",
-    custom_eval_config: "custom_eval_config",
-    description: "description",
-    evaluation_scope: "evaluation_scope",
-    inverted: "inverted",
-    is_metric_goal: "is_metric_goal",
-    metric_name: "metric_name",
-    metric_rank: "metric_rank",
-    metric_type: "metric_type",
-    metric_uuid: "metric_uuid",
-    metric_value_type: "metric_value_type",
-    range_max: "range_max",
-    range_min: "range_min",
-    source: "source",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    associated_presets: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAssociatedModelEvaluationPreset.from_hash(item) }
-    end,
-    category: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationMetricCategory.from_value(value)
-    end,
-    custom_eval_config: lambda do |value|
-      ::OctridevDigitalocean::ApiCustomEvaluationMetricConfig.from_hash(value)
-    end,
-    evaluation_scope: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationScope.from_value(value)
-    end,
-    metric_type: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationMetricType.from_value(value)
-    end,
-    metric_value_type: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationMetricValueType.from_value(value)
-    end,
-    source: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationMetricSource.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiEvaluationMetric.
-# Typed representation of the `ApiEvaluationMetric` API schema.
-class ApiEvaluationMetric
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiEvaluationMetricMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiEvaluationMetricMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiEvaluationMetricMetadata::DECODERS
-
-  # @return [Array_of_ApiAssociatedModelEvaluationPreset] Saved model evaluation presets that reference this metric. Populated for custom metrics when listing metrics so the dashboard can warn that deleting the metric will also delete these presets. Empty for built-in metrics.
-  attr_reader :associated_presets
-  # @return [ApiEvaluationMetricCategory] Optional enumerated value serialized in the `category` wire field.
-  attr_reader :category
-  # @return [ApiCustomEvaluationMetricConfig] Configuration for a custom model-evaluation metric scored by an LLM judge. Prompt and model response are always included in the judge context.
-  attr_reader :custom_eval_config
-  # @return [String] Optional `string` value serialized in the `description` wire field.
-  attr_reader :description
-  # @return [ApiEvaluationScope] Scope that determines whether a metric belongs to agent evaluation or model evaluation. For backwards compatibility, UNSPECIFIED defaults to agent metrics only in list operations.
-  attr_reader :evaluation_scope
-  # @return [Boolean] If true, the metric is inverted, meaning that a lower value is better.
-  attr_reader :inverted
-  # @return [Boolean] Optional `boolean` value serialized in the `is_metric_goal` wire field.
-  attr_reader :is_metric_goal
-  # @return [String] Optional `string` value serialized in the `metric_name` wire field.
-  attr_reader :metric_name
-  # @return [Integer] Optional `int64`-formatted value serialized in the `metric_rank` wire field.
-  attr_reader :metric_rank
-  # @return [ApiEvaluationMetricType] Optional enumerated value serialized in the `metric_type` wire field.
-  attr_reader :metric_type
-  # @return [String] Optional `string` value serialized in the `metric_uuid` wire field.
-  attr_reader :metric_uuid
-  # @return [ApiEvaluationMetricValueType] Optional enumerated value serialized in the `metric_value_type` wire field.
-  attr_reader :metric_value_type
-  # @return [Float] The maximum value for the metric.
-  attr_reader :range_max
-  # @return [Float] The minimum value for the metric.
-  attr_reader :range_min
-  # @return [ApiEvaluationMetricSource] Distinguishes platform catalog metrics from user-defined LLM-as-judge metrics.
-  attr_reader :source
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ApiEvaluationDatasetParadigm SDK namespace.
+  module ApiEvaluationDatasetParadigm
+    EVALUATION_DATASET_PARADIGM_SINGLE_TURN = 'EVALUATION_DATASET_PARADIGM_SINGLE_TURN'
+    EVALUATION_DATASET_PARADIGM_MULTI_TURN = 'EVALUATION_DATASET_PARADIGM_MULTI_TURN'
+    EVALUATION_DATASET_PARADIGM_CODING = 'EVALUATION_DATASET_PARADIGM_CODING'
+    EVALUATION_DATASET_PARADIGM_N_PLUS_1 = 'EVALUATION_DATASET_PARADIGM_N_PLUS_1'
+    VALUES = %w[
+      EVALUATION_DATASET_PARADIGM_SINGLE_TURN EVALUATION_DATASET_PARADIGM_MULTI_TURN
+      EVALUATION_DATASET_PARADIGM_CODING EVALUATION_DATASET_PARADIGM_N_PLUS_1
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ApiEvaluationDatasetType SDK namespace.
+  module ApiEvaluationDatasetType
+    EVALUATION_DATASET_TYPE_UNKNOWN = 'EVALUATION_DATASET_TYPE_UNKNOWN'
+    EVALUATION_DATASET_TYPE_MODEL = 'EVALUATION_DATASET_TYPE_MODEL'
+    VALUES = %w[EVALUATION_DATASET_TYPE_UNKNOWN EVALUATION_DATASET_TYPE_MODEL].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ApiEvaluationMetricCategory SDK namespace.
-module ApiEvaluationMetricCategory
-  METRIC_CATEGORY_UNSPECIFIED = 'METRIC_CATEGORY_UNSPECIFIED'
-  METRIC_CATEGORY_CORRECTNESS = 'METRIC_CATEGORY_CORRECTNESS'
-  METRIC_CATEGORY_USER_OUTCOMES = 'METRIC_CATEGORY_USER_OUTCOMES'
-  METRIC_CATEGORY_SAFETY_AND_SECURITY = 'METRIC_CATEGORY_SAFETY_AND_SECURITY'
-  METRIC_CATEGORY_CONTEXT_QUALITY = 'METRIC_CATEGORY_CONTEXT_QUALITY'
-  METRIC_CATEGORY_MODEL_FIT = 'METRIC_CATEGORY_MODEL_FIT'
-  METRIC_CATEGORY_CONVERSATIONAL = 'METRIC_CATEGORY_CONVERSATIONAL'
-  VALUES = [
-    'METRIC_CATEGORY_UNSPECIFIED', 'METRIC_CATEGORY_CORRECTNESS', 'METRIC_CATEGORY_USER_OUTCOMES',
-    'METRIC_CATEGORY_SAFETY_AND_SECURITY', 'METRIC_CATEGORY_CONTEXT_QUALITY',
-    'METRIC_CATEGORY_MODEL_FIT', 'METRIC_CATEGORY_CONVERSATIONAL'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiEvaluationMetricResultMetadata
-  FIELDS = {
-    error_description: "error_description",
-    metric_name: "metric_name",
-    metric_uuid: "metric_uuid",
-    metric_value_type: "metric_value_type",
-    number_value: "number_value",
-    reasoning: "reasoning",
-    status: "status",
-    string_value: "string_value",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    metric_value_type: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationMetricValueType.from_value(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationMetricResultStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiEvaluationMetricResult.
-# Typed representation of the `ApiEvaluationMetricResult` API schema.
-class ApiEvaluationMetricResult
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiEvaluationMetricResultMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiEvaluationMetricResultMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiEvaluationMetricResultMetadata::DECODERS
-
-  # @return [String] Error description if the metric could not be calculated.
-  attr_reader :error_description
-  # @return [String] Metric name
-  attr_reader :metric_name
-  # @return [String] Metric UUID (built-in or custom); stable key for results UI and aggregation.
-  attr_reader :metric_uuid
-  # @return [ApiEvaluationMetricValueType] Optional enumerated value serialized in the `metric_value_type` wire field.
-  attr_reader :metric_value_type
-  # @return [Float] The value of the metric as a number.
-  attr_reader :number_value
-  # @return [String] Reasoning of the metric result.
-  attr_reader :reasoning
-  # @return [ApiEvaluationMetricResultStatus] Outcome of scoring a single metric for one prompt or span.
-  attr_reader :status
-  # @return [String] The value of the metric as a string.
-  attr_reader :string_value
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiEvaluationMetricMetadata
+    FIELDS = {
+      associated_presets: 'associated_presets',
+      category: 'category',
+      custom_eval_config: 'custom_eval_config',
+      description: 'description',
+      evaluation_scope: 'evaluation_scope',
+      inverted: 'inverted',
+      is_metric_goal: 'is_metric_goal',
+      metric_name: 'metric_name',
+      metric_rank: 'metric_rank',
+      metric_type: 'metric_type',
+      metric_uuid: 'metric_uuid',
+      metric_value_type: 'metric_value_type',
+      range_max: 'range_max',
+      range_min: 'range_min',
+      source: 'source'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      associated_presets: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAssociatedModelEvaluationPreset.from_hash(item) }
+      end,
+      category: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationMetricCategory.from_value(value)
+      end,
+      custom_eval_config: lambda do |value|
+        ::OctridevDigitalocean::ApiCustomEvaluationMetricConfig.from_hash(value)
+      end,
+      evaluation_scope: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationScope.from_value(value)
+      end,
+      metric_type: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationMetricType.from_value(value)
+      end,
+      metric_value_type: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationMetricValueType.from_value(value)
+      end,
+      source: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationMetricSource.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiEvaluationMetric.
+  # Typed representation of the `ApiEvaluationMetric` API schema.
+  class ApiEvaluationMetric
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiEvaluationMetricMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiEvaluationMetricMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiEvaluationMetricMetadata::DECODERS
+
+    # @return [Array_of_ApiAssociatedModelEvaluationPreset] Saved model evaluation presets that reference this metric. Populated for custom metrics when listing metrics so the dashboard can warn that deleting the metric will also delete these presets. Empty for built-in metrics.
+    attr_reader :associated_presets
+    # @return [ApiEvaluationMetricCategory] Optional enumerated value serialized in the `category` wire field.
+    attr_reader :category
+    # @return [ApiCustomEvaluationMetricConfig] Configuration for a custom model-evaluation metric scored by an LLM judge. Prompt and model response are always included in the judge context.
+    attr_reader :custom_eval_config
+    # @return [String] Optional `string` value serialized in the `description` wire field.
+    attr_reader :description
+    # @return [ApiEvaluationScope] Scope that determines whether a metric belongs to agent evaluation or model evaluation. For backwards compatibility, UNSPECIFIED defaults to agent metrics only in list operations.
+    attr_reader :evaluation_scope
+    # @return [Boolean] If true, the metric is inverted, meaning that a lower value is better.
+    attr_reader :inverted
+    # @return [Boolean] Optional `boolean` value serialized in the `is_metric_goal` wire field.
+    attr_reader :is_metric_goal
+    # @return [String] Optional `string` value serialized in the `metric_name` wire field.
+    attr_reader :metric_name
+    # @return [Integer] Optional `int64`-formatted value serialized in the `metric_rank` wire field.
+    attr_reader :metric_rank
+    # @return [ApiEvaluationMetricType] Optional enumerated value serialized in the `metric_type` wire field.
+    attr_reader :metric_type
+    # @return [String] Optional `string` value serialized in the `metric_uuid` wire field.
+    attr_reader :metric_uuid
+    # @return [ApiEvaluationMetricValueType] Optional enumerated value serialized in the `metric_value_type` wire field.
+    attr_reader :metric_value_type
+    # @return [Float] The maximum value for the metric.
+    attr_reader :range_max
+    # @return [Float] The minimum value for the metric.
+    attr_reader :range_min
+    # @return [ApiEvaluationMetricSource] Distinguishes platform catalog metrics from user-defined LLM-as-judge metrics.
+    attr_reader :source
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ApiEvaluationMetricResultStatus SDK namespace.
-module ApiEvaluationMetricResultStatus
-  EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED = 'EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED'
-  EVALUATION_METRIC_RESULT_STATUS_COMPLETED = 'EVALUATION_METRIC_RESULT_STATUS_COMPLETED'
-  EVALUATION_METRIC_RESULT_STATUS_FAILED = 'EVALUATION_METRIC_RESULT_STATUS_FAILED'
-  EVALUATION_METRIC_RESULT_STATUS_SKIPPED = 'EVALUATION_METRIC_RESULT_STATUS_SKIPPED'
-  VALUES = [
-    'EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED', 'EVALUATION_METRIC_RESULT_STATUS_COMPLETED',
-    'EVALUATION_METRIC_RESULT_STATUS_FAILED', 'EVALUATION_METRIC_RESULT_STATUS_SKIPPED'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ApiEvaluationMetricSource SDK namespace.
-module ApiEvaluationMetricSource
-  EVALUATION_METRIC_SOURCE_UNSPECIFIED = 'EVALUATION_METRIC_SOURCE_UNSPECIFIED'
-  EVALUATION_METRIC_SOURCE_BUILTIN = 'EVALUATION_METRIC_SOURCE_BUILTIN'
-  EVALUATION_METRIC_SOURCE_CUSTOM = 'EVALUATION_METRIC_SOURCE_CUSTOM'
-  VALUES = [
-    'EVALUATION_METRIC_SOURCE_UNSPECIFIED', 'EVALUATION_METRIC_SOURCE_BUILTIN',
-    'EVALUATION_METRIC_SOURCE_CUSTOM'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ApiEvaluationMetricType SDK namespace.
-module ApiEvaluationMetricType
-  METRIC_TYPE_UNSPECIFIED = 'METRIC_TYPE_UNSPECIFIED'
-  METRIC_TYPE_GENERAL_QUALITY = 'METRIC_TYPE_GENERAL_QUALITY'
-  METRIC_TYPE_RAG_AND_TOOL = 'METRIC_TYPE_RAG_AND_TOOL'
-  METRIC_TYPE_MODEL_QUALITY = 'METRIC_TYPE_MODEL_QUALITY'
-  METRIC_TYPE_MODEL_SAFETY = 'METRIC_TYPE_MODEL_SAFETY'
-  VALUES = [
-    'METRIC_TYPE_UNSPECIFIED', 'METRIC_TYPE_GENERAL_QUALITY', 'METRIC_TYPE_RAG_AND_TOOL',
-    'METRIC_TYPE_MODEL_QUALITY', 'METRIC_TYPE_MODEL_SAFETY'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ApiEvaluationMetricValueType SDK namespace.
-module ApiEvaluationMetricValueType
-  METRIC_VALUE_TYPE_UNSPECIFIED = 'METRIC_VALUE_TYPE_UNSPECIFIED'
-  METRIC_VALUE_TYPE_NUMBER = 'METRIC_VALUE_TYPE_NUMBER'
-  METRIC_VALUE_TYPE_STRING = 'METRIC_VALUE_TYPE_STRING'
-  METRIC_VALUE_TYPE_PERCENTAGE = 'METRIC_VALUE_TYPE_PERCENTAGE'
-  VALUES = [
-    'METRIC_VALUE_TYPE_UNSPECIFIED', 'METRIC_VALUE_TYPE_NUMBER', 'METRIC_VALUE_TYPE_STRING',
-    'METRIC_VALUE_TYPE_PERCENTAGE'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiEvaluationPricingMetadata
-  FIELDS = {
-    currency: "currency",
-    judge_model_pricing: "judge_model_pricing",
-    per_candidate_model_pricing: "per_candidate_model_pricing",
-    total_cost: "total_cost",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    judge_model_pricing: lambda do |value|
-      ::OctridevDigitalocean::ApiTokenPricing.from_hash(value)
-    end,
-    per_candidate_model_pricing: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiModelPricingEntry.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ApiEvaluationPricing.
-# Pricing breakdown for an evaluation run.
-class ApiEvaluationPricing
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiEvaluationPricingMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiEvaluationPricingMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiEvaluationPricingMetadata::DECODERS
-
-  # @return [String] Currency code (e.g., "USD").
-  attr_reader :currency
-  # @return [ApiTokenPricing] Token pricing breakdown for a single model.
-  attr_reader :judge_model_pricing
-  # @return [Array_of_ApiModelPricingEntry] Pricing per candidate model.
-  attr_reader :per_candidate_model_pricing
-  # @return [Float] Total cost of the evaluation run (all candidates + judge).
-  attr_reader :total_cost
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ApiEvaluationMetricCategory SDK namespace.
+  module ApiEvaluationMetricCategory
+    METRIC_CATEGORY_UNSPECIFIED = 'METRIC_CATEGORY_UNSPECIFIED'
+    METRIC_CATEGORY_CORRECTNESS = 'METRIC_CATEGORY_CORRECTNESS'
+    METRIC_CATEGORY_USER_OUTCOMES = 'METRIC_CATEGORY_USER_OUTCOMES'
+    METRIC_CATEGORY_SAFETY_AND_SECURITY = 'METRIC_CATEGORY_SAFETY_AND_SECURITY'
+    METRIC_CATEGORY_CONTEXT_QUALITY = 'METRIC_CATEGORY_CONTEXT_QUALITY'
+    METRIC_CATEGORY_MODEL_FIT = 'METRIC_CATEGORY_MODEL_FIT'
+    METRIC_CATEGORY_CONVERSATIONAL = 'METRIC_CATEGORY_CONVERSATIONAL'
+    VALUES = %w[
+      METRIC_CATEGORY_UNSPECIFIED METRIC_CATEGORY_CORRECTNESS METRIC_CATEGORY_USER_OUTCOMES
+      METRIC_CATEGORY_SAFETY_AND_SECURITY METRIC_CATEGORY_CONTEXT_QUALITY
+      METRIC_CATEGORY_MODEL_FIT METRIC_CATEGORY_CONVERSATIONAL
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiEvaluationMetricResultMetadata
+    FIELDS = {
+      error_description: 'error_description',
+      metric_name: 'metric_name',
+      metric_uuid: 'metric_uuid',
+      metric_value_type: 'metric_value_type',
+      number_value: 'number_value',
+      reasoning: 'reasoning',
+      status: 'status',
+      string_value: 'string_value'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      metric_value_type: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationMetricValueType.from_value(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationMetricResultStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiEvaluationMetricResult.
+  # Typed representation of the `ApiEvaluationMetricResult` API schema.
+  class ApiEvaluationMetricResult
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiEvaluationMetricResultMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiEvaluationMetricResultMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiEvaluationMetricResultMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiEvaluationRunMetadata
-  FIELDS = {
-    agent_deleted: "agent_deleted",
-    agent_deployment_name: "agent_deployment_name",
-    agent_name: "agent_name",
-    agent_uuid: "agent_uuid",
-    agent_version_hash: "agent_version_hash",
-    agent_workspace_uuid: "agent_workspace_uuid",
-    created_by_user_email: "created_by_user_email",
-    created_by_user_id: "created_by_user_id",
-    error_description: "error_description",
-    evaluation_run_uuid: "evaluation_run_uuid",
-    evaluation_test_case_workspace_uuid: "evaluation_test_case_workspace_uuid",
-    finished_at: "finished_at",
-    pass_status: "pass_status",
-    queued_at: "queued_at",
-    run_level_metric_results: "run_level_metric_results",
-    run_name: "run_name",
-    star_metric_result: "star_metric_result",
-    started_at: "started_at",
-    status: "status",
-    test_case_description: "test_case_description",
-    test_case_name: "test_case_name",
-    test_case_uuid: "test_case_uuid",
-    test_case_version: "test_case_version",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    run_level_metric_results: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(item) }
-    end,
-    star_metric_result: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationRunStatus.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [String] Error description if the metric could not be calculated.
+    attr_reader :error_description
+    # @return [String] Metric name
+    attr_reader :metric_name
+    # @return [String] Metric UUID (built-in or custom); stable key for results UI and aggregation.
+    attr_reader :metric_uuid
+    # @return [ApiEvaluationMetricValueType] Optional enumerated value serialized in the `metric_value_type` wire field.
+    attr_reader :metric_value_type
+    # @return [Float] The value of the metric as a number.
+    attr_reader :number_value
+    # @return [String] Reasoning of the metric result.
+    attr_reader :reasoning
+    # @return [ApiEvaluationMetricResultStatus] Outcome of scoring a single metric for one prompt or span.
+    attr_reader :status
+    # @return [String] The value of the metric as a string.
+    attr_reader :string_value
 
-# API model for ApiEvaluationRun.
-# Typed representation of the `ApiEvaluationRun` API schema.
-class ApiEvaluationRun
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiEvaluationRunMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiEvaluationRunMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiEvaluationRunMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Boolean] Whether agent is deleted
-  attr_reader :agent_deleted
-  # @return [String] The agent deployment name
-  attr_reader :agent_deployment_name
-  # @return [String] Agent name
-  attr_reader :agent_name
-  # @return [String] Agent UUID.
-  attr_reader :agent_uuid
-  # @return [String] Version hash
-  attr_reader :agent_version_hash
-  # @return [String] Agent workspace uuid
-  attr_reader :agent_workspace_uuid
-  # @return [String] Optional `string` value serialized in the `created_by_user_email` wire field.
-  attr_reader :created_by_user_email
-  # @return [String] Optional `uint64`-formatted value serialized in the `created_by_user_id` wire field.
-  attr_reader :created_by_user_id
-  # @return [String] The error description
-  attr_reader :error_description
-  # @return [String] Evaluation run UUID.
-  attr_reader :evaluation_run_uuid
-  # @return [String] Evaluation test case workspace uuid
-  attr_reader :evaluation_test_case_workspace_uuid
-  # @return [String] Run end time.
-  attr_reader :finished_at
-  # @return [Boolean] The pass status of the evaluation run based on the star metric.
-  attr_reader :pass_status
-  # @return [String] Run queued time.
-  attr_reader :queued_at
-  # @return [Array_of_ApiEvaluationMetricResult] Optional array value serialized in the `run_level_metric_results` wire field.
-  attr_reader :run_level_metric_results
-  # @return [String] Run name.
-  attr_reader :run_name
-  # @return [ApiEvaluationMetricResult] Optional object value serialized in the `star_metric_result` wire field.
-  attr_reader :star_metric_result
-  # @return [String] Run start time.
-  attr_reader :started_at
-  # @return [ApiEvaluationRunStatus] Evaluation Run Statuses
-  attr_reader :status
-  # @return [String] Test case description.
-  attr_reader :test_case_description
-  # @return [String] Test case name.
-  attr_reader :test_case_name
-  # @return [String] Test-case UUID.
-  attr_reader :test_case_uuid
-  # @return [Integer] Test-case-version.
-  attr_reader :test_case_version
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ApiEvaluationMetricResultStatus SDK namespace.
+  module ApiEvaluationMetricResultStatus
+    EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED = 'EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED'
+    EVALUATION_METRIC_RESULT_STATUS_COMPLETED = 'EVALUATION_METRIC_RESULT_STATUS_COMPLETED'
+    EVALUATION_METRIC_RESULT_STATUS_FAILED = 'EVALUATION_METRIC_RESULT_STATUS_FAILED'
+    EVALUATION_METRIC_RESULT_STATUS_SKIPPED = 'EVALUATION_METRIC_RESULT_STATUS_SKIPPED'
+    VALUES = %w[
+      EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED EVALUATION_METRIC_RESULT_STATUS_COMPLETED
+      EVALUATION_METRIC_RESULT_STATUS_FAILED EVALUATION_METRIC_RESULT_STATUS_SKIPPED
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ApiEvaluationRunStatus SDK namespace.
-module ApiEvaluationRunStatus
-  EVALUATION_RUN_STATUS_UNSPECIFIED = 'EVALUATION_RUN_STATUS_UNSPECIFIED'
-  EVALUATION_RUN_QUEUED = 'EVALUATION_RUN_QUEUED'
-  EVALUATION_RUN_RUNNING_DATASET = 'EVALUATION_RUN_RUNNING_DATASET'
-  EVALUATION_RUN_EVALUATING_RESULTS = 'EVALUATION_RUN_EVALUATING_RESULTS'
-  EVALUATION_RUN_CANCELLING = 'EVALUATION_RUN_CANCELLING'
-  EVALUATION_RUN_CANCELLED = 'EVALUATION_RUN_CANCELLED'
-  EVALUATION_RUN_SUCCESSFUL = 'EVALUATION_RUN_SUCCESSFUL'
-  EVALUATION_RUN_PARTIALLY_SUCCESSFUL = 'EVALUATION_RUN_PARTIALLY_SUCCESSFUL'
-  EVALUATION_RUN_FAILED = 'EVALUATION_RUN_FAILED'
-  VALUES = [
-    'EVALUATION_RUN_STATUS_UNSPECIFIED', 'EVALUATION_RUN_QUEUED', 'EVALUATION_RUN_RUNNING_DATASET',
-    'EVALUATION_RUN_EVALUATING_RESULTS', 'EVALUATION_RUN_CANCELLING', 'EVALUATION_RUN_CANCELLED',
-    'EVALUATION_RUN_SUCCESSFUL', 'EVALUATION_RUN_PARTIALLY_SUCCESSFUL', 'EVALUATION_RUN_FAILED'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ApiEvaluationScope SDK namespace.
-module ApiEvaluationScope
-  EVALUATION_SCOPE_UNSPECIFIED = 'EVALUATION_SCOPE_UNSPECIFIED'
-  EVALUATION_SCOPE_AGENT = 'EVALUATION_SCOPE_AGENT'
-  EVALUATION_SCOPE_MODEL = 'EVALUATION_SCOPE_MODEL'
-  VALUES = [
-    'EVALUATION_SCOPE_UNSPECIFIED', 'EVALUATION_SCOPE_AGENT', 'EVALUATION_SCOPE_MODEL'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiEvaluationTestCaseMetadata
-  FIELDS = {
-    archived_at: "archived_at",
-    created_at: "created_at",
-    created_by_user_email: "created_by_user_email",
-    created_by_user_id: "created_by_user_id",
-    dataset: "dataset",
-    dataset_name: "dataset_name",
-    dataset_uuid: "dataset_uuid",
-    description: "description",
-    latest_version_number_of_runs: "latest_version_number_of_runs",
-    metrics: "metrics",
-    name: "name",
-    star_metric: "star_metric",
-    test_case_uuid: "test_case_uuid",
-    total_runs: "total_runs",
-    updated_at: "updated_at",
-    updated_by_user_email: "updated_by_user_email",
-    updated_by_user_id: "updated_by_user_id",
-    version: "version",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    dataset: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationDataset.from_hash(value)
-    end,
-    metrics: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetric.from_hash(item) }
-    end,
-    star_metric: lambda do |value|
-      ::OctridevDigitalocean::ApiStarMetric.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiEvaluationTestCase.
-# Typed representation of the `ApiEvaluationTestCase` API schema.
-class ApiEvaluationTestCase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiEvaluationTestCaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiEvaluationTestCaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiEvaluationTestCaseMetadata::DECODERS
-
-  # @return [String] Optional `date-time`-formatted value serialized in the `archived_at` wire field.
-  attr_reader :archived_at
-  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-  attr_reader :created_at
-  # @return [String] Optional `string` value serialized in the `created_by_user_email` wire field.
-  attr_reader :created_by_user_email
-  # @return [String] Optional `uint64`-formatted value serialized in the `created_by_user_id` wire field.
-  attr_reader :created_by_user_id
-  # @return [ApiEvaluationDataset] Optional object value serialized in the `dataset` wire field.
-  attr_reader :dataset
-  # @return [String] Optional `string` value serialized in the `dataset_name` wire field.
-  attr_reader :dataset_name
-  # @return [String] Optional `string` value serialized in the `dataset_uuid` wire field.
-  attr_reader :dataset_uuid
-  # @return [String] Optional `string` value serialized in the `description` wire field.
-  attr_reader :description
-  # @return [Integer] Optional `int32`-formatted value serialized in the `latest_version_number_of_runs` wire field.
-  attr_reader :latest_version_number_of_runs
-  # @return [Array_of_ApiEvaluationMetric] Optional array value serialized in the `metrics` wire field.
-  attr_reader :metrics
-  # @return [String] Optional `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [ApiStarMetric] Optional object value serialized in the `star_metric` wire field.
-  attr_reader :star_metric
-  # @return [String] Optional `string` value serialized in the `test_case_uuid` wire field.
-  attr_reader :test_case_uuid
-  # @return [Integer] Optional `int32`-formatted value serialized in the `total_runs` wire field.
-  attr_reader :total_runs
-  # @return [String] Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-  attr_reader :updated_at
-  # @return [String] Optional `string` value serialized in the `updated_by_user_email` wire field.
-  attr_reader :updated_by_user_email
-  # @return [String] Optional `uint64`-formatted value serialized in the `updated_by_user_id` wire field.
-  attr_reader :updated_by_user_id
-  # @return [Integer] Optional `int64`-formatted value serialized in the `version` wire field.
-  attr_reader :version
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ApiEvaluationMetricSource SDK namespace.
+  module ApiEvaluationMetricSource
+    EVALUATION_METRIC_SOURCE_UNSPECIFIED = 'EVALUATION_METRIC_SOURCE_UNSPECIFIED'
+    EVALUATION_METRIC_SOURCE_BUILTIN = 'EVALUATION_METRIC_SOURCE_BUILTIN'
+    EVALUATION_METRIC_SOURCE_CUSTOM = 'EVALUATION_METRIC_SOURCE_CUSTOM'
+    VALUES = %w[
+      EVALUATION_METRIC_SOURCE_UNSPECIFIED EVALUATION_METRIC_SOURCE_BUILTIN
+      EVALUATION_METRIC_SOURCE_CUSTOM
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ApiEvaluationMetricType SDK namespace.
+  module ApiEvaluationMetricType
+    METRIC_TYPE_UNSPECIFIED = 'METRIC_TYPE_UNSPECIFIED'
+    METRIC_TYPE_GENERAL_QUALITY = 'METRIC_TYPE_GENERAL_QUALITY'
+    METRIC_TYPE_RAG_AND_TOOL = 'METRIC_TYPE_RAG_AND_TOOL'
+    METRIC_TYPE_MODEL_QUALITY = 'METRIC_TYPE_MODEL_QUALITY'
+    METRIC_TYPE_MODEL_SAFETY = 'METRIC_TYPE_MODEL_SAFETY'
+    VALUES = %w[
+      METRIC_TYPE_UNSPECIFIED METRIC_TYPE_GENERAL_QUALITY METRIC_TYPE_RAG_AND_TOOL
+      METRIC_TYPE_MODEL_QUALITY METRIC_TYPE_MODEL_SAFETY
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiEvaluationTestCaseMetricListMetadata
-  FIELDS = {
-    metric_uuids: "metric_uuids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiEvaluationTestCaseMetricList.
-# Typed representation of the `ApiEvaluationTestCaseMetricList` API schema.
-class ApiEvaluationTestCaseMetricList
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiEvaluationTestCaseMetricListMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiEvaluationTestCaseMetricListMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiEvaluationTestCaseMetricListMetadata::DECODERS
-
-  # @return [Array_of_String] Optional array value serialized in the `metric_uuids` wire field.
-  attr_reader :metric_uuids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ApiEvaluationMetricValueType SDK namespace.
+  module ApiEvaluationMetricValueType
+    METRIC_VALUE_TYPE_UNSPECIFIED = 'METRIC_VALUE_TYPE_UNSPECIFIED'
+    METRIC_VALUE_TYPE_NUMBER = 'METRIC_VALUE_TYPE_NUMBER'
+    METRIC_VALUE_TYPE_STRING = 'METRIC_VALUE_TYPE_STRING'
+    METRIC_VALUE_TYPE_PERCENTAGE = 'METRIC_VALUE_TYPE_PERCENTAGE'
+    VALUES = %w[
+      METRIC_VALUE_TYPE_UNSPECIFIED METRIC_VALUE_TYPE_NUMBER METRIC_VALUE_TYPE_STRING
+      METRIC_VALUE_TYPE_PERCENTAGE
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiEvaluationPricingMetadata
+    FIELDS = {
+      currency: 'currency',
+      judge_model_pricing: 'judge_model_pricing',
+      per_candidate_model_pricing: 'per_candidate_model_pricing',
+      total_cost: 'total_cost'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      judge_model_pricing: lambda do |value|
+        ::OctridevDigitalocean::ApiTokenPricing.from_hash(value)
+      end,
+      per_candidate_model_pricing: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiModelPricingEntry.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiEvaluationPricing.
+  # Pricing breakdown for an evaluation run.
+  class ApiEvaluationPricing
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiEvaluationPricingMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiEvaluationPricingMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiEvaluationPricingMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiEvaluationTraceSpanMetadata
-  FIELDS = {
-    created_at: "created_at",
-    input: "input",
-    name: "name",
-    output: "output",
-    retriever_chunks: "retriever_chunks",
-    span_level_metric_results: "span_level_metric_results",
-    spans: "spans",
-    type: "type",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    retriever_chunks: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiPromptChunk.from_hash(item) }
-    end,
-    span_level_metric_results: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(item) }
-    end,
-    spans: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiTraceSpan.from_hash(item) }
-    end,
-    type: lambda do |value|
-      ::OctridevDigitalocean::ApiTraceSpanType.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [String] Currency code (e.g., "USD").
+    attr_reader :currency
+    # @return [ApiTokenPricing] Token pricing breakdown for a single model.
+    attr_reader :judge_model_pricing
+    # @return [Array_of_ApiModelPricingEntry] Pricing per candidate model.
+    attr_reader :per_candidate_model_pricing
+    # @return [Float] Total cost of the evaluation run (all candidates + judge).
+    attr_reader :total_cost
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalApiEvaluationRunMetadata
+    FIELDS = {
+      agent_deleted: 'agent_deleted',
+      agent_deployment_name: 'agent_deployment_name',
+      agent_name: 'agent_name',
+      agent_uuid: 'agent_uuid',
+      agent_version_hash: 'agent_version_hash',
+      agent_workspace_uuid: 'agent_workspace_uuid',
+      created_by_user_email: 'created_by_user_email',
+      created_by_user_id: 'created_by_user_id',
+      error_description: 'error_description',
+      evaluation_run_uuid: 'evaluation_run_uuid',
+      evaluation_test_case_workspace_uuid: 'evaluation_test_case_workspace_uuid',
+      finished_at: 'finished_at',
+      pass_status: 'pass_status',
+      queued_at: 'queued_at',
+      run_level_metric_results: 'run_level_metric_results',
+      run_name: 'run_name',
+      star_metric_result: 'star_metric_result',
+      started_at: 'started_at',
+      status: 'status',
+      test_case_description: 'test_case_description',
+      test_case_name: 'test_case_name',
+      test_case_uuid: 'test_case_uuid',
+      test_case_version: 'test_case_version'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      run_level_metric_results: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(item) }
+      end,
+      star_metric_result: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationRunStatus.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for ApiEvaluationRun.
+  # Typed representation of the `ApiEvaluationRun` API schema.
+  class ApiEvaluationRun
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiEvaluationRunMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiEvaluationRunMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiEvaluationRunMetadata::DECODERS
+
+    # @return [Boolean] Whether agent is deleted
+    attr_reader :agent_deleted
+    # @return [String] The agent deployment name
+    attr_reader :agent_deployment_name
+    # @return [String] Agent name
+    attr_reader :agent_name
+    # @return [String] Agent UUID.
+    attr_reader :agent_uuid
+    # @return [String] Version hash
+    attr_reader :agent_version_hash
+    # @return [String] Agent workspace uuid
+    attr_reader :agent_workspace_uuid
+    # @return [String] Optional `string` value serialized in the `created_by_user_email` wire field.
+    attr_reader :created_by_user_email
+    # @return [String] Optional `uint64`-formatted value serialized in the `created_by_user_id` wire field.
+    attr_reader :created_by_user_id
+    # @return [String] The error description
+    attr_reader :error_description
+    # @return [String] Evaluation run UUID.
+    attr_reader :evaluation_run_uuid
+    # @return [String] Evaluation test case workspace uuid
+    attr_reader :evaluation_test_case_workspace_uuid
+    # @return [String] Run end time.
+    attr_reader :finished_at
+    # @return [Boolean] The pass status of the evaluation run based on the star metric.
+    attr_reader :pass_status
+    # @return [String] Run queued time.
+    attr_reader :queued_at
+    # @return [Array_of_ApiEvaluationMetricResult] Optional array value serialized in the `run_level_metric_results` wire field.
+    attr_reader :run_level_metric_results
+    # @return [String] Run name.
+    attr_reader :run_name
+    # @return [ApiEvaluationMetricResult] Optional object value serialized in the `star_metric_result` wire field.
+    attr_reader :star_metric_result
+    # @return [String] Run start time.
+    attr_reader :started_at
+    # @return [ApiEvaluationRunStatus] Evaluation Run Statuses
+    attr_reader :status
+    # @return [String] Test case description.
+    attr_reader :test_case_description
+    # @return [String] Test case name.
+    attr_reader :test_case_name
+    # @return [String] Test-case UUID.
+    attr_reader :test_case_uuid
+    # @return [Integer] Test-case-version.
+    attr_reader :test_case_version
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the ApiEvaluationRunStatus SDK namespace.
+  module ApiEvaluationRunStatus
+    EVALUATION_RUN_STATUS_UNSPECIFIED = 'EVALUATION_RUN_STATUS_UNSPECIFIED'
+    EVALUATION_RUN_QUEUED = 'EVALUATION_RUN_QUEUED'
+    EVALUATION_RUN_RUNNING_DATASET = 'EVALUATION_RUN_RUNNING_DATASET'
+    EVALUATION_RUN_EVALUATING_RESULTS = 'EVALUATION_RUN_EVALUATING_RESULTS'
+    EVALUATION_RUN_CANCELLING = 'EVALUATION_RUN_CANCELLING'
+    EVALUATION_RUN_CANCELLED = 'EVALUATION_RUN_CANCELLED'
+    EVALUATION_RUN_SUCCESSFUL = 'EVALUATION_RUN_SUCCESSFUL'
+    EVALUATION_RUN_PARTIALLY_SUCCESSFUL = 'EVALUATION_RUN_PARTIALLY_SUCCESSFUL'
+    EVALUATION_RUN_FAILED = 'EVALUATION_RUN_FAILED'
+    VALUES = %w[
+      EVALUATION_RUN_STATUS_UNSPECIFIED EVALUATION_RUN_QUEUED EVALUATION_RUN_RUNNING_DATASET
+      EVALUATION_RUN_EVALUATING_RESULTS EVALUATION_RUN_CANCELLING EVALUATION_RUN_CANCELLED
+      EVALUATION_RUN_SUCCESSFUL EVALUATION_RUN_PARTIALLY_SUCCESSFUL EVALUATION_RUN_FAILED
+    ].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the ApiEvaluationScope SDK namespace.
+  module ApiEvaluationScope
+    EVALUATION_SCOPE_UNSPECIFIED = 'EVALUATION_SCOPE_UNSPECIFIED'
+    EVALUATION_SCOPE_AGENT = 'EVALUATION_SCOPE_AGENT'
+    EVALUATION_SCOPE_MODEL = 'EVALUATION_SCOPE_MODEL'
+    VALUES = %w[
+      EVALUATION_SCOPE_UNSPECIFIED EVALUATION_SCOPE_AGENT EVALUATION_SCOPE_MODEL
+    ].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalApiEvaluationTestCaseMetadata
+    FIELDS = {
+      archived_at: 'archived_at',
+      created_at: 'created_at',
+      created_by_user_email: 'created_by_user_email',
+      created_by_user_id: 'created_by_user_id',
+      dataset: 'dataset',
+      dataset_name: 'dataset_name',
+      dataset_uuid: 'dataset_uuid',
+      description: 'description',
+      latest_version_number_of_runs: 'latest_version_number_of_runs',
+      metrics: 'metrics',
+      name: 'name',
+      star_metric: 'star_metric',
+      test_case_uuid: 'test_case_uuid',
+      total_runs: 'total_runs',
+      updated_at: 'updated_at',
+      updated_by_user_email: 'updated_by_user_email',
+      updated_by_user_id: 'updated_by_user_id',
+      version: 'version'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      dataset: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationDataset.from_hash(value)
+      end,
+      metrics: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetric.from_hash(item) }
+      end,
+      star_metric: lambda do |value|
+        ::OctridevDigitalocean::ApiStarMetric.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for ApiEvaluationTestCase.
+  # Typed representation of the `ApiEvaluationTestCase` API schema.
+  class ApiEvaluationTestCase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiEvaluationTestCaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiEvaluationTestCaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiEvaluationTestCaseMetadata::DECODERS
+
+    # @return [String] Optional `date-time`-formatted value serialized in the `archived_at` wire field.
+    attr_reader :archived_at
+    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    attr_reader :created_at
+    # @return [String] Optional `string` value serialized in the `created_by_user_email` wire field.
+    attr_reader :created_by_user_email
+    # @return [String] Optional `uint64`-formatted value serialized in the `created_by_user_id` wire field.
+    attr_reader :created_by_user_id
+    # @return [ApiEvaluationDataset] Optional object value serialized in the `dataset` wire field.
+    attr_reader :dataset
+    # @return [String] Optional `string` value serialized in the `dataset_name` wire field.
+    attr_reader :dataset_name
+    # @return [String] Optional `string` value serialized in the `dataset_uuid` wire field.
+    attr_reader :dataset_uuid
+    # @return [String] Optional `string` value serialized in the `description` wire field.
+    attr_reader :description
+    # @return [Integer] Optional `int32`-formatted value serialized in the `latest_version_number_of_runs` wire field.
+    attr_reader :latest_version_number_of_runs
+    # @return [Array_of_ApiEvaluationMetric] Optional array value serialized in the `metrics` wire field.
+    attr_reader :metrics
+    # @return [String] Optional `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [ApiStarMetric] Optional object value serialized in the `star_metric` wire field.
+    attr_reader :star_metric
+    # @return [String] Optional `string` value serialized in the `test_case_uuid` wire field.
+    attr_reader :test_case_uuid
+    # @return [Integer] Optional `int32`-formatted value serialized in the `total_runs` wire field.
+    attr_reader :total_runs
+    # @return [String] Optional `date-time`-formatted value serialized in the `updated_at` wire field.
+    attr_reader :updated_at
+    # @return [String] Optional `string` value serialized in the `updated_by_user_email` wire field.
+    attr_reader :updated_by_user_email
+    # @return [String] Optional `uint64`-formatted value serialized in the `updated_by_user_id` wire field.
+    attr_reader :updated_by_user_id
+    # @return [Integer] Optional `int64`-formatted value serialized in the `version` wire field.
+    attr_reader :version
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalApiEvaluationTestCaseMetricListMetadata
+    FIELDS = {
+      metric_uuids: 'metric_uuids'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for ApiEvaluationTestCaseMetricList.
+  # Typed representation of the `ApiEvaluationTestCaseMetricList` API schema.
+  class ApiEvaluationTestCaseMetricList
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiEvaluationTestCaseMetricListMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiEvaluationTestCaseMetricListMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiEvaluationTestCaseMetricListMetadata::DECODERS
+
+    # @return [Array_of_String] Optional array value serialized in the `metric_uuids` wire field.
+    attr_reader :metric_uuids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalApiEvaluationTraceSpanMetadata
+    FIELDS = {
+      created_at: 'created_at',
+      input: 'input',
+      name: 'name',
+      output: 'output',
+      retriever_chunks: 'retriever_chunks',
+      span_level_metric_results: 'span_level_metric_results',
+      spans: 'spans',
+      type: 'type'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      retriever_chunks: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiPromptChunk.from_hash(item) }
+      end,
+      span_level_metric_results: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetricResult.from_hash(item) }
+      end,
+      spans: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiTraceSpan.from_hash(item) }
+      end,
+      type: lambda do |value|
+        ::OctridevDigitalocean::ApiTraceSpanType.from_value(value)
+      end
+    }.freeze
+  end
 end

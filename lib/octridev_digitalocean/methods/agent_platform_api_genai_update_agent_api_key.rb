@@ -27,26 +27,25 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/agents/",
+            '/v2/gen-ai/agents/',
             SdkClient.encode_path_segment(agent_uuid),
-            "/api_keys/",
+            '/api_keys/',
             SdkClient.encode_path_segment(api_key_uuid)
           ].join,
           config: config,
           body: {
             'agent_uuid' => agent_uuid2,
             'api_key_uuid' => api_key_uuid2,
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::ApiUpdateAgentAPIKeyOutput,
           decoder: :json,
           operation_id: 'genai_update_agent_api_key',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

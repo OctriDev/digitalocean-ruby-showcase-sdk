@@ -22,24 +22,23 @@ module OctridevDigitalocean
         guardrails: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/gen-ai/agents/",
+            '/v2/gen-ai/agents/',
             SdkClient.encode_path_segment(agent_uuid),
-            "/guardrails"
+            '/guardrails'
           ].join,
           config: config,
           body: {
             'agent_uuid' => agent_uuid2,
-            'guardrails' => guardrails,
+            'guardrails' => guardrails
           },
           return_type: ::OctridevDigitalocean::ApiLinkAgentGuardrailOutput,
           decoder: :json,
           operation_id: 'genai_attach_agent_guardrails',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

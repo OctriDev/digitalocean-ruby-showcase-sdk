@@ -5,665 +5,650 @@
 
 # dedicated_inference domain models (part 2)
 module OctridevDigitalocean
-# API model for DedicatedInferenceGpuModelConfig.
-# Typed representation of the `DedicatedInferenceGpuModelConfig` API schema.
-class DedicatedInferenceGpuModelConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceGpuModelConfigMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceGpuModelConfigMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceGpuModelConfigMetadata::DECODERS
+  # API model for DedicatedInferenceGpuModelConfig.
+  # Typed representation of the `DedicatedInferenceGpuModelConfig` API schema.
+  class DedicatedInferenceGpuModelConfig
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceGpuModelConfigMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceGpuModelConfigMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceGpuModelConfigMetadata::DECODERS
 
-  # @return [Array_of_String] Optional array value serialized in the `gpu_slugs` wire field.
-  attr_reader :gpu_slugs
-  # @return [String] Optional `string` value serialized in the `model_slug` wire field.
-  attr_reader :model_slug
-  # @return [String] Optional `string` value serialized in the `model_name` wire field.
-  attr_reader :model_name
-  # @return [Boolean] Whether the model requires gated access (e.g. Hugging Face token).
-  attr_reader :is_gated_model
+    # @return [Array_of_String] Optional array value serialized in the `gpu_slugs` wire field.
+    attr_reader :gpu_slugs
+    # @return [String] Optional `string` value serialized in the `model_slug` wire field.
+    attr_reader :model_slug
+    # @return [String] Optional `string` value serialized in the `model_name` wire field.
+    attr_reader :model_name
+    # @return [Boolean] Whether the model requires gated access (e.g. Hugging Face token).
+    attr_reader :is_gated_model
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceGpuModelConfigsResponseMetadata
+    FIELDS = {
+      gpu_model_configs: 'gpu_model_configs'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      gpu_model_configs: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::DedicatedInferenceGpuModelConfig.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceGpuModelConfigsResponse.
+  # Supported GPU and model configurations for Dedicated Inference.
+  class DedicatedInferenceGpuModelConfigsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceGpuModelConfigsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceGpuModelConfigsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceGpuModelConfigsResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceGpuModelConfigsResponseMetadata
-  FIELDS = {
-    gpu_model_configs: "gpu_model_configs",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    gpu_model_configs: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::DedicatedInferenceGpuModelConfig.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_DedicatedInferenceGpuModelConfig] Optional array value serialized in the `gpu_model_configs` wire field.
+    attr_reader :gpu_model_configs
 
-# API model for DedicatedInferenceGpuModelConfigsResponse.
-# Supported GPU and model configurations for Dedicated Inference.
-class DedicatedInferenceGpuModelConfigsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceGpuModelConfigsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceGpuModelConfigsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceGpuModelConfigsResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_DedicatedInferenceGpuModelConfig] Optional array value serialized in the `gpu_model_configs` wire field.
-  attr_reader :gpu_model_configs
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceProvisioningMetadata
+    FIELDS = {
+      dedicated_inference: 'dedicated_inference',
+      token: 'token'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      dedicated_inference: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInference.from_hash(value)
+      end,
+      token: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInferenceAccessToken.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceProvisioning.
+  # Typed representation of the `DedicatedInferenceProvisioning` API schema.
+  class DedicatedInferenceProvisioning
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceProvisioningMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceProvisioningMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceProvisioningMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceProvisioningMetadata
-  FIELDS = {
-    dedicated_inference: "dedicated_inference",
-    token: "token",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    dedicated_inference: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInference.from_hash(value)
-    end,
-    token: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInferenceAccessToken.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [DedicatedInference] A Dedicated Inference instance.
+    attr_reader :dedicated_inference
+    # @return [DedicatedInferenceAccessToken] Access token for authenticating to Dedicated Inference endpoints.
+    attr_reader :token
 
-# API model for DedicatedInferenceProvisioning.
-# Typed representation of the `DedicatedInferenceProvisioning` API schema.
-class DedicatedInferenceProvisioning
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceProvisioningMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceProvisioningMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceProvisioningMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DedicatedInference] A Dedicated Inference instance.
-  attr_reader :dedicated_inference
-  # @return [DedicatedInferenceAccessToken] Access token for authenticating to Dedicated Inference endpoints.
-  attr_reader :token
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceResponseMetadata
+    FIELDS = {
+      dedicated_inference: 'dedicated_inference'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      dedicated_inference: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInference.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceResponse.
+  # Typed representation of the `DedicatedInferenceResponse` API schema.
+  class DedicatedInferenceResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceResponseMetadata
-  FIELDS = {
-    dedicated_inference: "dedicated_inference",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    dedicated_inference: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInference.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [DedicatedInference] A Dedicated Inference instance.
+    attr_reader :dedicated_inference
 
-# API model for DedicatedInferenceResponse.
-# Typed representation of the `DedicatedInferenceResponse` API schema.
-class DedicatedInferenceResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DedicatedInference] A Dedicated Inference instance.
-  attr_reader :dedicated_inference
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceSizeMetadata
+    FIELDS = {
+      gpu_slug: 'gpu_slug',
+      price_per_hour: 'price_per_hour',
+      region: 'region',
+      currency: 'currency'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceSize.
+  # Typed representation of the `DedicatedInferenceSize` API schema.
+  class DedicatedInferenceSize
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceSizeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceSizeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceSizeMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceSizeMetadata
-  FIELDS = {
-    gpu_slug: "gpu_slug",
-    price_per_hour: "price_per_hour",
-    region: "region",
-    currency: "currency",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] Optional `string` value serialized in the `gpu_slug` wire field.
+    attr_reader :gpu_slug
+    # @return [String] Optional `string` value serialized in the `price_per_hour` wire field.
+    attr_reader :price_per_hour
+    # @return [String] Optional `string` value serialized in the `region` wire field.
+    attr_reader :region
+    # @return [String] Optional `string` value serialized in the `currency` wire field.
+    attr_reader :currency
 
-# API model for DedicatedInferenceSize.
-# Typed representation of the `DedicatedInferenceSize` API schema.
-class DedicatedInferenceSize
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceSizeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceSizeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceSizeMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Optional `string` value serialized in the `gpu_slug` wire field.
-  attr_reader :gpu_slug
-  # @return [String] Optional `string` value serialized in the `price_per_hour` wire field.
-  attr_reader :price_per_hour
-  # @return [String] Optional `string` value serialized in the `region` wire field.
-  attr_reader :region
-  # @return [String] Optional `string` value serialized in the `currency` wire field.
-  attr_reader :currency
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceSizesResponseMetadata
+    FIELDS = {
+      enabled_regions: 'enabled_regions',
+      sizes: 'sizes'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      sizes: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::DedicatedInferenceSize.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceSizesResponse.
+  # Available Dedicated Inference sizes and pricing.
+  class DedicatedInferenceSizesResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceSizesResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceSizesResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceSizesResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceSizesResponseMetadata
-  FIELDS = {
-    enabled_regions: "enabled_regions",
-    sizes: "sizes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    sizes: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::DedicatedInferenceSize.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_String] Regions where Dedicated Inference is available.
+    attr_reader :enabled_regions
+    # @return [Array_of_DedicatedInferenceSize] Optional array value serialized in the `sizes` wire field.
+    attr_reader :sizes
 
-# API model for DedicatedInferenceSizesResponse.
-# Available Dedicated Inference sizes and pricing.
-class DedicatedInferenceSizesResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceSizesResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceSizesResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceSizesResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_String] Regions where Dedicated Inference is available.
-  attr_reader :enabled_regions
-  # @return [Array_of_DedicatedInferenceSize] Optional array value serialized in the `sizes` wire field.
-  attr_reader :sizes
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceSpecVpcMetadata
+    FIELDS = {
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      uuid
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceSpecVpc.
+  # Required object value serialized in the `vpc` wire field.
+  class DedicatedInferenceSpecVpc
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceSpecVpcMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceSpecVpcMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceSpecVpcMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceSpecVpcMetadata
-  FIELDS = {
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    uuid
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] VPC UUID for the Dedicated Inference.
+    attr_reader :uuid
 
-# API model for DedicatedInferenceSpecVpc.
-# Required object value serialized in the `vpc` wire field.
-class DedicatedInferenceSpecVpc
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceSpecVpcMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceSpecVpcMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceSpecVpcMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] VPC UUID for the Dedicated Inference.
-  attr_reader :uuid
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceSpecMetadata
+    FIELDS = {
+      version: 'version',
+      name: 'name',
+      region: 'region',
+      vpc: 'vpc',
+      enable_public_endpoint: 'enable_public_endpoint',
+      model_deployments: 'model_deployments'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      version
+      name
+      region
+      vpc
+      enable_public_endpoint
+      model_deployments
+    ].freeze
+    DECODERS = {
+      region: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInferenceSpecRegion.from_value(value)
+      end,
+      vpc: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInferenceSpecVpc.from_hash(value)
+      end,
+      model_deployments: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ModelDeploymentSpec.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceSpec.
+  # Structured configuration for a Dedicated Inference deployment.
+  class DedicatedInferenceSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceSpecMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceSpecMetadata
-  FIELDS = {
-    version: "version",
-    name: "name",
-    region: "region",
-    vpc: "vpc",
-    enable_public_endpoint: "enable_public_endpoint",
-    model_deployments: "model_deployments",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    version
-    name
-    region
-    vpc
-    enable_public_endpoint
-    model_deployments
-  ].freeze
-  DECODERS = {
-    region: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInferenceSpecRegion.from_value(value)
-    end,
-    vpc: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInferenceSpecVpc.from_hash(value)
-    end,
-    model_deployments: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ModelDeploymentSpec.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Integer] Spec version.
+    attr_reader :version
+    # @return [String] Name of the Dedicated Inference. Must be unique within the team.
+    attr_reader :name
+    # @return [DedicatedInferenceSpecRegion] DigitalOcean region where the Dedicated Inference is hosted.
+    attr_reader :region
+    # @return [DedicatedInferenceSpecVpc] Required object value serialized in the `vpc` wire field.
+    attr_reader :vpc
+    # @return [Boolean] Whether to expose a public LLM endpoint.
+    attr_reader :enable_public_endpoint
+    # @return [Array_of_ModelDeploymentSpec] At least one model deployment is required.
+    attr_reader :model_deployments
 
-# API model for DedicatedInferenceSpec.
-# Structured configuration for a Dedicated Inference deployment.
-class DedicatedInferenceSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceSpecMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Integer] Spec version.
-  attr_reader :version
-  # @return [String] Name of the Dedicated Inference. Must be unique within the team.
-  attr_reader :name
-  # @return [DedicatedInferenceSpecRegion] DigitalOcean region where the Dedicated Inference is hosted.
-  attr_reader :region
-  # @return [DedicatedInferenceSpecVpc] Required object value serialized in the `vpc` wire field.
-  attr_reader :vpc
-  # @return [Boolean] Whether to expose a public LLM endpoint.
-  attr_reader :enable_public_endpoint
-  # @return [Array_of_ModelDeploymentSpec] At least one model deployment is required.
-  attr_reader :model_deployments
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the DedicatedInferenceSpecRegion SDK namespace.
+  module DedicatedInferenceSpecRegion
+    ATL1 = 'atl1'
+    NYC2 = 'nyc2'
+    TOR1 = 'tor1'
+    VALUES = %w[atl1 nyc2 tor1].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DedicatedInferenceSpecRegion SDK namespace.
-module DedicatedInferenceSpecRegion
-  ATL1 = 'atl1'
-  NYC2 = 'nyc2'
-  TOR1 = 'tor1'
-  VALUES = ['atl1', 'nyc2', 'tor1'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceSpecRequestVpcMetadata
-  FIELDS = {
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    uuid
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DedicatedInferenceSpecRequestVpc.
-# Required object value serialized in the `vpc` wire field.
-class DedicatedInferenceSpecRequestVpc
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceSpecRequestVpcMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceSpecRequestVpcMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceSpecRequestVpcMetadata::DECODERS
-
-  # @return [String] VPC UUID for the Dedicated Inference.
-  attr_reader :uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceSpecRequestVpcMetadata
+    FIELDS = {
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      uuid
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DedicatedInferenceSpecRequestVpc.
+  # Required object value serialized in the `vpc` wire field.
+  class DedicatedInferenceSpecRequestVpc
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceSpecRequestVpcMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceSpecRequestVpcMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceSpecRequestVpcMetadata::DECODERS
+
+    # @return [String] VPC UUID for the Dedicated Inference.
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceSpecRequestMetadata
-  FIELDS = {
-    version: "version",
-    name: "name",
-    region: "region",
-    vpc: "vpc",
-    enable_public_endpoint: "enable_public_endpoint",
-    model_deployments: "model_deployments",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    version
-    name
-    region
-    vpc
-    enable_public_endpoint
-    model_deployments
-  ].freeze
-  DECODERS = {
-    region: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInferenceSpecRequestRegion.from_value(value)
-    end,
-    vpc: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInferenceSpecRequestVpc.from_hash(value)
-    end,
-    model_deployments: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ModelDeploymentSpecRequest.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for DedicatedInferenceSpecRequest.
-# Structured configuration for a Dedicated Inference deployment.
-class DedicatedInferenceSpecRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceSpecRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceSpecRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceSpecRequestMetadata::DECODERS
-
-  # @return [Integer] Spec version.
-  attr_reader :version
-  # @return [String] Name of the Dedicated Inference. Must be unique within the team.
-  attr_reader :name
-  # @return [DedicatedInferenceSpecRequestRegion] DigitalOcean region where the Dedicated Inference is hosted.
-  attr_reader :region
-  # @return [DedicatedInferenceSpecRequestVpc] Required object value serialized in the `vpc` wire field.
-  attr_reader :vpc
-  # @return [Boolean] Whether to expose a public LLM endpoint.
-  attr_reader :enable_public_endpoint
-  # @return [Array_of_ModelDeploymentSpecRequest] At least one model deployment is required.
-  attr_reader :model_deployments
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceSpecRequestMetadata
+    FIELDS = {
+      version: 'version',
+      name: 'name',
+      region: 'region',
+      vpc: 'vpc',
+      enable_public_endpoint: 'enable_public_endpoint',
+      model_deployments: 'model_deployments'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      version
+      name
+      region
+      vpc
+      enable_public_endpoint
+      model_deployments
+    ].freeze
+    DECODERS = {
+      region: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInferenceSpecRequestRegion.from_value(value)
+      end,
+      vpc: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInferenceSpecRequestVpc.from_hash(value)
+      end,
+      model_deployments: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ModelDeploymentSpecRequest.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for DedicatedInferenceSpecRequest.
+  # Structured configuration for a Dedicated Inference deployment.
+  class DedicatedInferenceSpecRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceSpecRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceSpecRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceSpecRequestMetadata::DECODERS
+
+    # @return [Integer] Spec version.
+    attr_reader :version
+    # @return [String] Name of the Dedicated Inference. Must be unique within the team.
+    attr_reader :name
+    # @return [DedicatedInferenceSpecRequestRegion] DigitalOcean region where the Dedicated Inference is hosted.
+    attr_reader :region
+    # @return [DedicatedInferenceSpecRequestVpc] Required object value serialized in the `vpc` wire field.
+    attr_reader :vpc
+    # @return [Boolean] Whether to expose a public LLM endpoint.
+    attr_reader :enable_public_endpoint
+    # @return [Array_of_ModelDeploymentSpecRequest] At least one model deployment is required.
+    attr_reader :model_deployments
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the DedicatedInferenceSpecRequestRegion SDK namespace.
-module DedicatedInferenceSpecRequestRegion
-  ATL1 = 'atl1'
-  NYC2 = 'nyc2'
-  TOR1 = 'tor1'
-  VALUES = ['atl1', 'nyc2', 'tor1'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceTokenCreateRequestMetadata
-  FIELDS = {
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for DedicatedInferenceTokenCreateRequest.
-# Typed representation of the `DedicatedInferenceTokenCreateRequest` API schema.
-class DedicatedInferenceTokenCreateRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceTokenCreateRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceTokenCreateRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceTokenCreateRequestMetadata::DECODERS
-
-  # @return [String] Name for the new token.
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the DedicatedInferenceSpecRequestRegion SDK namespace.
+  module DedicatedInferenceSpecRequestRegion
+    ATL1 = 'atl1'
+    NYC2 = 'nyc2'
+    TOR1 = 'tor1'
+    VALUES = %w[atl1 nyc2 tor1].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceTokenCreateRequestMetadata
+    FIELDS = {
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceTokenCreateRequest.
+  # Typed representation of the `DedicatedInferenceTokenCreateRequest` API schema.
+  class DedicatedInferenceTokenCreateRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceTokenCreateRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceTokenCreateRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceTokenCreateRequestMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceUpdateAcceptedMetadata
-  FIELDS = {
-    dedicated_inference: "dedicated_inference",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    dedicated_inference: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInference.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] Name for the new token.
+    attr_reader :name
 
-# API model for DedicatedInferenceUpdateAccepted.
-# Typed representation of the `DedicatedInferenceUpdateAccepted` API schema.
-class DedicatedInferenceUpdateAccepted
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceUpdateAcceptedMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceUpdateAcceptedMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceUpdateAcceptedMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DedicatedInference] A Dedicated Inference instance.
-  attr_reader :dedicated_inference
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceUpdateAcceptedMetadata
+    FIELDS = {
+      dedicated_inference: 'dedicated_inference'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      dedicated_inference: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInference.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceUpdateAccepted.
+  # Typed representation of the `DedicatedInferenceUpdateAccepted` API schema.
+  class DedicatedInferenceUpdateAccepted
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceUpdateAcceptedMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceUpdateAcceptedMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceUpdateAcceptedMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceUpdateRequestAccessTokensMetadata
-  FIELDS = {
-    hugging_face_token: "hugging_face_token",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [DedicatedInference] A Dedicated Inference instance.
+    attr_reader :dedicated_inference
 
-# API model for DedicatedInferenceUpdateRequestAccessTokens.
-# Provider tokens for model access (e.g. gated Hugging Face models).
-class DedicatedInferenceUpdateRequestAccessTokens
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceUpdateRequestAccessTokensMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceUpdateRequestAccessTokensMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceUpdateRequestAccessTokensMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Hugging Face token required for gated models.
-  attr_reader :hugging_face_token
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceUpdateRequestAccessTokensMetadata
+    FIELDS = {
+      hugging_face_token: 'hugging_face_token'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceUpdateRequestAccessTokens.
+  # Provider tokens for model access (e.g. gated Hugging Face models).
+  class DedicatedInferenceUpdateRequestAccessTokens
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceUpdateRequestAccessTokensMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceUpdateRequestAccessTokensMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceUpdateRequestAccessTokensMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceUpdateRequestMetadata
-  FIELDS = {
-    spec: "spec",
-    access_tokens: "access_tokens",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    spec: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInferenceSpec.from_hash(value)
-    end,
-    access_tokens: lambda do |value|
-      ::OctridevDigitalocean::DedicatedInferenceUpdateRequestAccessTokens.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] Hugging Face token required for gated models.
+    attr_reader :hugging_face_token
 
-# API model for DedicatedInferenceUpdateRequest.
-# Typed representation of the `DedicatedInferenceUpdateRequest` API schema.
-class DedicatedInferenceUpdateRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceUpdateRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceUpdateRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceUpdateRequestMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DedicatedInferenceSpec] Structured configuration for a Dedicated Inference deployment.
-  attr_reader :spec
-  # @return [DedicatedInferenceUpdateRequestAccessTokens] Provider tokens for model access (e.g. gated Hugging Face models).
-  attr_reader :access_tokens
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceUpdateRequestMetadata
+    FIELDS = {
+      spec: 'spec',
+      access_tokens: 'access_tokens'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      spec: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInferenceSpec.from_hash(value)
+      end,
+      access_tokens: lambda do |value|
+        ::OctridevDigitalocean::DedicatedInferenceUpdateRequestAccessTokens.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for DedicatedInferenceUpdateRequest.
+  # Typed representation of the `DedicatedInferenceUpdateRequest` API schema.
+  class DedicatedInferenceUpdateRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceUpdateRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceUpdateRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceUpdateRequestMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalDedicatedInferenceUpdateRequestRequestAccessTokensMetadata
-  FIELDS = {
-    hugging_face_token: "hugging_face_token",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [DedicatedInferenceSpec] Structured configuration for a Dedicated Inference deployment.
+    attr_reader :spec
+    # @return [DedicatedInferenceUpdateRequestAccessTokens] Provider tokens for model access (e.g. gated Hugging Face models).
+    attr_reader :access_tokens
 
-# API model for DedicatedInferenceUpdateRequestRequestAccessTokens.
-# Provider tokens for model access (e.g. gated Hugging Face models).
-class DedicatedInferenceUpdateRequestRequestAccessTokens
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalDedicatedInferenceUpdateRequestRequestAccessTokensMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalDedicatedInferenceUpdateRequestRequestAccessTokensMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalDedicatedInferenceUpdateRequestRequestAccessTokensMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Hugging Face token required for gated models.
-  attr_reader :hugging_face_token
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalDedicatedInferenceUpdateRequestRequestAccessTokensMetadata
+    FIELDS = {
+      hugging_face_token: 'hugging_face_token'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for DedicatedInferenceUpdateRequestRequestAccessTokens.
+  # Provider tokens for model access (e.g. gated Hugging Face models).
+  class DedicatedInferenceUpdateRequestRequestAccessTokens
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalDedicatedInferenceUpdateRequestRequestAccessTokensMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalDedicatedInferenceUpdateRequestRequestAccessTokensMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalDedicatedInferenceUpdateRequestRequestAccessTokensMetadata::DECODERS
+
+    # @return [String] Hugging Face token required for gated models.
+    attr_reader :hugging_face_token
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

@@ -15,9 +15,9 @@ module OctridevDigitalocean
         ACCESS_POINT_ACTIVE = 'ACCESS_POINT_ACTIVE'
         ACCESS_POINT_FAILED = 'ACCESS_POINT_FAILED'
         ACCESS_POINT_DELETED = 'ACCESS_POINT_DELETED'
-        VALUES = [
-          'ACCESS_POINT_CREATING', 'ACCESS_POINT_ACTIVE', 'ACCESS_POINT_FAILED',
-          'ACCESS_POINT_DELETED'
+        VALUES = %w[
+          ACCESS_POINT_CREATING ACCESS_POINT_ACTIVE ACCESS_POINT_FAILED
+          ACCESS_POINT_DELETED
         ].freeze
         def self.from_value(value)
           value
@@ -43,23 +43,22 @@ module OctridevDigitalocean
         performance_tier: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/nfs",
+          '/v2/nfs',
           config: config,
           body: {
             'name' => name,
             'size_gib' => size_gib,
             'region' => region,
             'vpc_ids' => vpc_ids,
-            'performance_tier' => performance_tier,
+            'performance_tier' => performance_tier
           },
           return_type: ::OctridevDigitalocean::NfsCreateResponse,
           decoder: :json,
           operation_id: 'nfs_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -72,19 +71,18 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/nfs",
+          '/v2/nfs',
           config: config,
           query: {
-            'region' => QueryValue.new(region, style: 'form', explode: true),
+            'region' => QueryValue.new(region, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::NfsListResponse,
           decoder: :json,
           operation_id: 'nfs_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -99,22 +97,21 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/nfs/",
+            '/v2/nfs/',
             SdkClient.encode_path_segment(nfs_id)
           ].join,
           config: config,
           query: {
-            'region' => QueryValue.new(region, style: 'form', explode: true),
+            'region' => QueryValue.new(region, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::NfsGetResponse,
           decoder: :json,
           operation_id: 'nfs_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -129,21 +126,20 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/nfs/",
+            '/v2/nfs/',
             SdkClient.encode_path_segment(nfs_id)
           ].join,
           config: config,
           query: {
-            'region' => QueryValue.new(region, style: 'form', explode: true),
+            'region' => QueryValue.new(region, style: 'form', explode: true)
           },
           decoder: :empty,
           operation_id: 'nfs_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -159,20 +155,19 @@ module OctridevDigitalocean
         share_id: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/nfs/snapshots",
+          '/v2/nfs/snapshots',
           config: config,
           query: {
             'region' => QueryValue.new(region, style: 'form', explode: true),
-            'share_id' => QueryValue.new(share_id, style: 'form', explode: true),
+            'share_id' => QueryValue.new(share_id, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::NfsSnapshotListResponse,
           decoder: :json,
           operation_id: 'nfs_list_snapshot',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -187,22 +182,21 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/nfs/snapshots/",
+            '/v2/nfs/snapshots/',
             SdkClient.encode_path_segment(nfs_snapshot_id)
           ].join,
           config: config,
           query: {
-            'region' => QueryValue.new(region, style: 'form', explode: true),
+            'region' => QueryValue.new(region, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::NfsSnapshotGetResponse,
           decoder: :json,
           operation_id: 'nfs_get_snapshot',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -217,21 +211,20 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/nfs/snapshots/",
+            '/v2/nfs/snapshots/',
             SdkClient.encode_path_segment(nfs_snapshot_id)
           ].join,
           config: config,
           query: {
-            'region' => QueryValue.new(region, style: 'form', explode: true),
+            'region' => QueryValue.new(region, style: 'form', explode: true)
           },
           decoder: :empty,
           operation_id: 'nfs_delete_snapshot',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -263,28 +256,27 @@ module OctridevDigitalocean
         vpc_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('share_id', share_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/nfs/shares/",
+            '/v2/nfs/shares/',
             SdkClient.encode_path_segment(share_id),
-            "/access_points"
+            '/access_points'
           ].join,
           config: config,
           body: {
             'name' => name,
             'path' => path,
             'access_policy' => access_policy,
-            'vpc_id' => vpc_id,
+            'vpc_id' => vpc_id
           },
           return_type: ::OctridevDigitalocean::AccessPointActionResponse,
           decoder: :json,
           operation_id: 'nfs_create_access_point',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::NfsApiError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::NfsApiError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::NfsApiError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::NfsApiError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -298,25 +290,24 @@ module OctridevDigitalocean
         status: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('share_id', share_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/nfs/shares/",
+            '/v2/nfs/shares/',
             SdkClient.encode_path_segment(share_id),
-            "/access_points"
+            '/access_points'
           ].join,
           config: config,
           query: {
-            'status' => QueryValue.new(status, style: 'form', explode: true),
+            'status' => QueryValue.new(status, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AccessPointListResponse,
           decoder: :json,
           operation_id: 'nfs_list_access_points',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::NfsApiError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::NfsApiError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -329,13 +320,12 @@ module OctridevDigitalocean
         access_point_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('access_point_id', access_point_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/nfs/access_points/",
+            '/v2/nfs/access_points/',
             SdkClient.encode_path_segment(access_point_id)
           ].join,
           config: config,
@@ -343,7 +333,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'nfs_get_access_point',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -356,13 +346,12 @@ module OctridevDigitalocean
         access_point_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('access_point_id', access_point_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/nfs/access_points/",
+            '/v2/nfs/access_points/',
             SdkClient.encode_path_segment(access_point_id)
           ].join,
           config: config,
@@ -370,7 +359,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'nfs_delete_access_point',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::NfsApiError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::NfsApiError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

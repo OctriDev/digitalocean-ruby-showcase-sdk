@@ -19,20 +19,19 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/openai/keys",
+          '/v2/gen-ai/openai/keys',
           config: config,
           body: {
             'api_key' => api_key,
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::ApiCreateOpenAIAPIKeyOutput,
           decoder: :json,
           operation_id: 'genai_create_openai_api_key',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

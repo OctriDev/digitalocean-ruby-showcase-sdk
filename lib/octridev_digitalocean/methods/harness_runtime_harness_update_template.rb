@@ -25,25 +25,24 @@ module OctridevDigitalocean
         base_template: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('template_id', template_id)
 
         SdkClient.request(
           'PUT',
           [
-            "/v2/agents/templates/",
+            '/v2/agents/templates/',
             SdkClient.encode_path_segment(template_id)
           ].join,
           config: config,
           body: {
             'source_oci_ref' => source_oci_ref,
-            'base_template' => base_template,
+            'base_template' => base_template
           },
           return_type: ::OctridevDigitalocean::CreateTemplateResponse,
           decoder: :json,
           operation_id: 'harness_update_template',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

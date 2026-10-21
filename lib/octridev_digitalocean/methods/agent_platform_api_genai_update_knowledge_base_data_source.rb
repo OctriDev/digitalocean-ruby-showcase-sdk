@@ -31,13 +31,12 @@ module OctridevDigitalocean
         knowledge_base_uuid2: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/knowledge_bases/",
+            '/v2/gen-ai/knowledge_bases/',
             SdkClient.encode_path_segment(knowledge_base_uuid),
-            "/data_sources/",
+            '/data_sources/',
             SdkClient.encode_path_segment(data_source_uuid)
           ].join,
           config: config,
@@ -45,13 +44,13 @@ module OctridevDigitalocean
             'chunking_algorithm' => chunking_algorithm,
             'chunking_options' => chunking_options,
             'data_source_uuid' => data_source_uuid2,
-            'knowledge_base_uuid' => knowledge_base_uuid2,
+            'knowledge_base_uuid' => knowledge_base_uuid2
           },
           return_type: ::OctridevDigitalocean::ApiUpdateKnowledgeBaseDataSourceOutput,
           decoder: :json,
           operation_id: 'genai_update_knowledge_base_data_source',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

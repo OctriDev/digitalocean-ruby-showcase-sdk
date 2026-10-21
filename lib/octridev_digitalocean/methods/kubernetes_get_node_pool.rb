@@ -21,7 +21,6 @@ module OctridevDigitalocean
         node_pool_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.validate_uuid('node_pool_id', node_pool_id)
@@ -29,9 +28,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/kubernetes/clusters/",
+            '/v2/kubernetes/clusters/',
             SdkClient.encode_path_segment(cluster_id),
-            "/node_pools/",
+            '/node_pools/',
             SdkClient.encode_path_segment(node_pool_id)
           ].join,
           config: config,
@@ -39,7 +38,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'kubernetes_get_node_pool',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

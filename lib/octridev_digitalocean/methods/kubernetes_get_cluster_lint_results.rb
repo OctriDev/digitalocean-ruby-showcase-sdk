@@ -21,7 +21,6 @@ module OctridevDigitalocean
         run_id: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.if_given(run_id) { Validation.validate_uuid('run_id', run_id) }
@@ -29,19 +28,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/kubernetes/clusters/",
+            '/v2/kubernetes/clusters/',
             SdkClient.encode_path_segment(cluster_id),
-            "/clusterlint"
+            '/clusterlint'
           ].join,
           config: config,
           query: {
-            'run_id' => QueryValue.new(run_id, style: 'form', explode: true),
+            'run_id' => QueryValue.new(run_id, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ClusterlintResults,
           decoder: :json,
           operation_id: 'kubernetes_get_cluster_lint_results',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

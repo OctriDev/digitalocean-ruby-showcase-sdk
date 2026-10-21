@@ -25,24 +25,23 @@ module OctridevDigitalocean
         read_write: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(expiry_seconds) do
           Validation.validate_range('expiry_seconds', expiry_seconds, min: 0)
         end
 
         SdkClient.request(
           'GET',
-          "/v2/registry/docker-credentials",
+          '/v2/registry/docker-credentials',
           config: config,
           query: {
             'expiry_seconds' => QueryValue.new(expiry_seconds, style: 'form', explode: true),
-            'read_write' => QueryValue.new(read_write, style: 'form', explode: true),
+            'read_write' => QueryValue.new(read_write, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::DockerCredentials,
           decoder: :json,
           operation_id: 'registry_get_docker_credentials',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

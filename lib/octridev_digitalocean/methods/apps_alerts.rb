@@ -17,20 +17,19 @@ module OctridevDigitalocean
         app_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/apps/",
+            '/v2/apps/',
             SdkClient.encode_path_segment(app_id),
-            "/alerts"
+            '/alerts'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::AppsListAlertsResponse,
           decoder: :json,
           operation_id: 'apps_list_alerts',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -52,26 +51,25 @@ module OctridevDigitalocean
         slack_webhooks: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/apps/",
+            '/v2/apps/',
             SdkClient.encode_path_segment(app_id),
-            "/alerts/",
+            '/alerts/',
             SdkClient.encode_path_segment(alert_id),
-            "/destinations"
+            '/destinations'
           ].join,
           config: config,
           body: {
             'emails' => emails,
-            'slack_webhooks' => slack_webhooks,
+            'slack_webhooks' => slack_webhooks
           },
           return_type: ::OctridevDigitalocean::AppsAlertResponse,
           decoder: :json,
           operation_id: 'apps_assign_alert_destinations',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

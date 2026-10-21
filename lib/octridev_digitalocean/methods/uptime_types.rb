@@ -12,11 +12,11 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalUptimeCreateCheckMetadata
         FIELDS = {
-          name: "name",
-          type: "type",
-          target: "target",
-          regions: "regions",
-          enabled: "enabled",
+          name: 'name',
+          type: 'type',
+          target: 'target',
+          regions: 'regions',
+          enabled: 'enabled'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -31,7 +31,7 @@ module OctridevDigitalocean
           end,
           regions: lambda do |value|
             value&.map { |item| ::OctridevDigitalocean::Methods::Uptime::UptimeCreateCheckRegionsItem.from_value(item) }
-          end,
+          end
         }.freeze
       end
 
@@ -70,12 +70,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalUptimeCreateAlertMetadata
         FIELDS = {
-          name: "name",
-          type: "type",
-          threshold: "threshold",
-          comparison: "comparison",
-          notifications: "notifications",
-          period: "period",
+          name: 'name',
+          type: 'type',
+          threshold: 'threshold',
+          comparison: 'comparison',
+          notifications: 'notifications',
+          period: 'period'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -95,7 +95,7 @@ module OctridevDigitalocean
           end,
           period: lambda do |value|
             ::OctridevDigitalocean::Methods::Uptime::UptimeCreateAlertPeriod.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -136,12 +136,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalUptimeUpdateAlertMetadata
         FIELDS = {
-          name: "name",
-          type: "type",
-          threshold: "threshold",
-          comparison: "comparison",
-          notifications: "notifications",
-          period: "period",
+          name: 'name',
+          type: 'type',
+          threshold: 'threshold',
+          comparison: 'comparison',
+          notifications: 'notifications',
+          period: 'period'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -161,7 +161,7 @@ module OctridevDigitalocean
           end,
           period: lambda do |value|
             ::OctridevDigitalocean::Methods::Uptime::UptimeUpdateAlertPeriod.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -208,7 +208,7 @@ module OctridevDigitalocean
         V_15_M = '15m'
         V_30_M = '30m'
         V_1_H = '1h'
-        VALUES = ['2m', '3m', '5m', '10m', '15m', '30m', '1h'].freeze
+        VALUES = %w[2m 3m 5m 10m 15m 30m 1h].freeze
         def self.from_value(value)
           value
         end
@@ -220,7 +220,7 @@ module OctridevDigitalocean
         DOWN = 'down'
         DOWN_GLOBAL = 'down_global'
         SSL_EXPIRY = 'ssl_expiry'
-        VALUES = ['latency', 'down', 'down_global', 'ssl_expiry'].freeze
+        VALUES = %w[latency down down_global ssl_expiry].freeze
         def self.from_value(value)
           value
         end
@@ -231,7 +231,7 @@ module OctridevDigitalocean
         PING = 'ping'
         HTTP = 'http'
         HTTPS = 'https'
-        VALUES = ['ping', 'http', 'https'].freeze
+        VALUES = %w[ping http https].freeze
         def self.from_value(value)
           value
         end
@@ -243,7 +243,7 @@ module OctridevDigitalocean
         DOWN = 'down'
         DOWN_GLOBAL = 'down_global'
         SSL_EXPIRY = 'ssl_expiry'
-        VALUES = ['latency', 'down', 'down_global', 'ssl_expiry'].freeze
+        VALUES = %w[latency down down_global ssl_expiry].freeze
         def self.from_value(value)
           value
         end
@@ -253,7 +253,7 @@ module OctridevDigitalocean
       module UptimeCreateAlertComparison
         GREATER_THAN = 'greater_than'
         LESS_THAN = 'less_than'
-        VALUES = ['greater_than', 'less_than'].freeze
+        VALUES = %w[greater_than less_than].freeze
         def self.from_value(value)
           value
         end
@@ -263,7 +263,7 @@ module OctridevDigitalocean
       module UptimeUpdateAlertComparison
         GREATER_THAN = 'greater_than'
         LESS_THAN = 'less_than'
-        VALUES = ['greater_than', 'less_than'].freeze
+        VALUES = %w[greater_than less_than].freeze
         def self.from_value(value)
           value
         end
@@ -275,7 +275,7 @@ module OctridevDigitalocean
         US_WEST = 'us_west'
         EU_WEST = 'eu_west'
         SE_ASIA = 'se_asia'
-        VALUES = ['us_east', 'us_west', 'eu_west', 'se_asia'].freeze
+        VALUES = %w[us_east us_west eu_west se_asia].freeze
         def self.from_value(value)
           value
         end
@@ -290,7 +290,7 @@ module OctridevDigitalocean
         V_15_M = '15m'
         V_30_M = '30m'
         V_1_H = '1h'
-        VALUES = ['2m', '3m', '5m', '10m', '15m', '30m', '1h'].freeze
+        VALUES = %w[2m 3m 5m 10m 15m 30m 1h].freeze
         def self.from_value(value)
           value
         end

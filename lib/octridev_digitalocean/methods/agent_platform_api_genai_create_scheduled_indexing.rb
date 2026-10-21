@@ -23,21 +23,20 @@ module OctridevDigitalocean
         time: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/scheduled-indexing",
+          '/v2/gen-ai/scheduled-indexing',
           config: config,
           body: {
             'days' => days,
             'knowledge_base_uuid' => knowledge_base_uuid,
-            'time' => time,
+            'time' => time
           },
           return_type: ::OctridevDigitalocean::ApiCreateScheduledIndexingOutput,
           decoder: :json,
           operation_id: 'genai_create_scheduled_indexing',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

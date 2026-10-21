@@ -12,13 +12,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalFirewallsAssignDropletsMetadata
         FIELDS = {
-          droplet_ids: "droplet_ids",
+          droplet_ids: 'droplet_ids'
         }.freeze
         REQUIRED_FIELDS = %i[
           droplet_ids
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for FirewallsAssignDroplets.
@@ -48,13 +47,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalFirewallsDeleteDropletsMetadata
         FIELDS = {
-          droplet_ids: "droplet_ids",
+          droplet_ids: 'droplet_ids'
         }.freeze
         REQUIRED_FIELDS = %i[
           droplet_ids
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for FirewallsDeleteDroplets.
@@ -84,7 +82,7 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalFirewallsAddTagsMetadata
         FIELDS = {
-          tags: "tags",
+          tags: 'tags'
         }.freeze
         REQUIRED_FIELDS = %i[
           tags
@@ -92,7 +90,7 @@ module OctridevDigitalocean
         DECODERS = {
           tags: lambda do |value|
             ::OctridevDigitalocean::Methods::Firewalls::ExistingTagsArray.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -122,7 +120,7 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalFirewallsDeleteTagsMetadata
         FIELDS = {
-          tags: "tags",
+          tags: 'tags'
         }.freeze
         REQUIRED_FIELDS = %i[
           tags
@@ -130,7 +128,7 @@ module OctridevDigitalocean
         DECODERS = {
           tags: lambda do |value|
             ::OctridevDigitalocean::Methods::Firewalls::ExistingTagsArray.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -167,24 +165,23 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/firewalls",
+          '/v2/firewalls',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListFirewallsResponse,
           decoder: :json,
           operation_id: 'firewalls_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -196,17 +193,16 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/firewalls",
+          '/v2/firewalls',
           config: config,
           body: body,
           return_type: ::OctridevDigitalocean::CreateFirewallResponse,
           decoder: :json,
           operation_id: 'firewalls_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -219,13 +215,12 @@ module OctridevDigitalocean
         firewall_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id)
           ].join,
           config: config,
@@ -233,7 +228,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'firewalls_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -249,13 +244,12 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'PUT',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id)
           ].join,
           config: config,
@@ -264,7 +258,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'firewalls_update',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -277,20 +271,19 @@ module OctridevDigitalocean
         firewall_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'firewalls_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -306,24 +299,23 @@ module OctridevDigitalocean
         droplet_ids:,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id),
-            "/droplets"
+            '/droplets'
           ].join,
           config: config,
           body: {
-            'droplet_ids' => droplet_ids,
+            'droplet_ids' => droplet_ids
           },
           decoder: :empty,
           operation_id: 'firewalls_assign_droplets',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -339,24 +331,23 @@ module OctridevDigitalocean
         droplet_ids:,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id),
-            "/droplets"
+            '/droplets'
           ].join,
           config: config,
           body: {
-            'droplet_ids' => droplet_ids,
+            'droplet_ids' => droplet_ids
           },
           decoder: :empty,
           operation_id: 'firewalls_delete_droplets',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -372,24 +363,23 @@ module OctridevDigitalocean
         tags:,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id),
-            "/tags"
+            '/tags'
           ].join,
           config: config,
           body: {
-            'tags' => tags,
+            'tags' => tags
           },
           decoder: :empty,
           operation_id: 'firewalls_add_tags',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -405,24 +395,23 @@ module OctridevDigitalocean
         tags:,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id),
-            "/tags"
+            '/tags'
           ].join,
           config: config,
           body: {
-            'tags' => tags,
+            'tags' => tags
           },
           decoder: :empty,
           operation_id: 'firewalls_delete_tags',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -438,22 +427,21 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id),
-            "/rules"
+            '/rules'
           ].join,
           config: config,
           body: body,
           decoder: :empty,
           operation_id: 'firewalls_add_rules',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -469,22 +457,21 @@ module OctridevDigitalocean
         body: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('firewall_id', firewall_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/firewalls/",
+            '/v2/firewalls/',
             SdkClient.encode_path_segment(firewall_id),
-            "/rules"
+            '/rules'
           ].join,
           config: config,
           body: body,
           decoder: :empty,
           operation_id: 'firewalls_delete_rules',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

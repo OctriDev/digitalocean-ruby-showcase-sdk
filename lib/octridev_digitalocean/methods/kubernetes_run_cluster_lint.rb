@@ -30,28 +30,27 @@ module OctridevDigitalocean
         exclude_checks: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('cluster_id', cluster_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/kubernetes/clusters/",
+            '/v2/kubernetes/clusters/',
             SdkClient.encode_path_segment(cluster_id),
-            "/clusterlint"
+            '/clusterlint'
           ].join,
           config: config,
           body: {
             'include_groups' => include_groups,
             'include_checks' => include_checks,
             'exclude_groups' => exclude_groups,
-            'exclude_checks' => exclude_checks,
+            'exclude_checks' => exclude_checks
           },
           return_type: ::OctridevDigitalocean::ClusterlintRun,
           decoder: :json,
           operation_id: 'kubernetes_run_cluster_lint',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end
