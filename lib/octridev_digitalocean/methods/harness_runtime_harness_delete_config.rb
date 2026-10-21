@@ -17,20 +17,19 @@ module OctridevDigitalocean
         config_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('config_id', config_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/agents/configs/",
+            '/v2/agents/configs/',
             SdkClient.encode_path_segment(config_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'harness_delete_config',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

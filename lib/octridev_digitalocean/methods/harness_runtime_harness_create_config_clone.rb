@@ -28,7 +28,6 @@ module OctridevDigitalocean
         oauth_assignments: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('config_id', config_id)
 
         Validation.validate_length('name', name, min: 1, max: 64)
@@ -37,21 +36,21 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/configs/",
+            '/v2/agents/configs/',
             SdkClient.encode_path_segment(config_id),
-            "/clone"
+            '/clone'
           ].join,
           config: config,
           body: {
             'name' => name,
             'secrets' => secrets,
-            'oauth_assignments' => oauth_assignments,
+            'oauth_assignments' => oauth_assignments
           },
           return_type: ::OctridevDigitalocean::AgentConfigResponse,
           decoder: :json,
           operation_id: 'harness_create_config_clone',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '415' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '415' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

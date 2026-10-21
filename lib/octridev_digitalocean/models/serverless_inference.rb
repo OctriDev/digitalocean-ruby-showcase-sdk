@@ -5,489 +5,486 @@
 
 # serverless_inference domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalEmbeddingDataItemMetadata
-  FIELDS = {
-    index: "index",
-    object: "object",
-    embedding: "embedding",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    index
-    object
-    embedding
-  ].freeze
-  DECODERS = {
-    object: lambda do |value|
-      ::OctridevDigitalocean::EmbeddingDataItemObject.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for EmbeddingDataItem.
-# One row in the embeddings `data` array, aligned with a single `input` item.
-class EmbeddingDataItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalEmbeddingDataItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalEmbeddingDataItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalEmbeddingDataItemMetadata::DECODERS
-
-  # @return [Integer] Zero-based index of the corresponding `input` item (0 when `input` is a string).
-  attr_reader :index
-  # @return [EmbeddingDataItemObject] The object type, which is always `embedding`.
-  attr_reader :object
-  # @return [Object] The embedding vector, or a base64-encoded string when the request set encoding_format to base64.
-  attr_reader :embedding
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalEmbeddingDataItemMetadata
+    FIELDS = {
+      index: 'index',
+      object: 'object',
+      embedding: 'embedding'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      index
+      object
+      embedding
+    ].freeze
+    DECODERS = {
+      object: lambda do |value|
+        ::OctridevDigitalocean::EmbeddingDataItemObject.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for EmbeddingDataItem.
+  # One row in the embeddings `data` array, aligned with a single `input` item.
+  class EmbeddingDataItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalEmbeddingDataItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalEmbeddingDataItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalEmbeddingDataItemMetadata::DECODERS
+
+    # @return [Integer] Zero-based index of the corresponding `input` item (0 when `input` is a string).
+    attr_reader :index
+    # @return [EmbeddingDataItemObject] The object type, which is always `embedding`.
+    attr_reader :object
+    # @return [Object] The embedding vector, or a base64-encoded string when the request set encoding_format to base64.
+    attr_reader :embedding
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the EmbeddingDataItemObject SDK namespace.
-module EmbeddingDataItemObject
-  EMBEDDING = 'embedding'
-  VALUES = ['embedding'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalGeneratedImageMetadata
-  FIELDS = {
-    b64_json: "b64_json",
-    revised_prompt: "revised_prompt",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    b64_json
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for GeneratedImage.
-# Represents the content of a generated image.
-class GeneratedImage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalGeneratedImageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalGeneratedImageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalGeneratedImageMetadata::DECODERS
-
-  # @return [String] The base64-encoded JSON of the generated image.
-  attr_reader :b64_json
-  # @return [String] The optimized prompt that was used to generate the image.
-  attr_reader :revised_prompt
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the EmbeddingDataItemObject SDK namespace.
+  module EmbeddingDataItemObject
+    EMBEDDING = 'embedding'
+    VALUES = ['embedding'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalGeneratedImageMetadata
+    FIELDS = {
+      b64_json: 'b64_json',
+      revised_prompt: 'revised_prompt'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      b64_json
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for GeneratedImage.
+  # Represents the content of a generated image.
+  class GeneratedImage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalGeneratedImageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalGeneratedImageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalGeneratedImageMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalImageGenPartialImageEventMetadata
-  FIELDS = {
-    type: "type",
-    b64_json: "b64_json",
-    created_at: "created_at",
-    size: "size",
-    quality: "quality",
-    background: "background",
-    output_format: "output_format",
-    partial_image_index: "partial_image_index",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    b64_json
-    created_at
-    size
-    quality
-    background
-    output_format
-    partial_image_index
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ImageGenPartialImageEventType.from_value(value)
-    end,
-    size: lambda do |value|
-      ::OctridevDigitalocean::ImageGenPartialImageEventSize.from_value(value)
-    end,
-    quality: lambda do |value|
-      ::OctridevDigitalocean::ImageGenPartialImageEventQuality.from_value(value)
-    end,
-    background: lambda do |value|
-      ::OctridevDigitalocean::ImageGenPartialImageEventBackground.from_value(value)
-    end,
-    output_format: lambda do |value|
-      ::OctridevDigitalocean::ImageGenPartialImageEventOutputFormat.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [String] The base64-encoded JSON of the generated image.
+    attr_reader :b64_json
+    # @return [String] The optimized prompt that was used to generate the image.
+    attr_reader :revised_prompt
 
-# API model for ImageGenPartialImageEvent.
-# Emitted when a partial image is available during image generation streaming.
-class ImageGenPartialImageEvent
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalImageGenPartialImageEventMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalImageGenPartialImageEventMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalImageGenPartialImageEventMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ImageGenPartialImageEventType] The type of the event. Always `image_generation.partial_image`.
-  attr_reader :type
-  # @return [String] Base64-encoded partial image data, suitable for rendering as an image.
-  attr_reader :b64_json
-  # @return [Integer] The Unix timestamp when the event was created.
-  attr_reader :created_at
-  # @return [ImageGenPartialImageEventSize] The size of the requested image.
-  attr_reader :size
-  # @return [ImageGenPartialImageEventQuality] The quality setting for the requested image.
-  attr_reader :quality
-  # @return [ImageGenPartialImageEventBackground] The background setting for the requested image.
-  attr_reader :background
-  # @return [ImageGenPartialImageEventOutputFormat] The output format for the requested image.
-  attr_reader :output_format
-  # @return [Integer] 0-based index for the partial image (streaming).
-  attr_reader :partial_image_index
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalImageGenPartialImageEventMetadata
+    FIELDS = {
+      type: 'type',
+      b64_json: 'b64_json',
+      created_at: 'created_at',
+      size: 'size',
+      quality: 'quality',
+      background: 'background',
+      output_format: 'output_format',
+      partial_image_index: 'partial_image_index'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      b64_json
+      created_at
+      size
+      quality
+      background
+      output_format
+      partial_image_index
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ImageGenPartialImageEventType.from_value(value)
+      end,
+      size: lambda do |value|
+        ::OctridevDigitalocean::ImageGenPartialImageEventSize.from_value(value)
+      end,
+      quality: lambda do |value|
+        ::OctridevDigitalocean::ImageGenPartialImageEventQuality.from_value(value)
+      end,
+      background: lambda do |value|
+        ::OctridevDigitalocean::ImageGenPartialImageEventBackground.from_value(value)
+      end,
+      output_format: lambda do |value|
+        ::OctridevDigitalocean::ImageGenPartialImageEventOutputFormat.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ImageGenPartialImageEvent.
+  # Emitted when a partial image is available during image generation streaming.
+  class ImageGenPartialImageEvent
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalImageGenPartialImageEventMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalImageGenPartialImageEventMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalImageGenPartialImageEventMetadata::DECODERS
 
-# Defines the ImageGenPartialImageEventBackground SDK namespace.
-module ImageGenPartialImageEventBackground
-  TRANSPARENT = 'transparent'
-  OPAQUE = 'opaque'
-  AUTO = 'auto'
-  VALUES = ['transparent', 'opaque', 'auto'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [ImageGenPartialImageEventType] The type of the event. Always `image_generation.partial_image`.
+    attr_reader :type
+    # @return [String] Base64-encoded partial image data, suitable for rendering as an image.
+    attr_reader :b64_json
+    # @return [Integer] The Unix timestamp when the event was created.
+    attr_reader :created_at
+    # @return [ImageGenPartialImageEventSize] The size of the requested image.
+    attr_reader :size
+    # @return [ImageGenPartialImageEventQuality] The quality setting for the requested image.
+    attr_reader :quality
+    # @return [ImageGenPartialImageEventBackground] The background setting for the requested image.
+    attr_reader :background
+    # @return [ImageGenPartialImageEventOutputFormat] The output format for the requested image.
+    attr_reader :output_format
+    # @return [Integer] 0-based index for the partial image (streaming).
+    attr_reader :partial_image_index
 
-# Defines the ImageGenPartialImageEventOutputFormat SDK namespace.
-module ImageGenPartialImageEventOutputFormat
-  PNG = 'png'
-  WEBP = 'webp'
-  JPEG = 'jpeg'
-  VALUES = ['png', 'webp', 'jpeg'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Defines the ImageGenPartialImageEventQuality SDK namespace.
-module ImageGenPartialImageEventQuality
-  LOW = 'low'
-  MEDIUM = 'medium'
-  HIGH = 'high'
-  AUTO = 'auto'
-  VALUES = ['low', 'medium', 'high', 'auto'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# Defines the ImageGenPartialImageEventSize SDK namespace.
-module ImageGenPartialImageEventSize
-  V_1024_X1024 = '1024x1024'
-  V_1024_X1536 = '1024x1536'
-  V_1536_X1024 = '1536x1024'
-  AUTO = 'auto'
-  VALUES = ['1024x1024', '1024x1536', '1536x1024', 'auto'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ImageGenPartialImageEventType SDK namespace.
-module ImageGenPartialImageEventType
-  IMAGE_GENERATION_PARTIAL_IMAGE = 'image_generation.partial_image'
-  VALUES = ['image_generation.partial_image'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListModelsResponseMetadata
-  FIELDS = {
-    object: "object",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    object
-    data
-  ].freeze
-  DECODERS = {
-    object: lambda do |value|
-      ::OctridevDigitalocean::ListModelsResponseObject.from_value(value)
-    end,
-    data: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::Model.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ListModelsResponse.
-# Response listing available models.
-class ListModelsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListModelsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListModelsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListModelsResponseMetadata::DECODERS
-
-  # @return [ListModelsResponseObject] The object type, which is always "list".
-  attr_reader :object
-  # @return [Array_of_Model] The list of available models.
-  attr_reader :data
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ImageGenPartialImageEventBackground SDK namespace.
+  module ImageGenPartialImageEventBackground
+    TRANSPARENT = 'transparent'
+    OPAQUE = 'opaque'
+    AUTO = 'auto'
+    VALUES = %w[transparent opaque auto].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ListModelsResponseObject SDK namespace.
-module ListModelsResponseObject
-  LIST = 'list'
-  VALUES = ['list'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalModelMetadata
-  FIELDS = {
-    id: "id",
-    created: "created",
-    object: "object",
-    owned_by: "owned_by",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    created
-    object
-    owned_by
-  ].freeze
-  DECODERS = {
-    object: lambda do |value|
-      ::OctridevDigitalocean::ModelObject.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for Model.
-# Describes a model offering that can be used with the API.
-class Model
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalModelMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalModelMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalModelMetadata::DECODERS
-
-  # @return [String] The model identifier, which can be referenced in the API endpoints.
-  attr_reader :id
-  # @return [Integer] The Unix timestamp (in seconds) when the model was created.
-  attr_reader :created
-  # @return [ModelObject] The object type, which is always "model".
-  attr_reader :object
-  # @return [String] The organization that owns the model.
-  attr_reader :owned_by
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ImageGenPartialImageEventOutputFormat SDK namespace.
+  module ImageGenPartialImageEventOutputFormat
+    PNG = 'png'
+    WEBP = 'webp'
+    JPEG = 'jpeg'
+    VALUES = %w[png webp jpeg].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ImageGenPartialImageEventQuality SDK namespace.
+  module ImageGenPartialImageEventQuality
+    LOW = 'low'
+    MEDIUM = 'medium'
+    HIGH = 'high'
+    AUTO = 'auto'
+    VALUES = %w[low medium high auto].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ModelObject SDK namespace.
-module ModelObject
-  MODEL = 'model'
-  VALUES = ['model'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalResponseUsageInputTokensDetailsMetadata
-  FIELDS = {
-    cached_tokens: "cached_tokens",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    cached_tokens
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ResponseUsageInputTokensDetails.
-# A detailed breakdown of the input tokens.
-class ResponseUsageInputTokensDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalResponseUsageInputTokensDetailsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalResponseUsageInputTokensDetailsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalResponseUsageInputTokensDetailsMetadata::DECODERS
-
-  # @return [Integer] The number of tokens that were retrieved from the cache.
-  attr_reader :cached_tokens
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ImageGenPartialImageEventSize SDK namespace.
+  module ImageGenPartialImageEventSize
+    V_1024_X1024 = '1024x1024'
+    V_1024_X1536 = '1024x1536'
+    V_1536_X1024 = '1536x1024'
+    AUTO = 'auto'
+    VALUES = %w[1024x1024 1024x1536 1536x1024 auto].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ImageGenPartialImageEventType SDK namespace.
+  module ImageGenPartialImageEventType
+    IMAGE_GENERATION_PARTIAL_IMAGE = 'image_generation.partial_image'
+    VALUES = ['image_generation.partial_image'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalResponseUsageOutputTokensDetailsMetadata
-  FIELDS = {
-    reasoning_tokens: "reasoning_tokens",
-    tool_output_tokens: "tool_output_tokens",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    reasoning_tokens
-    tool_output_tokens
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ResponseUsageOutputTokensDetails.
-# A detailed breakdown of the output tokens.
-class ResponseUsageOutputTokensDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalResponseUsageOutputTokensDetailsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalResponseUsageOutputTokensDetailsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalResponseUsageOutputTokensDetailsMetadata::DECODERS
-
-  # @return [Integer] The number of reasoning tokens.
-  attr_reader :reasoning_tokens
-  # @return [Integer] The number of tool output tokens.
-  attr_reader :tool_output_tokens
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListModelsResponseMetadata
+    FIELDS = {
+      object: 'object',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      object
+      data
+    ].freeze
+    DECODERS = {
+      object: lambda do |value|
+        ::OctridevDigitalocean::ListModelsResponseObject.from_value(value)
+      end,
+      data: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::Model.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListModelsResponse.
+  # Response listing available models.
+  class ListModelsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListModelsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListModelsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListModelsResponseMetadata::DECODERS
+
+    # @return [ListModelsResponseObject] The object type, which is always "list".
+    attr_reader :object
+    # @return [Array_of_Model] The list of available models.
+    attr_reader :data
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalResponseUsageMetadata
-  FIELDS = {
-    input_tokens: "input_tokens",
-    input_tokens_details: "input_tokens_details",
-    output_tokens: "output_tokens",
-    output_tokens_details: "output_tokens_details",
-    total_tokens: "total_tokens",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    input_tokens
-    input_tokens_details
-    output_tokens
-    output_tokens_details
-    total_tokens
-  ].freeze
-  DECODERS = {
-    input_tokens_details: lambda do |value|
-      ::OctridevDigitalocean::ResponseUsageInputTokensDetails.from_hash(value)
-    end,
-    output_tokens_details: lambda do |value|
-      ::OctridevDigitalocean::ResponseUsageOutputTokensDetails.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ResponseUsage.
-# Detailed usage statistics for the Responses API request, including input/output token counts and detailed breakdowns.
-class ResponseUsage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalResponseUsageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalResponseUsageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalResponseUsageMetadata::DECODERS
-
-  # @return [Integer] The number of input tokens.
-  attr_reader :input_tokens
-  # @return [ResponseUsageInputTokensDetails] A detailed breakdown of the input tokens.
-  attr_reader :input_tokens_details
-  # @return [Integer] The number of output tokens.
-  attr_reader :output_tokens
-  # @return [ResponseUsageOutputTokensDetails] A detailed breakdown of the output tokens.
-  attr_reader :output_tokens_details
-  # @return [Integer] The total number of tokens used.
-  attr_reader :total_tokens
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ListModelsResponseObject SDK namespace.
+  module ListModelsResponseObject
+    LIST = 'list'
+    VALUES = ['list'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalModelMetadata
+    FIELDS = {
+      id: 'id',
+      created: 'created',
+      object: 'object',
+      owned_by: 'owned_by'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      created
+      object
+      owned_by
+    ].freeze
+    DECODERS = {
+      object: lambda do |value|
+        ::OctridevDigitalocean::ModelObject.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for Model.
+  # Describes a model offering that can be used with the API.
+  class Model
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalModelMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalModelMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalModelMetadata::DECODERS
+
+    # @return [String] The model identifier, which can be referenced in the API endpoints.
+    attr_reader :id
+    # @return [Integer] The Unix timestamp (in seconds) when the model was created.
+    attr_reader :created
+    # @return [ModelObject] The object type, which is always "model".
+    attr_reader :object
+    # @return [String] The organization that owns the model.
+    attr_reader :owned_by
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the ModelObject SDK namespace.
+  module ModelObject
+    MODEL = 'model'
+    VALUES = ['model'].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalResponseUsageInputTokensDetailsMetadata
+    FIELDS = {
+      cached_tokens: 'cached_tokens'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      cached_tokens
+    ].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for ResponseUsageInputTokensDetails.
+  # A detailed breakdown of the input tokens.
+  class ResponseUsageInputTokensDetails
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalResponseUsageInputTokensDetailsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalResponseUsageInputTokensDetailsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalResponseUsageInputTokensDetailsMetadata::DECODERS
+
+    # @return [Integer] The number of tokens that were retrieved from the cache.
+    attr_reader :cached_tokens
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalResponseUsageOutputTokensDetailsMetadata
+    FIELDS = {
+      reasoning_tokens: 'reasoning_tokens',
+      tool_output_tokens: 'tool_output_tokens'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      reasoning_tokens
+      tool_output_tokens
+    ].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for ResponseUsageOutputTokensDetails.
+  # A detailed breakdown of the output tokens.
+  class ResponseUsageOutputTokensDetails
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalResponseUsageOutputTokensDetailsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalResponseUsageOutputTokensDetailsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalResponseUsageOutputTokensDetailsMetadata::DECODERS
+
+    # @return [Integer] The number of reasoning tokens.
+    attr_reader :reasoning_tokens
+    # @return [Integer] The number of tool output tokens.
+    attr_reader :tool_output_tokens
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalResponseUsageMetadata
+    FIELDS = {
+      input_tokens: 'input_tokens',
+      input_tokens_details: 'input_tokens_details',
+      output_tokens: 'output_tokens',
+      output_tokens_details: 'output_tokens_details',
+      total_tokens: 'total_tokens'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      input_tokens
+      input_tokens_details
+      output_tokens
+      output_tokens_details
+      total_tokens
+    ].freeze
+    DECODERS = {
+      input_tokens_details: lambda do |value|
+        ::OctridevDigitalocean::ResponseUsageInputTokensDetails.from_hash(value)
+      end,
+      output_tokens_details: lambda do |value|
+        ::OctridevDigitalocean::ResponseUsageOutputTokensDetails.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for ResponseUsage.
+  # Detailed usage statistics for the Responses API request, including input/output token counts and detailed breakdowns.
+  class ResponseUsage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalResponseUsageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalResponseUsageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalResponseUsageMetadata::DECODERS
+
+    # @return [Integer] The number of input tokens.
+    attr_reader :input_tokens
+    # @return [ResponseUsageInputTokensDetails] A detailed breakdown of the input tokens.
+    attr_reader :input_tokens_details
+    # @return [Integer] The number of output tokens.
+    attr_reader :output_tokens
+    # @return [ResponseUsageOutputTokensDetails] A detailed breakdown of the output tokens.
+    attr_reader :output_tokens_details
+    # @return [Integer] The total number of tokens used.
+    attr_reader :total_tokens
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

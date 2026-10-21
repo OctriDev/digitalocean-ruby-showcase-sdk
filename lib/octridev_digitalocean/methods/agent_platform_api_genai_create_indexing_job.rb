@@ -20,20 +20,19 @@ module OctridevDigitalocean
         knowledge_base_uuid: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/indexing_jobs",
+          '/v2/gen-ai/indexing_jobs',
           config: config,
           body: {
             'data_source_uuids' => data_source_uuids,
-            'knowledge_base_uuid' => knowledge_base_uuid,
+            'knowledge_base_uuid' => knowledge_base_uuid
           },
           return_type: ::OctridevDigitalocean::ApiStartKnowledgeBaseIndexingJobOutput,
           decoder: :json,
           operation_id: 'genai_create_indexing_job',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -5,270 +5,269 @@
 
 # serverless_inference_systemone domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalSystemoneAnswerMetadata
-  FIELDS = {
-    type: "type",
-    noul: "noul",
-    choice: "choice",
-    score: "score",
-    legend: "legend",
-    probabilities: "probabilities",
-    confidence: "confidence",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::SystemoneAnswerType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for SystemoneAnswer.
-# The evaluated answer for a single question. The fields that are populated depend on the corresponding question's `type`.
-class SystemoneAnswer
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSystemoneAnswerMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSystemoneAnswerMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSystemoneAnswerMetadata::DECODERS
-
-  # @return [SystemoneAnswerType] Echoes the `type` of the question this answer corresponds to.
-  attr_reader :type
-  # @return [Float] Present when the question type is `noul`. A truth-likelihood value.
-  attr_reader :noul
-  # @return [String] Present when the question type is `choice`. The selected option name from the question's `criteria` map.
-  attr_reader :choice
-  # @return [Float] Present when the question type is `score`. The numeric position along the ordered rubric levels supplied in the question's `criteria`.
-  attr_reader :score
-  # @return [Hash] Present when the question type is `score`. Maps rubric levels to their corresponding numeric positions.
-  attr_reader :legend
-  # @return [Hash] Calibrated probability for each possible answer value.
-  attr_reader :probabilities
-  # @return [Float] Overall calibrated confidence in the returned answer.
-  attr_reader :confidence
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSystemoneAnswerMetadata
+    FIELDS = {
+      type: 'type',
+      noul: 'noul',
+      choice: 'choice',
+      score: 'score',
+      legend: 'legend',
+      probabilities: 'probabilities',
+      confidence: 'confidence'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::SystemoneAnswerType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SystemoneAnswer.
+  # The evaluated answer for a single question. The fields that are populated depend on the corresponding question's `type`.
+  class SystemoneAnswer
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSystemoneAnswerMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSystemoneAnswerMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSystemoneAnswerMetadata::DECODERS
+
+    # @return [SystemoneAnswerType] Echoes the `type` of the question this answer corresponds to.
+    attr_reader :type
+    # @return [Float] Present when the question type is `noul`. A truth-likelihood value.
+    attr_reader :noul
+    # @return [String] Present when the question type is `choice`. The selected option name from the question's `criteria` map.
+    attr_reader :choice
+    # @return [Float] Present when the question type is `score`. The numeric position along the ordered rubric levels supplied in the question's `criteria`.
+    attr_reader :score
+    # @return [Hash] Present when the question type is `score`. Maps rubric levels to their corresponding numeric positions.
+    attr_reader :legend
+    # @return [Hash] Calibrated probability for each possible answer value.
+    attr_reader :probabilities
+    # @return [Float] Overall calibrated confidence in the returned answer.
+    attr_reader :confidence
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the SystemoneAnswerType SDK namespace.
-module SystemoneAnswerType
-  NOUL = 'noul'
-  CHOICE = 'choice'
-  SCORE = 'score'
-  VALUES = ['noul', 'choice', 'score'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSystemoneQuestionMetadata
-  FIELDS = {
-    type: "type",
-    instructions: "instructions",
-    criteria: "criteria",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    instructions
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::SystemoneQuestionType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for SystemoneQuestion.
-# A single question to evaluate against the provided state. The `type` field determines how `criteria` should be shaped and how the corresponding answer is returned.
-class SystemoneQuestion
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSystemoneQuestionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSystemoneQuestionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSystemoneQuestionMetadata::DECODERS
-
-  # @return [SystemoneQuestionType] Question discriminator. Use `noul` for a boolean-like true/false check, `choice` to select one option from a fixed set, and `score` to rate against an ordered rubric.
-  attr_reader :type
-  # @return [String] The prompt describing what the question is asking the model to evaluate.
-  attr_reader :instructions
-  # @return [Object] Optional criteria payload. The expected shape depends on `type`: for `noul`, an optional object describing the true/false semantics; for `choice`, an object mapping each option name to a description of that option (minimum 2 options, maximum 255 options); for `score`, an ordered array of descriptive rubric levels (minimum 2, maximum 10 levels). Score levels must be descriptive labels, such as `["poor", "average", "excellent"]`, not numeric values.
-  attr_reader :criteria
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the SystemoneAnswerType SDK namespace.
+  module SystemoneAnswerType
+    NOUL = 'noul'
+    CHOICE = 'choice'
+    SCORE = 'score'
+    VALUES = %w[noul choice score].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalSystemoneQuestionMetadata
+    FIELDS = {
+      type: 'type',
+      instructions: 'instructions',
+      criteria: 'criteria'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      instructions
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::SystemoneQuestionType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for SystemoneQuestion.
+  # A single question to evaluate against the provided state. The `type` field determines how `criteria` should be shaped and how the corresponding answer is returned.
+  class SystemoneQuestion
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSystemoneQuestionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSystemoneQuestionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSystemoneQuestionMetadata::DECODERS
 
-# Defines the SystemoneQuestionType SDK namespace.
-module SystemoneQuestionType
-  NOUL = 'noul'
-  CHOICE = 'choice'
-  SCORE = 'score'
-  VALUES = ['noul', 'choice', 'score'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [SystemoneQuestionType] Question discriminator. Use `noul` for a boolean-like true/false check, `choice` to select one option from a fixed set, and `score` to rate against an ordered rubric.
+    attr_reader :type
+    # @return [String] The prompt describing what the question is asking the model to evaluate.
+    attr_reader :instructions
+    # @return [Object] Optional criteria payload. The expected shape depends on `type`: for `noul`, an optional object describing the true/false semantics; for `choice`, an object mapping each option name to a description of that option (minimum 2 options, maximum 255 options); for `score`, an ordered array of descriptive rubric levels (minimum 2, maximum 10 levels). Score levels must be descriptive labels, such as `["poor", "average", "excellent"]`, not numeric values.
+    attr_reader :criteria
 
-# Internal model hydration metadata.
-class SdkInternalSystemoneRequestMetadata
-  FIELDS = {
-    state: "state",
-    model: "model",
-    questions: "questions",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    state
-    model
-    questions
-  ].freeze
-  DECODERS = {
-    questions: lambda do |value|
-      value&.transform_values { |item| ::OctridevDigitalocean::SystemoneQuestion.from_hash(item) }
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for SystemoneRequest.
-# Request payload for a System One evaluation.
-class SystemoneRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSystemoneRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSystemoneRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSystemoneRequestMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The state to evaluate.
-  attr_reader :state
-  # @return [String] Model ID used to evaluate the request.
-  attr_reader :model
-  # @return [Hash] A map of question name to question definition. Each key becomes the corresponding key in the response's `answers` object.
-  attr_reader :questions
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the SystemoneQuestionType SDK namespace.
+  module SystemoneQuestionType
+    NOUL = 'noul'
+    CHOICE = 'choice'
+    SCORE = 'score'
+    VALUES = %w[noul choice score].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSystemoneResponseMetadata
-  FIELDS = {
-    model: "model",
-    answers: "answers",
-    usage: "usage",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    model
-    answers
-    usage
-  ].freeze
-  DECODERS = {
-    answers: lambda do |value|
-      value&.transform_values { |item| ::OctridevDigitalocean::SystemoneAnswer.from_hash(item) }
-    end,
-    usage: lambda do |value|
-      ::OctridevDigitalocean::SystemoneUsage.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for SystemoneResponse.
-# Response returned by a System One evaluation.
-class SystemoneResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSystemoneResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSystemoneResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSystemoneResponseMetadata::DECODERS
-
-  # @return [String] Model ID that produced the response.
-  attr_reader :model
-  # @return [Hash] A map of question name to answer, using the same keys as the request's `questions` object.
-  attr_reader :answers
-  # @return [SystemoneUsage] Token usage for the request. System One billing is input-token only.
-  attr_reader :usage
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSystemoneRequestMetadata
+    FIELDS = {
+      state: 'state',
+      model: 'model',
+      questions: 'questions'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      state
+      model
+      questions
+    ].freeze
+    DECODERS = {
+      questions: lambda do |value|
+        value&.transform_values { |item| ::OctridevDigitalocean::SystemoneQuestion.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SystemoneRequest.
+  # Request payload for a System One evaluation.
+  class SystemoneRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSystemoneRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSystemoneRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSystemoneRequestMetadata::DECODERS
+
+    # @return [String] The state to evaluate.
+    attr_reader :state
+    # @return [String] Model ID used to evaluate the request.
+    attr_reader :model
+    # @return [Hash] A map of question name to question definition. Each key becomes the corresponding key in the response's `answers` object.
+    attr_reader :questions
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSystemoneUsageMetadata
-  FIELDS = {
-    input_tokens: "input_tokens",
-    output_tokens: "output_tokens",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    input_tokens
-    output_tokens
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SystemoneUsage.
-# Token usage for the request. System One billing is input-token only.
-class SystemoneUsage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSystemoneUsageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSystemoneUsageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSystemoneUsageMetadata::DECODERS
-
-  # @return [Integer] Number of input tokens consumed by the request.
-  attr_reader :input_tokens
-  # @return [Integer] Number of output tokens consumed by the request. Always 0 for System One.
-  attr_reader :output_tokens
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSystemoneResponseMetadata
+    FIELDS = {
+      model: 'model',
+      answers: 'answers',
+      usage: 'usage'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      model
+      answers
+      usage
+    ].freeze
+    DECODERS = {
+      answers: lambda do |value|
+        value&.transform_values { |item| ::OctridevDigitalocean::SystemoneAnswer.from_hash(item) }
+      end,
+      usage: lambda do |value|
+        ::OctridevDigitalocean::SystemoneUsage.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SystemoneResponse.
+  # Response returned by a System One evaluation.
+  class SystemoneResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSystemoneResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSystemoneResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSystemoneResponseMetadata::DECODERS
+
+    # @return [String] Model ID that produced the response.
+    attr_reader :model
+    # @return [Hash] A map of question name to answer, using the same keys as the request's `questions` object.
+    attr_reader :answers
+    # @return [SystemoneUsage] Token usage for the request. System One billing is input-token only.
+    attr_reader :usage
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalSystemoneUsageMetadata
+    FIELDS = {
+      input_tokens: 'input_tokens',
+      output_tokens: 'output_tokens'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      input_tokens
+      output_tokens
+    ].freeze
+    DECODERS = {}.freeze
   end
-end
+
+  # API model for SystemoneUsage.
+  # Token usage for the request. System One billing is input-token only.
+  class SystemoneUsage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSystemoneUsageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSystemoneUsageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSystemoneUsageMetadata::DECODERS
+
+    # @return [Integer] Number of input tokens consumed by the request.
+    attr_reader :input_tokens
+    # @return [Integer] Number of output tokens consumed by the request. Always 0 for System One.
+    attr_reader :output_tokens
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

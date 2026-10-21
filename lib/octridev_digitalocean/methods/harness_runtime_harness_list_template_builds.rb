@@ -23,30 +23,29 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('template_id', template_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/templates/",
+            '/v2/agents/templates/',
             SdkClient.encode_path_segment(template_id),
-            "/builds"
+            '/builds'
           ].join,
           config: config,
           query: {
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListTemplateBuildsResponse,
           decoder: :json,
           operation_id: 'harness_list_template_builds',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
-    HarnessListTemplateBuildsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      HarnessListTemplateBuildsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # ListTemplateBuilds returns build history for a template.
       #
@@ -74,9 +73,11 @@ module OctridevDigitalocean
             )
             items = page.builds || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -101,10 +102,12 @@ module OctridevDigitalocean
             )
             items = page.builds || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << HarnessListTemplateBuildsPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end

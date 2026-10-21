@@ -5,218 +5,212 @@
 
 # agent_platform_api_api_simulation domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiSimulationTrajectoryJudgeResultMetadata
-  FIELDS = {
-    criteria_pass_fail: "criteria_pass_fail",
-    reasoning: "reasoning",
-    verdict: "verdict",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    criteria_pass_fail: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationTrajectoryJudgeCriterion.from_hash(item) }
-    end,
-    verdict: lambda do |value|
-      ::OctridevDigitalocean::ApiSimulationEpisodeVerdict.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiSimulationTrajectoryJudgeResult.
-# Judge output embedded in the trajectory JSON.
-class ApiSimulationTrajectoryJudgeResult
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiSimulationTrajectoryJudgeResultMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryJudgeResultMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiSimulationTrajectoryJudgeResultMetadata::DECODERS
-
-  # @return [Array_of_ApiSimulationTrajectoryJudgeCriterion] Optional array value serialized in the `criteria_pass_fail` wire field.
-  attr_reader :criteria_pass_fail
-  # @return [String] Optional `string` value serialized in the `reasoning` wire field.
-  attr_reader :reasoning
-  # @return [ApiSimulationEpisodeVerdict] The judge's verdict for an episode. - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria. - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria. - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
-  attr_reader :verdict
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiSimulationTrajectoryJudgeResultMetadata
+    FIELDS = {
+      criteria_pass_fail: 'criteria_pass_fail',
+      reasoning: 'reasoning',
+      verdict: 'verdict'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      criteria_pass_fail: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationTrajectoryJudgeCriterion.from_hash(item) }
+      end,
+      verdict: lambda do |value|
+        ::OctridevDigitalocean::ApiSimulationEpisodeVerdict.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiSimulationTrajectoryJudgeResult.
+  # Judge output embedded in the trajectory JSON.
+  class ApiSimulationTrajectoryJudgeResult
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiSimulationTrajectoryJudgeResultMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryJudgeResultMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiSimulationTrajectoryJudgeResultMetadata::DECODERS
+
+    # @return [Array_of_ApiSimulationTrajectoryJudgeCriterion] Optional array value serialized in the `criteria_pass_fail` wire field.
+    attr_reader :criteria_pass_fail
+    # @return [String] Optional `string` value serialized in the `reasoning` wire field.
+    attr_reader :reasoning
+    # @return [ApiSimulationEpisodeVerdict] The judge's verdict for an episode. - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria. - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria. - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
+    attr_reader :verdict
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiSimulationTrajectoryMessageMetadata
-  FIELDS = {
-    completed_at: "completed_at",
-    content: "content",
-    role: "role",
-    started_at: "started_at",
-    tokens: "tokens",
-    tool_calls: "tool_calls",
-    turn_index: "turn_index",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    tokens: lambda do |value|
-      ::OctridevDigitalocean::ApiSimulationTrajectoryMessageTokens.from_hash(value)
-    end,
-    tool_calls: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiSimulationTrajectoryToolCall.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ApiSimulationTrajectoryMessage.
-# One user or assistant message in the turn-by-turn conversation view.
-class ApiSimulationTrajectoryMessage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiSimulationTrajectoryMessageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryMessageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiSimulationTrajectoryMessageMetadata::DECODERS
-
-  # @return [String] ISO-8601 timestamp when the message completed.
-  attr_reader :completed_at
-  # @return [String] Message body text.
-  attr_reader :content
-  # @return [String] Message role: "user" or "assistant".
-  attr_reader :role
-  # @return [String] ISO-8601 timestamp when the message started.
-  attr_reader :started_at
-  # @return [ApiSimulationTrajectoryMessageTokens] Token usage for a single assistant message in the trajectory JSON.
-  attr_reader :tokens
-  # @return [Array_of_ApiSimulationTrajectoryToolCall] Tool calls on assistant turns.
-  attr_reader :tool_calls
-  # @return [Integer] Zero-based turn index shared by the user and assistant messages in one exchange.
-  attr_reader :turn_index
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiSimulationTrajectoryMessageMetadata
+    FIELDS = {
+      completed_at: 'completed_at',
+      content: 'content',
+      role: 'role',
+      started_at: 'started_at',
+      tokens: 'tokens',
+      tool_calls: 'tool_calls',
+      turn_index: 'turn_index'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      tokens: lambda do |value|
+        ::OctridevDigitalocean::ApiSimulationTrajectoryMessageTokens.from_hash(value)
+      end,
+      tool_calls: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiSimulationTrajectoryToolCall.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiSimulationTrajectoryMessage.
+  # One user or assistant message in the turn-by-turn conversation view.
+  class ApiSimulationTrajectoryMessage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiSimulationTrajectoryMessageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryMessageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiSimulationTrajectoryMessageMetadata::DECODERS
+
+    # @return [String] ISO-8601 timestamp when the message completed.
+    attr_reader :completed_at
+    # @return [String] Message body text.
+    attr_reader :content
+    # @return [String] Message role: "user" or "assistant".
+    attr_reader :role
+    # @return [String] ISO-8601 timestamp when the message started.
+    attr_reader :started_at
+    # @return [ApiSimulationTrajectoryMessageTokens] Token usage for a single assistant message in the trajectory JSON.
+    attr_reader :tokens
+    # @return [Array_of_ApiSimulationTrajectoryToolCall] Tool calls on assistant turns.
+    attr_reader :tool_calls
+    # @return [Integer] Zero-based turn index shared by the user and assistant messages in one exchange.
+    attr_reader :turn_index
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiSimulationTrajectoryMessageTokensMetadata
-  FIELDS = {
-    input: "input",
-    output: "output",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiSimulationTrajectoryMessageTokens.
-# Token usage for a single assistant message in the trajectory JSON.
-class ApiSimulationTrajectoryMessageTokens
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiSimulationTrajectoryMessageTokensMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryMessageTokensMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiSimulationTrajectoryMessageTokensMetadata::DECODERS
-
-  # @return [Integer] Optional `int64`-formatted value serialized in the `input` wire field.
-  attr_reader :input
-  # @return [Integer] Optional `int64`-formatted value serialized in the `output` wire field.
-  attr_reader :output
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiSimulationTrajectoryMessageTokensMetadata
+    FIELDS = {
+      input: 'input',
+      output: 'output'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiSimulationTrajectoryMessageTokens.
+  # Token usage for a single assistant message in the trajectory JSON.
+  class ApiSimulationTrajectoryMessageTokens
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiSimulationTrajectoryMessageTokensMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryMessageTokensMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiSimulationTrajectoryMessageTokensMetadata::DECODERS
+
+    # @return [Integer] Optional `int64`-formatted value serialized in the `input` wire field.
+    attr_reader :input
+    # @return [Integer] Optional `int64`-formatted value serialized in the `output` wire field.
+    attr_reader :output
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ApiSimulationTrajectoryStatus SDK namespace.
-module ApiSimulationTrajectoryStatus
-  SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED = 'SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED'
-  SIMULATION_TRAJECTORY_STATUS_RUNNING = 'SIMULATION_TRAJECTORY_STATUS_RUNNING'
-  SIMULATION_TRAJECTORY_STATUS_COMPLETED = 'SIMULATION_TRAJECTORY_STATUS_COMPLETED'
-  SIMULATION_TRAJECTORY_STATUS_FAILED = 'SIMULATION_TRAJECTORY_STATUS_FAILED'
-  SIMULATION_TRAJECTORY_STATUS_CANCELLED = 'SIMULATION_TRAJECTORY_STATUS_CANCELLED'
-  VALUES = [
-    'SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED', 'SIMULATION_TRAJECTORY_STATUS_RUNNING',
-    'SIMULATION_TRAJECTORY_STATUS_COMPLETED', 'SIMULATION_TRAJECTORY_STATUS_FAILED',
-    'SIMULATION_TRAJECTORY_STATUS_CANCELLED'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiSimulationTrajectoryToolCallMetadata
-  FIELDS = {
-    description: "description",
-    input_parameters: "input_parameters",
-    name: "name",
-    ok: "ok",
-    output: "output",
-    tool_call_id: "tool_call_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiSimulationTrajectoryToolCall.
-# A tool call recorded on an assistant turn in the trajectory JSON.
-class ApiSimulationTrajectoryToolCall
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiSimulationTrajectoryToolCallMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryToolCallMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiSimulationTrajectoryToolCallMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `description` wire field.
-  attr_reader :description
-  # @return [Hash] Optional object value serialized in the `input_parameters` wire field.
-  attr_reader :input_parameters
-  # @return [String] Optional `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [Boolean] Optional `boolean` value serialized in the `ok` wire field.
-  attr_reader :ok
-  # @return [Hash] Optional object value serialized in the `output` wire field.
-  attr_reader :output
-  # @return [String] Optional `string` value serialized in the `tool_call_id` wire field.
-  attr_reader :tool_call_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ApiSimulationTrajectoryStatus SDK namespace.
+  module ApiSimulationTrajectoryStatus
+    SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED = 'SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED'
+    SIMULATION_TRAJECTORY_STATUS_RUNNING = 'SIMULATION_TRAJECTORY_STATUS_RUNNING'
+    SIMULATION_TRAJECTORY_STATUS_COMPLETED = 'SIMULATION_TRAJECTORY_STATUS_COMPLETED'
+    SIMULATION_TRAJECTORY_STATUS_FAILED = 'SIMULATION_TRAJECTORY_STATUS_FAILED'
+    SIMULATION_TRAJECTORY_STATUS_CANCELLED = 'SIMULATION_TRAJECTORY_STATUS_CANCELLED'
+    VALUES = %w[
+      SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED SIMULATION_TRAJECTORY_STATUS_RUNNING
+      SIMULATION_TRAJECTORY_STATUS_COMPLETED SIMULATION_TRAJECTORY_STATUS_FAILED
+      SIMULATION_TRAJECTORY_STATUS_CANCELLED
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiSimulationTrajectoryToolCallMetadata
+    FIELDS = {
+      description: 'description',
+      input_parameters: 'input_parameters',
+      name: 'name',
+      ok: 'ok',
+      output: 'output',
+      tool_call_id: 'tool_call_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ApiSimulationTrajectoryToolCall.
+  # A tool call recorded on an assistant turn in the trajectory JSON.
+  class ApiSimulationTrajectoryToolCall
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiSimulationTrajectoryToolCallMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiSimulationTrajectoryToolCallMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiSimulationTrajectoryToolCallMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `description` wire field.
+    attr_reader :description
+    # @return [Hash] Optional object value serialized in the `input_parameters` wire field.
+    attr_reader :input_parameters
+    # @return [String] Optional `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [Boolean] Optional `boolean` value serialized in the `ok` wire field.
+    attr_reader :ok
+    # @return [Hash] Optional object value serialized in the `output` wire field.
+    attr_reader :output
+    # @return [String] Optional `string` value serialized in the `tool_call_id` wire field.
+    attr_reader :tool_call_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

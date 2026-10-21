@@ -23,25 +23,24 @@ module OctridevDigitalocean
         force: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/triggers/",
+            '/v2/agents/triggers/',
             SdkClient.encode_path_segment(trigger_id),
-            "/executions/",
+            '/executions/',
             SdkClient.encode_path_segment(execution_id),
-            "/cancel"
+            '/cancel'
           ].join,
           config: config,
           query: {
-            'force' => QueryValue.new(force, style: 'form', explode: true),
+            'force' => QueryValue.new(force, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::GetTriggerExecutionResponse,
           decoder: :json,
           operation_id: 'harness_cancel_trigger_execution',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

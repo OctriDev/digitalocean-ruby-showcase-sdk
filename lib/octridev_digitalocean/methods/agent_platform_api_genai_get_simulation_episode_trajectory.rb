@@ -19,22 +19,21 @@ module OctridevDigitalocean
         episode_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/simulation_runs/",
+            '/v2/gen-ai/simulation_runs/',
             SdkClient.encode_path_segment(run_uuid),
-            "/episodes/",
+            '/episodes/',
             SdkClient.encode_path_segment(episode_uuid),
-            "/trajectory"
+            '/trajectory'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiGetSimulationEpisodeTrajectoryOutput,
           decoder: :json,
           operation_id: 'genai_get_simulation_episode_trajectory',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

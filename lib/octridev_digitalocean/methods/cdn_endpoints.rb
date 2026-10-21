@@ -19,24 +19,23 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/cdn/endpoints",
+          '/v2/cdn/endpoints',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllCdnEndpoints,
           decoder: :json,
           operation_id: 'cdn_list_endpoints',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -60,24 +59,23 @@ module OctridevDigitalocean
         custom_domain: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(certificate_id) { Validation.validate_uuid('certificate_id', certificate_id) }
 
         SdkClient.request(
           'POST',
-          "/v2/cdn/endpoints",
+          '/v2/cdn/endpoints',
           config: config,
           body: {
             'origin' => origin,
             'ttl' => ttl,
             'certificate_id' => certificate_id,
-            'custom_domain' => custom_domain,
+            'custom_domain' => custom_domain
           },
           return_type: ::OctridevDigitalocean::ExistingEndpoint,
           decoder: :json,
           operation_id: 'cdn_create_endpoint',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -89,13 +87,12 @@ module OctridevDigitalocean
         cdn_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('cdn_id', cdn_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/cdn/endpoints/",
+            '/v2/cdn/endpoints/',
             SdkClient.encode_path_segment(cdn_id)
           ].join,
           config: config,
@@ -103,7 +100,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'cdn_get_endpoint',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -125,7 +122,6 @@ module OctridevDigitalocean
         custom_domain: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('cdn_id', cdn_id)
 
         Validation.if_given(certificate_id) { Validation.validate_uuid('certificate_id', certificate_id) }
@@ -133,20 +129,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'PUT',
           [
-            "/v2/cdn/endpoints/",
+            '/v2/cdn/endpoints/',
             SdkClient.encode_path_segment(cdn_id)
           ].join,
           config: config,
           body: {
             'ttl' => ttl,
             'certificate_id' => certificate_id,
-            'custom_domain' => custom_domain,
+            'custom_domain' => custom_domain
           },
           return_type: ::OctridevDigitalocean::ExistingEndpoint,
           decoder: :json,
           operation_id: 'cdn_update_endpoints',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -158,20 +154,19 @@ module OctridevDigitalocean
         cdn_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('cdn_id', cdn_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/cdn/endpoints/",
+            '/v2/cdn/endpoints/',
             SdkClient.encode_path_segment(cdn_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'cdn_delete_endpoint',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -186,24 +181,23 @@ module OctridevDigitalocean
         files:,
         request_options: nil
       )
-
         Validation.validate_uuid('cdn_id', cdn_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/cdn/endpoints/",
+            '/v2/cdn/endpoints/',
             SdkClient.encode_path_segment(cdn_id),
-            "/cache"
+            '/cache'
           ].join,
           config: config,
           body: {
-            'files' => files,
+            'files' => files
           },
           decoder: :empty,
           operation_id: 'cdn_purge_cache',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -19,24 +19,23 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/alerts",
+          '/v2/monitoring/alerts',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::MonitoringListAlertPolicyResponse,
           decoder: :json,
           operation_id: 'monitoring_list_alert_policy',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -75,10 +74,9 @@ module OctridevDigitalocean
         window:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/monitoring/alerts",
+          '/v2/monitoring/alerts',
           config: config,
           body: {
             'alerts' => alerts,
@@ -89,13 +87,13 @@ module OctridevDigitalocean
             'tags' => tags,
             'type' => type,
             'value' => value,
-            'window' => window,
+            'window' => window
           },
           return_type: ::OctridevDigitalocean::AlertPolicyResponse,
           decoder: :json,
           operation_id: 'monitoring_create_alert_policy',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -107,11 +105,10 @@ module OctridevDigitalocean
         alert_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/monitoring/alerts/",
+            '/v2/monitoring/alerts/',
             SdkClient.encode_path_segment(alert_uuid)
           ].join,
           config: config,
@@ -119,7 +116,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'monitoring_get_alert_policy',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -160,11 +157,10 @@ module OctridevDigitalocean
         window:,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/monitoring/alerts/",
+            '/v2/monitoring/alerts/',
             SdkClient.encode_path_segment(alert_uuid)
           ].join,
           config: config,
@@ -177,13 +173,13 @@ module OctridevDigitalocean
             'tags' => tags,
             'type' => type,
             'value' => value,
-            'window' => window,
+            'window' => window
           },
           return_type: ::OctridevDigitalocean::AlertPolicyResponse,
           decoder: :json,
           operation_id: 'monitoring_update_alert_policy',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -195,18 +191,17 @@ module OctridevDigitalocean
         alert_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/monitoring/alerts/",
+            '/v2/monitoring/alerts/',
             SdkClient.encode_path_segment(alert_uuid)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'monitoring_delete_alert_policy',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

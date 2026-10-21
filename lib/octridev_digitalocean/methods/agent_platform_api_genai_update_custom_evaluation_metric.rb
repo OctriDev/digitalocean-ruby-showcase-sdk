@@ -32,11 +32,10 @@ module OctridevDigitalocean
         metric_uuid2: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/custom_evaluation_metrics/",
+            '/v2/gen-ai/custom_evaluation_metrics/',
             SdkClient.encode_path_segment(metric_uuid)
           ].join,
           config: config,
@@ -44,13 +43,13 @@ module OctridevDigitalocean
             'config' => request_config,
             'description' => description,
             'metric_name' => metric_name,
-            'metric_uuid' => metric_uuid2,
+            'metric_uuid' => metric_uuid2
           },
           return_type: ::OctridevDigitalocean::ApiUpdateCustomEvaluationMetricOutput,
           decoder: :json,
           operation_id: 'genai_update_custom_evaluation_metric',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

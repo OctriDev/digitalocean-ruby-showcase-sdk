@@ -21,7 +21,6 @@ module OctridevDigitalocean
         since: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('cluster_id', cluster_id)
 
         Validation.if_given(since) { Validation.validate_date_time('since', since) }
@@ -29,19 +28,19 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/kubernetes/clusters/",
+            '/v2/kubernetes/clusters/',
             SdkClient.encode_path_segment(cluster_id),
-            "/status_messages"
+            '/status_messages'
           ].join,
           config: config,
           query: {
-            'since' => QueryValue.new(since, style: 'form', explode: true),
+            'since' => QueryValue.new(since, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::StatusMessagesResponse,
           decoder: :json,
           operation_id: 'kubernetes_get_status_messages',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

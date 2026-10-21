@@ -5,90 +5,86 @@
 
 # agent_platform_api_api_file domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiFilePresignedUrlResponseMetadata
-  FIELDS = {
-    expires_at: "expires_at",
-    object_key: "object_key",
-    original_file_name: "original_file_name",
-    presigned_url: "presigned_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiFilePresignedUrlResponse.
-# Detailed info about each presigned URL returned to the client.
-class ApiFilePresignedUrlResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiFilePresignedUrlResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiFilePresignedUrlResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiFilePresignedUrlResponseMetadata::DECODERS
-
-  # @return [String] The time the url expires at.
-  attr_reader :expires_at
-  # @return [String] The unique object key to store the file as.
-  attr_reader :object_key
-  # @return [String] The original file name.
-  attr_reader :original_file_name
-  # @return [String] The actual presigned URL the client can use to upload the file directly.
-  attr_reader :presigned_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiFilePresignedUrlResponseMetadata
+    FIELDS = {
+      expires_at: 'expires_at',
+      object_key: 'object_key',
+      original_file_name: 'original_file_name',
+      presigned_url: 'presigned_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiFilePresignedUrlResponse.
+  # Detailed info about each presigned URL returned to the client.
+  class ApiFilePresignedUrlResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiFilePresignedUrlResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiFilePresignedUrlResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiFilePresignedUrlResponseMetadata::DECODERS
+
+    # @return [String] The time the url expires at.
+    attr_reader :expires_at
+    # @return [String] The unique object key to store the file as.
+    attr_reader :object_key
+    # @return [String] The original file name.
+    attr_reader :original_file_name
+    # @return [String] The actual presigned URL the client can use to upload the file directly.
+    attr_reader :presigned_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiFileUploadDataSourceMetadata
-  FIELDS = {
-    original_file_name: "original_file_name",
-    size_in_bytes: "size_in_bytes",
-    stored_object_key: "stored_object_key",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiFileUploadDataSource.
-# File to upload as data source for knowledge base.
-class ApiFileUploadDataSource
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiFileUploadDataSourceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiFileUploadDataSourceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiFileUploadDataSourceMetadata::DECODERS
-
-  # @return [String] The original file name
-  attr_reader :original_file_name
-  # @return [String] The size of the file in bytes
-  attr_reader :size_in_bytes
-  # @return [String] The object key the file was stored as
-  attr_reader :stored_object_key
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiFileUploadDataSourceMetadata
+    FIELDS = {
+      original_file_name: 'original_file_name',
+      size_in_bytes: 'size_in_bytes',
+      stored_object_key: 'stored_object_key'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for ApiFileUploadDataSource.
+  # File to upload as data source for knowledge base.
+  class ApiFileUploadDataSource
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiFileUploadDataSourceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiFileUploadDataSourceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiFileUploadDataSourceMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] The original file name
+    attr_reader :original_file_name
+    # @return [String] The size of the file in bytes
+    attr_reader :size_in_bytes
+    # @return [String] The object key the file was stored as
+    attr_reader :stored_object_key
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

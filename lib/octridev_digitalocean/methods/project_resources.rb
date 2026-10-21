@@ -21,7 +21,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('project_id', project_id)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -31,20 +30,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/projects/",
+            '/v2/projects/',
             SdkClient.encode_path_segment(project_id),
-            "/resources"
+            '/resources'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ResourcesList,
           decoder: :json,
           operation_id: 'projects_list_resources',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -60,25 +59,24 @@ module OctridevDigitalocean
         resources: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('project_id', project_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/projects/",
+            '/v2/projects/',
             SdkClient.encode_path_segment(project_id),
-            "/resources"
+            '/resources'
           ].join,
           config: config,
           body: {
-            'resources' => resources,
+            'resources' => resources
           },
           return_type: ::OctridevDigitalocean::AssignedResourcesList,
           decoder: :json,
           operation_id: 'projects_assign_resources',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -87,16 +85,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/projects/default/resources",
+          '/v2/projects/default/resources',
           config: config,
           return_type: ::OctridevDigitalocean::ResourcesList,
           decoder: :json,
           operation_id: 'projects_list_resources_default',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -110,19 +107,18 @@ module OctridevDigitalocean
         resources: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/projects/default/resources",
+          '/v2/projects/default/resources',
           config: config,
           body: {
-            'resources' => resources,
+            'resources' => resources
           },
           return_type: ::OctridevDigitalocean::AssignedResourcesList,
           decoder: :json,
           operation_id: 'projects_assign_resources_default',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

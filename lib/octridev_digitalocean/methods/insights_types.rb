@@ -12,15 +12,14 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalInsightsPostPromQueryMetadata
         FIELDS = {
-          query: "query",
-          time: "time",
-          timeout: "timeout",
+          query: 'query',
+          time: 'time',
+          timeout: 'timeout'
         }.freeze
         REQUIRED_FIELDS = %i[
           query
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for InsightsPostPromQuery.
@@ -54,11 +53,11 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalInsightsPostPromQueryRangeMetadata
         FIELDS = {
-          query: "query",
-          start: "start",
-          end_: "end",
-          step: "step",
-          timeout: "timeout",
+          query: 'query',
+          start: 'start',
+          end_: 'end',
+          step: 'step',
+          timeout: 'timeout'
         }.freeze
         REQUIRED_FIELDS = %i[
           query
@@ -66,8 +65,7 @@ module OctridevDigitalocean
           end_
           step
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for InsightsPostPromQueryRange.
@@ -105,14 +103,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalInsightsPostPromLabelsMetadata
         FIELDS = {
-          start: "start",
-          end_: "end",
-          match: "match[]",
+          start: 'start',
+          end_: 'end',
+          match: 'match[]'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for InsightsPostPromLabels.
@@ -146,15 +142,14 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalInsightsPostPromSeriesMetadata
         FIELDS = {
-          match: "match[]",
-          start: "start",
-          end_: "end",
+          match: 'match[]',
+          start: 'start',
+          end_: 'end'
         }.freeze
         REQUIRED_FIELDS = %i[
           match
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for InsightsPostPromSeries.

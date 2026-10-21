@@ -24,21 +24,20 @@ module OctridevDigitalocean
         has_ground_truth: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/gen-ai/evaluation_datasets",
+          '/v2/gen-ai/evaluation_datasets',
           config: config,
           query: {
             'dataset_type' => QueryValue.new(dataset_type, style: 'form', explode: true),
             'dataset_paradigm' => QueryValue.new(dataset_paradigm, style: 'form', explode: true),
-            'has_ground_truth' => QueryValue.new(has_ground_truth, style: 'form', explode: true),
+            'has_ground_truth' => QueryValue.new(has_ground_truth, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ApiListEvaluationDatasetsOutput,
           decoder: :json,
           operation_id: 'genai_list_evaluation_datasets',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

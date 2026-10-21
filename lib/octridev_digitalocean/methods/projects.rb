@@ -12,10 +12,10 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalProjectsCreateMetadata
         FIELDS = {
-          name: "name",
-          description: "description",
-          purpose: "purpose",
-          environment: "environment",
+          name: 'name',
+          description: 'description',
+          purpose: 'purpose',
+          environment: 'environment'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -24,7 +24,7 @@ module OctridevDigitalocean
         DECODERS = {
           environment: lambda do |value|
             ::OctridevDigitalocean::Methods::Projects::ProjectsCreateEnvironment.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -61,11 +61,11 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalProjectsUpdateDefaultMetadata
         FIELDS = {
-          name: "name",
-          description: "description",
-          purpose: "purpose",
-          environment: "environment",
-          is_default: "is_default",
+          name: 'name',
+          description: 'description',
+          purpose: 'purpose',
+          environment: 'environment',
+          is_default: 'is_default'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -77,7 +77,7 @@ module OctridevDigitalocean
         DECODERS = {
           environment: lambda do |value|
             ::OctridevDigitalocean::Methods::Projects::ProjectsUpdateDefaultEnvironment.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -116,11 +116,11 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalProjectsUpdateMetadata
         FIELDS = {
-          name: "name",
-          description: "description",
-          purpose: "purpose",
-          environment: "environment",
-          is_default: "is_default",
+          name: 'name',
+          description: 'description',
+          purpose: 'purpose',
+          environment: 'environment',
+          is_default: 'is_default'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -132,7 +132,7 @@ module OctridevDigitalocean
         DECODERS = {
           environment: lambda do |value|
             ::OctridevDigitalocean::Methods::Projects::ProjectsUpdateEnvironment.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -173,7 +173,7 @@ module OctridevDigitalocean
         DEVELOPMENT = 'Development'
         STAGING = 'Staging'
         PRODUCTION = 'Production'
-        VALUES = ['Development', 'Staging', 'Production'].freeze
+        VALUES = %w[Development Staging Production].freeze
         def self.from_value(value)
           value
         end
@@ -184,7 +184,7 @@ module OctridevDigitalocean
         DEVELOPMENT = 'Development'
         STAGING = 'Staging'
         PRODUCTION = 'Production'
-        VALUES = ['Development', 'Staging', 'Production'].freeze
+        VALUES = %w[Development Staging Production].freeze
         def self.from_value(value)
           value
         end
@@ -195,7 +195,7 @@ module OctridevDigitalocean
         DEVELOPMENT = 'Development'
         STAGING = 'Staging'
         PRODUCTION = 'Production'
-        VALUES = ['Development', 'Staging', 'Production'].freeze
+        VALUES = %w[Development Staging Production].freeze
         def self.from_value(value)
           value
         end
@@ -211,24 +211,23 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/projects",
+          '/v2/projects',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ProjectsList,
           decoder: :json,
           operation_id: 'projects_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -255,7 +254,6 @@ module OctridevDigitalocean
         environment: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_length('name', name, max: 175)
 
         Validation.validate_length('purpose', purpose, max: 255)
@@ -264,19 +262,19 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          "/v2/projects",
+          '/v2/projects',
           config: config,
           body: {
             'name' => name,
             'purpose' => purpose,
             'description' => description,
-            'environment' => environment,
+            'environment' => environment
           },
           return_type: ::OctridevDigitalocean::ExistingProject,
           decoder: :json,
           operation_id: 'projects_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -285,16 +283,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/projects/default",
+          '/v2/projects/default',
           config: config,
           return_type: ::OctridevDigitalocean::DefaultProject,
           decoder: :json,
           operation_id: 'projects_get_default',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -324,7 +321,6 @@ module OctridevDigitalocean
         is_default:,
         request_options: nil
       )
-
         Validation.validate_length('name', name, max: 175)
 
         Validation.validate_length('description', description, max: 255)
@@ -333,20 +329,20 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'PUT',
-          "/v2/projects/default",
+          '/v2/projects/default',
           config: config,
           body: {
             'name' => name,
             'description' => description,
             'purpose' => purpose,
             'environment' => environment,
-            'is_default' => is_default,
+            'is_default' => is_default
           },
           return_type: ::OctridevDigitalocean::ExistingProject,
           decoder: :json,
           operation_id: 'projects_update_default',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -356,17 +352,16 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'PATCH',
-          "/v2/projects/default",
+          '/v2/projects/default',
           config: config,
           body: body,
           return_type: ::OctridevDigitalocean::ExistingProject,
           decoder: :json,
           operation_id: 'projects_patch_default',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -378,13 +373,12 @@ module OctridevDigitalocean
         project_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('project_id', project_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/projects/",
+            '/v2/projects/',
             SdkClient.encode_path_segment(project_id)
           ].join,
           config: config,
@@ -392,7 +386,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'projects_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -424,7 +418,6 @@ module OctridevDigitalocean
         is_default:,
         request_options: nil
       )
-
         Validation.validate_uuid('project_id', project_id)
 
         Validation.validate_length('name', name, max: 175)
@@ -436,7 +429,7 @@ module OctridevDigitalocean
         SdkClient.request(
           'PUT',
           [
-            "/v2/projects/",
+            '/v2/projects/',
             SdkClient.encode_path_segment(project_id)
           ].join,
           config: config,
@@ -445,13 +438,13 @@ module OctridevDigitalocean
             'description' => description,
             'purpose' => purpose,
             'environment' => environment,
-            'is_default' => is_default,
+            'is_default' => is_default
           },
           return_type: ::OctridevDigitalocean::ExistingProject,
           decoder: :json,
           operation_id: 'projects_update',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -464,13 +457,12 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         Validation.validate_uuid('project_id', project_id)
 
         SdkClient.request(
           'PATCH',
           [
-            "/v2/projects/",
+            '/v2/projects/',
             SdkClient.encode_path_segment(project_id)
           ].join,
           config: config,
@@ -479,7 +471,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'projects_patch',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -491,20 +483,19 @@ module OctridevDigitalocean
         project_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('project_id', project_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/projects/",
+            '/v2/projects/',
             SdkClient.encode_path_segment(project_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'projects_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '412' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

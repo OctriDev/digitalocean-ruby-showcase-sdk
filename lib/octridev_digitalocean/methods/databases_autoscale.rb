@@ -18,22 +18,21 @@ module OctridevDigitalocean
         database_cluster_uuid:,
         request_options: nil
       )
-
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/databases/",
+            '/v2/databases/',
             SdkClient.encode_path_segment(database_cluster_uuid),
-            "/autoscale"
+            '/autoscale'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::Autoscale,
           decoder: :json,
           operation_id: 'databases_get_autoscale',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -51,24 +50,23 @@ module OctridevDigitalocean
         storage: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
 
         SdkClient.request(
           'PUT',
           [
-            "/v2/databases/",
+            '/v2/databases/',
             SdkClient.encode_path_segment(database_cluster_uuid),
-            "/autoscale"
+            '/autoscale'
           ].join,
           config: config,
           body: {
-            'storage' => storage,
+            'storage' => storage
           },
           decoder: :empty,
           operation_id: 'databases_update_autoscale',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

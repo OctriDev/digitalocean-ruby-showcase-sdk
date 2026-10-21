@@ -5,460 +5,450 @@
 
 # vp_cs domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAllVpcsMetadata
-  FIELDS = {
-    vpcs: "vpcs",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    vpcs: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::Vpc.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AllVpcs.
-# Typed representation of the `AllVpcs` API schema.
-class AllVpcs
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAllVpcsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAllVpcsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAllVpcsMetadata::DECODERS
-
-  attr_reader :vpcs
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAllVpcsMetadata
+    FIELDS = {
+      vpcs: 'vpcs',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      vpcs: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::Vpc.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AllVpcs.
+  # Typed representation of the `AllVpcs` API schema.
+  class AllVpcs
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAllVpcsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAllVpcsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAllVpcsMetadata::DECODERS
+
+    attr_reader :vpcs
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalExistingVpcMetadata
-  FIELDS = {
-    vpc: "vpc",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    vpc: lambda do |value|
-      ::OctridevDigitalocean::Vpc.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ExistingVpc.
-# Typed representation of the `ExistingVpc` API schema.
-class ExistingVpc
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalExistingVpcMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalExistingVpcMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalExistingVpcMetadata::DECODERS
-
-  # @return [Vpc] Optional object value serialized in the `vpc` wire field.
-  attr_reader :vpc
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalExistingVpcMetadata
+    FIELDS = {
+      vpc: 'vpc'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      vpc: lambda do |value|
+        ::OctridevDigitalocean::Vpc.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ExistingVpc.
+  # Typed representation of the `ExistingVpc` API schema.
+  class ExistingVpc
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalExistingVpcMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalExistingVpcMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalExistingVpcMetadata::DECODERS
+
+    # @return [Vpc] Optional object value serialized in the `vpc` wire field.
+    attr_reader :vpc
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the Urn2 SDK value decoder.
-module Urn2
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVpcMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-    region: "region",
-    ip_range: "ip_range",
-    default: "default",
-    id: "id",
-    urn: "urn",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    urn: lambda do |value|
-      ::OctridevDigitalocean::Urn2.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for Vpc.
-# Typed representation of the `Vpc` API schema.
-class Vpc
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVpcMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVpcMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVpcMetadata::DECODERS
-
-  # @return [String] The name of the VPC. Must be unique and may only contain alphanumeric characters, dashes, and periods.
-  attr_reader :name
-  # @return [String] A free-form text field for describing the VPC's purpose. It may be a maximum of 255 characters.
-  attr_reader :description
-  # @return [String] The slug identifier for the region where the VPC will be created.
-  attr_reader :region
-  # @return [String] The range of IP addresses in the VPC in CIDR notation. Network ranges cannot overlap with other networks in the same account and must be in range of private addresses as defined in RFC1918. It may not be smaller than `/28` nor larger than `/16`. If no IP range is specified, a `/20` network range is generated that won't conflict with other VPC networks in your account.
-  attr_reader :ip_range
-  # @return [Boolean] A boolean value indicating whether or not the VPC is the default network for the region. All applicable resources are placed into the default VPC network unless otherwise specified during their creation. The `default` field cannot be unset from `true`. If you want to set a new default VPC network, update the `default` field of another VPC network in the same region. The previous network's `default` field will be set to `false` when a new default VPC has been defined.
-  attr_reader :default
-  # @return [String] A unique ID that can be used to identify and reference the VPC.
-  attr_reader :id
-  # @return [Urn2] The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
-  attr_reader :urn
-  # @return [String] A time value given in ISO8601 combined date and time format.
-  attr_reader :created_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the Urn2 SDK value decoder.
+  module Urn2
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVpcMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description',
+      region: 'region',
+      ip_range: 'ip_range',
+      default: 'default',
+      id: 'id',
+      urn: 'urn',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      urn: lambda do |value|
+        ::OctridevDigitalocean::Urn2.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for Vpc.
+  # Typed representation of the `Vpc` API schema.
+  class Vpc
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVpcMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVpcMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVpcMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalVpcBaseMetadata
-  FIELDS = {
-    id: "id",
-    urn: "urn",
-    created_at: "created_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    urn: lambda do |value|
-      ::OctridevDigitalocean::Urn2.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [String] The name of the VPC. Must be unique and may only contain alphanumeric characters, dashes, and periods.
+    attr_reader :name
+    # @return [String] A free-form text field for describing the VPC's purpose. It may be a maximum of 255 characters.
+    attr_reader :description
+    # @return [String] The slug identifier for the region where the VPC will be created.
+    attr_reader :region
+    # @return [String] The range of IP addresses in the VPC in CIDR notation. Network ranges cannot overlap with other networks in the same account and must be in range of private addresses as defined in RFC1918. It may not be smaller than `/28` nor larger than `/16`. If no IP range is specified, a `/20` network range is generated that won't conflict with other VPC networks in your account.
+    attr_reader :ip_range
+    # @return [Boolean] A boolean value indicating whether or not the VPC is the default network for the region. All applicable resources are placed into the default VPC network unless otherwise specified during their creation. The `default` field cannot be unset from `true`. If you want to set a new default VPC network, update the `default` field of another VPC network in the same region. The previous network's `default` field will be set to `false` when a new default VPC has been defined.
+    attr_reader :default
+    # @return [String] A unique ID that can be used to identify and reference the VPC.
+    attr_reader :id
+    # @return [Urn2] The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
+    attr_reader :urn
+    # @return [String] A time value given in ISO8601 combined date and time format.
+    attr_reader :created_at
 
-# API model for VpcBase.
-# Typed representation of the `VpcBase` API schema.
-class VpcBase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVpcBaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVpcBaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVpcBaseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] A unique ID that can be used to identify and reference the VPC.
-  attr_reader :id
-  # @return [Urn2] The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
-  attr_reader :urn
-  # @return [String] A time value given in ISO8601 combined date and time format.
-  attr_reader :created_at
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVpcBaseMetadata
+    FIELDS = {
+      id: 'id',
+      urn: 'urn',
+      created_at: 'created_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      urn: lambda do |value|
+        ::OctridevDigitalocean::Urn2.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for VpcBase.
+  # Typed representation of the `VpcBase` API schema.
+  class VpcBase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVpcBaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVpcBaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVpcBaseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalVpcCreateMetadata
-  FIELDS = {
-    region: "region",
-    ip_range: "ip_range",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] A unique ID that can be used to identify and reference the VPC.
+    attr_reader :id
+    # @return [Urn2] The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
+    attr_reader :urn
+    # @return [String] A time value given in ISO8601 combined date and time format.
+    attr_reader :created_at
 
-# API model for VpcCreate.
-# Typed representation of the `VpcCreate` API schema.
-class VpcCreate
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVpcCreateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVpcCreateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVpcCreateMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The slug identifier for the region where the VPC will be created.
-  attr_reader :region
-  # @return [String] The range of IP addresses in the VPC in CIDR notation. Network ranges cannot overlap with other networks in the same account and must be in range of private addresses as defined in RFC1918. It may not be smaller than `/28` nor larger than `/16`. If no IP range is specified, a `/20` network range is generated that won't conflict with other VPC networks in your account.
-  attr_reader :ip_range
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVpcCreateMetadata
+    FIELDS = {
+      region: 'region',
+      ip_range: 'ip_range'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for VpcCreate.
+  # Typed representation of the `VpcCreate` API schema.
+  class VpcCreate
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVpcCreateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVpcCreateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVpcCreateMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalVpcDefaultMetadata
-  FIELDS = {
-    default: "default",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] The slug identifier for the region where the VPC will be created.
+    attr_reader :region
+    # @return [String] The range of IP addresses in the VPC in CIDR notation. Network ranges cannot overlap with other networks in the same account and must be in range of private addresses as defined in RFC1918. It may not be smaller than `/28` nor larger than `/16`. If no IP range is specified, a `/20` network range is generated that won't conflict with other VPC networks in your account.
+    attr_reader :ip_range
 
-# API model for VpcDefault.
-# Typed representation of the `VpcDefault` API schema.
-class VpcDefault
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVpcDefaultMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVpcDefaultMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVpcDefaultMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Boolean] A boolean value indicating whether or not the VPC is the default network for the region. All applicable resources are placed into the default VPC network unless otherwise specified during their creation. The `default` field cannot be unset from `true`. If you want to set a new default VPC network, update the `default` field of another VPC network in the same region. The previous network's `default` field will be set to `false` when a new default VPC has been defined.
-  attr_reader :default
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVpcDefaultMetadata
+    FIELDS = {
+      default: 'default'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for VpcDefault.
+  # Typed representation of the `VpcDefault` API schema.
+  class VpcDefault
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVpcDefaultMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVpcDefaultMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVpcDefaultMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalVpcMembersMetadata
-  FIELDS = {
-    members: "members",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    members: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::VpcMember.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [Boolean] A boolean value indicating whether or not the VPC is the default network for the region. All applicable resources are placed into the default VPC network unless otherwise specified during their creation. The `default` field cannot be unset from `true`. If you want to set a new default VPC network, update the `default` field of another VPC network in the same region. The previous network's `default` field will be set to `false` when a new default VPC has been defined.
+    attr_reader :default
 
-# API model for VpcMembers.
-# Typed representation of the `VpcMembers` API schema.
-class VpcMembers
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVpcMembersMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVpcMembersMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVpcMembersMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  attr_reader :members
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVpcMembersMetadata
+    FIELDS = {
+      members: 'members',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      members: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::VpcMember.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for VpcMembers.
+  # Typed representation of the `VpcMembers` API schema.
+  class VpcMembers
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVpcMembersMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVpcMembersMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVpcMembersMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalVpcPeeringResponseMetadata
-  FIELDS = {
-    peering: "peering",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    peering: lambda do |value|
-      ::OctridevDigitalocean::VpcPeering.from_hash(value)
-    end,
-  }.freeze
-end
+    attr_reader :members
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
 
-# API model for VpcPeeringResponse.
-# Typed representation of the `VpcPeeringResponse` API schema.
-class VpcPeeringResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVpcPeeringResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVpcPeeringResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVpcPeeringResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [VpcPeering] Optional object value serialized in the `peering` wire field.
-  attr_reader :peering
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVpcPeeringResponseMetadata
+    FIELDS = {
+      peering: 'peering'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      peering: lambda do |value|
+        ::OctridevDigitalocean::VpcPeering.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for VpcPeeringResponse.
+  # Typed representation of the `VpcPeeringResponse` API schema.
+  class VpcPeeringResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVpcPeeringResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVpcPeeringResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVpcPeeringResponseMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalVpcPeeringsMetadata
-  FIELDS = {
-    peerings: "peerings",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    peerings: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::VpcPeering.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [VpcPeering] Optional object value serialized in the `peering` wire field.
+    attr_reader :peering
 
-# API model for VpcPeerings.
-# Typed representation of the `VpcPeerings` API schema.
-class VpcPeerings
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVpcPeeringsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVpcPeeringsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVpcPeeringsMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  attr_reader :peerings
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVpcPeeringsMetadata
+    FIELDS = {
+      peerings: 'peerings',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      peerings: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::VpcPeering.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for VpcPeerings.
+  # Typed representation of the `VpcPeerings` API schema.
+  class VpcPeerings
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVpcPeeringsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVpcPeeringsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVpcPeeringsMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalVpcUpdatableMetadata
-  FIELDS = {
-    name: "name",
-    description: "description",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    attr_reader :peerings
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
 
-# API model for VpcUpdatable.
-# Typed representation of the `VpcUpdatable` API schema.
-class VpcUpdatable
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVpcUpdatableMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVpcUpdatableMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVpcUpdatableMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The name of the VPC. Must be unique and may only contain alphanumeric characters, dashes, and periods.
-  attr_reader :name
-  # @return [String] A free-form text field for describing the VPC's purpose. It may be a maximum of 255 characters.
-  attr_reader :description
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVpcUpdatableMetadata
+    FIELDS = {
+      name: 'name',
+      description: 'description'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for VpcUpdatable.
+  # Typed representation of the `VpcUpdatable` API schema.
+  class VpcUpdatable
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVpcUpdatableMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVpcUpdatableMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVpcUpdatableMetadata::DECODERS
+
+    # @return [String] The name of the VPC. Must be unique and may only contain alphanumeric characters, dashes, and periods.
+    attr_reader :name
+    # @return [String] A free-form text field for describing the VPC's purpose. It may be a maximum of 255 characters.
+    attr_reader :description
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

@@ -25,22 +25,21 @@ module OctridevDigitalocean
         test_case_uuid: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/evaluation_runs",
+          '/v2/gen-ai/evaluation_runs',
           config: config,
           body: {
             'agent_deployment_names' => agent_deployment_names,
             'agent_uuids' => agent_uuids,
             'run_name' => run_name,
-            'test_case_uuid' => test_case_uuid,
+            'test_case_uuid' => test_case_uuid
           },
           return_type: ::OctridevDigitalocean::ApiRunEvaluationTestCaseOutput,
           decoder: :json,
           operation_id: 'genai_run_evaluation_test_case',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

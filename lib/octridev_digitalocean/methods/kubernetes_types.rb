@@ -12,12 +12,10 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalKubernetesUpgradeClusterMetadata
         FIELDS = {
-          version: "version",
+          version: 'version'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for KubernetesUpgradeCluster.
@@ -47,12 +45,10 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalKubernetesRecycleNodePoolMetadata
         FIELDS = {
-          nodes: "nodes",
+          nodes: 'nodes'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for KubernetesRecycleNodePool.

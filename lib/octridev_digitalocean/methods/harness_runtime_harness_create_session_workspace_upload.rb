@@ -30,18 +30,17 @@ module OctridevDigitalocean
         x_content_sha256: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/upload"
+            '/workspace/upload'
           ].join,
           config: config,
           query: {
             'path' => QueryValue.new(path, style: 'form', explode: true),
-            'is_archive' => QueryValue.new(is_archive, style: 'form', explode: true),
+            'is_archive' => QueryValue.new(is_archive, style: 'form', explode: true)
           },
           body: body,
           content_type: 'application/octet-stream',
@@ -49,10 +48,10 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_create_session_workspace_upload',
           extra_headers: SdkClient.serialize_headers({
-            'X-Content-Sha256' => SdkClient.header_value(x_content_sha256),
-          }),
+                                                       'X-Content-Sha256' => SdkClient.header_value(x_content_sha256)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

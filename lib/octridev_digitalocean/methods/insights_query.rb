@@ -27,25 +27,24 @@ module OctridevDigitalocean
         timeout: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/query"
+            '/prom/api/v1/query'
           ].join,
           config: config,
           query: {
             'query' => QueryValue.new(query, style: 'form', explode: true),
             'time' => QueryValue.new(time, style: 'form', explode: true),
-            'timeout' => QueryValue.new(timeout, style: 'form', explode: true),
+            'timeout' => QueryValue.new(timeout, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::PromQueryResponse,
           decoder: :json,
           operation_id: 'insights_get_prom_query',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -63,26 +62,25 @@ module OctridevDigitalocean
         timeout: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/query"
+            '/prom/api/v1/query'
           ].join,
           config: config,
           body: {
             'query' => query,
             'time' => time,
-            'timeout' => timeout,
+            'timeout' => timeout
           },
           content_type: 'application/x-www-form-urlencoded',
           return_type: ::OctridevDigitalocean::PromQueryResponse,
           decoder: :json,
           operation_id: 'insights_post_prom_query',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -110,13 +108,12 @@ module OctridevDigitalocean
         timeout: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/query_range"
+            '/prom/api/v1/query_range'
           ].join,
           config: config,
           query: {
@@ -124,13 +121,13 @@ module OctridevDigitalocean
             'start' => QueryValue.new(start, style: 'form', explode: true),
             'end' => QueryValue.new(end_, style: 'form', explode: true),
             'step' => QueryValue.new(step, style: 'form', explode: true),
-            'timeout' => QueryValue.new(timeout, style: 'form', explode: true),
+            'timeout' => QueryValue.new(timeout, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::PromQueryRangeResponse,
           decoder: :json,
           operation_id: 'insights_get_prom_query_range',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -152,13 +149,12 @@ module OctridevDigitalocean
         timeout: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/query_range"
+            '/prom/api/v1/query_range'
           ].join,
           config: config,
           body: {
@@ -166,14 +162,14 @@ module OctridevDigitalocean
             'start' => start,
             'end' => end_,
             'step' => step,
-            'timeout' => timeout,
+            'timeout' => timeout
           },
           content_type: 'application/x-www-form-urlencoded',
           return_type: ::OctridevDigitalocean::PromQueryRangeResponse,
           decoder: :json,
           operation_id: 'insights_post_prom_query_range',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -194,25 +190,24 @@ module OctridevDigitalocean
         match: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/labels"
+            '/prom/api/v1/labels'
           ].join,
           config: config,
           query: {
             'start' => QueryValue.new(start, style: 'form', explode: true),
             'end' => QueryValue.new(end_, style: 'form', explode: true),
-            'match[]' => QueryValue.new(match, style: 'form', explode: true),
+            'match[]' => QueryValue.new(match, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::PromStringListResponse,
           decoder: :json,
           operation_id: 'insights_get_prom_labels',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -230,26 +225,25 @@ module OctridevDigitalocean
         match: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/labels"
+            '/prom/api/v1/labels'
           ].join,
           config: config,
           body: {
             'start' => start,
             'end' => end_,
-            'match[]' => match,
+            'match[]' => match
           },
           content_type: 'application/x-www-form-urlencoded',
           return_type: ::OctridevDigitalocean::PromStringListResponse,
           decoder: :json,
           operation_id: 'insights_post_prom_labels',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -272,27 +266,26 @@ module OctridevDigitalocean
         match: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/label/",
+            '/prom/api/v1/label/',
             SdkClient.encode_path_segment(name),
-            "/values"
+            '/values'
           ].join,
           config: config,
           query: {
             'start' => QueryValue.new(start, style: 'form', explode: true),
             'end' => QueryValue.new(end_, style: 'form', explode: true),
-            'match[]' => QueryValue.new(match, style: 'form', explode: true),
+            'match[]' => QueryValue.new(match, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::PromStringListResponse,
           decoder: :json,
           operation_id: 'insights_get_prom_label_values',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -313,25 +306,24 @@ module OctridevDigitalocean
         end_: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/series"
+            '/prom/api/v1/series'
           ].join,
           config: config,
           query: {
             'match[]' => QueryValue.new(match, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::PromSeriesResponse,
           decoder: :json,
           operation_id: 'insights_get_prom_series',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -349,26 +341,25 @@ module OctridevDigitalocean
         end_: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/prom/api/v1/series"
+            '/prom/api/v1/series'
           ].join,
           config: config,
           body: {
             'match[]' => match,
             'start' => start,
-            'end' => end_,
+            'end' => end_
           },
           content_type: 'application/x-www-form-urlencoded',
           return_type: ::OctridevDigitalocean::PromSeriesResponse,
           decoder: :json,
           operation_id: 'insights_post_prom_series',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::PromError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::PromError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::PromError, '503' => ::OctridevDigitalocean::PromError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -391,26 +382,25 @@ module OctridevDigitalocean
         pagination: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/logs/search"
+            '/logs/search'
           ].join,
           config: config,
           body: {
             'time_range' => time_range,
             'filter' => filter,
             'order_by' => order_by,
-            'pagination' => pagination,
+            'pagination' => pagination
           },
           return_type: ::OctridevDigitalocean::LogsSearchResponse,
           decoder: :json,
           operation_id: 'insights_post_logs_search',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -442,26 +432,25 @@ module OctridevDigitalocean
         pagination: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/traces/search"
+            '/traces/search'
           ].join,
           config: config,
           body: {
             'timeRange' => time_range,
             'filter' => filter,
             'orderBy' => order_by,
-            'pagination' => pagination,
+            'pagination' => pagination
           },
           return_type: ::OctridevDigitalocean::TracesSearchResponse,
           decoder: :json,
           operation_id: 'insights_post_traces_search',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -486,25 +475,24 @@ module OctridevDigitalocean
         to: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/traces/",
+            '/traces/',
             SdkClient.encode_path_segment(trace_id)
           ].join,
           config: config,
           query: {
             'from' => QueryValue.new(from, style: 'form', explode: true),
-            'to' => QueryValue.new(to, style: 'form', explode: true),
+            'to' => QueryValue.new(to, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::TracesTraceResponse,
           decoder: :json,
           operation_id: 'insights_get_trace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -530,26 +518,25 @@ module OctridevDigitalocean
         pagination: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/insights/query/",
+            '/v2/insights/query/',
             SdkClient.encode_path_segment(region),
-            "/spans/search"
+            '/spans/search'
           ].join,
           config: config,
           body: {
             'timeRange' => time_range,
             'filter' => filter,
             'orderBy' => order_by,
-            'pagination' => pagination,
+            'pagination' => pagination
           },
           return_type: ::OctridevDigitalocean::SpansSearchResponse,
           decoder: :json,
           operation_id: 'insights_post_spans_search',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

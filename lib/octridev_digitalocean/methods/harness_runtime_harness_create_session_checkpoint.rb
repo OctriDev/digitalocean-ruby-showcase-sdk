@@ -20,23 +20,22 @@ module OctridevDigitalocean
         label: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/checkpoints"
+            '/checkpoints'
           ].join,
           config: config,
           body: {
-            'label' => label,
+            'label' => label
           },
           return_type: ::OctridevDigitalocean::CreateCheckpointResponse,
           decoder: :json,
           operation_id: 'harness_create_session_checkpoint',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

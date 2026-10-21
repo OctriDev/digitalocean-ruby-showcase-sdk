@@ -26,27 +26,26 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/images",
+          '/v2/images',
           config: config,
           query: {
             'type' => QueryValue.new(type, style: 'form', explode: true),
             'private' => QueryValue.new(private, style: 'form', explode: true),
             'tag_name' => QueryValue.new(tag_name, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllImages,
           decoder: :json,
           operation_id: 'images_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -56,17 +55,16 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/images",
+          '/v2/images',
           config: config,
           body: body,
           return_type: ::OctridevDigitalocean::NewCustomImage,
           decoder: :json,
           operation_id: 'images_create_custom',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -81,11 +79,10 @@ module OctridevDigitalocean
         image_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/images/",
+            '/v2/images/',
             SdkClient.encode_path_segment(image_id)
           ].join,
           config: config,
@@ -93,7 +90,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'images_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -119,24 +116,23 @@ module OctridevDigitalocean
         description: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/images/",
+            '/v2/images/',
             SdkClient.encode_path_segment(image_id)
           ].join,
           config: config,
           body: {
             'name' => name,
             'distribution' => distribution,
-            'description' => description,
+            'description' => description
           },
           return_type: ::OctridevDigitalocean::UpdatedImage,
           decoder: :json,
           operation_id: 'images_update',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -149,18 +145,17 @@ module OctridevDigitalocean
         image_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/images/",
+            '/v2/images/',
             SdkClient.encode_path_segment(image_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'images_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -176,13 +171,12 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/images/",
+            '/v2/images/',
             SdkClient.encode_path_segment(image_id),
-            "/account_transfer"
+            '/account_transfer'
           ].join,
           config: config,
           body: body,
@@ -190,7 +184,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'images_post_account_transfer_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -204,20 +198,19 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/images/",
+            '/v2/images/',
             SdkClient.encode_path_segment(image_id),
-            "/account_transfer/accept"
+            '/account_transfer/accept'
           ].join,
           config: config,
           body: body,
           decoder: :empty,
           operation_id: 'images_post_account_transfer_accept',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -233,22 +226,21 @@ module OctridevDigitalocean
         transfer_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/images/",
+            '/v2/images/',
             SdkClient.encode_path_segment(image_id),
-            "/account_transfer/cancel"
+            '/account_transfer/cancel'
           ].join,
           config: config,
           body: {
-            'transfer_id' => transfer_id,
+            'transfer_id' => transfer_id
           },
           decoder: :empty,
           operation_id: 'images_post_account_transfer_cancel',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -264,22 +256,21 @@ module OctridevDigitalocean
         transfer_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/images/",
+            '/v2/images/',
             SdkClient.encode_path_segment(image_id),
-            "/account_transfer/decline"
+            '/account_transfer/decline'
           ].join,
           config: config,
           body: {
-            'transfer_id' => transfer_id,
+            'transfer_id' => transfer_id
           },
           decoder: :empty,
           operation_id: 'images_post_account_transfer_decline',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

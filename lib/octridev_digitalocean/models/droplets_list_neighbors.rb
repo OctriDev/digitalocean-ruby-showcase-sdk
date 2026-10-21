@@ -5,173 +5,166 @@
 
 # droplets domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalNeighborDropletsMetadata
-  FIELDS = {
-    droplets: "droplets",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    droplets: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::Droplet.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for NeighborDroplets.
-# Typed representation of the `NeighborDroplets` API schema.
-class NeighborDroplets
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNeighborDropletsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNeighborDropletsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNeighborDropletsMetadata::DECODERS
-
-  attr_reader :droplets
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalNeighborDropletsMetadata
+    FIELDS = {
+      droplets: 'droplets'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      droplets: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::Droplet.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for NeighborDroplets.
+  # Typed representation of the `NeighborDroplets` API schema.
+  class NeighborDroplets
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNeighborDropletsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNeighborDropletsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNeighborDropletsMetadata::DECODERS
+
+    attr_reader :droplets
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalNeighborIdsMetadata
-  FIELDS = {
-    neighbor_ids: "neighbor_ids",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for NeighborIds.
-# Typed representation of the `NeighborIds` API schema.
-class NeighborIds
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNeighborIdsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNeighborIdsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNeighborIdsMetadata::DECODERS
-
-  # @return [Array_of_Array_of_Integer] An array of arrays. Each array will contain a set of Droplet IDs for Droplets that share a physical server.
-  attr_reader :neighbor_ids
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalNeighborIdsMetadata
+    FIELDS = {
+      neighbor_ids: 'neighbor_ids'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for NeighborIds.
+  # Typed representation of the `NeighborIds` API schema.
+  class NeighborIds
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNeighborIdsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNeighborIdsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNeighborIdsMetadata::DECODERS
+
+    # @return [Array_of_Array_of_Integer] An array of arrays. Each array will contain a set of Droplet IDs for Droplets that share a physical server.
+    attr_reader :neighbor_ids
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSelectiveDestroyAssociatedResourceMetadata
-  FIELDS = {
-    floating_ips: "floating_ips",
-    reserved_ips: "reserved_ips",
-    snapshots: "snapshots",
-    volumes: "volumes",
-    volume_snapshots: "volume_snapshots",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SelectiveDestroyAssociatedResource.
-# An object containing information about a resource to be scheduled for deletion.
-class SelectiveDestroyAssociatedResource
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSelectiveDestroyAssociatedResourceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSelectiveDestroyAssociatedResourceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSelectiveDestroyAssociatedResourceMetadata::DECODERS
-
-  # @return [Array_of_String] An array of unique identifiers for the floating IPs to be scheduled for deletion.
-  attr_reader :floating_ips
-  # @return [Array_of_String] An array of unique identifiers for the reserved IPs to be scheduled for deletion.
-  attr_reader :reserved_ips
-  # @return [Array_of_String] An array of unique identifiers for the snapshots to be scheduled for deletion.
-  attr_reader :snapshots
-  # @return [Array_of_String] An array of unique identifiers for the volumes to be scheduled for deletion.
-  attr_reader :volumes
-  # @return [Array_of_String] An array of unique identifiers for the volume snapshots to be scheduled for deletion.
-  attr_reader :volume_snapshots
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSelectiveDestroyAssociatedResourceMetadata
+    FIELDS = {
+      floating_ips: 'floating_ips',
+      reserved_ips: 'reserved_ips',
+      snapshots: 'snapshots',
+      volumes: 'volumes',
+      volume_snapshots: 'volume_snapshots'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for SelectiveDestroyAssociatedResource.
+  # An object containing information about a resource to be scheduled for deletion.
+  class SelectiveDestroyAssociatedResource
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSelectiveDestroyAssociatedResourceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSelectiveDestroyAssociatedResourceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSelectiveDestroyAssociatedResourceMetadata::DECODERS
+
+    # @return [Array_of_String] An array of unique identifiers for the floating IPs to be scheduled for deletion.
+    attr_reader :floating_ips
+    # @return [Array_of_String] An array of unique identifiers for the reserved IPs to be scheduled for deletion.
+    attr_reader :reserved_ips
+    # @return [Array_of_String] An array of unique identifiers for the snapshots to be scheduled for deletion.
+    attr_reader :snapshots
+    # @return [Array_of_String] An array of unique identifiers for the volumes to be scheduled for deletion.
+    attr_reader :volumes
+    # @return [Array_of_String] An array of unique identifiers for the volume snapshots to be scheduled for deletion.
+    attr_reader :volume_snapshots
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSupportedDropletBackupPolicyMetadata
-  FIELDS = {
-    name: "name",
-    possible_window_starts: "possible_window_starts",
-    window_length_hours: "window_length_hours",
-    retention_period_days: "retention_period_days",
-    possible_days: "possible_days",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SupportedDropletBackupPolicy.
-# Typed representation of the `SupportedDropletBackupPolicy` API schema.
-class SupportedDropletBackupPolicy
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSupportedDropletBackupPolicyMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSupportedDropletBackupPolicyMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSupportedDropletBackupPolicyMetadata::DECODERS
-
-  # @return [String] The name of the Droplet backup plan.
-  attr_reader :name
-  # @return [Array_of_Integer] An array of integers representing the hours of the day that a backup can start.
-  attr_reader :possible_window_starts
-  # @return [Integer] The number of hours that a backup window is open.
-  attr_reader :window_length_hours
-  # @return [Integer] The number of days that a backup will be kept.
-  attr_reader :retention_period_days
-  # @return [Array_of_String] The day of the week the backup will occur.
-  attr_reader :possible_days
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSupportedDropletBackupPolicyMetadata
+    FIELDS = {
+      name: 'name',
+      possible_window_starts: 'possible_window_starts',
+      window_length_hours: 'window_length_hours',
+      retention_period_days: 'retention_period_days',
+      possible_days: 'possible_days'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for SupportedDropletBackupPolicy.
+  # Typed representation of the `SupportedDropletBackupPolicy` API schema.
+  class SupportedDropletBackupPolicy
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSupportedDropletBackupPolicyMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSupportedDropletBackupPolicyMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSupportedDropletBackupPolicyMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    # @return [String] The name of the Droplet backup plan.
+    attr_reader :name
+    # @return [Array_of_Integer] An array of integers representing the hours of the day that a backup can start.
+    attr_reader :possible_window_starts
+    # @return [Integer] The number of hours that a backup window is open.
+    attr_reader :window_length_hours
+    # @return [Integer] The number of days that a backup will be kept.
+    attr_reader :retention_period_days
+    # @return [Array_of_String] The day of the week the backup will occur.
+    attr_reader :possible_days
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

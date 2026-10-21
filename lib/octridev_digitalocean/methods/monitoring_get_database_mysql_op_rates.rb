@@ -24,24 +24,23 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         Validation.validate_uuid('db_id', db_id)
 
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/database/mysql/op_rates",
+          '/v2/monitoring/metrics/database/mysql/op_rates',
           config: config,
           query: {
             'db_id' => QueryValue.new(db_id, style: 'form', explode: true),
             'metric' => QueryValue.new(metric, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_database_mysql_op_rates',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

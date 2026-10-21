@@ -17,22 +17,21 @@ module OctridevDigitalocean
         droplet_id:,
         request_options: nil
       )
-
         Validation.validate_range('droplet_id', droplet_id, min: 1)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/droplets/",
+            '/v2/droplets/',
             SdkClient.encode_path_segment(droplet_id),
-            "/neighbors"
+            '/neighbors'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::NeighborDroplets,
           decoder: :json,
           operation_id: 'droplets_list_neighbors',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

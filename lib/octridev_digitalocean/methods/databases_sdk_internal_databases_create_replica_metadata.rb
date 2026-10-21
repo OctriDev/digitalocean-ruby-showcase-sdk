@@ -12,15 +12,15 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesCreateReplicaMetadata
         FIELDS = {
-          name: "name",
-          region: "region",
-          size: "size",
-          tags: "tags",
-          private_network_uuid: "private_network_uuid",
-          connection: "connection",
-          private_connection: "private_connection",
-          storage_size_mib: "storage_size_mib",
-          do_settings: "do_settings",
+          name: 'name',
+          region: 'region',
+          size: 'size',
+          tags: 'tags',
+          private_network_uuid: 'private_network_uuid',
+          connection: 'connection',
+          private_connection: 'private_connection',
+          storage_size_mib: 'storage_size_mib',
+          do_settings: 'do_settings'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -35,7 +35,7 @@ module OctridevDigitalocean
           end,
           do_settings: lambda do |value|
             ::OctridevDigitalocean::DoSettings.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -79,10 +79,10 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesAddUserMetadata
         FIELDS = {
-          name: "name",
-          mysql_settings: "mysql_settings",
-          settings: "settings",
-          readonly: "readonly",
+          name: 'name',
+          mysql_settings: 'mysql_settings',
+          settings: 'settings',
+          readonly: 'readonly'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -93,7 +93,7 @@ module OctridevDigitalocean
           end,
           settings: lambda do |value|
             ::OctridevDigitalocean::UserSettings.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -127,14 +127,13 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesResetAuthMetadata
         FIELDS = {
-          mysql_settings: "mysql_settings",
+          mysql_settings: 'mysql_settings'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
+        REQUIRED_FIELDS = %i[].freeze
         DECODERS = {
           mysql_settings: lambda do |value|
             ::OctridevDigitalocean::MysqlSettings.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -164,7 +163,7 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesUpdateEvictionPolicyMetadata
         FIELDS = {
-          eviction_policy: "eviction_policy",
+          eviction_policy: 'eviction_policy'
         }.freeze
         REQUIRED_FIELDS = %i[
           eviction_policy
@@ -172,7 +171,7 @@ module OctridevDigitalocean
         DECODERS = {
           eviction_policy: lambda do |value|
             ::OctridevDigitalocean::EvictionPolicyModel.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -203,10 +202,10 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesCreateKafkaTopicMetadata
         FIELDS = {
-          name: "name",
-          replication_factor: "replication_factor",
-          partition_count: "partition_count",
-          config: "config",
+          name: 'name',
+          replication_factor: 'replication_factor',
+          partition_count: 'partition_count',
+          config: 'config'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -214,7 +213,7 @@ module OctridevDigitalocean
         DECODERS = {
           config: lambda do |value|
             ::OctridevDigitalocean::KafkaTopicConfig.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -250,9 +249,9 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesCreateLogsinkMetadata
         FIELDS = {
-          sink_name: "sink_name",
-          sink_type: "sink_type",
-          config: "config",
+          sink_name: 'sink_name',
+          sink_type: 'sink_type',
+          config: 'config'
         }.freeze
         REQUIRED_FIELDS = %i[
           sink_name
@@ -265,7 +264,7 @@ module OctridevDigitalocean
           end,
           config: lambda do |value|
             SdkModel.union_branch(value, [::OctridevDigitalocean::RsyslogLogsink, ::OctridevDigitalocean::ElasticsearchLogsink, ::OctridevDigitalocean::OpensearchLogsink, ::OctridevDigitalocean::DatadogLogsink])
-          end,
+          end
         }.freeze
       end
 
@@ -299,9 +298,9 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesCreateKafkaSchemaMetadata
         FIELDS = {
-          subject_name: "subject_name",
-          schema_type: "schema_type",
-          schema: "schema",
+          subject_name: 'subject_name',
+          schema_type: 'schema_type',
+          schema: 'schema'
         }.freeze
         REQUIRED_FIELDS = %i[
           subject_name
@@ -311,7 +310,7 @@ module OctridevDigitalocean
         DECODERS = {
           schema_type: lambda do |value|
             ::OctridevDigitalocean::Methods::Databases::DatabasesCreateKafkaSchemaSchemaType.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -346,7 +345,7 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesUpdateKafkaSchemaConfigMetadata
         FIELDS = {
-          compatibility_level: "compatibility_level",
+          compatibility_level: 'compatibility_level'
         }.freeze
         REQUIRED_FIELDS = %i[
           compatibility_level
@@ -354,7 +353,7 @@ module OctridevDigitalocean
         DECODERS = {
           compatibility_level: lambda do |value|
             ::OctridevDigitalocean::Methods::Databases::DatabasesUpdateKafkaSchemaConfigCompatibilityLevel.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -385,7 +384,7 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesUpdateKafkaSchemaSubjectConfigMetadata
         FIELDS = {
-          compatibility_level: "compatibility_level",
+          compatibility_level: 'compatibility_level'
         }.freeze
         REQUIRED_FIELDS = %i[
           compatibility_level
@@ -393,7 +392,7 @@ module OctridevDigitalocean
         DECODERS = {
           compatibility_level: lambda do |value|
             ::OctridevDigitalocean::Methods::Databases::DatabasesUpdateKafkaSchemaSubjectConfigCompatibilityLevel.from_value(value)
-          end,
+          end
         }.freeze
       end
 
@@ -427,7 +426,7 @@ module OctridevDigitalocean
         ELASTICSEARCH = 'elasticsearch'
         OPENSEARCH = 'opensearch'
         DATADOG = 'datadog'
-        VALUES = ['rsyslog', 'elasticsearch', 'opensearch', 'datadog'].freeze
+        VALUES = %w[rsyslog elasticsearch opensearch datadog].freeze
         def self.from_value(value)
           value
         end
@@ -442,9 +441,9 @@ module OctridevDigitalocean
         FORWARD_TRANSITIVE = 'FORWARD_TRANSITIVE'
         FULL = 'FULL'
         FULL_TRANSITIVE = 'FULL_TRANSITIVE'
-        VALUES = [
-          'NONE', 'BACKWARD', 'BACKWARD_TRANSITIVE', 'FORWARD', 'FORWARD_TRANSITIVE', 'FULL',
-          'FULL_TRANSITIVE'
+        VALUES = %w[
+          NONE BACKWARD BACKWARD_TRANSITIVE FORWARD FORWARD_TRANSITIVE FULL
+          FULL_TRANSITIVE
         ].freeze
         def self.from_value(value)
           value
@@ -460,9 +459,9 @@ module OctridevDigitalocean
         FORWARD_TRANSITIVE = 'FORWARD_TRANSITIVE'
         FULL = 'FULL'
         FULL_TRANSITIVE = 'FULL_TRANSITIVE'
-        VALUES = [
-          'NONE', 'BACKWARD', 'BACKWARD_TRANSITIVE', 'FORWARD', 'FORWARD_TRANSITIVE', 'FULL',
-          'FULL_TRANSITIVE'
+        VALUES = %w[
+          NONE BACKWARD BACKWARD_TRANSITIVE FORWARD FORWARD_TRANSITIVE FULL
+          FULL_TRANSITIVE
         ].freeze
         def self.from_value(value)
           value
@@ -474,7 +473,7 @@ module OctridevDigitalocean
         AVRO = 'AVRO'
         JSON = 'JSON'
         PROTOBUF = 'PROTOBUF'
-        VALUES = ['AVRO', 'JSON', 'PROTOBUF'].freeze
+        VALUES = %w[AVRO JSON PROTOBUF].freeze
         def self.from_value(value)
           value
         end

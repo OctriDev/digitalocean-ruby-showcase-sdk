@@ -5,640 +5,625 @@
 
 # harness_runtime domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalCronConfigMetadata
-  FIELDS = {
-    cron_expr: "cron_expr",
-    timezone: "timezone",
-    next_run_at: "next_run_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for CronConfig.
-# Present iff kind=cron.
-class CronConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalCronConfigMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalCronConfigMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalCronConfigMetadata::DECODERS
-
-  # @return [String] Cron expression; must parse with the scanner's cron library.
-  attr_reader :cron_expr
-  # @return [String] IANA timezone (e.g. "America/New_York").
-  attr_reader :timezone
-  # @return [String] Read-only; server-computed next fire time.
-  attr_reader :next_run_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalCronConfigMetadata
+    FIELDS = {
+      cron_expr: 'cron_expr',
+      timezone: 'timezone',
+      next_run_at: 'next_run_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for CronConfig.
+  # Present iff kind=cron.
+  class CronConfig
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalCronConfigMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalCronConfigMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalCronConfigMetadata::DECODERS
+
+    # @return [String] Cron expression; must parse with the scanner's cron library.
+    attr_reader :cron_expr
+    # @return [String] IANA timezone (e.g. "America/New_York").
+    attr_reader :timezone
+    # @return [String] Read-only; server-computed next fire time.
+    attr_reader :next_run_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the HitlOutcome SDK namespace.
-module HitlOutcome
-  HITL_OUTCOME_UNSPECIFIED = 'HITL_OUTCOME_UNSPECIFIED'
-  HITL_OUTCOME_APPROVE = 'HITL_OUTCOME_APPROVE'
-  HITL_OUTCOME_REJECT = 'HITL_OUTCOME_REJECT'
-  HITL_OUTCOME_DEFER = 'HITL_OUTCOME_DEFER'
-  VALUES = [
-    'HITL_OUTCOME_UNSPECIFIED', 'HITL_OUTCOME_APPROVE', 'HITL_OUTCOME_REJECT', 'HITL_OUTCOME_DEFER'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the IngressUrlState SDK namespace.
-module IngressUrlState
-  INGRESS_URL_STATE_PENDING = 'INGRESS_URL_STATE_PENDING'
-  INGRESS_URL_STATE_READY = 'INGRESS_URL_STATE_READY'
-  VALUES = ['INGRESS_URL_STATE_PENDING', 'INGRESS_URL_STATE_READY'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalInsightsOptInMetadata
-  FIELDS = {
-    metrics: "metrics",
-    logs: "logs",
-    traces: "traces",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for InsightsOptIn.
-# Per-signal DigitalOcean Insights telemetry opt-in, mirroring the Insights-owned schema insights.telemetry.opt_in. Each signal is independently optional and tri-state: omitted or null records that the customer expressed no choice and falls back to the product default, which is NOT equivalent to false.
-class InsightsOptIn
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalInsightsOptInMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalInsightsOptInMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalInsightsOptInMetadata::DECODERS
-
-  # @return [Boolean] Accepted and stored for parity with the Insights schema, but metrics are always collected: unregistered metrics are dropped at ingest rather than opted out of here.
-  attr_reader :metrics
-  # @return [Boolean] Whether the agent's logs are sent to Insights.
-  attr_reader :logs
-  # @return [Boolean] Whether the agent's traces are sent to Insights.
-  attr_reader :traces
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the HitlOutcome SDK namespace.
+  module HitlOutcome
+    HITL_OUTCOME_UNSPECIFIED = 'HITL_OUTCOME_UNSPECIFIED'
+    HITL_OUTCOME_APPROVE = 'HITL_OUTCOME_APPROVE'
+    HITL_OUTCOME_REJECT = 'HITL_OUTCOME_REJECT'
+    HITL_OUTCOME_DEFER = 'HITL_OUTCOME_DEFER'
+    VALUES = %w[
+      HITL_OUTCOME_UNSPECIFIED HITL_OUTCOME_APPROVE HITL_OUTCOME_REJECT HITL_OUTCOME_DEFER
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the IngressUrlState SDK namespace.
+  module IngressUrlState
+    INGRESS_URL_STATE_PENDING = 'INGRESS_URL_STATE_PENDING'
+    INGRESS_URL_STATE_READY = 'INGRESS_URL_STATE_READY'
+    VALUES = %w[INGRESS_URL_STATE_PENDING INGRESS_URL_STATE_READY].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalPatchSessionRequestMetadata
-  FIELDS = {
-    resume_on_topoff: "resume_on_topoff",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for PatchSessionRequest.
-# PATCH body for /v2/agents/sessions/{session_id}: an allowlisted subset of session-scoped settings (never environment-spec / config mutation). At least one property below must be present; {} is 400. Unknown top-level keys are rejected with 400. New patchable fields will be added here as optional properties over time.
-class PatchSessionRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPatchSessionRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPatchSessionRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPatchSessionRequestMetadata::DECODERS
-
-  # @return [Boolean] When present, sets whether this session opts in to automatic resumption when the team's prepayment balance is restored after a low-balance pause. Session-scoped consent, not config-scoped. Omitted properties are not modified.
-  attr_reader :resume_on_topoff
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalInsightsOptInMetadata
+    FIELDS = {
+      metrics: 'metrics',
+      logs: 'logs',
+      traces: 'traces'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for InsightsOptIn.
+  # Per-signal DigitalOcean Insights telemetry opt-in, mirroring the Insights-owned schema insights.telemetry.opt_in. Each signal is independently optional and tri-state: omitted or null records that the customer expressed no choice and falls back to the product default, which is NOT equivalent to false.
+  class InsightsOptIn
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalInsightsOptInMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalInsightsOptInMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalInsightsOptInMetadata::DECODERS
+
+    # @return [Boolean] Accepted and stored for parity with the Insights schema, but metrics are always collected: unregistered metrics are dropped at ingest rather than opted out of here.
+    attr_reader :metrics
+    # @return [Boolean] Whether the agent's logs are sent to Insights.
+    attr_reader :logs
+    # @return [Boolean] Whether the agent's traces are sent to Insights.
+    attr_reader :traces
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalPermissionsMetadata
-  FIELDS = {
-    default_action: "defaultAction",
-    rules: "rules",
-    filesystem: "filesystem",
-    network: "network",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    default_action: lambda do |value|
-      ::OctridevDigitalocean::PermissionsDefaultAction.from_value(value)
-    end,
-    rules: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::PermissionRule.from_hash(item) }
-    end,
-    filesystem: lambda do |value|
-      ::OctridevDigitalocean::PermissionFilesystem.from_hash(value)
-    end,
-    network: lambda do |value|
-      ::OctridevDigitalocean::PermissionNetwork.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Permissions.
-# Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the policy engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it against the (agent, version) capability descriptor. Absent or empty means the agent keeps its built-in default gating — no policy is shipped to the sandbox.
-class Permissions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPermissionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPermissionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPermissionsMetadata::DECODERS
-
-  # @return [PermissionsDefaultAction] Disposition for tool calls that match no rule. Defaults to "ask" when omitted.
-  attr_reader :default_action
-  # @return [Array_of_PermissionRule] Ordered match→action rules. Declared order is authoritative: the LAST matching rule wins (author-order last-match).
-  attr_reader :rules
-  # @return [PermissionFilesystem] Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots) for every agent.
-  attr_reader :filesystem
-  # @return [PermissionNetwork] Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses stay blocked by the broader egress policy.
-  attr_reader :network
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalPatchSessionRequestMetadata
+    FIELDS = {
+      resume_on_topoff: 'resume_on_topoff'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for PatchSessionRequest.
+  # PATCH body for /v2/agents/sessions/{session_id}: an allowlisted subset of session-scoped settings (never environment-spec / config mutation). At least one property below must be present; {} is 400. Unknown top-level keys are rejected with 400. New patchable fields will be added here as optional properties over time.
+  class PatchSessionRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPatchSessionRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPatchSessionRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPatchSessionRequestMetadata::DECODERS
+
+    # @return [Boolean] When present, sets whether this session opts in to automatic resumption when the team's prepayment balance is restored after a low-balance pause. Session-scoped consent, not config-scoped. Omitted properties are not modified.
+    attr_reader :resume_on_topoff
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the PermissionsDefaultAction SDK namespace.
-module PermissionsDefaultAction
-  ALLOW = 'allow'
-  ASK = 'ask'
-  DENY = 'deny'
-  VALUES = ['allow', 'ask', 'deny'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ResolutionSource SDK namespace.
-module ResolutionSource
-  RESOLUTION_SOURCE_UNSPECIFIED = 'RESOLUTION_SOURCE_UNSPECIFIED'
-  RESOLUTION_SOURCE_INLINE_KEYSTROKE = 'RESOLUTION_SOURCE_INLINE_KEYSTROKE'
-  RESOLUTION_SOURCE_OUT_OF_BAND = 'RESOLUTION_SOURCE_OUT_OF_BAND'
-  VALUES = [
-    'RESOLUTION_SOURCE_UNSPECIFIED', 'RESOLUTION_SOURCE_INLINE_KEYSTROKE',
-    'RESOLUTION_SOURCE_OUT_OF_BAND'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalResolvedRuleMetadata
-  FIELDS = {
-    id: "id",
-    tool: "tool",
-    match: "match",
-    action: "action",
-    enforcement: "enforcement",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    action: lambda do |value|
-      ::OctridevDigitalocean::ResolvedRuleAction.from_value(value)
-    end,
-    enforcement: lambda do |value|
-      ::OctridevDigitalocean::ResolvedRuleEnforcement.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ResolvedRule.
-# A rule after resolution (∩ tenant ∩ platform), carrying a stable id for audit correlation.
-class ResolvedRule
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalResolvedRuleMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalResolvedRuleMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalResolvedRuleMetadata::DECODERS
-
-  # @return [String] Stable rule id assigned during resolution; correlates with the PolicyDenied event's matched rule.
-  attr_reader :id
-  # @return [String] Optional `string` value serialized in the `tool` wire field.
-  attr_reader :tool
-  # @return [Hash] Optional object value serialized in the `match` wire field.
-  attr_reader :match
-  # @return [ResolvedRuleAction] Optional enumerated value serialized in the `action` wire field.
-  attr_reader :action
-  # @return [ResolvedRuleEnforcement] Optional enumerated value serialized in the `enforcement` wire field.
-  attr_reader :enforcement
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalPermissionsMetadata
+    FIELDS = {
+      default_action: 'defaultAction',
+      rules: 'rules',
+      filesystem: 'filesystem',
+      network: 'network'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      default_action: lambda do |value|
+        ::OctridevDigitalocean::PermissionsDefaultAction.from_value(value)
+      end,
+      rules: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::PermissionRule.from_hash(item) }
+      end,
+      filesystem: lambda do |value|
+        ::OctridevDigitalocean::PermissionFilesystem.from_hash(value)
+      end,
+      network: lambda do |value|
+        ::OctridevDigitalocean::PermissionNetwork.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Permissions.
+  # Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the policy engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it against the (agent, version) capability descriptor. Absent or empty means the agent keeps its built-in default gating — no policy is shipped to the sandbox.
+  class Permissions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPermissionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPermissionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPermissionsMetadata::DECODERS
+
+    # @return [PermissionsDefaultAction] Disposition for tool calls that match no rule. Defaults to "ask" when omitted.
+    attr_reader :default_action
+    # @return [Array_of_PermissionRule] Ordered match→action rules. Declared order is authoritative: the LAST matching rule wins (author-order last-match).
+    attr_reader :rules
+    # @return [PermissionFilesystem] Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots) for every agent.
+    attr_reader :filesystem
+    # @return [PermissionNetwork] Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses stay blocked by the broader egress policy.
+    attr_reader :network
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ResolvedRuleAction SDK namespace.
-module ResolvedRuleAction
-  ALLOW = 'allow'
-  ASK = 'ask'
-  DENY = 'deny'
-  VALUES = ['allow', 'ask', 'deny'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ResolvedRuleEnforcement SDK namespace.
-module ResolvedRuleEnforcement
-  STRICT = 'strict'
-  BEST_EFFORT = 'best-effort'
-  VALUES = ['strict', 'best-effort'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalResolveHitlRequestMetadata
-  FIELDS = {
-    outcome: "outcome",
-    reason: "reason",
-    source: "source",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    outcome
-  ].freeze
-  DECODERS = {
-    outcome: lambda do |value|
-      ::OctridevDigitalocean::HitlOutcome.from_value(value)
-    end,
-    source: lambda do |value|
-      ::OctridevDigitalocean::ResolutionSource.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ResolveHitlRequest.
-# Typed representation of the `ResolveHitlRequest` API schema.
-class ResolveHitlRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalResolveHitlRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalResolveHitlRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalResolveHitlRequestMetadata::DECODERS
-
-  # @return [HitlOutcome] HITLOutcome is the user's decision on a HITL request. DEFER backs off this attempt without treating it as a rejection.
-  attr_reader :outcome
-  # @return [String] Optional free-text reason. Captured in the audit trail; not interpreted.
-  attr_reader :reason
-  # @return [ResolutionSource] How a HITL resolution was triggered. Defaults to RESOLUTION_SOURCE_OUT_OF_BAND when omitted.
-  attr_reader :source
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the PermissionsDefaultAction SDK namespace.
+  module PermissionsDefaultAction
+    ALLOW = 'allow'
+    ASK = 'ask'
+    DENY = 'deny'
+    VALUES = %w[allow ask deny].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ResolutionSource SDK namespace.
+  module ResolutionSource
+    RESOLUTION_SOURCE_UNSPECIFIED = 'RESOLUTION_SOURCE_UNSPECIFIED'
+    RESOLUTION_SOURCE_INLINE_KEYSTROKE = 'RESOLUTION_SOURCE_INLINE_KEYSTROKE'
+    RESOLUTION_SOURCE_OUT_OF_BAND = 'RESOLUTION_SOURCE_OUT_OF_BAND'
+    VALUES = %w[
+      RESOLUTION_SOURCE_UNSPECIFIED RESOLUTION_SOURCE_INLINE_KEYSTROKE
+      RESOLUTION_SOURCE_OUT_OF_BAND
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalReusableSessionMetadata
-  FIELDS = {
-    session_id: "session_id",
-    name: "name",
-    agent_kind: "agent_kind",
-    status: "status",
-    created_at: "created_at",
-    last_event_at: "last_event_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    agent_kind: lambda do |value|
-      ::OctridevDigitalocean::AgentKind.from_value(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::SessionStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ReusableSession.
-# The hosted-agents Session shape (subset), returned verbatim from an internal ListSessions(status=PAUSED). Enum spellings match the sessions API.
-class ReusableSession
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalReusableSessionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalReusableSessionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalReusableSessionMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `session_id` wire field.
-  attr_reader :session_id
-  # @return [String] Optional `string` value serialized in the `name` wire field.
-  attr_reader :name
-  # @return [AgentKind] AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE, OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400. AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter. AGENT_KIND_CREWAI is the CrewAI…
-  attr_reader :agent_kind
-  # @return [SessionStatus] SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a ListSessions status-filter value only -- no session is ever actually in this status. SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing response.
-  attr_reader :status
-  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-  attr_reader :created_at
-  # @return [String] Optional `date-time`-formatted value serialized in the `last_event_at` wire field.
-  attr_reader :last_event_at
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalResolvedRuleMetadata
+    FIELDS = {
+      id: 'id',
+      tool: 'tool',
+      match: 'match',
+      action: 'action',
+      enforcement: 'enforcement'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      action: lambda do |value|
+        ::OctridevDigitalocean::ResolvedRuleAction.from_value(value)
+      end,
+      enforcement: lambda do |value|
+        ::OctridevDigitalocean::ResolvedRuleEnforcement.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ResolvedRule.
+  # A rule after resolution (∩ tenant ∩ platform), carrying a stable id for audit correlation.
+  class ResolvedRule
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalResolvedRuleMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalResolvedRuleMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalResolvedRuleMetadata::DECODERS
+
+    # @return [String] Stable rule id assigned during resolution; correlates with the PolicyDenied event's matched rule.
+    attr_reader :id
+    # @return [String] Optional `string` value serialized in the `tool` wire field.
+    attr_reader :tool
+    # @return [Hash] Optional object value serialized in the `match` wire field.
+    attr_reader :match
+    # @return [ResolvedRuleAction] Optional enumerated value serialized in the `action` wire field.
+    attr_reader :action
+    # @return [ResolvedRuleEnforcement] Optional enumerated value serialized in the `enforcement` wire field.
+    attr_reader :enforcement
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRollbackToCheckpointResponseMetadata
-  FIELDS = {
-    session: "session",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    session: lambda do |value|
-      ::OctridevDigitalocean::DefinitionsSession.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for RollbackToCheckpointResponse.
-# The session after in-place rollback: same session_id, sandbox_id swapped to the restored VM.
-class RollbackToCheckpointResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRollbackToCheckpointResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRollbackToCheckpointResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRollbackToCheckpointResponseMetadata::DECODERS
-
-  # @return [DefinitionsSession] Session is the user-facing record of a environment session + sandbox pair.
-  attr_reader :session
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ResolvedRuleAction SDK namespace.
+  module ResolvedRuleAction
+    ALLOW = 'allow'
+    ASK = 'ask'
+    DENY = 'deny'
+    VALUES = %w[allow ask deny].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ResolvedRuleEnforcement SDK namespace.
+  module ResolvedRuleEnforcement
+    STRICT = 'strict'
+    BEST_EFFORT = 'best-effort'
+    VALUES = %w[strict best-effort].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRotateSecretResponseMetadata
-  FIELDS = {
-    webhook_secret: "webhook_secret",
-    previous_secret_expires_at: "previous_secret_expires_at",
-    previous_secret_revoked: "previous_secret_revoked",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for RotateSecretResponse.
-# Typed representation of the `RotateSecretResponse` API schema.
-class RotateSecretResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRotateSecretResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRotateSecretResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRotateSecretResponseMetadata::DECODERS
-
-  # @return [String] The new webhook secret, shown once.
-  attr_reader :webhook_secret
-  # @return [String] The instant the outgoing secret stops verifying deliveries. Omitted when grace_period_seconds=0.
-  attr_reader :previous_secret_expires_at
-  # @return [Boolean] True when grace_period_seconds=0 retired the old secret on this call. Exactly one of this and previous_secret_expires_at is present.
-  attr_reader :previous_secret_revoked
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalResolveHitlRequestMetadata
+    FIELDS = {
+      outcome: 'outcome',
+      reason: 'reason',
+      source: 'source'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      outcome
+    ].freeze
+    DECODERS = {
+      outcome: lambda do |value|
+        ::OctridevDigitalocean::HitlOutcome.from_value(value)
+      end,
+      source: lambda do |value|
+        ::OctridevDigitalocean::ResolutionSource.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ResolveHitlRequest.
+  # Typed representation of the `ResolveHitlRequest` API schema.
+  class ResolveHitlRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalResolveHitlRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalResolveHitlRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalResolveHitlRequestMetadata::DECODERS
+
+    # @return [HitlOutcome] HITLOutcome is the user's decision on a HITL request. DEFER backs off this attempt without treating it as a rejection.
+    attr_reader :outcome
+    # @return [String] Optional free-text reason. Captured in the audit trail; not interpreted.
+    attr_reader :reason
+    # @return [ResolutionSource] How a HITL resolution was triggered. Defaults to RESOLUTION_SOURCE_OUT_OF_BAND when omitted.
+    attr_reader :source
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRuleVerdictMetadata
-  FIELDS = {
-    rule: "rule",
-    verdict: "verdict",
-    rendered: "rendered",
-    reason: "reason",
-    suggestion: "suggestion",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    rule: lambda do |value|
-      ::OctridevDigitalocean::ResolvedRule.from_hash(value)
-    end,
-    verdict: lambda do |value|
-      ::OctridevDigitalocean::RuleVerdictVerdict.from_value(value)
-    end,
-    rendered: lambda do |value|
-      ::OctridevDigitalocean::RuleVerdictRendered.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for RuleVerdict.
-# Validation outcome for one resolved rule.
-class RuleVerdict
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRuleVerdictMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRuleVerdictMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRuleVerdictMetadata::DECODERS
-
-  # @return [ResolvedRule] A rule after resolution (∩ tenant ∩ platform), carrying a stable id for audit correlation.
-  attr_reader :rule
-  # @return [RuleVerdictVerdict] exact — enforced precisely as written; degraded — renderable only in a more-restrictive form (deny→ask), warned; unsupported — cannot be enforced (strict ⇒ session reject); unverified — no descriptor available, rendered conservatively but unproven.
-  attr_reader :verdict
-  # @return [RuleVerdictRendered] The disposition the agent will actually enforce: the requested action when exact/unverified, the more-restrictive target when degraded, omitted when unsupported (cannot render).
-  attr_reader :rendered
-  # @return [String] Human-readable explanation of the verdict.
-  attr_reader :reason
-  # @return [String] Optional actionable hint (e.g. "set enforcement: best-effort, or target a capable agent").
-  attr_reader :suggestion
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalReusableSessionMetadata
+    FIELDS = {
+      session_id: 'session_id',
+      name: 'name',
+      agent_kind: 'agent_kind',
+      status: 'status',
+      created_at: 'created_at',
+      last_event_at: 'last_event_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      agent_kind: lambda do |value|
+        ::OctridevDigitalocean::AgentKind.from_value(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::SessionStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ReusableSession.
+  # The hosted-agents Session shape (subset), returned verbatim from an internal ListSessions(status=PAUSED). Enum spellings match the sessions API.
+  class ReusableSession
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalReusableSessionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalReusableSessionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalReusableSessionMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `session_id` wire field.
+    attr_reader :session_id
+    # @return [String] Optional `string` value serialized in the `name` wire field.
+    attr_reader :name
+    # @return [AgentKind] AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE, OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400. AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter. AGENT_KIND_CREWAI is the CrewAI…
+    attr_reader :agent_kind
+    # @return [SessionStatus] SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a ListSessions status-filter value only -- no session is ever actually in this status. SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing response.
+    attr_reader :status
+    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    attr_reader :created_at
+    # @return [String] Optional `date-time`-formatted value serialized in the `last_event_at` wire field.
+    attr_reader :last_event_at
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the RuleVerdictRendered SDK namespace.
-module RuleVerdictRendered
-  ALLOW = 'allow'
-  ASK = 'ask'
-  DENY = 'deny'
-  VALUES = ['allow', 'ask', 'deny'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the RuleVerdictVerdict SDK namespace.
-module RuleVerdictVerdict
-  EXACT = 'exact'
-  DEGRADED = 'degraded'
-  UNSUPPORTED = 'unsupported'
-  UNVERIFIED = 'unverified'
-  VALUES = ['exact', 'degraded', 'unsupported', 'unverified'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSlackOutputWriteMetadata
-  FIELDS = {
-    webhook_url: "webhook_url",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    webhook_url
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SlackOutputWrite.
-# Slack destination on create/update. webhook_url is required when mode=slack; must be hooks.slack.com stored encrypted and never returned.
-class SlackOutputWrite
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSlackOutputWriteMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSlackOutputWriteMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSlackOutputWriteMetadata::DECODERS
-
-  # @return [String] Slack incoming webhook URL (hooks.slack.com). The channel is bound to this URL at install time.
-  attr_reader :webhook_url
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalRollbackToCheckpointResponseMetadata
+    FIELDS = {
+      session: 'session'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      session: lambda do |value|
+        ::OctridevDigitalocean::DefinitionsSession.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for RollbackToCheckpointResponse.
+  # The session after in-place rollback: same session_id, sandbox_id swapped to the restored VM.
+  class RollbackToCheckpointResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRollbackToCheckpointResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRollbackToCheckpointResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRollbackToCheckpointResponseMetadata::DECODERS
+
+    # @return [DefinitionsSession] Session is the user-facing record of a environment session + sandbox pair.
+    attr_reader :session
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalRotateSecretResponseMetadata
+    FIELDS = {
+      webhook_secret: 'webhook_secret',
+      previous_secret_expires_at: 'previous_secret_expires_at',
+      previous_secret_revoked: 'previous_secret_revoked'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
-end
 
-# Internal model hydration metadata.
-class SdkInternalStreamEventMetadata
-  FIELDS = {
-    event_id: "event_id",
-    run_id: "run_id",
-    tenant_id: "tenant_id",
-    session_id: "session_id",
-    trace_parent: "trace_parent",
-    timestamp: "timestamp",
-    seq: "seq",
-    source_event_id: "source_event_id",
-    source_event_type: "source_event_type",
-    source_tenant_id: "source_tenant_id",
-    producer: "producer",
-    definition_id: "definition_id",
-    revision_id: "revision_id",
-    credential_binding_set_id: "credential_binding_set_id",
-    type: "type",
-    data: "data",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    producer: lambda do |value|
-      ::OctridevDigitalocean::StreamEventProducer.from_value(value)
-    end,
-    type: lambda do |value|
-      ::OctridevDigitalocean::StreamEventType.from_value(value)
-    end,
-  }.freeze
-end
+  # API model for RotateSecretResponse.
+  # Typed representation of the `RotateSecretResponse` API schema.
+  class RotateSecretResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRotateSecretResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRotateSecretResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRotateSecretResponseMetadata::DECODERS
+
+    # @return [String] The new webhook secret, shown once.
+    attr_reader :webhook_secret
+    # @return [String] The instant the outgoing secret stops verifying deliveries. Omitted when grace_period_seconds=0.
+    attr_reader :previous_secret_expires_at
+    # @return [Boolean] True when grace_period_seconds=0 retired the old secret on this call. Exactly one of this and previous_secret_expires_at is present.
+    attr_reader :previous_secret_revoked
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalRuleVerdictMetadata
+    FIELDS = {
+      rule: 'rule',
+      verdict: 'verdict',
+      rendered: 'rendered',
+      reason: 'reason',
+      suggestion: 'suggestion'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      rule: lambda do |value|
+        ::OctridevDigitalocean::ResolvedRule.from_hash(value)
+      end,
+      verdict: lambda do |value|
+        ::OctridevDigitalocean::RuleVerdictVerdict.from_value(value)
+      end,
+      rendered: lambda do |value|
+        ::OctridevDigitalocean::RuleVerdictRendered.from_value(value)
+      end
+    }.freeze
+  end
+
+  # API model for RuleVerdict.
+  # Validation outcome for one resolved rule.
+  class RuleVerdict
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRuleVerdictMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRuleVerdictMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRuleVerdictMetadata::DECODERS
+
+    # @return [ResolvedRule] A rule after resolution (∩ tenant ∩ platform), carrying a stable id for audit correlation.
+    attr_reader :rule
+    # @return [RuleVerdictVerdict] exact — enforced precisely as written; degraded — renderable only in a more-restrictive form (deny→ask), warned; unsupported — cannot be enforced (strict ⇒ session reject); unverified — no descriptor available, rendered conservatively but unproven.
+    attr_reader :verdict
+    # @return [RuleVerdictRendered] The disposition the agent will actually enforce: the requested action when exact/unverified, the more-restrictive target when degraded, omitted when unsupported (cannot render).
+    attr_reader :rendered
+    # @return [String] Human-readable explanation of the verdict.
+    attr_reader :reason
+    # @return [String] Optional actionable hint (e.g. "set enforcement: best-effort, or target a capable agent").
+    attr_reader :suggestion
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the RuleVerdictRendered SDK namespace.
+  module RuleVerdictRendered
+    ALLOW = 'allow'
+    ASK = 'ask'
+    DENY = 'deny'
+    VALUES = %w[allow ask deny].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Defines the RuleVerdictVerdict SDK namespace.
+  module RuleVerdictVerdict
+    EXACT = 'exact'
+    DEGRADED = 'degraded'
+    UNSUPPORTED = 'unsupported'
+    UNVERIFIED = 'unverified'
+    VALUES = %w[exact degraded unsupported unverified].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalSlackOutputWriteMetadata
+    FIELDS = {
+      webhook_url: 'webhook_url'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      webhook_url
+    ].freeze
+    DECODERS = {}.freeze
+  end
+
+  # API model for SlackOutputWrite.
+  # Slack destination on create/update. webhook_url is required when mode=slack; must be hooks.slack.com stored encrypted and never returned.
+  class SlackOutputWrite
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSlackOutputWriteMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSlackOutputWriteMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSlackOutputWriteMetadata::DECODERS
+
+    # @return [String] Slack incoming webhook URL (hooks.slack.com). The channel is bound to this URL at install time.
+    attr_reader :webhook_url
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalStreamEventMetadata
+    FIELDS = {
+      event_id: 'event_id',
+      run_id: 'run_id',
+      tenant_id: 'tenant_id',
+      session_id: 'session_id',
+      trace_parent: 'trace_parent',
+      timestamp: 'timestamp',
+      seq: 'seq',
+      source_event_id: 'source_event_id',
+      source_event_type: 'source_event_type',
+      source_tenant_id: 'source_tenant_id',
+      producer: 'producer',
+      definition_id: 'definition_id',
+      revision_id: 'revision_id',
+      credential_binding_set_id: 'credential_binding_set_id',
+      type: 'type',
+      data: 'data'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      producer: lambda do |value|
+        ::OctridevDigitalocean::StreamEventProducer.from_value(value)
+      end,
+      type: lambda do |value|
+        ::OctridevDigitalocean::StreamEventType.from_value(value)
+      end
+    }.freeze
+  end
 end

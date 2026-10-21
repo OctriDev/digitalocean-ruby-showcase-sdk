@@ -5,662 +5,649 @@
 
 # agent_platform_api_api_model domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiModelEvaluationRunDetailMetadata
-  FIELDS = {
-    candidate_inference_config: "candidate_inference_config",
-    candidate_model_name: "candidate_model_name",
-    candidate_model_source: "candidate_model_source",
-    candidate_model_uuid: "candidate_model_uuid",
-    completed_at: "completed_at",
-    created_at: "created_at",
-    dataset_name: "dataset_name",
-    dataset_uuid: "dataset_uuid",
-    epochs: "epochs",
-    error_description: "error_description",
-    eval_preset_name: "eval_preset_name",
-    eval_preset_uuid: "eval_preset_uuid",
-    eval_run_uuid: "eval_run_uuid",
-    judge_model_name: "judge_model_name",
-    judge_model_uuid: "judge_model_uuid",
-    metrics: "metrics",
-    name: "name",
-    progress: "progress",
-    result_summary: "result_summary",
-    star_metric: "star_metric",
-    started_at: "started_at",
-    status: "status",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    candidate_inference_config: lambda do |value|
-      ::OctridevDigitalocean::ApiCandidateInferenceConfig.from_hash(value)
-    end,
-    candidate_model_source: lambda do |value|
-      ::OctridevDigitalocean::ApiCandidateModelSource.from_value(value)
-    end,
-    metrics: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetric.from_hash(item) }
-    end,
-    progress: lambda do |value|
-      ::OctridevDigitalocean::ApiModelEvaluationRunProgress.from_hash(value)
-    end,
-    result_summary: lambda do |value|
-      ::OctridevDigitalocean::ApiModelEvaluationRunResultSummary.from_hash(value)
-    end,
-    star_metric: lambda do |value|
-      ::OctridevDigitalocean::ApiStarMetric.from_hash(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::ApiModelEvaluationRunStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiModelEvaluationRunDetail.
-# Model Evaluation Run Detail - full view returned when fetching a specific run.
-class ApiModelEvaluationRunDetail
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelEvaluationRunDetailMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelEvaluationRunDetailMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelEvaluationRunDetailMetadata::DECODERS
-
-  # @return [ApiCandidateInferenceConfig] Inference configuration for the candidate model during evaluation.
-  attr_reader :candidate_inference_config
-  # @return [String] Optional `string` value serialized in the `candidate_model_name` wire field.
-  attr_reader :candidate_model_name
-  # @return [ApiCandidateModelSource] Whether the candidate is a served model (serverless platform, a dedicated deployment, or a model router) or an OHS-hosted agent config.
-  attr_reader :candidate_model_source
-  # @return [String] Candidate model being evaluated.
-  attr_reader :candidate_model_uuid
-  # @return [String] Optional `date-time`-formatted value serialized in the `completed_at` wire field.
-  attr_reader :completed_at
-  # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
-  attr_reader :created_at
-  # @return [String] Optional `string` value serialized in the `dataset_name` wire field.
-  attr_reader :dataset_name
-  # @return [String] Dataset used for the evaluation.
-  attr_reader :dataset_uuid
-  # @return [Integer] Number of times each dataset row is evaluated (n-pass/epochs). 1 by default. Drives the avg@k/pass@k/cons@k aggregation in result_summary.
-  attr_reader :epochs
-  # @return [String] Error description if the run failed or partially succeeded.
-  attr_reader :error_description
-  # @return [String] Optional `string` value serialized in the `eval_preset_name` wire field.
-  attr_reader :eval_preset_name
-  # @return [String] Optional `string` value serialized in the `eval_preset_uuid` wire field.
-  attr_reader :eval_preset_uuid
-  # @return [String] UUID of the evaluation run.
-  attr_reader :eval_run_uuid
-  # @return [String] Optional `string` value serialized in the `judge_model_name` wire field.
-  attr_reader :judge_model_name
-  # @return [String] Judge model used to score responses.
-  attr_reader :judge_model_uuid
-  # @return [Array_of_ApiEvaluationMetric] Metrics selected for this evaluation.
-  attr_reader :metrics
-  # @return [String] Name of the evaluation run.
-  attr_reader :name
-  # @return [ApiModelEvaluationRunProgress] Per-phase progress for a model evaluation run. The candidate phase invokes the candidate model once per dataset row; the judge phase scores each candidate-success row with the configured metrics. Counts grow as the run advances; compare against total_rows to render a progress bar.
-  attr_reader :progress
-  # @return [ApiModelEvaluationRunResultSummary] Aggregated result summary for a completed model evaluation run.
-  attr_reader :result_summary
-  # @return [ApiStarMetric] Optional object value serialized in the `star_metric` wire field.
-  attr_reader :star_metric
-  # @return [String] Optional `date-time`-formatted value serialized in the `started_at` wire field.
-  attr_reader :started_at
-  # @return [ApiModelEvaluationRunStatus] Model Evaluation Run Statuses
-  attr_reader :status
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiModelEvaluationRunDetailMetadata
+    FIELDS = {
+      candidate_inference_config: 'candidate_inference_config',
+      candidate_model_name: 'candidate_model_name',
+      candidate_model_source: 'candidate_model_source',
+      candidate_model_uuid: 'candidate_model_uuid',
+      completed_at: 'completed_at',
+      created_at: 'created_at',
+      dataset_name: 'dataset_name',
+      dataset_uuid: 'dataset_uuid',
+      epochs: 'epochs',
+      error_description: 'error_description',
+      eval_preset_name: 'eval_preset_name',
+      eval_preset_uuid: 'eval_preset_uuid',
+      eval_run_uuid: 'eval_run_uuid',
+      judge_model_name: 'judge_model_name',
+      judge_model_uuid: 'judge_model_uuid',
+      metrics: 'metrics',
+      name: 'name',
+      progress: 'progress',
+      result_summary: 'result_summary',
+      star_metric: 'star_metric',
+      started_at: 'started_at',
+      status: 'status'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      candidate_inference_config: lambda do |value|
+        ::OctridevDigitalocean::ApiCandidateInferenceConfig.from_hash(value)
+      end,
+      candidate_model_source: lambda do |value|
+        ::OctridevDigitalocean::ApiCandidateModelSource.from_value(value)
+      end,
+      metrics: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationMetric.from_hash(item) }
+      end,
+      progress: lambda do |value|
+        ::OctridevDigitalocean::ApiModelEvaluationRunProgress.from_hash(value)
+      end,
+      result_summary: lambda do |value|
+        ::OctridevDigitalocean::ApiModelEvaluationRunResultSummary.from_hash(value)
+      end,
+      star_metric: lambda do |value|
+        ::OctridevDigitalocean::ApiStarMetric.from_hash(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::ApiModelEvaluationRunStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiModelEvaluationRunDetail.
+  # Model Evaluation Run Detail - full view returned when fetching a specific run.
+  class ApiModelEvaluationRunDetail
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelEvaluationRunDetailMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelEvaluationRunDetailMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelEvaluationRunDetailMetadata::DECODERS
+
+    # @return [ApiCandidateInferenceConfig] Inference configuration for the candidate model during evaluation.
+    attr_reader :candidate_inference_config
+    # @return [String] Optional `string` value serialized in the `candidate_model_name` wire field.
+    attr_reader :candidate_model_name
+    # @return [ApiCandidateModelSource] Whether the candidate is a served model (serverless platform, a dedicated deployment, or a model router) or an OHS-hosted agent config.
+    attr_reader :candidate_model_source
+    # @return [String] Candidate model being evaluated.
+    attr_reader :candidate_model_uuid
+    # @return [String] Optional `date-time`-formatted value serialized in the `completed_at` wire field.
+    attr_reader :completed_at
+    # @return [String] Optional `date-time`-formatted value serialized in the `created_at` wire field.
+    attr_reader :created_at
+    # @return [String] Optional `string` value serialized in the `dataset_name` wire field.
+    attr_reader :dataset_name
+    # @return [String] Dataset used for the evaluation.
+    attr_reader :dataset_uuid
+    # @return [Integer] Number of times each dataset row is evaluated (n-pass/epochs). 1 by default. Drives the avg@k/pass@k/cons@k aggregation in result_summary.
+    attr_reader :epochs
+    # @return [String] Error description if the run failed or partially succeeded.
+    attr_reader :error_description
+    # @return [String] Optional `string` value serialized in the `eval_preset_name` wire field.
+    attr_reader :eval_preset_name
+    # @return [String] Optional `string` value serialized in the `eval_preset_uuid` wire field.
+    attr_reader :eval_preset_uuid
+    # @return [String] UUID of the evaluation run.
+    attr_reader :eval_run_uuid
+    # @return [String] Optional `string` value serialized in the `judge_model_name` wire field.
+    attr_reader :judge_model_name
+    # @return [String] Judge model used to score responses.
+    attr_reader :judge_model_uuid
+    # @return [Array_of_ApiEvaluationMetric] Metrics selected for this evaluation.
+    attr_reader :metrics
+    # @return [String] Name of the evaluation run.
+    attr_reader :name
+    # @return [ApiModelEvaluationRunProgress] Per-phase progress for a model evaluation run. The candidate phase invokes the candidate model once per dataset row; the judge phase scores each candidate-success row with the configured metrics. Counts grow as the run advances; compare against total_rows to render a progress bar.
+    attr_reader :progress
+    # @return [ApiModelEvaluationRunResultSummary] Aggregated result summary for a completed model evaluation run.
+    attr_reader :result_summary
+    # @return [ApiStarMetric] Optional object value serialized in the `star_metric` wire field.
+    attr_reader :star_metric
+    # @return [String] Optional `date-time`-formatted value serialized in the `started_at` wire field.
+    attr_reader :started_at
+    # @return [ApiModelEvaluationRunStatus] Model Evaluation Run Statuses
+    attr_reader :status
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelEvaluationRunProgressMetadata
-  FIELDS = {
-    candidate_rows_evaluated: "candidate_rows_evaluated",
-    judge_rows_evaluated: "judge_rows_evaluated",
-    total_rows: "total_rows",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiModelEvaluationRunProgress.
-# Per-phase progress for a model evaluation run. The candidate phase invokes the candidate model once per dataset row; the judge phase scores each candidate-success row with the configured metrics. Counts grow as the run advances; compare against total_rows to render a progress bar.
-class ApiModelEvaluationRunProgress
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelEvaluationRunProgressMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelEvaluationRunProgressMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelEvaluationRunProgressMetadata::DECODERS
-
-  # @return [Integer] Dataset rows whose candidate model call has completed (success or failure).
-  attr_reader :candidate_rows_evaluated
-  # @return [Integer] Candidate-success rows the judge has finished (scored or skipped). Caps at the number of candidate successes, which may be below total_rows.
-  attr_reader :judge_rows_evaluated
-  # @return [Integer] Total dataset rows for the run, sourced from the evaluation dataset.
-  attr_reader :total_rows
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiModelEvaluationRunProgressMetadata
+    FIELDS = {
+      candidate_rows_evaluated: 'candidate_rows_evaluated',
+      judge_rows_evaluated: 'judge_rows_evaluated',
+      total_rows: 'total_rows'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiModelEvaluationRunProgress.
+  # Per-phase progress for a model evaluation run. The candidate phase invokes the candidate model once per dataset row; the judge phase scores each candidate-success row with the configured metrics. Counts grow as the run advances; compare against total_rows to render a progress bar.
+  class ApiModelEvaluationRunProgress
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelEvaluationRunProgressMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelEvaluationRunProgressMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelEvaluationRunProgressMetadata::DECODERS
+
+    # @return [Integer] Dataset rows whose candidate model call has completed (success or failure).
+    attr_reader :candidate_rows_evaluated
+    # @return [Integer] Candidate-success rows the judge has finished (scored or skipped). Caps at the number of candidate successes, which may be below total_rows.
+    attr_reader :judge_rows_evaluated
+    # @return [Integer] Total dataset rows for the run, sourced from the evaluation dataset.
+    attr_reader :total_rows
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelEvaluationRunResultSummaryMetadata
-  FIELDS = {
-    end_time: "end_time",
-    epoch_summary: "epoch_summary",
-    epochs: "epochs",
-    metric_summaries: "metric_summaries",
-    overall_score_percent: "overall_score_percent",
-    per_model_summaries: "per_model_summaries",
-    per_task_summaries: "per_task_summaries",
-    performance_metrics: "performance_metrics",
-    pricing: "pricing",
-    star_metric_summary: "star_metric_summary",
-    start_time: "start_time",
-    total_duration_seconds: "total_duration_seconds",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    epoch_summary: lambda do |value|
-      ::OctridevDigitalocean::ApiEpochResultSummary.from_hash(value)
-    end,
-    metric_summaries: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiMetricResultSummary.from_hash(item) }
-    end,
-    per_model_summaries: lambda do |value|
-      ::OctridevDigitalocean::ApiPerModelResultSummaries.from_hash(value)
-    end,
-    per_task_summaries: lambda do |value|
-      ::OctridevDigitalocean::ApiPerTaskResultSummaries.from_hash(value)
-    end,
-    performance_metrics: lambda do |value|
-      ::OctridevDigitalocean::ApiPerformanceMetrics.from_hash(value)
-    end,
-    pricing: lambda do |value|
-      ::OctridevDigitalocean::ApiEvaluationPricing.from_hash(value)
-    end,
-    star_metric_summary: lambda do |value|
-      ::OctridevDigitalocean::ApiStarMetricSummary.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiModelEvaluationRunResultSummary.
-# Aggregated result summary for a completed model evaluation run.
-class ApiModelEvaluationRunResultSummary
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelEvaluationRunResultSummaryMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelEvaluationRunResultSummaryMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelEvaluationRunResultSummaryMetadata::DECODERS
-
-  # @return [String] Optional `date-time`-formatted value serialized in the `end_time` wire field.
-  attr_reader :end_time
-  # @return [ApiEpochResultSummary] Aggregation across epochs when a run repeats each dataset row k times. Only populated when epochs > 1; at epochs == 1 every number here would equal overall_score_percent, so it is omitted rather than duplicated.
-  attr_reader :epoch_summary
-  # @return [Integer] Number of times each dataset row was evaluated (n-pass/epochs). Mirrors ModelEvaluationRunDetail.epochs. 1 for every existing run.
-  attr_reader :epochs
-  # @return [Array_of_ApiMetricResultSummary] Per-metric aggregated pass/fail statistics.
-  attr_reader :metric_summaries
-  # @return [Float] Optional `double`-formatted value serialized in the `overall_score_percent` wire field.
-  attr_reader :overall_score_percent
-  # @return [ApiPerModelResultSummaries] Per-model breakdown of an evaluation run. Set on router evaluations to show how each underlying model performed across the prompts that were routed to it.
-  attr_reader :per_model_summaries
-  # @return [ApiPerTaskResultSummaries] Per-task breakdown of an evaluation run. Set on router evaluations to show how each routing task category performed across the prompts that were classified into it.
-  attr_reader :per_task_summaries
-  # @return [ApiPerformanceMetrics] All performance metrics are for the candidate model unless noted otherwise.
-  attr_reader :performance_metrics
-  # @return [ApiEvaluationPricing] Pricing breakdown for an evaluation run.
-  attr_reader :pricing
-  # @return [ApiStarMetricSummary] Star metric summary with identifying details and threshold.
-  attr_reader :star_metric_summary
-  # @return [String] Run timing.
-  attr_reader :start_time
-  # @return [Integer] Total wall-clock duration in seconds.
-  attr_reader :total_duration_seconds
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiModelEvaluationRunResultSummaryMetadata
+    FIELDS = {
+      end_time: 'end_time',
+      epoch_summary: 'epoch_summary',
+      epochs: 'epochs',
+      metric_summaries: 'metric_summaries',
+      overall_score_percent: 'overall_score_percent',
+      per_model_summaries: 'per_model_summaries',
+      per_task_summaries: 'per_task_summaries',
+      performance_metrics: 'performance_metrics',
+      pricing: 'pricing',
+      star_metric_summary: 'star_metric_summary',
+      start_time: 'start_time',
+      total_duration_seconds: 'total_duration_seconds'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      epoch_summary: lambda do |value|
+        ::OctridevDigitalocean::ApiEpochResultSummary.from_hash(value)
+      end,
+      metric_summaries: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiMetricResultSummary.from_hash(item) }
+      end,
+      per_model_summaries: lambda do |value|
+        ::OctridevDigitalocean::ApiPerModelResultSummaries.from_hash(value)
+      end,
+      per_task_summaries: lambda do |value|
+        ::OctridevDigitalocean::ApiPerTaskResultSummaries.from_hash(value)
+      end,
+      performance_metrics: lambda do |value|
+        ::OctridevDigitalocean::ApiPerformanceMetrics.from_hash(value)
+      end,
+      pricing: lambda do |value|
+        ::OctridevDigitalocean::ApiEvaluationPricing.from_hash(value)
+      end,
+      star_metric_summary: lambda do |value|
+        ::OctridevDigitalocean::ApiStarMetricSummary.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiModelEvaluationRunResultSummary.
+  # Aggregated result summary for a completed model evaluation run.
+  class ApiModelEvaluationRunResultSummary
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelEvaluationRunResultSummaryMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelEvaluationRunResultSummaryMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelEvaluationRunResultSummaryMetadata::DECODERS
+
+    # @return [String] Optional `date-time`-formatted value serialized in the `end_time` wire field.
+    attr_reader :end_time
+    # @return [ApiEpochResultSummary] Aggregation across epochs when a run repeats each dataset row k times. Only populated when epochs > 1; at epochs == 1 every number here would equal overall_score_percent, so it is omitted rather than duplicated.
+    attr_reader :epoch_summary
+    # @return [Integer] Number of times each dataset row was evaluated (n-pass/epochs). Mirrors ModelEvaluationRunDetail.epochs. 1 for every existing run.
+    attr_reader :epochs
+    # @return [Array_of_ApiMetricResultSummary] Per-metric aggregated pass/fail statistics.
+    attr_reader :metric_summaries
+    # @return [Float] Optional `double`-formatted value serialized in the `overall_score_percent` wire field.
+    attr_reader :overall_score_percent
+    # @return [ApiPerModelResultSummaries] Per-model breakdown of an evaluation run. Set on router evaluations to show how each underlying model performed across the prompts that were routed to it.
+    attr_reader :per_model_summaries
+    # @return [ApiPerTaskResultSummaries] Per-task breakdown of an evaluation run. Set on router evaluations to show how each routing task category performed across the prompts that were classified into it.
+    attr_reader :per_task_summaries
+    # @return [ApiPerformanceMetrics] All performance metrics are for the candidate model unless noted otherwise.
+    attr_reader :performance_metrics
+    # @return [ApiEvaluationPricing] Pricing breakdown for an evaluation run.
+    attr_reader :pricing
+    # @return [ApiStarMetricSummary] Star metric summary with identifying details and threshold.
+    attr_reader :star_metric_summary
+    # @return [String] Run timing.
+    attr_reader :start_time
+    # @return [Integer] Total wall-clock duration in seconds.
+    attr_reader :total_duration_seconds
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the ApiModelEvaluationRunStatus SDK namespace.
-module ApiModelEvaluationRunStatus
-  MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED = 'MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED'
-  MODEL_EVALUATION_RUN_QUEUED = 'MODEL_EVALUATION_RUN_QUEUED'
-  MODEL_EVALUATION_RUN_RUNNING_DATASET = 'MODEL_EVALUATION_RUN_RUNNING_DATASET'
-  MODEL_EVALUATION_RUN_EVALUATING_RESULTS = 'MODEL_EVALUATION_RUN_EVALUATING_RESULTS'
-  MODEL_EVALUATION_RUN_CANCELLING = 'MODEL_EVALUATION_RUN_CANCELLING'
-  MODEL_EVALUATION_RUN_CANCELLED = 'MODEL_EVALUATION_RUN_CANCELLED'
-  MODEL_EVALUATION_RUN_SUCCESSFUL = 'MODEL_EVALUATION_RUN_SUCCESSFUL'
-  MODEL_EVALUATION_RUN_PARTIALLY_SUCCESSFUL = 'MODEL_EVALUATION_RUN_PARTIALLY_SUCCESSFUL'
-  MODEL_EVALUATION_RUN_FAILED = 'MODEL_EVALUATION_RUN_FAILED'
-  VALUES = [
-    'MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED', 'MODEL_EVALUATION_RUN_QUEUED',
-    'MODEL_EVALUATION_RUN_RUNNING_DATASET', 'MODEL_EVALUATION_RUN_EVALUATING_RESULTS',
-    'MODEL_EVALUATION_RUN_CANCELLING', 'MODEL_EVALUATION_RUN_CANCELLED',
-    'MODEL_EVALUATION_RUN_SUCCESSFUL', 'MODEL_EVALUATION_RUN_PARTIALLY_SUCCESSFUL',
-    'MODEL_EVALUATION_RUN_FAILED'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelEvaluationRunSummaryMetadata
-  FIELDS = {
-    candidate_model_name: "candidate_model_name",
-    candidate_model_source: "candidate_model_source",
-    candidate_model_uuid: "candidate_model_uuid",
-    created_at: "created_at",
-    dataset_name: "dataset_name",
-    dataset_uuid: "dataset_uuid",
-    eval_run_uuid: "eval_run_uuid",
-    judge_model_name: "judge_model_name",
-    judge_model_uuid: "judge_model_uuid",
-    name: "name",
-    progress: "progress",
-    status: "status",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    candidate_model_source: lambda do |value|
-      ::OctridevDigitalocean::ApiCandidateModelSource.from_value(value)
-    end,
-    progress: lambda do |value|
-      ::OctridevDigitalocean::ApiModelEvaluationRunProgress.from_hash(value)
-    end,
-    status: lambda do |value|
-      ::OctridevDigitalocean::ApiModelEvaluationRunStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiModelEvaluationRunSummary.
-# Model Evaluation Run Summary - lightweight view used in run history list.
-class ApiModelEvaluationRunSummary
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelEvaluationRunSummaryMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelEvaluationRunSummaryMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelEvaluationRunSummaryMetadata::DECODERS
-
-  # @return [String] Name of the candidate model being evaluated.
-  attr_reader :candidate_model_name
-  # @return [ApiCandidateModelSource] Whether the candidate is a served model (serverless platform, a dedicated deployment, or a model router) or an OHS-hosted agent config.
-  attr_reader :candidate_model_source
-  # @return [String] UUID of the candidate model being evaluated.
-  attr_reader :candidate_model_uuid
-  # @return [String] Timestamp when the run was created.
-  attr_reader :created_at
-  # @return [String] Name of the dataset used for evaluation.
-  attr_reader :dataset_name
-  # @return [String] UUID of the dataset used for evaluation.
-  attr_reader :dataset_uuid
-  # @return [String] UUID of the evaluation run.
-  attr_reader :eval_run_uuid
-  # @return [String] Optional `string` value serialized in the `judge_model_name` wire field.
-  attr_reader :judge_model_name
-  # @return [String] Judge model used to score responses.
-  attr_reader :judge_model_uuid
-  # @return [String] Name of the evaluation run.
-  attr_reader :name
-  # @return [ApiModelEvaluationRunProgress] Per-phase progress for a model evaluation run. The candidate phase invokes the candidate model once per dataset row; the judge phase scores each candidate-success row with the configured metrics. Counts grow as the run advances; compare against total_rows to render a progress bar.
-  attr_reader :progress
-  # @return [ApiModelEvaluationRunStatus] Model Evaluation Run Statuses
-  attr_reader :status
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ApiModelEvaluationRunStatus SDK namespace.
+  module ApiModelEvaluationRunStatus
+    MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED = 'MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED'
+    MODEL_EVALUATION_RUN_QUEUED = 'MODEL_EVALUATION_RUN_QUEUED'
+    MODEL_EVALUATION_RUN_RUNNING_DATASET = 'MODEL_EVALUATION_RUN_RUNNING_DATASET'
+    MODEL_EVALUATION_RUN_EVALUATING_RESULTS = 'MODEL_EVALUATION_RUN_EVALUATING_RESULTS'
+    MODEL_EVALUATION_RUN_CANCELLING = 'MODEL_EVALUATION_RUN_CANCELLING'
+    MODEL_EVALUATION_RUN_CANCELLED = 'MODEL_EVALUATION_RUN_CANCELLED'
+    MODEL_EVALUATION_RUN_SUCCESSFUL = 'MODEL_EVALUATION_RUN_SUCCESSFUL'
+    MODEL_EVALUATION_RUN_PARTIALLY_SUCCESSFUL = 'MODEL_EVALUATION_RUN_PARTIALLY_SUCCESSFUL'
+    MODEL_EVALUATION_RUN_FAILED = 'MODEL_EVALUATION_RUN_FAILED'
+    VALUES = %w[
+      MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED MODEL_EVALUATION_RUN_QUEUED
+      MODEL_EVALUATION_RUN_RUNNING_DATASET MODEL_EVALUATION_RUN_EVALUATING_RESULTS
+      MODEL_EVALUATION_RUN_CANCELLING MODEL_EVALUATION_RUN_CANCELLED
+      MODEL_EVALUATION_RUN_SUCCESSFUL MODEL_EVALUATION_RUN_PARTIALLY_SUCCESSFUL
+      MODEL_EVALUATION_RUN_FAILED
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelEvaluationRunSummaryMetadata
+    FIELDS = {
+      candidate_model_name: 'candidate_model_name',
+      candidate_model_source: 'candidate_model_source',
+      candidate_model_uuid: 'candidate_model_uuid',
+      created_at: 'created_at',
+      dataset_name: 'dataset_name',
+      dataset_uuid: 'dataset_uuid',
+      eval_run_uuid: 'eval_run_uuid',
+      judge_model_name: 'judge_model_name',
+      judge_model_uuid: 'judge_model_uuid',
+      name: 'name',
+      progress: 'progress',
+      status: 'status'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      candidate_model_source: lambda do |value|
+        ::OctridevDigitalocean::ApiCandidateModelSource.from_value(value)
+      end,
+      progress: lambda do |value|
+        ::OctridevDigitalocean::ApiModelEvaluationRunProgress.from_hash(value)
+      end,
+      status: lambda do |value|
+        ::OctridevDigitalocean::ApiModelEvaluationRunStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiModelEvaluationRunSummary.
+  # Model Evaluation Run Summary - lightweight view used in run history list.
+  class ApiModelEvaluationRunSummary
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelEvaluationRunSummaryMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelEvaluationRunSummaryMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelEvaluationRunSummaryMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiModelModalitiesMetadata
-  FIELDS = {
-    input: "input",
-    output: "output",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] Name of the candidate model being evaluated.
+    attr_reader :candidate_model_name
+    # @return [ApiCandidateModelSource] Whether the candidate is a served model (serverless platform, a dedicated deployment, or a model router) or an OHS-hosted agent config.
+    attr_reader :candidate_model_source
+    # @return [String] UUID of the candidate model being evaluated.
+    attr_reader :candidate_model_uuid
+    # @return [String] Timestamp when the run was created.
+    attr_reader :created_at
+    # @return [String] Name of the dataset used for evaluation.
+    attr_reader :dataset_name
+    # @return [String] UUID of the dataset used for evaluation.
+    attr_reader :dataset_uuid
+    # @return [String] UUID of the evaluation run.
+    attr_reader :eval_run_uuid
+    # @return [String] Optional `string` value serialized in the `judge_model_name` wire field.
+    attr_reader :judge_model_name
+    # @return [String] Judge model used to score responses.
+    attr_reader :judge_model_uuid
+    # @return [String] Name of the evaluation run.
+    attr_reader :name
+    # @return [ApiModelEvaluationRunProgress] Per-phase progress for a model evaluation run. The candidate phase invokes the candidate model once per dataset row; the judge phase scores each candidate-success row with the configured metrics. Counts grow as the run advances; compare against total_rows to render a progress bar.
+    attr_reader :progress
+    # @return [ApiModelEvaluationRunStatus] Model Evaluation Run Statuses
+    attr_reader :status
 
-# API model for ApiModelModalities.
-# Input/output modalities
-class ApiModelModalities
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelModalitiesMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelModalitiesMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelModalitiesMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_String] Optional array value serialized in the `input` wire field.
-  attr_reader :input
-  # @return [Array_of_String] Optional array value serialized in the `output` wire field.
-  attr_reader :output
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelPricingMetadata
-  FIELDS = {
-    cache_read_input_price_per_million: "cache_read_input_price_per_million",
-    cache_write1h_input_price_per_million: "cache_write_1h_input_price_per_million",
-    cache_write5m_input_price_per_million: "cache_write_5m_input_price_per_million",
-    image_cache_read_input_price_per_million: "image_cache_read_input_price_per_million",
-    image_input_price_per_million: "image_input_price_per_million",
-    image_output_price_per_million: "image_output_price_per_million",
-    input_cache_read: "input_cache_read",
-    input_price_per_million: "input_price_per_million",
-    output_price_per_million: "output_price_per_million",
-    price_per_audio: "price_per_audio",
-    price_per_image: "price_per_image",
-    price_per_megapixel: "price_per_megapixel",
-    price_per_second: "price_per_second",
-    price_per_thousand_characters: "price_per_thousand_characters",
-    price_per_video: "price_per_video",
-    reasoning_price_per_million: "reasoning_price_per_million",
-    text_cache_read_input_price_per_million: "text_cache_read_input_price_per_million",
-    text_input_price_per_million: "text_input_price_per_million",
-    text_output_price_per_million: "text_output_price_per_million",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiModelPricing.
-# Pricing per million tokens (aligns with existing ModelPrice pattern)
-class ApiModelPricing
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelPricingMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelPricingMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelPricingMetadata::DECODERS
-
-  # @return [Float] Per-million cache read rate for standard chat models (token_type "cache read input"). Multimodal models use text_cache_read_input_price_per_million / image_cache_read_input_price_per_million instead.
-  attr_reader :cache_read_input_price_per_million
-  # @return [Float] Price per million tokens written to the prompt cache with a 1-hour lifetime.
-  attr_reader :cache_write1h_input_price_per_million
-  # @return [Float] Price per million tokens written to the prompt cache with a 5-minute lifetime.
-  attr_reader :cache_write5m_input_price_per_million
-  # @return [Float] Optional `double`-formatted value serialized in the `image_cache_read_input_price_per_million` wire field.
-  attr_reader :image_cache_read_input_price_per_million
-  # @return [Float] Optional `double`-formatted value serialized in the `image_input_price_per_million` wire field.
-  attr_reader :image_input_price_per_million
-  # @return [Float] Optional `double`-formatted value serialized in the `image_output_price_per_million` wire field.
-  attr_reader :image_output_price_per_million
-  # @return [Float] Cache read input price per single token. Equivalent to cache_read_input_price_per_million.
-  attr_reader :input_cache_read
-  # @return [Float] Optional `double`-formatted value serialized in the `input_price_per_million` wire field.
-  attr_reader :input_price_per_million
-  # @return [Float] Optional `double`-formatted value serialized in the `output_price_per_million` wire field.
-  attr_reader :output_price_per_million
-  # @return [Float] Optional `double`-formatted value serialized in the `price_per_audio` wire field.
-  attr_reader :price_per_audio
-  # @return [Float] Unit-based pricing for non-token models (e.g., Fal AI image/video/audio generation, speech models). At most one of these is typically populated per model. Token-based models (chat, embeddings) leave all of these at 0 and populate input_price_per_million / output_price_per_million instead.
-  attr_reader :price_per_image
-  # @return [Float] Optional `double`-formatted value serialized in the `price_per_megapixel` wire field.
-  attr_reader :price_per_megapixel
-  # @return [Float] Optional `double`-formatted value serialized in the `price_per_second` wire field.
-  attr_reader :price_per_second
-  # @return [Float] Optional `double`-formatted value serialized in the `price_per_thousand_characters` wire field.
-  attr_reader :price_per_thousand_characters
-  # @return [Float] Optional `double`-formatted value serialized in the `price_per_video` wire field.
-  attr_reader :price_per_video
-  # @return [Float] Price per million reasoning tokens. 0 if the model does not charge separately for reasoning tokens.
-  attr_reader :reasoning_price_per_million
-  # @return [Float] Optional `double`-formatted value serialized in the `text_cache_read_input_price_per_million` wire field.
-  attr_reader :text_cache_read_input_price_per_million
-  # @return [Float] Per-million token rates for models that bill text vs image tokens separately (e.g. OpenAI gpt-image-2). Standard chat models leave these at 0 and use input_price_per_million / output_price_per_million instead. Values align with usage token_type / internal/usage.Type string values for each meter.
-  attr_reader :text_input_price_per_million
-  # @return [Float] Optional `double`-formatted value serialized in the `text_output_price_per_million` wire field.
-  attr_reader :text_output_price_per_million
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelModalitiesMetadata
+    FIELDS = {
+      input: 'input',
+      output: 'output'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiModelModalities.
+  # Input/output modalities
+  class ApiModelModalities
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelModalitiesMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelModalitiesMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelModalitiesMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiModelPricingDetailMetadata
-  FIELDS = {
-    variants: "variants",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    variants: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiModelPricingVariant.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [Array_of_String] Optional array value serialized in the `input` wire field.
+    attr_reader :input
+    # @return [Array_of_String] Optional array value serialized in the `output` wire field.
+    attr_reader :output
 
-# API model for ApiModelPricingDetail.
-# The complete set of prices for a model, covering every available variant.
-class ApiModelPricingDetail
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelPricingDetailMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelPricingDetailMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelPricingDetailMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_ApiModelPricingVariant] Each available pricing variant for the model.
-  attr_reader :variants
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelPricingMetadata
+    FIELDS = {
+      cache_read_input_price_per_million: 'cache_read_input_price_per_million',
+      cache_write1h_input_price_per_million: 'cache_write_1h_input_price_per_million',
+      cache_write5m_input_price_per_million: 'cache_write_5m_input_price_per_million',
+      image_cache_read_input_price_per_million: 'image_cache_read_input_price_per_million',
+      image_input_price_per_million: 'image_input_price_per_million',
+      image_output_price_per_million: 'image_output_price_per_million',
+      input_cache_read: 'input_cache_read',
+      input_price_per_million: 'input_price_per_million',
+      output_price_per_million: 'output_price_per_million',
+      price_per_audio: 'price_per_audio',
+      price_per_image: 'price_per_image',
+      price_per_megapixel: 'price_per_megapixel',
+      price_per_second: 'price_per_second',
+      price_per_thousand_characters: 'price_per_thousand_characters',
+      price_per_video: 'price_per_video',
+      reasoning_price_per_million: 'reasoning_price_per_million',
+      text_cache_read_input_price_per_million: 'text_cache_read_input_price_per_million',
+      text_input_price_per_million: 'text_input_price_per_million',
+      text_output_price_per_million: 'text_output_price_per_million'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiModelPricing.
+  # Pricing per million tokens (aligns with existing ModelPrice pattern)
+  class ApiModelPricing
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelPricingMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelPricingMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelPricingMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiModelPricingEntryMetadata
-  FIELDS = {
-    model_name: "model_name",
-    model_uuid: "model_uuid",
-    pricing: "pricing",
-    prompt_count: "prompt_count",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    pricing: lambda do |value|
-      ::OctridevDigitalocean::ApiTokenPricing.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [Float] Per-million cache read rate for standard chat models (token_type "cache read input"). Multimodal models use text_cache_read_input_price_per_million / image_cache_read_input_price_per_million instead.
+    attr_reader :cache_read_input_price_per_million
+    # @return [Float] Price per million tokens written to the prompt cache with a 1-hour lifetime.
+    attr_reader :cache_write1h_input_price_per_million
+    # @return [Float] Price per million tokens written to the prompt cache with a 5-minute lifetime.
+    attr_reader :cache_write5m_input_price_per_million
+    # @return [Float] Optional `double`-formatted value serialized in the `image_cache_read_input_price_per_million` wire field.
+    attr_reader :image_cache_read_input_price_per_million
+    # @return [Float] Optional `double`-formatted value serialized in the `image_input_price_per_million` wire field.
+    attr_reader :image_input_price_per_million
+    # @return [Float] Optional `double`-formatted value serialized in the `image_output_price_per_million` wire field.
+    attr_reader :image_output_price_per_million
+    # @return [Float] Cache read input price per single token. Equivalent to cache_read_input_price_per_million.
+    attr_reader :input_cache_read
+    # @return [Float] Optional `double`-formatted value serialized in the `input_price_per_million` wire field.
+    attr_reader :input_price_per_million
+    # @return [Float] Optional `double`-formatted value serialized in the `output_price_per_million` wire field.
+    attr_reader :output_price_per_million
+    # @return [Float] Optional `double`-formatted value serialized in the `price_per_audio` wire field.
+    attr_reader :price_per_audio
+    # @return [Float] Unit-based pricing for non-token models (e.g., Fal AI image/video/audio generation, speech models). At most one of these is typically populated per model. Token-based models (chat, embeddings) leave all of these at 0 and populate input_price_per_million / output_price_per_million instead.
+    attr_reader :price_per_image
+    # @return [Float] Optional `double`-formatted value serialized in the `price_per_megapixel` wire field.
+    attr_reader :price_per_megapixel
+    # @return [Float] Optional `double`-formatted value serialized in the `price_per_second` wire field.
+    attr_reader :price_per_second
+    # @return [Float] Optional `double`-formatted value serialized in the `price_per_thousand_characters` wire field.
+    attr_reader :price_per_thousand_characters
+    # @return [Float] Optional `double`-formatted value serialized in the `price_per_video` wire field.
+    attr_reader :price_per_video
+    # @return [Float] Price per million reasoning tokens. 0 if the model does not charge separately for reasoning tokens.
+    attr_reader :reasoning_price_per_million
+    # @return [Float] Optional `double`-formatted value serialized in the `text_cache_read_input_price_per_million` wire field.
+    attr_reader :text_cache_read_input_price_per_million
+    # @return [Float] Per-million token rates for models that bill text vs image tokens separately (e.g. OpenAI gpt-image-2). Standard chat models leave these at 0 and use input_price_per_million / output_price_per_million instead. Values align with usage token_type / internal/usage.Type string values for each meter.
+    attr_reader :text_input_price_per_million
+    # @return [Float] Optional `double`-formatted value serialized in the `text_output_price_per_million` wire field.
+    attr_reader :text_output_price_per_million
 
-# API model for ApiModelPricingEntry.
-# Pricing entry for a specific model.
-class ApiModelPricingEntry
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelPricingEntryMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelPricingEntryMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelPricingEntryMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Model name (for display purposes).
-  attr_reader :model_name
-  # @return [String] Model UUID.
-  attr_reader :model_uuid
-  # @return [ApiTokenPricing] Token pricing breakdown for a single model.
-  attr_reader :pricing
-  # @return [Integer] Number of prompts/rows routed to this model.
-  attr_reader :prompt_count
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelPricingIntervalMetadata
-  FIELDS = {
-    end_time: "end_time",
-    prices: "prices",
-    start_time: "start_time",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    prices: lambda do |value|
-      ::OctridevDigitalocean::ApiModelPricing.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiModelPricingInterval.
-# A time window during which the model's rates stay the same. Together these intervals show how pricing changes over the course of a day.
-class ApiModelPricingInterval
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelPricingIntervalMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelPricingIntervalMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelPricingIntervalMetadata::DECODERS
-
-  # @return [String] End of the interval, exclusive. Always on the hour.
-  attr_reader :end_time
-  # @return [ApiModelPricing] Pricing per million tokens (aligns with existing ModelPrice pattern)
-  attr_reader :prices
-  # @return [String] Start of the interval, inclusive. Always on the hour.
-  attr_reader :start_time
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelPricingDetailMetadata
+    FIELDS = {
+      variants: 'variants'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      variants: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiModelPricingVariant.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for ApiModelPricingDetail.
+  # The complete set of prices for a model, covering every available variant.
+  class ApiModelPricingDetail
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelPricingDetailMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelPricingDetailMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelPricingDetailMetadata::DECODERS
 
-# Defines the ApiModelPricingTier SDK namespace.
-module ApiModelPricingTier
-  MODEL_PRICING_TIER_UNSPECIFIED = 'MODEL_PRICING_TIER_UNSPECIFIED'
-  MODEL_PRICING_TIER_STANDARD = 'MODEL_PRICING_TIER_STANDARD'
-  MODEL_PRICING_TIER_FAST_MODE = 'MODEL_PRICING_TIER_FAST_MODE'
-  MODEL_PRICING_TIER_EXTENDED_1_M = 'MODEL_PRICING_TIER_EXTENDED_1M'
-  MODEL_PRICING_TIER_EXTENDED_272_K = 'MODEL_PRICING_TIER_EXTENDED_272K'
-  MODEL_PRICING_TIER_BYOK = 'MODEL_PRICING_TIER_BYOK'
-  VALUES = [
-    'MODEL_PRICING_TIER_UNSPECIFIED', 'MODEL_PRICING_TIER_STANDARD', 'MODEL_PRICING_TIER_FAST_MODE',
-    'MODEL_PRICING_TIER_EXTENDED_1M', 'MODEL_PRICING_TIER_EXTENDED_272K', 'MODEL_PRICING_TIER_BYOK'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [Array_of_ApiModelPricingVariant] Each available pricing variant for the model.
+    attr_reader :variants
 
-# Internal model hydration metadata.
-class SdkInternalApiModelPricingVariantMetadata
-  FIELDS = {
-    currency: "currency",
-    label: "label",
-    mode: "mode",
-    prices: "prices",
-    scaled_pricing: "scaled_pricing",
-    tier: "tier",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    mode: lambda do |value|
-      ::OctridevDigitalocean::ApiModelBillingMode.from_value(value)
-    end,
-    prices: lambda do |value|
-      ::OctridevDigitalocean::ApiModelPricing.from_hash(value)
-    end,
-    scaled_pricing: lambda do |value|
-      ::OctridevDigitalocean::ApiModelScaledPricing.from_hash(value)
-    end,
-    tier: lambda do |value|
-      ::OctridevDigitalocean::ApiModelPricingTier.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalApiModelPricingEntryMetadata
+    FIELDS = {
+      model_name: 'model_name',
+      model_uuid: 'model_uuid',
+      pricing: 'pricing',
+      prompt_count: 'prompt_count'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      pricing: lambda do |value|
+        ::OctridevDigitalocean::ApiTokenPricing.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for ApiModelPricingEntry.
+  # Pricing entry for a specific model.
+  class ApiModelPricingEntry
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelPricingEntryMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelPricingEntryMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelPricingEntryMetadata::DECODERS
+
+    # @return [String] Model name (for display purposes).
+    attr_reader :model_name
+    # @return [String] Model UUID.
+    attr_reader :model_uuid
+    # @return [ApiTokenPricing] Token pricing breakdown for a single model.
+    attr_reader :pricing
+    # @return [Integer] Number of prompts/rows routed to this model.
+    attr_reader :prompt_count
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalApiModelPricingIntervalMetadata
+    FIELDS = {
+      end_time: 'end_time',
+      prices: 'prices',
+      start_time: 'start_time'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      prices: lambda do |value|
+        ::OctridevDigitalocean::ApiModelPricing.from_hash(value)
+      end
+    }.freeze
+  end
+
+  # API model for ApiModelPricingInterval.
+  # A time window during which the model's rates stay the same. Together these intervals show how pricing changes over the course of a day.
+  class ApiModelPricingInterval
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelPricingIntervalMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelPricingIntervalMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelPricingIntervalMetadata::DECODERS
+
+    # @return [String] End of the interval, exclusive. Always on the hour.
+    attr_reader :end_time
+    # @return [ApiModelPricing] Pricing per million tokens (aligns with existing ModelPrice pattern)
+    attr_reader :prices
+    # @return [String] Start of the interval, inclusive. Always on the hour.
+    attr_reader :start_time
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
+
+  # Defines the ApiModelPricingTier SDK namespace.
+  module ApiModelPricingTier
+    MODEL_PRICING_TIER_UNSPECIFIED = 'MODEL_PRICING_TIER_UNSPECIFIED'
+    MODEL_PRICING_TIER_STANDARD = 'MODEL_PRICING_TIER_STANDARD'
+    MODEL_PRICING_TIER_FAST_MODE = 'MODEL_PRICING_TIER_FAST_MODE'
+    MODEL_PRICING_TIER_EXTENDED_1_M = 'MODEL_PRICING_TIER_EXTENDED_1M'
+    MODEL_PRICING_TIER_EXTENDED_272_K = 'MODEL_PRICING_TIER_EXTENDED_272K'
+    MODEL_PRICING_TIER_BYOK = 'MODEL_PRICING_TIER_BYOK'
+    VALUES = %w[
+      MODEL_PRICING_TIER_UNSPECIFIED MODEL_PRICING_TIER_STANDARD MODEL_PRICING_TIER_FAST_MODE
+      MODEL_PRICING_TIER_EXTENDED_1M MODEL_PRICING_TIER_EXTENDED_272K MODEL_PRICING_TIER_BYOK
+    ].freeze
+    def self.from_value(value)
+      value
+    end
+  end
+
+  # Internal model hydration metadata.
+  class SdkInternalApiModelPricingVariantMetadata
+    FIELDS = {
+      currency: 'currency',
+      label: 'label',
+      mode: 'mode',
+      prices: 'prices',
+      scaled_pricing: 'scaled_pricing',
+      tier: 'tier'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      mode: lambda do |value|
+        ::OctridevDigitalocean::ApiModelBillingMode.from_value(value)
+      end,
+      prices: lambda do |value|
+        ::OctridevDigitalocean::ApiModelPricing.from_hash(value)
+      end,
+      scaled_pricing: lambda do |value|
+        ::OctridevDigitalocean::ApiModelScaledPricing.from_hash(value)
+      end,
+      tier: lambda do |value|
+        ::OctridevDigitalocean::ApiModelPricingTier.from_value(value)
+      end
+    }.freeze
+  end
 end

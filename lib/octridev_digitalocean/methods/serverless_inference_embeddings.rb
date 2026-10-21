@@ -27,22 +27,21 @@ module OctridevDigitalocean
         encoding_format: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v1/embeddings",
+          '/v1/embeddings',
           config: config,
           body: {
             'model' => model,
             'input' => input,
             'user' => user,
-            'encoding_format' => encoding_format,
+            'encoding_format' => encoding_format
           },
           return_type: ::OctridevDigitalocean::EmbeddingsResponse,
           decoder: :json,
           operation_id: 'inference_create_embedding',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

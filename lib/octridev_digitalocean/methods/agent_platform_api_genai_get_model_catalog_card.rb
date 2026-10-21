@@ -21,22 +21,21 @@ module OctridevDigitalocean
         model_id: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/models/catalog/",
+            '/v2/gen-ai/models/catalog/',
             SdkClient.encode_path_segment(id)
           ].join,
           config: config,
           query: {
-            'model_id' => QueryValue.new(model_id, style: 'form', explode: true),
+            'model_id' => QueryValue.new(model_id, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ApiGetModelCatalogCardOutput,
           decoder: :json,
           operation_id: 'genai_get_model_catalog_card',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

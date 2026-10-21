@@ -17,20 +17,19 @@ module OctridevDigitalocean
         workspace_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/workspaces/",
+            '/v2/gen-ai/workspaces/',
             SdkClient.encode_path_segment(workspace_uuid),
-            "/evaluation_test_cases"
+            '/evaluation_test_cases'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiListEvaluationTestCasesByWorkspaceOutput,
           decoder: :json,
           operation_id: 'genai_list_evaluation_test_cases_by_workspace',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

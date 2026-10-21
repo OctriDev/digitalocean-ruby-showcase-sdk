@@ -5,387 +5,385 @@
 
 # block_storage_actions domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalVolumeActionMetadata
-  FIELDS = {
-    type: "type",
-    resource_id: "resource_id",
-    id: "id",
-    status: "status",
-    started_at: "started_at",
-    completed_at: "completed_at",
-    resource_type: "resource_type",
-    region: "region",
-    region_slug: "region_slug",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::ActionStatus.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevDigitalocean::Region.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for VolumeAction.
-# Typed representation of the `VolumeAction` API schema.
-class VolumeAction
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVolumeActionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVolumeActionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVolumeActionMetadata::DECODERS
-
-  # @return [String] This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
-  attr_reader :type
-  # @return [Integer] A unique identifier for the resource that the action is associated with.
-  attr_reader :resource_id
-  # @return [Integer] A unique numeric ID that can be used to identify and reference an action.
-  attr_reader :id
-  # @return [ActionStatus] The current status of the action. This can be "in-progress", "completed", or "errored".
-  attr_reader :status
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was initiated.
-  attr_reader :started_at
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was completed.
-  attr_reader :completed_at
-  # @return [String] The type of resource that the action is associated with.
-  attr_reader :resource_type
-  # @return [Region] Optional object value serialized in the `region` wire field.
-  attr_reader :region
-  # @return [String] A human-readable string that is used as a unique identifier for each region.
-  attr_reader :region_slug
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVolumeActionMetadata
+    FIELDS = {
+      type: 'type',
+      resource_id: 'resource_id',
+      id: 'id',
+      status: 'status',
+      started_at: 'started_at',
+      completed_at: 'completed_at',
+      resource_type: 'resource_type',
+      region: 'region',
+      region_slug: 'region_slug'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::ActionStatus.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevDigitalocean::Region.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VolumeAction.
+  # Typed representation of the `VolumeAction` API schema.
+  class VolumeAction
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVolumeActionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVolumeActionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVolumeActionMetadata::DECODERS
+
+    # @return [String] This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
+    attr_reader :type
+    # @return [Integer] A unique identifier for the resource that the action is associated with.
+    attr_reader :resource_id
+    # @return [Integer] A unique numeric ID that can be used to identify and reference an action.
+    attr_reader :id
+    # @return [ActionStatus] The current status of the action. This can be "in-progress", "completed", or "errored".
+    attr_reader :status
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was initiated.
+    attr_reader :started_at
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the action was completed.
+    attr_reader :completed_at
+    # @return [String] The type of resource that the action is associated with.
+    attr_reader :resource_type
+    # @return [Region] Optional object value serialized in the `region` wire field.
+    attr_reader :region
+    # @return [String] A human-readable string that is used as a unique identifier for each region.
+    attr_reader :region_slug
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the VolumeActionDropletId SDK value decoder.
-module VolumeActionDropletId
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVolumeActionPostAttachMetadata
-  FIELDS = {
-    type: "type",
-    region: "region",
-    droplet_id: "droplet_id",
-    tags: "tags",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    droplet_id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::VolumeActionPostBaseType.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevDigitalocean::RegionSlug.from_value(value)
-    end,
-    droplet_id: lambda do |value|
-      ::OctridevDigitalocean::VolumeActionDropletId.from_value(value)
-    end,
-    tags: lambda do |value|
-      ::OctridevDigitalocean::TagsArray.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for VolumeActionPostAttach.
-# Typed representation of the `VolumeActionPostAttach` API schema.
-class VolumeActionPostAttach
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVolumeActionPostAttachMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVolumeActionPostAttachMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVolumeActionPostAttachMetadata::DECODERS
-
-  # @return [VolumeActionPostBaseType] The volume action to initiate.
-  attr_reader :type
-  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-  attr_reader :region
-  # @return [VolumeActionDropletId] The unique identifier for the Droplet the volume will be attached or detached from.
-  attr_reader :droplet_id
-  # @return [TagsArray] A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
-  attr_reader :tags
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the VolumeActionDropletId SDK value decoder.
+  module VolumeActionDropletId
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVolumeActionPostAttachMetadata
+    FIELDS = {
+      type: 'type',
+      region: 'region',
+      droplet_id: 'droplet_id',
+      tags: 'tags'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      droplet_id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::VolumeActionPostBaseType.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevDigitalocean::RegionSlug.from_value(value)
+      end,
+      droplet_id: lambda do |value|
+        ::OctridevDigitalocean::VolumeActionDropletId.from_value(value)
+      end,
+      tags: lambda do |value|
+        ::OctridevDigitalocean::TagsArray.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for VolumeActionPostAttach.
+  # Typed representation of the `VolumeActionPostAttach` API schema.
+  class VolumeActionPostAttach
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVolumeActionPostAttachMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVolumeActionPostAttachMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVolumeActionPostAttachMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalVolumeActionPostBaseMetadata
-  FIELDS = {
-    type: "type",
-    region: "region",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::VolumeActionPostBaseType.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevDigitalocean::RegionSlug.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [VolumeActionPostBaseType] The volume action to initiate.
+    attr_reader :type
+    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+    attr_reader :region
+    # @return [VolumeActionDropletId] The unique identifier for the Droplet the volume will be attached or detached from.
+    attr_reader :droplet_id
+    # @return [TagsArray] A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
+    attr_reader :tags
 
-# API model for VolumeActionPostBase.
-# Typed representation of the `VolumeActionPostBase` API schema.
-class VolumeActionPostBase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVolumeActionPostBaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVolumeActionPostBaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVolumeActionPostBaseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [VolumeActionPostBaseType] The volume action to initiate.
-  attr_reader :type
-  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-  attr_reader :region
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalVolumeActionPostBaseMetadata
+    FIELDS = {
+      type: 'type',
+      region: 'region'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::VolumeActionPostBaseType.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevDigitalocean::RegionSlug.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for VolumeActionPostBase.
+  # Typed representation of the `VolumeActionPostBase` API schema.
+  class VolumeActionPostBase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVolumeActionPostBaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVolumeActionPostBaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVolumeActionPostBaseMetadata::DECODERS
 
-# Defines the VolumeActionPostBaseType SDK namespace.
-module VolumeActionPostBaseType
-  ATTACH = 'attach'
-  DETACH = 'detach'
-  RESIZE = 'resize'
-  VALUES = ['attach', 'detach', 'resize'].freeze
-  def self.from_value(value)
-    return value if VALUES.include?(value)
+    # @return [VolumeActionPostBaseType] The volume action to initiate.
+    attr_reader :type
+    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+    attr_reader :region
 
-    raise SdkValidationError.new('VolumeActionPostBaseType', 'enum', "Unknown VolumeActionPostBaseType: #{value}")
-  end
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# Internal model hydration metadata.
-class SdkInternalVolumeActionPostDetachMetadata
-  FIELDS = {
-    type: "type",
-    region: "region",
-    droplet_id: "droplet_id",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    droplet_id
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::VolumeActionPostBaseType.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevDigitalocean::RegionSlug.from_value(value)
-    end,
-    droplet_id: lambda do |value|
-      ::OctridevDigitalocean::VolumeActionDropletId.from_value(value)
-    end,
-  }.freeze
-end
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-# API model for VolumeActionPostDetach.
-# Typed representation of the `VolumeActionPostDetach` API schema.
-class VolumeActionPostDetach
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVolumeActionPostDetachMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVolumeActionPostDetachMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVolumeActionPostDetachMetadata::DECODERS
-
-  # @return [VolumeActionPostBaseType] The volume action to initiate.
-  attr_reader :type
-  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-  attr_reader :region
-  # @return [VolumeActionDropletId] The unique identifier for the Droplet the volume will be attached or detached from.
-  attr_reader :droplet_id
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the VolumeActionPostBaseType SDK namespace.
+  module VolumeActionPostBaseType
+    ATTACH = 'attach'
+    DETACH = 'detach'
+    RESIZE = 'resize'
+    VALUES = %w[attach detach resize].freeze
+    def self.from_value(value)
+      return value if VALUES.include?(value)
+
+      raise SdkValidationError.new('VolumeActionPostBaseType', 'enum', "Unknown VolumeActionPostBaseType: #{value}")
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVolumeActionPostResizeMetadata
-  FIELDS = {
-    type: "type",
-    region: "region",
-    size_gigabytes: "size_gigabytes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    size_gigabytes
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::VolumeActionPostBaseType.from_value(value)
-    end,
-    region: lambda do |value|
-      ::OctridevDigitalocean::RegionSlug.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for VolumeActionPostResize.
-# Typed representation of the `VolumeActionPostResize` API schema.
-class VolumeActionPostResize
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVolumeActionPostResizeMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVolumeActionPostResizeMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVolumeActionPostResizeMetadata::DECODERS
-
-  # @return [VolumeActionPostBaseType] The volume action to initiate.
-  attr_reader :type
-  # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
-  attr_reader :region
-  # @return [Integer] The new size of the block storage volume in GiB (1024^3).
-  attr_reader :size_gigabytes
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVolumeActionPostDetachMetadata
+    FIELDS = {
+      type: 'type',
+      region: 'region',
+      droplet_id: 'droplet_id'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      droplet_id
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::VolumeActionPostBaseType.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevDigitalocean::RegionSlug.from_value(value)
+      end,
+      droplet_id: lambda do |value|
+        ::OctridevDigitalocean::VolumeActionDropletId.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VolumeActionPostDetach.
+  # Typed representation of the `VolumeActionPostDetach` API schema.
+  class VolumeActionPostDetach
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVolumeActionPostDetachMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVolumeActionPostDetachMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVolumeActionPostDetachMetadata::DECODERS
+
+    # @return [VolumeActionPostBaseType] The volume action to initiate.
+    attr_reader :type
+    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+    attr_reader :region
+    # @return [VolumeActionDropletId] The unique identifier for the Droplet the volume will be attached or detached from.
+    attr_reader :droplet_id
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVolumeActionResponseMetadata
-  FIELDS = {
-    action: "action",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    action: lambda do |value|
-      ::OctridevDigitalocean::VolumeAction.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for VolumeActionResponse.
-# Typed representation of the `VolumeActionResponse` API schema.
-class VolumeActionResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVolumeActionResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVolumeActionResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVolumeActionResponseMetadata::DECODERS
-
-  # @return [VolumeAction] Optional object value serialized in the `action` wire field.
-  attr_reader :action
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVolumeActionPostResizeMetadata
+    FIELDS = {
+      type: 'type',
+      region: 'region',
+      size_gigabytes: 'size_gigabytes'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      size_gigabytes
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::VolumeActionPostBaseType.from_value(value)
+      end,
+      region: lambda do |value|
+        ::OctridevDigitalocean::RegionSlug.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VolumeActionPostResize.
+  # Typed representation of the `VolumeActionPostResize` API schema.
+  class VolumeActionPostResize
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVolumeActionPostResizeMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVolumeActionPostResizeMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVolumeActionPostResizeMetadata::DECODERS
+
+    # @return [VolumeActionPostBaseType] The volume action to initiate.
+    attr_reader :type
+    # @return [RegionSlug] The slug identifier for the region where the resource will initially be available.
+    attr_reader :region
+    # @return [Integer] The new size of the block storage volume in GiB (1024^3).
+    attr_reader :size_gigabytes
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalVolumeActionsMetadata
-  FIELDS = {
-    actions: "actions",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    actions: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::VolumeAction.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for VolumeActions.
-# Typed representation of the `VolumeActions` API schema.
-class VolumeActions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalVolumeActionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalVolumeActionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalVolumeActionsMetadata::DECODERS
-
-  attr_reader :actions
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalVolumeActionResponseMetadata
+    FIELDS = {
+      action: 'action'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      action: lambda do |value|
+        ::OctridevDigitalocean::VolumeAction.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for VolumeActionResponse.
+  # Typed representation of the `VolumeActionResponse` API schema.
+  class VolumeActionResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVolumeActionResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVolumeActionResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVolumeActionResponseMetadata::DECODERS
+
+    # @return [VolumeAction] Optional object value serialized in the `action` wire field.
+    attr_reader :action
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalVolumeActionsMetadata
+    FIELDS = {
+      actions: 'actions',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      actions: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::VolumeAction.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
-end
+
+  # API model for VolumeActions.
+  # Typed representation of the `VolumeActions` API schema.
+  class VolumeActions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalVolumeActionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalVolumeActionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalVolumeActionsMetadata::DECODERS
+
+    attr_reader :actions
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

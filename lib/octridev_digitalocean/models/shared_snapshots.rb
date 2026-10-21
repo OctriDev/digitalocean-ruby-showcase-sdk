@@ -5,141 +5,140 @@
 
 # shared_snapshots domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalSnapshotsMetadata
-  FIELDS = {
-    id: "id",
-    name: "name",
-    created_at: "created_at",
-    regions: "regions",
-    min_disk_size: "min_disk_size",
-    size_gigabytes: "size_gigabytes",
-    resource_id: "resource_id",
-    resource_type: "resource_type",
-    tags: "tags",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    name
-    created_at
-    regions
-    min_disk_size
-    size_gigabytes
-    resource_id
-    resource_type
-    tags
-  ].freeze
-  DECODERS = {
-    resource_type: lambda do |value|
-      ::OctridevDigitalocean::SnapshotsVariant2ResourceType.from_value(value)
-    end,
-  }.freeze
-  NULLABLE_FIELDS = %i[
-    tags
-  ].freeze
-end
-
-# API model for Snapshots.
-# Typed representation of the `Snapshots` API schema.
-class Snapshots
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSnapshotsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSnapshotsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSnapshotsMetadata::DECODERS
-
-  # @return [String] The unique identifier for the snapshot.
-  attr_reader :id
-  # @return [String] A human-readable name for the snapshot.
-  attr_reader :name
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the snapshot was created.
-  attr_reader :created_at
-  # @return [Array_of_String] An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.
-  attr_reader :regions
-  # @return [Integer] The minimum size in GB required for a volume or Droplet to use this snapshot.
-  attr_reader :min_disk_size
-  # @return [Float] The billable size of the snapshot in gigabytes.
-  attr_reader :size_gigabytes
-  # @return [String] The unique identifier for the resource that the snapshot originated from.
-  attr_reader :resource_id
-  # @return [SnapshotsVariant2ResourceType] The type of resource that the snapshot originated from.
-  attr_reader :resource_type
-  # @return [Array_of_String] An array of Tags the snapshot has been tagged with. Requires `tag:read` scope.
-  attr_reader :tags
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSnapshotsMetadata
+    FIELDS = {
+      id: 'id',
+      name: 'name',
+      created_at: 'created_at',
+      regions: 'regions',
+      min_disk_size: 'min_disk_size',
+      size_gigabytes: 'size_gigabytes',
+      resource_id: 'resource_id',
+      resource_type: 'resource_type',
+      tags: 'tags'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      name
+      created_at
+      regions
+      min_disk_size
+      size_gigabytes
+      resource_id
+      resource_type
+      tags
+    ].freeze
+    DECODERS = {
+      resource_type: lambda do |value|
+        ::OctridevDigitalocean::SnapshotsVariant2ResourceType.from_value(value)
+      end
+    }.freeze
+    NULLABLE_FIELDS = %i[
+      tags
+    ].freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalSnapshotsMetadata::NULLABLE_FIELDS)
+  # API model for Snapshots.
+  # Typed representation of the `Snapshots` API schema.
+  class Snapshots
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSnapshotsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSnapshotsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSnapshotsMetadata::DECODERS
+
+    # @return [String] The unique identifier for the snapshot.
+    attr_reader :id
+    # @return [String] A human-readable name for the snapshot.
+    attr_reader :name
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the snapshot was created.
+    attr_reader :created_at
+    # @return [Array_of_String] An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.
+    attr_reader :regions
+    # @return [Integer] The minimum size in GB required for a volume or Droplet to use this snapshot.
+    attr_reader :min_disk_size
+    # @return [Float] The billable size of the snapshot in gigabytes.
+    attr_reader :size_gigabytes
+    # @return [String] The unique identifier for the resource that the snapshot originated from.
+    attr_reader :resource_id
+    # @return [SnapshotsVariant2ResourceType] The type of resource that the snapshot originated from.
+    attr_reader :resource_type
+    # @return [Array_of_String] An array of Tags the snapshot has been tagged with. Requires `tag:read` scope.
+    attr_reader :tags
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalSnapshotsMetadata::NULLABLE_FIELDS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the SnapshotsVariant2ResourceType SDK namespace.
-module SnapshotsVariant2ResourceType
-  DROPLET = 'droplet'
-  VOLUME = 'volume'
-  VALUES = ['droplet', 'volume'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSnapshotsBaseMetadata
-  FIELDS = {
-    name: "name",
-    created_at: "created_at",
-    regions: "regions",
-    min_disk_size: "min_disk_size",
-    size_gigabytes: "size_gigabytes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    created_at
-    regions
-    min_disk_size
-    size_gigabytes
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for SnapshotsBase.
-# Typed representation of the `SnapshotsBase` API schema.
-class SnapshotsBase
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSnapshotsBaseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSnapshotsBaseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSnapshotsBaseMetadata::DECODERS
-
-  # @return [String] A human-readable name for the snapshot.
-  attr_reader :name
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the snapshot was created.
-  attr_reader :created_at
-  # @return [Array_of_String] An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.
-  attr_reader :regions
-  # @return [Integer] The minimum size in GB required for a volume or Droplet to use this snapshot.
-  attr_reader :min_disk_size
-  # @return [Float] The billable size of the snapshot in gigabytes.
-  attr_reader :size_gigabytes
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the SnapshotsVariant2ResourceType SDK namespace.
+  module SnapshotsVariant2ResourceType
+    DROPLET = 'droplet'
+    VOLUME = 'volume'
+    VALUES = %w[droplet volume].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalSnapshotsBaseMetadata
+    FIELDS = {
+      name: 'name',
+      created_at: 'created_at',
+      regions: 'regions',
+      min_disk_size: 'min_disk_size',
+      size_gigabytes: 'size_gigabytes'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      created_at
+      regions
+      min_disk_size
+      size_gigabytes
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for SnapshotsBase.
+  # Typed representation of the `SnapshotsBase` API schema.
+  class SnapshotsBase
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSnapshotsBaseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSnapshotsBaseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSnapshotsBaseMetadata::DECODERS
+
+    # @return [String] A human-readable name for the snapshot.
+    attr_reader :name
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the snapshot was created.
+    attr_reader :created_at
+    # @return [Array_of_String] An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.
+    attr_reader :regions
+    # @return [Integer] The minimum size in GB required for a volume or Droplet to use this snapshot.
+    attr_reader :min_disk_size
+    # @return [Float] The billable size of the snapshot in gigabytes.
+    attr_reader :size_gigabytes
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

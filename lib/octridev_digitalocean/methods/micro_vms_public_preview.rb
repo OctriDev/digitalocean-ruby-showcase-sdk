@@ -12,12 +12,10 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalMicrovmCheckpointsCreateMetadata
         FIELDS = {
-          name: "name",
+          name: 'name'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for MicrovmCheckpointsCreate.
@@ -61,27 +59,26 @@ module OctridevDigitalocean
         tag_name: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         SdkClient.request(
           'GET',
-          "/v2/microvms",
+          '/v2/microvms',
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'region' => QueryValue.new(region, style: 'form', explode: true),
             'name' => QueryValue.new(name, style: 'form', explode: true),
-            'tag_name' => QueryValue.new(tag_name, style: 'form', explode: true),
+            'tag_name' => QueryValue.new(tag_name, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllMicrovms,
           decoder: :json,
           operation_id: 'microvms_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -136,7 +133,6 @@ module OctridevDigitalocean
         tags: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_pattern('name', name, '^[a-z0-9-]{1,63}$')
 
         Validation.if_given(vpc_uuid) { Validation.validate_uuid('vpc_uuid', vpc_uuid) }
@@ -145,7 +141,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          "/v2/microvms",
+          '/v2/microvms',
           config: config,
           body: {
             'name' => name,
@@ -160,13 +156,13 @@ module OctridevDigitalocean
             'http_protocol' => http_protocol,
             'ports' => ports,
             'environment' => environment,
-            'tags' => tags,
+            'tags' => tags
           },
           return_type: ::OctridevDigitalocean::MicrovmCreated,
           decoder: :json,
           operation_id: 'microvms_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -175,16 +171,15 @@ module OctridevDigitalocean
         config:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/microvms/options",
+          '/v2/microvms/options',
           config: config,
           return_type: ::OctridevDigitalocean::MicrovmOptions,
           decoder: :json,
           operation_id: 'microvms_get_options',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -200,7 +195,6 @@ module OctridevDigitalocean
         microvm_id: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -209,18 +203,18 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'GET',
-          "/v2/microvms/checkpoints",
+          '/v2/microvms/checkpoints',
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'microvm_id' => QueryValue.new(microvm_id, style: 'form', explode: true),
+            'microvm_id' => QueryValue.new(microvm_id, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllCheckpoints,
           decoder: :json,
           operation_id: 'microvm_checkpoints_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -232,13 +226,12 @@ module OctridevDigitalocean
         checkpoint_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('checkpoint_id', checkpoint_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/microvms/checkpoints/",
+            '/v2/microvms/checkpoints/',
             SdkClient.encode_path_segment(checkpoint_id)
           ].join,
           config: config,
@@ -246,7 +239,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'microvm_checkpoints_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -258,20 +251,19 @@ module OctridevDigitalocean
         checkpoint_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('checkpoint_id', checkpoint_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/microvms/checkpoints/",
+            '/v2/microvms/checkpoints/',
             SdkClient.encode_path_segment(checkpoint_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'microvm_checkpoints_delete',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -283,13 +275,12 @@ module OctridevDigitalocean
         microvm_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('microvm_id', microvm_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/microvms/",
+            '/v2/microvms/',
             SdkClient.encode_path_segment(microvm_id)
           ].join,
           config: config,
@@ -297,7 +288,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'microvms_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -309,20 +300,19 @@ module OctridevDigitalocean
         microvm_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('microvm_id', microvm_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/microvms/",
+            '/v2/microvms/',
             SdkClient.encode_path_segment(microvm_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'microvms_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -334,22 +324,21 @@ module OctridevDigitalocean
         microvm_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('microvm_id', microvm_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/microvms/",
+            '/v2/microvms/',
             SdkClient.encode_path_segment(microvm_id),
-            "/pause"
+            '/pause'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::MicrovmResponse,
           decoder: :json,
           operation_id: 'microvms_post_pause',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -361,22 +350,21 @@ module OctridevDigitalocean
         microvm_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('microvm_id', microvm_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/microvms/",
+            '/v2/microvms/',
             SdkClient.encode_path_segment(microvm_id),
-            "/resume"
+            '/resume'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::MicrovmResponse,
           decoder: :json,
           operation_id: 'microvms_post_resume',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -392,7 +380,6 @@ module OctridevDigitalocean
         cwd: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('microvm_id', microvm_id)
 
         Validation.validate_items('argv', argv, min: 1)
@@ -400,20 +387,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'POST',
           [
-            "/v2/microvms/",
+            '/v2/microvms/',
             SdkClient.encode_path_segment(microvm_id),
-            "/exec"
+            '/exec'
           ].join,
           config: config,
           body: {
             'argv' => argv,
-            'cwd' => cwd,
+            'cwd' => cwd
           },
           return_type: ::OctridevDigitalocean::ExecResponse,
           decoder: :json,
           operation_id: 'microvms_run_command',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::MicrovmError, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::MicrovmError, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::MicrovmError, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::MicrovmError, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -429,30 +416,29 @@ module OctridevDigitalocean
         cols: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('microvm_id', microvm_id)
 
-        Validation.if_given(rows) { Validation.validate_range('rows', rows, min: 1, max: 65535) }
+        Validation.if_given(rows) { Validation.validate_range('rows', rows, min: 1, max: 65_535) }
 
-        Validation.if_given(cols) { Validation.validate_range('cols', cols, min: 1, max: 65535) }
+        Validation.if_given(cols) { Validation.validate_range('cols', cols, min: 1, max: 65_535) }
 
         SdkClient.request(
           'GET',
           [
-            "/v2/microvms/",
+            '/v2/microvms/',
             SdkClient.encode_path_segment(microvm_id),
-            "/console"
+            '/console'
           ].join,
           config: config,
           query: {
             'rows' => QueryValue.new(rows, style: 'form', explode: true),
-            'cols' => QueryValue.new(cols, style: 'form', explode: true),
+            'cols' => QueryValue.new(cols, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Error2,
           decoder: :json,
           operation_id: 'microvms_get_console',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::MicrovmError, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::MicrovmError, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -467,25 +453,24 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('microvm_id', microvm_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/microvms/",
+            '/v2/microvms/',
             SdkClient.encode_path_segment(microvm_id),
-            "/checkpoints"
+            '/checkpoints'
           ].join,
           config: config,
           body: {
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::CheckpointResponse,
           decoder: :json,
           operation_id: 'microvm_checkpoints_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::MicrovmError, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::MicrovmError, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

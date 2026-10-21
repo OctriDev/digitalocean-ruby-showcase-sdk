@@ -22,24 +22,23 @@ module OctridevDigitalocean
         stop: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/agents/",
+            '/v2/gen-ai/agents/',
             SdkClient.encode_path_segment(uuid),
-            "/usage"
+            '/usage'
           ].join,
           config: config,
           query: {
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'stop' => QueryValue.new(stop, style: 'form', explode: true),
+            'stop' => QueryValue.new(stop, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ApiGetAgentUsageOutput,
           decoder: :json,
           operation_id: 'genai_get_agent_usage',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

@@ -30,22 +30,21 @@ module OctridevDigitalocean
         name: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/evaluation_datasets",
+          '/v2/gen-ai/evaluation_datasets',
           config: config,
           body: {
             'dataset_paradigm' => dataset_paradigm,
             'dataset_type' => dataset_type,
             'file_upload_dataset' => file_upload_dataset,
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::ApiCreateEvaluationDatasetOutput,
           decoder: :json,
           operation_id: 'genai_create_evaluation_dataset',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

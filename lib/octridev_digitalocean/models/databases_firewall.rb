@@ -5,174 +5,173 @@
 
 # databases_firewall domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalFirewallRuleMetadata
-  FIELDS = {
-    uuid: "uuid",
-    cluster_uuid: "cluster_uuid",
-    type: "type",
-    value: "value",
-    created_at: "created_at",
-    description: "description",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    value
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::FirewallRuleType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for FirewallRule.
-# Typed representation of the `FirewallRule` API schema.
-class FirewallRule
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalFirewallRuleMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalFirewallRuleMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalFirewallRuleMetadata::DECODERS
-
-  # @return [String] A unique ID for the firewall rule itself.
-  attr_reader :uuid
-  # @return [String] A unique ID for the database cluster to which the rule is applied.
-  attr_reader :cluster_uuid
-  # @return [FirewallRuleType] The type of resource that the firewall rule allows to access the database cluster.
-  attr_reader :type
-  # @return [String] The ID of the specific resource, the name of a tag applied to a group of resources, or the IP address that the firewall rule allows to access the database cluster.
-  attr_reader :value
-  # @return [String] A time value given in ISO8601 combined date and time format that represents when the firewall rule was created.
-  attr_reader :created_at
-  # @return [String] A human-readable description of the rule.
-  attr_reader :description
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalFirewallRuleMetadata
+    FIELDS = {
+      uuid: 'uuid',
+      cluster_uuid: 'cluster_uuid',
+      type: 'type',
+      value: 'value',
+      created_at: 'created_at',
+      description: 'description'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      value
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::FirewallRuleType.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for FirewallRule.
+  # Typed representation of the `FirewallRule` API schema.
+  class FirewallRule
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalFirewallRuleMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalFirewallRuleMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalFirewallRuleMetadata::DECODERS
+
+    # @return [String] A unique ID for the firewall rule itself.
+    attr_reader :uuid
+    # @return [String] A unique ID for the database cluster to which the rule is applied.
+    attr_reader :cluster_uuid
+    # @return [FirewallRuleType] The type of resource that the firewall rule allows to access the database cluster.
+    attr_reader :type
+    # @return [String] The ID of the specific resource, the name of a tag applied to a group of resources, or the IP address that the firewall rule allows to access the database cluster.
+    attr_reader :value
+    # @return [String] A time value given in ISO8601 combined date and time format that represents when the firewall rule was created.
+    attr_reader :created_at
+    # @return [String] A human-readable description of the rule.
+    attr_reader :description
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the FirewallRuleType SDK namespace.
-module FirewallRuleType
-  DROPLET = 'droplet'
-  K8_S = 'k8s'
-  IP_ADDR = 'ip_addr'
-  TAG = 'tag'
-  APP = 'app'
-  VALUES = ['droplet', 'k8s', 'ip_addr', 'tag', 'app'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalFirewallRuleRequestMetadata
-  FIELDS = {
-    uuid: "uuid",
-    type: "type",
-    value: "value",
-    description: "description",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    value
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::FirewallRuleRequestType.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for FirewallRuleRequest.
-# Typed representation of the `FirewallRuleRequest` API schema.
-class FirewallRuleRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalFirewallRuleRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalFirewallRuleRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalFirewallRuleRequestMetadata::DECODERS
-
-  # @return [String] A unique ID for the firewall rule itself.
-  attr_reader :uuid
-  # @return [FirewallRuleRequestType] The type of resource that the firewall rule allows to access the database cluster.
-  attr_reader :type
-  # @return [String] The ID of the specific resource, the name of a tag applied to a group of resources, or the IP address that the firewall rule allows to access the database cluster.
-  attr_reader :value
-  # @return [String] A human-readable description of the rule.
-  attr_reader :description
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the FirewallRuleType SDK namespace.
+  module FirewallRuleType
+    DROPLET = 'droplet'
+    K8_S = 'k8s'
+    IP_ADDR = 'ip_addr'
+    TAG = 'tag'
+    APP = 'app'
+    VALUES = %w[droplet k8s ip_addr tag app].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalFirewallRuleRequestMetadata
+    FIELDS = {
+      uuid: 'uuid',
+      type: 'type',
+      value: 'value',
+      description: 'description'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      value
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::FirewallRuleRequestType.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for FirewallRuleRequest.
+  # Typed representation of the `FirewallRuleRequest` API schema.
+  class FirewallRuleRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalFirewallRuleRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalFirewallRuleRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalFirewallRuleRequestMetadata::DECODERS
 
-# Defines the FirewallRuleRequestType SDK namespace.
-module FirewallRuleRequestType
-  DROPLET = 'droplet'
-  K8_S = 'k8s'
-  IP_ADDR = 'ip_addr'
-  TAG = 'tag'
-  APP = 'app'
-  VALUES = ['droplet', 'k8s', 'ip_addr', 'tag', 'app'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] A unique ID for the firewall rule itself.
+    attr_reader :uuid
+    # @return [FirewallRuleRequestType] The type of resource that the firewall rule allows to access the database cluster.
+    attr_reader :type
+    # @return [String] The ID of the specific resource, the name of a tag applied to a group of resources, or the IP address that the firewall rule allows to access the database cluster.
+    attr_reader :value
+    # @return [String] A human-readable description of the rule.
+    attr_reader :description
 
-# Internal model hydration metadata.
-class SdkInternalFirewallRulesResponseMetadata
-  FIELDS = {
-    rules: "rules",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    rules: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::FirewallRule.from_hash(item) }
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for FirewallRulesResponse.
-# Typed representation of the `FirewallRulesResponse` API schema.
-class FirewallRulesResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalFirewallRulesResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalFirewallRulesResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalFirewallRulesResponseMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [Array_of_FirewallRule] Optional array value serialized in the `rules` wire field.
-  attr_reader :rules
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the FirewallRuleRequestType SDK namespace.
+  module FirewallRuleRequestType
+    DROPLET = 'droplet'
+    K8_S = 'k8s'
+    IP_ADDR = 'ip_addr'
+    TAG = 'tag'
+    APP = 'app'
+    VALUES = %w[droplet k8s ip_addr tag app].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalFirewallRulesResponseMetadata
+    FIELDS = {
+      rules: 'rules'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      rules: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::FirewallRule.from_hash(item) }
+      end
+    }.freeze
   end
-end
+
+  # API model for FirewallRulesResponse.
+  # Typed representation of the `FirewallRulesResponse` API schema.
+  class FirewallRulesResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalFirewallRulesResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalFirewallRulesResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalFirewallRulesResponseMetadata::DECODERS
+
+    # @return [Array_of_FirewallRule] Optional array value serialized in the `rules` wire field.
+    attr_reader :rules
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+  end
 end

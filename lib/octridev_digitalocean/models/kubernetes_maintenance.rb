@@ -5,126 +5,124 @@
 
 # kubernetes_maintenance domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalMaintenancePolicyMetadata
-  FIELDS = {
-    start_time: "start_time",
-    duration: "duration",
-    day: "day",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    day: lambda do |value|
-      ::OctridevDigitalocean::MaintenancePolicyDay.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for MaintenancePolicy.
-# An object specifying the maintenance window policy for the Kubernetes cluster.
-class MaintenancePolicy
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMaintenancePolicyMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMaintenancePolicyMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMaintenancePolicyMetadata::DECODERS
-
-  # @return [String] The start time in UTC of the maintenance window policy in 24-hour clock format / HH:MM notation (e.g., `15:00`).
-  attr_reader :start_time
-  # @return [String] The duration of the maintenance window policy in human-readable format.
-  attr_reader :duration
-  # @return [MaintenancePolicyDay] The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to indicate an arbitrary week day.
-  attr_reader :day
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalMaintenancePolicyMetadata
+    FIELDS = {
+      start_time: 'start_time',
+      duration: 'duration',
+      day: 'day'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      day: lambda do |value|
+        ::OctridevDigitalocean::MaintenancePolicyDay.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for MaintenancePolicy.
+  # An object specifying the maintenance window policy for the Kubernetes cluster.
+  class MaintenancePolicy
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMaintenancePolicyMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMaintenancePolicyMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMaintenancePolicyMetadata::DECODERS
+
+    # @return [String] The start time in UTC of the maintenance window policy in 24-hour clock format / HH:MM notation (e.g., `15:00`).
+    attr_reader :start_time
+    # @return [String] The duration of the maintenance window policy in human-readable format.
+    attr_reader :duration
+    # @return [MaintenancePolicyDay] The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to indicate an arbitrary week day.
+    attr_reader :day
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the MaintenancePolicyDay SDK namespace.
-module MaintenancePolicyDay
-  ANY = 'any'
-  MONDAY = 'monday'
-  TUESDAY = 'tuesday'
-  WEDNESDAY = 'wednesday'
-  THURSDAY = 'thursday'
-  FRIDAY = 'friday'
-  SATURDAY = 'saturday'
-  SUNDAY = 'sunday'
-  VALUES = [
-    'any', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalMaintenancePolicyRequestMetadata
-  FIELDS = {
-    start_time: "start_time",
-    day: "day",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    day: lambda do |value|
-      ::OctridevDigitalocean::MaintenancePolicyRequestDay.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for MaintenancePolicyRequest.
-# An object specifying the maintenance window policy for the Kubernetes cluster.
-class MaintenancePolicyRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalMaintenancePolicyRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalMaintenancePolicyRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalMaintenancePolicyRequestMetadata::DECODERS
-
-  # @return [String] The start time in UTC of the maintenance window policy in 24-hour clock format / HH:MM notation (e.g., `15:00`).
-  attr_reader :start_time
-  # @return [MaintenancePolicyRequestDay] The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to indicate an arbitrary week day.
-  attr_reader :day
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the MaintenancePolicyDay SDK namespace.
+  module MaintenancePolicyDay
+    ANY = 'any'
+    MONDAY = 'monday'
+    TUESDAY = 'tuesday'
+    WEDNESDAY = 'wednesday'
+    THURSDAY = 'thursday'
+    FRIDAY = 'friday'
+    SATURDAY = 'saturday'
+    SUNDAY = 'sunday'
+    VALUES = %w[
+      any monday tuesday wednesday thursday friday saturday sunday
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalMaintenancePolicyRequestMetadata
+    FIELDS = {
+      start_time: 'start_time',
+      day: 'day'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      day: lambda do |value|
+        ::OctridevDigitalocean::MaintenancePolicyRequestDay.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
+  # API model for MaintenancePolicyRequest.
+  # An object specifying the maintenance window policy for the Kubernetes cluster.
+  class MaintenancePolicyRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalMaintenancePolicyRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalMaintenancePolicyRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalMaintenancePolicyRequestMetadata::DECODERS
 
-# Defines the MaintenancePolicyRequestDay SDK namespace.
-module MaintenancePolicyRequestDay
-  ANY = 'any'
-  MONDAY = 'monday'
-  TUESDAY = 'tuesday'
-  WEDNESDAY = 'wednesday'
-  THURSDAY = 'thursday'
-  FRIDAY = 'friday'
-  SATURDAY = 'saturday'
-  SUNDAY = 'sunday'
-  VALUES = [
-    'any', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
-  ].freeze
-  def self.from_value(value)
-    value
+    # @return [String] The start time in UTC of the maintenance window policy in 24-hour clock format / HH:MM notation (e.g., `15:00`).
+    attr_reader :start_time
+    # @return [MaintenancePolicyRequestDay] The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to indicate an arbitrary week day.
+    attr_reader :day
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
+
+  # Defines the MaintenancePolicyRequestDay SDK namespace.
+  module MaintenancePolicyRequestDay
+    ANY = 'any'
+    MONDAY = 'monday'
+    TUESDAY = 'tuesday'
+    WEDNESDAY = 'wednesday'
+    THURSDAY = 'thursday'
+    FRIDAY = 'friday'
+    SATURDAY = 'saturday'
+    SUNDAY = 'sunday'
+    VALUES = %w[
+      any monday tuesday wednesday thursday friday saturday sunday
+    ].freeze
+    def self.from_value(value)
+      value
+    end
+  end
 end

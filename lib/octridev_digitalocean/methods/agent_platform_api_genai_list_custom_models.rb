@@ -21,21 +21,20 @@ module OctridevDigitalocean
         status: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/gen-ai/custom_models",
+          '/v2/gen-ai/custom_models',
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'status' => QueryValue.new(status, style: 'form', explode: true),
+            'status' => QueryValue.new(status, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ApiListCustomModelsOutputPublic,
           decoder: :json,
           operation_id: 'genai_list_custom_models',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
     end

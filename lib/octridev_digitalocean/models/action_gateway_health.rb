@@ -5,103 +5,100 @@
 
 # action_gateway_health domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalHealthMetricsMetadata
-  FIELDS = {
-    data_status: "data_status",
-    uptime_percentage: "uptime_percentage",
-    latency_p50_ms: "latency_p50_ms",
-    latency_p95_ms: "latency_p95_ms",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    data_status: lambda do |value|
-      ::OctridevDigitalocean::HealthMetricsDataStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for HealthMetrics.
-# Availability and latency of a tool or provider over a window, aggregated across all customers. Request volumes are not reported.
-class HealthMetrics
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalHealthMetricsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalHealthMetricsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalHealthMetricsMetadata::DECODERS
-
-  # @return [HealthMetricsDataStatus] `HEALTH_DATA_STATUS_AVAILABLE` when the window has calls to measure; `HEALTH_DATA_STATUS_NO_DATA` when it has none, in which case the metrics are null. Do not treat no data as healthy.
-  attr_reader :data_status
-  # @return [Float] Percentage of calls that did not fail because of the provider (an upstream error, timeout, rate limit, or unavailability). Calls that failed for other reasons are not counted.
-  attr_reader :uptime_percentage
-  # @return [Float] Median duration of successful calls, in milliseconds. Durations above 40960 ms are reported as 40960.
-  attr_reader :latency_p50_ms
-  # @return [Float] 95th-percentile duration of successful calls, in milliseconds. Durations above 40960 ms are reported as 40960.
-  attr_reader :latency_p95_ms
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalHealthMetricsMetadata
+    FIELDS = {
+      data_status: 'data_status',
+      uptime_percentage: 'uptime_percentage',
+      latency_p50_ms: 'latency_p50_ms',
+      latency_p95_ms: 'latency_p95_ms'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      data_status: lambda do |value|
+        ::OctridevDigitalocean::HealthMetricsDataStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for HealthMetrics.
+  # Availability and latency of a tool or provider over a window, aggregated across all customers. Request volumes are not reported.
+  class HealthMetrics
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalHealthMetricsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalHealthMetricsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalHealthMetricsMetadata::DECODERS
+
+    # @return [HealthMetricsDataStatus] `HEALTH_DATA_STATUS_AVAILABLE` when the window has calls to measure; `HEALTH_DATA_STATUS_NO_DATA` when it has none, in which case the metrics are null. Do not treat no data as healthy.
+    attr_reader :data_status
+    # @return [Float] Percentage of calls that did not fail because of the provider (an upstream error, timeout, rate limit, or unavailability). Calls that failed for other reasons are not counted.
+    attr_reader :uptime_percentage
+    # @return [Float] Median duration of successful calls, in milliseconds. Durations above 40960 ms are reported as 40960.
+    attr_reader :latency_p50_ms
+    # @return [Float] 95th-percentile duration of successful calls, in milliseconds. Durations above 40960 ms are reported as 40960.
+    attr_reader :latency_p95_ms
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-end
-
-# Defines the HealthMetricsDataStatus SDK namespace.
-module HealthMetricsDataStatus
-  HEALTH_DATA_STATUS_AVAILABLE = 'HEALTH_DATA_STATUS_AVAILABLE'
-  HEALTH_DATA_STATUS_NO_DATA = 'HEALTH_DATA_STATUS_NO_DATA'
-  VALUES = ['HEALTH_DATA_STATUS_AVAILABLE', 'HEALTH_DATA_STATUS_NO_DATA'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalHealthSnapshotMetadata
-  FIELDS = {
-    measured_at: "measured_at",
-    window: "window",
-    stale: "stale",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for HealthSnapshot.
-# Describes when health metrics were computed.
-class HealthSnapshot
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalHealthSnapshotMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalHealthSnapshotMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalHealthSnapshotMetadata::DECODERS
-
-  # @return [String] When the metrics were computed. They are recomputed at most every five minutes.
-  attr_reader :measured_at
-  # @return [String] Length of the window the metrics cover, ending at `measured_at`.
-  attr_reader :window
-  # @return [Boolean] True when the latest recomputation failed and earlier metrics, up to 30 minutes old, are returned instead.
-  attr_reader :stale
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the HealthMetricsDataStatus SDK namespace.
+  module HealthMetricsDataStatus
+    HEALTH_DATA_STATUS_AVAILABLE = 'HEALTH_DATA_STATUS_AVAILABLE'
+    HEALTH_DATA_STATUS_NO_DATA = 'HEALTH_DATA_STATUS_NO_DATA'
+    VALUES = %w[HEALTH_DATA_STATUS_AVAILABLE HEALTH_DATA_STATUS_NO_DATA].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalHealthSnapshotMetadata
+    FIELDS = {
+      measured_at: 'measured_at',
+      window: 'window',
+      stale: 'stale'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for HealthSnapshot.
+  # Describes when health metrics were computed.
+  class HealthSnapshot
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalHealthSnapshotMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalHealthSnapshotMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalHealthSnapshotMetadata::DECODERS
+
+    # @return [String] When the metrics were computed. They are recomputed at most every five minutes.
+    attr_reader :measured_at
+    # @return [String] Length of the window the metrics cover, ending at `measured_at`.
+    attr_reader :window
+    # @return [Boolean] True when the latest recomputation failed and earlier metrics, up to 30 minutes old, are returned instead.
+    attr_reader :stale
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
   end
-end
 end

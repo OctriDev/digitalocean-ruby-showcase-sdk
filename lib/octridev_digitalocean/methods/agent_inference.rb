@@ -111,23 +111,23 @@ module OctridevDigitalocean
         user: NOT_GIVEN,
         request_options: nil
       )
-
         __sdk_validate_agent_inference_create_chat_completion(messages: messages, max_tokens: max_tokens, max_completion_tokens: max_completion_tokens, frequency_penalty: frequency_penalty, presence_penalty: presence_penalty, top_logprobs: top_logprobs, count: count, temperature: temperature, top_p: top_p)
 
         SdkClient.request(
           'POST',
-          "/api/v1/chat/completions",
+          '/api/v1/chat/completions',
           config: config,
           query: {
-            'agent' => QueryValue.new(agent, style: 'form', explode: true),
+            'agent' => QueryValue.new(agent, style: 'form', explode: true)
           },
           body: __sdk_body_agent_inference_create_chat_completion_part1(messages: messages, model: model, max_tokens: max_tokens, max_completion_tokens: max_completion_tokens, frequency_penalty: frequency_penalty, presence_penalty: presence_penalty, top_logprobs: top_logprobs, tools: tools, tool_choice: tool_choice, stream: stream, stop: stop, logit_bias: logit_bias, logprobs: logprobs, count: count, stream_options: stream_options, reasoning_effort: reasoning_effort, seed: seed, metadata: metadata).merge(
-            __sdk_body_agent_inference_create_chat_completion_part2(temperature: temperature, top_p: top_p, user: user)),
+            __sdk_body_agent_inference_create_chat_completion_part2(temperature: temperature, top_p: top_p, user: user)
+          ),
           return_type: ::OctridevDigitalocean::ChatCompletionResponse,
           decoder: :json,
           operation_id: 'agent_inference_create_chat_completion',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).data
       end
 
@@ -208,7 +208,7 @@ module OctridevDigitalocean
           'stream_options' => stream_options,
           'reasoning_effort' => reasoning_effort,
           'seed' => seed,
-          'metadata' => metadata,
+          'metadata' => metadata
         }
       end
       private_class_method :__sdk_body_agent_inference_create_chat_completion_part1
@@ -221,7 +221,7 @@ module OctridevDigitalocean
         {
           'temperature' => temperature,
           'top_p' => top_p,
-          'user' => user,
+          'user' => user
         }
       end
       private_class_method :__sdk_body_agent_inference_create_chat_completion_part2
@@ -329,39 +329,41 @@ module OctridevDigitalocean
         request_options: nil,
         &block
       )
-    return enum_for(
-          __method__,
-          config: config,
-          agent: agent,
-          messages: messages,
-          model: model,
-          stream: stream,
-          max_tokens: max_tokens,
-          max_completion_tokens: max_completion_tokens,
-          frequency_penalty: frequency_penalty,
-          presence_penalty: presence_penalty,
-          top_logprobs: top_logprobs,
-          tools: tools,
-          tool_choice: tool_choice,
-          stop: stop,
-          logit_bias: logit_bias,
-          logprobs: logprobs,
-          count: count,
-          stream_options: stream_options,
-          reasoning_effort: reasoning_effort,
-          seed: seed,
-          metadata: metadata,
-          temperature: temperature,
-          top_p: top_p,
-          user: user,
-          request_options: request_options,
-        ) unless block
+        unless block
+          return enum_for(
+            __method__,
+            config: config,
+            agent: agent,
+            messages: messages,
+            model: model,
+            stream: stream,
+            max_tokens: max_tokens,
+            max_completion_tokens: max_completion_tokens,
+            frequency_penalty: frequency_penalty,
+            presence_penalty: presence_penalty,
+            top_logprobs: top_logprobs,
+            tools: tools,
+            tool_choice: tool_choice,
+            stop: stop,
+            logit_bias: logit_bias,
+            logprobs: logprobs,
+            count: count,
+            stream_options: stream_options,
+            reasoning_effort: reasoning_effort,
+            seed: seed,
+            metadata: metadata,
+            temperature: temperature,
+            top_p: top_p,
+            user: user,
+            request_options: request_options
+          )
+        end
         SdkClient.stream(
-          'POST', "/api/v1/chat/completions",
+          'POST', '/api/v1/chat/completions',
           config: config,
           query: {
-          'agent' => QueryValue.new(agent, style: 'form', explode: true),
-        },
+            'agent' => QueryValue.new(agent, style: 'form', explode: true)
+          },
           body: {
             'messages' => messages,
             'model' => model,
@@ -383,16 +385,17 @@ module OctridevDigitalocean
             'metadata' => metadata,
             'temperature' => temperature,
             'top_p' => top_p,
-            'user' => user,
+            'user' => user
           },
           content_type: 'application/json',
           operation_id: 'agent_inference_create_chat_completion_stream',
           stream_format: :sse,
-          stream_media_type: "text/event-stream",
+          stream_media_type: 'text/event-stream',
           request_options: request_options,
           errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2 }
         ).each do |ev|
           break if ev.data == '[DONE]'
+
           decoded = JSON.parse(ev.data)
           block.call(SdkClient.decode_event(decoded, ::OctridevDigitalocean::ChatCompletionChunk))
         end
