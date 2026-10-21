@@ -9,546 +9,133 @@ module OctridevDigitalocean
   module Methods
     # Defines the Databases SDK namespace.
     module Databases
-      # Internal model hydration metadata.
-      class SdkInternalDatabaseClusterRequestUiConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+      # To list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`. The result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes. The embedded `connection` and…
+      #
+      # @param tag_name [String] Limits the results to database clusters with a
+      #   specific tag. Requires `tag:read` scope.
+      def self.databases_list_clusters(
+        config:,
+        tag_name: NOT_GIVEN,
+        request_options: nil
+      )
+
+        SdkClient.request(
+          'GET',
+          "/v2/databases",
+          config: config,
+          query: {
+            'tag_name' => QueryValue.new(tag_name, style: 'form', explode: true),
+          },
+          return_type: ::OctridevDigitalocean::DatabaseClusters,
+          decoder: :json,
+          operation_id: 'databases_list_clusters',
+          request_options: request_options,
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+        ).data
       end
 
-      # API model for DatabaseClusterRequestUiConnection.
-      # The connection details for OpenSearch dashboard.
-      class DatabaseClusterRequestUiConnection
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabaseClusterRequestUiConnectionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestUiConnectionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabaseClusterRequestUiConnectionMetadata::DECODERS
+      # Creates a database cluster with the selected engine, size, region, and node count. Supply `name`, `engine`, `num_nodes`, `size`, and `region`; use `backup_restore` to create a cluster from an existing backup. The new cluster starts with a `creating` status and changes to `online` when ready to receive traffic.
+      #
+      # To create a database cluster, send a POST request to `/v2/databases`. To see a list of options for each engine, such as available regions, size slugs, and versions, send a GET request to the `/v2/databases/options` endpoint. The available sizes for the `storage_size_mib` field depends on the cluster's size. To see a list of available sizes, see Managed Database Pricing. The create response returns a JSON object with a key called `database`. The value of this is an object…
+      def self.databases_create_cluster(
+        config:,
+        body:,
+        request_options: nil
+      )
 
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
+        SdkClient.request(
+          'POST',
+          "/v2/databases",
+          config: config,
+          body: body,
+          return_type: ::OctridevDigitalocean::DatabaseClusterResponse,
+          decoder: :json,
+          operation_id: 'databases_create_cluster',
+          request_options: request_options,
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+        ).data
       end
 
-      # Internal model hydration metadata.
-      class SdkInternalDatabaseClusterRequestSchemaRegistryConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+      # To show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID`. The response will be a JSON object with a database key. This will be set to an object containing the standard database cluster attributes. The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects contain the…
+      #
+      # @param database_cluster_uuid [String] A unique identifier for a database
+      #   cluster.
+      def self.databases_get_cluster(
+        config:,
+        database_cluster_uuid:,
+        request_options: nil
+      )
+
+        Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
+
+        SdkClient.request(
+          'GET',
+          [
+            "/v2/databases/",
+            SdkClient.encode_path_segment(database_cluster_uuid)
+          ].join,
+          config: config,
+          return_type: ::OctridevDigitalocean::DatabaseClusterResponse,
+          decoder: :json,
+          operation_id: 'databases_get_cluster',
+          request_options: request_options,
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+        ).data
       end
 
-      # API model for DatabaseClusterRequestSchemaRegistryConnection.
-      # The connection details for Schema Registry.
-      class DatabaseClusterRequestSchemaRegistryConnection
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabaseClusterRequestSchemaRegistryConnectionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestSchemaRegistryConnectionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabaseClusterRequestSchemaRegistryConnectionMetadata::DECODERS
-
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabaseClusterRequestConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
-      end
-
-      # API model for DatabaseClusterRequestConnection.
-      class DatabaseClusterRequestConnection
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabaseClusterRequestConnectionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestConnectionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabaseClusterRequestConnectionMetadata::DECODERS
-
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabaseClusterRequestPrivateConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
-      end
-
-      # API model for DatabaseClusterRequestPrivateConnection.
-      class DatabaseClusterRequestPrivateConnection
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabaseClusterRequestPrivateConnectionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestPrivateConnectionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabaseClusterRequestPrivateConnectionMetadata::DECODERS
-
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabaseClusterRequestStandbyConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
-      end
-
-      # API model for DatabaseClusterRequestStandbyConnection.
-      class DatabaseClusterRequestStandbyConnection
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabaseClusterRequestStandbyConnectionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestStandbyConnectionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabaseClusterRequestStandbyConnectionMetadata::DECODERS
-
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabaseClusterRequestStandbyPrivateConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
-      end
-
-      # API model for DatabaseClusterRequestStandbyPrivateConnection.
-      class DatabaseClusterRequestStandbyPrivateConnection
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabaseClusterRequestStandbyPrivateConnectionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestStandbyPrivateConnectionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabaseClusterRequestStandbyPrivateConnectionMetadata::DECODERS
-
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabaseClusterRequestMaintenanceWindowMetadata
-        FIELDS = {
-          day: "day",
-          hour: "hour",
-        }.freeze
-        REQUIRED_FIELDS = %i[
-          day
-          hour
-        ].freeze
-        DECODERS = {
-        }.freeze
-      end
-
-      # API model for DatabaseClusterRequestMaintenanceWindow.
-      class DatabaseClusterRequestMaintenanceWindow
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabaseClusterRequestMaintenanceWindowMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestMaintenanceWindowMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabaseClusterRequestMaintenanceWindowMetadata::DECODERS
-
-        # @return [String] The day of the week on which to apply maintenance updates.
-        attr_reader :day
-        # @return [String] The hour in UTC at which maintenance updates will be applied in 24 hour format.
-        attr_reader :hour
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabasesCreateClusterMetadata
-        FIELDS = {
-          name: "name",
-          engine: "engine",
-          version: "version",
-          num_nodes: "num_nodes",
-          size: "size",
-          region: "region",
-          private_network_uuid: "private_network_uuid",
-          tags: "tags",
-          ui_connection: "ui_connection",
-          schema_registry_connection: "schema_registry_connection",
-          connection: "connection",
-          private_connection: "private_connection",
-          standby_connection: "standby_connection",
-          standby_private_connection: "standby_private_connection",
-          maintenance_window: "maintenance_window",
-          project_id: "project_id",
-          rules: "rules",
-          storage_size_mib: "storage_size_mib",
-          autoscale: "autoscale",
-          do_settings: "do_settings",
-          backup_restore: "backup_restore",
-        }.freeze
-        REQUIRED_FIELDS = %i[
-          name
-          engine
-          num_nodes
-          size
-          region
-        ].freeze
-        DECODERS = {
-          engine: lambda do |value|
-            ::OctridevDigitalocean::DatabaseClusterRequestEngine.from_value(value)
-          end,
-          ui_connection: lambda do |value|
-            ::OctridevDigitalocean::Methods::Databases::DatabaseClusterRequestUiConnection.from_hash(value)
-          end,
-          schema_registry_connection: lambda do |value|
-            ::OctridevDigitalocean::Methods::Databases::DatabaseClusterRequestSchemaRegistryConnection.from_hash(value)
-          end,
-          connection: lambda do |value|
-            ::OctridevDigitalocean::Methods::Databases::DatabaseClusterRequestConnection.from_hash(value)
-          end,
-          private_connection: lambda do |value|
-            ::OctridevDigitalocean::Methods::Databases::DatabaseClusterRequestPrivateConnection.from_hash(value)
-          end,
-          standby_connection: lambda do |value|
-            ::OctridevDigitalocean::Methods::Databases::DatabaseClusterRequestStandbyConnection.from_hash(value)
-          end,
-          standby_private_connection: lambda do |value|
-            ::OctridevDigitalocean::Methods::Databases::DatabaseClusterRequestStandbyPrivateConnection.from_hash(value)
-          end,
-          maintenance_window: lambda do |value|
-            ::OctridevDigitalocean::Methods::Databases::DatabaseClusterRequestMaintenanceWindow.from_hash(value)
-          end,
-          rules: lambda do |value|
-            value&.map { |item| ::OctridevDigitalocean::FirewallRuleRequest.from_hash(item) }
-          end,
-          autoscale: lambda do |value|
-            ::OctridevDigitalocean::DatabaseAutoscaleParams.from_hash(value)
-          end,
-          do_settings: lambda do |value|
-            ::OctridevDigitalocean::DoSettings.from_hash(value)
-          end,
-          backup_restore: lambda do |value|
-            ::OctridevDigitalocean::DatabaseBackup.from_hash(value)
-          end,
-        }.freeze
-      end
-
-      # API model for DatabasesCreateCluster.
-      class DatabasesCreateCluster
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabasesCreateClusterMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabasesCreateClusterMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabasesCreateClusterMetadata::DECODERS
-
-        attr_reader :connection, :private_connection, :standby_connection,
-                    :standby_private_connection, :maintenance_window, :rules, :backup_restore
-        # @return [String] A unique, human-readable name referring to a database cluster.
-        attr_reader :name
-        # @return [DatabaseClusterRequestEngine] A slug representing the database engine used for the cluster. The possible values are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB, "kafka" for Kafka, "opensearch" for OpenSearch, "valkey" for Valkey, "advanced_pg" for PostgreSQL Advanced Edition, and "advanced_mysql" for MySQL Advanced Edition. Advanced Edition engines are currently in public preview.
-        attr_reader :engine
-        # @return [String] A string representing the version of the database engine in use for the cluster.
-        attr_reader :version
-        # @return [Integer] The number of nodes in the database cluster.
-        attr_reader :num_nodes
-        # @return [String] The slug identifier representing the size of the nodes in the database cluster.
-        attr_reader :size
-        # @return [String] The slug identifier for the region where the database cluster is located.
-        attr_reader :region
-        # @return [String] A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
-        attr_reader :private_network_uuid
-        # @return [Array_of_String] An array of tags (as strings) to apply to the database cluster. Requires `tag:create` scope.
-        attr_reader :tags
-        # @return [DatabaseClusterRequestUiConnection] The connection details for OpenSearch dashboard.
-        attr_reader :ui_connection
-        # @return [DatabaseClusterRequestSchemaRegistryConnection] The connection details for Schema Registry.
-        attr_reader :schema_registry_connection
-        # @return [String] The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project. Requires `project:assign_resource` scope.
-        attr_reader :project_id
-        # @return [Integer] Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.
-        attr_reader :storage_size_mib
-        # @return [DatabaseAutoscaleParams] Autoscaling configuration for the database cluster. Currently only supports storage autoscaling. If null, autoscaling is not configured for the cluster.
-        attr_reader :autoscale
-        # @return [DoSettings] DigitalOcean-specific settings for the database cluster, including custom service CNAMEs.
-        attr_reader :do_settings
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabasesUpdateRegionMetadata
-        FIELDS = {
-          region: "region",
-        }.freeze
-        REQUIRED_FIELDS = %i[
-          region
-        ].freeze
-        DECODERS = {
-        }.freeze
-      end
-
-      # API model for DatabasesUpdateRegion.
-      class DatabasesUpdateRegion
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabasesUpdateRegionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabasesUpdateRegionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabasesUpdateRegionMetadata::DECODERS
-
-        # @return [String] A slug identifier for the region to which the database cluster will be migrated.
-        attr_reader :region
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabasesUpdateFirewallRulesMetadata
-        FIELDS = {
-          rules: "rules",
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-          rules: lambda do |value|
-            value&.map { |item| ::OctridevDigitalocean::FirewallRuleRequest.from_hash(item) }
-          end,
-        }.freeze
-      end
-
-      # API model for DatabasesUpdateFirewallRules.
-      class DatabasesUpdateFirewallRules
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabasesUpdateFirewallRulesMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabasesUpdateFirewallRulesMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabasesUpdateFirewallRulesMetadata::DECODERS
-
-        attr_reader :rules
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabasesUpdateDoSettingsMetadata
-        FIELDS = {
-          do_settings: "do_settings",
-        }.freeze
-        REQUIRED_FIELDS = %i[
-          do_settings
-        ].freeze
-        DECODERS = {
-          do_settings: lambda do |value|
-            ::OctridevDigitalocean::DoSettings.from_hash(value)
-          end,
-        }.freeze
-      end
-
-      # API model for DatabasesUpdateDoSettings.
-      class DatabasesUpdateDoSettings
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabasesUpdateDoSettingsMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabasesUpdateDoSettingsMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabasesUpdateDoSettingsMetadata::DECODERS
-
-        # @return [DoSettings] DigitalOcean-specific settings for the database cluster.
-        attr_reader :do_settings
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabasesCreateReplicaConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
-      end
-
-      # API model for DatabasesCreateReplicaConnection.
-      class DatabasesCreateReplicaConnection
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabasesCreateReplicaConnectionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabasesCreateReplicaConnectionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabasesCreateReplicaConnectionMetadata::DECODERS
-
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
-      end
-
-      # Internal model hydration metadata.
-      class SdkInternalDatabasesCreateReplicaPrivateConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
-      end
-
-      # API model for DatabasesCreateReplicaPrivateConnection.
-      class DatabasesCreateReplicaPrivateConnection
-        CONSTRUCTION_SURFACE = :named
-        FIELDS = SdkInternalDatabasesCreateReplicaPrivateConnectionMetadata::FIELDS
-        REQUIRED_FIELDS = SdkInternalDatabasesCreateReplicaPrivateConnectionMetadata::REQUIRED_FIELDS
-        DECODERS = SdkInternalDatabasesCreateReplicaPrivateConnectionMetadata::DECODERS
-
-
-        def initialize(**attributes)
-          SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-          freeze
-        end
-
-        def self.from_hash(data)
-          SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-        end
-
-        def to_h
-          SdkModel.to_h(self, FIELDS)
-        end
+      # To destroy a specific database, send a DELETE request to `/v2/databases/$DATABASE_ID`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
+      #
+      # @param database_cluster_uuid [String] A unique identifier for a database
+      #   cluster.
+      def self.databases_destroy_cluster(
+        config:,
+        database_cluster_uuid:,
+        request_options: nil
+      )
+
+        Validation.validate_uuid('database_cluster_uuid', database_cluster_uuid)
+
+        SdkClient.request(
+          'DELETE',
+          [
+            "/v2/databases/",
+            SdkClient.encode_path_segment(database_cluster_uuid)
+          ].join,
+          config: config,
+          decoder: :empty,
+          operation_id: 'databases_destroy_cluster',
+          request_options: request_options,
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+        ).data
       end
     end
   end
 end
 
-require_relative 'databases_part_2'
-require_relative 'databases_part_3'
-require_relative 'databases_part_4'
-require_relative 'databases_part_5'
-require_relative 'databases_part_6'
-require_relative 'databases_part_7'
+require_relative 'databases_types'
+require_relative 'databases_sdk_internal_databases_create_replica_metadata'
+require_relative 'databases_options'
+require_relative 'databases_config'
+require_relative 'databases_ca'
+require_relative 'databases_online_migration'
+require_relative 'databases_migrate'
+require_relative 'databases_resize'
+require_relative 'databases_firewall'
+require_relative 'databases_do_settings'
+require_relative 'databases_maintenance'
+require_relative 'databases_install_update'
+require_relative 'databases_backups'
+require_relative 'databases_replicas'
+require_relative 'databases_events'
+require_relative 'databases_users'
+require_relative 'databases_dbs'
+require_relative 'databases_pools'
+require_relative 'databases_eviction_policy'
+require_relative 'databases_sql_mode'
+require_relative 'databases_upgrade'
+require_relative 'databases_autoscale'
+require_relative 'databases_topics'
+require_relative 'databases_logsink'
+require_relative 'databases_schema_registry'
+require_relative 'databases_metrics'
+require_relative 'databases_indexes'
