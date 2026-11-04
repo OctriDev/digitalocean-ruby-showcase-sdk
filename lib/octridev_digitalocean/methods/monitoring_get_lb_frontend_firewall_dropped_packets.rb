@@ -21,21 +21,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets",
+          '/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_firewall_dropped_packets',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -51,21 +50,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_http_responses",
+          '/v2/monitoring/metrics/load_balancer/frontend_http_responses',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_http_responses',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -81,21 +79,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second",
+          '/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_http_requests_per_second',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -111,21 +108,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http",
+          '/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_network_throughput_http',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -141,21 +137,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp",
+          '/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_network_throughput_udp',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -171,21 +166,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp",
+          '/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_network_throughput_tcp',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -201,21 +195,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput",
+          '/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_nlb_tcp_network_throughput',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -231,21 +224,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput",
+          '/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_nlb_udp_network_throughput',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -261,21 +253,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current",
+          '/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_tls_connections_current',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -291,21 +282,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit",
+          '/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_tls_connections_limit',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -321,21 +311,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit",
+          '/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_tls_connections_exceeding_rate_limit',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -351,21 +340,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg",
+          '/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_droplets_http_session_duration_avg',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -381,21 +369,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p",
+          '/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_droplets_http_session_duration50p',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -411,21 +398,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p",
+          '/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_droplets_http_session_duration95p',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -441,21 +427,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg",
+          '/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_droplets_http_response_time_avg',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -471,21 +456,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p",
+          '/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_droplets_http_response_time50p',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -501,21 +485,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p",
+          '/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_droplets_http_response_time95p',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -531,21 +514,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p",
+          '/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_droplets_http_response_time99p',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
     end

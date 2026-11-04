@@ -5,40 +5,36 @@
 
 # webhook_signature_config domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalWebhookSignatureConfigMetadata
-  FIELDS = {
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for WebhookSignatureConfig.
-# Optional HMAC signature configuration for a webhook create or update request. `secret` is write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing secret.
-class WebhookSignatureConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWebhookSignatureConfigMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWebhookSignatureConfigMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWebhookSignatureConfigMetadata::DECODERS
-
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWebhookSignatureConfigMetadata
+    FIELDS = {}.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for WebhookSignatureConfig.
+  # Optional HMAC signature configuration for a webhook create or update request. `secret` is write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing secret.
+  class WebhookSignatureConfig
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWebhookSignatureConfigMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWebhookSignatureConfigMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWebhookSignatureConfigMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  def to_json(*args)
-    to_h.to_json(*args)
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-end
 end

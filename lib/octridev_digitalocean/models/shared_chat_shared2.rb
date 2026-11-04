@@ -5,654 +5,648 @@
 
 # shared_chat domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata
-  FIELDS = {
-    content: "content",
-    refusal: "refusal",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    content
-    refusal
-  ].freeze
-  DECODERS = {
-    content: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
-    end,
-    refusal: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
-    end,
-  }.freeze
-  NULLABLE_FIELDS = %i[
-    content
-    refusal
-  ].freeze
-end
-
-# API model for ChatCompletionResponseChoicesItemLogprobs.
-# Log probability information for the choice.
-class ChatCompletionResponseChoicesItemLogprobs
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::DECODERS
-
-  # @return [Array_of_ChatCompletionTokenLogprob] A list of message content tokens with log probability information.
-  attr_reader :content
-  # @return [Array_of_ChatCompletionTokenLogprob] A list of message refusal tokens with log probability information.
-  attr_reader :refusal
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata
+    FIELDS = {
+      content: 'content',
+      refusal: 'refusal'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      content
+      refusal
+    ].freeze
+    DECODERS = {
+      content: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
+      end,
+      refusal: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ChatCompletionTokenLogprob.from_hash(item) }
+      end
+    }.freeze
+    NULLABLE_FIELDS = %i[
+      content
+      refusal
+    ].freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::NULLABLE_FIELDS)
+  # API model for ChatCompletionResponseChoicesItemLogprobs.
+  # Log probability information for the choice.
+  class ChatCompletionResponseChoicesItemLogprobs
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::DECODERS
+
+    # @return [Array_of_ChatCompletionTokenLogprob] A list of message content tokens with log probability information.
+    attr_reader :content
+    # @return [Array_of_ChatCompletionTokenLogprob] A list of message refusal tokens with log probability information.
+    attr_reader :refusal
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionResponseChoicesItemLogprobsMetadata::NULLABLE_FIELDS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionResponseChoicesItemMetadata
+    FIELDS = {
+      finish_reason: 'finish_reason',
+      index: 'index',
+      message: 'message',
+      logprobs: 'logprobs'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      finish_reason
+      index
+      message
+      logprobs
+    ].freeze
+    DECODERS = {
+      finish_reason: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionResponseChoicesItemFinishReason.from_value(value)
+      end,
+      message: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessage.from_hash(value)
+      end,
+      logprobs: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionResponseChoicesItemLogprobs.from_hash(value)
+      end
+    }.freeze
+    NULLABLE_FIELDS = %i[
+      logprobs
+    ].freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ChatCompletionResponseChoicesItem.
+  # Required object value serialized in the `choices[]` wire field.
+  class ChatCompletionResponseChoicesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionResponseChoicesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionResponseChoicesItemMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalChatCompletionResponseChoicesItemMetadata
-  FIELDS = {
-    finish_reason: "finish_reason",
-    index: "index",
-    message: "message",
-    logprobs: "logprobs",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    finish_reason
-    index
-    message
-    logprobs
-  ].freeze
-  DECODERS = {
-    finish_reason: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionResponseChoicesItemFinishReason.from_value(value)
-    end,
-    message: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionResponseChoicesItemMessage.from_hash(value)
-    end,
-    logprobs: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionResponseChoicesItemLogprobs.from_hash(value)
-    end,
-  }.freeze
-  NULLABLE_FIELDS = %i[
-    logprobs
-  ].freeze
-end
+    # @return [ChatCompletionResponseChoicesItemFinishReason] The reason the model stopped generating tokens. stop if the model hit a natural stop point or a provided stop sequence, length if the maximum number of tokens specified in the request was reached, tool_calls if the model called a tool.
+    attr_reader :finish_reason
+    # @return [Integer] The index of the choice in the list of choices.
+    attr_reader :index
+    # @return [ChatCompletionResponseChoicesItemMessage] A chat completion message generated by the model.
+    attr_reader :message
+    # @return [ChatCompletionResponseChoicesItemLogprobs] Log probability information for the choice.
+    attr_reader :logprobs
 
-# API model for ChatCompletionResponseChoicesItem.
-# Required object value serialized in the `choices[]` wire field.
-class ChatCompletionResponseChoicesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionResponseChoicesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionResponseChoicesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionResponseChoicesItemMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ChatCompletionResponseChoicesItemFinishReason] The reason the model stopped generating tokens. stop if the model hit a natural stop point or a provided stop sequence, length if the maximum number of tokens specified in the request was reached, tool_calls if the model called a tool.
-  attr_reader :finish_reason
-  # @return [Integer] The index of the choice in the list of choices.
-  attr_reader :index
-  # @return [ChatCompletionResponseChoicesItemMessage] A chat completion message generated by the model.
-  attr_reader :message
-  # @return [ChatCompletionResponseChoicesItemLogprobs] Log probability information for the choice.
-  attr_reader :logprobs
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionResponseChoicesItemMetadata::NULLABLE_FIELDS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionResponseChoicesItemMetadata::NULLABLE_FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionResponseMetadata
+    FIELDS = {
+      id: 'id',
+      choices: 'choices',
+      created: 'created',
+      model: 'model',
+      object: 'object',
+      usage: 'usage'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      choices
+      created
+      model
+      object
+    ].freeze
+    DECODERS = {
+      choices: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ChatCompletionResponseChoicesItem.from_hash(item) }
+      end,
+      object: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionResponseObject.from_value(value)
+      end,
+      usage: lambda do |value|
+        ::OctridevDigitalocean::CompletionUsage.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ChatCompletionResponse.
+  # Represents a chat completion response returned by model, based on the provided input.
+  class ChatCompletionResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionResponseMetadata::DECODERS
+
+    # @return [String] A unique identifier for the chat completion.
+    attr_reader :id
+    # @return [Array_of_ChatCompletionResponseChoicesItem] A list of chat completion choices. Can be more than one if n is greater than 1.
+    attr_reader :choices
+    # @return [Integer] The Unix timestamp (in seconds) of when the chat completion was created.
+    attr_reader :created
+    # @return [String] The model used for the chat completion.
+    attr_reader :model
+    # @return [ChatCompletionResponseObject] The object type, which is always chat.completion.
+    attr_reader :object
+    # @return [CompletionUsage] Usage statistics for the completion request.
+    attr_reader :usage
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalChatCompletionResponseMetadata
-  FIELDS = {
-    id: "id",
-    choices: "choices",
-    created: "created",
-    model: "model",
-    object: "object",
-    usage: "usage",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    choices
-    created
-    model
-    object
-  ].freeze
-  DECODERS = {
-    choices: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ChatCompletionResponseChoicesItem.from_hash(item) }
-    end,
-    object: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionResponseObject.from_value(value)
-    end,
-    usage: lambda do |value|
-      ::OctridevDigitalocean::CompletionUsage.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ChatCompletionResponse.
-# Represents a chat completion response returned by model, based on the provided input.
-class ChatCompletionResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionResponseMetadata::DECODERS
-
-  # @return [String] A unique identifier for the chat completion.
-  attr_reader :id
-  # @return [Array_of_ChatCompletionResponseChoicesItem] A list of chat completion choices. Can be more than one if n is greater than 1.
-  attr_reader :choices
-  # @return [Integer] The Unix timestamp (in seconds) of when the chat completion was created.
-  attr_reader :created
-  # @return [String] The model used for the chat completion.
-  attr_reader :model
-  # @return [ChatCompletionResponseObject] The object type, which is always chat.completion.
-  attr_reader :object
-  # @return [CompletionUsage] Usage statistics for the completion request.
-  attr_reader :usage
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ChatCompletionResponseChoicesItemFinishReason SDK namespace.
+  module ChatCompletionResponseChoicesItemFinishReason
+    STOP = 'stop'
+    LENGTH = 'length'
+    TOOL_CALLS = 'tool_calls'
+    CONTENT_FILTER = 'content_filter'
+    VALUES = %w[stop length tool_calls content_filter].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ChatCompletionResponseChoicesItemMessageRole SDK namespace.
+  module ChatCompletionResponseChoicesItemMessageRole
+    ASSISTANT = 'assistant'
+    VALUES = ['assistant'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the ChatCompletionResponseChoicesItemMessageToolCallsItemType SDK namespace.
+  module ChatCompletionResponseChoicesItemMessageToolCallsItemType
+    FUNCTION = 'function'
+    VALUES = ['function'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the ChatCompletionResponseChoicesItemFinishReason SDK namespace.
-module ChatCompletionResponseChoicesItemFinishReason
-  STOP = 'stop'
-  LENGTH = 'length'
-  TOOL_CALLS = 'tool_calls'
-  CONTENT_FILTER = 'content_filter'
-  VALUES = ['stop', 'length', 'tool_calls', 'content_filter'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ChatCompletionResponseChoicesItemMessageRole SDK namespace.
-module ChatCompletionResponseChoicesItemMessageRole
-  ASSISTANT = 'assistant'
-  VALUES = ['assistant'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ChatCompletionResponseChoicesItemMessageToolCallsItemType SDK namespace.
-module ChatCompletionResponseChoicesItemMessageToolCallsItemType
-  FUNCTION = 'function'
-  VALUES = ['function'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the ChatCompletionResponseObject SDK namespace.
-module ChatCompletionResponseObject
-  CHAT_COMPLETION = 'chat.completion'
-  VALUES = ['chat.completion'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalChatCompletionStreamResponseDeltaMetadata
-  FIELDS = {
-    content: "content",
-    tool_calls: "tool_calls",
-    reasoning_content: "reasoning_content",
-    role: "role",
-    refusal: "refusal",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    tool_calls: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ChatCompletionToolCallChunk.from_hash(item) }
-    end,
-    role: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionStreamResponseDeltaRole.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for ChatCompletionStreamResponseDelta.
-# A chat completion delta generated by streamed model responses.
-class ChatCompletionStreamResponseDelta
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionStreamResponseDeltaMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionStreamResponseDeltaMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionStreamResponseDeltaMetadata::DECODERS
-
-  # @return [String] The contents of the chunk message.
-  attr_reader :content
-  # @return [Array_of_ChatCompletionToolCallChunk] Optional array value serialized in the `tool_calls` wire field.
-  attr_reader :tool_calls
-  # @return [String] The reasoning content generated by the model.
-  attr_reader :reasoning_content
-  # @return [ChatCompletionStreamResponseDeltaRole] The role of the author of this message.
-  attr_reader :role
-  # @return [String] The refusal message generated by the model.
-  attr_reader :refusal
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ChatCompletionResponseObject SDK namespace.
+  module ChatCompletionResponseObject
+    CHAT_COMPLETION = 'chat.completion'
+    VALUES = ['chat.completion'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionStreamResponseDeltaMetadata
+    FIELDS = {
+      content: 'content',
+      tool_calls: 'tool_calls',
+      reasoning_content: 'reasoning_content',
+      role: 'role',
+      refusal: 'refusal'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      tool_calls: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ChatCompletionToolCallChunk.from_hash(item) }
+      end,
+      role: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionStreamResponseDeltaRole.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ChatCompletionStreamResponseDelta.
+  # A chat completion delta generated by streamed model responses.
+  class ChatCompletionStreamResponseDelta
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionStreamResponseDeltaMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionStreamResponseDeltaMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionStreamResponseDeltaMetadata::DECODERS
+
+    # @return [String] The contents of the chunk message.
+    attr_reader :content
+    # @return [Array_of_ChatCompletionToolCallChunk] Optional array value serialized in the `tool_calls` wire field.
+    attr_reader :tool_calls
+    # @return [String] The reasoning content generated by the model.
+    attr_reader :reasoning_content
+    # @return [ChatCompletionStreamResponseDeltaRole] The role of the author of this message.
+    attr_reader :role
+    # @return [String] The refusal message generated by the model.
+    attr_reader :refusal
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the ChatCompletionStreamResponseDeltaRole SDK namespace.
-module ChatCompletionStreamResponseDeltaRole
-  DEVELOPER = 'developer'
-  USER = 'user'
-  ASSISTANT = 'assistant'
-  VALUES = ['developer', 'user', 'assistant'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalChatCompletionTokenLogprobMetadata
-  FIELDS = {
-    token: "token",
-    logprob: "logprob",
-    bytes: "bytes",
-    top_logprobs: "top_logprobs",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    token
-    logprob
-    bytes
-    top_logprobs
-  ].freeze
-  DECODERS = {
-    top_logprobs: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ChatCompletionTopLogprobItem.from_hash(item) }
-    end,
-  }.freeze
-  NULLABLE_FIELDS = %i[
-    bytes
-  ].freeze
-end
-
-# API model for ChatCompletionTokenLogprob.
-# Typed representation of the `ChatCompletionTokenLogprob` API schema.
-class ChatCompletionTokenLogprob
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionTokenLogprobMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionTokenLogprobMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionTokenLogprobMetadata::DECODERS
-
-  # @return [String] The token.
-  attr_reader :token
-  # @return [Float] The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely.
-  attr_reader :logprob
-  # @return [Array_of_Integer] A list of integers representing the UTF-8 bytes representation of the token. Can be null if there is no bytes representation for the token.
-  attr_reader :bytes
-  # @return [Array_of_ChatCompletionTopLogprobItem] List of the most likely tokens and their log probability, at this token position.
-  attr_reader :top_logprobs
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ChatCompletionStreamResponseDeltaRole SDK namespace.
+  module ChatCompletionStreamResponseDeltaRole
+    DEVELOPER = 'developer'
+    USER = 'user'
+    ASSISTANT = 'assistant'
+    VALUES = %w[developer user assistant].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionTokenLogprobMetadata::NULLABLE_FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionTokenLogprobMetadata
+    FIELDS = {
+      token: 'token',
+      logprob: 'logprob',
+      bytes: 'bytes',
+      top_logprobs: 'top_logprobs'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      token
+      logprob
+      bytes
+      top_logprobs
+    ].freeze
+    DECODERS = {
+      top_logprobs: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ChatCompletionTopLogprobItem.from_hash(item) }
+      end
+    }.freeze
+    NULLABLE_FIELDS = %i[
+      bytes
+    ].freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ChatCompletionTokenLogprob.
+  # Typed representation of the `ChatCompletionTokenLogprob` API schema.
+  class ChatCompletionTokenLogprob
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionTokenLogprobMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionTokenLogprobMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionTokenLogprobMetadata::DECODERS
+
+    # @return [String] The token.
+    attr_reader :token
+    # @return [Float] The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely.
+    attr_reader :logprob
+    # @return [Array_of_Integer] A list of integers representing the UTF-8 bytes representation of the token. Can be null if there is no bytes representation for the token.
+    attr_reader :bytes
+    # @return [Array_of_ChatCompletionTopLogprobItem] List of the most likely tokens and their log probability, at this token position.
+    attr_reader :top_logprobs
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS, SdkInternalChatCompletionTokenLogprobMetadata::NULLABLE_FIELDS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalChatCompletionToolMetadata
-  FIELDS = {
-    type: "type",
-    function: "function",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    type
-    function
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionToolType.from_value(value)
-    end,
-    function: lambda do |value|
-      ::OctridevDigitalocean::FunctionObject.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ChatCompletionTool.
-# Typed representation of the `ChatCompletionTool` API schema.
-class ChatCompletionTool
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionToolMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionToolMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionToolMetadata::DECODERS
-
-  # @return [ChatCompletionToolType] The type of the tool. Currently, only function is supported.
-  attr_reader :type
-  # @return [FunctionObject] Required object value serialized in the `function` wire field.
-  attr_reader :function
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionToolMetadata
+    FIELDS = {
+      type: 'type',
+      function: 'function'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      type
+      function
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionToolType.from_value(value)
+      end,
+      function: lambda do |value|
+        ::OctridevDigitalocean::FunctionObject.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ChatCompletionTool.
+  # Typed representation of the `ChatCompletionTool` API schema.
+  class ChatCompletionTool
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionToolMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionToolMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionToolMetadata::DECODERS
+
+    # @return [ChatCompletionToolType] The type of the tool. Currently, only function is supported.
+    attr_reader :type
+    # @return [FunctionObject] Required object value serialized in the `function` wire field.
+    attr_reader :function
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the ChatCompletionToolType SDK namespace.
+  module ChatCompletionToolType
+    FUNCTION = 'function'
+    VALUES = ['function'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the ChatCompletionToolType SDK namespace.
-module ChatCompletionToolType
-  FUNCTION = 'function'
-  VALUES = ['function'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalChatCompletionToolCallFunctionMetadata
-  FIELDS = {
-    name: "name",
-    arguments: "arguments",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    name
-    arguments
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ChatCompletionToolCallFunction.
-# Required object value serialized in the `function` wire field.
-class ChatCompletionToolCallFunction
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionToolCallFunctionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionToolCallFunctionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionToolCallFunctionMetadata::DECODERS
-
-  # @return [String] The name of the function to call.
-  attr_reader :name
-  # @return [String] The arguments to call the function with, as generated by the model in JSON format.
-  attr_reader :arguments
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionToolCallFunctionMetadata
+    FIELDS = {
+      name: 'name',
+      arguments: 'arguments'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      name
+      arguments
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ChatCompletionToolCallFunction.
+  # Required object value serialized in the `function` wire field.
+  class ChatCompletionToolCallFunction
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionToolCallFunctionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionToolCallFunctionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionToolCallFunctionMetadata::DECODERS
+
+    # @return [String] The name of the function to call.
+    attr_reader :name
+    # @return [String] The arguments to call the function with, as generated by the model in JSON format.
+    attr_reader :arguments
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionToolCallMetadata
+    FIELDS = {
+      id: 'id',
+      type: 'type',
+      function: 'function'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+      type
+      function
+    ].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionToolCallType.from_value(value)
+      end,
+      function: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionToolCallFunction.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ChatCompletionToolCall.
+  # Typed representation of the `ChatCompletionToolCall` API schema.
+  class ChatCompletionToolCall
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionToolCallMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionToolCallMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionToolCallMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalChatCompletionToolCallMetadata
-  FIELDS = {
-    id: "id",
-    type: "type",
-    function: "function",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-    type
-    function
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionToolCallType.from_value(value)
-    end,
-    function: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionToolCallFunction.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] The ID of the tool call.
+    attr_reader :id
+    # @return [ChatCompletionToolCallType] The type of the tool. Currently, only function is supported.
+    attr_reader :type
+    # @return [ChatCompletionToolCallFunction] Required object value serialized in the `function` wire field.
+    attr_reader :function
 
-# API model for ChatCompletionToolCall.
-# Typed representation of the `ChatCompletionToolCall` API schema.
-class ChatCompletionToolCall
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionToolCallMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionToolCallMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionToolCallMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The ID of the tool call.
-  attr_reader :id
-  # @return [ChatCompletionToolCallType] The type of the tool. Currently, only function is supported.
-  attr_reader :type
-  # @return [ChatCompletionToolCallFunction] Required object value serialized in the `function` wire field.
-  attr_reader :function
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ChatCompletionToolCallType SDK namespace.
+  module ChatCompletionToolCallType
+    FUNCTION = 'function'
+    VALUES = ['function'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionToolCallChunkFunctionMetadata
+    FIELDS = {
+      name: 'name',
+      arguments: 'arguments'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ChatCompletionToolCallChunkFunction.
+  # Optional object value serialized in the `function` wire field.
+  class ChatCompletionToolCallChunkFunction
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionToolCallChunkFunctionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionToolCallChunkFunctionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionToolCallChunkFunctionMetadata::DECODERS
 
-# Defines the ChatCompletionToolCallType SDK namespace.
-module ChatCompletionToolCallType
-  FUNCTION = 'function'
-  VALUES = ['function'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] The name of the function to call.
+    attr_reader :name
+    # @return [String] The arguments to call the function with.
+    attr_reader :arguments
 
-# Internal model hydration metadata.
-class SdkInternalChatCompletionToolCallChunkFunctionMetadata
-  FIELDS = {
-    name: "name",
-    arguments: "arguments",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for ChatCompletionToolCallChunkFunction.
-# Optional object value serialized in the `function` wire field.
-class ChatCompletionToolCallChunkFunction
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionToolCallChunkFunctionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionToolCallChunkFunctionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionToolCallChunkFunctionMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] The name of the function to call.
-  attr_reader :name
-  # @return [String] The arguments to call the function with.
-  attr_reader :arguments
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionToolCallChunkMetadata
+    FIELDS = {
+      index: 'index',
+      id: 'id',
+      type: 'type',
+      function: 'function'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionToolCallChunkType.from_value(value)
+      end,
+      function: lambda do |value|
+        ::OctridevDigitalocean::ChatCompletionToolCallChunkFunction.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ChatCompletionToolCallChunk.
+  # Typed representation of the `ChatCompletionToolCallChunk` API schema.
+  class ChatCompletionToolCallChunk
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalChatCompletionToolCallChunkMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalChatCompletionToolCallChunkMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalChatCompletionToolCallChunkMetadata::DECODERS
+
+    # @return [Integer] Optional `integer` value serialized in the `index` wire field.
+    attr_reader :index
+    # @return [String] The ID of the tool call.
+    attr_reader :id
+    # @return [ChatCompletionToolCallChunkType] Optional enumerated value serialized in the `type` wire field.
+    attr_reader :type
+    # @return [ChatCompletionToolCallChunkFunction] Optional object value serialized in the `function` wire field.
+    attr_reader :function
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalChatCompletionToolCallChunkMetadata
-  FIELDS = {
-    index: "index",
-    id: "id",
-    type: "type",
-    function: "function",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionToolCallChunkType.from_value(value)
-    end,
-    function: lambda do |value|
-      ::OctridevDigitalocean::ChatCompletionToolCallChunkFunction.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ChatCompletionToolCallChunk.
-# Typed representation of the `ChatCompletionToolCallChunk` API schema.
-class ChatCompletionToolCallChunk
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalChatCompletionToolCallChunkMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalChatCompletionToolCallChunkMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalChatCompletionToolCallChunkMetadata::DECODERS
-
-  # @return [Integer] Optional `integer` value serialized in the `index` wire field.
-  attr_reader :index
-  # @return [String] The ID of the tool call.
-  attr_reader :id
-  # @return [ChatCompletionToolCallChunkType] Optional enumerated value serialized in the `type` wire field.
-  attr_reader :type
-  # @return [ChatCompletionToolCallChunkFunction] Optional object value serialized in the `function` wire field.
-  attr_reader :function
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the ChatCompletionToolCallChunkType SDK namespace.
+  module ChatCompletionToolCallChunkType
+    FUNCTION = 'function'
+    VALUES = ['function'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalChatCompletionTopLogprobItemMetadata
+    FIELDS = {
+      token: 'token',
+      logprob: 'logprob',
+      bytes: 'bytes'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      token
+      logprob
+      bytes
+    ].freeze
+    DECODERS = {}.freeze
+    NULLABLE_FIELDS = %i[
+      bytes
+    ].freeze
   end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the ChatCompletionToolCallChunkType SDK namespace.
-module ChatCompletionToolCallChunkType
-  FUNCTION = 'function'
-  VALUES = ['function'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalChatCompletionTopLogprobItemMetadata
-  FIELDS = {
-    token: "token",
-    logprob: "logprob",
-    bytes: "bytes",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    token
-    logprob
-    bytes
-  ].freeze
-  DECODERS = {
-  }.freeze
-  NULLABLE_FIELDS = %i[
-    bytes
-  ].freeze
-end
 end

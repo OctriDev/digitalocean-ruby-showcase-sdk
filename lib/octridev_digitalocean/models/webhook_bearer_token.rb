@@ -5,40 +5,36 @@
 
 # webhook_bearer_token domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalWebhookBearerTokenMetadata
-  FIELDS = {
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for WebhookBearerToken.
-# Bearer token authentication for a webhook create or update request. `token` is write-only: send the full value to set or rotate. Omit `token` on update to keep the existing token.
-class WebhookBearerToken
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalWebhookBearerTokenMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalWebhookBearerTokenMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalWebhookBearerTokenMetadata::DECODERS
-
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalWebhookBearerTokenMetadata
+    FIELDS = {}.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
+  # API model for WebhookBearerToken.
+  # Bearer token authentication for a webhook create or update request. `token` is write-only: send the full value to set or rotate. Omit `token` on update to keep the existing token.
+  class WebhookBearerToken
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalWebhookBearerTokenMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalWebhookBearerTokenMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalWebhookBearerTokenMetadata::DECODERS
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  def to_json(*args)
-    to_h.to_json(*args)
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-end
 end

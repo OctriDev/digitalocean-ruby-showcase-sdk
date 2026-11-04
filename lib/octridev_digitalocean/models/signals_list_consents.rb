@@ -5,656 +5,638 @@
 
 # signals domain models
 module OctridevDigitalocean
-# API model for ListConsents.
-# A wrapper for a list of consent records.
-class ListConsents
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListConsentsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListConsentsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListConsentsMetadata::DECODERS
+  # API model for ListConsents.
+  # A wrapper for a list of consent records.
+  class ListConsents
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListConsentsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListConsentsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListConsentsMetadata::DECODERS
 
-  # @return [Array_of_ConsentRecord] A list of consent records for the team. Includes per-environment records (`source: agent`) and, when set, the team-level inference record (`source: inference`).
-  attr_reader :consents
-  # @return [ListConsentsSource] Echoes the `source` filter when the request was filtered by source. Omitted when the list was not filtered.
-  attr_reader :source
+    # @return [Array_of_ConsentRecord] A list of consent records for the team. Includes per-environment records (`source: agent`) and, when set, the team-level inference record (`source: inference`).
+    attr_reader :consents
+    # @return [ListConsentsSource] Echoes the `source` filter when the request was filtered by source. Omitted when the list was not filtered.
+    attr_reader :source
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ListConsentsSource SDK namespace.
+  module ListConsentsSource
+    AGENT = 'agent'
+    INFERENCE = 'inference'
+    VALUES = %w[agent inference].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalListDeletionsResponseEdgesItemMetadata
+    FIELDS = {
+      cursor: 'cursor',
+      node: 'node'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      node: lambda do |value|
+        ::OctridevDigitalocean::DeletionJob.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ListDeletionsResponseEdgesItem.
+  # Required object value serialized in the `edges[]` wire field.
+  class ListDeletionsResponseEdgesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListDeletionsResponseEdgesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListDeletionsResponseEdgesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListDeletionsResponseEdgesItemMetadata::DECODERS
 
-# Defines the ListConsentsSource SDK namespace.
-module ListConsentsSource
-  AGENT = 'agent'
-  INFERENCE = 'inference'
-  VALUES = ['agent', 'inference'].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] An opaque cursor for pagination.
+    attr_reader :cursor
+    # @return [DeletionJob] A deletion job that permanently removes Signals conversations for one Harness Runtime environment, or Serverless Inference Signals conversations for a whole team. Aggregated Insights or metrics summaries may still remain.
+    attr_reader :node
 
-# Internal model hydration metadata.
-class SdkInternalListDeletionsResponseEdgesItemMetadata
-  FIELDS = {
-    cursor: "cursor",
-    node: "node",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    node: lambda do |value|
-      ::OctridevDigitalocean::DeletionJob.from_hash(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for ListDeletionsResponseEdgesItem.
-# Required object value serialized in the `edges[]` wire field.
-class ListDeletionsResponseEdgesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListDeletionsResponseEdgesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListDeletionsResponseEdgesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListDeletionsResponseEdgesItemMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] An opaque cursor for pagination.
-  attr_reader :cursor
-  # @return [DeletionJob] A deletion job that permanently removes Signals conversations for one Harness Runtime environment, or Serverless Inference Signals conversations for a whole team. Aggregated Insights or metrics summaries may still remain.
-  attr_reader :node
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListDeletionsResponsePageInfoMetadata
+    FIELDS = {
+      has_next_page: 'has_next_page',
+      end_cursor: 'end_cursor'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ListDeletionsResponsePageInfo.
+  # Optional object value serialized in the `page_info` wire field.
+  class ListDeletionsResponsePageInfo
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListDeletionsResponsePageInfoMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListDeletionsResponsePageInfoMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListDeletionsResponsePageInfoMetadata::DECODERS
+
+    # @return [Boolean] Whether there are more results after this page.
+    attr_reader :has_next_page
+    # @return [String] Cursor of the last item. Pass as `after` to fetch the next page. Present only when there are more results.
+    attr_reader :end_cursor
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListDeletionsResponsePageInfoMetadata
-  FIELDS = {
-    has_next_page: "has_next_page",
-    end_cursor: "end_cursor",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ListDeletionsResponsePageInfo.
-# Optional object value serialized in the `page_info` wire field.
-class ListDeletionsResponsePageInfo
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListDeletionsResponsePageInfoMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListDeletionsResponsePageInfoMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListDeletionsResponsePageInfoMetadata::DECODERS
-
-  # @return [Boolean] Whether there are more results after this page.
-  attr_reader :has_next_page
-  # @return [String] Cursor of the last item. Pass as `after` to fetch the next page. Present only when there are more results.
-  attr_reader :end_cursor
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListDeletionsResponseMetadata
+    FIELDS = {
+      edges: 'edges',
+      page_info: 'page_info'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      edges: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ListDeletionsResponseEdgesItem.from_hash(item) }
+      end,
+      page_info: lambda do |value|
+        ::OctridevDigitalocean::ListDeletionsResponsePageInfo.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListDeletionsResponse.
+  # Typed representation of the `ListDeletionsResponse` API schema.
+  class ListDeletionsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListDeletionsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListDeletionsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListDeletionsResponseMetadata::DECODERS
+
+    # @return [Array_of_ListDeletionsResponseEdgesItem] Optional array value serialized in the `edges` wire field.
+    attr_reader :edges
+    # @return [ListDeletionsResponsePageInfo] Optional object value serialized in the `page_info` wire field.
+    attr_reader :page_info
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalListDialoguesResponseEdgesItemMetadata
+    FIELDS = {
+      cursor: 'cursor',
+      node: 'node'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      node: lambda do |value|
+        ::OctridevDigitalocean::SessionDialogue.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ListDialoguesResponseEdgesItem.
+  # Required object value serialized in the `edges[]` wire field.
+  class ListDialoguesResponseEdgesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListDialoguesResponseEdgesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListDialoguesResponseEdgesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListDialoguesResponseEdgesItemMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListDeletionsResponseMetadata
-  FIELDS = {
-    edges: "edges",
-    page_info: "page_info",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    edges: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ListDeletionsResponseEdgesItem.from_hash(item) }
-    end,
-    page_info: lambda do |value|
-      ::OctridevDigitalocean::ListDeletionsResponsePageInfo.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] An opaque cursor for pagination.
+    attr_reader :cursor
+    # @return [SessionDialogue] A dialogue entry within a session, representing a single turn of conversation.
+    attr_reader :node
 
-# API model for ListDeletionsResponse.
-# Typed representation of the `ListDeletionsResponse` API schema.
-class ListDeletionsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListDeletionsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListDeletionsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListDeletionsResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_ListDeletionsResponseEdgesItem] Optional array value serialized in the `edges` wire field.
-  attr_reader :edges
-  # @return [ListDeletionsResponsePageInfo] Optional object value serialized in the `page_info` wire field.
-  attr_reader :page_info
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListDialoguesResponsePageInfoMetadata
+    FIELDS = {
+      has_next_page: 'has_next_page'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ListDialoguesResponsePageInfo.
+  # Optional object value serialized in the `page_info` wire field.
+  class ListDialoguesResponsePageInfo
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListDialoguesResponsePageInfoMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListDialoguesResponsePageInfoMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListDialoguesResponsePageInfoMetadata::DECODERS
+
+    # @return [Boolean] Whether there are more results after this page.
+    attr_reader :has_next_page
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListDialoguesResponseEdgesItemMetadata
-  FIELDS = {
-    cursor: "cursor",
-    node: "node",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    node: lambda do |value|
-      ::OctridevDigitalocean::SessionDialogue.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ListDialoguesResponseEdgesItem.
-# Required object value serialized in the `edges[]` wire field.
-class ListDialoguesResponseEdgesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListDialoguesResponseEdgesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListDialoguesResponseEdgesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListDialoguesResponseEdgesItemMetadata::DECODERS
-
-  # @return [String] An opaque cursor for pagination.
-  attr_reader :cursor
-  # @return [SessionDialogue] A dialogue entry within a session, representing a single turn of conversation.
-  attr_reader :node
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListDialoguesResponseMetadata
+    FIELDS = {
+      edges: 'edges',
+      page_info: 'page_info'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      edges: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ListDialoguesResponseEdgesItem.from_hash(item) }
+      end,
+      page_info: lambda do |value|
+        ::OctridevDigitalocean::ListDialoguesResponsePageInfo.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListDialoguesResponse.
+  # Typed representation of the `ListDialoguesResponse` API schema.
+  class ListDialoguesResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListDialoguesResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListDialoguesResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListDialoguesResponseMetadata::DECODERS
+
+    # @return [Array_of_ListDialoguesResponseEdgesItem] Optional array value serialized in the `edges` wire field.
+    attr_reader :edges
+    # @return [ListDialoguesResponsePageInfo] Optional object value serialized in the `page_info` wire field.
+    attr_reader :page_info
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalListExportsResponseEdgesItemMetadata
+    FIELDS = {
+      cursor: 'cursor',
+      node: 'node'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      node: lambda do |value|
+        ::OctridevDigitalocean::ExportJob.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ListExportsResponseEdgesItem.
+  # Required object value serialized in the `edges[]` wire field.
+  class ListExportsResponseEdgesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListExportsResponseEdgesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListExportsResponseEdgesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListExportsResponseEdgesItemMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListDialoguesResponsePageInfoMetadata
-  FIELDS = {
-    has_next_page: "has_next_page",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] An opaque cursor for pagination.
+    attr_reader :cursor
+    # @return [ExportJob] An export job that produces a downloadable archive of signals data.
+    attr_reader :node
 
-# API model for ListDialoguesResponsePageInfo.
-# Optional object value serialized in the `page_info` wire field.
-class ListDialoguesResponsePageInfo
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListDialoguesResponsePageInfoMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListDialoguesResponsePageInfoMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListDialoguesResponsePageInfoMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Boolean] Whether there are more results after this page.
-  attr_reader :has_next_page
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalListExportsResponsePageInfoMetadata
+    FIELDS = {
+      has_next_page: 'has_next_page'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ListExportsResponsePageInfo.
+  # Optional object value serialized in the `page_info` wire field.
+  class ListExportsResponsePageInfo
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListExportsResponsePageInfoMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListExportsResponsePageInfoMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListExportsResponsePageInfoMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListDialoguesResponseMetadata
-  FIELDS = {
-    edges: "edges",
-    page_info: "page_info",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    edges: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ListDialoguesResponseEdgesItem.from_hash(item) }
-    end,
-    page_info: lambda do |value|
-      ::OctridevDigitalocean::ListDialoguesResponsePageInfo.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [Boolean] Whether there are more results after this page.
+    attr_reader :has_next_page
 
-# API model for ListDialoguesResponse.
-# Typed representation of the `ListDialoguesResponse` API schema.
-class ListDialoguesResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListDialoguesResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListDialoguesResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListDialoguesResponseMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_ListDialoguesResponseEdgesItem] Optional array value serialized in the `edges` wire field.
-  attr_reader :edges
-  # @return [ListDialoguesResponsePageInfo] Optional object value serialized in the `page_info` wire field.
-  attr_reader :page_info
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListExportsResponseMetadata
+    FIELDS = {
+      edges: 'edges',
+      page_info: 'page_info'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      edges: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ListExportsResponseEdgesItem.from_hash(item) }
+      end,
+      page_info: lambda do |value|
+        ::OctridevDigitalocean::ListExportsResponsePageInfo.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ListExportsResponse.
+  # Typed representation of the `ListExportsResponse` API schema.
+  class ListExportsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListExportsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListExportsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListExportsResponseMetadata::DECODERS
+
+    # @return [Array_of_ListExportsResponseEdgesItem] Optional array value serialized in the `edges` wire field.
+    attr_reader :edges
+    # @return [ListExportsResponsePageInfo] Optional object value serialized in the `page_info` wire field.
+    attr_reader :page_info
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListExportsResponseEdgesItemMetadata
-  FIELDS = {
-    cursor: "cursor",
-    node: "node",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    node: lambda do |value|
-      ::OctridevDigitalocean::ExportJob.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ListExportsResponseEdgesItem.
-# Required object value serialized in the `edges[]` wire field.
-class ListExportsResponseEdgesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListExportsResponseEdgesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListExportsResponseEdgesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListExportsResponseEdgesItemMetadata::DECODERS
-
-  # @return [String] An opaque cursor for pagination.
-  attr_reader :cursor
-  # @return [ExportJob] An export job that produces a downloadable archive of signals data.
-  attr_reader :node
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalListSessionsResponseResponseEdgesItemMetadata
+    FIELDS = {
+      cursor: 'cursor',
+      node: 'node'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      node: lambda do |value|
+        ::OctridevDigitalocean::Session2.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ListSessionsResponseResponseEdgesItem.
+  # Required object value serialized in the `edges[]` wire field.
+  class ListSessionsResponseResponseEdgesItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListSessionsResponseResponseEdgesItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListSessionsResponseResponseEdgesItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListSessionsResponseResponseEdgesItemMetadata::DECODERS
+
+    # @return [String] An opaque cursor for pagination.
+    attr_reader :cursor
+    # @return [Session2] A session represents a conversation monitored by Signals, such as a Harness Runtime environment session or a Serverless Inference chat completion.
+    attr_reader :node
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalListSessionsResponseResponsePageInfoMetadata
+    FIELDS = {
+      has_next_page: 'has_next_page'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ListSessionsResponseResponsePageInfo.
+  # Optional object value serialized in the `page_info` wire field.
+  class ListSessionsResponseResponsePageInfo
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListSessionsResponseResponsePageInfoMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListSessionsResponseResponsePageInfoMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListSessionsResponseResponsePageInfoMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalListExportsResponsePageInfoMetadata
-  FIELDS = {
-    has_next_page: "has_next_page",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [Boolean] Whether there are more results after this page.
+    attr_reader :has_next_page
 
-# API model for ListExportsResponsePageInfo.
-# Optional object value serialized in the `page_info` wire field.
-class ListExportsResponsePageInfo
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListExportsResponsePageInfoMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListExportsResponsePageInfoMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListExportsResponsePageInfoMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Boolean] Whether there are more results after this page.
-  attr_reader :has_next_page
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalListSessionsResponseResponseMetadata
+    FIELDS = {
+      edges: 'edges',
+      page_info: 'page_info'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      edges: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ListSessionsResponseResponseEdgesItem.from_hash(item) }
+      end,
+      page_info: lambda do |value|
+        ::OctridevDigitalocean::ListSessionsResponseResponsePageInfo.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ListSessionsResponseResponse.
+  # Typed representation of the `ListSessionsResponseResponse` API schema.
+  class ListSessionsResponseResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalListSessionsResponseResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalListSessionsResponseResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalListSessionsResponseResponseMetadata::DECODERS
+
+    # @return [Array_of_ListSessionsResponseResponseEdgesItem] Optional array value serialized in the `edges` wire field.
+    attr_reader :edges
+    # @return [ListSessionsResponseResponsePageInfo] Optional object value serialized in the `page_info` wire field.
+    attr_reader :page_info
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListExportsResponseMetadata
-  FIELDS = {
-    edges: "edges",
-    page_info: "page_info",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    edges: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ListExportsResponseEdgesItem.from_hash(item) }
-    end,
-    page_info: lambda do |value|
-      ::OctridevDigitalocean::ListExportsResponsePageInfo.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ListExportsResponse.
-# Typed representation of the `ListExportsResponse` API schema.
-class ListExportsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListExportsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListExportsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListExportsResponseMetadata::DECODERS
-
-  # @return [Array_of_ListExportsResponseEdgesItem] Optional array value serialized in the `edges` wire field.
-  attr_reader :edges
-  # @return [ListExportsResponsePageInfo] Optional object value serialized in the `page_info` wire field.
-  attr_reader :page_info
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalSession2Metadata
+    FIELDS = {
+      session_id: 'session_id',
+      total_turns: 'total_turns',
+      started_at: 'started_at',
+      duration_seconds: 'duration_seconds',
+      signal_count: 'signal_count'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      session_id
+    ].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for Session2.
+  # A session represents a conversation monitored by Signals, such as a Harness Runtime environment session or a Serverless Inference chat completion.
+  class Session2
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalSession2Metadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalSession2Metadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalSession2Metadata::DECODERS
+
+    # @return [String] The unique identifier for the session.
+    attr_reader :session_id
+    # @return [Integer] The total number of conversation turns in this session.
+    attr_reader :total_turns
+    # @return [String] When the session started.
+    attr_reader :started_at
+    # @return [Float] The duration of the session in seconds.
+    attr_reader :duration_seconds
+    # @return [Integer] The number of signals detected in this session.
+    attr_reader :signal_count
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalSessionDialogueMetadata
+    FIELDS = {
+      id: 'id',
+      sequence: 'sequence',
+      run_status: 'run_status',
+      user_message: 'user_message',
+      signals: 'signals'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      id
+    ].freeze
+    DECODERS = {}.freeze
   end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListSessionsResponseResponseEdgesItemMetadata
-  FIELDS = {
-    cursor: "cursor",
-    node: "node",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    node: lambda do |value|
-      ::OctridevDigitalocean::Session2.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ListSessionsResponseResponseEdgesItem.
-# Required object value serialized in the `edges[]` wire field.
-class ListSessionsResponseResponseEdgesItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListSessionsResponseResponseEdgesItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListSessionsResponseResponseEdgesItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListSessionsResponseResponseEdgesItemMetadata::DECODERS
-
-  # @return [String] An opaque cursor for pagination.
-  attr_reader :cursor
-  # @return [Session2] A session represents a conversation monitored by Signals, such as a Harness Runtime environment session or a Serverless Inference chat completion.
-  attr_reader :node
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListSessionsResponseResponsePageInfoMetadata
-  FIELDS = {
-    has_next_page: "has_next_page",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ListSessionsResponseResponsePageInfo.
-# Optional object value serialized in the `page_info` wire field.
-class ListSessionsResponseResponsePageInfo
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListSessionsResponseResponsePageInfoMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListSessionsResponseResponsePageInfoMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListSessionsResponseResponsePageInfoMetadata::DECODERS
-
-  # @return [Boolean] Whether there are more results after this page.
-  attr_reader :has_next_page
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalListSessionsResponseResponseMetadata
-  FIELDS = {
-    edges: "edges",
-    page_info: "page_info",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    edges: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ListSessionsResponseResponseEdgesItem.from_hash(item) }
-    end,
-    page_info: lambda do |value|
-      ::OctridevDigitalocean::ListSessionsResponseResponsePageInfo.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ListSessionsResponseResponse.
-# Typed representation of the `ListSessionsResponseResponse` API schema.
-class ListSessionsResponseResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalListSessionsResponseResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalListSessionsResponseResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalListSessionsResponseResponseMetadata::DECODERS
-
-  # @return [Array_of_ListSessionsResponseResponseEdgesItem] Optional array value serialized in the `edges` wire field.
-  attr_reader :edges
-  # @return [ListSessionsResponseResponsePageInfo] Optional object value serialized in the `page_info` wire field.
-  attr_reader :page_info
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSession2Metadata
-  FIELDS = {
-    session_id: "session_id",
-    total_turns: "total_turns",
-    started_at: "started_at",
-    duration_seconds: "duration_seconds",
-    signal_count: "signal_count",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    session_id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for Session2.
-# A session represents a conversation monitored by Signals, such as a Harness Runtime environment session or a Serverless Inference chat completion.
-class Session2
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalSession2Metadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalSession2Metadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalSession2Metadata::DECODERS
-
-  # @return [String] The unique identifier for the session.
-  attr_reader :session_id
-  # @return [Integer] The total number of conversation turns in this session.
-  attr_reader :total_turns
-  # @return [String] When the session started.
-  attr_reader :started_at
-  # @return [Float] The duration of the session in seconds.
-  attr_reader :duration_seconds
-  # @return [Integer] The number of signals detected in this session.
-  attr_reader :signal_count
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalSessionDialogueMetadata
-  FIELDS = {
-    id: "id",
-    sequence: "sequence",
-    run_status: "run_status",
-    user_message: "user_message",
-    signals: "signals",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    id
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
 end

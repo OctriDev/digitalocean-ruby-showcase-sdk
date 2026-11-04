@@ -12,13 +12,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalVpcPeeringsPatchMetadata
         FIELDS = {
-          name: "name",
+          name: 'name'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for VpcPeeringsPatch.
@@ -62,25 +61,24 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/vpc_peerings",
+          '/v2/vpc_peerings',
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'page' => QueryValue.new(page, style: 'form', explode: true),
-            'region' => QueryValue.new(region, style: 'form', explode: true),
+            'region' => QueryValue.new(region, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::AllVpcPeerings,
           decoder: :json,
           operation_id: 'vpc_peerings_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -90,17 +88,16 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/vpc_peerings",
+          '/v2/vpc_peerings',
           config: config,
           body: body,
           return_type: ::OctridevDigitalocean::ProvisioningVpcPeering,
           decoder: :json,
           operation_id: 'vpc_peerings_create',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -112,13 +109,12 @@ module OctridevDigitalocean
         vpc_peering_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('vpc_peering_id', vpc_peering_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/vpc_peerings/",
+            '/v2/vpc_peerings/',
             SdkClient.encode_path_segment(vpc_peering_id)
           ].join,
           config: config,
@@ -126,7 +122,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'vpc_peerings_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -141,7 +137,6 @@ module OctridevDigitalocean
         name:,
         request_options: nil
       )
-
         Validation.validate_uuid('vpc_peering_id', vpc_peering_id)
 
         Validation.validate_pattern('name', name, '^[a-zA-Z0-9\\-]+$')
@@ -149,18 +144,18 @@ module OctridevDigitalocean
         SdkClient.request(
           'PATCH',
           [
-            "/v2/vpc_peerings/",
+            '/v2/vpc_peerings/',
             SdkClient.encode_path_segment(vpc_peering_id)
           ].join,
           config: config,
           body: {
-            'name' => name,
+            'name' => name
           },
           return_type: ::OctridevDigitalocean::ActiveVpcPeering,
           decoder: :json,
           operation_id: 'vpc_peerings_patch',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -172,13 +167,12 @@ module OctridevDigitalocean
         vpc_peering_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('vpc_peering_id', vpc_peering_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/vpc_peerings/",
+            '/v2/vpc_peerings/',
             SdkClient.encode_path_segment(vpc_peering_id)
           ].join,
           config: config,
@@ -186,7 +180,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'vpc_peerings_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
     end

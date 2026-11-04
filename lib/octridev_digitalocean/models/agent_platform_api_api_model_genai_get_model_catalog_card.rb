@@ -5,665 +5,653 @@
 
 # agent_platform_api_api_model domain models
 module OctridevDigitalocean
-# API model for ApiModelPricingInterval.
-# A time window during which the model's rates stay the same. Together these intervals show how pricing changes over the course of a day.
-class ApiModelPricingInterval
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelPricingIntervalMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelPricingIntervalMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelPricingIntervalMetadata::DECODERS
+  # API model for ApiModelPricingInterval.
+  # A time window during which the model's rates stay the same. Together these intervals show how pricing changes over the course of a day.
+  class ApiModelPricingInterval
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelPricingIntervalMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelPricingIntervalMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelPricingIntervalMetadata::DECODERS
 
-  # @return [String] End of the interval, exclusive. Always on the hour.
-  attr_reader :end_time
-  # @return [ApiModelPricing] Pricing per million tokens (aligns with existing ModelPrice pattern)
-  attr_reader :prices
-  # @return [String] Start of the interval, inclusive. Always on the hour.
-  attr_reader :start_time
+    # @return [String] End of the interval, exclusive. Always on the hour.
+    attr_reader :end_time
+    # @return [ApiModelPricing] Pricing per million tokens (aligns with existing ModelPrice pattern)
+    attr_reader :prices
+    # @return [String] Start of the interval, inclusive. Always on the hour.
+    attr_reader :start_time
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ApiModelPricingTier SDK namespace.
+  module ApiModelPricingTier
+    MODEL_PRICING_TIER_UNSPECIFIED = 'MODEL_PRICING_TIER_UNSPECIFIED'
+    MODEL_PRICING_TIER_STANDARD = 'MODEL_PRICING_TIER_STANDARD'
+    MODEL_PRICING_TIER_FAST_MODE = 'MODEL_PRICING_TIER_FAST_MODE'
+    MODEL_PRICING_TIER_EXTENDED_1_M = 'MODEL_PRICING_TIER_EXTENDED_1M'
+    MODEL_PRICING_TIER_EXTENDED_272_K = 'MODEL_PRICING_TIER_EXTENDED_272K'
+    MODEL_PRICING_TIER_BYOK = 'MODEL_PRICING_TIER_BYOK'
+    VALUES = %w[
+      MODEL_PRICING_TIER_UNSPECIFIED MODEL_PRICING_TIER_STANDARD MODEL_PRICING_TIER_FAST_MODE
+      MODEL_PRICING_TIER_EXTENDED_1M MODEL_PRICING_TIER_EXTENDED_272K MODEL_PRICING_TIER_BYOK
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelPricingVariantMetadata
+    FIELDS = {
+      currency: 'currency',
+      label: 'label',
+      mode: 'mode',
+      prices: 'prices',
+      scaled_pricing: 'scaled_pricing',
+      tier: 'tier'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      mode: lambda do |value|
+        ::OctridevDigitalocean::ApiModelBillingMode.from_value(value)
+      end,
+      prices: lambda do |value|
+        ::OctridevDigitalocean::ApiModelPricing.from_hash(value)
+      end,
+      scaled_pricing: lambda do |value|
+        ::OctridevDigitalocean::ApiModelScaledPricing.from_hash(value)
+      end,
+      tier: lambda do |value|
+        ::OctridevDigitalocean::ApiModelPricingTier.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ApiModelPricingVariant.
+  # Pricing for one variant of a model: a specific tier and billing mode.
+  class ApiModelPricingVariant
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelPricingVariantMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelPricingVariantMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelPricingVariantMetadata::DECODERS
 
-# Defines the ApiModelPricingTier SDK namespace.
-module ApiModelPricingTier
-  MODEL_PRICING_TIER_UNSPECIFIED = 'MODEL_PRICING_TIER_UNSPECIFIED'
-  MODEL_PRICING_TIER_STANDARD = 'MODEL_PRICING_TIER_STANDARD'
-  MODEL_PRICING_TIER_FAST_MODE = 'MODEL_PRICING_TIER_FAST_MODE'
-  MODEL_PRICING_TIER_EXTENDED_1_M = 'MODEL_PRICING_TIER_EXTENDED_1M'
-  MODEL_PRICING_TIER_EXTENDED_272_K = 'MODEL_PRICING_TIER_EXTENDED_272K'
-  MODEL_PRICING_TIER_BYOK = 'MODEL_PRICING_TIER_BYOK'
-  VALUES = [
-    'MODEL_PRICING_TIER_UNSPECIFIED', 'MODEL_PRICING_TIER_STANDARD', 'MODEL_PRICING_TIER_FAST_MODE',
-    'MODEL_PRICING_TIER_EXTENDED_1M', 'MODEL_PRICING_TIER_EXTENDED_272K', 'MODEL_PRICING_TIER_BYOK'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] Currency code for this variant's rates (e.g. `USD`).
+    attr_reader :currency
+    # @return [String] Display name for the variant (e.g. `Standard`, `Fast Mode`, `1M Context`).
+    attr_reader :label
+    # @return [ApiModelBillingMode] Whether rates apply to real-time or batch requests. - MODEL_BILLING_MODE_INTERACTIVE: Real-time request pricing. - MODEL_BILLING_MODE_BATCH: Discounted pricing for asynchronous batch requests.
+    attr_reader :mode
+    # @return [ApiModelPricing] Pricing per million tokens (aligns with existing ModelPrice pattern)
+    attr_reader :prices
+    # @return [ApiModelScaledPricing] Pricing that varies over time. When present, the rates move between the low and high bounds below across the intervals in the schedule.
+    attr_reader :scaled_pricing
+    # @return [ApiModelPricingTier] A pricing variant of a model, such as a faster serving option or a larger context window. - MODEL_PRICING_TIER_STANDARD: Default pricing. - MODEL_PRICING_TIER_FAST_MODE: Faster, higher-priority serving at a premium price. - MODEL_PRICING_TIER_EXTENDED_1M: Pricing for the 1M-token context window. - MODEL_PRICING_TIER_EXTENDED_272K: Pricing for the 272K-token context window. - MODEL_PRICING_TIER_BYOK: Pricing when using your own model API key.
+    attr_reader :tier
 
-# Internal model hydration metadata.
-class SdkInternalApiModelPricingVariantMetadata
-  FIELDS = {
-    currency: "currency",
-    label: "label",
-    mode: "mode",
-    prices: "prices",
-    scaled_pricing: "scaled_pricing",
-    tier: "tier",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    mode: lambda do |value|
-      ::OctridevDigitalocean::ApiModelBillingMode.from_value(value)
-    end,
-    prices: lambda do |value|
-      ::OctridevDigitalocean::ApiModelPricing.from_hash(value)
-    end,
-    scaled_pricing: lambda do |value|
-      ::OctridevDigitalocean::ApiModelScaledPricing.from_hash(value)
-    end,
-    tier: lambda do |value|
-      ::OctridevDigitalocean::ApiModelPricingTier.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for ApiModelPricingVariant.
-# Pricing for one variant of a model: a specific tier and billing mode.
-class ApiModelPricingVariant
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelPricingVariantMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelPricingVariantMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelPricingVariantMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] Currency code for this variant's rates (e.g. `USD`).
-  attr_reader :currency
-  # @return [String] Display name for the variant (e.g. `Standard`, `Fast Mode`, `1M Context`).
-  attr_reader :label
-  # @return [ApiModelBillingMode] Whether rates apply to real-time or batch requests. - MODEL_BILLING_MODE_INTERACTIVE: Real-time request pricing. - MODEL_BILLING_MODE_BATCH: Discounted pricing for asynchronous batch requests.
-  attr_reader :mode
-  # @return [ApiModelPricing] Pricing per million tokens (aligns with existing ModelPrice pattern)
-  attr_reader :prices
-  # @return [ApiModelScaledPricing] Pricing that varies over time. When present, the rates move between the low and high bounds below across the intervals in the schedule.
-  attr_reader :scaled_pricing
-  # @return [ApiModelPricingTier] A pricing variant of a model, such as a faster serving option or a larger context window. - MODEL_PRICING_TIER_STANDARD: Default pricing. - MODEL_PRICING_TIER_FAST_MODE: Faster, higher-priority serving at a premium price. - MODEL_PRICING_TIER_EXTENDED_1M: Pricing for the 1M-token context window. - MODEL_PRICING_TIER_EXTENDED_272K: Pricing for the 272K-token context window. - MODEL_PRICING_TIER_BYOK: Pricing when using your own model API key.
-  attr_reader :tier
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the ApiModelProvider SDK namespace.
+  module ApiModelProvider
+    MODEL_PROVIDER_DIGITALOCEAN = 'MODEL_PROVIDER_DIGITALOCEAN'
+    MODEL_PROVIDER_ANTHROPIC = 'MODEL_PROVIDER_ANTHROPIC'
+    MODEL_PROVIDER_OPENAI = 'MODEL_PROVIDER_OPENAI'
+    VALUES = %w[
+      MODEL_PROVIDER_DIGITALOCEAN MODEL_PROVIDER_ANTHROPIC MODEL_PROVIDER_OPENAI
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelProviderKeyInfoMetadata
+    FIELDS = {
+      api_key_uuid: 'api_key_uuid',
+      created_at: 'created_at',
+      created_by: 'created_by',
+      deleted_at: 'deleted_at',
+      models: 'models',
+      name: 'name',
+      provider: 'provider',
+      updated_at: 'updated_at'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      models: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiModel.from_hash(item) }
+      end,
+      provider: lambda do |value|
+        ::OctridevDigitalocean::ApiModelProvider.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ApiModelProviderKeyInfo.
+  # Typed representation of the `ApiModelProviderKeyInfo` API schema.
+  class ApiModelProviderKeyInfo
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelProviderKeyInfoMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelProviderKeyInfoMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelProviderKeyInfoMetadata::DECODERS
 
-# Defines the ApiModelProvider SDK namespace.
-module ApiModelProvider
-  MODEL_PROVIDER_DIGITALOCEAN = 'MODEL_PROVIDER_DIGITALOCEAN'
-  MODEL_PROVIDER_ANTHROPIC = 'MODEL_PROVIDER_ANTHROPIC'
-  MODEL_PROVIDER_OPENAI = 'MODEL_PROVIDER_OPENAI'
-  VALUES = [
-    'MODEL_PROVIDER_DIGITALOCEAN', 'MODEL_PROVIDER_ANTHROPIC', 'MODEL_PROVIDER_OPENAI'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
+    # @return [String] API key ID
+    attr_reader :api_key_uuid
+    # @return [String] Key creation date
+    attr_reader :created_at
+    # @return [String] Created by user id from DO
+    attr_reader :created_by
+    # @return [String] Key deleted date
+    attr_reader :deleted_at
+    # @return [Array_of_ApiModel] Models supported by the openAI api key
+    attr_reader :models
+    # @return [String] Name of the key
+    attr_reader :name
+    # @return [ApiModelProvider] Optional enumerated value serialized in the `provider` wire field.
+    attr_reader :provider
+    # @return [String] Key last updated date
+    attr_reader :updated_at
 
-# Internal model hydration metadata.
-class SdkInternalApiModelProviderKeyInfoMetadata
-  FIELDS = {
-    api_key_uuid: "api_key_uuid",
-    created_at: "created_at",
-    created_by: "created_by",
-    deleted_at: "deleted_at",
-    models: "models",
-    name: "name",
-    provider: "provider",
-    updated_at: "updated_at",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    models: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiModel.from_hash(item) }
-    end,
-    provider: lambda do |value|
-      ::OctridevDigitalocean::ApiModelProvider.from_value(value)
-    end,
-  }.freeze
-end
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-# API model for ApiModelProviderKeyInfo.
-# Typed representation of the `ApiModelProviderKeyInfo` API schema.
-class ApiModelProviderKeyInfo
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelProviderKeyInfoMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelProviderKeyInfoMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelProviderKeyInfoMetadata::DECODERS
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  # @return [String] API key ID
-  attr_reader :api_key_uuid
-  # @return [String] Key creation date
-  attr_reader :created_at
-  # @return [String] Created by user id from DO
-  attr_reader :created_by
-  # @return [String] Key deleted date
-  attr_reader :deleted_at
-  # @return [Array_of_ApiModel] Models supported by the openAI api key
-  attr_reader :models
-  # @return [String] Name of the key
-  attr_reader :name
-  # @return [ApiModelProvider] Optional enumerated value serialized in the `provider` wire field.
-  attr_reader :provider
-  # @return [String] Key last updated date
-  attr_reader :updated_at
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelPublicMetadata
+    FIELDS = {
+      agreement: 'agreement',
+      benchmark_score: 'benchmark_score',
+      capabilities: 'capabilities',
+      context_window: 'context_window',
+      created_at: 'created_at',
+      description: 'description',
+      endpoints: 'endpoints',
+      id: 'id',
+      is_foundational: 'is_foundational',
+      kb_default_chunk_size: 'kb_default_chunk_size',
+      kb_max_chunk_size: 'kb_max_chunk_size',
+      kb_min_chunk_size: 'kb_min_chunk_size',
+      lifecycle_status: 'lifecycle_status',
+      modalities: 'modalities',
+      model_availability: 'model_availability',
+      name: 'name',
+      parameter_count: 'parameter_count',
+      parent_uuid: 'parent_uuid',
+      pricing: 'pricing',
+      provider: 'provider',
+      reasoning_efforts: 'reasoning_efforts',
+      settings: 'settings',
+      thinking: 'thinking',
+      type: 'type',
+      updated_at: 'updated_at',
+      upload_complete: 'upload_complete',
+      url: 'url',
+      uuid: 'uuid',
+      version: 'version'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      agreement: lambda do |value|
+        ::OctridevDigitalocean::ApiAgreement.from_hash(value)
+      end,
+      endpoints: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiModelEndpoint.from_hash(item) }
+      end,
+      modalities: lambda do |value|
+        ::OctridevDigitalocean::ApiModelModalities.from_hash(value)
+      end,
+      pricing: lambda do |value|
+        ::OctridevDigitalocean::ApiModelPricing.from_hash(value)
+      end,
+      provider: lambda do |value|
+        ::OctridevDigitalocean::ApiModelProvider.from_value(value)
+      end,
+      settings: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiModelSetting.from_hash(item) }
+      end,
+      version: lambda do |value|
+        ::OctridevDigitalocean::ApiModelVersion.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ApiModelPublic.
+  # A machine learning model stored on the GenAI platform
+  class ApiModelPublic
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelPublicMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelPublicMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelPublicMetadata::DECODERS
+
+    # @return [ApiAgreement] Agreement Description
+    attr_reader :agreement
+    # @return [Hash] Benchmark scores for this model, stored as arbitrary JSON
+    attr_reader :benchmark_score
+    # @return [Array_of_String] Model capabilities (inference, reasoning, vectorization, etc.)
+    attr_reader :capabilities
+    # @return [String] Context window (maximum tokens)
+    attr_reader :context_window
+    # @return [String] Creation date / time
+    attr_reader :created_at
+    # @return [String] Model description
+    attr_reader :description
+    # @return [Array_of_ApiModelEndpoint] Available endpoints and their capabilities
+    attr_reader :endpoints
+    # @return [String] Human-readable model identifier
+    attr_reader :id
+    # @return [Boolean] True if it is a foundational model provided by do
+    attr_reader :is_foundational
+    # @return [Integer] Default chunking size limit to show in UI
+    attr_reader :kb_default_chunk_size
+    # @return [Integer] Maximum chunk size limit of model
+    attr_reader :kb_max_chunk_size
+    # @return [Integer] Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase
+    attr_reader :kb_min_chunk_size
+    # @return [String] Lifecycle status of the model (internal, public-preview, active, deprecated, end_of_life)
+    attr_reader :lifecycle_status
+    # @return [ApiModelModalities] Input/output modalities
+    attr_reader :modalities
+    # @return [String] Model availability (serverless, dedicated, etc.)
+    attr_reader :model_availability
+    # @return [String] Display name of the model
+    attr_reader :name
+    # @return [Float] Parameter count in billions
+    attr_reader :parameter_count
+    # @return [String] Unique id of the model, this model is based on
+    attr_reader :parent_uuid
+    # @return [ApiModelPricing] Pricing per million tokens (aligns with existing ModelPrice pattern)
+    attr_reader :pricing
+    # @return [ApiModelProvider] Optional enumerated value serialized in the `provider` wire field.
+    attr_reader :provider
+    # @return [Array_of_String] Available reasoning efforts for this model
+    attr_reader :reasoning_efforts
+    # @return [Array_of_ApiModelSetting] Playground settings derived from model metadata
+    attr_reader :settings
+    # @return [Boolean] Whether this model supports extended thinking (Anthropic models)
+    attr_reader :thinking
+    # @return [String] Model type (chat, embedding, image, reasoning, coding)
+    attr_reader :type
+    # @return [String] Last modified
+    attr_reader :updated_at
+    # @return [Boolean] Model has been fully uploaded
+    attr_reader :upload_complete
+    # @return [String] Download url
+    attr_reader :url
+    # @return [String] Unique id
+    attr_reader :uuid
+    # @return [ApiModelVersion] Version Information about a Model
+    attr_reader :version
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelPublicMetadata
-  FIELDS = {
-    agreement: "agreement",
-    benchmark_score: "benchmark_score",
-    capabilities: "capabilities",
-    context_window: "context_window",
-    created_at: "created_at",
-    description: "description",
-    endpoints: "endpoints",
-    id: "id",
-    is_foundational: "is_foundational",
-    kb_default_chunk_size: "kb_default_chunk_size",
-    kb_max_chunk_size: "kb_max_chunk_size",
-    kb_min_chunk_size: "kb_min_chunk_size",
-    lifecycle_status: "lifecycle_status",
-    modalities: "modalities",
-    model_availability: "model_availability",
-    name: "name",
-    parameter_count: "parameter_count",
-    parent_uuid: "parent_uuid",
-    pricing: "pricing",
-    provider: "provider",
-    reasoning_efforts: "reasoning_efforts",
-    settings: "settings",
-    thinking: "thinking",
-    type: "type",
-    updated_at: "updated_at",
-    upload_complete: "upload_complete",
-    url: "url",
-    uuid: "uuid",
-    version: "version",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    agreement: lambda do |value|
-      ::OctridevDigitalocean::ApiAgreement.from_hash(value)
-    end,
-    endpoints: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiModelEndpoint.from_hash(item) }
-    end,
-    modalities: lambda do |value|
-      ::OctridevDigitalocean::ApiModelModalities.from_hash(value)
-    end,
-    pricing: lambda do |value|
-      ::OctridevDigitalocean::ApiModelPricing.from_hash(value)
-    end,
-    provider: lambda do |value|
-      ::OctridevDigitalocean::ApiModelProvider.from_value(value)
-    end,
-    settings: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiModelSetting.from_hash(item) }
-    end,
-    version: lambda do |value|
-      ::OctridevDigitalocean::ApiModelVersion.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiModelPublic.
-# A machine learning model stored on the GenAI platform
-class ApiModelPublic
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelPublicMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelPublicMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelPublicMetadata::DECODERS
-
-  # @return [ApiAgreement] Agreement Description
-  attr_reader :agreement
-  # @return [Hash] Benchmark scores for this model, stored as arbitrary JSON
-  attr_reader :benchmark_score
-  # @return [Array_of_String] Model capabilities (inference, reasoning, vectorization, etc.)
-  attr_reader :capabilities
-  # @return [String] Context window (maximum tokens)
-  attr_reader :context_window
-  # @return [String] Creation date / time
-  attr_reader :created_at
-  # @return [String] Model description
-  attr_reader :description
-  # @return [Array_of_ApiModelEndpoint] Available endpoints and their capabilities
-  attr_reader :endpoints
-  # @return [String] Human-readable model identifier
-  attr_reader :id
-  # @return [Boolean] True if it is a foundational model provided by do
-  attr_reader :is_foundational
-  # @return [Integer] Default chunking size limit to show in UI
-  attr_reader :kb_default_chunk_size
-  # @return [Integer] Maximum chunk size limit of model
-  attr_reader :kb_max_chunk_size
-  # @return [Integer] Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase
-  attr_reader :kb_min_chunk_size
-  # @return [String] Lifecycle status of the model (internal, public-preview, active, deprecated, end_of_life)
-  attr_reader :lifecycle_status
-  # @return [ApiModelModalities] Input/output modalities
-  attr_reader :modalities
-  # @return [String] Model availability (serverless, dedicated, etc.)
-  attr_reader :model_availability
-  # @return [String] Display name of the model
-  attr_reader :name
-  # @return [Float] Parameter count in billions
-  attr_reader :parameter_count
-  # @return [String] Unique id of the model, this model is based on
-  attr_reader :parent_uuid
-  # @return [ApiModelPricing] Pricing per million tokens (aligns with existing ModelPrice pattern)
-  attr_reader :pricing
-  # @return [ApiModelProvider] Optional enumerated value serialized in the `provider` wire field.
-  attr_reader :provider
-  # @return [Array_of_String] Available reasoning efforts for this model
-  attr_reader :reasoning_efforts
-  # @return [Array_of_ApiModelSetting] Playground settings derived from model metadata
-  attr_reader :settings
-  # @return [Boolean] Whether this model supports extended thinking (Anthropic models)
-  attr_reader :thinking
-  # @return [String] Model type (chat, embedding, image, reasoning, coding)
-  attr_reader :type
-  # @return [String] Last modified
-  attr_reader :updated_at
-  # @return [Boolean] Model has been fully uploaded
-  attr_reader :upload_complete
-  # @return [String] Download url
-  attr_reader :url
-  # @return [String] Unique id
-  attr_reader :uuid
-  # @return [ApiModelVersion] Version Information about a Model
-  attr_reader :version
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiModelRouterMetadata
+    FIELDS = {
+      config: 'config',
+      created_at: 'created_at',
+      description: 'description',
+      name: 'name',
+      regions: 'regions',
+      updated_at: 'updated_at',
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      config: lambda do |value|
+        ::OctridevDigitalocean::ApiModelRouterConfig.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiModelRouter.
+  # Model router
+  class ApiModelRouter
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelRouterMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelRouterMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelRouterMetadata::DECODERS
+
+    # @return [ApiModelRouterConfig] Optional object value serialized in the `config` wire field.
+    attr_reader :config
+    # @return [String] Creation date / time
+    attr_reader :created_at
+    # @return [String] Description
+    attr_reader :description
+    # @return [String] Name of the model router
+    attr_reader :name
+    # @return [Array_of_String] Target regions for the router
+    attr_reader :regions
+    # @return [String] Last modified
+    attr_reader :updated_at
+    # @return [String] Unique id
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelRouterConfigMetadata
+    FIELDS = {
+      fallback_models: 'fallback_models',
+      policies: 'policies'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      policies: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiModelRouterTaskPolicy.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ApiModelRouterConfig.
+  # Typed representation of the `ApiModelRouterConfig` API schema.
+  class ApiModelRouterConfig
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelRouterConfigMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelRouterConfigMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelRouterConfigMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiModelRouterMetadata
-  FIELDS = {
-    config: "config",
-    created_at: "created_at",
-    description: "description",
-    name: "name",
-    regions: "regions",
-    updated_at: "updated_at",
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    config: lambda do |value|
-      ::OctridevDigitalocean::ApiModelRouterConfig.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [Array_of_String] Router-level fallback models
+    attr_reader :fallback_models
+    # @return [Array_of_ApiModelRouterTaskPolicy] Task routing policies
+    attr_reader :policies
 
-# API model for ApiModelRouter.
-# Model router
-class ApiModelRouter
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelRouterMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelRouterMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelRouterMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ApiModelRouterConfig] Optional object value serialized in the `config` wire field.
-  attr_reader :config
-  # @return [String] Creation date / time
-  attr_reader :created_at
-  # @return [String] Description
-  attr_reader :description
-  # @return [String] Name of the model router
-  attr_reader :name
-  # @return [Array_of_String] Target regions for the router
-  attr_reader :regions
-  # @return [String] Last modified
-  attr_reader :updated_at
-  # @return [String] Unique id
-  attr_reader :uuid
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelRouterPresetMetadata
+    FIELDS = {
+      config: 'config',
+      display_name: 'display_name',
+      long_description: 'long_description',
+      short_description: 'short_description',
+      slug: 'slug'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      config: lambda do |value|
+        ::OctridevDigitalocean::ApiModelRouterConfig.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ApiModelRouterPreset.
+  # Model router preset used to prefill new router configurations.
+  class ApiModelRouterPreset
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelRouterPresetMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelRouterPresetMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelRouterPresetMetadata::DECODERS
+
+    # @return [ApiModelRouterConfig] Optional object value serialized in the `config` wire field.
+    attr_reader :config
+    # @return [String] Display name for UI surfaces
+    attr_reader :display_name
+    # @return [String] Long description for details views
+    attr_reader :long_description
+    # @return [String] Short description for list views
+    attr_reader :short_description
+    # @return [String] Stable slug for routing usage
+    attr_reader :slug
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelRouterConfigMetadata
-  FIELDS = {
-    fallback_models: "fallback_models",
-    policies: "policies",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    policies: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiModelRouterTaskPolicy.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ApiModelRouterConfig.
-# Typed representation of the `ApiModelRouterConfig` API schema.
-class ApiModelRouterConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelRouterConfigMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelRouterConfigMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelRouterConfigMetadata::DECODERS
-
-  # @return [Array_of_String] Router-level fallback models
-  attr_reader :fallback_models
-  # @return [Array_of_ApiModelRouterTaskPolicy] Task routing policies
-  attr_reader :policies
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiModelRouterSelectionPolicyMetadata
+    FIELDS = {
+      prefer: 'prefer'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiModelRouterSelectionPolicy.
+  # Selection policy preference for choosing among assigned models.
+  class ApiModelRouterSelectionPolicy
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelRouterSelectionPolicyMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelRouterSelectionPolicyMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelRouterSelectionPolicyMetadata::DECODERS
+
+    # @return [String] One of: none, cheapest, fastest
+    attr_reader :prefer
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelRouterTaskDetailsMetadata
+    FIELDS = {
+      description: 'description',
+      name: 'name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for ApiModelRouterTaskDetails.
+  # Task definition embedded in a model router config.
+  class ApiModelRouterTaskDetails
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelRouterTaskDetailsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelRouterTaskDetailsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelRouterTaskDetailsMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalApiModelRouterPresetMetadata
-  FIELDS = {
-    config: "config",
-    display_name: "display_name",
-    long_description: "long_description",
-    short_description: "short_description",
-    slug: "slug",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    config: lambda do |value|
-      ::OctridevDigitalocean::ApiModelRouterConfig.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [String] Short task description
+    attr_reader :description
+    # @return [String] Task name
+    attr_reader :name
 
-# API model for ApiModelRouterPreset.
-# Model router preset used to prefill new router configurations.
-class ApiModelRouterPreset
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelRouterPresetMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelRouterPresetMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelRouterPresetMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [ApiModelRouterConfig] Optional object value serialized in the `config` wire field.
-  attr_reader :config
-  # @return [String] Display name for UI surfaces
-  attr_reader :display_name
-  # @return [String] Long description for details views
-  attr_reader :long_description
-  # @return [String] Short description for list views
-  attr_reader :short_description
-  # @return [String] Stable slug for routing usage
-  attr_reader :slug
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelRouterTaskPolicyMetadata
+    FIELDS = {
+      custom_task: 'custom_task',
+      models: 'models',
+      selection_policy: 'selection_policy',
+      task_slug: 'task_slug'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      custom_task: lambda do |value|
+        ::OctridevDigitalocean::ApiModelRouterTaskDetails.from_hash(value)
+      end,
+      selection_policy: lambda do |value|
+        ::OctridevDigitalocean::ApiModelRouterSelectionPolicy.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ApiModelRouterTaskPolicy.
+  # Model router policy
+  class ApiModelRouterTaskPolicy
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiModelRouterTaskPolicyMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiModelRouterTaskPolicyMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiModelRouterTaskPolicyMetadata::DECODERS
+
+    # @return [ApiModelRouterTaskDetails] Task definition embedded in a model router config.
+    attr_reader :custom_task
+    # @return [Array_of_String] Models assigned to the task
+    attr_reader :models
+    # @return [ApiModelRouterSelectionPolicy] Selection policy preference for choosing among assigned models.
+    attr_reader :selection_policy
+    # @return [String] Task slug
+    attr_reader :task_slug
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
+  # Internal model hydration metadata.
+  class SdkInternalApiModelRouterTaskPresetMetadata
+    FIELDS = {
+      category: 'category',
+      description: 'description',
+      models: 'models',
+      name: 'name',
+      selection_policy: 'selection_policy',
+      tags: 'tags',
+      task_slug: 'task_slug'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      selection_policy: lambda do |value|
+        ::OctridevDigitalocean::ApiModelRouterSelectionPolicy.from_hash(value)
+      end
+    }.freeze
   end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelRouterSelectionPolicyMetadata
-  FIELDS = {
-    prefer: "prefer",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiModelRouterSelectionPolicy.
-# Selection policy preference for choosing among assigned models.
-class ApiModelRouterSelectionPolicy
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelRouterSelectionPolicyMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelRouterSelectionPolicyMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelRouterSelectionPolicyMetadata::DECODERS
-
-  # @return [String] One of: none, cheapest, fastest
-  attr_reader :prefer
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelRouterTaskDetailsMetadata
-  FIELDS = {
-    description: "description",
-    name: "name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiModelRouterTaskDetails.
-# Task definition embedded in a model router config.
-class ApiModelRouterTaskDetails
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelRouterTaskDetailsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelRouterTaskDetailsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelRouterTaskDetailsMetadata::DECODERS
-
-  # @return [String] Short task description
-  attr_reader :description
-  # @return [String] Task name
-  attr_reader :name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelRouterTaskPolicyMetadata
-  FIELDS = {
-    custom_task: "custom_task",
-    models: "models",
-    selection_policy: "selection_policy",
-    task_slug: "task_slug",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    custom_task: lambda do |value|
-      ::OctridevDigitalocean::ApiModelRouterTaskDetails.from_hash(value)
-    end,
-    selection_policy: lambda do |value|
-      ::OctridevDigitalocean::ApiModelRouterSelectionPolicy.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for ApiModelRouterTaskPolicy.
-# Model router policy
-class ApiModelRouterTaskPolicy
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiModelRouterTaskPolicyMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiModelRouterTaskPolicyMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiModelRouterTaskPolicyMetadata::DECODERS
-
-  # @return [ApiModelRouterTaskDetails] Task definition embedded in a model router config.
-  attr_reader :custom_task
-  # @return [Array_of_String] Models assigned to the task
-  attr_reader :models
-  # @return [ApiModelRouterSelectionPolicy] Selection policy preference for choosing among assigned models.
-  attr_reader :selection_policy
-  # @return [String] Task slug
-  attr_reader :task_slug
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiModelRouterTaskPresetMetadata
-  FIELDS = {
-    category: "category",
-    description: "description",
-    models: "models",
-    name: "name",
-    selection_policy: "selection_policy",
-    tags: "tags",
-    task_slug: "task_slug",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    selection_policy: lambda do |value|
-      ::OctridevDigitalocean::ApiModelRouterSelectionPolicy.from_hash(value)
-    end,
-  }.freeze
-end
 end

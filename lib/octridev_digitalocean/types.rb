@@ -8,78 +8,103 @@ module OctridevDigitalocean
   # Defines the AutoscalePoolConfig SDK namespace.
   module AutoscalePoolConfig
   end
+
   # Defines the AutoscalePoolCreateConfig SDK namespace.
   module AutoscalePoolCreateConfig
   end
+
   # Defines the ChatCompletionRequestToolChoice SDK namespace.
   module ChatCompletionRequestToolChoice
   end
+
   # Defines the CreateResponseRequestToolChoice SDK namespace.
   module CreateResponseRequestToolChoice
   end
+
   # Defines the DatabaseConfigConfig SDK namespace.
   module DatabaseConfigConfig
   end
+
   # Defines the DatabaseConfigResponseConfig SDK namespace.
   module DatabaseConfigResponseConfig
   end
+
   # Defines the DropletsCreateResponse SDK namespace.
   module DropletsCreateResponse
   end
+
   # Defines the FloatingIpCreate SDK namespace.
   module FloatingIpCreate
   end
+
   # Defines the FloatingIpDroplet SDK namespace.
   module FloatingIpDroplet
   end
+
   # Defines the Forbidden SDK namespace.
   module Forbidden
   end
+
   # Defines the ImagesPostAccountTransferCreate SDK namespace.
   module ImagesPostAccountTransferCreate
   end
+
   # Defines the LoadBalancerCreate SDK namespace.
   module LoadBalancerCreate
   end
+
   # Defines the LoadBalancerCreateRequest SDK namespace.
   module LoadBalancerCreateRequest
   end
+
   # Defines the LoadBalancerUpdate SDK namespace.
   module LoadBalancerUpdate
   end
+
   # Defines the LoadBalancerUpdateRequest SDK namespace.
   module LoadBalancerUpdateRequest
   end
+
   # Defines the LogsinkUpdateConfig SDK namespace.
   module LogsinkUpdateConfig
   end
+
   # Defines the MessagesRequestContentBlockParam SDK namespace.
   module MessagesRequestContentBlockParam
   end
+
   # Defines the MessagesResponseContentBlock SDK namespace.
   module MessagesResponseContentBlock
   end
+
   # Defines the MessagesToolChoiceParam SDK namespace.
   module MessagesToolChoiceParam
   end
+
   # Defines the PartnerAttachmentUpdatable SDK namespace.
   module PartnerAttachmentUpdatable
   end
+
   # Defines the ReservedIpCreate SDK namespace.
   module ReservedIpCreate
   end
+
   # Defines the ReservedIpDroplet SDK namespace.
   module ReservedIpDroplet
   end
+
   # Defines the ReservedIpv6Droplet SDK namespace.
   module ReservedIpv6Droplet
   end
+
   # Defines the ReservedIpv6ListReservedIpv6sItemDroplet SDK namespace.
   module ReservedIpv6ListReservedIpv6sItemDroplet
   end
+
   # Defines the SpansFilterValue SDK namespace.
   module SpansFilterValue
   end
+
   # Defines the TracesFilterValue SDK namespace.
   module TracesFilterValue
   end

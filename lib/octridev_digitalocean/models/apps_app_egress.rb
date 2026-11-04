@@ -5,56 +5,55 @@
 
 # apps_app_egress domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAppEgressSpecMetadata
-  FIELDS = {
-    type: "type",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    type: lambda do |value|
-      ::OctridevDigitalocean::AppEgressTypeSpec.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for AppEgressSpec.
-# Specification for app egress configurations.
-class AppEgressSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppEgressSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppEgressSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppEgressSpecMetadata::DECODERS
-
-  # @return [AppEgressTypeSpec] Optional enumerated value serialized in the `type` wire field.
-  attr_reader :type
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppEgressSpecMetadata
+    FIELDS = {
+      type: 'type'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      type: lambda do |value|
+        ::OctridevDigitalocean::AppEgressTypeSpec.from_value(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppEgressSpec.
+  # Specification for app egress configurations.
+  class AppEgressSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppEgressSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppEgressSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppEgressSpecMetadata::DECODERS
+
+    # @return [AppEgressTypeSpec] Optional enumerated value serialized in the `type` wire field.
+    attr_reader :type
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the AppEgressTypeSpec SDK namespace.
+  module AppEgressTypeSpec
+    AUTOASSIGN = 'AUTOASSIGN'
+    DEDICATED_IP = 'DEDICATED_IP'
+    VALUES = %w[AUTOASSIGN DEDICATED_IP].freeze
+    def self.from_value(value)
+      value
+    end
   end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the AppEgressTypeSpec SDK namespace.
-module AppEgressTypeSpec
-  AUTOASSIGN = 'AUTOASSIGN'
-  DEDICATED_IP = 'DEDICATED_IP'
-  VALUES = ['AUTOASSIGN', 'DEDICATED_IP'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

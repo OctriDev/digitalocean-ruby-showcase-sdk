@@ -5,16 +5,16 @@
 
 # load_balancer domain models
 module OctridevDigitalocean
-# Defines the LoadBalancerUpdate SDK namespace.
-module LoadBalancerUpdate
-  def self.from_hash(hash)
-    shape_mapping = {
-      "droplet_ids" => LoadBalancerUpdateVariant0,
-      "tag" => LoadBalancerUpdateVariant1,
-    }
-    type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
-    decoded = type&.from_hash(hash)
-    return decoded unless type.nil?
+  # Defines the LoadBalancerUpdate SDK namespace.
+  module LoadBalancerUpdate
+    def self.from_hash(hash)
+      shape_mapping = {
+        'droplet_ids' => LoadBalancerUpdateVariant0,
+        'tag' => LoadBalancerUpdateVariant1
+      }
+      type = shape_mapping.find { |required, _type| hash.is_a?(::Hash) && hash.key?(required) }&.last
+      decoded = type&.from_hash(hash)
+      decoded unless type.nil?
+    end
   end
-end
 end

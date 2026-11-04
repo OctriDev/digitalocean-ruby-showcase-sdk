@@ -5,89 +5,85 @@
 
 # agent_platform_api_api_google domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalApiGoogleDriveDataSourceMetadata
-  FIELDS = {
-    folder_id: "folder_id",
-    refresh_token: "refresh_token",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiGoogleDriveDataSource.
-# Google Drive Data Source
-class ApiGoogleDriveDataSource
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiGoogleDriveDataSourceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiGoogleDriveDataSourceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiGoogleDriveDataSourceMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `folder_id` wire field.
-  attr_reader :folder_id
-  # @return [String] Refresh token. you can obrain a refresh token by following the oauth2 flow. see /v2/gen-ai/oauth2/google/tokens for reference.
-  attr_reader :refresh_token
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalApiGoogleDriveDataSourceMetadata
+    FIELDS = {
+      folder_id: 'folder_id',
+      refresh_token: 'refresh_token'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for ApiGoogleDriveDataSource.
+  # Google Drive Data Source
+  class ApiGoogleDriveDataSource
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiGoogleDriveDataSourceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiGoogleDriveDataSourceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiGoogleDriveDataSourceMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `folder_id` wire field.
+    attr_reader :folder_id
+    # @return [String] Refresh token. you can obrain a refresh token by following the oauth2 flow. see /v2/gen-ai/oauth2/google/tokens for reference.
+    attr_reader :refresh_token
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalApiGoogleDriveDataSourceDisplayMetadata
+    FIELDS = {
+      folder_id: 'folder_id',
+      folder_name: 'folder_name'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
+  # API model for ApiGoogleDriveDataSourceDisplay.
+  # Google Drive Data Source for Display
+  class ApiGoogleDriveDataSourceDisplay
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiGoogleDriveDataSourceDisplayMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiGoogleDriveDataSourceDisplayMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiGoogleDriveDataSourceDisplayMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `folder_id` wire field.
+    attr_reader :folder_id
+    # @return [String] Name of the selected folder if available
+    attr_reader :folder_name
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiGoogleDriveDataSourceDisplayMetadata
-  FIELDS = {
-    folder_id: "folder_id",
-    folder_name: "folder_name",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiGoogleDriveDataSourceDisplay.
-# Google Drive Data Source for Display
-class ApiGoogleDriveDataSourceDisplay
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiGoogleDriveDataSourceDisplayMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiGoogleDriveDataSourceDisplayMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiGoogleDriveDataSourceDisplayMetadata::DECODERS
-
-  # @return [String] Optional `string` value serialized in the `folder_id` wire field.
-  attr_reader :folder_id
-  # @return [String] Name of the selected folder if available
-  attr_reader :folder_name
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
 end

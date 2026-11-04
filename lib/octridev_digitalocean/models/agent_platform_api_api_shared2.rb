@@ -5,107 +5,106 @@
 
 # agent_platform_api_api domain models
 module OctridevDigitalocean
-# API model for ApiWorkflowSpan.
-# Workflow span - can contain child spans (agent, llm, tool, retriever)
-class ApiWorkflowSpan
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiWorkflowSpanMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiWorkflowSpanMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiWorkflowSpanMetadata::DECODERS
+  # API model for ApiWorkflowSpan.
+  # Workflow span - can contain child spans (agent, llm, tool, retriever)
+  class ApiWorkflowSpan
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiWorkflowSpanMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiWorkflowSpanMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiWorkflowSpanMetadata::DECODERS
 
-  # @return [ApiSpanCommon] Common optional fields shared by all span types
-  attr_reader :common
-  # @return [Array_of_ApiTraceSpan] Child spans - must contain between 1 and 999 spans Allowed types: agent, llm, tool, retriever (not workflow)
-  attr_reader :spans
+    # @return [ApiSpanCommon] Common optional fields shared by all span types
+    attr_reader :common
+    # @return [Array_of_ApiTraceSpan] Child spans - must contain between 1 and 999 spans Allowed types: agent, llm, tool, retriever (not workflow)
+    attr_reader :spans
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiWorkspaceMetadata
+    FIELDS = {
+      agents: 'agents',
+      created_at: 'created_at',
+      created_by: 'created_by',
+      created_by_email: 'created_by_email',
+      deleted_at: 'deleted_at',
+      description: 'description',
+      evaluation_test_cases: 'evaluation_test_cases',
+      name: 'name',
+      updated_at: 'updated_at',
+      uuid: 'uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      agents: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
+      end,
+      evaluation_test_cases: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::ApiEvaluationTestCase.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ApiWorkspace.
+  # Typed representation of the `ApiWorkspace` API schema.
+  class ApiWorkspace
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiWorkspaceMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiWorkspaceMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiWorkspaceMetadata::DECODERS
+
+    # @return [Array_of_ApiAgent] Agents
+    attr_reader :agents
+    # @return [String] Creation date
+    attr_reader :created_at
+    # @return [String] The id of user who created this workspace
+    attr_reader :created_by
+    # @return [String] The email of the user who created this workspace
+    attr_reader :created_by_email
+    # @return [String] Deleted date
+    attr_reader :deleted_at
+    # @return [String] Description of the workspace
+    attr_reader :description
+    # @return [Array_of_ApiEvaluationTestCase] Evaluations
+    attr_reader :evaluation_test_cases
+    # @return [String] Name of the workspace
+    attr_reader :name
+    # @return [String] Update date
+    attr_reader :updated_at
+    # @return [String] Unique id
+    attr_reader :uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiWorkspaceMetadata
-  FIELDS = {
-    agents: "agents",
-    created_at: "created_at",
-    created_by: "created_by",
-    created_by_email: "created_by_email",
-    deleted_at: "deleted_at",
-    description: "description",
-    evaluation_test_cases: "evaluation_test_cases",
-    name: "name",
-    updated_at: "updated_at",
-    uuid: "uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    agents: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiAgent.from_hash(item) }
-    end,
-    evaluation_test_cases: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::ApiEvaluationTestCase.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for ApiWorkspace.
-# Typed representation of the `ApiWorkspace` API schema.
-class ApiWorkspace
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiWorkspaceMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiWorkspaceMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiWorkspaceMetadata::DECODERS
-
-  # @return [Array_of_ApiAgent] Agents
-  attr_reader :agents
-  # @return [String] Creation date
-  attr_reader :created_at
-  # @return [String] The id of user who created this workspace
-  attr_reader :created_by
-  # @return [String] The email of the user who created this workspace
-  attr_reader :created_by_email
-  # @return [String] Deleted date
-  attr_reader :deleted_at
-  # @return [String] Description of the workspace
-  attr_reader :description
-  # @return [Array_of_ApiEvaluationTestCase] Evaluations
-  attr_reader :evaluation_test_cases
-  # @return [String] Name of the workspace
-  attr_reader :name
-  # @return [String] Update date
-  attr_reader :updated_at
-  # @return [String] Unique id
-  attr_reader :uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
 end

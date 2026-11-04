@@ -21,24 +21,23 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/agents/templates",
+          '/v2/agents/templates',
           config: config,
           query: {
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListTemplatesResponse,
           decoder: :json,
           operation_id: 'harness_list_templates',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
-    HarnessListTemplatesPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      HarnessListTemplatesPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # team_id is stamped from the authenticated principal; never accepted from the client.
       #
@@ -63,9 +62,11 @@ module OctridevDigitalocean
             )
             items = page.templates || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -88,10 +89,12 @@ module OctridevDigitalocean
             )
             items = page.templates || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << HarnessListTemplatesPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end
@@ -114,21 +117,20 @@ module OctridevDigitalocean
         source_oci_ref:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/agents/templates",
+          '/v2/agents/templates',
           config: config,
           body: {
             'name' => name,
             'base_template' => base_template,
-            'source_oci_ref' => source_oci_ref,
+            'source_oci_ref' => source_oci_ref
           },
           return_type: ::OctridevDigitalocean::CreateTemplateResponse,
           decoder: :json,
           operation_id: 'harness_create_template',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -140,13 +142,12 @@ module OctridevDigitalocean
         template_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('template_id', template_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/templates/",
+            '/v2/agents/templates/',
             SdkClient.encode_path_segment(template_id)
           ].join,
           config: config,
@@ -154,7 +155,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_get_template',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -174,25 +175,24 @@ module OctridevDigitalocean
         base_template: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('template_id', template_id)
 
         SdkClient.request(
           'PUT',
           [
-            "/v2/agents/templates/",
+            '/v2/agents/templates/',
             SdkClient.encode_path_segment(template_id)
           ].join,
           config: config,
           body: {
             'source_oci_ref' => source_oci_ref,
-            'base_template' => base_template,
+            'base_template' => base_template
           },
           return_type: ::OctridevDigitalocean::CreateTemplateResponse,
           decoder: :json,
           operation_id: 'harness_update_template',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -206,13 +206,12 @@ module OctridevDigitalocean
         template_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('template_id', template_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/agents/templates/",
+            '/v2/agents/templates/',
             SdkClient.encode_path_segment(template_id)
           ].join,
           config: config,
@@ -220,7 +219,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_delete_template',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -238,30 +237,29 @@ module OctridevDigitalocean
         page_token: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('template_id', template_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/templates/",
+            '/v2/agents/templates/',
             SdkClient.encode_path_segment(template_id),
-            "/builds"
+            '/builds'
           ].join,
           config: config,
           query: {
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
-            'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
+            'page_token' => QueryValue.new(page_token, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListTemplateBuildsResponse,
           decoder: :json,
           operation_id: 'harness_list_template_builds',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
-    HarnessListTemplateBuildsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      HarnessListTemplateBuildsPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # ListTemplateBuilds returns build history for a template.
       #
@@ -289,9 +287,11 @@ module OctridevDigitalocean
             )
             items = page.builds || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -316,10 +316,12 @@ module OctridevDigitalocean
             )
             items = page.builds || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << HarnessListTemplateBuildsPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end
@@ -337,7 +339,6 @@ module OctridevDigitalocean
         build_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('template_id', template_id)
 
         Validation.validate_uuid('build_id', build_id)
@@ -345,9 +346,9 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/templates/",
+            '/v2/agents/templates/',
             SdkClient.encode_path_segment(template_id),
-            "/builds/",
+            '/builds/',
             SdkClient.encode_path_segment(build_id)
           ].join,
           config: config,
@@ -355,7 +356,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_get_template_build',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -375,28 +376,27 @@ module OctridevDigitalocean
         status: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(page_size) { Validation.validate_range('page_size', page_size, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/agents/triggers",
+          '/v2/agents/triggers',
           config: config,
           query: {
             'page_size' => QueryValue.new(page_size, style: 'form', explode: true),
             'page_token' => QueryValue.new(page_token, style: 'form', explode: true),
             'kind' => QueryValue.new(kind, style: 'form', explode: true),
-            'status' => QueryValue.new(status, style: 'form', explode: true),
+            'status' => QueryValue.new(status, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ListTriggersResponse,
           decoder: :json,
           operation_id: 'harness_list_triggers',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
-    HarnessListTriggersPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
+      HarnessListTriggersPage = ::Struct.new(:data, :items, :has_more, keyword_init: true)
 
       # Keyset-paginated on an opaque cursor. Excludes soft-deleted triggers. Scoped to the authenticated team.
       #
@@ -427,9 +427,11 @@ module OctridevDigitalocean
             )
             items = page.triggers || []
             break if items.empty?
+
             items.each { |item| y << item }
             next_cursor = page.next_page_token
             break if next_cursor.nil?
+
             cursor = next_cursor
           end
         end
@@ -456,10 +458,12 @@ module OctridevDigitalocean
             )
             items = page.triggers || []
             break if items.empty?
+
             next_cursor = page.next_page_token
             has_more = !next_cursor.nil?
             y << HarnessListTriggersPage.new(data: page, items: items, has_more: has_more)
             break unless has_more
+
             cursor = next_cursor
           end
         end
@@ -502,7 +506,6 @@ module OctridevDigitalocean
         cron: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_length('name', name, min: 1, max: 64)
         Validation.validate_pattern('name', name, '^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$')
 
@@ -510,7 +513,7 @@ module OctridevDigitalocean
 
         SdkClient.request(
           'POST',
-          "/v2/agents/triggers",
+          '/v2/agents/triggers',
           config: config,
           body: {
             'kind' => kind,
@@ -521,13 +524,13 @@ module OctridevDigitalocean
             'session_template' => session_template,
             'bound_session_id' => bound_session_id,
             'webhook' => webhook,
-            'cron' => cron,
+            'cron' => cron
           },
           return_type: ::OctridevDigitalocean::CreateTriggerResponse,
           decoder: :json,
           operation_id: 'harness_create_trigger',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '422' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -539,11 +542,10 @@ module OctridevDigitalocean
         session_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/triggers/by-session/",
+            '/v2/agents/triggers/by-session/',
             SdkClient.encode_path_segment(session_id)
           ].join,
           config: config,
@@ -551,7 +553,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_get_trigger_by_session',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
     end

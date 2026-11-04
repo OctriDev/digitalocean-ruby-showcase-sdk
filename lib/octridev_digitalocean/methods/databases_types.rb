@@ -11,12 +11,9 @@ module OctridevDigitalocean
     module Databases
       # Internal model hydration metadata.
       class SdkInternalDatabaseClusterRequestUiConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        FIELDS = {}.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabaseClusterRequestUiConnection.
@@ -26,7 +23,6 @@ module OctridevDigitalocean
         FIELDS = SdkInternalDatabaseClusterRequestUiConnectionMetadata::FIELDS
         REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestUiConnectionMetadata::REQUIRED_FIELDS
         DECODERS = SdkInternalDatabaseClusterRequestUiConnectionMetadata::DECODERS
-
 
         def initialize(**attributes)
           SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
@@ -48,12 +44,9 @@ module OctridevDigitalocean
 
       # Internal model hydration metadata.
       class SdkInternalDatabaseClusterRequestSchemaRegistryConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        FIELDS = {}.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabaseClusterRequestSchemaRegistryConnection.
@@ -63,7 +56,6 @@ module OctridevDigitalocean
         FIELDS = SdkInternalDatabaseClusterRequestSchemaRegistryConnectionMetadata::FIELDS
         REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestSchemaRegistryConnectionMetadata::REQUIRED_FIELDS
         DECODERS = SdkInternalDatabaseClusterRequestSchemaRegistryConnectionMetadata::DECODERS
-
 
         def initialize(**attributes)
           SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
@@ -85,12 +77,9 @@ module OctridevDigitalocean
 
       # Internal model hydration metadata.
       class SdkInternalDatabaseClusterRequestConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        FIELDS = {}.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabaseClusterRequestConnection.
@@ -99,7 +88,6 @@ module OctridevDigitalocean
         FIELDS = SdkInternalDatabaseClusterRequestConnectionMetadata::FIELDS
         REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestConnectionMetadata::REQUIRED_FIELDS
         DECODERS = SdkInternalDatabaseClusterRequestConnectionMetadata::DECODERS
-
 
         def initialize(**attributes)
           SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
@@ -121,12 +109,9 @@ module OctridevDigitalocean
 
       # Internal model hydration metadata.
       class SdkInternalDatabaseClusterRequestPrivateConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        FIELDS = {}.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabaseClusterRequestPrivateConnection.
@@ -135,7 +120,6 @@ module OctridevDigitalocean
         FIELDS = SdkInternalDatabaseClusterRequestPrivateConnectionMetadata::FIELDS
         REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestPrivateConnectionMetadata::REQUIRED_FIELDS
         DECODERS = SdkInternalDatabaseClusterRequestPrivateConnectionMetadata::DECODERS
-
 
         def initialize(**attributes)
           SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
@@ -157,12 +141,9 @@ module OctridevDigitalocean
 
       # Internal model hydration metadata.
       class SdkInternalDatabaseClusterRequestStandbyConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        FIELDS = {}.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabaseClusterRequestStandbyConnection.
@@ -171,7 +152,6 @@ module OctridevDigitalocean
         FIELDS = SdkInternalDatabaseClusterRequestStandbyConnectionMetadata::FIELDS
         REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestStandbyConnectionMetadata::REQUIRED_FIELDS
         DECODERS = SdkInternalDatabaseClusterRequestStandbyConnectionMetadata::DECODERS
-
 
         def initialize(**attributes)
           SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
@@ -193,12 +173,9 @@ module OctridevDigitalocean
 
       # Internal model hydration metadata.
       class SdkInternalDatabaseClusterRequestStandbyPrivateConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        FIELDS = {}.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabaseClusterRequestStandbyPrivateConnection.
@@ -207,7 +184,6 @@ module OctridevDigitalocean
         FIELDS = SdkInternalDatabaseClusterRequestStandbyPrivateConnectionMetadata::FIELDS
         REQUIRED_FIELDS = SdkInternalDatabaseClusterRequestStandbyPrivateConnectionMetadata::REQUIRED_FIELDS
         DECODERS = SdkInternalDatabaseClusterRequestStandbyPrivateConnectionMetadata::DECODERS
-
 
         def initialize(**attributes)
           SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
@@ -230,15 +206,14 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabaseClusterRequestMaintenanceWindowMetadata
         FIELDS = {
-          day: "day",
-          hour: "hour",
+          day: 'day',
+          hour: 'hour'
         }.freeze
         REQUIRED_FIELDS = %i[
           day
           hour
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabaseClusterRequestMaintenanceWindow.
@@ -274,27 +249,27 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesCreateClusterMetadata
         FIELDS = {
-          name: "name",
-          engine: "engine",
-          version: "version",
-          num_nodes: "num_nodes",
-          size: "size",
-          region: "region",
-          private_network_uuid: "private_network_uuid",
-          tags: "tags",
-          ui_connection: "ui_connection",
-          schema_registry_connection: "schema_registry_connection",
-          connection: "connection",
-          private_connection: "private_connection",
-          standby_connection: "standby_connection",
-          standby_private_connection: "standby_private_connection",
-          maintenance_window: "maintenance_window",
-          project_id: "project_id",
-          rules: "rules",
-          storage_size_mib: "storage_size_mib",
-          autoscale: "autoscale",
-          do_settings: "do_settings",
-          backup_restore: "backup_restore",
+          name: 'name',
+          engine: 'engine',
+          version: 'version',
+          num_nodes: 'num_nodes',
+          size: 'size',
+          region: 'region',
+          private_network_uuid: 'private_network_uuid',
+          tags: 'tags',
+          ui_connection: 'ui_connection',
+          schema_registry_connection: 'schema_registry_connection',
+          connection: 'connection',
+          private_connection: 'private_connection',
+          standby_connection: 'standby_connection',
+          standby_private_connection: 'standby_private_connection',
+          maintenance_window: 'maintenance_window',
+          project_id: 'project_id',
+          rules: 'rules',
+          storage_size_mib: 'storage_size_mib',
+          autoscale: 'autoscale',
+          do_settings: 'do_settings',
+          backup_restore: 'backup_restore'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -339,7 +314,7 @@ module OctridevDigitalocean
           end,
           backup_restore: lambda do |value|
             ::OctridevDigitalocean::DatabaseBackup.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -402,13 +377,12 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesUpdateRegionMetadata
         FIELDS = {
-          region: "region",
+          region: 'region'
         }.freeze
         REQUIRED_FIELDS = %i[
           region
         ].freeze
-        DECODERS = {
-        }.freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabasesUpdateRegion.
@@ -442,14 +416,13 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesUpdateFirewallRulesMetadata
         FIELDS = {
-          rules: "rules",
+          rules: 'rules'
         }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
+        REQUIRED_FIELDS = %i[].freeze
         DECODERS = {
           rules: lambda do |value|
             value&.map { |item| ::OctridevDigitalocean::FirewallRuleRequest.from_hash(item) }
-          end,
+          end
         }.freeze
       end
 
@@ -483,7 +456,7 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalDatabasesUpdateDoSettingsMetadata
         FIELDS = {
-          do_settings: "do_settings",
+          do_settings: 'do_settings'
         }.freeze
         REQUIRED_FIELDS = %i[
           do_settings
@@ -491,7 +464,7 @@ module OctridevDigitalocean
         DECODERS = {
           do_settings: lambda do |value|
             ::OctridevDigitalocean::DoSettings.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -525,12 +498,9 @@ module OctridevDigitalocean
 
       # Internal model hydration metadata.
       class SdkInternalDatabasesCreateReplicaConnectionMetadata
-        FIELDS = {
-        }.freeze
-        REQUIRED_FIELDS = %i[
-        ].freeze
-        DECODERS = {
-        }.freeze
+        FIELDS = {}.freeze
+        REQUIRED_FIELDS = %i[].freeze
+        DECODERS = {}.freeze
       end
 
       # API model for DatabasesCreateReplicaConnection.
@@ -539,7 +509,6 @@ module OctridevDigitalocean
         FIELDS = SdkInternalDatabasesCreateReplicaConnectionMetadata::FIELDS
         REQUIRED_FIELDS = SdkInternalDatabasesCreateReplicaConnectionMetadata::REQUIRED_FIELDS
         DECODERS = SdkInternalDatabasesCreateReplicaConnectionMetadata::DECODERS
-
 
         def initialize(**attributes)
           SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)

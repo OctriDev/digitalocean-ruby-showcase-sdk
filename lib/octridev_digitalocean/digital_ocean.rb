@@ -892,7 +892,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ActionGatewayDataPlaneNamespace SDK type.
@@ -1014,7 +1013,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the N1ClickApplicationsNamespace SDK type.
@@ -1050,7 +1048,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the AccountNamespace SDK type.
@@ -1065,7 +1062,6 @@ module OctridevDigitalocean
     def get(request_options: nil)
       ::OctridevDigitalocean::Methods::Account.account_get(config: @config, request_options: request_options)
     end
-
   end
 
   # Defines the SshKeysNamespace SDK type.
@@ -1141,7 +1137,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ActionsNamespace SDK type.
@@ -1177,7 +1172,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the AddOnsNamespace SDK type.
@@ -1194,10 +1188,7 @@ module OctridevDigitalocean
     end
 
     # To find out what metadata is required for a specific add-on, send a GET request to `/v2/add-ons/apps/{app_slug}/metadata`. Metadata varies by application.
-    define_method(:get_app_metadata) do |
-      app_slug:,
-      request_options: nil
-    |
+    define_method(:get_app_metadata) do |app_slug:, request_options: nil|
       ::OctridevDigitalocean::Methods::AddOns.addons_get_app_metadata(
         config: @config,
         app_slug: app_slug,
@@ -1283,7 +1274,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the HarnessRuntimeNamespace SDK type.
@@ -2267,7 +2257,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the AppsNamespace SDK type.
@@ -2360,14 +2349,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.
-    define_method(:get_logs_active_deployment) do |
-      app_id:,
-      component_name:,
-      type:,
-      follow: NOT_GIVEN,
-      pod_connection_timeout: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_logs_active_deployment) do |app_id:, component_name:, type:, follow: NOT_GIVEN, pod_connection_timeout: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_logs_active_deployment(
         config: @config,
         app_id: app_id,
@@ -2380,12 +2362,7 @@ module OctridevDigitalocean
     end
 
     # Returns a websocket URL that allows sending/receiving console input and output to a component of the active deployment if one exists.
-    define_method(:get_exec_active_deployment) do |
-      app_id:,
-      component_name:,
-      instance_name: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_exec_active_deployment) do |app_id:, component_name:, instance_name: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_exec_active_deployment(
         config: @config,
         app_id: app_id,
@@ -2396,10 +2373,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve the list of running instances for a given application, including instance names and component types. Please note that these instances are ephemeral and may change over time. It is recommended not to make persistent changes or develop scripts that rely on their persistence.
-    define_method(:get_instances) do |
-      app_id:,
-      request_options: nil
-    |
+    define_method(:get_instances) do |app_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_instances(
         config: @config,
         app_id: app_id,
@@ -2446,11 +2420,7 @@ module OctridevDigitalocean
     # Retrieves details for a specific deployment of an app. Use both identifiers to select the deployment, and inspect its phase and progress to check its current state.
     #
     # Retrieve information about an app deployment.
-    define_method(:get_deployment) do |
-      app_id:,
-      deployment_id:,
-      request_options: nil
-    |
+    define_method(:get_deployment) do |app_id:, deployment_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_deployment(
         config: @config,
         app_id: app_id,
@@ -2476,15 +2446,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve the logs of a past, in-progress, or active deployment. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
-    define_method(:get_logs) do |
-      app_id:,
-      deployment_id:,
-      component_name:,
-      type:,
-      follow: NOT_GIVEN,
-      pod_connection_timeout: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_logs) do |app_id:, deployment_id:, component_name:, type:, follow: NOT_GIVEN, pod_connection_timeout: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_logs(
         config: @config,
         app_id: app_id,
@@ -2498,14 +2460,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve the logs of a past, in-progress, or active deployment. If a component name is specified, the logs will be limited to only that component. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
-    define_method(:get_logs_aggregate) do |
-      app_id:,
-      deployment_id:,
-      type:,
-      follow: NOT_GIVEN,
-      pod_connection_timeout: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_logs_aggregate) do |app_id:, deployment_id:, type:, follow: NOT_GIVEN, pod_connection_timeout: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_logs_aggregate(
         config: @config,
         app_id: app_id,
@@ -2518,13 +2473,7 @@ module OctridevDigitalocean
     end
 
     # Returns a websocket URL that allows sending/receiving console input and output to a component of the specified deployment if one exists. Optionally, the instance_name parameter can be provided to retrieve the exec URL for a specific instance. Note that instances are ephemeral; therefore, we recommended to avoid making persistent changes or such scripting around them.
-    define_method(:get_exec) do |
-      app_id:,
-      deployment_id:,
-      component_name:,
-      instance_name: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_exec) do |app_id:, deployment_id:, component_name:, instance_name: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_exec(
         config: @config,
         app_id: app_id,
@@ -2536,13 +2485,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.
-    define_method(:get_logs_active_deployment_aggregate) do |
-      app_id:,
-      type:,
-      follow: NOT_GIVEN,
-      pod_connection_timeout: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_logs_active_deployment_aggregate) do |app_id:, type:, follow: NOT_GIVEN, pod_connection_timeout: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_logs_active_deployment_aggregate(
         config: @config,
         app_id: app_id,
@@ -2578,12 +2521,7 @@ module OctridevDigitalocean
     # Retrieves a specific job invocation for an app. Use `job_invocation_id` to select the invocation and optionally provide `job_name` to specify the job associated with it.
     #
     # Get a specific job invocation for an app.
-    define_method(:get_job_invocation) do |
-      app_id:,
-      job_invocation_id:,
-      job_name: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_job_invocation) do |app_id:, job_invocation_id:, job_name: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_job_invocation(
         config: @config,
         app_id: app_id,
@@ -2612,17 +2550,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve the logs of a past, in-progress, or active deployment. If a component name is specified, the logs will be limited to only that component. If deployment is omitted the active deployment will be selected (if available). The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
-    define_method(:get_job_invocation_logs) do |
-      app_id:,
-      job_name:,
-      job_invocation_id:,
-      type:,
-      deployment_id: NOT_GIVEN,
-      follow: NOT_GIVEN,
-      pod_connection_timeout: NOT_GIVEN,
-      tail_lines: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_job_invocation_logs) do |app_id:, job_name:, job_invocation_id:, type:, deployment_id: NOT_GIVEN, follow: NOT_GIVEN, pod_connection_timeout: NOT_GIVEN, tail_lines: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_job_invocation_logs(
         config: @config,
         app_id: app_id,
@@ -2658,11 +2586,7 @@ module OctridevDigitalocean
     # Retrieves a single event for a specified app. Use `app_id` and `event_id` to identify the event whose details you need.
     #
     # Get a single event for an app.
-    define_method(:get_event) do |
-      app_id:,
-      event_id:,
-      request_options: nil
-    |
+    define_method(:get_event) do |app_id:, event_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_event(
         config: @config,
         app_id: app_id,
@@ -2688,14 +2612,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve the logs of an autoscaling event for an app.
-    define_method(:get_event_logs) do |
-      app_id:,
-      event_id:,
-      type:,
-      follow: NOT_GIVEN,
-      pod_connection_timeout: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_event_logs) do |app_id:, event_id:, type:, follow: NOT_GIVEN, pod_connection_timeout: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_event_logs(
         config: @config,
         app_id: app_id,
@@ -2713,10 +2630,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve information about a specific instance size for `service`, `worker`, and `job` components.
-    define_method(:get_instance_size) do |
-      slug:,
-      request_options: nil
-    |
+    define_method(:get_instance_size) do |slug:, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_instance_size(
         config: @config,
         slug: slug,
@@ -2834,11 +2748,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve daily bandwidth usage metrics for a single app.
-    define_method(:get_metrics_bandwidth_daily) do |
-      app_id:,
-      date: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_metrics_bandwidth_daily) do |app_id:, date: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_metrics_bandwidth_daily(
         config: @config,
         app_id: app_id,
@@ -2862,13 +2772,9 @@ module OctridevDigitalocean
     end
 
     # Retrieve information like health status, cpu and memory utilization of app components.
-    define_method(:get_health) do |
-      app_id:,
-      request_options: nil
-    |
+    define_method(:get_health) do |app_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Apps.apps_get_health(config: @config, app_id: app_id, request_options: request_options)
     end
-
   end
 
   # Defines the CdnEndpointsNamespace SDK type.
@@ -2966,7 +2872,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the CertificatesNamespace SDK type.
@@ -3030,7 +2935,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the BillingNamespace SDK type.
@@ -3159,7 +3063,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DatabasesNamespace SDK type.
@@ -3202,10 +3105,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID`. The response will be a JSON object with a database key. This will be set to an object containing the standard database cluster attributes. The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects contain the…
-    define_method(:get_cluster) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_cluster) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_cluster(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3226,10 +3126,7 @@ module OctridevDigitalocean
     end
 
     # Shows configuration parameters for an existing database cluster by sending a GET request to `/v2/databases/$DATABASE_ID/config`. The response is a JSON object with a `config` key, which is set to an object containing any database configuration parameters.
-    define_method(:get_config) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_config) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_config(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3254,10 +3151,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the public certificate used to secure the connection to the database cluster send a GET request to `/v2/databases/$DATABASE_ID/ca`. The response will be a JSON object with a `ca` key. This will be set to an object containing the base64 encoding of the public key certificate.
-    define_method(:get_ca) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_ca) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_ca(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3266,10 +3160,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the status of the most recent online migration, send a GET request to `/v2/databases/$DATABASE_ID/online-migration`.
-    define_method(:get_migration_status) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_migration_status) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_migration_status(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3372,10 +3263,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the DigitalOcean-specific settings for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/do_settings`. The response will include the current `service_cnames` configuration.
-    define_method(:get_do_settings) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_do_settings) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_do_settings(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3494,11 +3382,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an existing database replica, send a GET request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. The response will be a JSON object with a `replica key`. This will be set to an object containing the standard database replica attributes.
-    define_method(:get_replica) do |
-      database_cluster_uuid:,
-      replica_name:,
-      request_options: nil
-    |
+    define_method(:get_replica) do |database_cluster_uuid:, replica_name:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_replica(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3564,11 +3448,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an existing database user, send a GET request to `/v2/databases/$DATABASE_ID/users/$USERNAME`. Note: User management is not supported for Caching or Valkey clusters. The response will be a JSON object with a `user` key. This will be set to an object containing the standard database user attributes. The user's password will not show up unless the `database:view_credentials` scope is present. For MySQL clusters, additional options will be contained in…
-    define_method(:get_user) do |
-      database_cluster_uuid:,
-      username:,
-      request_options: nil
-    |
+    define_method(:get_user) do |database_cluster_uuid:, username:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_user(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3724,11 +3604,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an existing connection pool for a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. The response will be a JSON object with a `pool` key.
-    define_method(:get_connection_pool) do |
-      database_cluster_uuid:,
-      pool_name:,
-      request_options: nil
-    |
+    define_method(:get_connection_pool) do |database_cluster_uuid:, pool_name:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_connection_pool(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3774,10 +3650,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the configured eviction policy for an existing Caching or Valkey cluster, send a GET request to `/v2/databases/$DATABASE_ID/eviction_policy`. The response will be a JSON object with an `eviction_policy` key. This will be set to a string representing the eviction policy.
-    define_method(:get_eviction_policy) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_eviction_policy) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_eviction_policy(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3800,10 +3673,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the configured SQL modes for an existing MySQL cluster, send a GET request to `/v2/databases/$DATABASE_ID/sql_mode`. The response will be a JSON object with a `sql_mode` key. This will be set to a string representing the configured SQL modes.
-    define_method(:get_sql_mode) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_sql_mode) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_sql_mode(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3840,10 +3710,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the autoscale configuration for an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID/autoscale`. The response will be a JSON object with autoscaling configuration details.
-    define_method(:get_autoscale) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_autoscale) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_autoscale(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3902,11 +3769,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve a given topic by name from the set of a Kafka cluster's topics, send a GET request to `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`. The result will be a JSON object with a `topic` key.
-    define_method(:get_kafka_topic) do |
-      database_cluster_uuid:,
-      topic_name:,
-      request_options: nil
-    |
+    define_method(:get_kafka_topic) do |database_cluster_uuid:, topic_name:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_kafka_topic(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -3980,11 +3843,7 @@ module OctridevDigitalocean
     end
 
     # To get a logsink for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
-    define_method(:get_logsink) do |
-      database_cluster_uuid:,
-      logsink_id:,
-      request_options: nil
-    |
+    define_method(:get_logsink) do |database_cluster_uuid:, logsink_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_logsink(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -4056,11 +3915,7 @@ module OctridevDigitalocean
     end
 
     # To get a specific schema by subject name for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
-    define_method(:get_kafka_schema) do |
-      database_cluster_uuid:,
-      subject_name:,
-      request_options: nil
-    |
+    define_method(:get_kafka_schema) do |database_cluster_uuid:, subject_name:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_kafka_schema(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -4084,12 +3939,7 @@ module OctridevDigitalocean
     end
 
     # To get a specific schema by subject name for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME/versions/$VERSION`.
-    define_method(:get_kafka_schema_version) do |
-      database_cluster_uuid:,
-      subject_name:,
-      version:,
-      request_options: nil
-    |
+    define_method(:get_kafka_schema_version) do |database_cluster_uuid:, subject_name:, version:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_kafka_schema_version(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -4100,10 +3950,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the Schema Registry configuration for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
-    define_method(:get_kafka_schema_config) do |
-      database_cluster_uuid:,
-      request_options: nil
-    |
+    define_method(:get_kafka_schema_config) do |database_cluster_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_kafka_schema_config(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -4126,11 +3973,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the Schema Registry configuration for a Subject of a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
-    define_method(:get_kafka_schema_subject_config) do |
-      database_cluster_uuid:,
-      subject_name:,
-      request_options: nil
-    |
+    define_method(:get_kafka_schema_subject_config) do |database_cluster_uuid:, subject_name:, request_options: nil|
       ::OctridevDigitalocean::Methods::Databases.databases_get_kafka_schema_subject_config(
         config: @config,
         database_cluster_uuid: database_cluster_uuid,
@@ -4202,7 +4045,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DedicatedInferenceNamespace SDK type.
@@ -4302,11 +4144,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve a single accelerator by ID for a Dedicated Inference instance. Send a GET request to `/v2/dedicated-inferences/{dedicated_inference_id}/accelerators/{accelerator_id}`.
-    define_method(:get_accelerator) do |
-      dedicated_inference_id:,
-      accelerator_id:,
-      request_options: nil
-    |
+    define_method(:get_accelerator) do |dedicated_inference_id:, accelerator_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::DedicatedInference.dedicated_inferences_get_accelerator(
         config: @config,
         dedicated_inference_id: dedicated_inference_id,
@@ -4316,10 +4154,7 @@ module OctridevDigitalocean
     end
 
     # Get the CA certificate for a Dedicated Inference instance (base64-encoded). Required for private endpoint connectivity. Send a GET request to `/v2/dedicated-inferences/{dedicated_inference_id}/ca`.
-    define_method(:get_ca) do |
-      dedicated_inference_id:,
-      request_options: nil
-    |
+    define_method(:get_ca) do |dedicated_inference_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::DedicatedInference.dedicated_inferences_get_ca(
         config: @config,
         dedicated_inference_id: dedicated_inference_id,
@@ -4386,7 +4221,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DomainsNamespace SDK type.
@@ -4448,7 +4282,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DomainRecordsNamespace SDK type.
@@ -4586,7 +4419,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DropletsNamespace SDK type.
@@ -4680,10 +4512,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an individual Droplet's backup policy, send a GET request to `/v2/droplets/$DROPLET_ID/backups/policy`.
-    define_method(:get_backup_policy) do |
-      droplet_id:,
-      request_options: nil
-    |
+    define_method(:get_backup_policy) do |droplet_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Droplets.droplets_get_backup_policy(
         config: @config,
         droplet_id: droplet_id,
@@ -4822,10 +4651,7 @@ module OctridevDigitalocean
     end
 
     # To check on the status of a request to destroy a Droplet with its associated resources, send a GET request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/status` endpoint.
-    define_method(:get_destroy_associated_resources_status) do |
-      droplet_id:,
-      request_options: nil
-    |
+    define_method(:get_destroy_associated_resources_status) do |droplet_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Droplets.droplets_get_destroy_associated_resources_status(
         config: @config,
         droplet_id: droplet_id,
@@ -4849,7 +4675,6 @@ module OctridevDigitalocean
     def list_neighbors_ids(request_options: nil)
       ::OctridevDigitalocean::Methods::Droplets.droplets_list_neighbors_ids(config: @config, request_options: request_options)
     end
-
   end
 
   # Defines the DropletActionsNamespace SDK type.
@@ -4921,7 +4746,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DropletAutoscalePoolsNamespace SDK type.
@@ -5055,7 +4879,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the FirewallsNamespace SDK type.
@@ -5225,7 +5048,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the FloatingIpsNamespace SDK type.
@@ -5287,7 +5109,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the FloatingIpActionsNamespace SDK type.
@@ -5339,7 +5160,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the FunctionsNamespace SDK type.
@@ -5370,10 +5190,7 @@ module OctridevDigitalocean
     end
 
     # Gets the namespace details for the given namespace UUID. To get namespace details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.
-    define_method(:get_namespace) do |
-      namespace_id:,
-      request_options: nil
-    |
+    define_method(:get_namespace) do |namespace_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Functions.functions_get_namespace(
         config: @config,
         namespace_id: namespace_id,
@@ -5428,11 +5245,7 @@ module OctridevDigitalocean
     end
 
     # Gets the trigger details. To get the trigger details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
-    define_method(:get_trigger) do |
-      namespace_id:,
-      trigger_name:,
-      request_options: nil
-    |
+    define_method(:get_trigger) do |namespace_id:, trigger_name:, request_options: nil|
       ::OctridevDigitalocean::Methods::Functions.functions_get_trigger(
         config: @config,
         namespace_id: namespace_id,
@@ -5530,7 +5343,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ImagesNamespace SDK type.
@@ -5672,7 +5484,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ImageActionsNamespace SDK type.
@@ -5724,7 +5535,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the InsightsNamespace SDK type.
@@ -5756,10 +5566,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve a single alert instance, send a GET request to `/v2/insights/alert-instances/{id}`.
-    define_method(:get_alert_instance) do |
-      id:,
-      request_options: nil
-    |
+    define_method(:get_alert_instance) do |id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_alert_instance(
         config: @config,
         id: id,
@@ -5798,10 +5605,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve an alert rule, send a GET request to `/v2/insights/alert-rules/{id}`.
-    define_method(:get_alert_rule) do |
-      id:,
-      request_options: nil
-    |
+    define_method(:get_alert_rule) do |id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_alert_rule(
         config: @config,
         id: id,
@@ -5870,10 +5674,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve a notification channel, send a GET request to `/v2/insights/notification-channels/{id}`. Secret credentials are never returned. When a secret is configured, the response includes an optional `*_status` object (for example `webhook_url_status`) with `configured: true`.
-    define_method(:get_notification_channel) do |
-      id:,
-      request_options: nil
-    |
+    define_method(:get_notification_channel) do |id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_notification_channel(
         config: @config,
         id: id,
@@ -5914,13 +5715,7 @@ module OctridevDigitalocean
     end
 
     # To evaluate a PromQL expression at a single point in time, send a GET request to `/v2/insights/query/{region}/prom/api/v1/query`.
-    define_method(:get_prom_query) do |
-      region:,
-      query:,
-      time: NOT_GIVEN,
-      timeout: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_prom_query) do |region:, query:, time: NOT_GIVEN, timeout: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_prom_query(
         config: @config,
         region: region,
@@ -5950,15 +5745,7 @@ module OctridevDigitalocean
     end
 
     # To evaluate a PromQL expression over a time range, send a GET request to `/v2/insights/query/{region}/prom/api/v1/query_range`.
-    define_method(:get_prom_query_range) do |
-      region:,
-      query:,
-      start:,
-      end_:,
-      step:,
-      timeout: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_prom_query_range) do |region:, query:, start:, end_:, step:, timeout: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_prom_query_range(
         config: @config,
         region: region,
@@ -5994,13 +5781,7 @@ module OctridevDigitalocean
     end
 
     # To list label names, send a GET request to `/v2/insights/query/{region}/prom/api/v1/labels`.
-    define_method(:get_prom_labels) do |
-      region:,
-      start: NOT_GIVEN,
-      end_: NOT_GIVEN,
-      match: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_prom_labels) do |region:, start: NOT_GIVEN, end_: NOT_GIVEN, match: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_prom_labels(
         config: @config,
         region: region,
@@ -6030,14 +5811,7 @@ module OctridevDigitalocean
     end
 
     # To list values for a label name, send a GET request to `/v2/insights/query/{region}/prom/api/v1/label/{name}/values`.
-    define_method(:get_prom_label_values) do |
-      region:,
-      name:,
-      start: NOT_GIVEN,
-      end_: NOT_GIVEN,
-      match: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_prom_label_values) do |region:, name:, start: NOT_GIVEN, end_: NOT_GIVEN, match: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_prom_label_values(
         config: @config,
         region: region,
@@ -6050,13 +5824,7 @@ module OctridevDigitalocean
     end
 
     # To find series matching one or more selectors, send a GET request to `/v2/insights/query/{region}/prom/api/v1/series`.
-    define_method(:get_prom_series) do |
-      region:,
-      match:,
-      start: NOT_GIVEN,
-      end_: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_prom_series) do |region:, match:, start: NOT_GIVEN, end_: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_prom_series(
         config: @config,
         region: region,
@@ -6126,13 +5894,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve a single trace and all of its spans, send a GET request to `/v2/insights/query/{region}/traces/{trace_id}`. Only spans that started within the lookup window are returned. The window defaults to the last 7 days and can be narrowed with the `from` and `to` query parameters; it must not exceed 7 days, and `from` must not be after `to`. Spans are returned ordered by start time. At most 10,000 spans are returned; `truncated` is `true` when the trace has more. A trace…
-    define_method(:get_trace) do |
-      region:,
-      trace_id:,
-      from: NOT_GIVEN,
-      to: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_trace) do |region:, trace_id:, from: NOT_GIVEN, to: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Insights.insights_get_trace(
         config: @config,
         region: region,
@@ -6162,7 +5924,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SignalsNamespace SDK type.
@@ -6200,10 +5961,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the consent record for a specific environment, send a GET request to `/v1/consent/{agent_id}`. The response includes an `enabled` field indicating whether signals collection is on for this environment. This endpoint only serves per-environment (`source: agent`) records. Team-level inference consent is read from `GET /v1/consent?source=inference`.
-    define_method(:get_consent) do |
-      agent_id:,
-      request_options: nil
-    |
+    define_method(:get_consent) do |agent_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Signals.signals_get_consent(
         config: @config,
         agent_id: agent_id,
@@ -6311,10 +6069,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the status and details of a signals export job, send a GET request to `/v1/signals/exports/{export_id}`.
-    define_method(:get_export) do |
-      export_id:,
-      request_options: nil
-    |
+    define_method(:get_export) do |export_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Signals.signals_get_export(
         config: @config,
         export_id: export_id,
@@ -6323,10 +6078,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve a pre-signed download URL for a completed export, send a GET request to `/v1/signals/exports/{export_id}/download`. The export must have a `complete` status. The URL is temporary and will expire.
-    define_method(:get_export_download) do |
-      export_id:,
-      request_options: nil
-    |
+    define_method(:get_export_download) do |export_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Signals.signals_get_export_download(
         config: @config,
         export_id: export_id,
@@ -6365,17 +6117,13 @@ module OctridevDigitalocean
     end
 
     # To retrieve the status of a signals data deletion job, send a GET request to `/v1/signals/deletions/{deletion_id}`.
-    define_method(:get_deletion) do |
-      deletion_id:,
-      request_options: nil
-    |
+    define_method(:get_deletion) do |deletion_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Signals.signals_get_deletion(
         config: @config,
         deletion_id: deletion_id,
         request_options: request_options
       )
     end
-
   end
 
   # Defines the KubernetesNamespace SDK type.
@@ -6467,10 +6215,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an existing Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
-    define_method(:get_cluster) do |
-      cluster_id:,
-      request_options: nil
-    |
+    define_method(:get_cluster) do |cluster_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Kubernetes.kubernetes_get_cluster(
         config: @config,
         cluster_id: cluster_id,
@@ -6585,12 +6330,7 @@ module OctridevDigitalocean
     end
 
     # This endpoint returns a kubeconfig file in YAML format. It can be used to connect to and administer the cluster using the Kubernetes command line tool, `kubectl`, or other programs supporting kubeconfig files (e.g., client libraries). The resulting kubeconfig file uses token-based authentication for clusters supporting it, and certificate-based authentication otherwise. For a list of supported versions and more information, see "How to Connect to a DigitalOcean Kubernetes…
-    define_method(:get_kubeconfig) do |
-      cluster_id:,
-      expiry_seconds: NOT_GIVEN,
-      type: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_kubeconfig) do |cluster_id:, expiry_seconds: NOT_GIVEN, type: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Kubernetes.kubernetes_get_kubeconfig(
         config: @config,
         cluster_id: cluster_id,
@@ -6601,11 +6341,7 @@ module OctridevDigitalocean
     end
 
     # This endpoint returns a JSON object . It can be used to programmatically construct Kubernetes clients which cannot parse kubeconfig files. The resulting JSON object contains token-based authentication for clusters supporting it, and certificate-based authentication otherwise. For a list of supported versions and more information, see "How to Connect to a DigitalOcean Kubernetes Cluster". To retrieve credentials for accessing a Kubernetes cluster, send a GET request to…
-    define_method(:get_credentials) do |
-      cluster_id:,
-      expiry_seconds: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_credentials) do |cluster_id:, expiry_seconds: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Kubernetes.kubernetes_get_credentials(
         config: @config,
         cluster_id: cluster_id,
@@ -6615,10 +6351,7 @@ module OctridevDigitalocean
     end
 
     # To determine whether a cluster can be upgraded, and the versions to which it can be upgraded, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
-    define_method(:get_available_upgrades) do |
-      cluster_id:,
-      request_options: nil
-    |
+    define_method(:get_available_upgrades) do |cluster_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Kubernetes.kubernetes_get_available_upgrades(
         config: @config,
         cluster_id: cluster_id,
@@ -6667,11 +6400,7 @@ module OctridevDigitalocean
     end
 
     # To show information about a specific node pool in a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.
-    define_method(:get_node_pool) do |
-      cluster_id:,
-      node_pool_id:,
-      request_options: nil
-    |
+    define_method(:get_node_pool) do |cluster_id:, node_pool_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Kubernetes.kubernetes_get_node_pool(
         config: @config,
         cluster_id: cluster_id,
@@ -6765,10 +6494,7 @@ module OctridevDigitalocean
     end
 
     # To show information the user associated with a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/user`.
-    define_method(:get_cluster_user) do |
-      cluster_id:,
-      request_options: nil
-    |
+    define_method(:get_cluster_user) do |cluster_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Kubernetes.kubernetes_get_cluster_user(
         config: @config,
         cluster_id: cluster_id,
@@ -6802,11 +6528,7 @@ module OctridevDigitalocean
     end
 
     # To request clusterlint diagnostics for your cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. If the `run_id` query parameter is provided, then the diagnostics for the specific run is fetched. By default, the latest results are shown. To find out how to address clusterlint feedback, please refer to the clusterlint check documentation.
-    define_method(:get_cluster_lint_results) do |
-      cluster_id:,
-      run_id: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_cluster_lint_results) do |cluster_id:, run_id: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Kubernetes.kubernetes_get_cluster_lint_results(
         config: @config,
         cluster_id: cluster_id,
@@ -6868,11 +6590,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve status messages for a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/status_messages`. Status messages inform users of any issues that come up during the cluster lifecycle.
-    define_method(:get_status_messages) do |
-      cluster_id:,
-      since: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_status_messages) do |cluster_id:, since: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Kubernetes.kubernetes_get_status_messages(
         config: @config,
         cluster_id: cluster_id,
@@ -6880,7 +6598,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the LoadBalancersNamespace SDK type.
@@ -7030,7 +6747,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the MicroVmsPublicPreviewNamespace SDK type.
@@ -7238,7 +6954,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the MonitoringNamespace SDK type.
@@ -7294,10 +7009,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve a given alert policy, send a GET request to `/v2/monitoring/alerts/{alert_uuid}`
-    define_method(:get_alert_policy) do |
-      alert_uuid:,
-      request_options: nil
-    |
+    define_method(:get_alert_policy) do |alert_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_alert_policy(
         config: @config,
         alert_uuid: alert_uuid,
@@ -7350,14 +7062,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve bandwidth metrics for a given Droplet, send a GET request to `/v2/monitoring/metrics/droplet/bandwidth`. Use the `interface` query parameter to specify if the results should be for the `private` or `public` interface. Use the `direction` query parameter to specify if the results should be for `inbound` or `outbound` traffic. The metrics in the response body are in megabits per second (Mbps).
-    define_method(:get_droplet_bandwidth_metrics) do |
-      host_id:,
-      interface:,
-      direction:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_bandwidth_metrics) do |host_id:, interface:, direction:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_bandwidth_metrics(
         config: @config,
         host_id: host_id,
@@ -7370,12 +7075,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve CPU metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/cpu`.
-    define_method(:get_droplet_cpu_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_cpu_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_cpu_metrics(
         config: @config,
         host_id: host_id,
@@ -7386,12 +7086,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve filesystem free metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_free`.
-    define_method(:get_droplet_filesystem_free_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_filesystem_free_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_filesystem_free_metrics(
         config: @config,
         host_id: host_id,
@@ -7402,12 +7097,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve filesystem size metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_size`.
-    define_method(:get_droplet_filesystem_size_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_filesystem_size_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_filesystem_size_metrics(
         config: @config,
         host_id: host_id,
@@ -7418,12 +7108,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve 1 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_1`.
-    define_method(:get_droplet_load1_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_load1_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_load1_metrics(
         config: @config,
         host_id: host_id,
@@ -7434,12 +7119,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve 5 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_5`.
-    define_method(:get_droplet_load5_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_load5_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_load5_metrics(
         config: @config,
         host_id: host_id,
@@ -7450,12 +7130,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve 15 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_15`.
-    define_method(:get_droplet_load15_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_load15_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_load15_metrics(
         config: @config,
         host_id: host_id,
@@ -7466,12 +7141,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve cached memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_cached`.
-    define_method(:get_droplet_memory_cached_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_memory_cached_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_memory_cached_metrics(
         config: @config,
         host_id: host_id,
@@ -7482,12 +7152,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve free memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_free`.
-    define_method(:get_droplet_memory_free_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_memory_free_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_memory_free_metrics(
         config: @config,
         host_id: host_id,
@@ -7498,12 +7163,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve total memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_total`.
-    define_method(:get_droplet_memory_total_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_memory_total_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_memory_total_metrics(
         config: @config,
         host_id: host_id,
@@ -7514,12 +7174,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve available memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_available`.
-    define_method(:get_droplet_memory_available_metrics) do |
-      host_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_memory_available_metrics) do |host_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_memory_available_metrics(
         config: @config,
         host_id: host_id,
@@ -7530,13 +7185,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve memory percentage metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/memory_percentage`.
-    define_method(:get_app_memory_percentage_metrics) do |
-      app_id:,
-      start:,
-      end_:,
-      app_component: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_app_memory_percentage_metrics) do |app_id:, start:, end_:, app_component: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_app_memory_percentage_metrics(
         config: @config,
         app_id: app_id,
@@ -7548,13 +7197,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve cpu percentage metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/cpu_percentage`.
-    define_method(:get_app_cpu_percentage_metrics) do |
-      app_id:,
-      start:,
-      end_:,
-      app_component: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_app_cpu_percentage_metrics) do |app_id:, start:, end_:, app_component: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_app_cpu_percentage_metrics(
         config: @config,
         app_id: app_id,
@@ -7566,13 +7209,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve restart count metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/restart_count`.
-    define_method(:get_app_restart_count_metrics_yml) do |
-      app_id:,
-      start:,
-      end_:,
-      app_component: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_app_restart_count_metrics_yml) do |app_id:, start:, end_:, app_component: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_app_restart_count_metrics_yml(
         config: @config,
         app_id: app_id,
@@ -7584,12 +7221,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend total current active connections for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_connections_current`.
-    define_method(:get_lb_frontend_connections_current) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_connections_current) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_connections_current(
         config: @config,
         lb_id: lb_id,
@@ -7600,12 +7232,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend max connections limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_connections_limit`.
-    define_method(:get_lb_frontend_connections_limit) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_connections_limit) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_connections_limit(
         config: @config,
         lb_id: lb_id,
@@ -7616,12 +7243,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend average percentage CPU utilization for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_cpu_utilization`.
-    define_method(:get_lb_frontend_cpu_utilization) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_cpu_utilization) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_cpu_utilization(
         config: @config,
         lb_id: lb_id,
@@ -7632,12 +7254,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve firewall dropped bytes for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes`. This is currently only supported for network load balancers.
-    define_method(:get_lb_frontend_firewall_dropped_bytes) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_firewall_dropped_bytes) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_firewall_dropped_bytes(
         config: @config,
         lb_id: lb_id,
@@ -7648,12 +7265,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve firewall dropped packets per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets`. This is currently only supported for network load balancers.
-    define_method(:get_lb_frontend_firewall_dropped_packets) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_firewall_dropped_packets) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_firewall_dropped_packets(
         config: @config,
         lb_id: lb_id,
@@ -7664,12 +7276,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend HTTP rate of response code for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_http_responses`.
-    define_method(:get_lb_frontend_http_responses) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_http_responses) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_http_responses(
         config: @config,
         lb_id: lb_id,
@@ -7680,12 +7287,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend HTTP requests per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second`.
-    define_method(:get_lb_frontend_http_requests_per_second) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_http_requests_per_second) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_http_requests_per_second(
         config: @config,
         lb_id: lb_id,
@@ -7696,12 +7298,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend HTTP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http`.
-    define_method(:get_lb_frontend_network_throughput_http) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_network_throughput_http) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_network_throughput_http(
         config: @config,
         lb_id: lb_id,
@@ -7712,12 +7309,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp`.
-    define_method(:get_lb_frontend_network_throughput_udp) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_network_throughput_udp) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_network_throughput_udp(
         config: @config,
         lb_id: lb_id,
@@ -7728,12 +7320,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp`.
-    define_method(:get_lb_frontend_network_throughput_tcp) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_network_throughput_tcp) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_network_throughput_tcp(
         config: @config,
         lb_id: lb_id,
@@ -7744,12 +7331,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput`.
-    define_method(:get_lb_frontend_nlb_tcp_network_throughput) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_nlb_tcp_network_throughput) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_nlb_tcp_network_throughput(
         config: @config,
         lb_id: lb_id,
@@ -7760,12 +7342,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput`.
-    define_method(:get_lb_frontend_nlb_udp_network_throughput) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_nlb_udp_network_throughput) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_nlb_udp_network_throughput(
         config: @config,
         lb_id: lb_id,
@@ -7776,12 +7353,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend current TLS connections rate for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current`.
-    define_method(:get_lb_frontend_tls_connections_current) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_tls_connections_current) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_tls_connections_current(
         config: @config,
         lb_id: lb_id,
@@ -7792,12 +7364,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend max TLS connections limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit`.
-    define_method(:get_lb_frontend_tls_connections_limit) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_tls_connections_limit) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_tls_connections_limit(
         config: @config,
         lb_id: lb_id,
@@ -7808,12 +7375,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve frontend closed TLS connections for exceeded rate limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit`.
-    define_method(:get_lb_frontend_tls_connections_exceeding_rate_limit) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_frontend_tls_connections_exceeding_rate_limit) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_frontend_tls_connections_exceeding_rate_limit(
         config: @config,
         lb_id: lb_id,
@@ -7824,12 +7386,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets average HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg`.
-    define_method(:get_lb_droplets_http_session_duration_avg) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_http_session_duration_avg) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_http_session_duration_avg(
         config: @config,
         lb_id: lb_id,
@@ -7840,12 +7397,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets 50th percentile HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p`.
-    define_method(:get_lb_droplets_http_session_duration50p) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_http_session_duration50p) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_http_session_duration50p(
         config: @config,
         lb_id: lb_id,
@@ -7856,12 +7408,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets 95th percentile HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p`.
-    define_method(:get_lb_droplets_http_session_duration95p) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_http_session_duration95p) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_http_session_duration95p(
         config: @config,
         lb_id: lb_id,
@@ -7872,12 +7419,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets average HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg`.
-    define_method(:get_lb_droplets_http_response_time_avg) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_http_response_time_avg) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_http_response_time_avg(
         config: @config,
         lb_id: lb_id,
@@ -7888,12 +7430,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets 50th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p`.
-    define_method(:get_lb_droplets_http_response_time50p) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_http_response_time50p) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_http_response_time50p(
         config: @config,
         lb_id: lb_id,
@@ -7904,12 +7441,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets 95th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p`.
-    define_method(:get_lb_droplets_http_response_time95p) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_http_response_time95p) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_http_response_time95p(
         config: @config,
         lb_id: lb_id,
@@ -7920,12 +7452,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets 99th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p`.
-    define_method(:get_lb_droplets_http_response_time99p) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_http_response_time99p) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_http_response_time99p(
         config: @config,
         lb_id: lb_id,
@@ -7936,12 +7463,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets queue size for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_queue_size`.
-    define_method(:get_lb_droplets_queue_size) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_queue_size) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_queue_size(
         config: @config,
         lb_id: lb_id,
@@ -7952,12 +7474,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets HTTP rate of response code for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_responses`.
-    define_method(:get_lb_droplets_http_responses) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_http_responses) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_http_responses(
         config: @config,
         lb_id: lb_id,
@@ -7968,12 +7485,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets active connections for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_connections`.
-    define_method(:get_lb_droplets_connections) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_connections) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_connections(
         config: @config,
         lb_id: lb_id,
@@ -7984,12 +7496,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets health check status for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_health_checks`.
-    define_method(:get_lb_droplets_health_checks) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_health_checks) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_health_checks(
         config: @config,
         lb_id: lb_id,
@@ -8000,12 +7507,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve Droplets downtime status for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_downtime`.
-    define_method(:get_lb_droplets_downtime) do |
-      lb_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_lb_droplets_downtime) do |lb_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_lb_droplets_downtime(
         config: @config,
         lb_id: lb_id,
@@ -8016,12 +7518,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the current size for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_instances`.
-    define_method(:get_droplet_autoscale_current_instances) do |
-      autoscale_pool_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_autoscale_current_instances) do |autoscale_pool_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_autoscale_current_instances(
         config: @config,
         autoscale_pool_id: autoscale_pool_id,
@@ -8032,12 +7529,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the target size for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_instances`.
-    define_method(:get_droplet_autoscale_target_instances) do |
-      autoscale_pool_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_autoscale_target_instances) do |autoscale_pool_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_autoscale_target_instances(
         config: @config,
         autoscale_pool_id: autoscale_pool_id,
@@ -8048,12 +7540,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the current average CPU utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization`.
-    define_method(:get_droplet_autoscale_current_cpu_utilization_yml) do |
-      autoscale_pool_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_autoscale_current_cpu_utilization_yml) do |autoscale_pool_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_autoscale_current_cpu_utilization_yml(
         config: @config,
         autoscale_pool_id: autoscale_pool_id,
@@ -8064,12 +7551,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the target average CPU utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization`.
-    define_method(:get_droplet_autoscale_target_cpu_utilization) do |
-      autoscale_pool_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_autoscale_target_cpu_utilization) do |autoscale_pool_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_autoscale_target_cpu_utilization(
         config: @config,
         autoscale_pool_id: autoscale_pool_id,
@@ -8080,12 +7562,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the current average memory utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization`.
-    define_method(:get_droplet_autoscale_current_memory_utilization) do |
-      autoscale_pool_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_autoscale_current_memory_utilization) do |autoscale_pool_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_autoscale_current_memory_utilization(
         config: @config,
         autoscale_pool_id: autoscale_pool_id,
@@ -8096,12 +7573,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the target average memory utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization`.
-    define_method(:get_droplet_autoscale_target_memory_utilization) do |
-      autoscale_pool_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_droplet_autoscale_target_memory_utilization) do |autoscale_pool_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_droplet_autoscale_target_memory_utilization(
         config: @config,
         autoscale_pool_id: autoscale_pool_id,
@@ -8112,13 +7584,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve CPU usage (percent) for a MySQL cluster. Response is a time series of cluster-level CPU usage. Use **aggregate** to get avg, max, or min over the range.
-    define_method(:get_database_mysql_cpu_usage) do |
-      db_id:,
-      aggregate:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_cpu_usage) do |db_id:, aggregate:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_cpu_usage(
         config: @config,
         db_id: db_id,
@@ -8130,14 +7596,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve load metrics for a MySQL cluster. Use **metric** for the window: **load1** (1-minute), **load5** (5-minute), or **load15** (15-minute). Use **aggregate** to get either the average (avg) or maximum (max) over that window over the time range.
-    define_method(:get_database_mysql_load) do |
-      db_id:,
-      metric:,
-      aggregate:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_load) do |db_id:, metric:, aggregate:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_load(
         config: @config,
         db_id: db_id,
@@ -8150,13 +7609,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve memory usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over the time range.
-    define_method(:get_database_mysql_memory_usage) do |
-      db_id:,
-      aggregate:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_memory_usage) do |db_id:, aggregate:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_memory_usage(
         config: @config,
         db_id: db_id,
@@ -8168,13 +7621,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve disk usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over the time range.
-    define_method(:get_database_mysql_disk_usage) do |
-      db_id:,
-      aggregate:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_disk_usage) do |db_id:, aggregate:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_disk_usage(
         config: @config,
         db_id: db_id,
@@ -8186,12 +7633,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve current threads connected for a MySQL service (gauge).
-    define_method(:get_database_mysql_threads_connected) do |
-      db_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_threads_connected) do |db_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_threads_connected(
         config: @config,
         db_id: db_id,
@@ -8202,12 +7644,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve threads created rate for a MySQL service (per second).
-    define_method(:get_database_mysql_threads_created_rate) do |
-      db_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_threads_created_rate) do |db_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_threads_created_rate(
         config: @config,
         db_id: db_id,
@@ -8218,12 +7655,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve active (running) threads for a MySQL service.
-    define_method(:get_database_mysql_threads_active) do |
-      db_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_threads_active) do |db_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_threads_active(
         config: @config,
         db_id: db_id,
@@ -8234,12 +7666,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve index vs sequential reads ratio (percent) for a MySQL service — i.e. percentage of reads using an index.
-    define_method(:get_database_mysql_index_vs_sequential_reads) do |
-      db_id:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_index_vs_sequential_reads) do |db_id:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_index_vs_sequential_reads(
         config: @config,
         db_id: db_id,
@@ -8250,13 +7677,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve operations rate (per second) for a MySQL service. Use **metric** to choose select, insert, update, or delete.
-    define_method(:get_database_mysql_op_rates) do |
-      db_id:,
-      metric:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_op_rates) do |db_id:, metric:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_op_rates(
         config: @config,
         db_id: db_id,
@@ -8268,14 +7689,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve table I/O throughput (rows per second) for a schema. Requires **schema** and **metric** (insert, fetch, update, delete).
-    define_method(:get_database_mysql_schema_throughput) do |
-      db_id:,
-      schema:,
-      metric:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_schema_throughput) do |db_id:, schema:, metric:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_schema_throughput(
         config: @config,
         db_id: db_id,
@@ -8288,14 +7702,7 @@ module OctridevDigitalocean
     end
 
     # Retrieve table I/O latency (seconds) for a schema. Requires **schema** and **metric** (insert, fetch, update, delete).
-    define_method(:get_database_mysql_schema_latency) do |
-      db_id:,
-      schema:,
-      metric:,
-      start:,
-      end_:,
-      request_options: nil
-    |
+    define_method(:get_database_mysql_schema_latency) do |db_id:, schema:, metric:, start:, end_:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_database_mysql_schema_latency(
         config: @config,
         db_id: db_id,
@@ -8334,10 +7741,7 @@ module OctridevDigitalocean
     end
 
     # To get the details of a destination, send a GET request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
-    define_method(:get_destination) do |
-      destination_uuid:,
-      request_options: nil
-    |
+    define_method(:get_destination) do |destination_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_destination(
         config: @config,
         destination_uuid: destination_uuid,
@@ -8404,10 +7808,7 @@ module OctridevDigitalocean
     end
 
     # To get the details of a sink (resources and destination), send a GET request to `/v2/monitoring/sinks/${sink_uuid}`.
-    define_method(:get_sink) do |
-      sink_uuid:,
-      request_options: nil
-    |
+    define_method(:get_sink) do |sink_uuid:, request_options: nil|
       ::OctridevDigitalocean::Methods::Monitoring.monitoring_get_sink(
         config: @config,
         sink_uuid: sink_uuid,
@@ -8426,7 +7827,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the NfsNamespace SDK type.
@@ -8508,11 +7908,7 @@ module OctridevDigitalocean
     end
 
     # To get an NFS snapshot, send a GET request to `/v2/nfs/snapshots/{nfs_snapshot_id}?region=${region}`. A successful request will return the NFS snapshot.
-    define_method(:get_snapshot) do |
-      nfs_snapshot_id:,
-      region: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_snapshot) do |nfs_snapshot_id:, region: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Nfs.nfs_get_snapshot(
         config: @config,
         nfs_snapshot_id: nfs_snapshot_id,
@@ -8570,10 +7966,7 @@ module OctridevDigitalocean
     end
 
     # To get an NFS access point, send a GET request to `/v2/nfs/access_points/{access_point_id}`. A successful request will return the NFS access point.
-    define_method(:get_access_point) do |
-      access_point_id:,
-      request_options: nil
-    |
+    define_method(:get_access_point) do |access_point_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Nfs.nfs_get_access_point(
         config: @config,
         access_point_id: access_point_id,
@@ -8592,7 +7985,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the NfsActionsNamespace SDK type.
@@ -8618,7 +8010,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the OrganizationsNamespace SDK type.
@@ -8650,7 +8041,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the PartnerNetworkConnectNamespace SDK type.
@@ -8794,7 +8184,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ProjectsNamespace SDK type.
@@ -8933,7 +8322,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ProjectResourcesNamespace SDK type.
@@ -8993,7 +8381,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the RegionsNamespace SDK type.
@@ -9017,7 +8404,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ContainerRegistriesNamespace SDK type.
@@ -9280,7 +8666,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ContainerRegistryNamespace SDK type.
@@ -9566,7 +8951,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ReservedIpsNamespace SDK type.
@@ -9628,7 +9012,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ReservedIpActionsNamespace SDK type.
@@ -9680,7 +9063,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ReservedIPv6Namespace SDK type.
@@ -9740,7 +9122,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ReservedIPv6ActionsNamespace SDK type.
@@ -9766,7 +9147,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ByoipPrefixesNamespace SDK type.
@@ -9860,7 +9240,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SecurityNamespace SDK type.
@@ -9891,14 +9270,7 @@ module OctridevDigitalocean
     end
 
     # To get a CSPM scan by ID, send a GET request to `/v2/security/scans/{scan_id}`.
-    define_method(:get_scan) do |
-      scan_id:,
-      severity: NOT_GIVEN,
-      per_page: NOT_GIVEN,
-      page: NOT_GIVEN,
-      type: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_scan) do |scan_id:, severity: NOT_GIVEN, per_page: NOT_GIVEN, page: NOT_GIVEN, type: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Security.security_get_scan(
         config: @config,
         scan_id: scan_id,
@@ -9911,13 +9283,7 @@ module OctridevDigitalocean
     end
 
     # To get the latest CSPM scan, send a GET request to `/v2/security/scans/latest`.
-    define_method(:get_latest_scan) do |
-      per_page: NOT_GIVEN,
-      page: NOT_GIVEN,
-      severity: NOT_GIVEN,
-      type: NOT_GIVEN,
-      request_options: nil
-    |
+    define_method(:get_latest_scan) do |per_page: NOT_GIVEN, page: NOT_GIVEN, severity: NOT_GIVEN, type: NOT_GIVEN, request_options: nil|
       ::OctridevDigitalocean::Methods::Security.security_get_latest_scan(
         config: @config,
         per_page: per_page,
@@ -10009,7 +9375,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SizesNamespace SDK type.
@@ -10033,7 +9398,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SnapshotsNamespace SDK type.
@@ -10083,7 +9447,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the SpacesKeysNamespace SDK type.
@@ -10187,7 +9550,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the TagsNamespace SDK type.
@@ -10263,7 +9625,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the VectorDatabasesNamespace SDK type.
@@ -10365,11 +9726,7 @@ module OctridevDigitalocean
     end
 
     # To check the status of a restore operation, send a GET request to `/v2/vector-databases/{id}/backups/{backup_id}/restore`. The response body contains the current status of the restore.
-    define_method(:get_restore_status) do |
-      id:,
-      backup_id:,
-      request_options: nil
-    |
+    define_method(:get_restore_status) do |id:, backup_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::VectorDatabases.vector_databases_get_restore_status(
         config: @config,
         id: id,
@@ -10397,10 +9754,7 @@ module OctridevDigitalocean
     end
 
     # To retrieve the admin credentials for a vector database, send a GET request to `/v2/vector-databases/{id}/credentials`. The response body contains the `user_id` and `api_token` for the admin user provisioned on the cluster.
-    define_method(:get_credentials) do |
-      id:,
-      request_options: nil
-    |
+    define_method(:get_credentials) do |id:, request_options: nil|
       ::OctridevDigitalocean::Methods::VectorDatabases.vector_databases_get_credentials(
         config: @config,
         id: id,
@@ -10439,7 +9793,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the BlockStorageNamespace SDK type.
@@ -10575,7 +9928,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the BlockStorageActionsNamespace SDK type.
@@ -10657,7 +10009,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the VpcsNamespace SDK type.
@@ -10799,7 +10150,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the VpcRoutesPublicPreviewNamespace SDK type.
@@ -10895,7 +10245,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the VpcSubnetsPublicPreviewNamespace SDK type.
@@ -11001,7 +10350,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the VpcPeeringsNamespace SDK type.
@@ -11077,7 +10425,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the VpcNatGatewaysNamespace SDK type.
@@ -11185,7 +10532,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the UptimeNamespace SDK type.
@@ -11231,10 +10577,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an existing check, send a GET request to `/v2/uptime/checks/$CHECK_ID`.
-    define_method(:get_check) do |
-      check_id:,
-      request_options: nil
-    |
+    define_method(:get_check) do |check_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Uptime.uptime_get_check(
         config: @config,
         check_id: check_id,
@@ -11269,10 +10612,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an existing check's state, send a GET request to `/v2/uptime/checks/$CHECK_ID/state`.
-    define_method(:get_check_state) do |
-      check_id:,
-      request_options: nil
-    |
+    define_method(:get_check_state) do |check_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Uptime.uptime_get_check_state(
         config: @config,
         check_id: check_id,
@@ -11321,11 +10661,7 @@ module OctridevDigitalocean
     end
 
     # To show information about an existing alert, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
-    define_method(:get_alert) do |
-      check_id:,
-      alert_id:,
-      request_options: nil
-    |
+    define_method(:get_alert) do |check_id:, alert_id:, request_options: nil|
       ::OctridevDigitalocean::Methods::Uptime.uptime_get_alert(
         config: @config,
         check_id: check_id,
@@ -11373,7 +10709,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the AgentPlatformApiNamespace SDK type.
@@ -13761,7 +13096,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the ServerlessInferenceNamespace SDK type.
@@ -14215,7 +13549,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the AgentInferenceNamespace SDK type.
@@ -14333,7 +13666,6 @@ module OctridevDigitalocean
         &block
       )
     end
-
   end
 
   # Defines the BatchInferenceNamespace SDK type.
@@ -14454,7 +13786,6 @@ module OctridevDigitalocean
         request_options: request_options
       )
     end
-
   end
 
   # Defines the DigitalOcean SDK type.
@@ -14536,7 +13867,7 @@ module OctridevDigitalocean
       agent_platform_api: AgentPlatformApiNamespace,
       serverless_inference: ServerlessInferenceNamespace,
       agent_inference: AgentInferenceNamespace,
-      batch_inference: BatchInferenceNamespace,
+      batch_inference: BatchInferenceNamespace
     }.freeze
     private_constant :SUB_NAMESPACES
 
@@ -14565,6 +13896,5 @@ module OctridevDigitalocean
       end
       logging
     end
-
   end
 end

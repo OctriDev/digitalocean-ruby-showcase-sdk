@@ -25,23 +25,22 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/bandwidth",
+          '/v2/monitoring/metrics/droplet/bandwidth',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'interface' => QueryValue.new(interface, style: 'form', explode: true),
             'direction' => QueryValue.new(direction, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_bandwidth_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -57,21 +56,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/cpu",
+          '/v2/monitoring/metrics/droplet/cpu',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_cpu_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -87,21 +85,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/filesystem_free",
+          '/v2/monitoring/metrics/droplet/filesystem_free',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_filesystem_free_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -117,21 +114,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/filesystem_size",
+          '/v2/monitoring/metrics/droplet/filesystem_size',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_filesystem_size_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -147,21 +143,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/load_1",
+          '/v2/monitoring/metrics/droplet/load_1',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_load1_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -177,21 +172,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/load_5",
+          '/v2/monitoring/metrics/droplet/load_5',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_load5_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -207,21 +201,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/load_15",
+          '/v2/monitoring/metrics/droplet/load_15',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_load15_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -237,21 +230,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/memory_cached",
+          '/v2/monitoring/metrics/droplet/memory_cached',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_memory_cached_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -267,21 +259,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/memory_free",
+          '/v2/monitoring/metrics/droplet/memory_free',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_memory_free_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -297,21 +288,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/memory_total",
+          '/v2/monitoring/metrics/droplet/memory_total',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_memory_total_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -327,21 +317,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/droplet/memory_available",
+          '/v2/monitoring/metrics/droplet/memory_available',
           config: config,
           query: {
             'host_id' => QueryValue.new(host_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_droplet_memory_available_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -359,22 +348,21 @@ module OctridevDigitalocean
         app_component: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/apps/memory_percentage",
+          '/v2/monitoring/metrics/apps/memory_percentage',
           config: config,
           query: {
             'app_id' => QueryValue.new(app_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
             'end' => QueryValue.new(end_, style: 'form', explode: true),
-            'app_component' => QueryValue.new(app_component, style: 'form', explode: true),
+            'app_component' => QueryValue.new(app_component, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_app_memory_percentage_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -392,22 +380,21 @@ module OctridevDigitalocean
         app_component: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/apps/cpu_percentage",
+          '/v2/monitoring/metrics/apps/cpu_percentage',
           config: config,
           query: {
             'app_id' => QueryValue.new(app_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
             'end' => QueryValue.new(end_, style: 'form', explode: true),
-            'app_component' => QueryValue.new(app_component, style: 'form', explode: true),
+            'app_component' => QueryValue.new(app_component, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_app_cpu_percentage_metrics',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -425,22 +412,21 @@ module OctridevDigitalocean
         app_component: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/apps/restart_count",
+          '/v2/monitoring/metrics/apps/restart_count',
           config: config,
           query: {
             'app_id' => QueryValue.new(app_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
             'end' => QueryValue.new(end_, style: 'form', explode: true),
-            'app_component' => QueryValue.new(app_component, style: 'form', explode: true),
+            'app_component' => QueryValue.new(app_component, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_app_restart_count_metrics_yml',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -456,21 +442,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_connections_current",
+          '/v2/monitoring/metrics/load_balancer/frontend_connections_current',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_connections_current',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -486,21 +471,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_connections_limit",
+          '/v2/monitoring/metrics/load_balancer/frontend_connections_limit',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_connections_limit',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -516,21 +500,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_cpu_utilization",
+          '/v2/monitoring/metrics/load_balancer/frontend_cpu_utilization',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_cpu_utilization',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -546,21 +529,20 @@ module OctridevDigitalocean
         end_:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes",
+          '/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes',
           config: config,
           query: {
             'lb_id' => QueryValue.new(lb_id, style: 'form', explode: true),
             'start' => QueryValue.new(start, style: 'form', explode: true),
-            'end' => QueryValue.new(end_, style: 'form', explode: true),
+            'end' => QueryValue.new(end_, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Metrics,
           decoder: :json,
           operation_id: 'monitoring_get_lb_frontend_firewall_dropped_bytes',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
     end

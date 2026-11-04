@@ -5,271 +5,270 @@
 
 # harness_runtime_agent domain models
 module OctridevDigitalocean
-# Internal model hydration metadata.
-class SdkInternalAgentManifestSpecMetadata
-  FIELDS = {
-    permissions: "permissions",
-    mode: "mode",
-    runtime: "runtime",
-    workspace: "workspace",
-    sandbox: "sandbox",
-    model: "model",
-    tools: "tools",
-    skills: "skills",
-    env: "env",
-    memory: "memory",
-    secrets: "secrets",
-    defaults: "defaults",
-    serving: "serving",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    runtime
-  ].freeze
-  DECODERS = {
-    permissions: lambda do |value|
-      ::OctridevDigitalocean::Permissions.from_hash(value)
-    end,
-    mode: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecMode.from_value(value)
-    end,
-    runtime: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecRuntime.from_hash(value)
-    end,
-    workspace: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecWorkspace.from_hash(value)
-    end,
-    sandbox: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecSandbox.from_hash(value)
-    end,
-    model: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecModel.from_hash(value)
-    end,
-    tools: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecTools.from_hash(value)
-    end,
-    skills: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AgentManifestSpecSkillsItem.from_hash(item) }
-    end,
-    memory: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecMemory.from_hash(value)
-    end,
-    secrets: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AgentManifestSpecSecretsItem.from_hash(item) }
-    end,
-    defaults: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecDefaults.from_hash(value)
-    end,
-    serving: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpecServing.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AgentManifestSpec.
-# Optional object value serialized in the `spec` wire field.
-class AgentManifestSpec
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAgentManifestSpecMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAgentManifestSpecMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAgentManifestSpecMetadata::DECODERS
-
-  # @return [Permissions] Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the policy engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it against the (agent, version) capability descriptor. Absent or empty means the agent keeps its built-in default gating — no policy is shipped to the sandbox.
-  attr_reader :permissions
-  # @return [AgentManifestSpecMode] Explicit lifecycle discriminator. Defaults to "interactive" (spec.serving forbidden); "served" requires spec.serving.
-  attr_reader :mode
-  # @return [AgentManifestSpecRuntime] Canonical adapter ids: claude-code | opencode | codex | cursor | hermes | codex-agentapi | custom. codex-agentapi is the OpenAI sandbox-provider runtime (DO runs codex exec-server; the agent loop lives at OpenAI) and pairs with the opaque spec.runtime.config block. codex-cli and cursor-cli are deprecated aliases (accepted with a create-time warning). The framework adapters (openai-agents, claude-agent-sdk, crewai, langgraph) are declared but not yet supported; CreateSession…
-  attr_reader :runtime
-  # @return [AgentManifestSpecWorkspace] Repositories the session works against.
-  attr_reader :workspace
-  # @return [AgentManifestSpecSandbox] Optional object value serialized in the `sandbox` wire field.
-  attr_reader :sandbox
-  # @return [AgentManifestSpecModel] Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated when enforcement lands.
-  attr_reader :model
-  # @return [AgentManifestSpecTools] Accepted, not yet enforced (returns a warning). Exactly one of mcpServers or bundle.
-  attr_reader :tools
-  # @return [Array_of_AgentManifestSpecSkillsItem] Inline agent skills (SKILL.md shape): reusable markdown instructions the agent loads on demand, selected by description. Accepted, not yet enforced (returns a warning). Max 32 entries; instructions additionally capped at 256 KiB summed across the list so a valid manifest always fits the request-body limits. v0 is inline-only - remote skill sources come later as an additive field.
-  attr_reader :skills
-  # @return [Hash] Non-secret guest env (debug-readable - never put secrets here; use spec.secrets). Reserved platform keys (TEAM_ID, SESSION_ID, SANDBOX_ID, CONTROL_PLANE_CALLBACK_URL, SANDBOX_TEMPLATE, SANDBOX_AGENT_WORKDIR, SIZE_SLUG, SANDBOX_IMAGE_ID, SANDBOX_OCI_REF, PLANO_PERMISSION_*) are rejected. Credential-looking values (dop_v1_..., sk-..., ghp_...) trigger a create-time warning.
-  attr_reader :env
-  # @return [AgentManifestSpecMemory] Accepted, not yet enforced (returns a warning).
-  attr_reader :memory
-  # @return [Array_of_AgentManifestSpecSecretsItem] Declared credential requirements. source tenantSecret is enforced today: value is write-only plaintext, extracted into Secrets Manager at create and never persisted or returned. source oauth requires provider, carries no value, and is accepted but not yet enforced. ref is legacy and ignored. env false keeps the resolved value out of the guest environment (mount-only slots).
-  attr_reader :secrets
-  # @return [AgentManifestSpecDefaults] Optional object value serialized in the `defaults` wire field.
-  attr_reader :defaults
-  # @return [AgentManifestSpecServing] Present only when spec.mode is "served" (autoscaled fleet).
-  attr_reader :serving
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAgentManifestSpecMetadata
+    FIELDS = {
+      permissions: 'permissions',
+      mode: 'mode',
+      runtime: 'runtime',
+      workspace: 'workspace',
+      sandbox: 'sandbox',
+      model: 'model',
+      tools: 'tools',
+      skills: 'skills',
+      env: 'env',
+      memory: 'memory',
+      secrets: 'secrets',
+      defaults: 'defaults',
+      serving: 'serving'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      runtime
+    ].freeze
+    DECODERS = {
+      permissions: lambda do |value|
+        ::OctridevDigitalocean::Permissions.from_hash(value)
+      end,
+      mode: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecMode.from_value(value)
+      end,
+      runtime: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecRuntime.from_hash(value)
+      end,
+      workspace: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecWorkspace.from_hash(value)
+      end,
+      sandbox: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecSandbox.from_hash(value)
+      end,
+      model: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecModel.from_hash(value)
+      end,
+      tools: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecTools.from_hash(value)
+      end,
+      skills: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AgentManifestSpecSkillsItem.from_hash(item) }
+      end,
+      memory: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecMemory.from_hash(value)
+      end,
+      secrets: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AgentManifestSpecSecretsItem.from_hash(item) }
+      end,
+      defaults: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecDefaults.from_hash(value)
+      end,
+      serving: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpecServing.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AgentManifestSpec.
+  # Optional object value serialized in the `spec` wire field.
+  class AgentManifestSpec
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAgentManifestSpecMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAgentManifestSpecMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAgentManifestSpecMetadata::DECODERS
+
+    # @return [Permissions] Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the policy engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it against the (agent, version) capability descriptor. Absent or empty means the agent keeps its built-in default gating — no policy is shipped to the sandbox.
+    attr_reader :permissions
+    # @return [AgentManifestSpecMode] Explicit lifecycle discriminator. Defaults to "interactive" (spec.serving forbidden); "served" requires spec.serving.
+    attr_reader :mode
+    # @return [AgentManifestSpecRuntime] Canonical adapter ids: claude-code | opencode | codex | cursor | hermes | codex-agentapi | custom. codex-agentapi is the OpenAI sandbox-provider runtime (DO runs codex exec-server; the agent loop lives at OpenAI) and pairs with the opaque spec.runtime.config block. codex-cli and cursor-cli are deprecated aliases (accepted with a create-time warning). The framework adapters (openai-agents, claude-agent-sdk, crewai, langgraph) are declared but not yet supported; CreateSession…
+    attr_reader :runtime
+    # @return [AgentManifestSpecWorkspace] Repositories the session works against.
+    attr_reader :workspace
+    # @return [AgentManifestSpecSandbox] Optional object value serialized in the `sandbox` wire field.
+    attr_reader :sandbox
+    # @return [AgentManifestSpecModel] Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated when enforcement lands.
+    attr_reader :model
+    # @return [AgentManifestSpecTools] Accepted, not yet enforced (returns a warning). Exactly one of mcpServers or bundle.
+    attr_reader :tools
+    # @return [Array_of_AgentManifestSpecSkillsItem] Inline agent skills (SKILL.md shape): reusable markdown instructions the agent loads on demand, selected by description. Accepted, not yet enforced (returns a warning). Max 32 entries; instructions additionally capped at 256 KiB summed across the list so a valid manifest always fits the request-body limits. v0 is inline-only - remote skill sources come later as an additive field.
+    attr_reader :skills
+    # @return [Hash] Non-secret guest env (debug-readable - never put secrets here; use spec.secrets). Reserved platform keys (TEAM_ID, SESSION_ID, SANDBOX_ID, CONTROL_PLANE_CALLBACK_URL, SANDBOX_TEMPLATE, SANDBOX_AGENT_WORKDIR, SIZE_SLUG, SANDBOX_IMAGE_ID, SANDBOX_OCI_REF, PLANO_PERMISSION_*) are rejected. Credential-looking values (dop_v1_..., sk-..., ghp_...) trigger a create-time warning.
+    attr_reader :env
+    # @return [AgentManifestSpecMemory] Accepted, not yet enforced (returns a warning).
+    attr_reader :memory
+    # @return [Array_of_AgentManifestSpecSecretsItem] Declared credential requirements. source tenantSecret is enforced today: value is write-only plaintext, extracted into Secrets Manager at create and never persisted or returned. source oauth requires provider, carries no value, and is accepted but not yet enforced. ref is legacy and ignored. env false keeps the resolved value out of the guest environment (mount-only slots).
+    attr_reader :secrets
+    # @return [AgentManifestSpecDefaults] Optional object value serialized in the `defaults` wire field.
+    attr_reader :defaults
+    # @return [AgentManifestSpecServing] Present only when spec.mode is "served" (autoscaled fleet).
+    attr_reader :serving
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalAgentManifestMetadata
+    FIELDS = {
+      api_version: 'apiVersion',
+      kind: 'kind',
+      metadata: 'metadata',
+      spec: 'spec'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      api_version: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestApiVersion.from_value(value)
+      end,
+      kind: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestKind.from_value(value)
+      end,
+      metadata: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestMetadata.from_hash(value)
+      end,
+      spec: lambda do |value|
+        ::OctridevDigitalocean::AgentManifestSpec.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for AgentManifest.
+  # Customer-authored agents.yaml Agent manifest, sent as the CreateSession request body with a YAML Content-Type. Two formats are accepted during the dual-format transition: the FLAT format (primary - no envelope, snake_case, duration strings; authoritative published schema contracts/agent.flat.schema.json, field reference docs/agent-manifest.md) and the legacy v1alpha1 envelope documented by the properties below (DEPRECATED; schema contracts/agent.v1alpha1.schema.json; parses…
+  class AgentManifest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAgentManifestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAgentManifestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAgentManifestMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAgentManifestMetadata
-  FIELDS = {
-    api_version: "apiVersion",
-    kind: "kind",
-    metadata: "metadata",
-    spec: "spec",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    api_version: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestApiVersion.from_value(value)
-    end,
-    kind: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestKind.from_value(value)
-    end,
-    metadata: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestMetadata.from_hash(value)
-    end,
-    spec: lambda do |value|
-      ::OctridevDigitalocean::AgentManifestSpec.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [AgentManifestApiVersion] Legacy envelope only - must be "agents.digitalocean.com/v1alpha1", and its presence is what routes the document to the deprecated legacy parser. Flat-format manifests carry no version key (the endpoint owns the contract); required, with kind and spec, when authoring the legacy format.
+    attr_reader :api_version
+    # @return [AgentManifestKind] Must be "Agent".
+    attr_reader :kind
+    # @return [AgentManifestMetadata] Optional object value serialized in the `metadata` wire field.
+    attr_reader :metadata
+    # @return [AgentManifestSpec] Optional object value serialized in the `spec` wire field.
+    attr_reader :spec
 
-# API model for AgentManifest.
-# Customer-authored agents.yaml Agent manifest, sent as the CreateSession request body with a YAML Content-Type. Two formats are accepted during the dual-format transition: the FLAT format (primary - no envelope, snake_case, duration strings; authoritative published schema contracts/agent.flat.schema.json, field reference docs/agent-manifest.md) and the legacy v1alpha1 envelope documented by the properties below (DEPRECATED; schema contracts/agent.v1alpha1.schema.json; parses…
-class AgentManifest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAgentManifestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAgentManifestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAgentManifestMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [AgentManifestApiVersion] Legacy envelope only - must be "agents.digitalocean.com/v1alpha1", and its presence is what routes the document to the deprecated legacy parser. Flat-format manifests carry no version key (the endpoint owns the contract); required, with kind and spec, when authoring the legacy format.
-  attr_reader :api_version
-  # @return [AgentManifestKind] Must be "Agent".
-  attr_reader :kind
-  # @return [AgentManifestMetadata] Optional object value serialized in the `metadata` wire field.
-  attr_reader :metadata
-  # @return [AgentManifestSpec] Optional object value serialized in the `spec` wire field.
-  attr_reader :spec
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the AgentManifestApiVersion SDK namespace.
+  module AgentManifestApiVersion
+    AGENTS_DIGITALOCEAN_COM_V1_ALPHA1 = 'agents.digitalocean.com/v1alpha1'
+    VALUES = ['agents.digitalocean.com/v1alpha1'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Defines the AgentManifestKind SDK namespace.
+  module AgentManifestKind
+    AGENT = 'Agent'
+    VALUES = ['Agent'].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
+  # Defines the AgentManifestSpecDefaultsBudgetOnBreach SDK namespace.
+  module AgentManifestSpecDefaultsBudgetOnBreach
+    PAUSE = 'pause'
+    HUMAN_INPUT = 'humanInput'
+    FAIL = 'fail'
+    VALUES = %w[pause humanInput fail].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the AgentManifestApiVersion SDK namespace.
-module AgentManifestApiVersion
-  AGENTS_DIGITALOCEAN_COM_V1_ALPHA1 = 'agents.digitalocean.com/v1alpha1'
-  VALUES = ['agents.digitalocean.com/v1alpha1'].freeze
-  def self.from_value(value)
-    value
+  # Defines the AgentManifestSpecMemoryScope SDK namespace.
+  module AgentManifestSpecMemoryScope
+    TENANT = 'tenant'
+    USER = 'user'
+    AGENT = 'agent'
+    SESSION = 'session'
+    VALUES = %w[tenant user agent session].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the AgentManifestKind SDK namespace.
-module AgentManifestKind
-  AGENT = 'Agent'
-  VALUES = ['Agent'].freeze
-  def self.from_value(value)
-    value
+  # Defines the AgentManifestSpecMode SDK namespace.
+  module AgentManifestSpecMode
+    INTERACTIVE = 'interactive'
+    SERVED = 'served'
+    VALUES = %w[interactive served].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the AgentManifestSpecDefaultsBudgetOnBreach SDK namespace.
-module AgentManifestSpecDefaultsBudgetOnBreach
-  PAUSE = 'pause'
-  HUMAN_INPUT = 'humanInput'
-  FAIL = 'fail'
-  VALUES = ['pause', 'humanInput', 'fail'].freeze
-  def self.from_value(value)
-    value
+  # Defines the AgentManifestSpecRuntimeAdapter SDK namespace.
+  module AgentManifestSpecRuntimeAdapter
+    CLAUDE_CODE = 'claude-code'
+    OPENCODE = 'opencode'
+    CODEX = 'codex'
+    CURSOR = 'cursor'
+    HERMES = 'hermes'
+    CODEX_AGENTAPI = 'codex-agentapi'
+    CUSTOM = 'custom'
+    CODEX_CLI = 'codex-cli'
+    CURSOR_CLI = 'cursor-cli'
+    OPENAI_AGENTS = 'openai-agents'
+    CLAUDE_AGENT_SDK = 'claude-agent-sdk'
+    CREWAI = 'crewai'
+    LANGGRAPH = 'langgraph'
+    VALUES = %w[
+      claude-code opencode codex cursor hermes codex-agentapi custom codex-cli
+      cursor-cli openai-agents claude-agent-sdk crewai langgraph
+    ].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the AgentManifestSpecMemoryScope SDK namespace.
-module AgentManifestSpecMemoryScope
-  TENANT = 'tenant'
-  USER = 'user'
-  AGENT = 'agent'
-  SESSION = 'session'
-  VALUES = ['tenant', 'user', 'agent', 'session'].freeze
-  def self.from_value(value)
-    value
+  # Defines the AgentManifestSpecSandboxMountsItemType SDK namespace.
+  module AgentManifestSpecSandboxMountsItemType
+    S3_FUSE = 's3fuse'
+    VALUES = ['s3fuse'].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
 
-# Defines the AgentManifestSpecMode SDK namespace.
-module AgentManifestSpecMode
-  INTERACTIVE = 'interactive'
-  SERVED = 'served'
-  VALUES = ['interactive', 'served'].freeze
-  def self.from_value(value)
-    value
+  # Defines the AgentManifestSpecSecretsItemSource SDK namespace.
+  module AgentManifestSpecSecretsItemSource
+    OAUTH = 'oauth'
+    TENANT_SECRET = 'tenantSecret'
+    VALUES = %w[oauth tenantSecret].freeze
+    def self.from_value(value)
+      value
+    end
   end
-end
-
-# Defines the AgentManifestSpecRuntimeAdapter SDK namespace.
-module AgentManifestSpecRuntimeAdapter
-  CLAUDE_CODE = 'claude-code'
-  OPENCODE = 'opencode'
-  CODEX = 'codex'
-  CURSOR = 'cursor'
-  HERMES = 'hermes'
-  CODEX_AGENTAPI = 'codex-agentapi'
-  CUSTOM = 'custom'
-  CODEX_CLI = 'codex-cli'
-  CURSOR_CLI = 'cursor-cli'
-  OPENAI_AGENTS = 'openai-agents'
-  CLAUDE_AGENT_SDK = 'claude-agent-sdk'
-  CREWAI = 'crewai'
-  LANGGRAPH = 'langgraph'
-  VALUES = [
-    'claude-code', 'opencode', 'codex', 'cursor', 'hermes', 'codex-agentapi', 'custom', 'codex-cli',
-    'cursor-cli', 'openai-agents', 'claude-agent-sdk', 'crewai', 'langgraph'
-  ].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the AgentManifestSpecSandboxMountsItemType SDK namespace.
-module AgentManifestSpecSandboxMountsItemType
-  S3_FUSE = 's3fuse'
-  VALUES = ['s3fuse'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the AgentManifestSpecSecretsItemSource SDK namespace.
-module AgentManifestSpecSecretsItemSource
-  OAUTH = 'oauth'
-  TENANT_SECRET = 'tenantSecret'
-  VALUES = ['oauth', 'tenantSecret'].freeze
-  def self.from_value(value)
-    value
-  end
-end
 end

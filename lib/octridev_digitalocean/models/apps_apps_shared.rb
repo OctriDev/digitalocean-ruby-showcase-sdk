@@ -5,282 +5,275 @@
 
 # apps_apps domain models
 module OctridevDigitalocean
-# API model for AppsRegion.
-# Typed representation of the `AppsRegion` API schema.
-class AppsRegion
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsRegionMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsRegionMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsRegionMetadata::DECODERS
+  # API model for AppsRegion.
+  # Typed representation of the `AppsRegion` API schema.
+  class AppsRegion
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsRegionMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsRegionMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsRegionMetadata::DECODERS
 
-  # @return [String] Optional `string` value serialized in the `continent` wire field.
-  attr_reader :continent
-  # @return [Array_of_String] Optional array value serialized in the `data_centers` wire field.
-  attr_reader :data_centers
-  # @return [Boolean] Whether or not the region is presented as the default.
-  attr_reader :default
-  # @return [Boolean] Optional `boolean` value serialized in the `disabled` wire field.
-  attr_reader :disabled
-  # @return [String] Optional `string` value serialized in the `flag` wire field.
-  attr_reader :flag
-  # @return [String] Optional `string` value serialized in the `label` wire field.
-  attr_reader :label
-  # @return [String] Optional `string` value serialized in the `reason` wire field.
-  attr_reader :reason
-  # @return [String] Optional `string` value serialized in the `slug` wire field.
-  attr_reader :slug
+    # @return [String] Optional `string` value serialized in the `continent` wire field.
+    attr_reader :continent
+    # @return [Array_of_String] Optional array value serialized in the `data_centers` wire field.
+    attr_reader :data_centers
+    # @return [Boolean] Whether or not the region is presented as the default.
+    attr_reader :default
+    # @return [Boolean] Optional `boolean` value serialized in the `disabled` wire field.
+    attr_reader :disabled
+    # @return [String] Optional `string` value serialized in the `flag` wire field.
+    attr_reader :flag
+    # @return [String] Optional `string` value serialized in the `label` wire field.
+    attr_reader :label
+    # @return [String] Optional `string` value serialized in the `reason` wire field.
+    attr_reader :reason
+    # @return [String] Optional `string` value serialized in the `slug` wire field.
+    attr_reader :slug
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppsResponseMetadata
+    FIELDS = {
+      apps: 'apps',
+      links: 'links',
+      meta: 'meta'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      meta
+    ].freeze
+    DECODERS = {
+      apps: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::App.from_hash(item) }
+      end,
+      links: lambda do |value|
+        ::OctridevDigitalocean::PageLinks.from_hash(value)
+      end,
+      meta: lambda do |value|
+        ::OctridevDigitalocean::MetaMeta.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for AppsResponse.
+  # Typed representation of the `AppsResponse` API schema.
+  class AppsResponse
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsResponseMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsResponseMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsResponseMetadata::DECODERS
+
+    attr_reader :apps
+    # @return [PageLinks] Optional object value serialized in the `links` wire field.
+    attr_reader :links
+    # @return [MetaMeta] Required API value serialized in the `meta` wire field.
+    attr_reader :meta
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsResponseMetadata
-  FIELDS = {
-    apps: "apps",
-    links: "links",
-    meta: "meta",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    meta
-  ].freeze
-  DECODERS = {
-    apps: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::App.from_hash(item) }
-    end,
-    links: lambda do |value|
-      ::OctridevDigitalocean::PageLinks.from_hash(value)
-    end,
-    meta: lambda do |value|
-      ::OctridevDigitalocean::MetaMeta.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for AppsResponse.
-# Typed representation of the `AppsResponse` API schema.
-class AppsResponse
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsResponseMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsResponseMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsResponseMetadata::DECODERS
-
-  attr_reader :apps
-  # @return [PageLinks] Optional object value serialized in the `links` wire field.
-  attr_reader :links
-  # @return [MetaMeta] Required API value serialized in the `meta` wire field.
-  attr_reader :meta
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalAppsRestartRequestMetadata
+    FIELDS = {
+      components: 'components'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for AppsRestartRequest.
+  # Typed representation of the `AppsRestartRequest` API schema.
+  class AppsRestartRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsRestartRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsRestartRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsRestartRequestMetadata::DECODERS
+
+    # @return [Array_of_String] Optional array value serialized in the `components` wire field.
+    attr_reader :components
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalAppsRollbackAppRequestMetadata
+    FIELDS = {
+      deployment_id: 'deployment_id',
+      skip_pin: 'skip_pin'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for AppsRollbackAppRequest.
+  # Typed representation of the `AppsRollbackAppRequest` API schema.
+  class AppsRollbackAppRequest
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsRollbackAppRequestMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsRollbackAppRequestMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsRollbackAppRequestMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAppsRestartRequestMetadata
-  FIELDS = {
-    components: "components",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] The ID of the deployment to rollback to.
+    attr_reader :deployment_id
+    # @return [Boolean] Whether to skip pinning the rollback deployment. If false, the rollback deployment will be pinned and any new deployments including Auto Deploy on Push hooks will be disabled until the rollback is either manually committed or reverted via the CommitAppRollback or RevertAppRollback endpoints respectively. If true, the rollback will be immediately committed and the app will remain unpinned.
+    attr_reader :skip_pin
 
-# API model for AppsRestartRequest.
-# Typed representation of the `AppsRestartRequest` API schema.
-class AppsRestartRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsRestartRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsRestartRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsRestartRequestMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_String] Optional array value serialized in the `components` wire field.
-  attr_reader :components
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalAppsStringMatchMetadata
+    FIELDS = {
+      exact: 'exact',
+      prefix: 'prefix',
+      regex: 'regex'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for AppsStringMatch.
+  # Typed representation of the `AppsStringMatch` API schema.
+  class AppsStringMatch
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsStringMatchMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsStringMatchMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsStringMatchMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalAppsRollbackAppRequestMetadata
-  FIELDS = {
-    deployment_id: "deployment_id",
-    skip_pin: "skip_pin",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [String] Exact string match. Only 1 of `exact`, `prefix`, or `regex` must be set. An empty string is a valid value and will be serialized explicitly rather than being omitted from the payload.
+    attr_reader :exact
+    # @return [String] Prefix-based match. Only 1 of `exact`, `prefix`, or `regex` must be set.
+    attr_reader :prefix
+    # @return [String] RE2 style regex-based match. Only 1 of `exact`, `prefix`, or `regex` must be set. For more information about RE2 syntax, see: github.com
+    attr_reader :regex
 
-# API model for AppsRollbackAppRequest.
-# Typed representation of the `AppsRollbackAppRequest` API schema.
-class AppsRollbackAppRequest
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsRollbackAppRequestMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsRollbackAppRequestMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsRollbackAppRequestMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] The ID of the deployment to rollback to.
-  attr_reader :deployment_id
-  # @return [Boolean] Whether to skip pinning the rollback deployment. If false, the rollback deployment will be pinned and any new deployments including Auto Deploy on Push hooks will be disabled until the rollback is either manually committed or reverted via the CommitAppRollback or RevertAppRollback endpoints respectively. If true, the rollback will be immediately committed and the app will remain unpinned.
-  attr_reader :skip_pin
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalAppsValidateRollbackMetadata
+    FIELDS = {
+      valid: 'valid',
+      error: 'error',
+      warnings: 'warnings'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      error: lambda do |value|
+        ::OctridevDigitalocean::AppRollbackValidationCondition.from_hash(value)
+      end,
+      warnings: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::AppRollbackValidationCondition.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for AppsValidateRollback.
+  # Typed representation of the `AppsValidateRollback` API schema.
+  class AppsValidateRollback
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalAppsValidateRollbackMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalAppsValidateRollbackMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalAppsValidateRollbackMetadata::DECODERS
+
+    # @return [Boolean] Indicates whether the app can be rolled back to the specified deployment.
+    attr_reader :valid
+    # @return [AppRollbackValidationCondition] Contains the failing condition that is causing the rollback to be invalid.
+    attr_reader :error
+    # @return [Array_of_AppRollbackValidationCondition] Contains a list of warnings that may cause the rollback to run under unideal circumstances.
+    attr_reader :warnings
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsStringMatchMetadata
-  FIELDS = {
-    exact: "exact",
-    prefix: "prefix",
-    regex: "regex",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for AppsStringMatch.
-# Typed representation of the `AppsStringMatch` API schema.
-class AppsStringMatch
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsStringMatchMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsStringMatchMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsStringMatchMetadata::DECODERS
-
-  # @return [String] Exact string match. Only 1 of `exact`, `prefix`, or `regex` must be set. An empty string is a valid value and will be serialized explicitly rather than being omitted from the payload.
-  attr_reader :exact
-  # @return [String] Prefix-based match. Only 1 of `exact`, `prefix`, or `regex` must be set.
-  attr_reader :prefix
-  # @return [String] RE2 style regex-based match. Only 1 of `exact`, `prefix`, or `regex` must be set. For more information about RE2 syntax, see: github.com
-  attr_reader :regex
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalAppsValidateRollbackMetadata
-  FIELDS = {
-    valid: "valid",
-    error: "error",
-    warnings: "warnings",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    error: lambda do |value|
-      ::OctridevDigitalocean::AppRollbackValidationCondition.from_hash(value)
-    end,
-    warnings: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::AppRollbackValidationCondition.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for AppsValidateRollback.
-# Typed representation of the `AppsValidateRollback` API schema.
-class AppsValidateRollback
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalAppsValidateRollbackMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalAppsValidateRollbackMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalAppsValidateRollbackMetadata::DECODERS
-
-  # @return [Boolean] Indicates whether the app can be rolled back to the specified deployment.
-  attr_reader :valid
-  # @return [AppRollbackValidationCondition] Contains the failing condition that is causing the rollback to be invalid.
-  attr_reader :error
-  # @return [Array_of_AppRollbackValidationCondition] Contains a list of warnings that may cause the rollback to run under unideal circumstances.
-  attr_reader :warnings
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
 end

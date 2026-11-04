@@ -20,22 +20,21 @@ module OctridevDigitalocean
         x_device_uuid: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/pause"
+            '/pause'
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'harness_post_session_pause',
           extra_headers: SdkClient.serialize_headers({
-            'X-Device-UUID' => SdkClient.header_value(x_device_uuid),
-          }),
+                                                       'X-Device-UUID' => SdkClient.header_value(x_device_uuid)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -50,22 +49,21 @@ module OctridevDigitalocean
         x_device_uuid: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/resume"
+            '/resume'
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'harness_post_session_resume',
           extra_headers: SdkClient.serialize_headers({
-            'X-Device-UUID' => SdkClient.header_value(x_device_uuid),
-          }),
+                                                       'X-Device-UUID' => SdkClient.header_value(x_device_uuid)
+                                                     }),
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -90,26 +88,25 @@ module OctridevDigitalocean
         timeout_seconds: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/sandbox/exec"
+            '/sandbox/exec'
           ].join,
           config: config,
           body: {
             'argv' => argv,
             'workdir' => workdir,
             'stdin' => stdin,
-            'timeout_seconds' => timeout_seconds,
+            'timeout_seconds' => timeout_seconds
           },
           return_type: ::OctridevDigitalocean::ExecInSandboxResponse,
           decoder: :json,
           operation_id: 'harness_post_session_sandbox_exec',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -128,23 +125,22 @@ module OctridevDigitalocean
         as_archive: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/download"
+            '/workspace/download'
           ].join,
           config: config,
           query: {
             'path' => QueryValue.new(path, style: 'form', explode: true),
-            'as_archive' => QueryValue.new(as_archive, style: 'form', explode: true),
+            'as_archive' => QueryValue.new(as_archive, style: 'form', explode: true)
           },
           decoder: :bytes,
           operation_id: 'harness_get_session_workspace_download',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -174,13 +170,12 @@ module OctridevDigitalocean
         sha256: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/transfers"
+            '/workspace/transfers'
           ].join,
           config: config,
           body: {
@@ -189,13 +184,13 @@ module OctridevDigitalocean
             'is_archive' => is_archive,
             'as_archive' => as_archive,
             'size_bytes' => size_bytes,
-            'sha256' => sha256,
+            'sha256' => sha256
           },
           return_type: ::OctridevDigitalocean::WorkspaceTransferCreated,
           decoder: :json,
           operation_id: 'harness_create_session_workspace_transfer',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -209,13 +204,12 @@ module OctridevDigitalocean
         transfer_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/transfers/",
+            '/workspace/transfers/',
             SdkClient.encode_path_segment(transfer_id)
           ].join,
           config: config,
@@ -223,7 +217,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_get_session_workspace_transfer',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -239,25 +233,24 @@ module OctridevDigitalocean
         reason: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/transfers/",
+            '/workspace/transfers/',
             SdkClient.encode_path_segment(transfer_id),
-            "/cancel"
+            '/cancel'
           ].join,
           config: config,
           body: {
-            'reason' => reason,
+            'reason' => reason
           },
           return_type: ::OctridevDigitalocean::WorkspaceTransferCancelled,
           decoder: :json,
           operation_id: 'harness_cancel_session_workspace_transfer',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -274,25 +267,24 @@ module OctridevDigitalocean
         sha256: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/transfers/",
+            '/workspace/transfers/',
             SdkClient.encode_path_segment(transfer_id),
-            "/commit"
+            '/commit'
           ].join,
           config: config,
           body: {
-            'sha256' => sha256,
+            'sha256' => sha256
           },
           return_type: ::OctridevDigitalocean::WorkspaceUploadCommitted,
           decoder: :json,
           operation_id: 'harness_commit_session_workspace_transfer',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -309,25 +301,24 @@ module OctridevDigitalocean
         part_numbers:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/transfers/",
+            '/workspace/transfers/',
             SdkClient.encode_path_segment(transfer_id),
-            "/part-upload-urls"
+            '/part-upload-urls'
           ].join,
           config: config,
           body: {
-            'part_numbers' => part_numbers,
+            'part_numbers' => part_numbers
           },
           return_type: ::OctridevDigitalocean::WorkspacePartUploadUrls,
           decoder: :json,
           operation_id: 'harness_create_session_workspace_part_upload_urls',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -352,18 +343,17 @@ module OctridevDigitalocean
         x_content_sha256: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/workspace/upload"
+            '/workspace/upload'
           ].join,
           config: config,
           query: {
             'path' => QueryValue.new(path, style: 'form', explode: true),
-            'is_archive' => QueryValue.new(is_archive, style: 'form', explode: true),
+            'is_archive' => QueryValue.new(is_archive, style: 'form', explode: true)
           },
           body: body,
           content_type: 'application/octet-stream',
@@ -371,10 +361,10 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_create_session_workspace_upload',
           extra_headers: SdkClient.serialize_headers({
-            'X-Content-Sha256' => SdkClient.header_value(x_content_sha256),
-          }),
+                                                       'X-Content-Sha256' => SdkClient.header_value(x_content_sha256)
+                                                     }),
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '413' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -411,42 +401,45 @@ module OctridevDigitalocean
         request_options: nil,
         &block
       )
-    return enum_for(
-          __method__,
-          config: config,
-          session_id: session_id,
-          replay_only: replay_only,
-          replay_from: replay_from,
-          cursor: cursor,
-          device_id: device_id,
-          last_event_id: last_event_id,
-          x_device_uuid: x_device_uuid,
-          request_options: request_options,
-        ) unless block
+        unless block
+          return enum_for(
+            __method__,
+            config: config,
+            session_id: session_id,
+            replay_only: replay_only,
+            replay_from: replay_from,
+            cursor: cursor,
+            device_id: device_id,
+            last_event_id: last_event_id,
+            x_device_uuid: x_device_uuid,
+            request_options: request_options
+          )
+        end
         SdkClient.stream(
           'GET', [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/events"
+            '/events'
           ].join,
           config: config,
           query: {
-          'replay_only' => QueryValue.new(replay_only, style: 'form', explode: true),
-          'replay_from' => QueryValue.new(replay_from, style: 'form', explode: true),
-          'cursor' => QueryValue.new(cursor, style: 'form', explode: true),
-          'device_id' => QueryValue.new(device_id, style: 'form', explode: true),
-        },
+            'replay_only' => QueryValue.new(replay_only, style: 'form', explode: true),
+            'replay_from' => QueryValue.new(replay_from, style: 'form', explode: true),
+            'cursor' => QueryValue.new(cursor, style: 'form', explode: true),
+            'device_id' => QueryValue.new(device_id, style: 'form', explode: true)
+          },
           operation_id: 'harness_get_session_events',
           stream_format: :sse,
-          stream_media_type: "text/event-stream",
+          stream_media_type: 'text/event-stream',
           extra_headers: SdkClient.serialize_headers({
-            'Last-Event-ID' => SdkClient.header_value(last_event_id),
-            'X-Device-UUID' => SdkClient.header_value(x_device_uuid),
-          }),
+                                                       'Last-Event-ID' => SdkClient.header_value(last_event_id),
+                                                       'X-Device-UUID' => SdkClient.header_value(x_device_uuid)
+                                                     }),
           request_options: request_options,
           errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '503' => ::OctridevDigitalocean::Error2 }
         ).each do |ev|
           break if ev.data == '[DONE]'
+
           decoded = JSON.parse(ev.data)
           block.call(SdkClient.decode_event(decoded, ::OctridevDigitalocean::StreamEvent))
         end
@@ -463,15 +456,14 @@ module OctridevDigitalocean
         port:,
         request_options: nil
       )
-
-        Validation.validate_range('port', port, min: 1024, max: 65535)
+        Validation.validate_range('port', port, min: 1024, max: 65_535)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/port-forward/",
+            '/port-forward/',
             SdkClient.encode_path_segment(port)
           ].join,
           config: config,
@@ -479,7 +471,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'harness_get_session_port_forward',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '402' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '502' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -491,20 +483,19 @@ module OctridevDigitalocean
         session_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/agents/sessions/",
+            '/v2/agents/sessions/',
             SdkClient.encode_path_segment(session_id),
-            "/ingress"
+            '/ingress'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::GetIngressUrlResponse,
           decoder: :json,
           operation_id: 'harness_get_session_ingress',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '403' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '409' => ::OctridevDigitalocean::Error2, '423' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, '501' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
     end

@@ -12,8 +12,8 @@ module OctridevDigitalocean
       # Internal model hydration metadata.
       class SdkInternalVolumeSnapshotsCreateMetadata
         FIELDS = {
-          name: "name",
-          tags: "tags",
+          name: 'name',
+          tags: 'tags'
         }.freeze
         REQUIRED_FIELDS = %i[
           name
@@ -21,7 +21,7 @@ module OctridevDigitalocean
         DECODERS = {
           tags: lambda do |value|
             ::OctridevDigitalocean::TagsArray.from_hash(value)
-          end,
+          end
         }.freeze
       end
 
@@ -70,26 +70,25 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
 
         Validation.if_given(page) { Validation.validate_range('page', page, min: 1) }
 
         SdkClient.request(
           'GET',
-          "/v2/volumes",
+          '/v2/volumes',
           config: config,
           query: {
             'name' => QueryValue.new(name, style: 'form', explode: true),
             'region' => QueryValue.new(region, style: 'form', explode: true),
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::Volumes,
           decoder: :json,
           operation_id: 'volumes_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -101,17 +100,16 @@ module OctridevDigitalocean
         body:,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/volumes",
+          '/v2/volumes',
           config: config,
           body: body,
           return_type: ::OctridevDigitalocean::Volume,
           decoder: :json,
           operation_id: 'volumes_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -126,19 +124,18 @@ module OctridevDigitalocean
         region: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
-          "/v2/volumes",
+          '/v2/volumes',
           config: config,
           query: {
             'name' => QueryValue.new(name, style: 'form', explode: true),
-            'region' => QueryValue.new(region, style: 'form', explode: true),
+            'region' => QueryValue.new(region, style: 'form', explode: true)
           },
           decoder: :empty,
           operation_id: 'volumes_delete_by_name',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -150,11 +147,10 @@ module OctridevDigitalocean
         snapshot_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/volumes/snapshots/",
+            '/v2/volumes/snapshots/',
             SdkClient.encode_path_segment(snapshot_id)
           ].join,
           config: config,
@@ -162,7 +158,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'volume_snapshots_get_by_id',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -174,18 +170,17 @@ module OctridevDigitalocean
         snapshot_id:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/volumes/snapshots/",
+            '/v2/volumes/snapshots/',
             SdkClient.encode_path_segment(snapshot_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'volume_snapshots_delete_by_id',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -197,13 +192,12 @@ module OctridevDigitalocean
         volume_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('volume_id', volume_id)
 
         SdkClient.request(
           'GET',
           [
-            "/v2/volumes/",
+            '/v2/volumes/',
             SdkClient.encode_path_segment(volume_id)
           ].join,
           config: config,
@@ -211,7 +205,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'volumes_get',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -223,20 +217,19 @@ module OctridevDigitalocean
         volume_id:,
         request_options: nil
       )
-
         Validation.validate_uuid('volume_id', volume_id)
 
         SdkClient.request(
           'DELETE',
           [
-            "/v2/volumes/",
+            '/v2/volumes/',
             SdkClient.encode_path_segment(volume_id)
           ].join,
           config: config,
           decoder: :empty,
           operation_id: 'volumes_delete',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -252,7 +245,6 @@ module OctridevDigitalocean
         page: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('volume_id', volume_id)
 
         Validation.if_given(per_page) { Validation.validate_range('per_page', per_page, min: 1, max: 200) }
@@ -262,20 +254,20 @@ module OctridevDigitalocean
         SdkClient.request(
           'GET',
           [
-            "/v2/volumes/",
+            '/v2/volumes/',
             SdkClient.encode_path_segment(volume_id),
-            "/snapshots"
+            '/snapshots'
           ].join,
           config: config,
           query: {
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
-            'page' => QueryValue.new(page, style: 'form', explode: true),
+            'page' => QueryValue.new(page, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::VolumeSnapshots,
           decoder: :json,
           operation_id: 'volume_snapshots_list',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -293,26 +285,25 @@ module OctridevDigitalocean
         tags: NOT_GIVEN,
         request_options: nil
       )
-
         Validation.validate_uuid('volume_id', volume_id)
 
         SdkClient.request(
           'POST',
           [
-            "/v2/volumes/",
+            '/v2/volumes/',
             SdkClient.encode_path_segment(volume_id),
-            "/snapshots"
+            '/snapshots'
           ].join,
           config: config,
           body: {
             'name' => name,
-            'tags' => tags,
+            'tags' => tags
           },
           return_type: ::OctridevDigitalocean::VolumeSnapshot,
           decoder: :json,
           operation_id: 'volume_snapshots_create',
           request_options: request_options,
-          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '400' => ::OctridevDigitalocean::Error2, '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
     end

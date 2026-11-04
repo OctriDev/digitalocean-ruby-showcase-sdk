@@ -5,72 +5,70 @@
 
 # agent_platform_api_api_delete domain models
 module OctridevDigitalocean
-# API model for ApiDeleteSimulationRunOutput.
-# Output for deleting a simulation run.
-class ApiDeleteSimulationRunOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiDeleteSimulationRunOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiDeleteSimulationRunOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiDeleteSimulationRunOutputMetadata::DECODERS
+  # API model for ApiDeleteSimulationRunOutput.
+  # Output for deleting a simulation run.
+  class ApiDeleteSimulationRunOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiDeleteSimulationRunOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiDeleteSimulationRunOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiDeleteSimulationRunOutputMetadata::DECODERS
 
-  # @return [String] UUID of the deleted run.
-  attr_reader :run_uuid
+    # @return [String] UUID of the deleted run.
+    attr_reader :run_uuid
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalApiDeleteWorkspaceOutputMetadata
+    FIELDS = {
+      workspace_uuid: 'workspace_uuid'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for ApiDeleteWorkspaceOutput.
+  # Typed representation of the `ApiDeleteWorkspaceOutput` API schema.
+  class ApiDeleteWorkspaceOutput
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalApiDeleteWorkspaceOutputMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalApiDeleteWorkspaceOutputMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalApiDeleteWorkspaceOutputMetadata::DECODERS
+
+    # @return [String] Workspace
+    attr_reader :workspace_uuid
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalApiDeleteWorkspaceOutputMetadata
-  FIELDS = {
-    workspace_uuid: "workspace_uuid",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
-
-# API model for ApiDeleteWorkspaceOutput.
-# Typed representation of the `ApiDeleteWorkspaceOutput` API schema.
-class ApiDeleteWorkspaceOutput
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalApiDeleteWorkspaceOutputMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalApiDeleteWorkspaceOutputMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalApiDeleteWorkspaceOutputMetadata::DECODERS
-
-  # @return [String] Workspace
-  attr_reader :workspace_uuid
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
 end

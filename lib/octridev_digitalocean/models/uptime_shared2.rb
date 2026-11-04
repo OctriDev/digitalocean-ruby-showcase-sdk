@@ -5,289 +5,284 @@
 
 # uptime domain models
 module OctridevDigitalocean
-# API model for NotificationSlackItem.
-# Required object value serialized in the `slack[]` wire field.
-class NotificationSlackItem
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNotificationSlackItemMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNotificationSlackItemMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNotificationSlackItemMetadata::DECODERS
+  # API model for NotificationSlackItem.
+  # Required object value serialized in the `slack[]` wire field.
+  class NotificationSlackItem
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNotificationSlackItemMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNotificationSlackItemMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNotificationSlackItemMetadata::DECODERS
 
-  # @return [String] Slack channel to notify of an alert trigger.
-  attr_reader :channel
-  # @return [String] Slack Webhook URL.
-  attr_reader :url
+    # @return [String] Slack channel to notify of an alert trigger.
+    attr_reader :channel
+    # @return [String] Slack Webhook URL.
+    attr_reader :url
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalNotificationMetadata
+    FIELDS = {
+      email: 'email',
+      slack: 'slack'
+    }.freeze
+    REQUIRED_FIELDS = %i[
+      email
+      slack
+    ].freeze
+    DECODERS = {
+      slack: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::NotificationSlackItem.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for Notification.
+  # The notification settings for a trigger alert.
+  class Notification
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalNotificationMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalNotificationMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalNotificationMetadata::DECODERS
+
+    # @return [Array_of_String] An email to notify on an alert trigger. The Email has to be one that is verified on that DigitalOcean account.
+    attr_reader :email
+    # @return [Array_of_NotificationSlackItem] Slack integration details.
+    attr_reader :slack
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalNotificationMetadata
-  FIELDS = {
-    email: "email",
-    slack: "slack",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-    email
-    slack
-  ].freeze
-  DECODERS = {
-    slack: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::NotificationSlackItem.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for Notification.
-# The notification settings for a trigger alert.
-class Notification
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalNotificationMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalNotificationMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalNotificationMetadata::DECODERS
-
-  # @return [Array_of_String] An email to notify on an alert trigger. The Email has to be one that is verified on that DigitalOcean account.
-  attr_reader :email
-  # @return [Array_of_NotificationSlackItem] Slack integration details.
-  attr_reader :slack
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalPreviousOutageMetadata
+    FIELDS = {
+      region: 'region',
+      started_at: 'started_at',
+      ended_at: 'ended_at',
+      duration_seconds: 'duration_seconds'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {}.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for PreviousOutage.
+  # Typed representation of the `PreviousOutage` API schema.
+  class PreviousOutage
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPreviousOutageMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPreviousOutageMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPreviousOutageMetadata::DECODERS
+
+    # @return [String] Optional `string` value serialized in the `region` wire field.
+    attr_reader :region
+    # @return [String] Optional `string` value serialized in the `started_at` wire field.
+    attr_reader :started_at
+    # @return [String] Optional `string` value serialized in the `ended_at` wire field.
+    attr_reader :ended_at
+    # @return [Integer] Optional `integer` value serialized in the `duration_seconds` wire field.
+    attr_reader :duration_seconds
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalRegionalStateMetadata
+    FIELDS = {
+      us_east: 'us_east',
+      eu_west: 'eu_west'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      us_east: lambda do |value|
+        ::OctridevDigitalocean::RegionState.from_hash(value)
+      end,
+      eu_west: lambda do |value|
+        ::OctridevDigitalocean::RegionState.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for RegionalState.
+  # A map of region to regional state
+  class RegionalState
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRegionalStateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRegionalStateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRegionalStateMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalPreviousOutageMetadata
-  FIELDS = {
-    region: "region",
-    started_at: "started_at",
-    ended_at: "ended_at",
-    duration_seconds: "duration_seconds",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-  }.freeze
-end
+    # @return [RegionState] Optional object value serialized in the `us_east` wire field.
+    attr_reader :us_east
+    # @return [RegionState] Optional object value serialized in the `eu_west` wire field.
+    attr_reader :eu_west
 
-# API model for PreviousOutage.
-# Typed representation of the `PreviousOutage` API schema.
-class PreviousOutage
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPreviousOutageMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPreviousOutageMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPreviousOutageMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [String] Optional `string` value serialized in the `region` wire field.
-  attr_reader :region
-  # @return [String] Optional `string` value serialized in the `started_at` wire field.
-  attr_reader :started_at
-  # @return [String] Optional `string` value serialized in the `ended_at` wire field.
-  attr_reader :ended_at
-  # @return [Integer] Optional `integer` value serialized in the `duration_seconds` wire field.
-  attr_reader :duration_seconds
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalRegionStateMetadata
+    FIELDS = {
+      status: 'status',
+      status_changed_at: 'status_changed_at',
+      thirty_day_uptime_percentage: 'thirty_day_uptime_percentage'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      status: lambda do |value|
+        ::OctridevDigitalocean::RegionStateStatus.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for RegionState.
+  # Typed representation of the `RegionState` API schema.
+  class RegionState
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalRegionStateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalRegionStateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalRegionStateMetadata::DECODERS
+
+    # @return [RegionStateStatus] Optional enumerated value serialized in the `status` wire field.
+    attr_reader :status
+    # @return [String] Optional `string` value serialized in the `status_changed_at` wire field.
+    attr_reader :status_changed_at
+    # @return [Float] Optional `number` value serialized in the `thirty_day_uptime_percentage` wire field.
+    attr_reader :thirty_day_uptime_percentage
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRegionalStateMetadata
-  FIELDS = {
-    us_east: "us_east",
-    eu_west: "eu_west",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    us_east: lambda do |value|
-      ::OctridevDigitalocean::RegionState.from_hash(value)
-    end,
-    eu_west: lambda do |value|
-      ::OctridevDigitalocean::RegionState.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for RegionalState.
-# A map of region to regional state
-class RegionalState
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRegionalStateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRegionalStateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRegionalStateMetadata::DECODERS
-
-  # @return [RegionState] Optional object value serialized in the `us_east` wire field.
-  attr_reader :us_east
-  # @return [RegionState] Optional object value serialized in the `eu_west` wire field.
-  attr_reader :eu_west
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the RegionStateStatus SDK namespace.
+  module RegionStateStatus
+    DOWN = 'DOWN'
+    UP = 'UP'
+    CHECKING = 'CHECKING'
+    VALUES = %w[DOWN UP CHECKING].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalStateMetadata
+    FIELDS = {
+      regions: 'regions',
+      previous_outage: 'previous_outage'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      regions: lambda do |value|
+        ::OctridevDigitalocean::RegionalState.from_hash(value)
+      end,
+      previous_outage: lambda do |value|
+        ::OctridevDigitalocean::PreviousOutage.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for State.
+  # Typed representation of the `State` API schema.
+  class State
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalStateMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalStateMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalStateMetadata::DECODERS
+
+    # @return [RegionalState] A map of region to regional state
+    attr_reader :regions
+    # @return [PreviousOutage] Optional object value serialized in the `previous_outage` wire field.
+    attr_reader :previous_outage
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalRegionStateMetadata
-  FIELDS = {
-    status: "status",
-    status_changed_at: "status_changed_at",
-    thirty_day_uptime_percentage: "thirty_day_uptime_percentage",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    status: lambda do |value|
-      ::OctridevDigitalocean::RegionStateStatus.from_value(value)
-    end,
-  }.freeze
-end
-
-# API model for RegionState.
-# Typed representation of the `RegionState` API schema.
-class RegionState
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalRegionStateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalRegionStateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalRegionStateMetadata::DECODERS
-
-  # @return [RegionStateStatus] Optional enumerated value serialized in the `status` wire field.
-  attr_reader :status
-  # @return [String] Optional `string` value serialized in the `status_changed_at` wire field.
-  attr_reader :status_changed_at
-  # @return [Float] Optional `number` value serialized in the `thirty_day_uptime_percentage` wire field.
-  attr_reader :thirty_day_uptime_percentage
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the RegionStateStatus SDK namespace.
-module RegionStateStatus
-  DOWN = 'DOWN'
-  UP = 'UP'
-  CHECKING = 'CHECKING'
-  VALUES = ['DOWN', 'UP', 'CHECKING'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalStateMetadata
-  FIELDS = {
-    regions: "regions",
-    previous_outage: "previous_outage",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    regions: lambda do |value|
-      ::OctridevDigitalocean::RegionalState.from_hash(value)
-    end,
-    previous_outage: lambda do |value|
-      ::OctridevDigitalocean::PreviousOutage.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for State.
-# Typed representation of the `State` API schema.
-class State
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalStateMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalStateMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalStateMetadata::DECODERS
-
-  # @return [RegionalState] A map of region to regional state
-  attr_reader :regions
-  # @return [PreviousOutage] Optional object value serialized in the `previous_outage` wire field.
-  attr_reader :previous_outage
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
 end

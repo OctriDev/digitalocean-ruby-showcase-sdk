@@ -5,602 +5,594 @@
 
 # databases domain models
 module OctridevDigitalocean
-# API model for OptionsOptionsOpensearch.
-# Optional object value serialized in the `opensearch` wire field.
-class OptionsOptionsOpensearch
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOptionsOptionsOpensearchMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOptionsOptionsOpensearchMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOptionsOptionsOpensearchMetadata::DECODERS
+  # API model for OptionsOptionsOpensearch.
+  # Optional object value serialized in the `opensearch` wire field.
+  class OptionsOptionsOpensearch
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOptionsOptionsOpensearchMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOptionsOptionsOpensearchMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOptionsOptionsOpensearchMetadata::DECODERS
 
-  # @return [Array_of_String] An array of strings containing the names of available regions
-  attr_reader :regions
-  # @return [Array_of_String] An array of strings containing the names of available regions
-  attr_reader :versions
-  # @return [Array_of_DatabaseLayoutOption] An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
-  attr_reader :layouts
+    # @return [Array_of_String] An array of strings containing the names of available regions
+    attr_reader :regions
+    # @return [Array_of_String] An array of strings containing the names of available regions
+    attr_reader :versions
+    # @return [Array_of_DatabaseLayoutOption] An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+    attr_reader :layouts
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalOptionsOptionsAdvancedPgMetadata
+    FIELDS = {
+      regions: 'regions',
+      versions: 'versions',
+      layouts: 'layouts'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      layouts: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::DatabaseLayoutOption.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for OptionsOptionsAdvancedPg.
+  # Optional object value serialized in the `advanced_pg` wire field.
+  class OptionsOptionsAdvancedPg
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOptionsOptionsAdvancedPgMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOptionsOptionsAdvancedPgMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOptionsOptionsAdvancedPgMetadata::DECODERS
+
+    # @return [Array_of_String] An array of strings containing the names of available regions
+    attr_reader :regions
+    # @return [Array_of_String] An array of strings containing the names of available regions
+    attr_reader :versions
+    # @return [Array_of_DatabaseLayoutOption] An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+    attr_reader :layouts
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalOptionsOptionsAdvancedPgMetadata
-  FIELDS = {
-    regions: "regions",
-    versions: "versions",
-    layouts: "layouts",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    layouts: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::DatabaseLayoutOption.from_hash(item) }
-    end,
-  }.freeze
-end
-
-# API model for OptionsOptionsAdvancedPg.
-# Optional object value serialized in the `advanced_pg` wire field.
-class OptionsOptionsAdvancedPg
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOptionsOptionsAdvancedPgMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOptionsOptionsAdvancedPgMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOptionsOptionsAdvancedPgMetadata::DECODERS
-
-  # @return [Array_of_String] An array of strings containing the names of available regions
-  attr_reader :regions
-  # @return [Array_of_String] An array of strings containing the names of available regions
-  attr_reader :versions
-  # @return [Array_of_DatabaseLayoutOption] An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
-  attr_reader :layouts
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalOptionsOptionsAdvancedMysqlMetadata
+    FIELDS = {
+      regions: 'regions',
+      versions: 'versions',
+      layouts: 'layouts'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      layouts: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::DatabaseLayoutOption.from_hash(item) }
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for OptionsOptionsAdvancedMysql.
+  # Optional object value serialized in the `advanced_mysql` wire field.
+  class OptionsOptionsAdvancedMysql
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOptionsOptionsAdvancedMysqlMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOptionsOptionsAdvancedMysqlMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOptionsOptionsAdvancedMysqlMetadata::DECODERS
+
+    # @return [Array_of_String] An array of strings containing the names of available regions
+    attr_reader :regions
+    # @return [Array_of_String] An array of strings containing the names of available regions
+    attr_reader :versions
+    # @return [Array_of_DatabaseLayoutOption] An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+    attr_reader :layouts
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalOptionsOptionsMetadata
+    FIELDS = {
+      kafka: 'kafka',
+      mongodb: 'mongodb',
+      pg: 'pg',
+      mysql: 'mysql',
+      redis: 'redis',
+      valkey: 'valkey',
+      opensearch: 'opensearch',
+      advanced_pg: 'advanced_pg',
+      advanced_mysql: 'advanced_mysql'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      kafka: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsKafka.from_hash(value)
+      end,
+      mongodb: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsMongodb.from_hash(value)
+      end,
+      pg: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsPg.from_hash(value)
+      end,
+      mysql: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsMysql.from_hash(value)
+      end,
+      redis: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsRedis.from_hash(value)
+      end,
+      valkey: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsValkey.from_hash(value)
+      end,
+      opensearch: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsOpensearch.from_hash(value)
+      end,
+      advanced_pg: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsAdvancedPg.from_hash(value)
+      end,
+      advanced_mysql: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptionsAdvancedMysql.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for OptionsOptions.
+  # Optional object value serialized in the `options` wire field.
+  class OptionsOptions
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOptionsOptionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOptionsOptionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOptionsOptionsMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalOptionsOptionsAdvancedMysqlMetadata
-  FIELDS = {
-    regions: "regions",
-    versions: "versions",
-    layouts: "layouts",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    layouts: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::DatabaseLayoutOption.from_hash(item) }
-    end,
-  }.freeze
-end
+    # @return [OptionsOptionsKafka] Optional object value serialized in the `kafka` wire field.
+    attr_reader :kafka
+    # @return [OptionsOptionsMongodb] Optional object value serialized in the `mongodb` wire field.
+    attr_reader :mongodb
+    # @return [OptionsOptionsPg] Optional object value serialized in the `pg` wire field.
+    attr_reader :pg
+    # @return [OptionsOptionsMysql] Optional object value serialized in the `mysql` wire field.
+    attr_reader :mysql
+    # @return [OptionsOptionsRedis] Optional object value serialized in the `redis` wire field.
+    attr_reader :redis
+    # @return [OptionsOptionsValkey] Optional object value serialized in the `valkey` wire field.
+    attr_reader :valkey
+    # @return [OptionsOptionsOpensearch] Optional object value serialized in the `opensearch` wire field.
+    attr_reader :opensearch
+    # @return [OptionsOptionsAdvancedPg] Optional object value serialized in the `advanced_pg` wire field.
+    attr_reader :advanced_pg
+    # @return [OptionsOptionsAdvancedMysql] Optional object value serialized in the `advanced_mysql` wire field.
+    attr_reader :advanced_mysql
 
-# API model for OptionsOptionsAdvancedMysql.
-# Optional object value serialized in the `advanced_mysql` wire field.
-class OptionsOptionsAdvancedMysql
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOptionsOptionsAdvancedMysqlMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOptionsOptionsAdvancedMysqlMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOptionsOptionsAdvancedMysqlMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Array_of_String] An array of strings containing the names of available regions
-  attr_reader :regions
-  # @return [Array_of_String] An array of strings containing the names of available regions
-  attr_reader :versions
-  # @return [Array_of_DatabaseLayoutOption] An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
-  attr_reader :layouts
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalOptionsOptionsMetadata
-  FIELDS = {
-    kafka: "kafka",
-    mongodb: "mongodb",
-    pg: "pg",
-    mysql: "mysql",
-    redis: "redis",
-    valkey: "valkey",
-    opensearch: "opensearch",
-    advanced_pg: "advanced_pg",
-    advanced_mysql: "advanced_mysql",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    kafka: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsKafka.from_hash(value)
-    end,
-    mongodb: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsMongodb.from_hash(value)
-    end,
-    pg: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsPg.from_hash(value)
-    end,
-    mysql: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsMysql.from_hash(value)
-    end,
-    redis: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsRedis.from_hash(value)
-    end,
-    valkey: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsValkey.from_hash(value)
-    end,
-    opensearch: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsOpensearch.from_hash(value)
-    end,
-    advanced_pg: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsAdvancedPg.from_hash(value)
-    end,
-    advanced_mysql: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptionsAdvancedMysql.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for OptionsOptions.
-# Optional object value serialized in the `options` wire field.
-class OptionsOptions
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOptionsOptionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOptionsOptionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOptionsOptionsMetadata::DECODERS
-
-  # @return [OptionsOptionsKafka] Optional object value serialized in the `kafka` wire field.
-  attr_reader :kafka
-  # @return [OptionsOptionsMongodb] Optional object value serialized in the `mongodb` wire field.
-  attr_reader :mongodb
-  # @return [OptionsOptionsPg] Optional object value serialized in the `pg` wire field.
-  attr_reader :pg
-  # @return [OptionsOptionsMysql] Optional object value serialized in the `mysql` wire field.
-  attr_reader :mysql
-  # @return [OptionsOptionsRedis] Optional object value serialized in the `redis` wire field.
-  attr_reader :redis
-  # @return [OptionsOptionsValkey] Optional object value serialized in the `valkey` wire field.
-  attr_reader :valkey
-  # @return [OptionsOptionsOpensearch] Optional object value serialized in the `opensearch` wire field.
-  attr_reader :opensearch
-  # @return [OptionsOptionsAdvancedPg] Optional object value serialized in the `advanced_pg` wire field.
-  attr_reader :advanced_pg
-  # @return [OptionsOptionsAdvancedMysql] Optional object value serialized in the `advanced_mysql` wire field.
-  attr_reader :advanced_mysql
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Internal model hydration metadata.
+  class SdkInternalOptionsVersionAvailabilityMetadata
+    FIELDS = {
+      kafka: 'kafka',
+      pg: 'pg',
+      mysql: 'mysql',
+      redis: 'redis',
+      valkey: 'valkey',
+      mongodb: 'mongodb',
+      opensearch: 'opensearch',
+      advanced_pg: 'advanced_pg',
+      advanced_mysql: 'advanced_mysql'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      kafka: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end,
+      pg: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end,
+      mysql: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end,
+      redis: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end,
+      valkey: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end,
+      mongodb: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end,
+      opensearch: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end,
+      advanced_pg: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end,
+      advanced_mysql: lambda do |value|
+        ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
+      end
+    }.freeze
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # API model for OptionsVersionAvailability.
+  # Optional object value serialized in the `version_availability` wire field.
+  class OptionsVersionAvailability
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOptionsVersionAvailabilityMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOptionsVersionAvailabilityMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOptionsVersionAvailabilityMetadata::DECODERS
+
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :kafka
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :pg
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :mysql
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :redis
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :valkey
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :mongodb
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :opensearch
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :advanced_pg
+    # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+    attr_reader :advanced_mysql
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalOptionsMetadata
+    FIELDS = {
+      options: 'options',
+      version_availability: 'version_availability'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      options: lambda do |value|
+        ::OctridevDigitalocean::OptionsOptions.from_hash(value)
+      end,
+      version_availability: lambda do |value|
+        ::OctridevDigitalocean::OptionsVersionAvailability.from_hash(value)
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for Options.
+  # Typed representation of the `Options` API schema.
+  class Options
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalOptionsMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalOptionsMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalOptionsMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalOptionsVersionAvailabilityMetadata
-  FIELDS = {
-    kafka: "kafka",
-    pg: "pg",
-    mysql: "mysql",
-    redis: "redis",
-    valkey: "valkey",
-    mongodb: "mongodb",
-    opensearch: "opensearch",
-    advanced_pg: "advanced_pg",
-    advanced_mysql: "advanced_mysql",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    kafka: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-    pg: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-    mysql: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-    redis: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-    valkey: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-    mongodb: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-    opensearch: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-    advanced_pg: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-    advanced_mysql: lambda do |value|
-      ::OctridevDigitalocean::DatabaseVersionAvailabilities.from_hash(value)
-    end,
-  }.freeze
-end
+    # @return [OptionsOptions] Optional object value serialized in the `options` wire field.
+    attr_reader :options
+    # @return [OptionsVersionAvailability] Optional object value serialized in the `version_availability` wire field.
+    attr_reader :version_availability
 
-# API model for OptionsVersionAvailability.
-# Optional object value serialized in the `version_availability` wire field.
-class OptionsVersionAvailability
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOptionsVersionAvailabilityMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOptionsVersionAvailabilityMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOptionsVersionAvailabilityMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :kafka
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :pg
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :mysql
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :redis
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :valkey
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :mongodb
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :opensearch
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :advanced_pg
-  # @return [DatabaseVersionAvailabilities] An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
-  attr_reader :advanced_mysql
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalPgbouncerAdvancedConfigMetadata
+    FIELDS = {
+      server_reset_query_always: 'server_reset_query_always',
+      ignore_startup_parameters: 'ignore_startup_parameters',
+      min_pool_size: 'min_pool_size',
+      server_lifetime: 'server_lifetime',
+      server_idle_timeout: 'server_idle_timeout',
+      autodb_pool_size: 'autodb_pool_size',
+      autodb_pool_mode: 'autodb_pool_mode',
+      autodb_max_db_connections: 'autodb_max_db_connections',
+      autodb_idle_timeout: 'autodb_idle_timeout'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      ignore_startup_parameters: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::PgbouncerAdvancedConfigIgnoreStartupParametersItem.from_value(item) }
+      end,
+      autodb_pool_mode: lambda do |value|
+        ::OctridevDigitalocean::PgbouncerAdvancedConfigAutodbPoolMode.from_value(value)
+      end
+    }.freeze
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # API model for PgbouncerAdvancedConfig.
+  # PGBouncer connection pooling settings
+  class PgbouncerAdvancedConfig
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPgbouncerAdvancedConfigMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPgbouncerAdvancedConfigMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPgbouncerAdvancedConfigMetadata::DECODERS
+
+    # @return [Boolean] Run server_reset_query (DISCARD ALL) in all pooling modes.
+    attr_reader :server_reset_query_always
+    # @return [Array_of_PgbouncerAdvancedConfigIgnoreStartupParametersItem] List of parameters to ignore when given in startup packet.
+    attr_reader :ignore_startup_parameters
+    # @return [Integer] If current server connections are below this number, adds more. Improves behavior when usual load comes suddenly back after period of total inactivity. The value is effectively capped at the pool size.
+    attr_reader :min_pool_size
+    # @return [Integer] The pooler closes any unused server connection that has been connected longer than this amount of seconds.
+    attr_reader :server_lifetime
+    # @return [Integer] Drops server connections if they have been idle more than this many seconds. If 0, timeout is disabled.
+    attr_reader :server_idle_timeout
+    # @return [Integer] If non-zero, automatically creates a pool of that size per user when a pool doesn't exist.
+    attr_reader :autodb_pool_size
+    # @return [PgbouncerAdvancedConfigAutodbPoolMode] PGBouncer pool mode
+    attr_reader :autodb_pool_mode
+    # @return [Integer] Only allows a maximum this many server connections per database (regardless of user). If 0, allows unlimited connections.
+    attr_reader :autodb_max_db_connections
+    # @return [Integer] If the automatically-created database pools have been unused this many seconds, they are freed. If 0, timeout is disabled.
+    attr_reader :autodb_idle_timeout
+
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
+
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
+
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalOptionsMetadata
-  FIELDS = {
-    options: "options",
-    version_availability: "version_availability",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    options: lambda do |value|
-      ::OctridevDigitalocean::OptionsOptions.from_hash(value)
-    end,
-    version_availability: lambda do |value|
-      ::OctridevDigitalocean::OptionsVersionAvailability.from_hash(value)
-    end,
-  }.freeze
-end
-
-# API model for Options.
-# Typed representation of the `Options` API schema.
-class Options
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalOptionsMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalOptionsMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalOptionsMetadata::DECODERS
-
-  # @return [OptionsOptions] Optional object value serialized in the `options` wire field.
-  attr_reader :options
-  # @return [OptionsVersionAvailability] Optional object value serialized in the `version_availability` wire field.
-  attr_reader :version_availability
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+  # Defines the PgbouncerAdvancedConfigAutodbPoolMode SDK namespace.
+  module PgbouncerAdvancedConfigAutodbPoolMode
+    SESSION = 'session'
+    TRANSACTION = 'transaction'
+    STATEMENT = 'statement'
+    VALUES = %w[session transaction statement].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Defines the PgbouncerAdvancedConfigIgnoreStartupParametersItem SDK namespace.
+  module PgbouncerAdvancedConfigIgnoreStartupParametersItem
+    EXTRA_FLOAT_DIGITS = 'extra_float_digits'
+    SEARCH_PATH = 'search_path'
+    VALUES = %w[extra_float_digits search_path].freeze
+    def self.from_value(value)
+      value
+    end
   end
 
-  def to_h
-    SdkModel.to_h(self, FIELDS)
+  # Internal model hydration metadata.
+  class SdkInternalPostgresAdvancedConfigPgauditMetadata
+    FIELDS = {
+      feature_enabled: 'feature_enabled',
+      log: 'log'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      log: lambda do |value|
+        value&.map { |item| ::OctridevDigitalocean::PostgresAdvancedConfigPgauditLogItem.from_value(item) }
+      end
+    }.freeze
   end
 
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
+  # API model for PostgresAdvancedConfigPgaudit.
+  # System-wide settings for the pgaudit extension. When `feature_enabled` is true, the pgaudit extension is automatically installed. When false, the extension is uninstalled but auditing configurations (such as `log`) are preserved.
+  class PostgresAdvancedConfigPgaudit
+    CONSTRUCTION_SURFACE = :named
+    FIELDS = SdkInternalPostgresAdvancedConfigPgauditMetadata::FIELDS
+    REQUIRED_FIELDS = SdkInternalPostgresAdvancedConfigPgauditMetadata::REQUIRED_FIELDS
+    DECODERS = SdkInternalPostgresAdvancedConfigPgauditMetadata::DECODERS
 
-# Internal model hydration metadata.
-class SdkInternalPgbouncerAdvancedConfigMetadata
-  FIELDS = {
-    server_reset_query_always: "server_reset_query_always",
-    ignore_startup_parameters: "ignore_startup_parameters",
-    min_pool_size: "min_pool_size",
-    server_lifetime: "server_lifetime",
-    server_idle_timeout: "server_idle_timeout",
-    autodb_pool_size: "autodb_pool_size",
-    autodb_pool_mode: "autodb_pool_mode",
-    autodb_max_db_connections: "autodb_max_db_connections",
-    autodb_idle_timeout: "autodb_idle_timeout",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    ignore_startup_parameters: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::PgbouncerAdvancedConfigIgnoreStartupParametersItem.from_value(item) }
-    end,
-    autodb_pool_mode: lambda do |value|
-      ::OctridevDigitalocean::PgbouncerAdvancedConfigAutodbPoolMode.from_value(value)
-    end,
-  }.freeze
-end
+    # @return [Boolean] Enable pgaudit extension. When enabled, pgaudit extension will be automatically installed. Otherwise, extension will be uninstalled but auditing configurations will be preserved.
+    attr_reader :feature_enabled
+    # @return [Array_of_PostgresAdvancedConfigPgauditLogItem] Specifies which classes of statements will be logged by session audit logging. Available values are `read` (SELECT and COPY when the source is a relation or query), `write` (INSERT, UPDATE, DELETE, TRUNCATE, and COPY when the destination is a relation), `function` (function calls and DO blocks), `role` (statements related to roles and privileges: GRANT, REVOKE, CREATE/ALTER/DROP ROLE), `ddl` (all DDL that is not included in the role class), `misc` (miscellaneous commands,…
+    attr_reader :log
 
-# API model for PgbouncerAdvancedConfig.
-# PGBouncer connection pooling settings
-class PgbouncerAdvancedConfig
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPgbouncerAdvancedConfigMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPgbouncerAdvancedConfigMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPgbouncerAdvancedConfigMetadata::DECODERS
+    def initialize(**attributes)
+      SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
+      freeze
+    end
 
-  # @return [Boolean] Run server_reset_query (DISCARD ALL) in all pooling modes.
-  attr_reader :server_reset_query_always
-  # @return [Array_of_PgbouncerAdvancedConfigIgnoreStartupParametersItem] List of parameters to ignore when given in startup packet.
-  attr_reader :ignore_startup_parameters
-  # @return [Integer] If current server connections are below this number, adds more. Improves behavior when usual load comes suddenly back after period of total inactivity. The value is effectively capped at the pool size.
-  attr_reader :min_pool_size
-  # @return [Integer] The pooler closes any unused server connection that has been connected longer than this amount of seconds.
-  attr_reader :server_lifetime
-  # @return [Integer] Drops server connections if they have been idle more than this many seconds. If 0, timeout is disabled.
-  attr_reader :server_idle_timeout
-  # @return [Integer] If non-zero, automatically creates a pool of that size per user when a pool doesn't exist.
-  attr_reader :autodb_pool_size
-  # @return [PgbouncerAdvancedConfigAutodbPoolMode] PGBouncer pool mode
-  attr_reader :autodb_pool_mode
-  # @return [Integer] Only allows a maximum this many server connections per database (regardless of user). If 0, allows unlimited connections.
-  attr_reader :autodb_max_db_connections
-  # @return [Integer] If the automatically-created database pools have been unused this many seconds, they are freed. If 0, timeout is disabled.
-  attr_reader :autodb_idle_timeout
+    def self.from_hash(data)
+      SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+    end
 
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
+    def to_h
+      SdkModel.to_h(self, FIELDS)
+    end
+
+    def to_json(*args)
+      to_h.to_json(*args)
+    end
   end
 
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
+  # Internal model hydration metadata.
+  class SdkInternalPostgresAdvancedConfigMetadata
+    FIELDS = {
+      autovacuum_freeze_max_age: 'autovacuum_freeze_max_age',
+      autovacuum_max_workers: 'autovacuum_max_workers',
+      autovacuum_naptime: 'autovacuum_naptime',
+      autovacuum_vacuum_threshold: 'autovacuum_vacuum_threshold',
+      autovacuum_analyze_threshold: 'autovacuum_analyze_threshold',
+      autovacuum_vacuum_scale_factor: 'autovacuum_vacuum_scale_factor',
+      autovacuum_analyze_scale_factor: 'autovacuum_analyze_scale_factor',
+      autovacuum_vacuum_cost_delay: 'autovacuum_vacuum_cost_delay',
+      autovacuum_vacuum_cost_limit: 'autovacuum_vacuum_cost_limit',
+      backup_hour: 'backup_hour',
+      backup_minute: 'backup_minute',
+      bgwriter_delay: 'bgwriter_delay',
+      bgwriter_flush_after: 'bgwriter_flush_after',
+      bgwriter_lru_maxpages: 'bgwriter_lru_maxpages',
+      bgwriter_lru_multiplier: 'bgwriter_lru_multiplier',
+      deadlock_timeout: 'deadlock_timeout',
+      default_toast_compression: 'default_toast_compression',
+      idle_in_transaction_session_timeout: 'idle_in_transaction_session_timeout',
+      jit: 'jit',
+      log_autovacuum_min_duration: 'log_autovacuum_min_duration',
+      log_error_verbosity: 'log_error_verbosity',
+      log_line_prefix: 'log_line_prefix',
+      log_min_duration_statement: 'log_min_duration_statement',
+      max_files_per_process: 'max_files_per_process',
+      max_prepared_transactions: 'max_prepared_transactions',
+      max_pred_locks_per_transaction: 'max_pred_locks_per_transaction',
+      max_locks_per_transaction: 'max_locks_per_transaction',
+      max_stack_depth: 'max_stack_depth',
+      max_standby_archive_delay: 'max_standby_archive_delay',
+      max_standby_streaming_delay: 'max_standby_streaming_delay',
+      max_replication_slots: 'max_replication_slots',
+      max_logical_replication_workers: 'max_logical_replication_workers',
+      max_parallel_workers: 'max_parallel_workers',
+      max_parallel_workers_per_gather: 'max_parallel_workers_per_gather',
+      max_worker_processes: 'max_worker_processes',
+      pg_partman_bgw_role: 'pg_partman_bgw.role',
+      pg_partman_bgw_interval: 'pg_partman_bgw.interval',
+      pg_stat_statements_track: 'pg_stat_statements.track',
+      temp_file_limit: 'temp_file_limit',
+      timezone: 'timezone',
+      track_activity_query_size: 'track_activity_query_size',
+      track_commit_timestamp: 'track_commit_timestamp',
+      track_functions: 'track_functions',
+      track_io_timing: 'track_io_timing',
+      max_wal_senders: 'max_wal_senders',
+      wal_sender_timeout: 'wal_sender_timeout',
+      wal_writer_delay: 'wal_writer_delay',
+      shared_buffers_percentage: 'shared_buffers_percentage',
+      pgbouncer: 'pgbouncer',
+      work_mem: 'work_mem',
+      timescaledb: 'timescaledb',
+      synchronous_replication: 'synchronous_replication',
+      stat_monitor_enable: 'stat_monitor_enable',
+      max_failover_replication_time_lag: 'max_failover_replication_time_lag',
+      max_connections: 'max_connections',
+      max_slot_wal_keep_size: 'max_slot_wal_keep_size',
+      pgaudit: 'pgaudit'
+    }.freeze
+    REQUIRED_FIELDS = %i[].freeze
+    DECODERS = {
+      default_toast_compression: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigDefaultToastCompression.from_value(value)
+      end,
+      log_error_verbosity: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigLogErrorVerbosity.from_value(value)
+      end,
+      log_line_prefix: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigLogLinePrefix.from_value(value)
+      end,
+      pg_stat_statements_track: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigPgStatStatementsTrack.from_value(value)
+      end,
+      track_commit_timestamp: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigTrackCommitTimestamp.from_value(value)
+      end,
+      track_functions: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigTrackFunctions.from_value(value)
+      end,
+      track_io_timing: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigTrackIoTiming.from_value(value)
+      end,
+      pgbouncer: lambda do |value|
+        ::OctridevDigitalocean::PgbouncerAdvancedConfig.from_hash(value)
+      end,
+      timescaledb: lambda do |value|
+        ::OctridevDigitalocean::TimescaledbAdvancedConfig.from_hash(value)
+      end,
+      synchronous_replication: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigSynchronousReplication.from_value(value)
+      end,
+      pgaudit: lambda do |value|
+        ::OctridevDigitalocean::PostgresAdvancedConfigPgaudit.from_hash(value)
+      end
+    }.freeze
   end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Defines the PgbouncerAdvancedConfigAutodbPoolMode SDK namespace.
-module PgbouncerAdvancedConfigAutodbPoolMode
-  SESSION = 'session'
-  TRANSACTION = 'transaction'
-  STATEMENT = 'statement'
-  VALUES = ['session', 'transaction', 'statement'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Defines the PgbouncerAdvancedConfigIgnoreStartupParametersItem SDK namespace.
-module PgbouncerAdvancedConfigIgnoreStartupParametersItem
-  EXTRA_FLOAT_DIGITS = 'extra_float_digits'
-  SEARCH_PATH = 'search_path'
-  VALUES = ['extra_float_digits', 'search_path'].freeze
-  def self.from_value(value)
-    value
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalPostgresAdvancedConfigPgauditMetadata
-  FIELDS = {
-    feature_enabled: "feature_enabled",
-    log: "log",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    log: lambda do |value|
-      value&.map { |item| ::OctridevDigitalocean::PostgresAdvancedConfigPgauditLogItem.from_value(item) }
-    end,
-  }.freeze
-end
-
-# API model for PostgresAdvancedConfigPgaudit.
-# System-wide settings for the pgaudit extension. When `feature_enabled` is true, the pgaudit extension is automatically installed. When false, the extension is uninstalled but auditing configurations (such as `log`) are preserved.
-class PostgresAdvancedConfigPgaudit
-  CONSTRUCTION_SURFACE = :named
-  FIELDS = SdkInternalPostgresAdvancedConfigPgauditMetadata::FIELDS
-  REQUIRED_FIELDS = SdkInternalPostgresAdvancedConfigPgauditMetadata::REQUIRED_FIELDS
-  DECODERS = SdkInternalPostgresAdvancedConfigPgauditMetadata::DECODERS
-
-  # @return [Boolean] Enable pgaudit extension. When enabled, pgaudit extension will be automatically installed. Otherwise, extension will be uninstalled but auditing configurations will be preserved.
-  attr_reader :feature_enabled
-  # @return [Array_of_PostgresAdvancedConfigPgauditLogItem] Specifies which classes of statements will be logged by session audit logging. Available values are `read` (SELECT and COPY when the source is a relation or query), `write` (INSERT, UPDATE, DELETE, TRUNCATE, and COPY when the destination is a relation), `function` (function calls and DO blocks), `role` (statements related to roles and privileges: GRANT, REVOKE, CREATE/ALTER/DROP ROLE), `ddl` (all DDL that is not included in the role class), `misc` (miscellaneous commands,…
-  attr_reader :log
-
-  def initialize(**attributes)
-    SdkModel.assign(self, attributes, FIELDS, REQUIRED_FIELDS)
-    freeze
-  end
-
-  def self.from_hash(data)
-    SdkModel.from_hash(self, data, FIELDS, REQUIRED_FIELDS, DECODERS)
-  end
-
-  def to_h
-    SdkModel.to_h(self, FIELDS)
-  end
-
-  def to_json(*args)
-    to_h.to_json(*args)
-  end
-end
-
-# Internal model hydration metadata.
-class SdkInternalPostgresAdvancedConfigMetadata
-  FIELDS = {
-    autovacuum_freeze_max_age: "autovacuum_freeze_max_age",
-    autovacuum_max_workers: "autovacuum_max_workers",
-    autovacuum_naptime: "autovacuum_naptime",
-    autovacuum_vacuum_threshold: "autovacuum_vacuum_threshold",
-    autovacuum_analyze_threshold: "autovacuum_analyze_threshold",
-    autovacuum_vacuum_scale_factor: "autovacuum_vacuum_scale_factor",
-    autovacuum_analyze_scale_factor: "autovacuum_analyze_scale_factor",
-    autovacuum_vacuum_cost_delay: "autovacuum_vacuum_cost_delay",
-    autovacuum_vacuum_cost_limit: "autovacuum_vacuum_cost_limit",
-    backup_hour: "backup_hour",
-    backup_minute: "backup_minute",
-    bgwriter_delay: "bgwriter_delay",
-    bgwriter_flush_after: "bgwriter_flush_after",
-    bgwriter_lru_maxpages: "bgwriter_lru_maxpages",
-    bgwriter_lru_multiplier: "bgwriter_lru_multiplier",
-    deadlock_timeout: "deadlock_timeout",
-    default_toast_compression: "default_toast_compression",
-    idle_in_transaction_session_timeout: "idle_in_transaction_session_timeout",
-    jit: "jit",
-    log_autovacuum_min_duration: "log_autovacuum_min_duration",
-    log_error_verbosity: "log_error_verbosity",
-    log_line_prefix: "log_line_prefix",
-    log_min_duration_statement: "log_min_duration_statement",
-    max_files_per_process: "max_files_per_process",
-    max_prepared_transactions: "max_prepared_transactions",
-    max_pred_locks_per_transaction: "max_pred_locks_per_transaction",
-    max_locks_per_transaction: "max_locks_per_transaction",
-    max_stack_depth: "max_stack_depth",
-    max_standby_archive_delay: "max_standby_archive_delay",
-    max_standby_streaming_delay: "max_standby_streaming_delay",
-    max_replication_slots: "max_replication_slots",
-    max_logical_replication_workers: "max_logical_replication_workers",
-    max_parallel_workers: "max_parallel_workers",
-    max_parallel_workers_per_gather: "max_parallel_workers_per_gather",
-    max_worker_processes: "max_worker_processes",
-    pg_partman_bgw_role: "pg_partman_bgw.role",
-    pg_partman_bgw_interval: "pg_partman_bgw.interval",
-    pg_stat_statements_track: "pg_stat_statements.track",
-    temp_file_limit: "temp_file_limit",
-    timezone: "timezone",
-    track_activity_query_size: "track_activity_query_size",
-    track_commit_timestamp: "track_commit_timestamp",
-    track_functions: "track_functions",
-    track_io_timing: "track_io_timing",
-    max_wal_senders: "max_wal_senders",
-    wal_sender_timeout: "wal_sender_timeout",
-    wal_writer_delay: "wal_writer_delay",
-    shared_buffers_percentage: "shared_buffers_percentage",
-    pgbouncer: "pgbouncer",
-    work_mem: "work_mem",
-    timescaledb: "timescaledb",
-    synchronous_replication: "synchronous_replication",
-    stat_monitor_enable: "stat_monitor_enable",
-    max_failover_replication_time_lag: "max_failover_replication_time_lag",
-    max_connections: "max_connections",
-    max_slot_wal_keep_size: "max_slot_wal_keep_size",
-    pgaudit: "pgaudit",
-  }.freeze
-  REQUIRED_FIELDS = %i[
-  ].freeze
-  DECODERS = {
-    default_toast_compression: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigDefaultToastCompression.from_value(value)
-    end,
-    log_error_verbosity: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigLogErrorVerbosity.from_value(value)
-    end,
-    log_line_prefix: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigLogLinePrefix.from_value(value)
-    end,
-    pg_stat_statements_track: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigPgStatStatementsTrack.from_value(value)
-    end,
-    track_commit_timestamp: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigTrackCommitTimestamp.from_value(value)
-    end,
-    track_functions: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigTrackFunctions.from_value(value)
-    end,
-    track_io_timing: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigTrackIoTiming.from_value(value)
-    end,
-    pgbouncer: lambda do |value|
-      ::OctridevDigitalocean::PgbouncerAdvancedConfig.from_hash(value)
-    end,
-    timescaledb: lambda do |value|
-      ::OctridevDigitalocean::TimescaledbAdvancedConfig.from_hash(value)
-    end,
-    synchronous_replication: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigSynchronousReplication.from_value(value)
-    end,
-    pgaudit: lambda do |value|
-      ::OctridevDigitalocean::PostgresAdvancedConfigPgaudit.from_hash(value)
-    end,
-  }.freeze
-end
 end

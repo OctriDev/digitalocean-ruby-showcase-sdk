@@ -34,13 +34,12 @@ module OctridevDigitalocean
         sort_direction: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/scenario_library/",
+            '/v2/gen-ai/scenario_library/',
             SdkClient.encode_path_segment(library_scenario_uuid),
-            "/scenarios"
+            '/scenarios'
           ].join,
           config: config,
           query: {
@@ -48,13 +47,13 @@ module OctridevDigitalocean
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'search' => QueryValue.new(search, style: 'form', explode: true),
             'sort_by' => QueryValue.new(sort_by, style: 'form', explode: true),
-            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
+            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ApiListScenariosOutput,
           decoder: :json,
           operation_id: 'genai_list_scenario_library_scenarios',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -98,10 +97,9 @@ module OctridevDigitalocean
         sort_direction: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/gen-ai/scenario_sets",
+          '/v2/gen-ai/scenario_sets',
           config: config,
           query: {
             'page' => QueryValue.new(page, style: 'form', explode: true),
@@ -110,13 +108,13 @@ module OctridevDigitalocean
             'source_kinds' => QueryValue.new(source_kinds, style: 'form', explode: true),
             'search' => QueryValue.new(search, style: 'form', explode: true),
             'sort_by' => QueryValue.new(sort_by, style: 'form', explode: true),
-            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
+            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ApiListScenarioSetsOutput,
           decoder: :json,
           operation_id: 'genai_list_scenario_sets',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -134,21 +132,20 @@ module OctridevDigitalocean
         scenarios: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/scenario_sets",
+          '/v2/gen-ai/scenario_sets',
           config: config,
           body: {
             'file_upload_scenario_set' => file_upload_scenario_set,
             'name' => name,
-            'scenarios' => scenarios,
+            'scenarios' => scenarios
           },
           return_type: ::OctridevDigitalocean::ApiCreateScenarioSetOutput,
           decoder: :json,
           operation_id: 'genai_create_scenario_set',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -161,19 +158,18 @@ module OctridevDigitalocean
         files: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/scenario_sets/file_upload_presigned_urls",
+          '/v2/gen-ai/scenario_sets/file_upload_presigned_urls',
           config: config,
           body: {
-            'files' => files,
+            'files' => files
           },
           return_type: ::OctridevDigitalocean::ApiCreateDataSourceFileUploadPresignedUrlsOutput,
           decoder: :json,
           operation_id: 'genai_create_scenario_set_upload_presigned_urls',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -193,22 +189,21 @@ module OctridevDigitalocean
         num_scenarios: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/scenario_sets/generate",
+          '/v2/gen-ai/scenario_sets/generate',
           config: config,
           body: {
             'generator_model_uuid' => generator_model_uuid,
             'goal_description' => goal_description,
             'name' => name,
-            'num_scenarios' => num_scenarios,
+            'num_scenarios' => num_scenarios
           },
           return_type: ::OctridevDigitalocean::ApiGenerateScenarioSetOutput,
           decoder: :json,
           operation_id: 'genai_create_generated_scenario_set',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -220,11 +215,10 @@ module OctridevDigitalocean
         scenario_set_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/scenario_sets/",
+            '/v2/gen-ai/scenario_sets/',
             SdkClient.encode_path_segment(scenario_set_uuid)
           ].join,
           config: config,
@@ -232,7 +226,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'genai_get_scenario_set',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -253,24 +247,23 @@ module OctridevDigitalocean
         scenarios: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'PUT',
           [
-            "/v2/gen-ai/scenario_sets/",
+            '/v2/gen-ai/scenario_sets/',
             SdkClient.encode_path_segment(scenario_set_uuid)
           ].join,
           config: config,
           body: {
             'name' => name,
             'scenario_set_uuid' => scenario_set_uuid2,
-            'scenarios' => scenarios,
+            'scenarios' => scenarios
           },
           return_type: ::OctridevDigitalocean::ApiUpdateScenarioSetOutput,
           decoder: :json,
           operation_id: 'genai_update_scenario_set',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -284,11 +277,10 @@ module OctridevDigitalocean
         scenario_set_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/gen-ai/scenario_sets/",
+            '/v2/gen-ai/scenario_sets/',
             SdkClient.encode_path_segment(scenario_set_uuid)
           ].join,
           config: config,
@@ -296,7 +288,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'genai_delete_scenario_set',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -308,20 +300,19 @@ module OctridevDigitalocean
         scenario_set_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/scenario_sets/",
+            '/v2/gen-ai/scenario_sets/',
             SdkClient.encode_path_segment(scenario_set_uuid),
-            "/download_url"
+            '/download_url'
           ].join,
           config: config,
           return_type: ::OctridevDigitalocean::ApiGetScenarioSetDownloadURLOutput,
           decoder: :json,
           operation_id: 'genai_get_scenario_set_download_url',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -335,23 +326,22 @@ module OctridevDigitalocean
         scenario_set_uuid2: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
           [
-            "/v2/gen-ai/scenario_sets/",
+            '/v2/gen-ai/scenario_sets/',
             SdkClient.encode_path_segment(scenario_set_uuid),
-            "/duplicate"
+            '/duplicate'
           ].join,
           config: config,
           body: {
-            'scenario_set_uuid' => scenario_set_uuid2,
+            'scenario_set_uuid' => scenario_set_uuid2
           },
           return_type: ::OctridevDigitalocean::ApiDuplicateScenarioSetOutput,
           decoder: :json,
           operation_id: 'genai_create_duplicate_scenario_set',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -380,13 +370,12 @@ module OctridevDigitalocean
         sort_direction: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/scenario_sets/",
+            '/v2/gen-ai/scenario_sets/',
             SdkClient.encode_path_segment(scenario_set_uuid),
-            "/scenarios"
+            '/scenarios'
           ].join,
           config: config,
           query: {
@@ -394,13 +383,13 @@ module OctridevDigitalocean
             'per_page' => QueryValue.new(per_page, style: 'form', explode: true),
             'search' => QueryValue.new(search, style: 'form', explode: true),
             'sort_by' => QueryValue.new(sort_by, style: 'form', explode: true),
-            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
+            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ApiListScenariosOutput,
           decoder: :json,
           operation_id: 'genai_list_scenarios',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -418,21 +407,20 @@ module OctridevDigitalocean
         time: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'POST',
-          "/v2/gen-ai/scheduled-indexing",
+          '/v2/gen-ai/scheduled-indexing',
           config: config,
           body: {
             'days' => days,
             'knowledge_base_uuid' => knowledge_base_uuid,
-            'time' => time,
+            'time' => time
           },
           return_type: ::OctridevDigitalocean::ApiCreateScheduledIndexingOutput,
           decoder: :json,
           operation_id: 'genai_create_scheduled_indexing',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -444,11 +432,10 @@ module OctridevDigitalocean
         knowledge_base_uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
           [
-            "/v2/gen-ai/scheduled-indexing/knowledge-base/",
+            '/v2/gen-ai/scheduled-indexing/knowledge-base/',
             SdkClient.encode_path_segment(knowledge_base_uuid)
           ].join,
           config: config,
@@ -456,7 +443,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'genai_get_scheduled_indexing',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -468,11 +455,10 @@ module OctridevDigitalocean
         uuid:,
         request_options: nil
       )
-
         SdkClient.request(
           'DELETE',
           [
-            "/v2/gen-ai/scheduled-indexing/",
+            '/v2/gen-ai/scheduled-indexing/',
             SdkClient.encode_path_segment(uuid)
           ].join,
           config: config,
@@ -480,7 +466,7 @@ module OctridevDigitalocean
           decoder: :json,
           operation_id: 'genai_delete_scheduled_indexing',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
 
@@ -519,10 +505,9 @@ module OctridevDigitalocean
         sort_direction: NOT_GIVEN,
         request_options: nil
       )
-
         SdkClient.request(
           'GET',
-          "/v2/gen-ai/simulation_runs",
+          '/v2/gen-ai/simulation_runs',
           config: config,
           query: {
             'scenario_set_uuid' => QueryValue.new(scenario_set_uuid, style: 'form', explode: true),
@@ -531,13 +516,13 @@ module OctridevDigitalocean
             'statuses' => QueryValue.new(statuses, style: 'form', explode: true),
             'search' => QueryValue.new(search, style: 'form', explode: true),
             'sort_by' => QueryValue.new(sort_by, style: 'form', explode: true),
-            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true),
+            'sort_direction' => QueryValue.new(sort_direction, style: 'form', explode: true)
           },
           return_type: ::OctridevDigitalocean::ApiListSimulationRunsOutput,
           decoder: :json,
           operation_id: 'genai_list_simulation_runs',
           request_options: request_options,
-          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 },
+          errors: { '401' => ::OctridevDigitalocean::Error2, '404' => ::OctridevDigitalocean::Error2, '429' => ::OctridevDigitalocean::Error2, '500' => ::OctridevDigitalocean::Error2, 'default' => ::OctridevDigitalocean::Error2 }
         ).result
       end
     end
